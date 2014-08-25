@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZWaveLib", "zwavelib\ZWaveLib.csproj", "{B4427C2E-4974-4DBC-9203-3947924C144D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{F8C3C250-222D-49F4-9582-F7BA0DD6393E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApplication1", "WpfApplication1\WpfApplication1.csproj", "{7AE3DB22-54D2-4C22-B0DE-0E399EFD1657}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenHomeMation", "OpenHomeMation\OpenHomeMation.csproj", "{C5DF6E96-8157-4901-9CED-F75285AB8E49}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Public", "Common.Public\Common.Public.csproj", "{C7AE6787-9A8A-4EBC-A341-FFACF31ACAF7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OHM.Tests", "OHM.Tests\OHM.Tests.csproj", "{FC583E82-C9CC-4DFA-A8DE-294AB69E6380}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B4427C2E-4974-4DBC-9203-3947924C144D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4427C2E-4974-4DBC-9203-3947924C144D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4427C2E-4974-4DBC-9203-3947924C144D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4427C2E-4974-4DBC-9203-3947924C144D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8C3C250-222D-49F4-9582-F7BA0DD6393E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8C3C250-222D-49F4-9582-F7BA0DD6393E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8C3C250-222D-49F4-9582-F7BA0DD6393E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8C3C250-222D-49F4-9582-F7BA0DD6393E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AE3DB22-54D2-4C22-B0DE-0E399EFD1657}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AE3DB22-54D2-4C22-B0DE-0E399EFD1657}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AE3DB22-54D2-4C22-B0DE-0E399EFD1657}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AE3DB22-54D2-4C22-B0DE-0E399EFD1657}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5DF6E96-8157-4901-9CED-F75285AB8E49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5DF6E96-8157-4901-9CED-F75285AB8E49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5DF6E96-8157-4901-9CED-F75285AB8E49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5DF6E96-8157-4901-9CED-F75285AB8E49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7AE6787-9A8A-4EBC-A341-FFACF31ACAF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7AE6787-9A8A-4EBC-A341-FFACF31ACAF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7AE6787-9A8A-4EBC-A341-FFACF31ACAF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7AE6787-9A8A-4EBC-A341-FFACF31ACAF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC583E82-C9CC-4DFA-A8DE-294AB69E6380}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC583E82-C9CC-4DFA-A8DE-294AB69E6380}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC583E82-C9CC-4DFA-A8DE-294AB69E6380}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC583E82-C9CC-4DFA-A8DE-294AB69E6380}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
