@@ -14,6 +14,10 @@ namespace OHM.Logger
 
         public DefaultLogger(ILog log)
         {
+            if (log == null)
+            {
+                throw new ArgumentNullException("log", "The log arguments must not be null");
+            }
             _log = log;
         }
 
