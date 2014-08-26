@@ -1,9 +1,5 @@
-﻿using OHM.Logger;
+﻿using OHM.System;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OHM.Plugins
 {
@@ -16,7 +12,7 @@ namespace OHM.Plugins
 
         Version Version { get; }
 
-        bool Install(ISystem system);
+        bool Install(IOhmSystemInstallGateway system);
 
         bool Uninstall();
 

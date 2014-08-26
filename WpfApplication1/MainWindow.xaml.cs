@@ -1,23 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using OHM.Logger;
 using OHM.Data;
 using OHM.Plugins;
 using log4net;
 using OHM.System;
+using OHM.Interfaces;
 
 namespace WpfApplication1
 {
@@ -41,11 +32,10 @@ namespace WpfApplication1
         {
             InitializeComponent();
             loggerMng = new WpfLoggerManager(txt);
-            var dataMng = new FileDataManager();
-
-
+            var dataMng = new FileDataManager(loggerMng, AppDomain.CurrentDomain.BaseDirectory + "\\data\\");
             pluginMng = new PluginsManager(loggerMng);
-            ohm = new OpenHomeMation(pluginMng, dataMng, loggerMng);
+            var interfacesMng = new InterfacesManager();
+            ohm = new OpenHomeMation(pluginMng, dataMng, loggerMng, interfacesMng);
 
             ohm.start();
             

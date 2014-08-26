@@ -47,6 +47,7 @@
     <Compile Include="Nodes\IAbstractNode.cs" />
     <Compile Include="Interfaces\IInterface.cs" />
     <Compile Include="Logger\ILogger.cs" />
+    <Compile Include="System\IOhmSystemInstallGateway.cs" />
     <Compile Include="System\ISystem.cs" />
     <Compile Include="Plugins\IPlugin.cs" />
     <Compile Include="Plugins\PluginBase.cs" />

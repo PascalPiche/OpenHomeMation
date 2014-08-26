@@ -1,10 +1,5 @@
-﻿using OHM.Commands;
-using OHM.Logger;
+﻿using OHM.System;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OHM.Plugins
 {
@@ -18,7 +13,7 @@ namespace OHM.Plugins
 
         public abstract Version Version { get; }
 
-        public abstract bool Install(ISystem system);
+        public abstract bool Install(IOhmSystemInstallGateway system);
 
         public abstract bool Uninstall();
 

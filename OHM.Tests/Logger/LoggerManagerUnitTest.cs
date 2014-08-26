@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OHM.Logger;
 
-namespace OHM.Tests
+namespace OHM.Logger.Tests
 {
     [TestClass]
     public class LoggerManagerUnitTest

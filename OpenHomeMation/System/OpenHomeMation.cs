@@ -1,11 +1,7 @@
 ﻿using OHM.Data;
+using OHM.Interfaces;
 using OHM.Logger;
 using OHM.Plugins;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OHM.System
 {
@@ -19,12 +15,15 @@ namespace OHM.System
         private IPluginsManager _pluginsMng;
         private IDataManager _dataMng;
         private OhmSystem _ohmSystem;
-        public OpenHomeMation(IPluginsManager pluginsMng, IDataManager dataMng, ILoggerManager loggerMng)
+        private IInterfacesManager _interfacesMng;
+
+        public OpenHomeMation(IPluginsManager pluginsMng, IDataManager dataMng, ILoggerManager loggerMng, IInterfacesManager interfacesMng)
         {
             //Store dependency
             this._loggerMng = loggerMng;
             this._pluginsMng = pluginsMng;
             this._dataMng = dataMng;
+            this._interfacesMng = interfacesMng;
         }
 
         public void start()
@@ -32,7 +31,8 @@ namespace OHM.System
             _logger = _loggerMng.GetLogger("root");
             _logger.Info("Starting OHM");
             _ohmSystem = new OhmSystem();
-            _ohmSystem.Logger = _logger;
+            _ohmSystem.LoggerMng = _loggerMng;
+            _ohmSystem.InterfacesMng = _interfacesMng;
             _dataMng.Init();
 
             if (StartPluginMng())
@@ -66,13 +66,13 @@ namespace OHM.System
             {
                 _logger.Debug("Data Store for Plugins Manager not found");
                 _logger.Info("Creating new Data Store for Plugins Manager");
-                data = _dataMng.CreateDataStore("PluginsManager");
+                data = _dataMng.GetOrCreateDataStore("PluginsManager");
                
             }
             return _pluginsMng.Init(data);
         }
 
-        public ISystem System
+        public IOhmSystem System
         {
             get
             {

@@ -4,7 +4,7 @@ using OHM.Logger;
 using Rhino.Mocks;
 using log4net;
 
-namespace OHM.Tests
+namespace OHM.Logger.Tests
 {
     [TestClass]
     public class DefaultLoggerUnitTest

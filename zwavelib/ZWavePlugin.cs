@@ -1,6 +1,4 @@
-﻿using OHM.Commands;
-using OHM.Plugins;
-using System.AddIn;
+﻿using System.AddIn;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,6 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OHM.Logger;
+using OHM.Commands;
+using OHM.Plugins;
+using OHM.System;
 
 namespace ZWaveLib
 {
@@ -33,7 +34,7 @@ namespace ZWaveLib
 
         public override Version Version { get { return _version; } }
 
-        public override bool Install(ISystem system)
+        public override bool Install(IOhmSystemInstallGateway system)
         {
             system.RegisterInterface(new ZWaveInterface(system.Logger));
             return true;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OHM.Logger;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization;
@@ -8,14 +9,20 @@ namespace OHM.Data
     public class FileDataManager : IDataManager
     {
 
-        private string _filePath = AppDomain.CurrentDomain.BaseDirectory + "\\data\\";
+        private ILogger _logger;
+        private string _filePath;
         private Dictionary<String, IDataStore> _loadedDataStore = new Dictionary<string,IDataStore>();
+
+        public FileDataManager(ILoggerManager loggerManager, string filePath) {
+            _filePath = filePath;
+            _logger = loggerManager.GetLogger("FileDataManager");
+        }
 
         public void Init()
         {
-
             if (!Directory.Exists(_filePath))
             {
+                _logger.Debug("Creating Data Directory : " + _filePath);
                 Directory.CreateDirectory(_filePath);
             }
         }
@@ -23,6 +30,7 @@ namespace OHM.Data
         public IDataStore GetDataStore(string key)
         {
             if (_loadedDataStore.ContainsKey(key)) {
+
                 return _loadedDataStore[key];
             } 
             else 
@@ -38,13 +46,28 @@ namespace OHM.Data
             return null;
         }
 
-        public IDataStore CreateDataStore(string key)
+        public IDataStore GetOrCreateDataStore(string key)
         {
-            DataStore newDataStore = new DataStore(key);
-            newDataStore.Init(this);
-            DataStoreToFile(newDataStore, BuildDataStorePath(key));
-            _loadedDataStore.Add(key, newDataStore);
-            return newDataStore;
+            //Check if DataStore exist
+            IDataStore existing = GetDataStore(key);
+            if (existing != null)
+            {
+                return existing;
+            }
+            else
+            {
+                DataStore newDataStore = new DataStore(key);
+                newDataStore.Init(this);
+                DataStoreToFile(newDataStore, BuildDataStorePath(key));
+                _loadedDataStore.Add(key, newDataStore);
+                return newDataStore;
+            }
+        }
+
+        public bool SaveDataStore(IDataStore dataStore)
+        {
+            DataStoreToFile(dataStore, BuildDataStorePath(dataStore.Key));
+            return true;
         }
 
         private IDataStore DataStoreFromFile(string path)
@@ -58,7 +81,8 @@ namespace OHM.Data
         private IList<Type> GetSerializationTypes()
         {
             IList<Type> listKnowTypes = new List<Type>();
-            listKnowTypes.Add(typeof(DataValueStore));
+            listKnowTypes.Add(typeof(DataValueDictionary));
+            listKnowTypes.Add(typeof(DataDictionary));
             listKnowTypes.Add(typeof(DataValueString));
             return listKnowTypes;
         }
@@ -76,10 +100,6 @@ namespace OHM.Data
             return _filePath + key + ".data";
         }
 
-        public bool SaveDataStore(IDataStore dataStore)
-        {
-            DataStoreToFile(dataStore, BuildDataStorePath(dataStore.Key));
-            return true;
-        }
+       
     }
 }

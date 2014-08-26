@@ -1,16 +1,13 @@
 ﻿using OHM.Data;
 using OHM.Logger;
-using OHM.Plugins;
+using OHM.System;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Security;
 using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OHM.Plugins
 {
@@ -19,7 +16,7 @@ namespace OHM.Plugins
 
         private ILogger _logger;
         private IDataStore _data;
-        private IDataStore _dataInstalledPlugins;
+        private IDataDictionary _dataInstalledPlugins;
 
         private IList<IPlugin> _availablesPlugins = new ObservableCollection<IPlugin>();
         private IList<IPlugin> _installedPluginsInstance = new ObservableCollection<IPlugin>();
@@ -48,11 +45,11 @@ namespace OHM.Plugins
         public bool Init(IDataStore data)
         {
             _data = data;
-            _dataInstalledPlugins = _data.GetDataStore("InstalledPlugins");
+            _dataInstalledPlugins = _data.GetDataDictionary("InstalledPlugins");
             if (_dataInstalledPlugins == null)
             {
-                _dataInstalledPlugins = new DataStore();
-                _data.StoreDataStore("InstalledPlugins", _dataInstalledPlugins);
+                _dataInstalledPlugins = new DataDictionary();
+                _data.StoreDataDictionary("InstalledPlugins", _dataInstalledPlugins);
             }
 
             InitPluginsList();
@@ -60,14 +57,14 @@ namespace OHM.Plugins
             return true;
         }
 
-        public bool InstallPlugin(Guid id, ISystem system)
+        public bool InstallPlugin(Guid id, IOhmSystem system)
         {
             IPlugin plugin = FindPluginIn(id, _availablesPlugins);
             
             if (plugin != null)
             {
 
-                return InstallPlugin(plugin, system);
+                return InstallPlugin(plugin, system.getInstallGateway(plugin));
             }
             else
             {
@@ -77,7 +74,8 @@ namespace OHM.Plugins
             return false;
         }
 
-        private bool InstallPlugin(IPlugin plugin, ISystem system) {
+        private bool InstallPlugin(IPlugin plugin, IOhmSystemInstallGateway system)
+        {
             bool result = false;
             try
             {
@@ -93,13 +91,22 @@ namespace OHM.Plugins
             //Save to persistent storage
             _dataInstalledPlugins.StoreString(plugin.Id.ToString(), plugin.Version.ToString());
             _data.Save();
-            _availablesPlugins.Remove(plugin);
+            try
+            {
+                _availablesPlugins.Remove(plugin);
+            }
+            catch (Exception ex)
+            {
+                //Weird error related to WPF 
+                //Do nothing for the moment.. need investigation later
+            }
+            
             return result;
         }
 
         private bool IsPluginRegistered(Guid id)
         {
-            return _dataInstalledPlugins.GetString(id.ToString()) != null;
+            return _dataInstalledPlugins.GetString(id.ToString()) != "";
         }
 
         private bool IsPluginInstanceInstalled(Guid id)

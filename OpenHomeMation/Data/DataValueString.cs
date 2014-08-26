@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OHM.Data
 {
@@ -25,16 +21,9 @@ namespace OHM.Data
             set { _value = value; }
         }
 
-        object IDataValue.Value
+        public Type Type
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get { return this.GetType(); }
         }
     }
 }

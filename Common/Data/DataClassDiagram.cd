@@ -1,40 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="OHM.Data.DataValueString" BaseTypeListCollapsed="true">
-    <Position X="2.25" Y="1.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>ABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgQAAAAAA=</HashCode>
-      <FileName>Data\DataValue.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" Collapsed="true" />
-  </Class>
-  <Class Name="OHM.Data.DataValueStore" BaseTypeListCollapsed="true">
-    <Position X="0.5" Y="1.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAgQAAAAAA=</HashCode>
-      <FileName>Data\DataValue.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" Collapsed="true" />
-  </Class>
   <Interface Name="OHM.Data.IDataManager">
     <Position X="5.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAAAEAAAAQAAACAAAAAAA=</HashCode>
+      <HashCode>AAAAQAAAAAAAAAAAAAAAAAAAAAEAAAAQAAACAAAAAAA=</HashCode>
       <FileName>Data\IDataManager.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="OHM.Data.IDataStore">
-    <Position X="4" Y="0.5" Width="1.5" />
+    <Position X="3.75" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>CAAAAIAAAAIAAAQAAAAABAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAIAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Data\IDataStore.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="OHM.Data.IDataValue">
     <Position X="0.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
       <FileName>Data\IDataValue.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OHM.Data.IDataDictionary">
+    <Position X="3.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>iAAAAAAAAAAAAAAAAAAABAAAAAAAAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\IDataDictionary.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Font Name="Segoe UI" Size="9" />

@@ -1,27 +1,13 @@
-﻿using OHM.Interfaces;
-using OHM.Logger;
-using OHM.Nodes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using OHM.Plugins;
+using OHM.System;
 
 namespace OHM.Logger
 {
-    public interface ISystem
+
+    public interface IOhmSystem
     {
 
-        ILogger Logger { get; }
-
-        void RegisterInterface(IInterface newInterface);
-
-        void RegisterObjectType(IAbstractNode obj);
-
-        //IAb CreateObject(IAbstractObject obj);
-
-
-
-
+        IOhmSystemInstallGateway getInstallGateway(IPlugin plugin);
+        
     }
 }
