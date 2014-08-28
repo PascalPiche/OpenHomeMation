@@ -67,6 +67,7 @@
     <Compile Include="Logger\DefaultLogger.cs" />
     <Compile Include="Logger\LoggerManager.cs" />
     <Compile Include="System\OhmSystem.cs" />
+    <Compile Include="System\OhmSystemInstallGateway.cs" />
     <Compile Include="System\OpenHomeMation.cs" />
     <Compile Include="Plugins\PluginsManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

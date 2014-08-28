@@ -8,8 +8,8 @@ namespace OHM.System
     {
         ILogger Logger { get; }
 
-        void RegisterInterface(IInterface newInterface);
+        bool RegisterInterface(string key);
 
-        void RegisterNodeType(INode obj);
+        //void RegisterNodeType(string key, string type);
     }
 }

@@ -1,4 +1,6 @@
-﻿using OHM.System;
+﻿using OHM.Interfaces;
+using OHM.Logger;
+using OHM.System;
 using System;
 
 namespace OHM.Plugins
@@ -10,13 +12,13 @@ namespace OHM.Plugins
 
         String Name { get; }
 
-        Version Version { get; }
-
         bool Install(IOhmSystemInstallGateway system);
 
         bool Uninstall();
 
         bool Update();
+
+        IInterface CreateInterface(string key, ILogger logger);
 
     }
 }

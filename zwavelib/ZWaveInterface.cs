@@ -39,6 +39,7 @@ namespace ZWaveLib
             // Create the OpenZWave Manager
             mng.Create();
             mng.OnNotification += new ManagedNotificationsHandler(NotificationHandler);
+            mng.OnControllerStateChanged += new ManagedControllerStateChangedHandler(ControllerStateChangedHandler);
         }
 
         public void ExecuteCommand(String key, Dictionary<String, Object> arguments)
@@ -92,6 +93,11 @@ namespace ZWaveLib
             mng.GetNodeClassInformation(n.GetHomeId(), n.GetNodeId(), n.GetValueID().GetCommandClassId(), out className, out classVersion);
             logger.Debug("ClassName (version): " + className + "(" + classVersion.ToString() + ")");
             logger.Debug("----------------------------------------------");
+        }
+
+        private void ControllerStateChangedHandler(ZWControllerState state)
+        {
+            
         }
     }
 }

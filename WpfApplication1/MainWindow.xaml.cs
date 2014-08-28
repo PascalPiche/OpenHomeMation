@@ -33,8 +33,8 @@ namespace WpfApplication1
             InitializeComponent();
             loggerMng = new WpfLoggerManager(txt);
             var dataMng = new FileDataManager(loggerMng, AppDomain.CurrentDomain.BaseDirectory + "\\data\\");
-            pluginMng = new PluginsManager(loggerMng);
-            var interfacesMng = new InterfacesManager();
+            pluginMng = new PluginsManager(loggerMng, AppDomain.CurrentDomain.BaseDirectory + "\\plugins\\");
+            var interfacesMng = new InterfacesManager(loggerMng, pluginMng);
             ohm = new OpenHomeMation(pluginMng, dataMng, loggerMng, interfacesMng);
 
             ohm.start();
@@ -45,7 +45,7 @@ namespace WpfApplication1
 
         protected override void OnClosing(CancelEventArgs e)
         {
-            //zwave.Shutdown();
+            ohm.Shutdown();
             base.OnClosing(e);
         }
 

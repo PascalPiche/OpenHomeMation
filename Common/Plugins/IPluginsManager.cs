@@ -1,5 +1,5 @@
 ﻿using OHM.Data;
-using OHM.Logger;
+using OHM.System;
 using System;
 using System.Collections.Generic;
 
@@ -16,5 +16,7 @@ namespace OHM.Plugins
         IList<IPlugin> AvailablesPlugins { get; }
 
         bool InstallPlugin(Guid id, IOhmSystem system);
+
+        IPlugin GetPlugin(Guid id);
     }
 }

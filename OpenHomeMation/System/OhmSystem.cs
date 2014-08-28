@@ -10,36 +10,29 @@ namespace OHM.System
 
         [NonSerialized]
         private ILoggerManager _loggerMng;
+
+        [NonSerialized]
         private IInterfacesManager _interfacesMng;
+
+        internal OhmSystem(IInterfacesManager interfacesMng, ILoggerManager loggerMng)
+        {
+            _loggerMng = loggerMng;
+            _interfacesMng = interfacesMng;
+        }
 
         internal ILoggerManager LoggerMng
         {
             get { return _loggerMng; }
-            set { _loggerMng = value; }
         }
 
         internal IInterfacesManager InterfacesMng
         {
             get { return _interfacesMng; }
-            set { _interfacesMng = value; }
         }
 
-        /*
-        public void RegisterInterface(IInterface newInterface)
+        public IOhmSystemInstallGateway GetInstallGateway(Plugins.IPlugin plugin)
         {
-            //var t = log4net.Appender.;
-
-            //TODO throw new NotImplementedException();
-        }
-
-        public void RegisterObjectType(IAbstractNode obj)
-        {
-            //TODO throw new NotImplementedException();
-        }*/
-
-        public IOhmSystemInstallGateway getInstallGateway(Plugins.IPlugin plugin)
-        {
-            throw new NotImplementedException();
+            return new OhmSystemInstallGateway(this, plugin);
         }
     }
 }

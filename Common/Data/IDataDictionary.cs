@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace OHM.Data
 {
@@ -9,6 +11,8 @@ namespace OHM.Data
         void StoreDataDictionary(string key, IDataDictionary store);
 
         String GetString(string key);
+
+        IEnumerable<string> GetKeys();
 
         IDataDictionary GetDataDictionary(string key);
 

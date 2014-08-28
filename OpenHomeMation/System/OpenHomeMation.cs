@@ -26,35 +26,47 @@ namespace OHM.System
             this._interfacesMng = interfacesMng;
         }
 
+        public IOhmSystem System
+        {
+            get
+            {
+                return _ohmSystem;
+            }
+        }
+
         public void start()
         {
             _logger = _loggerMng.GetLogger("root");
             _logger.Info("Starting OHM");
-            _ohmSystem = new OhmSystem();
-            _ohmSystem.LoggerMng = _loggerMng;
-            _ohmSystem.InterfacesMng = _interfacesMng;
+            _ohmSystem = new OhmSystem(_interfacesMng, _loggerMng);
             _dataMng.Init();
 
-            if (StartPluginMng())
-            {
-                this._isRunning = true;
-                _logger.Info("Started OHM");
-            }
-            else
+            if (!StartPluginMng())
             {
                 _logger.Fatal("PluginManager failed Init. Abording start");
+                return;
             }
+
+            if (!StartInterfacesMng())
+            {
+                _logger.Fatal("InterfacesManager failed Init. Abording start");
+                return;
+            }
+            
+            this._isRunning = true;
+            _logger.Info("Started OHM"); 
+            
             
         }
 
-        public void shutdown()
+        public void Shutdown()
         {
             _logger.Info("Stoping OHM");
             this._isRunning = false;
             _logger.Info("Stoped OHM");
         }
 
-        public bool isRunning()
+        public bool IsRunning()
         {
             return this._isRunning;
         }
@@ -72,12 +84,18 @@ namespace OHM.System
             return _pluginsMng.Init(data);
         }
 
-        public IOhmSystem System
+        private bool StartInterfacesMng()
         {
-            get
+            IDataStore data = _dataMng.GetDataStore("InterfacesManager");
+            if (data == null)
             {
-                return new OhmSystem();
+                _logger.Debug("Data Store for Interfaces Manager not found");
+                _logger.Info("Creating new Data Store for Plugins Manager");
+                data = _dataMng.GetOrCreateDataStore("InterfacesManager");
+
             }
+            return _interfacesMng.Init(data);
         }
+
     }
 }

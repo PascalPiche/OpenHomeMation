@@ -1,13 +1,13 @@
 ﻿using OHM.Plugins;
 using OHM.System;
 
-namespace OHM.Logger
+namespace OHM.System
 {
 
     public interface IOhmSystem
     {
 
-        IOhmSystemInstallGateway getInstallGateway(IPlugin plugin);
+        IOhmSystemInstallGateway GetInstallGateway(IPlugin plugin);
         
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace OHM.Data
@@ -7,21 +8,6 @@ namespace OHM.Data
     public class DataDictionary : IDataDictionary
     {
         private Dictionary<string, IDataValue> _dataValues = new Dictionary<string, IDataValue>();
-
-        protected void StoreValue(string key, IDataValue obj)
-        {
-            _dataValues[key] = obj;
-        }
-
-        protected IDataValue GetValue(string key)
-        {
-            IDataValue value;
-            if (_dataValues.TryGetValue(key, out value))
-            {
-                return value;
-            }
-            return null;
-        }
 
         public void StoreString(string key, string value)
         {
@@ -52,5 +38,28 @@ namespace OHM.Data
             }
             return null;
         }
+
+        public IEnumerable<string> GetKeys()
+        {
+            return _dataValues.Keys;
+        }
+
+        protected void StoreValue(string key, IDataValue obj)
+        {
+            _dataValues[key] = obj;
+        }
+
+        protected IDataValue GetValue(string key)
+        {
+            IDataValue value;
+            if (_dataValues.TryGetValue(key, out value))
+            {
+                return value;
+            }
+            return null;
+        }
+
+
+
     }
 }

@@ -8,18 +8,19 @@ namespace OHM.Data
 {
     public class FileDataManager : IDataManager
     {
-
+        private ILoggerManager _loggerMng;
         private ILogger _logger;
         private string _filePath;
         private Dictionary<String, IDataStore> _loadedDataStore = new Dictionary<string,IDataStore>();
 
-        public FileDataManager(ILoggerManager loggerManager, string filePath) {
+        public FileDataManager(ILoggerManager loggerMng, string filePath) {
             _filePath = filePath;
-            _logger = loggerManager.GetLogger("FileDataManager");
+            _loggerMng = loggerMng;
         }
 
         public void Init()
         {
+            _logger = _loggerMng.GetLogger("FileDataManager");
             if (!Directory.Exists(_filePath))
             {
                 _logger.Debug("Creating Data Directory : " + _filePath);
