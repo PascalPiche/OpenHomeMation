@@ -4,14 +4,11 @@ using System;
 
 namespace OHM.System
 {
-    [Serializable]
     public class OhmSystem : IOhmSystem
     {
 
-        [NonSerialized]
         private ILoggerManager _loggerMng;
 
-        [NonSerialized]
         private IInterfacesManager _interfacesMng;
 
         internal OhmSystem(IInterfacesManager interfacesMng, ILoggerManager loggerMng)

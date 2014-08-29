@@ -20,12 +20,19 @@
                         </Label>
                     </TreeViewItem.Header>
                     <TreeViewItem.Items>
-                        <TreeViewItem>
+                        <TreeViewItem Name="InterfacesTreeViewItem" ItemsSource="{Binding}">
                             <TreeViewItem.Header>
                                 <Label>
                                     <Run>Interfaces</Run>
                                 </Label>
                             </TreeViewItem.Header>
+                            <TreeViewItem.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                                        <Run Text="{Binding Path=Name}" />
+                                    </TextBlock>
+                                </DataTemplate>
+                            </TreeViewItem.ItemTemplate>
                         </TreeViewItem>
                     </TreeViewItem.Items>
                 </TreeViewItem>

@@ -28,6 +28,7 @@ namespace OHM.Plugins
         {
             _loggerMng = loggerMng;
             _filePath = filePath;
+            AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
         }
 
         public IList<IPlugin> AvailablesPlugins
@@ -54,6 +55,7 @@ namespace OHM.Plugins
             {
                 _dataInstalledPlugins = new DataDictionary();
                 _data.StoreDataDictionary("InstalledPlugins", _dataInstalledPlugins);
+                _data.Save();
             }
 
             InitPluginsList();
@@ -64,18 +66,19 @@ namespace OHM.Plugins
         public bool InstallPlugin(Guid id, IOhmSystem system)
         {
             IPlugin plugin = FindPluginIn(id, _availablesPlugins);
-            
+            bool result = false;
             if (plugin != null)
             {
 
-                return InstallPlugin(plugin, system.GetInstallGateway(plugin));
+                result = InstallPlugin(plugin, system.GetInstallGateway(plugin));
             }
-            else
+            /*else
             {
                 //todo log
                 //Plugin not found 
-            }
-            return false;
+            }*/
+
+            return result;
         }
 
         public IPlugin GetPlugin(Guid id)
@@ -101,31 +104,34 @@ namespace OHM.Plugins
             _dataInstalledPlugins.StoreString(plugin.Id.ToString(), plugin.GetType().Assembly.GetName().Version.ToString());
             _data.Save();
 
-            try
-            {
+            /*try
+            {*/
                 _availablesPlugins.Remove(plugin);
-            }
+            /*}
             catch (Exception ex)
             {
                 //Weird error related to WPF 
                 //Do nothing for the moment.. need investigation later
                 //but work if we skip the error
                 _logger.Debug("Weird error on removing plugin from availables plugins list", ex);
-            }
+            }*/
             
             return result;
         }
 
         private IPlugin FindPluginIn(Guid id, IList<IPlugin> source) {
-            //Find plugins
-            foreach (var item in AvailablesPlugins)
+
+            IPlugin result = null;
+            
+            foreach (var item in source)
             {
                 if (item.Id == id)
                 {
-                    return item;
+                    result = item;
+                    break;
                 }
             }
-            return null;
+            return result;
         }
 
         private void InitPluginsList()
@@ -146,28 +152,48 @@ namespace OHM.Plugins
                     
                     foreach (var type in assembly.GetExportedTypes())
                     {
-
-                        if (IsPlugin(type))
+                        try
                         {
-                            this._logger.Info("Plugin Found:" + type.FullName);
-
-                            var domain = CreateSandboxDomain("Sandbox Domain For " + type.FullName, Path.GetDirectoryName(assembly.Location), SecurityZone.Internet, typeof(PluginsManager));
-                            IPlugin plugin = (PluginBase)domain.CreateInstanceAndUnwrap(assembly.FullName, type.FullName);
-
-                            _availablesPlugins.Add(plugin);
+                            if (IsPlugin(type))
+                            {
+                                this._logger.Info("Plugin Found:" + type.FullName);
+                                IPlugin plugin = (PluginBase)AppDomain.CurrentDomain.CreateInstanceAndUnwrap(assembly.FullName, type.FullName);
+                                _availablesPlugins.Add(plugin);
+                                this._logger.Info("Plugin " + type.FullName + " added to available plugins");
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            this._logger.Error("Cannot instantiate plugin type : " + type.ToString() +" : In file : " + file, ex);
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    this._logger.Error("Cannot instantiate plugin : " + file, ex);
+                    this._logger.Error("Cannot load Assembly file : " + file, ex);
                 }
             }
         }
 
+        Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
+        {
+            Assembly result = null;
+
+            foreach (var file in Directory.GetFiles(_filePath, "*.dll", SearchOption.AllDirectories))
+            {
+                var assembly = Assembly.LoadFrom(file);
+                if (assembly.FullName == args.Name)
+                {
+                    result = assembly;
+                    break;
+                }
+            }
+            return result;
+        }
+
         private bool IsPlugin(Type type)
         {
-            return _pluginBaseType.IsAssignableFrom(type) && !type.Equals(_pluginBaseType);
+            return _pluginBaseType.IsAssignableFrom(type);
         }
 
         private void LoadRegisteredPlugins() {
@@ -176,39 +202,16 @@ namespace OHM.Plugins
                 var plugin = FindPluginIn(new Guid(item), _availablesPlugins);
                 if (plugin != null)
                 {
+                    _logger.Info("Registered plugin found : " + plugin.Name);
                     _installedPluginsInstance.Add(plugin);
-                    try
-                    {
-                        _availablesPlugins.Remove(plugin);
-                    }
-                    catch (Exception ex)
-                    {
-                        //Weird error related to WPF 
-                        //Do nothing for the moment.. need investigation later
-                        //but work if we skip the error
-                        _logger.Debug("Weird error on removing plugin from availables plugins list", ex);
-                    }
+                    _availablesPlugins.Remove(plugin);
                 }
                 else
                 {
+                    _logger.Warn("Registered plugin " + item + "not found");
                     //Track plugin status?, code base not found for registered plugins
-
                 }
             }
         }
-
-        private AppDomain CreateSandboxDomain(string name, string path, SecurityZone zone, Type item)
-        {
-            var setup = new AppDomainSetup { ApplicationBase = AppDomain.CurrentDomain.BaseDirectory, PrivateBinPath = Path.GetFullPath(path) };
-
-            var evidence = new Evidence();
-            evidence.AddHostEvidence(new Zone(zone));
-            var permissions = SecurityManager.GetStandardSandbox(evidence);
-
-            StrongName strongName = item.Assembly.Evidence.GetHostEvidence<StrongName>();
-
-            return AppDomain.CreateDomain(name, null, setup);
-        }
-
     }
 }

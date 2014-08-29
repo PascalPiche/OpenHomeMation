@@ -40,7 +40,7 @@ namespace WpfApplication1
             ohm.start();
             
             this.DataContext = pluginMng;
-            
+            InterfacesTreeViewItem.DataContext = interfacesMng.RunnableInterfaces;
         }
 
         protected override void OnClosing(CancelEventArgs e)

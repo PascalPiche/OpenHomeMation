@@ -15,9 +15,14 @@ namespace ZWaveLib
         private List<ICommandDefinition> commands;
         private Dictionary<int, IZWaveController> controllers = new Dictionary<int, IZWaveController>();
 
-        public IList<ICommandDefinition> Commands()
+        public string Key
         {
-            return commands;
+            get { return "ZWaveInterface"; }
+        }
+
+        public string Name
+        {
+            get { return "ZWave"; }
         }
 
         public ZWaveInterface(ILogger logger) 
@@ -40,11 +45,17 @@ namespace ZWaveLib
             mng.Create();
             mng.OnNotification += new ManagedNotificationsHandler(NotificationHandler);
             mng.OnControllerStateChanged += new ManagedControllerStateChangedHandler(ControllerStateChangedHandler);
+            logger.Info("ZWaveInterface Inited");
         }
 
-        public void ExecuteCommand(String key, Dictionary<String, Object> arguments)
+        public IList<ICommandDefinition> Commands
         {
+            get { return commands; }
+        }
 
+        public bool RunCommand(string key, Dictionary<string, object> arguments)
+        {
+            throw new NotImplementedException();
         }
 
         public bool CreateController(int port)
@@ -99,5 +110,6 @@ namespace ZWaveLib
         {
             
         }
+
     }
 }

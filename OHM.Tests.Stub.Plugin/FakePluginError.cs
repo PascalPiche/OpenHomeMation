@@ -9,22 +9,28 @@ using System.Threading.Tasks;
 
 namespace OHM.Tests.Stub.Plugin
 {
-    public class FakePlugin : PluginBase
+    public class FakePluginError : PluginBase
     {
+
+        public FakePluginError()
+        {
+            throw new NotImplementedException();
+        }
 
         public override Guid Id
         {
-            get { return new Guid("dd985d5b-2d5e-49b5-9b07-64aad480e312"); }
+            get { return new Guid("dd985d5b-2d5e-49b5-9b07-64aad480e318"); }
         }
 
         public override string Name
         {
-            get { return "Fake Plugin"; }
+            get { return "Fake Plugin Error"; }
         }
 
         public override bool Install(System.IOhmSystemInstallGateway system)
         {
-            return true;
+            throw new NotImplementedException();
+            //return true;
         }
 
         public override bool Uninstall()

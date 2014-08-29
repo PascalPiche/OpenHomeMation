@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Data\DataDictionaryUnitTest.cs" />
     <Compile Include="Data\FileDataManagerUnitTest.cs" />
+    <Compile Include="Interfaces\UnitTest1.cs" />
     <Compile Include="Plugins\PluginsManagerUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Logger\DefaultLoggerUnitTest.cs" />

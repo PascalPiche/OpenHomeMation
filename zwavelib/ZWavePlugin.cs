@@ -13,7 +13,7 @@ using OHM.Interfaces;
 
 namespace ZWaveLib
 {
-    [Serializable()]
+    
     public class ZWavePlugin : PluginBase
     {
         private Guid _id = new Guid("8d8a6e6b-4ddb-450a-8f3c-7b361a9081b4");

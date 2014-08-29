@@ -8,9 +8,11 @@ namespace OHM.Nodes
 
         string Key { get; }
 
+        string Name { get; }
+
         IList<ICommandDefinition> Commands { get; }
 
-        bool RunCommand(ICommandDefinition command, Dictionary<string, object> arguments);
+        bool RunCommand(string key, Dictionary<string, object> arguments);
 
     }
 }

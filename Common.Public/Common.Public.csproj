@@ -44,7 +44,7 @@
   <ItemGroup>
     <Compile Include="Commands\IArgumentDefinition.cs" />
     <Compile Include="Commands\ICommandDefinition.cs" />
-    <Compile Include="Nodes\IAbstractNode.cs" />
+    <Compile Include="Nodes\INode.cs" />
     <Compile Include="Interfaces\IInterface.cs" />
     <Compile Include="Logger\ILogger.cs" />
     <Compile Include="System\IOhmSystemInstallGateway.cs" />

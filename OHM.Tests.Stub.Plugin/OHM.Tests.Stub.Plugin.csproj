@@ -43,6 +43,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FakePlugin.cs" />
+    <Compile Include="FakePluginError.cs" />
+    <Compile Include="FakePluginInstallError.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
