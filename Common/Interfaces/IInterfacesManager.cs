@@ -14,6 +14,10 @@ namespace OHM.Interfaces
 
         IList<IInterface> RunnableInterfaces { get; }
 
+        bool StartInterface(string key);
+
+        bool StopInterface(string key);
+
     }
 
 }

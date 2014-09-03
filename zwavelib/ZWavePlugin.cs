@@ -39,7 +39,7 @@ namespace ZWaveLib
             return true;
         }
 
-        public override IInterface CreateInterface(string key, ILogger logger)
+        public override InterfaceAbstract CreateInterface(string key, ILogger logger)
         {
             switch (key)
 	        {

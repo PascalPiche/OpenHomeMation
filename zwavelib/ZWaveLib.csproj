@@ -71,9 +71,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(TargetPath)" "$(SolutionDir)\OpenHomeMation\plugins\zwave\" /Y
-xcopy "$(SolutionDir)\ZWaveLib\bin\OpenZWaveDotNet.dll" "$(SolutionDir)\OpenHomeMation\plugins\zwave\" /Y
-xcopy "$(SolutionDir)\ZWaveLib\bin\OpenZWaveDotNet.pdb" "$(SolutionDir)\OpenHomeMation\plugins\zwave\" /Y</PostBuildEvent>
+    <PostBuildEvent>xcopy "$(TargetPath)" "$(SolutionDir)OpenHomeMation\plugins\zwave\" /Y /s /D /E
+xcopy "$(SolutionDir)ZWaveLib\bin\OpenZWaveDotNet.dll" "$(SolutionDir)OpenHomeMation\plugins\zwave\OpenZWaveDotNet.dll" /Y /s</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

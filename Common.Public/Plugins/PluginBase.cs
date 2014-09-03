@@ -19,7 +19,7 @@ namespace OHM.Plugins
 
         public abstract bool Update();
 
-        public abstract IInterface CreateInterface(string key, ILogger logger);
+        public abstract InterfaceAbstract CreateInterface(string key, ILogger logger);
 
     }
 }

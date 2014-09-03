@@ -42,7 +42,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\CommandDefinitionBase.cs" />
     <Compile Include="Data\IDataDictionary.cs" />
     <Compile Include="Data\IDataValue.cs" />
     <Compile Include="Interfaces\IInterfacesManager.cs" />
@@ -54,9 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Logger\LoggerClassDiagram.cd" />
-    <None Include="Commands\CommandsClassDiagramFull.cd" />
     <None Include="Data\DataClassDiagram.cd" />
-    <None Include="Commands\CommandsClassDiagram.cd" />
     <None Include="Logger\LoggerClassDiagramFull.cd" />
     <None Include="packages.config" />
     <None Include="Plugins\PluginsClassDiagram.cd" />

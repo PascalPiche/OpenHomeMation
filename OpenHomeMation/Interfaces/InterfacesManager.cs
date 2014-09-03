@@ -18,11 +18,12 @@ namespace OHM.Interfaces
         private IPluginsManager _pluginsMng;
         private IDataStore _data;
         private IDataDictionary _dataRegisteredInterfaces;
-        private IList<IInterface> _runninInterfaces = new ObservableCollection<IInterface>();
+        private IList<IInterface> _runningInterfaces = new ObservableCollection<IInterface>();
+        private Dictionary<String, IInterface> _runningDic = new Dictionary<string, IInterface>();
 
         public IList<IInterface> RunnableInterfaces
         {
-            get { return _runninInterfaces; }
+            get { return _runningInterfaces; }
         }
 
         public InterfacesManager(ILoggerManager loggerMng, IPluginsManager pluginsMng)
@@ -86,6 +87,36 @@ namespace OHM.Interfaces
             return result;
         }
 
+        public bool StartInterface(string key)
+        {
+            bool result = false;
+            IInterface interf = null;
+            if (_runningDic.TryGetValue(key, out interf))
+            {
+                if (interf.State == InterfaceState.Disabled)
+                {
+                    interf.Start();
+                    result = true;
+                }
+            }
+            return result;
+        }
+
+        public bool StopInterface(string key)
+        {
+            bool result = false;
+            IInterface interf = null;
+            if (_runningDic.TryGetValue(key, out interf))
+            {
+                if (interf.State == InterfaceState.Enabled)
+                {
+                    interf.Shutdown();
+                    result = true;
+                }
+            }
+            return result;
+        }
+
         private void loadRegisteredInterfaces()
         {
             foreach (var key in _dataRegisteredInterfaces.GetKeys())
@@ -96,7 +127,7 @@ namespace OHM.Interfaces
                 }
                 catch (Exception ex)
                 {
-                    _logger.Error("Cannot create interface : " + key);
+                    _logger.Error("Cannot create interface : " + key, ex);
                 }
             }
        }
@@ -139,7 +170,8 @@ namespace OHM.Interfaces
                 result = plugin.CreateInterface(key, interfaceLogger);
                 if (result != null)
                 {
-                    _runninInterfaces.Add(result);
+                    _runningInterfaces.Add(result);
+                    _runningDic.Add(key, result);
                 }
             }
 
@@ -153,5 +185,7 @@ namespace OHM.Interfaces
 
             return result;
         }
+
+
     }
 }

@@ -10,9 +10,7 @@ namespace OHM.Nodes
 
         string Name { get; }
 
-        IList<ICommandDefinition> Commands { get; }
-
-        bool RunCommand(string key, Dictionary<string, object> arguments);
+        IList<ICommand> Commands { get; }
 
     }
 }

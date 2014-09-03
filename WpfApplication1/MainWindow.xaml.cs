@@ -1,14 +1,13 @@
-﻿using System;
+﻿using OHM.Data;
+using OHM.Interfaces;
+using OHM.Logger;
+using OHM.Plugins;
+using OHM.System;
+using System;
 using System.ComponentModel;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
-using OHM.Logger;
-using OHM.Data;
-using OHM.Plugins;
-using log4net;
-using OHM.System;
-using OHM.Interfaces;
+using WpfApplication1.Logger;
 
 namespace WpfApplication1
 {
@@ -20,11 +19,40 @@ namespace WpfApplication1
         private OpenHomeMation ohm;
         private ILoggerManager loggerMng;
         private IPluginsManager pluginMng;
+        private IInterfacesManager interfacesMng;
 
         public static readonly RoutedUICommand InstallPluginCommand = new RoutedUICommand
         (
                 "Install Plugin",
                 "Install Plugin",
+                typeof(MainWindow)
+        );
+
+        public static readonly RoutedUICommand UninstallPluginCommand = new RoutedUICommand
+        (
+                "Uninstall Plugin",
+                "Uninstall Plugin",
+                typeof(MainWindow)
+        );
+
+        public static readonly RoutedUICommand StartInterfaceCommand = new RoutedUICommand
+        (
+                "Start Interface",
+                "Start Interface",
+                typeof(MainWindow)
+        );
+
+        public static readonly RoutedUICommand StopInterfaceCommand = new RoutedUICommand
+        (
+                "Stop Interface",
+                "Stop Interface",
+                typeof(MainWindow)
+        );
+
+        public static readonly RoutedUICommand ExecuteInterfaceCommand = new RoutedUICommand
+        (
+                "Execute interface command",
+                "Execute interface command",
                 typeof(MainWindow)
         );
 
@@ -34,7 +62,7 @@ namespace WpfApplication1
             loggerMng = new WpfLoggerManager(txt);
             var dataMng = new FileDataManager(loggerMng, AppDomain.CurrentDomain.BaseDirectory + "\\data\\");
             pluginMng = new PluginsManager(loggerMng, AppDomain.CurrentDomain.BaseDirectory + "\\plugins\\");
-            var interfacesMng = new InterfacesManager(loggerMng, pluginMng);
+            interfacesMng = new InterfacesManager(loggerMng, pluginMng);
             ohm = new OpenHomeMation(pluginMng, dataMng, loggerMng, interfacesMng);
 
             ohm.start();
@@ -58,104 +86,48 @@ namespace WpfApplication1
         {
             pluginMng.InstallPlugin((Guid)e.Parameter, ohm.System);
         }
-    }
 
-    public class WpfLoggerManager : ILoggerManager
-    {
-
-        private TextBox _txt;
-        public WpfLoggerManager(TextBox txt)
+        private void StopInterfaceCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            _txt = txt;
+            string key = (string)e.Parameter;
+            interfacesMng.StopInterface(key);
         }
 
-        public ILogger GetLogger(Type type)
+        private void StartInterfaceCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            return new WpfLogger(log4net.LogManager.GetLogger(type), _txt);
+            string key = (string)e.Parameter;
+            interfacesMng.StartInterface(key);
         }
 
-        public ILogger GetLogger(string name)
+        private void ExecuteInterfaceCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            return new WpfLogger(log4net.LogManager.GetLogger(name), _txt);
-        }
-    }
+            var command = e.Parameter as OHM.Commands.ICommand;
 
-    public class WpfLogger : DefaultLogger, ILogger
-    {
-        private TextBox output;
-        public WpfLogger(ILog log, TextBox output)
-            : base(log)
-        {
-            this.output = output;
-        }
-
-        public override void Debug(object message)
-        {
-            base.Debug(message);
-            wpfLog(message.ToString());
-        }
-
-        public override void Debug(object message, Exception exception)
-        {
-            base.Debug(message, exception);
-            wpfLog(message.ToString());
-        }
-
-        public override void Error(object message)
-        {
-            base.Error(message);
-            wpfLog(message.ToString());
-        }
-
-        public override void Error(object message, Exception exception)
-        {
-            base.Error(message, exception);
-            wpfLog(message.ToString());
-        }
-
-        public override void Fatal(object message)
-        {
-            base.Fatal(message);
-            wpfLog(message.ToString());
-        }
-
-        public override void Fatal(object message, Exception exception)
-        {
-            base.Fatal(message, exception);
-            wpfLog(message.ToString());
-        }
-
-        public override void Info(object message)
-        {
-            base.Info(message);
-            wpfLog(message.ToString());
-        }
-
-        public override void Info(object message, Exception exception)
-        {
-            base.Info(message, exception);
-            wpfLog(message.ToString());
-        }
-
-        public override void Warn(object message)
-        {
-            base.Warn(message);
-            wpfLog(message.ToString());
-        }
-
-        public override void Warn(object message, Exception exception)
-        {
-            base.Warn(message, exception);
-            wpfLog(message.ToString());
-        }
-
-        public void wpfLog(string message)
-        {
-            output.Dispatcher.BeginInvoke(new Action(delegate {
-                output.AppendText(message + "\n");
-                
-            }));
+            if (command != null)
+            {
+                if (command.ArgumentsDefinition.Count > 0)
+                {
+                    ShowCommandDialog(command);
+                }
+                else
+                {
+                    command.Run(null);
+                }
+            }
             
+        }
+
+        private void ShowCommandDialog(OHM.Commands.ICommand command)
+        {
+            var w = new CommandDialog();
+            w.init(command);
+            var result = w.ShowDialog();
+
+            if (result.HasValue && result.Value)
+            {
+                //get arguments
+                command.Run(w.ArgumentsResult);
+            }
         }
     }
 }

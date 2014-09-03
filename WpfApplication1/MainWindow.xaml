@@ -5,9 +5,12 @@
         Title="MainWindow" Height="350" Width="525">
     <Window.CommandBindings>
         <CommandBinding Command="local:MainWindow.InstallPluginCommand" Executed="InstallPluginCommand_Executed" />
+        <CommandBinding Command="local:MainWindow.StartInterfaceCommand" Executed="StartInterfaceCommand_Executed" />
+        <CommandBinding Command="local:MainWindow.StopInterfaceCommand" Executed="StopInterfaceCommand_Executed" />
+        <CommandBinding Command="local:MainWindow.ExecuteInterfaceCommand" Executed="ExecuteInterfaceCommand_Executed" />
     </Window.CommandBindings>
     <DockPanel>
-        <TextBox DockPanel.Dock="Bottom" HorizontalAlignment="Stretch" Name="txt" Margin="10" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Stretch" />
+        <TextBox DockPanel.Dock="Bottom" HorizontalAlignment="Stretch" Name="txt" Margin="10" TextWrapping="Wrap" VerticalAlignment="Stretch" />
         <Grid DockPanel.Dock="Left" Width="200" >
             <Label>
                 <Run Text="System" />
@@ -21,17 +24,51 @@
                     </TreeViewItem.Header>
                     <TreeViewItem.Items>
                         <TreeViewItem Name="InterfacesTreeViewItem" ItemsSource="{Binding}">
+                            <TreeViewItem.ItemContainerStyle>
+                                <Style TargetType="TreeViewItem">
+                                    <Setter Property="ContextMenu">
+                                        <Setter.Value>
+                                            <ContextMenu >
+                                                <ContextMenu.ItemContainerStyle>
+                                                    <Style>
+                                                        <Setter Property="MenuItem.Command" Value="local:MainWindow.ExecuteInterfaceCommand" />
+                                                        <Setter Property="MenuItem.CommandParameter" Value="{Binding}" />
+                                                    </Style>
+                                                </ContextMenu.ItemContainerStyle>
+                                                <ContextMenu.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="{Binding Name}" />
+                                                    </DataTemplate>
+                                                </ContextMenu.ItemTemplate>
+
+                                                <ContextMenu.Resources>
+                                                    <CollectionViewSource x:Key="CustomCommandsCollection" Source="{Binding Commands}"/>
+                                                </ContextMenu.Resources>
+                                                <ContextMenu.ItemsSource>
+                                                    <CompositeCollection>
+                                                        <MenuItem Header="Start" Command="local:MainWindow.StartInterfaceCommand" CommandParameter="{Binding Path=Key}" />
+                                                        <MenuItem Header="Stop" Command="local:MainWindow.StopInterfaceCommand" CommandParameter="{Binding Path=Key}" />
+                                                        <Separator />
+                                                        <CollectionContainer Collection="{Binding Source={StaticResource CustomCommandsCollection}}"/>
+                                                    </CompositeCollection>
+                                                </ContextMenu.ItemsSource>
+                                            </ContextMenu>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </TreeViewItem.ItemContainerStyle>
                             <TreeViewItem.Header>
                                 <Label>
                                     <Run>Interfaces</Run>
                                 </Label>
                             </TreeViewItem.Header>
+                            
                             <TreeViewItem.ItemTemplate>
-                                <DataTemplate>
-                                    <TextBlock>
-                                        <Run Text="{Binding Path=Name}" />
-                                    </TextBlock>
-                                </DataTemplate>
+                                <HierarchicalDataTemplate>
+                                    <Label>
+                                        <Run Text="{Binding Path=Name, Mode=OneWay}" />
+                                    </Label>
+                                </HierarchicalDataTemplate>
                             </TreeViewItem.ItemTemplate>
                         </TreeViewItem>
                     </TreeViewItem.Items>

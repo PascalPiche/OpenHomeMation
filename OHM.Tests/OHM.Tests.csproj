@@ -108,7 +108,9 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>del "$(SolutionDir)OHM.Tests\bin\Debug\pluginsStub\*"
-xcopy "$(SolutionDir)OHM.Tests.Stub.Plugin\bin\debug\OHM.Tests.Stub.Plugin.dll" "$(SolutionDir)OHM.Tests\bin\Debug\pluginsStub\" /Y /s</PostBuildEvent>
+xcopy "$(SolutionDir)OHM.Tests.Stub.Plugin\bin\debug\OHM.Tests.Stub.Plugin.dll" "$(SolutionDir)OHM.Tests\bin\Debug\pluginsStub\" /Y /s
+xcopy "$(SolutionDir)OHM.Tests.Stub.Plugin\bin\debug\OHM.Tests.Stub.Plugin.dll" "$(SolutionDir)OHM.Tests\bin\Debug\pluginsStub1\" /Y /s
+xcopy "$(SolutionDir)OHM.Tests.Stub.Plugin\bin\debug\OHM.Tests.Stub.Plugin.dll" "$(SolutionDir)OHM.Tests\bin\Debug\pluginsStub2\" /Y /s</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

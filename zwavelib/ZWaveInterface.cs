@@ -7,34 +7,26 @@ using System.Collections.Generic;
 
 namespace ZWaveLib
 {
-    public class ZWaveInterface : IInterface
+    public class ZWaveInterface : InterfaceAbstract
     {
 
         private ZWManager mng = new ZWManager();
         private ILogger logger;
-        private List<ICommandDefinition> commands;
+        
         private Dictionary<int, IZWaveController> controllers = new Dictionary<int, IZWaveController>();
 
-        public string Key
-        {
-            get { return "ZWaveInterface"; }
-        }
-
-        public string Name
-        {
-            get { return "ZWave"; }
-        }
-
-        public ZWaveInterface(ILogger logger) 
+        public ZWaveInterface(ILogger logger)
+            : base("ZWaveInterface", "ZWave")
         {
             this.logger = logger;
 
             //Create Commands
-            commands = new List<ICommandDefinition>();
+            this.Commands.Add(new CreateControllerCommand(this));
         }
 
-        public void Init()
+        public override void Start()
         {
+            logger.Info("ZWave Interface initing");
             var apiPath = @"C:\Users\Scopollif\Documents\Visual Studio 2013\Projects\OpenHomeMation\external\open-zwave\openzwave-1.0.791";
             ZWOptions opt = new ZWOptions();
             opt.Create(apiPath + @"\config\", apiPath + @"", @"");
@@ -45,20 +37,19 @@ namespace ZWaveLib
             mng.Create();
             mng.OnNotification += new ManagedNotificationsHandler(NotificationHandler);
             mng.OnControllerStateChanged += new ManagedControllerStateChangedHandler(ControllerStateChangedHandler);
-            logger.Info("ZWaveInterface Inited");
+            base.Start();
+            logger.Info("ZWave Interface Inited");
         }
 
-        public IList<ICommandDefinition> Commands
+        public override void Shutdown()
         {
-            get { return commands; }
+            logger.Info("ZWave Interface Shutdowning");
+            mng.Destroy();
+            base.Shutdown();
+            logger.Info("ZWave Interface Shutdowned");
         }
 
-        public bool RunCommand(string key, Dictionary<string, object> arguments)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool CreateController(int port)
+        internal bool CreateController(int port)
         {
             logger.Info("Creating ZWave Controller on port: " + port);
 
@@ -73,15 +64,10 @@ namespace ZWaveLib
             return true;
         }
 
-        public void RemoveController(int port)
+        internal void RemoveController(int port)
         {
             logger.Info("Removing Driver on port: " + port);
             mng.RemoveDriver(@"\\.\COM" + port);
-        }
-
-        public void Shutdown()
-        {
-            
         }
 
         private void NotificationHandler(ZWNotification n)
@@ -110,6 +96,25 @@ namespace ZWaveLib
         {
             
         }
-
     }
+
+
+    public class CreateControllerCommand : CommandAbstract
+    {
+
+        private ZWaveInterface _interface;
+        public CreateControllerCommand(ZWaveInterface interf)
+            : base("createController", "Create a controller")
+        {
+            _interface = interf;
+            this.ArgumentsDefinition.Add("Port", new ArgumentDefinition("port", "Port", typeof(int)));
+        }
+
+
+       protected override bool RunImplementation(Dictionary<string, object> arguments)
+        {
+            return _interface.CreateController((int)arguments["Port"]);
+        }
+    }
+
 }

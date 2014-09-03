@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\CommandDefinitionBase.cs" />
     <Compile Include="Commands\IArgumentDefinition.cs" />
     <Compile Include="Commands\ICommandDefinition.cs" />
     <Compile Include="Nodes\INode.cs" />
