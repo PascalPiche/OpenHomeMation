@@ -9,9 +9,9 @@
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         
-        <Label Content="{Binding Command.Description}" Grid.Row="0"/>
+        <Label Content="{Binding Command.Name}" Grid.Row="0"/>
 
-        <ItemsControl ItemsSource="{Binding ArgumentsDefinition.Values}" Grid.Row="1">
+        <ItemsControl ItemsSource="{Binding Arguments}" Grid.Row="1">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -19,14 +19,15 @@
                             <ColumnDefinition />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <Label Content="{Binding }" />
+                        <Label Content="{Binding ArgumentDefinition.Name}" Grid.Column="0" />
+                        <TextBox Text="{Binding Value}" Grid.Column="1" /> 
                     </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
         
         <StackPanel Grid.Row="2" Margin="10" HorizontalAlignment="Right" Orientation="Horizontal">
-            <Button IsDefault="True">Run</Button>
+            <Button IsDefault="True" Name="okBtn">Run</Button>
             <Button IsCancel="True" Margin="10 0 0 0">Cancel</Button>
         </StackPanel>
         

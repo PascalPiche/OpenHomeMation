@@ -42,9 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\CommandDefinitionBase.cs" />
+    <Compile Include="Commands\ArgumentDefinition.cs" />
+    <Compile Include="Commands\CommandAbstract.cs" />
+    <Compile Include="Commands\IArgumentConverter.cs" />
     <Compile Include="Commands\IArgumentDefinition.cs" />
-    <Compile Include="Commands\ICommandDefinition.cs" />
+    <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Nodes\INode.cs" />
     <Compile Include="Interfaces\IInterface.cs" />
     <Compile Include="Logger\ILogger.cs" />

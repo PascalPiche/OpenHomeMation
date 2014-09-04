@@ -103,18 +103,7 @@ namespace OHM.Plugins
             //Save to persistent storage
             _dataInstalledPlugins.StoreString(plugin.Id.ToString(), plugin.GetType().Assembly.GetName().Version.ToString());
             _data.Save();
-
-            /*try
-            {*/
-                _availablesPlugins.Remove(plugin);
-            /*}
-            catch (Exception ex)
-            {
-                //Weird error related to WPF 
-                //Do nothing for the moment.. need investigation later
-                //but work if we skip the error
-                _logger.Debug("Weird error on removing plugin from availables plugins list", ex);
-            }*/
+            _availablesPlugins.Remove(plugin);
             
             return result;
         }

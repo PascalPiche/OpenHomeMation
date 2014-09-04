@@ -111,7 +111,7 @@ namespace WpfApplication1
                 }
                 else
                 {
-                    command.Run(null);
+                    command.Execute(null);
                 }
             }
             
@@ -126,7 +126,7 @@ namespace WpfApplication1
             if (result.HasValue && result.Value)
             {
                 //get arguments
-                command.Run(w.ArgumentsResult);
+                command.Execute(w.ArgumentsResult);
             }
         }
     }

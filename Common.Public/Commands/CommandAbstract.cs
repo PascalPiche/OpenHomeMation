@@ -53,17 +53,32 @@ namespace OHM.Commands
             get { return _description; }
         }
 
+        public bool CanExecute()
+        {
+            return true;
+        }
+
         public bool ValidateArguments(Dictionary<string, object> arguments)
         {
             bool result = true;
-            foreach (var item in ArgumentsDefinition.Values)
+            //Validate required
+            foreach (var item in _argumentsDefinition.Values)
             {
                 if (item.Required)
                 {
-                    if (!arguments.ContainsKey(item.Name))
+                    if (!arguments.ContainsKey(item.Key))
                     {
                         result = false;
                     }
+                }
+            }
+
+            foreach (var item in arguments)
+            {
+                var argDef = _argumentsDefinition[item.Key];
+                if (!argDef.ValidateValue(item.Value))
+                {
+                    result = false;
                 }
             }
             return result;
@@ -74,7 +89,7 @@ namespace OHM.Commands
             get { return _argumentsDefinition; }
         }
 
-        public bool Run(Dictionary<string, object> arguments)
+        public bool Execute(Dictionary<string, object> arguments)
         {
             bool result = false;
             if (ValidateArguments(arguments))
@@ -85,5 +100,6 @@ namespace OHM.Commands
         }
 
         protected abstract bool RunImplementation(Dictionary<string, object> arguments);
+
     }
 }

@@ -107,13 +107,24 @@ namespace ZWaveLib
             : base("createController", "Create a controller")
         {
             _interface = interf;
-            this.ArgumentsDefinition.Add("Port", new ArgumentDefinition("port", "Port", typeof(int)));
+            this.ArgumentsDefinition.Add
+            (
+                "port", 
+                new ArgumentDefinition(
+                    "port", 
+                    "Port", 
+                    typeof(int), 
+                    true
+                )
+            );
         }
 
 
        protected override bool RunImplementation(Dictionary<string, object> arguments)
         {
-            return _interface.CreateController((int)arguments["Port"]);
+            return false;/* _interface.CreateController(
+                this.ArgumentsDefinition["port"]).GetValue(arguments["port"]);
+            );*/
         }
     }
 

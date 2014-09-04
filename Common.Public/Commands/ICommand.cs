@@ -16,6 +16,8 @@ namespace OHM.Commands
 
         Dictionary<String, IArgumentDefinition> ArgumentsDefinition { get; }
 
-        bool Run(Dictionary<string, object> arguments);
+        bool Execute(Dictionary<string, object> arguments);
+
+        bool CanExecute();
     }
 }

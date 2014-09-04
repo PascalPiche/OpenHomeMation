@@ -30,6 +30,18 @@ namespace WpfApplication1
         public CommandDialog()
         {
             InitializeComponent();
+            okBtn.Click += okBtn_Click;
+        }
+
+        void okBtn_Click(object sender, RoutedEventArgs e)
+        {
+            //Validate arguments
+            var args = ArgumentsResult;
+            if (_mv.Command.ValidateArguments(args))
+            {
+                this.DialogResult = true;
+                this.Close();
+            }
         }
 
         public Dictionary<String, object> ArgumentsResult { get { return _mv.ArgumentsResult; } }
@@ -37,29 +49,29 @@ namespace WpfApplication1
         public void init(OHM.Commands.ICommand command)
         {
             _mv = new CommandDialogMV(command);
-
+            
             this.DataContext = _mv;
         }
-
 
     }
 
     public class CommandDialogMV
     {
         private OHM.Commands.ICommand _command;
-
-        private ObservableCollection<ArgumentsDefinitionDesigner> arguments = new ObservableCollection<ArgumentsDefinitionDesigner>();
-        private ObservableCollection<string> optionalArguments = new ObservableCollection<string>();
+        private ObservableCollection<ArgumentsDefinitionDesigner> _arguments = new ObservableCollection<ArgumentsDefinitionDesigner>();
+        private ObservableCollection<string> _optionalArguments = new ObservableCollection<string>();
 
         public OHM.Commands.ICommand Command { get { return _command; } }
 
-        public CommandDialogMV(OHM.Commands.ICommand command)
+        public ObservableCollection<ArgumentsDefinitionDesigner> Arguments { get { return _arguments; } }
+        
+        internal CommandDialogMV(OHM.Commands.ICommand command)
         {
             _command = command;
             Init();
         }
 
-        public Dictionary<String, object> ArgumentsResult { get { return CreateArgumentsResult(); } }
+        internal Dictionary<String, object> ArgumentsResult { get { return CreateArgumentsResult(); } }
 
         private void Init()
         {
@@ -68,11 +80,11 @@ namespace WpfApplication1
             {
                 if (item.Required)
                 {
-                    arguments.Add(new ArgumentsDefinitionDesigner(item));
+                    _arguments.Add(new ArgumentsDefinitionDesigner(item));
                 }
                 else
                 {
-                    optionalArguments.Add(item.Name);
+                    _optionalArguments.Add(item.Name);
                 }
             }
         }
@@ -81,9 +93,9 @@ namespace WpfApplication1
         {
             Dictionary<String, object> result = new Dictionary<String, object>();
 
-            foreach (var item in arguments)
+            foreach (var item in _arguments)
             {
-                //result.Add(item.ArgumentDefinition.)
+                result.Add(item.ArgumentDefinition.Key, item.Value);
             }
 
             return result;
