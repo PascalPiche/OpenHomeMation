@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\CreateControllerCommand.cs" />
     <Compile Include="IZWaveController.cs" />
     <Compile Include="IZWaveNode.cs" />
     <Compile Include="ZWaveController.cs" />

@@ -1,4 +1,5 @@
-﻿using OHM.Data;
+﻿using OHM.Commands;
+using OHM.Data;
 using OHM.Interfaces;
 using OHM.Logger;
 using OHM.Plugins;
@@ -101,23 +102,22 @@ namespace WpfApplication1
 
         private void ExecuteInterfaceCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            var command = e.Parameter as OHM.Commands.ICommand;
+            var command = e.Parameter as CommandAbstract;
 
             if (command != null)
             {
-                if (command.ArgumentsDefinition.Count > 0)
+                if (command.Definition.ArgumentsDefinition.Count > 0)
                 {
                     ShowCommandDialog(command);
                 }
                 else
                 {
-                    command.Execute(null);
+                    interfacesMng.ExecuteCommand(command, null);
                 }
             }
-            
         }
 
-        private void ShowCommandDialog(OHM.Commands.ICommand command)
+        private void ShowCommandDialog(CommandAbstract command)
         {
             var w = new CommandDialog();
             w.init(command);
@@ -125,8 +125,7 @@ namespace WpfApplication1
 
             if (result.HasValue && result.Value)
             {
-                //get arguments
-                command.Execute(w.ArgumentsResult);
+                interfacesMng.ExecuteCommand(command, w.ArgumentsResult);
             }
         }
     }

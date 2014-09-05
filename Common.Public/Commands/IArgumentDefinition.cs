@@ -13,9 +13,13 @@ namespace OHM.Commands
 
         bool Required { get; }
 
-        IArgumentConverter ArgumentConverter { get; }
+        //IArgumentConverter ArgumentConverter { get; }
 
         bool ValidateValue(object value);
+
+        bool TryGetInt(object value, out int result);
+
+        bool TryGetString(object value, out string result);
     }
 
     

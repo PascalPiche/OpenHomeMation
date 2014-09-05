@@ -9,7 +9,6 @@ using System.Collections.ObjectModel;
 namespace OHM.Interfaces
 {
 
-    
     public class InterfacesManager : IInterfacesManager
     {
 
@@ -117,6 +116,21 @@ namespace OHM.Interfaces
             return result;
         }
 
+        public bool ExecuteCommand(string interfaceKey, string commandKey, Dictionary<string, object> arguments)
+        {
+            //Find interface
+
+            //Find Command
+            throw new NotImplementedException();
+        }
+
+        public bool ExecuteCommand(Commands.ICommand command, Dictionary<string, object> arguments)
+        {
+            return command.Execute(arguments);
+        }
+
+        #region "Private"
+
         private void loadRegisteredInterfaces()
         {
             foreach (var key in _dataRegisteredInterfaces.GetKeys())
@@ -186,6 +200,7 @@ namespace OHM.Interfaces
             return result;
         }
 
+        #endregion
 
     }
 }

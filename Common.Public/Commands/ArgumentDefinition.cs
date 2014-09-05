@@ -33,36 +33,48 @@ namespace OHM.Commands
 
         public bool ValidateValue(object value)
         {
-            /*if (value is )
-            {
-                return true;
-            }
 
-            //Try convert
-            if (this.Type == typeof(int))
+            if (_type == typeof(int))
             {
                 int result;
-                return TryConvertInt(value, out result);
-            }*/
+                return TryGetInt(value, out result);
+            } 
+            else if (_type == typeof(string))
+            {
+                string result;
+                return TryGetString(value, out result);
+            }
             return false;
         }
 
-        
-
-        private bool TryConvertInt(object value, out int result)
+        public bool TryGetInt(object value, out int result)
         {
+            if (value is int)
+            {
+                result = (int)value;
+                return true;
+            }
+
             if (value is string)
             {
                 return int.TryParse((string)value, out result);
             }
+
             result = 0;
             return false;
         }
 
-
-        public IArgumentConverter ArgumentConverter
+        public bool TryGetString(object value, out string result)
         {
-            get { throw new NotImplementedException(); }
+            if (value is string)
+            {
+                result = (string)value;
+                return true;
+            }
+
+            result = string.Empty;
+            return false;
         }
+
     }
 }

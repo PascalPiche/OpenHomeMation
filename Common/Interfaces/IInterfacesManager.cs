@@ -1,4 +1,5 @@
 ﻿
+using OHM.Commands;
 using OHM.Data;
 using OHM.Plugins;
 using System.Collections.Generic;
@@ -18,6 +19,9 @@ namespace OHM.Interfaces
 
         bool StopInterface(string key);
 
+        bool ExecuteCommand(string interfaceKey, string commandKey, Dictionary<string, object> arguments);
+
+        bool ExecuteCommand(ICommand command, Dictionary<string, object> arguments);
     }
 
 }

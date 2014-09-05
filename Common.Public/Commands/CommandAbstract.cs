@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OHM.Nodes;
+using System;
 using System.Collections.Generic;
 
 namespace OHM.Commands
@@ -6,100 +7,76 @@ namespace OHM.Commands
     
     public abstract class CommandAbstract : ICommand
     {
-        private string _key;
-        private string _name;
-        private string _description;
-        private Dictionary<string, IArgumentDefinition> _argumentsDefinition;
 
-        public CommandAbstract(string key, string name) 
-            : this(key, name, string.Empty, null) { }
+        private ICommandDefinition _definition;
+        private INode _node;
+        #region "Ctor"
 
-        public CommandAbstract(string key, string name, string description) 
-            : this (key, name, description, null) { }
+        public CommandAbstract(INode node, string key, string name) 
+            : this(node, key, name, string.Empty, null) { }
+
+        public CommandAbstract(INode node, string key, string name, string description) 
+            : this (node, key, name, description, null) { }
 
         public CommandAbstract(
+            INode node,
             string key, 
             string name,
             string description, 
             Dictionary<string, IArgumentDefinition> argumentsDefinition
         )
         {
-            _key = key;
-            _name = name;
-            _description = description;
-            if (argumentsDefinition != null)
-            {
-                _argumentsDefinition = argumentsDefinition;
-            }
-            else
-            {
-                _argumentsDefinition = new Dictionary<string,IArgumentDefinition>();
-            }
-            
+            _node = node;
+            _definition = new CommandDefinition(key, name, description, argumentsDefinition);
         }
 
-        public string Key
+        public CommandAbstract(INode node, ICommandDefinition definition)
         {
-            get { return _key; }
+            _node = node;
+            _definition = definition;
         }
 
-        public string Name
+        #endregion
+
+        #region "Public"
+
+        public Nodes.INode Node
         {
-            get { return _name; }
+            get { return _node; }
         }
 
-        public string Description
+        public ICommandDefinition Definition
         {
-            get { return _description; }
+            get { return _definition; }
         }
 
-        public bool CanExecute()
+        public virtual bool CanExecute()
         {
             return true;
         }
 
-        public bool ValidateArguments(Dictionary<string, object> arguments)
-        {
-            bool result = true;
-            //Validate required
-            foreach (var item in _argumentsDefinition.Values)
-            {
-                if (item.Required)
-                {
-                    if (!arguments.ContainsKey(item.Key))
-                    {
-                        result = false;
-                    }
-                }
-            }
+        #endregion
 
-            foreach (var item in arguments)
-            {
-                var argDef = _argumentsDefinition[item.Key];
-                if (!argDef.ValidateValue(item.Value))
-                {
-                    result = false;
-                }
-            }
-            return result;
-        }
+        #region "Protected"
 
-        public Dictionary<string, IArgumentDefinition> ArgumentsDefinition
-        {
-            get { return _argumentsDefinition; }
-        }
+        protected abstract bool RunImplementation(Dictionary<string, object> arguments);
+
+        #endregion
+
+        #region "Internal"
 
         public bool Execute(Dictionary<string, object> arguments)
         {
             bool result = false;
-            if (ValidateArguments(arguments))
+            if (_definition.ValidateArguments(arguments))
             {
                 result = RunImplementation(arguments);
             }
             return result;
         }
 
-        protected abstract bool RunImplementation(Dictionary<string, object> arguments);
+        #endregion
 
+        
     }
 }

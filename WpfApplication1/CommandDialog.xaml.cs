@@ -37,7 +37,7 @@ namespace WpfApplication1
         {
             //Validate arguments
             var args = ArgumentsResult;
-            if (_mv.Command.ValidateArguments(args))
+            if (_mv.Command.Definition.ValidateArguments(args))
             {
                 this.DialogResult = true;
                 this.Close();
@@ -76,7 +76,7 @@ namespace WpfApplication1
         private void Init()
         {
             //Add required arguments
-            foreach (var item in _command.ArgumentsDefinition.Values)
+            foreach (var item in _command.Definition.ArgumentsDefinition.Values)
             {
                 if (item.Required)
                 {

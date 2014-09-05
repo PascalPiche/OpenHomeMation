@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OHM.Nodes;
+using System;
 using System.Collections.Generic;
 
 namespace OHM.Commands
@@ -6,18 +7,25 @@ namespace OHM.Commands
     public interface ICommand
     {
 
+        INode Node { get; }
+
+        ICommandDefinition Definition { get; }
+
+        bool Execute(Dictionary<string, object> arguments);
+
+        bool CanExecute();
+    }
+
+    public interface ICommandDefinition
+    {
         String Key { get; }
 
         String Name { get; }
 
         String Description { get; }
 
-        bool ValidateArguments(Dictionary<string, object> arguments);
-
         Dictionary<String, IArgumentDefinition> ArgumentsDefinition { get; }
 
-        bool Execute(Dictionary<string, object> arguments);
-
-        bool CanExecute();
+        bool ValidateArguments(Dictionary<string, object> arguments);
     }
 }
