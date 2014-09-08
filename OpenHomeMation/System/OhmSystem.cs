@@ -2,7 +2,7 @@
 using OHM.Logger;
 using System;
 
-namespace OHM.System
+namespace OHM.Sys
 {
     public class OhmSystem : IOhmSystem
     {
@@ -30,6 +30,12 @@ namespace OHM.System
         public IOhmSystemInstallGateway GetInstallGateway(Plugins.IPlugin plugin)
         {
             return new OhmSystemInstallGateway(this, plugin);
+        }
+
+
+        public IOhmSystemInterfaceGateway GetInterfaceGateway(IInterface interf)
+        {
+            return new OhmSystemInterfaceGateway(this, interf);
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using OHM.Logger;
+using OHM.Nodes;
+using System;
 
 namespace ZWaveLib
 {
@@ -8,12 +10,12 @@ namespace ZWaveLib
         ready,
         error
     }
-    class ZWaveController : IZWaveController
+    class ZWaveController : ZWaveNode, IZWaveController
     {
 
         //private ZWaveControllerState state = ZWaveControllerState.initializing;
         
-        public ZWaveController()
+        public ZWaveController(string key, string name, ILogger logger, INode parent) : base(key, name, logger, parent)
         {
 
         }

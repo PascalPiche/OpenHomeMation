@@ -2,7 +2,7 @@
 using OHM.Logger;
 using OHM.Nodes;
 
-namespace OHM.System
+namespace OHM.Sys
 {
     public interface IOhmSystemInstallGateway
     {
@@ -10,6 +10,13 @@ namespace OHM.System
 
         bool RegisterInterface(string key);
 
-        //void RegisterNodeType(string key, string type);
+    }
+
+    public interface IOhmSystemInterfaceGateway
+    {
+        bool CreateNode(INode node);
+
+        bool RemoveNode(INode node);
+
     }
 }

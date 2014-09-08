@@ -1,5 +1,7 @@
 ﻿using OHM.Commands;
+using OHM.Logger;
 using OHM.Nodes;
+using OHM.Sys;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,10 +13,14 @@ namespace OHM.Interfaces
     {
 
         private InterfaceState _state = InterfaceState.Disabled;
+        
+        private IOhmSystemInterfaceGateway _system;
 
-        public InterfaceAbstract(string key, string name) 
-            : base(key, name)
-        {}
+        public InterfaceAbstract(string key, string name, ILogger logger) 
+            : base(key, name, logger, null)
+        {
+            
+        }
 
         public InterfaceState State
         {
@@ -42,5 +48,13 @@ namespace OHM.Interfaces
         {
             State = Interfaces.InterfaceState.Disabled;
         }
+
+        public void Init(IOhmSystemInterfaceGateway system)
+        {
+            base.Init();
+            _system = system;
+        }
+       
+        
     }
 }

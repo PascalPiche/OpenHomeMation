@@ -2,6 +2,7 @@
 using OHM.Data;
 using OHM.Logger;
 using OHM.Plugins;
+using OHM.Sys;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -20,10 +21,16 @@ namespace OHM.Interfaces
         private IList<IInterface> _runningInterfaces = new ObservableCollection<IInterface>();
         private Dictionary<String, IInterface> _runningDic = new Dictionary<string, IInterface>();
 
+        #region "Public Property"
+
         public IList<IInterface> RunnableInterfaces
         {
             get { return _runningInterfaces; }
         }
+
+        #endregion
+
+        #region Ctor
 
         public InterfacesManager(ILoggerManager loggerMng, IPluginsManager pluginsMng)
         {
@@ -31,7 +38,11 @@ namespace OHM.Interfaces
             _pluginsMng = pluginsMng;
         }
 
-        public bool Init(IDataStore data)
+        #endregion
+
+        #region "Public api"
+
+        public bool Init(IDataStore data, IOhmSystem system)
         {
             _data = data;
             _logger = _loggerMng.GetLogger("InterfacesManager");
@@ -42,11 +53,11 @@ namespace OHM.Interfaces
                 _data.StoreDataDictionary("RegisteredInterfaces", _dataRegisteredInterfaces);
                 _data.Save();
             }
-            loadRegisteredInterfaces();
+            loadRegisteredInterfaces(system);
             return true;
         }
 
-        public bool RegisterInterface(string key, IPlugin plugin)
+        public bool RegisterInterface(string key, IPlugin plugin, IOhmSystem system)
         {
             bool result = false;
             //Detect if already created
@@ -59,7 +70,7 @@ namespace OHM.Interfaces
             else 
             {
                 try {
-                    IInterface newInterface = CreateInterface(key, plugin);
+                    IInterface newInterface = CreateInterface(key, plugin, system);
                     if (newInterface == null)
                     {
                         _logger.Error("Cannot register interface " + key + ", Error on creating Interface");
@@ -119,25 +130,35 @@ namespace OHM.Interfaces
         public bool ExecuteCommand(string interfaceKey, string commandKey, Dictionary<string, object> arguments)
         {
             //Find interface
-
-            //Find Command
-            throw new NotImplementedException();
+            IInterface interf = GetRunningInterface(interfaceKey);
+            if (interf != null)
+            {
+                return interf.ExecuteCommand(commandKey, arguments);
+            }
+            return false;
         }
 
-        public bool ExecuteCommand(Commands.ICommand command, Dictionary<string, object> arguments)
+        public bool CanExecuteCommand(string interfaceKey, string commandKey)
         {
-            return command.Execute(arguments);
+            IInterface interf = GetRunningInterface(interfaceKey);
+            if (interf != null)
+            {
+                return interf.CanExecuteCommand(commandKey);
+            }
+            return false;
         }
+
+        #endregion
 
         #region "Private"
 
-        private void loadRegisteredInterfaces()
+        private void loadRegisteredInterfaces(IOhmSystem system)
         {
             foreach (var key in _dataRegisteredInterfaces.GetKeys())
             {
                 try
                 {
-                    CreateInterface(key);
+                    CreateInterface(key, system);
                 }
                 catch (Exception ex)
                 {
@@ -164,9 +185,9 @@ namespace OHM.Interfaces
             return result;
         }
 
-        private IInterface CreateInterface(string key)
+        private InterfaceAbstract CreateInterface(string key, IOhmSystem system)
         {
-            return CreateInterface(key, GetPluginForInterface(key));
+            return CreateInterface(key, GetPluginForInterface(key), system);
         }
 
         private string GetInterfaceLoggerKey(string key, IPlugin plugin)
@@ -174,16 +195,18 @@ namespace OHM.Interfaces
             return plugin.Id.ToString() + '.' + key;
         }
 
-        private IInterface CreateInterface(string key, IPlugin plugin)
+        private InterfaceAbstract CreateInterface(string key, IPlugin plugin, IOhmSystem system)
         {
-            IInterface result = null;
+            InterfaceAbstract result = null;
 
             if (plugin != null)
             {
                 var interfaceLogger = _loggerMng.GetLogger(GetInterfaceLoggerKey(key, plugin));
                 result = plugin.CreateInterface(key, interfaceLogger);
+                
                 if (result != null)
                 {
+                    result.Init(system.GetInterfaceGateway(result));
                     _runningInterfaces.Add(result);
                     _runningDic.Add(key, result);
                 }
@@ -197,6 +220,17 @@ namespace OHM.Interfaces
 
             result.StoreString("PluginId", plugin.Id.ToString());
 
+            return result;
+        }
+
+        private IInterface GetRunningInterface(string key)
+        {
+            IInterface result;
+
+            if (!_runningDic.TryGetValue(key, out result))
+            {
+                result = null;
+            }
             return result;
         }
 

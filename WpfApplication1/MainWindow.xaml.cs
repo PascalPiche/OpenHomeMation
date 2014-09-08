@@ -3,7 +3,7 @@ using OHM.Data;
 using OHM.Interfaces;
 using OHM.Logger;
 using OHM.Plugins;
-using OHM.System;
+using OHM.Sys;
 using System;
 using System.ComponentModel;
 using System.Windows;
@@ -102,7 +102,7 @@ namespace WpfApplication1
 
         private void ExecuteInterfaceCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            var command = e.Parameter as CommandAbstract;
+            var command = e.Parameter as OHM.Commands.ICommand;
 
             if (command != null)
             {
@@ -112,12 +112,12 @@ namespace WpfApplication1
                 }
                 else
                 {
-                    interfacesMng.ExecuteCommand(command, null);
+                    interfacesMng.ExecuteCommand(command.Node.Key, command.Definition.Key, null);
                 }
             }
         }
 
-        private void ShowCommandDialog(CommandAbstract command)
+        private void ShowCommandDialog(OHM.Commands.ICommand command)
         {
             var w = new CommandDialog();
             w.init(command);
@@ -125,7 +125,17 @@ namespace WpfApplication1
 
             if (result.HasValue && result.Value)
             {
-                interfacesMng.ExecuteCommand(command, w.ArgumentsResult);
+                interfacesMng.ExecuteCommand(command.Node.Key, command.Definition.Key, w.ArgumentsResult);
+            }
+        }
+
+        private void ExecuteInterfaceCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            var command = e.Parameter as OHM.Commands.ICommand;
+            e.CanExecute = false;
+            if (command != null)
+            {
+                e.CanExecute = interfacesMng.CanExecuteCommand(command.Node.Key, command.Definition.Key);
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OHM.Nodes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ZWaveLib
 {
-    interface IZWaveNode
+    public interface IZWaveNode : INode
     {
 
     }

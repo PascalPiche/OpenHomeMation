@@ -9,7 +9,7 @@
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         
-        <Label Content="{Binding Command.Name}" Grid.Row="0"/>
+        <Label Content="{Binding Command.Definition.Name}" Grid.Row="0"/>
 
         <ItemsControl ItemsSource="{Binding Arguments}" Grid.Row="1">
             <ItemsControl.ItemTemplate>

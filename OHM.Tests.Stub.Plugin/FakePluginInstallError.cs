@@ -22,7 +22,7 @@ namespace OHM.Tests.Stub.Plugin
             get { return "Fake Plugin Install Error"; }
         }
 
-        public override bool Install(System.IOhmSystemInstallGateway system)
+        public override bool Install(Sys.IOhmSystemInstallGateway system)
         {
             throw new NotImplementedException();
             //return true;
@@ -37,6 +37,7 @@ namespace OHM.Tests.Stub.Plugin
         {
             throw new NotImplementedException();
         }
+
 
         public override InterfaceAbstract CreateInterface(string key, ILogger logger)
         {

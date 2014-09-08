@@ -7,10 +7,10 @@
         <CommandBinding Command="local:MainWindow.InstallPluginCommand" Executed="InstallPluginCommand_Executed" />
         <CommandBinding Command="local:MainWindow.StartInterfaceCommand" Executed="StartInterfaceCommand_Executed" />
         <CommandBinding Command="local:MainWindow.StopInterfaceCommand" Executed="StopInterfaceCommand_Executed" />
-        <CommandBinding Command="local:MainWindow.ExecuteInterfaceCommand" Executed="ExecuteInterfaceCommand_Executed" />
+        <CommandBinding Command="local:MainWindow.ExecuteInterfaceCommand" Executed="ExecuteInterfaceCommand_Executed" CanExecute="ExecuteInterfaceCommand_CanExecute" />
     </Window.CommandBindings>
     <DockPanel>
-        <TextBox DockPanel.Dock="Bottom" HorizontalAlignment="Stretch" Name="txt" Margin="10" TextWrapping="Wrap" VerticalAlignment="Stretch" />
+        <TextBox  MaxHeight="300" DockPanel.Dock="Bottom" HorizontalAlignment="Stretch" Name="txt" Margin="10" TextWrapping="Wrap" VerticalAlignment="Stretch" />
         <Grid DockPanel.Dock="Left" Width="200" >
             <Label>
                 <Run Text="System" />
@@ -37,7 +37,7 @@
                                                 </ContextMenu.ItemContainerStyle>
                                                 <ContextMenu.ItemTemplate>
                                                     <DataTemplate>
-                                                        <TextBlock Text="{Binding Name}" />
+                                                        <TextBlock Text="{Binding Definition.Name}" />
                                                     </DataTemplate>
                                                 </ContextMenu.ItemTemplate>
 
@@ -64,7 +64,7 @@
                             </TreeViewItem.Header>
                             
                             <TreeViewItem.ItemTemplate>
-                                <HierarchicalDataTemplate>
+                                <HierarchicalDataTemplate ItemsSource="{Binding Children}">
                                     <Label>
                                         <Run Text="{Binding Path=Name, Mode=OneWay}" />
                                     </Label>

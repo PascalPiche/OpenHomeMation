@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using OHM.Logger;
 using OHM.Commands;
 using OHM.Plugins;
-using OHM.System;
+using OHM.Sys;
 using OHM.Interfaces;
 
 namespace ZWaveLib

@@ -1,8 +1,11 @@
 ﻿using OHM.Interfaces;
 using OHM.Logger;
+using OHM.Nodes;
+using OHM.Sys;
 using OpenZWaveDotNet;
 using System;
 using System.Collections.Generic;
+using System.Windows.Threading;
 
 namespace ZWaveLib
 {
@@ -10,17 +13,12 @@ namespace ZWaveLib
     {
 
         private ZWManager _mng = new ZWManager();
-        private ILogger _logger;
-        
-        private Dictionary<int, IZWaveController> _controllers = new Dictionary<int, IZWaveController>();
 
         #region "Ctor"
 
         public ZWaveInterface(ILogger logger)
-            : base("ZWaveInterface", "ZWave")
+            : base("ZWaveInterface", "ZWave", logger)
         {
-            this._logger = logger;
-
             //Create Commands
             this.RegisterCommand(new CreateControllerCommand(this));
         }
@@ -31,7 +29,8 @@ namespace ZWaveLib
 
         public override void Start()
         {
-            _logger.Info("ZWave Interface initing");
+            
+            Logger.Info("ZWave Interface initing");
             var apiPath = @"C:\Users\Scopollif\Documents\Visual Studio 2013\Projects\OpenHomeMation\external\open-zwave\openzwave-1.0.791";
             ZWOptions opt = new ZWOptions();
             opt.Create(apiPath + @"\config\", apiPath + @"", @"");
@@ -43,15 +42,15 @@ namespace ZWaveLib
             _mng.OnNotification += new ManagedNotificationsHandler(NotificationHandler);
             _mng.OnControllerStateChanged += new ManagedControllerStateChangedHandler(ControllerStateChangedHandler);
             base.Start();
-            _logger.Info("ZWave Interface Inited");
+            Logger.Info("ZWave Interface Inited");
         }
 
         public override void Shutdown()
         {
-            _logger.Info("ZWave Interface Shutdowning");
+            Logger.Info("ZWave Interface Shutdowning");
             _mng.Destroy();
             base.Shutdown();
-            _logger.Info("ZWave Interface Shutdowned");
+            Logger.Info("ZWave Interface Shutdowned");
         }
 
         #endregion
@@ -60,22 +59,24 @@ namespace ZWaveLib
 
         internal bool CreateController(int port)
         {
-            _logger.Info("Creating ZWave Controller on port: " + port);
+            Logger.Info("Creating ZWave Controller on port: " + port);
 
             //Valid if a Controller exist on this port
-            if (_controllers.ContainsKey(port)) {
-                _logger.Error("ZWave Controller already exist on port : " + port);
+            if (this.GetChild(port.ToString()) != null) {
+                Logger.Error("ZWave Controller already exist on port : " + port);
                 return false;
             }
 
             _mng.AddDriver(@"\\.\COM" + port, ZWControllerInterface.Serial);
-            _logger.Info("ZWave Controller created on port: " + port);
+            Logger.Info("ZWave Controller created on port: " + port);
+
+            
             return true;
         }
 
         internal void RemoveController(int port)
         {
-            _logger.Info("Removing Driver on port: " + port);
+            Logger.Info("Removing Driver on port: " + port);
             _mng.RemoveDriver(@"\\.\COM" + port);
         }
 
@@ -85,28 +86,182 @@ namespace ZWaveLib
 
         private void NotificationHandler(ZWNotification n)
         {
-            _logger.Debug("HomeId:  " + n.GetHomeId());
-            _logger.Debug("NodeId:  " + n.GetNodeId());
-            _logger.Debug("GroupId: " + n.GetGroupIdx());
-            _logger.Debug("Type:    " + n.GetType().ToString());
-            _logger.Debug("Event:   " + n.GetEvent());
-            _logger.Debug("Value ClassId: " + n.GetValueID().GetCommandClassId());
-            _logger.Debug("Value Genre: " + n.GetValueID().GetGenre().ToString());
+            /*Logger.Debug("HomeId:  " + n.GetHomeId());
+            Logger.Debug("NodeId:  " + n.GetNodeId());
+            Logger.Debug("GroupId: " + n.GetGroupIdx());
+            Logger.Debug("Type:    " + n.GetType().ToString());
+            Logger.Debug("Event:   " + n.GetEvent());
+            Logger.Debug("Value ClassId: " + n.GetValueID().GetCommandClassId());
+            Logger.Debug("Value Genre: " + n.GetValueID().GetGenre().ToString());
             var vid = n.GetValueID();
-            _logger.Debug("Value Id: " + vid.GetId());
-            _logger.Debug("Value Label: " + _mng.GetValueLabel(vid));
-            _logger.Debug("Value Index: " + vid.GetIndex());
-            _logger.Debug("Value type: " + n.GetValueID().GetType());
-            _logger.Debug("Byte:    " + n.GetByte());
+            Logger.Debug("Value Id: " + vid.GetId());
+            Logger.Debug("Value Label: " + _mng.GetValueLabel(vid));
+            Logger.Debug("Value Index: " + vid.GetIndex());
+            Logger.Debug("Value type: " + n.GetValueID().GetType());
+            Logger.Debug("Byte:    " + n.GetByte());
             byte classVersion;
             String className;
             _mng.GetNodeClassInformation(n.GetHomeId(), n.GetNodeId(), n.GetValueID().GetCommandClassId(), out className, out classVersion);
-            _logger.Debug("ClassName (version): " + className + "(" + classVersion.ToString() + ")");
-            _logger.Debug("----------------------------------------------");
+            Logger.Debug("ClassName (version): " + className + "(" + classVersion.ToString() + ")");
+            Logger.Debug("----------------------------------------------");*/
+
+            switch (n.GetType())
+            {
+                //Query
+                case ZWNotification.Type.AllNodesQueried:
+                case ZWNotification.Type.AllNodesQueriedSomeDead:
+                case ZWNotification.Type.AwakeNodesQueried:
+                case ZWNotification.Type.EssentialNodeQueriesComplete:
+                    break;
+                //Driver
+                case ZWNotification.Type.DriverFailed:
+
+                    break;
+                case ZWNotification.Type.DriverReady:
+                    NotificationDriverReady(n);
+                    break;
+                case ZWNotification.Type.DriverReset:
+
+                    break;
+                //Polling
+                case ZWNotification.Type.PollingDisabled:
+                case ZWNotification.Type.PollingEnabled:
+
+                //button
+                case ZWNotification.Type.ButtonOff:
+                case ZWNotification.Type.ButtonOn:
+                case ZWNotification.Type.CreateButton:
+                case ZWNotification.Type.DeleteButton:
+
+                //Group
+                case ZWNotification.Type.Group:
+
+                //Node
+                case ZWNotification.Type.NodeNew:
+                    NotificationNodeNew(n);
+                    break;
+                case ZWNotification.Type.NodeAdded:
+                    NotificationNodeAdded(n);
+                    break;
+                case ZWNotification.Type.NodeEvent:
+                    break;
+                case ZWNotification.Type.NodeNaming:
+                    NotificationNodeNaming(n);
+                    break;
+                case ZWNotification.Type.NodeProtocolInfo:
+                    break;
+                case ZWNotification.Type.NodeQueriesComplete:
+                    break;
+                case ZWNotification.Type.NodeRemoved:
+                    break;
+
+                //Notification
+                case ZWNotification.Type.Notification:
+                
+                //Scene
+                case ZWNotification.Type.SceneEvent:
+
+                //Value
+                case ZWNotification.Type.ValueAdded:
+                case ZWNotification.Type.ValueChanged:
+                case ZWNotification.Type.ValueRefreshed:
+                case ZWNotification.Type.ValueRemoved:
+                    break;
+            }
         }
 
         private void ControllerStateChangedHandler(ZWControllerState state)
         {
+            Logger.Debug("ControllerStateChanged:  " + state.ToString());
+        }
+
+        private void NotificationDriverReady(ZWNotification n)
+        {
+            Logger.Info("ZWave Driver Reader");
+            string key = MakeNodeKey(n);
+            string name = GetNodeName(n);
+
+            this.AddChild(new ZWaveController(key, name, Logger, this));
+        }
+
+        private void NotificationNodeNew(ZWNotification n)
+        {
+            Logger.Info("ZWave New Node : " + n.GetHomeId() + " - " + n.GetNodeId());
+            //Find node
+            var node = this.GetChild(MakeNodeKey(n));
+            if (node == null)
+            {
+                //Create Node
+                CreateNode(n);
+            }
+            else
+            {
+                //Update Node
+                UpdateNode(node, n);
+            }
+        }
+
+        private void NotificationNodeAdded(ZWNotification n)
+        {
+            //Update State
+            Logger.Info("ZWave Node Added: " + n.GetHomeId() + " - " + n.GetNodeId());
+            //Find node
+            var node = this.GetChild(MakeNodeKey(n));
+            if (node == null)
+            {
+                //Create Node
+                CreateNode(n);
+            }
+            else
+            {
+                //Update Node
+                UpdateNode(node, n);
+            }
+        }
+
+        private void NotificationNodeNaming(ZWNotification n)
+        {
+            //Update State
+            Logger.Info("ZWave Node Naming: " + n.GetHomeId() + " - " + n.GetNodeId());
+            //Find node
+            var node = this.GetChild(MakeNodeKey(n));
+            if (node != null)
+            {
+                //Update Node
+                UpdateNode(node, n);
+            }
+        }
+
+        private string GetNodeName(ZWNotification n)
+        {
+            string result = _mng.GetNodeName(n.GetHomeId(), n.GetNodeId());
+            if (String.IsNullOrEmpty(result))
+            {
+                result = _mng.GetNodeProductName(n.GetHomeId(), n.GetNodeId());
+            }
+            if (string.IsNullOrEmpty(result))
+            {
+                result = "Unknow device";
+            }
+            return result;
+        }
+        private string MakeNodeKey(ZWNotification n)
+        {
+            return n.GetHomeId().ToString() + "-" + n.GetNodeId().ToString();
+        }
+
+        private void CreateNode(ZWNotification n)
+        {
+            string key = MakeNodeKey(n);
+            string name = GetNodeName(n);
+            this.AddChild(new ZWaveNode(key, name, this.Logger, this));
+        }
+
+        private void UpdateNode(INode node, ZWNotification n)
+        {
+            ZWaveNode no = node as ZWaveNode;
+            string name = GetNodeName(n);
+            no.UpdateName(name);
 
         }
 

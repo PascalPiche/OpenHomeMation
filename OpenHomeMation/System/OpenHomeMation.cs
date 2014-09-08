@@ -3,7 +3,7 @@ using OHM.Interfaces;
 using OHM.Logger;
 using OHM.Plugins;
 
-namespace OHM.System
+namespace OHM.Sys
 {
     public class OpenHomeMation
     {
@@ -94,7 +94,7 @@ namespace OHM.System
                 data = _dataMng.GetOrCreateDataStore("InterfacesManager");
 
             }
-            return _interfacesMng.Init(data);
+            return _interfacesMng.Init(data, _ohmSystem);
         }
 
     }

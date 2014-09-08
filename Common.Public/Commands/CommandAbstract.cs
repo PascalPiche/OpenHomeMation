@@ -1,4 +1,5 @@
-﻿using OHM.Nodes;
+﻿using OHM.Interfaces;
+using OHM.Nodes;
 using System;
 using System.Collections.Generic;
 
@@ -52,7 +53,8 @@ namespace OHM.Commands
 
         public virtual bool CanExecute()
         {
-            return true;
+
+            return IsStateRunning();
         }
 
         #endregion
@@ -77,6 +79,15 @@ namespace OHM.Commands
 
         #endregion
 
+        private bool IsStateRunning()
+        {
+            if (_node is IInterface)
+            {
+                var interf = _node as IInterface;
+                return interf.IsRunning;
+            }
+            return true;
+        }
         
     }
 }

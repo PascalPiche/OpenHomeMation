@@ -1,12 +1,12 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OHM.System;
+using OHM.Sys;
 using Rhino.Mocks;
 using OHM.Interfaces;
 using OHM.Plugins;
 using OHM.Logger;
 
-namespace OHM.System.Tests
+namespace OHM.Sys.Tests
 {
     [TestClass]
     public class OhmSystemUnitTest
@@ -22,14 +22,15 @@ namespace OHM.System.Tests
             var logger = MockRepository.GenerateStub<ILogger>();
             plugin.Stub(x => x.Name).Return("name");
             loggerMng.Stub(x => x.GetLogger(plugin.Name)).Return(logger);
-            
+            var system = MockRepository.GenerateStub<IOhmSystem>();
+
             var result = target.GetInstallGateway(plugin);
 
             Assert.IsNotNull(result);
 
             result.RegisterInterface("key");
             Assert.AreSame(logger, result.Logger);
-            target.InterfacesMng.AssertWasCalled(x => x.RegisterInterface("key", plugin));
+            target.InterfacesMng.AssertWasCalled(x => x.RegisterInterface("key", plugin, system));
 
         }
     }
