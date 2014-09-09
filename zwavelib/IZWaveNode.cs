@@ -10,5 +10,9 @@ namespace ZWaveLib
     public interface IZWaveNode : INode
     {
 
+        uint HomeId { get; }
+
+        byte NodeId { get; }
+
     }
 }

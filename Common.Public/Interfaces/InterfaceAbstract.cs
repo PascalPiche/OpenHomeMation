@@ -1,4 +1,5 @@
 ﻿using OHM.Commands;
+using OHM.Data;
 using OHM.Logger;
 using OHM.Nodes;
 using OHM.Sys;
@@ -13,11 +14,12 @@ namespace OHM.Interfaces
     {
 
         private InterfaceState _state = InterfaceState.Disabled;
+        private bool _startOnLaunch = false;
         
         private IOhmSystemInterfaceGateway _system;
 
-        public InterfaceAbstract(string key, string name, ILogger logger) 
-            : base(key, name, logger, null)
+        public InterfaceAbstract(string key, string name) 
+            : base(key, name, null)
         {
             
         }
@@ -49,12 +51,26 @@ namespace OHM.Interfaces
             State = Interfaces.InterfaceState.Disabled;
         }
 
-        public void Init(IOhmSystemInterfaceGateway system)
+        public void Init(ILogger logger, IDataStore data, IOhmSystemInterfaceGateway system)
         {
-            base.Init();
+            base.Init(logger, data);
+            _startOnLaunch = data.GetBool("StartOnLaunch");
+            NotifyPropertyChanged("StartOnLaunch");
             _system = system;
         }
-       
-        
+
+
+        public bool StartOnLaunch
+        {
+            get { return _startOnLaunch; }
+            set { 
+
+                _startOnLaunch = value;
+                DataStore.StoreBool("StartOnLaunch", value);
+                DataStore.Save();
+                NotifyPropertyChanged("StartOnLaunch");
+            }
+
+        }
     }
 }

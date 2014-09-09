@@ -38,7 +38,7 @@ namespace OHM.Sys
         {
             _logger = _loggerMng.GetLogger("root");
             _logger.Info("Starting OHM");
-            _ohmSystem = new OhmSystem(_interfacesMng, _loggerMng);
+            _ohmSystem = new OhmSystem( _interfacesMng, _loggerMng, _dataMng);
             _dataMng.Init();
 
             if (!StartPluginMng())

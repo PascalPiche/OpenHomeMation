@@ -1,4 +1,5 @@
-﻿using OHM.Interfaces;
+﻿using OHM.Data;
+using OHM.Interfaces;
 using OHM.Logger;
 using System;
 
@@ -11,27 +12,34 @@ namespace OHM.Sys
 
         private IInterfacesManager _interfacesMng;
 
-        internal OhmSystem(IInterfacesManager interfacesMng, ILoggerManager loggerMng)
+        private IDataManager _dataMng;
+
+        public OhmSystem(IInterfacesManager interfacesMng, ILoggerManager loggerMng, IDataManager dataMng)
         {
             _loggerMng = loggerMng;
             _interfacesMng = interfacesMng;
+            _dataMng = dataMng;
         }
 
-        internal ILoggerManager LoggerMng
+        public ILoggerManager LoggerMng
         {
             get { return _loggerMng; }
         }
 
-        internal IInterfacesManager InterfacesMng
+        public IInterfacesManager InterfacesMng
         {
             get { return _interfacesMng; }
         }
 
+        public IDataManager DataMng
+        {
+            get { return _dataMng; }
+        }
+        
         public IOhmSystemInstallGateway GetInstallGateway(Plugins.IPlugin plugin)
         {
             return new OhmSystemInstallGateway(this, plugin);
         }
-
 
         public IOhmSystemInterfaceGateway GetInterfaceGateway(IInterface interf)
         {

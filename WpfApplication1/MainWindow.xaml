@@ -48,6 +48,7 @@
                                                     <CompositeCollection>
                                                         <MenuItem Header="Start" Command="local:MainWindow.StartInterfaceCommand" CommandParameter="{Binding Path=Key}" />
                                                         <MenuItem Header="Stop" Command="local:MainWindow.StopInterfaceCommand" CommandParameter="{Binding Path=Key}" />
+                                                        <MenuItem Header="Start on launch" Command="" CommandParameter="" IsCheckable="True" IsChecked="{Binding Path=StartOnLaunch}" />
                                                         <Separator />
                                                         <CollectionContainer Collection="{Binding Source={StaticResource CustomCommandsCollection}}"/>
                                                     </CompositeCollection>
@@ -65,6 +66,36 @@
                             
                             <TreeViewItem.ItemTemplate>
                                 <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                                    <HierarchicalDataTemplate.ItemContainerStyle>
+                                        <Style TargetType="TreeViewItem">
+                                            <Setter Property="ContextMenu">
+                                                <Setter.Value>
+                                                    <ContextMenu >
+                                                        <ContextMenu.ItemContainerStyle>
+                                                            <Style>
+                                                                <Setter Property="MenuItem.Command" Value="local:MainWindow.ExecuteNodeCommand" />
+                                                                <Setter Property="MenuItem.CommandParameter" Value="{Binding}" />
+                                                            </Style>
+                                                        </ContextMenu.ItemContainerStyle>
+                                                        <ContextMenu.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <TextBlock Text="{Binding Definition.Name}" />
+                                                            </DataTemplate>
+                                                        </ContextMenu.ItemTemplate>
+
+                                                        <ContextMenu.Resources>
+                                                            <CollectionViewSource x:Key="CustomCommandsCollection" Source="{Binding Commands}"/>
+                                                        </ContextMenu.Resources>
+                                                        <ContextMenu.ItemsSource>
+                                                            <CompositeCollection>
+                                                                <CollectionContainer Collection="{Binding Source={StaticResource CustomCommandsCollection}}"/>
+                                                            </CompositeCollection>
+                                                        </ContextMenu.ItemsSource>
+                                                    </ContextMenu>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </HierarchicalDataTemplate.ItemContainerStyle>
                                     <Label>
                                         <Run Text="{Binding Path=Name, Mode=OneWay}" />
                                     </Label>

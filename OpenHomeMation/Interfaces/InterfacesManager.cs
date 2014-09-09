@@ -42,7 +42,7 @@ namespace OHM.Interfaces
 
         #region "Public api"
 
-        public bool Init(IDataStore data, IOhmSystem system)
+        public bool Init(IDataStore data, OhmSystem system)
         {
             _data = data;
             _logger = _loggerMng.GetLogger("InterfacesManager");
@@ -57,7 +57,7 @@ namespace OHM.Interfaces
             return true;
         }
 
-        public bool RegisterInterface(string key, IPlugin plugin, IOhmSystem system)
+        public bool RegisterInterface(string key, IPlugin plugin, OhmSystem system)
         {
             bool result = false;
             //Detect if already created
@@ -103,11 +103,18 @@ namespace OHM.Interfaces
             IInterface interf = null;
             if (_runningDic.TryGetValue(key, out interf))
             {
-                if (interf.State == InterfaceState.Disabled)
-                {
-                    interf.Start();
-                    result = true;
-                }
+                result = StartInterface(interf);
+            }
+            return result;
+        }
+
+        private bool StartInterface(IInterface interf)
+        {
+            bool result = false;
+            if (interf.State == InterfaceState.Disabled)
+            {
+                interf.Start();
+                result = true;
             }
             return result;
         }
@@ -152,13 +159,24 @@ namespace OHM.Interfaces
 
         #region "Private"
 
-        private void loadRegisteredInterfaces(IOhmSystem system)
+        private void loadRegisteredInterfaces(OhmSystem system)
         {
-            foreach (var key in _dataRegisteredInterfaces.GetKeys())
+            foreach (var key in _dataRegisteredInterfaces.Keys)
             {
                 try
                 {
-                    CreateInterface(key, system);
+                    var interf = CreateInterface(key, system);
+                    if (interf != null)
+                    {
+                        if (interf.StartOnLaunch)
+                        {
+                            StartInterface(interf);
+                        }
+                    }
+                    else
+                    {
+                        _logger.Error("Cannot create interface : " + key);
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -185,7 +203,7 @@ namespace OHM.Interfaces
             return result;
         }
 
-        private InterfaceAbstract CreateInterface(string key, IOhmSystem system)
+        private InterfaceAbstract CreateInterface(string key, OhmSystem system)
         {
             return CreateInterface(key, GetPluginForInterface(key), system);
         }
@@ -195,18 +213,20 @@ namespace OHM.Interfaces
             return plugin.Id.ToString() + '.' + key;
         }
 
-        private InterfaceAbstract CreateInterface(string key, IPlugin plugin, IOhmSystem system)
+        private InterfaceAbstract CreateInterface(string key, IPlugin plugin, OhmSystem system)
         {
             InterfaceAbstract result = null;
 
             if (plugin != null)
             {
                 var interfaceLogger = _loggerMng.GetLogger(GetInterfaceLoggerKey(key, plugin));
-                result = plugin.CreateInterface(key, interfaceLogger);
+                result = plugin.CreateInterface(key);
                 
                 if (result != null)
                 {
-                    result.Init(system.GetInterfaceGateway(result));
+                    var _interfData = system.DataMng.GetOrCreateDataStore(plugin.Id.ToString() + "." + result.Key);
+
+                    result.Init(interfaceLogger, _interfData, system.GetInterfaceGateway(result));
                     _runningInterfaces.Add(result);
                     _runningDic.Add(key, result);
                 }

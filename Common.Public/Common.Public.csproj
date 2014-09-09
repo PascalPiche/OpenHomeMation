@@ -35,6 +35,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,15 +47,25 @@
     <Compile Include="Commands\ArgumentDefinition.cs" />
     <Compile Include="Commands\CommandAbstract.cs" />
     <Compile Include="Commands\CommandDefinition.cs" />
-    <Compile Include="Commands\IArgumentConverter.cs" />
     <Compile Include="Commands\IArgumentDefinition.cs" />
     <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="Commands\ICommandDefinition.cs" />
+    <Compile Include="Data\DataDictionary.cs" />
+    <Compile Include="Data\DataValueBool.cs" />
+    <Compile Include="Data\DataValueDictionary.cs" />
+    <Compile Include="Data\DataValueString.cs" />
+    <Compile Include="Data\IDataDictionary.cs" />
+    <Compile Include="Data\IDataStore.cs" />
+    <Compile Include="Data\IDataValue.cs" />
     <Compile Include="Interfaces\InterfaceAbstract.cs" />
+    <Compile Include="Interfaces\InterfaceState.cs" />
     <Compile Include="Nodes\INode.cs" />
     <Compile Include="Interfaces\IInterface.cs" />
     <Compile Include="Logger\ILogger.cs" />
+    <Compile Include="Nodes\INodeProperty.cs" />
+    <Compile Include="Nodes\NodeAbstract.cs" />
     <Compile Include="System\IOhmSystemInstallGateway.cs" />
-    <Compile Include="System\ISystem.cs" />
+    <Compile Include="System\IOhmSystem.cs" />
     <Compile Include="Plugins\IPlugin.cs" />
     <Compile Include="Plugins\PluginBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -62,6 +73,7 @@
   <ItemGroup />
   <ItemGroup>
     <None Include="Commands\CommandsClassDiagram.cd" />
+    <None Include="Data\DataClassDiagram.cd" />
     <None Include="Interfaces\InterfacesClassDiagram.cd" />
     <None Include="Logger\LoggerClassDiagram.cd" />
     <None Include="Nodes\NodesClassDiagram.cd" />

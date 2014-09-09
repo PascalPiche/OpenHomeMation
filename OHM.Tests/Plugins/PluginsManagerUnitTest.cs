@@ -115,7 +115,7 @@ namespace OHM.Plugins.Tests
             var guid = new Guid(guidStr);
             listKeys.Add(guidStr); //Valid key
             listKeys.Add("dd985d5b-2d5e-49b5-4b07-64aad480e312"); //Invalid key
-            dataDic.Stub(x => x.GetKeys()).Return(listKeys);
+            dataDic.Stub(x => x.Keys).Return(listKeys);
             var dataStore = MockRepository.GenerateStub<IDataStore>();
             dataStore.Stub(x => x.GetDataDictionary("InstalledPlugins")).Return(dataDic);
             string filePath = AppDomain.CurrentDomain.BaseDirectory + "\\pluginsStub2\\";

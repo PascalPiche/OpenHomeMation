@@ -39,7 +39,7 @@ namespace OHM.Tests.Interfaces
 
             var pluginsMng = MockRepository.GenerateStub<IPluginsManager>();
             var dataStore = MockRepository.GenerateStub<IDataStore>();
-            var system = MockRepository.GenerateStub<IOhmSystem>();
+            var system = MockRepository.GenerateStub<OhmSystem>();
 
             var target = new InterfacesManager(loggerMng, pluginsMng);
 
@@ -58,14 +58,14 @@ namespace OHM.Tests.Interfaces
             var pluginsMng = MockRepository.GenerateStub<IPluginsManager>();
             var dataStore = MockRepository.GenerateStub<IDataStore>();
             var dataDic = MockRepository.GenerateStub<IDataDictionary>();
-            dataDic.Stub(x => x.GetKeys()).Return(new List<string>());
+            dataDic.Stub(x => x.Keys).Return(new List<string>());
             dataDic.Stub(x => x.GetDataDictionary("existing")).Return(dataDic);
             dataStore.Stub(x => x.GetDataDictionary("RegisteredInterfaces")).Return(dataDic);
             dataStore.Stub(x => x.Save()).Return(true);
             var plugin = MockRepository.GenerateStub<IPlugin>();
             plugin.Stub(x => x.Id).Return(new Guid("dd985d5b-2d5e-49b5-9b07-64aad480e312"));
-            plugin.Stub(x => x.CreateInterface("testGood", logger2)).Return(MockRepository.GenerateStub<InterfaceAbstract>("test","test"));
-            var system = MockRepository.GenerateStub<IOhmSystem>();
+            plugin.Stub(x => x.CreateInterface("testGood")).Return(MockRepository.GenerateStub<InterfaceAbstract>("test","test"));
+            var system = MockRepository.GenerateStub<OhmSystem>();
 
             var target = new InterfacesManager(loggerMng, pluginsMng);
             Assert.AreEqual(0, target.RunnableInterfaces.Count);
@@ -75,6 +75,7 @@ namespace OHM.Tests.Interfaces
 
             //Registering will fail
             Assert.IsFalse(target.RegisterInterface("existing", plugin, system));
+
             //Registering will fail
             Assert.IsFalse(target.RegisterInterface("test", plugin, system));
 
@@ -82,7 +83,7 @@ namespace OHM.Tests.Interfaces
             Assert.IsTrue(target.RegisterInterface("testGood", plugin, system));
 
             //Registering will succeed
-            plugin.AssertWasCalled(x => x.CreateInterface("testGood", logger2));
+            plugin.AssertWasCalled(x => x.CreateInterface("testGood"));
             Assert.AreEqual(1, target.RunnableInterfaces.Count);
 
         }
@@ -102,7 +103,7 @@ namespace OHM.Tests.Interfaces
             listKeys.Add("test2"); //valid key, valid plugin id, plugin not found
             listKeys.Add("test3"); //valid key, no plugin id
             listKeys.Add("test4"); //invalid key
-            dataDic.Stub(x => x.GetKeys()).Return(listKeys);
+            dataDic.Stub(x => x.Keys).Return(listKeys);
             dataStore.Stub(x => x.GetDataDictionary("RegisteredInterfaces")).Return(dataDic);
             var plugin = MockRepository.GenerateStub<IPlugin>();
 
@@ -112,7 +113,7 @@ namespace OHM.Tests.Interfaces
             dataDic2.Stub(x => x.GetString("PluginId")).Return("dd985d5b-2d5e-49b5-9b07-64aad480e312");
             var guid = new Guid("dd985d5b-2d5e-49b5-9b07-64aad480e312");
             pluginsMng.Stub(x => x.GetPlugin(guid)).Return(plugin);
-            var system = MockRepository.GenerateStub<IOhmSystem>();
+            var system = MockRepository.GenerateStub<OhmSystem>();
 
             var target = new InterfacesManager(loggerMng, pluginsMng);
             Assert.AreEqual(0, target.RunnableInterfaces.Count);

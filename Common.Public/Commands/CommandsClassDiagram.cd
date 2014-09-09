@@ -1,17 +1,48 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Interface Name="OHM.Commands.IArgumentDefinition">
-    <Position X="0.5" Y="0.5" Width="1.5" />
+  <Class Name="OHM.Commands.ArgumentDefinition">
+    <Position X="3.5" Y="3.5" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAEAAAAAAAAAAAQAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <HashCode>ABAAIAAAAAEACAQAAACAABQAAAAAAAAAAQAAAAAAgAA=</HashCode>
+      <FileName>Commands\ArgumentDefinition.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OHM.Commands.CommandAbstract">
+    <Position X="0.5" Y="3.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAIACAQAAEAAAAAAAAAAEAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Commands\CommandAbstract.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OHM.Commands.CommandDefinition">
+    <Position X="6.5" Y="3.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAMAAAAAAgAAQEAACAAAQAAAAAAIgAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\CommandDefinition.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="OHM.Commands.IArgumentDefinition">
+    <Position X="3.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAEACAQAAAAAAAQAAAAAAAAAAQAAAAAAgAA=</HashCode>
       <FileName>Commands\IArgumentDefinition.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="OHM.Commands.ICommandDefinition">
-    <Position X="2.25" Y="0.5" Width="1.5" />
+    <Position X="6.5" Y="0.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAEAAAAAAgAAQAAAAAAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
-      <FileName>Commands\ICommandDefinition.cs</FileName>
+      <HashCode>AAAAEAAAAAAgAAQAAAAAAAQAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\ICommand.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OHM.Commands.ICommand">
+    <Position X="0.5" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAQAAEAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Commands\ICommand.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Font Name="Segoe UI" Size="9" />

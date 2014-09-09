@@ -15,7 +15,8 @@ namespace ZWaveLib
 
         //private ZWaveControllerState state = ZWaveControllerState.initializing;
         
-        public ZWaveController(string key, string name, ILogger logger, INode parent) : base(key, name, logger, parent)
+        public ZWaveController(string key, string name, INode parent, uint homeId, byte nodeId)
+            : base(key, name, parent, homeId, nodeId)
         {
 
         }

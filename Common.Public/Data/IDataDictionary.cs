@@ -6,13 +6,20 @@ namespace OHM.Data
 {
     public interface IDataDictionary
     {
-        void StoreString(string key, String vlaue);
+
+        IEnumerable<string> Keys { get; }
+
+
+        void StoreString(string key, string value);
+
+        void StoreBool(string key, bool value);
 
         void StoreDataDictionary(string key, IDataDictionary store);
 
+
         String GetString(string key);
 
-        IEnumerable<string> GetKeys();
+        bool GetBool(string key);
 
         IDataDictionary GetDataDictionary(string key);
 

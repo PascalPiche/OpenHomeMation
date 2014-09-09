@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace OHM.Data
 {
@@ -9,14 +10,25 @@ namespace OHM.Data
     {
         private Dictionary<string, IDataValue> _dataValues = new Dictionary<string, IDataValue>();
 
+        #region "Public Properties"
+
+        [IgnoreDataMemberAttribute]
+        public IEnumerable<string> Keys
+        {
+            get {
+                return _dataValues.Keys;
+            }
+        }
+
+        #endregion
+
+        #region "Public API"
+
+        #region "String"
+
         public void StoreString(string key, string value)
         {
             StoreValue(key, new DataValueString(value));
-        }
-
-        public void StoreDataDictionary(string key, IDataDictionary store)
-        {
-            StoreValue(key, new DataValueDictionary(store));
         }
 
         public string GetString(string key)
@@ -29,6 +41,15 @@ namespace OHM.Data
             return "";
         }
 
+        #endregion
+
+        #region "Dictionary"
+
+        public void StoreDataDictionary(string key, IDataDictionary store)
+        {
+            StoreValue(key, new DataValueDictionary(store));
+        }
+
         public IDataDictionary GetDataDictionary(string key)
         {
             var value = GetValue(key);
@@ -39,10 +60,30 @@ namespace OHM.Data
             return null;
         }
 
-        public IEnumerable<string> GetKeys()
+        #endregion
+
+        #region "bool"
+
+        public void StoreBool(string key, bool value)
         {
-            return _dataValues.Keys;
+            StoreValue(key, new DataValueBool(value));
         }
+
+        public bool GetBool(string key)
+        {
+            var value = GetValue(key);
+            if (value != null)
+            {
+                return ((DataValueBool)value).Value;
+            }
+            return false;
+        }
+
+        #endregion
+
+        #endregion
+
+        #region "Protected"
 
         protected void StoreValue(string key, IDataValue obj)
         {
@@ -59,7 +100,7 @@ namespace OHM.Data
             return null;
         }
 
-
+        #endregion
 
     }
 }

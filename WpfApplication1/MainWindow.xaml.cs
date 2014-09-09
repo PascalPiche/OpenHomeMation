@@ -57,6 +57,13 @@ namespace WpfApplication1
                 typeof(MainWindow)
         );
 
+        public static readonly RoutedUICommand ExecuteNodeCommand = new RoutedUICommand
+        (
+                "Execute node command",
+                "Execute node command",
+                typeof(MainWindow)
+        );
+
         public MainWindow()
         {
             InitializeComponent();

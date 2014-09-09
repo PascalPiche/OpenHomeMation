@@ -5,6 +5,7 @@ using Rhino.Mocks;
 using OHM.Interfaces;
 using OHM.Plugins;
 using OHM.Logger;
+using OHM.Data;
 
 namespace OHM.Sys.Tests
 {
@@ -16,13 +17,13 @@ namespace OHM.Sys.Tests
         {
             var intMng = MockRepository.GenerateMock<IInterfacesManager>();
             var loggerMng = MockRepository.GenerateStub<ILoggerManager>();
-            
-            var target = new OhmSystem(intMng, loggerMng);
+            var dataMng = MockRepository.GenerateStub<IDataManager>();
+            var target = new OhmSystem(intMng, loggerMng, dataMng);
             var plugin = MockRepository.GenerateStub<IPlugin>();
             var logger = MockRepository.GenerateStub<ILogger>();
             plugin.Stub(x => x.Name).Return("name");
             loggerMng.Stub(x => x.GetLogger(plugin.Name)).Return(logger);
-            var system = MockRepository.GenerateStub<IOhmSystem>();
+            var system = MockRepository.GenerateStub<OhmSystem>();
 
             var result = target.GetInstallGateway(plugin);
 

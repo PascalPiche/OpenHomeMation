@@ -186,7 +186,7 @@ namespace OHM.Plugins
         }
 
         private void LoadRegisteredPlugins() {
-            foreach (string item in _dataInstalledPlugins.GetKeys())
+            foreach (string item in _dataInstalledPlugins.Keys)
             {
                 var plugin = FindPluginIn(new Guid(item), _availablesPlugins);
                 if (plugin != null)

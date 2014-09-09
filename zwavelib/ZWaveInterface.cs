@@ -1,4 +1,5 @@
-﻿using OHM.Interfaces;
+﻿using OHM.Data;
+using OHM.Interfaces;
 using OHM.Logger;
 using OHM.Nodes;
 using OHM.Sys;
@@ -13,11 +14,11 @@ namespace ZWaveLib
     {
 
         private ZWManager _mng = new ZWManager();
-
+        private IDataDictionary _registeredControllers;
         #region "Ctor"
 
-        public ZWaveInterface(ILogger logger)
-            : base("ZWaveInterface", "ZWave", logger)
+        public ZWaveInterface()
+            : base("ZWaveInterface", "ZWave")
         {
             //Create Commands
             this.RegisterCommand(new CreateControllerCommand(this));
@@ -41,6 +42,14 @@ namespace ZWaveLib
             _mng.Create();
             _mng.OnNotification += new ManagedNotificationsHandler(NotificationHandler);
             _mng.OnControllerStateChanged += new ManagedControllerStateChangedHandler(ControllerStateChangedHandler);
+
+            //Get DataDictionary For installed Controllers
+            _registeredControllers = DataStore.GetDataDictionary("registeredControllers");
+            if (_registeredControllers == null)
+            {
+                _registeredControllers = new DataDictionary();
+            }
+
             base.Start();
             Logger.Info("ZWave Interface Inited");
         }
@@ -70,6 +79,8 @@ namespace ZWaveLib
             _mng.AddDriver(@"\\.\COM" + port, ZWControllerInterface.Serial);
             Logger.Info("ZWave Controller created on port: " + port);
 
+            //Store Controller
+            
             
             return true;
         }
@@ -180,8 +191,9 @@ namespace ZWaveLib
             Logger.Info("ZWave Driver Reader");
             string key = MakeNodeKey(n);
             string name = GetNodeName(n);
-
-            this.AddChild(new ZWaveController(key, name, Logger, this));
+            uint homeId = n.GetHomeId();
+            byte nodeId = n.GetNodeId();
+            this.AddChild(new ZWaveController(key, name, this, homeId, nodeId));
         }
 
         private void NotificationNodeNew(ZWNotification n)
@@ -245,6 +257,7 @@ namespace ZWaveLib
             }
             return result;
         }
+        
         private string MakeNodeKey(ZWNotification n)
         {
             return n.GetHomeId().ToString() + "-" + n.GetNodeId().ToString();
@@ -254,7 +267,10 @@ namespace ZWaveLib
         {
             string key = MakeNodeKey(n);
             string name = GetNodeName(n);
-            this.AddChild(new ZWaveNode(key, name, this.Logger, this));
+            uint homeId = n.GetHomeId();
+            byte nodeId = n.GetNodeId();
+            var newNode = new ZWaveNode(key, name, this, homeId, nodeId);
+            this.AddChild(newNode);
         }
 
         private void UpdateNode(INode node, ZWNotification n)

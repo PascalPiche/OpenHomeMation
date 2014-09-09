@@ -74,7 +74,9 @@ namespace OHM.Data
         private IDataStore DataStoreFromFile(string path)
         {
             DataContractSerializer formatter = new DataContractSerializer(typeof(DataStore), GetSerializationTypes());
-            DataStore data = (DataStore)formatter.ReadObject(File.OpenRead(path));
+            var fileStream = File.OpenRead(path);
+            DataStore data = (DataStore)formatter.ReadObject(fileStream);
+            fileStream.Close();
             data.Init(this);
             return data;
         }
@@ -85,6 +87,7 @@ namespace OHM.Data
             listKnowTypes.Add(typeof(DataValueDictionary));
             listKnowTypes.Add(typeof(DataDictionary));
             listKnowTypes.Add(typeof(DataValueString));
+            listKnowTypes.Add(typeof(DataValueBool));
             return listKnowTypes;
         }
 

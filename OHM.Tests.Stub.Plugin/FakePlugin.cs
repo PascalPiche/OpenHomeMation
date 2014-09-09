@@ -38,7 +38,7 @@ namespace OHM.Tests.Stub.Plugin
         }
 
 
-        public override InterfaceAbstract CreateInterface(string key, ILogger logger)
+        public override InterfaceAbstract CreateInterface(string key)
         {
             throw new NotImplementedException();
         }

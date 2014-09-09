@@ -42,18 +42,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\IDataDictionary.cs" />
-    <Compile Include="Data\IDataValue.cs" />
+    <Compile Include="Data\IDataManager.cs" />
     <Compile Include="Interfaces\IInterfacesManager.cs" />
     <Compile Include="Logger\ILoggerManager.cs" />
-    <Compile Include="Data\IDataManager.cs" />
-    <Compile Include="Data\IDataStore.cs" />
+    <Compile Include="System\OhmSystem.cs" />
     <Compile Include="Plugins\IPluginsManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="System\OhmSystemInstallGateway.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Logger\LoggerClassDiagram.cd" />
-    <None Include="Data\DataClassDiagram.cd" />
     <None Include="Logger\LoggerClassDiagramFull.cd" />
     <None Include="packages.config" />
     <None Include="Plugins\PluginsClassDiagram.cd" />

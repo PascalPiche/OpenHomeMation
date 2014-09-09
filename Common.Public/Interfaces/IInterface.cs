@@ -1,9 +1,4 @@
-﻿using OHM.Commands;
-using OHM.Nodes;
-using OHM.Sys;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using OHM.Nodes;
 using System.ComponentModel;
 
 namespace OHM.Interfaces
@@ -15,16 +10,11 @@ namespace OHM.Interfaces
 
         bool IsRunning { get; }
 
+        bool StartOnLaunch { get; set; }
+
         void Start();
 
         void Shutdown();
         
-    }
-
-    public enum InterfaceState
-    {
-        Enabled,
-        Disabled,
-        Error
     }
 }
