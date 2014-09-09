@@ -49,6 +49,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\AllOn.cs" />
     <Compile Include="Commands\CreateControllerCommand.cs" />
     <Compile Include="IZWaveController.cs" />
     <Compile Include="IZWaveNode.cs" />

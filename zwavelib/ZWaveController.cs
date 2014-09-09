@@ -15,10 +15,12 @@ namespace ZWaveLib
 
         //private ZWaveControllerState state = ZWaveControllerState.initializing;
         
-        public ZWaveController(string key, string name, INode parent, uint homeId, byte nodeId)
+        public ZWaveController(string key, string name, ZWaveInterface parent, uint homeId, byte nodeId)
             : base(key, name, parent, homeId, nodeId)
         {
 
+            this.RegisterCommand(new AllOnCommand(this, parent));
+            this.RegisterCommand(new AllOffCommand(this, parent));
         }
     }
 }

@@ -91,6 +91,16 @@ namespace ZWaveLib
             _mng.RemoveDriver(@"\\.\COM" + port);
         }
 
+        internal void AllOn(uint homeId)
+        {
+            _mng.SwitchAllOn(homeId);
+        }
+
+        internal void AllOff(uint homeId)
+        {
+            _mng.SwitchAllOff(homeId);
+        }
+
         #endregion
 
         #region "private"

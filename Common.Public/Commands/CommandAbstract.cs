@@ -13,13 +13,13 @@ namespace OHM.Commands
         private INode _node;
         #region "Ctor"
 
-        public CommandAbstract(INode node, string key, string name) 
+        protected CommandAbstract(INode node, string key, string name) 
             : this(node, key, name, string.Empty, null) { }
 
-        public CommandAbstract(INode node, string key, string name, string description) 
+        protected CommandAbstract(INode node, string key, string name, string description) 
             : this (node, key, name, description, null) { }
 
-        public CommandAbstract(
+        protected CommandAbstract(
             INode node,
             string key, 
             string name,
@@ -31,7 +31,7 @@ namespace OHM.Commands
             _definition = new CommandDefinition(key, name, description, argumentsDefinition);
         }
 
-        public CommandAbstract(INode node, ICommandDefinition definition)
+        protected CommandAbstract(INode node, ICommandDefinition definition)
         {
             _node = node;
             _definition = definition;

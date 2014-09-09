@@ -1,0 +1,51 @@
+﻿using OHM.Commands;
+using OHM.Nodes;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ZWaveLib
+{
+    public class AllOnCommand : CommandAbstract
+    {
+
+        private ZWaveInterface _interface;
+        private ZWaveNode _node;
+
+        public AllOnCommand(INode node, ZWaveInterface interf)
+            : base(node, "allOn", "Switch all on")
+        {
+            _interface = interf;
+            _node = node as ZWaveNode;
+        }
+
+        protected override bool RunImplementation(Dictionary<string, object> arguments)
+        {
+            _interface.AllOn(_node.HomeId);
+            return true;
+        }
+    }
+
+    public class AllOffCommand : CommandAbstract
+    {
+
+        private ZWaveInterface _interface;
+        private ZWaveNode _node;
+
+        public AllOffCommand(INode node, ZWaveInterface interf)
+            : base(node, "allOff", "Switch all off")
+        {
+            _interface = interf;
+            _node = node as ZWaveNode;
+        }
+
+
+        protected override bool RunImplementation(Dictionary<string, object> arguments)
+        {
+            _interface.AllOff(_node.HomeId);
+            return true;
+        }
+    }
+}
