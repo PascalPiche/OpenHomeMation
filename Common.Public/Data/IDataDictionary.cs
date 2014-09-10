@@ -8,17 +8,17 @@ namespace OHM.Data
 
         IEnumerable<string> Keys { get; }
 
-
         void StoreString(string key, string value);
-
-        void StoreBool(string key, bool value);
-
-        void StoreDataDictionary(string key, IDataDictionary store);
-
 
         String GetString(string key);
 
+        void StoreDataDictionary(string key, IDataDictionary store);
+
+        IDataDictionary GetOrCreateDataDictionary(string key);
+
         bool GetBool(string key);
+
+        void StoreBool(string key, bool value);
 
         IDataDictionary GetDataDictionary(string key);
 

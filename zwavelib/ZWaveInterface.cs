@@ -47,18 +47,10 @@ namespace ZWaveLib
             _mng.OnControllerStateChanged += new ManagedControllerStateChangedHandler(ControllerStateChangedHandler);
 
             //Get DataDictionary For installed Controllers
-            _registeredControllers = DataStore.GetDataDictionary("registeredControllers");
-            if (_registeredControllers == null)
-            {
-                _registeredControllers = new DataDictionary();
-                DataStore.StoreDataDictionary("registeredControllers", _registeredControllers);
-                DataStore.Save();
-            }
-            else
-            {
-                //Load registered controllers
-                LoadRegisteredControllers();
-            }
+            _registeredControllers = DataStore.GetOrCreateDataDictionary("registeredControllers");
+            
+            //Load registered controllers
+            LoadRegisteredControllers();
 
             base.Start();
             Logger.Info("ZWave Interface Inited");

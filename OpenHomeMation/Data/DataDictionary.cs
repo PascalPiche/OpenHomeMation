@@ -59,6 +59,19 @@ namespace OHM.Data
             return null;
         }
 
+        public IDataDictionary GetOrCreateDataDictionary(string key)
+        {
+            var result = GetDataDictionary(key);
+
+            if (result == null) 
+            {
+                result = new DataDictionary();
+                this.StoreDataDictionary(key, result);
+            }
+
+            return result;
+        }
+
         #endregion
 
         #region "bool"
