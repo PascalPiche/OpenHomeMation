@@ -64,9 +64,13 @@
     <Compile Include="Data\DataValueDictionary.cs" />
     <Compile Include="Data\DataValueString.cs" />
     <Compile Include="Data\FileDataManager.cs" />
+    <Compile Include="Data\IDataValue.cs" />
     <Compile Include="Interfaces\InterfacesManager.cs" />
     <Compile Include="Logger\DefaultLogger.cs" />
     <Compile Include="Logger\LoggerManager.cs" />
+    <Compile Include="System\OhmSystem.cs" />
+    <Compile Include="System\OhmSystemInstallGateway.cs" />
+    <Compile Include="System\OhmSystemInterfaceGateway.cs" />
     <Compile Include="System\OpenHomeMation.cs" />
     <Compile Include="Plugins\PluginsManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -2,7 +2,7 @@
 
 namespace OHM.Commands
 {
-    public class ArgumentDefinition : IArgumentDefinition
+    public sealed class ArgumentDefinition : IArgumentDefinition
     {
         private string _key;
         private string _name;

@@ -2,7 +2,7 @@
 
 namespace OHM.Commands
 {
-    public class CommandDefinition : ICommandDefinition
+    public sealed class CommandDefinition : ICommandDefinition
     {
         private string _key;
         private string _name;

@@ -39,7 +39,7 @@ namespace OHM.Tests.Interfaces
 
             var pluginsMng = MockRepository.GenerateStub<IPluginsManager>();
             var dataStore = MockRepository.GenerateStub<IDataStore>();
-            var system = MockRepository.GenerateStub<OhmSystem>();
+            var system = MockRepository.GenerateStub<IOhmSystemInternal>();
 
             var target = new InterfacesManager(loggerMng, pluginsMng);
 
@@ -65,7 +65,7 @@ namespace OHM.Tests.Interfaces
             var plugin = MockRepository.GenerateStub<IPlugin>();
             plugin.Stub(x => x.Id).Return(new Guid("dd985d5b-2d5e-49b5-9b07-64aad480e312"));
             plugin.Stub(x => x.CreateInterface("testGood")).Return(MockRepository.GenerateStub<InterfaceAbstract>("test","test"));
-            var system = MockRepository.GenerateStub<OhmSystem>();
+            var system = MockRepository.GenerateStub<IOhmSystemInternal>();
 
             var target = new InterfacesManager(loggerMng, pluginsMng);
             Assert.AreEqual(0, target.RunnableInterfaces.Count);
@@ -113,7 +113,7 @@ namespace OHM.Tests.Interfaces
             dataDic2.Stub(x => x.GetString("PluginId")).Return("dd985d5b-2d5e-49b5-9b07-64aad480e312");
             var guid = new Guid("dd985d5b-2d5e-49b5-9b07-64aad480e312");
             pluginsMng.Stub(x => x.GetPlugin(guid)).Return(plugin);
-            var system = MockRepository.GenerateStub<OhmSystem>();
+            var system = MockRepository.GenerateStub<IOhmSystemInternal>();
 
             var target = new InterfacesManager(loggerMng, pluginsMng);
             Assert.AreEqual(0, target.RunnableInterfaces.Count);

@@ -42,7 +42,7 @@ namespace OHM.Interfaces
 
         #region "Public api"
 
-        public bool Init(IDataStore data, OhmSystem system)
+        public bool Init(IDataStore data, IOhmSystemInternal system)
         {
             _data = data;
             _logger = _loggerMng.GetLogger("InterfacesManager");
@@ -57,7 +57,7 @@ namespace OHM.Interfaces
             return true;
         }
 
-        public bool RegisterInterface(string key, IPlugin plugin, OhmSystem system)
+        public bool RegisterInterface(string key, IPlugin plugin, IOhmSystemInternal system)
         {
             bool result = false;
             //Detect if already created
@@ -159,7 +159,7 @@ namespace OHM.Interfaces
 
         #region "Private"
 
-        private void loadRegisteredInterfaces(OhmSystem system)
+        private void loadRegisteredInterfaces(IOhmSystemInternal system)
         {
             foreach (var key in _dataRegisteredInterfaces.Keys)
             {
@@ -203,7 +203,7 @@ namespace OHM.Interfaces
             return result;
         }
 
-        private InterfaceAbstract CreateInterface(string key, OhmSystem system)
+        private InterfaceAbstract CreateInterface(string key, IOhmSystemInternal system)
         {
             return CreateInterface(key, GetPluginForInterface(key), system);
         }
@@ -213,7 +213,7 @@ namespace OHM.Interfaces
             return plugin.Id.ToString() + '.' + key;
         }
 
-        private InterfaceAbstract CreateInterface(string key, IPlugin plugin, OhmSystem system)
+        private InterfaceAbstract CreateInterface(string key, IPlugin plugin, IOhmSystemInternal system)
         {
             InterfaceAbstract result = null;
 

@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="OHM.Plugins.PluginBase">
-    <Position X="4.75" Y="0.5" Width="1.5" />
+    <Position X="3" Y="3.25" Width="1.5" />
     <TypeIdentifier />
     <Lollipop Position="0.2" />
   </Class>
   <Interface Name="OHM.Plugins.IPluginsManager">
     <Position X="0.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>QAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAACAAEAAAA=</HashCode>
+      <HashCode>QEAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAACAAEAAAA=</HashCode>
       <FileName>Plugins\IPluginsManager.cs</FileName>
     </TypeIdentifier>
   </Interface>

@@ -20,9 +20,9 @@ namespace OHM.Commands
 
         protected CommandAbstract(
             INode node,
-            string key, 
+            string key,
             string name,
-            string description, 
+            string description,
             Dictionary<string, IArgumentDefinition> argumentsDefinition
         )
         {

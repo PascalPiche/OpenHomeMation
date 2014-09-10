@@ -8,9 +8,9 @@ namespace OHM.Interfaces
     public interface IInterfacesManager
     {
 
-        bool Init(IDataStore data, OhmSystem system);
+        bool Init(IDataStore data, IOhmSystemInternal system);
 
-        bool RegisterInterface(string key, IPlugin plugin, OhmSystem system);
+        bool RegisterInterface(string key, IPlugin plugin, IOhmSystemInternal system);
 
         IList<IInterface> RunnableInterfaces { get; }
 

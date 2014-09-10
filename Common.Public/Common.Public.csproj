@@ -51,7 +51,6 @@
     <Compile Include="Commands\ICommandDefinition.cs" />
     <Compile Include="Data\IDataDictionary.cs" />
     <Compile Include="Data\IDataStore.cs" />
-    <Compile Include="Data\IDataValue.cs" />
     <Compile Include="Interfaces\InterfaceAbstract.cs" />
     <Compile Include="Interfaces\InterfaceState.cs" />
     <Compile Include="Nodes\INode.cs" />

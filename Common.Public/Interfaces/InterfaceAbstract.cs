@@ -17,6 +17,8 @@ namespace OHM.Interfaces
             : base(key, name, null)
         {
             
+            //Register Default commands
+
         }
 
         public InterfaceState State
