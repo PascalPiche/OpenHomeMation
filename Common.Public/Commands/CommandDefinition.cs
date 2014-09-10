@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace OHM.Commands
 {
@@ -70,14 +66,18 @@ namespace OHM.Commands
                 }
             }
 
-            foreach (var item in arguments)
+            if (arguments != null)
             {
-                var argDef = _argumentsDefinition[item.Key];
-                if (!argDef.ValidateValue(item.Value))
+                foreach (var item in arguments)
                 {
-                    result = false;
+                    var argDef = _argumentsDefinition[item.Key];
+                    if (!argDef.ValidateValue(item.Value))
+                    {
+                        result = false;
+                    }
                 }
             }
+            
             return result;
         }
 

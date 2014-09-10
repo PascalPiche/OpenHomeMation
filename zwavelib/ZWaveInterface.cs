@@ -15,6 +15,8 @@ namespace ZWaveLib
 
         private ZWManager _mng = new ZWManager();
         private IDataDictionary _registeredControllers;
+        private Dictionary<uint, ZWaveController> _runningControllers;
+
         #region "Ctor"
 
         public ZWaveInterface()
@@ -23,15 +25,16 @@ namespace ZWaveLib
             //Create Commands
             this.RegisterCommand(new CreateControllerCommand(this));
         }
-
+            
         #endregion
 
         #region "public"
 
         public override void Start()
         {
-            
             Logger.Info("ZWave Interface initing");
+            _runningControllers = new Dictionary<uint, ZWaveController>();
+
             var apiPath = @"C:\Users\Scopollif\Documents\Visual Studio 2013\Projects\OpenHomeMation\external\open-zwave\openzwave-1.0.791";
             ZWOptions opt = new ZWOptions();
             opt.Create(apiPath + @"\config\", apiPath + @"", @"");
@@ -48,6 +51,13 @@ namespace ZWaveLib
             if (_registeredControllers == null)
             {
                 _registeredControllers = new DataDictionary();
+                DataStore.StoreDataDictionary("registeredControllers", _registeredControllers);
+                DataStore.Save();
+            }
+            else
+            {
+                //Load registered controllers
+                LoadRegisteredControllers();
             }
 
             base.Start();
@@ -80,7 +90,8 @@ namespace ZWaveLib
             Logger.Info("ZWave Controller created on port: " + port);
 
             //Store Controller
-            
+            _registeredControllers.StoreString(port.ToString(), port.ToString());
+            DataStore.Save();
             
             return true;
         }
@@ -104,6 +115,14 @@ namespace ZWaveLib
         #endregion
 
         #region "private"
+
+        private void LoadRegisteredControllers()
+        {
+            foreach (var item in _registeredControllers.Keys)
+            {
+                CreateController(int.Parse(_registeredControllers.GetString(item)));
+            }
+        }
 
         private void NotificationHandler(ZWNotification n)
         {
@@ -203,7 +222,9 @@ namespace ZWaveLib
             string name = GetNodeName(n);
             uint homeId = n.GetHomeId();
             byte nodeId = n.GetNodeId();
-            this.AddChild(new ZWaveController(key, name, this, homeId, nodeId));
+            var ctl = new ZWaveController(key, name, this, homeId, nodeId);
+            this.AddChild(ctl);
+            this._runningControllers.Add(homeId, ctl);
         }
 
         private void NotificationNodeNew(ZWNotification n)

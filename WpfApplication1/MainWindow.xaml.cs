@@ -145,5 +145,24 @@ namespace WpfApplication1
                 e.CanExecute = interfacesMng.CanExecuteCommand(command.Node.Key, command.Definition.Key);
             }
         }
+
+        private void ExecuteNodeCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            var command = e.Parameter as OHM.Commands.ICommand;
+            if (command != null)
+            {
+                command.Execute(null);
+            }
+        }
+
+        private void ExecuteNodeCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            var command = e.Parameter as OHM.Commands.ICommand;
+            e.CanExecute = false;
+            if (command != null)
+            {
+                e.CanExecute = command.CanExecute();
+            }
+        }
     }
 }
