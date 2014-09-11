@@ -6,10 +6,10 @@ namespace OHM.Sys
     public class OhmSystemInstallGateway : IOhmSystemInstallGateway
     {
 
-        private OhmSystem _system;
+        private IOhmSystemInternal _system;
         private IPlugin _plugin;
 
-        public OhmSystemInstallGateway(OhmSystem system, IPlugin plugin)
+        public OhmSystemInstallGateway(IOhmSystemInternal system, IPlugin plugin)
         {
             _system = system;
             _plugin = plugin;

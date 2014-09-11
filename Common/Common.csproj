@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
+    <None Include="Data\DataClassDiagramFull.cd" />
     <None Include="Interfaces\InterfacesClassDiagramFull.cd" />
     <None Include="System\SystemClassDiagramFull.cd" />
     <None Include="System\SystemClassDiagram.cd" />
