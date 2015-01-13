@@ -69,16 +69,30 @@ namespace OHM.Plugins
             bool result = false;
             if (plugin != null)
             {
-
                 result = InstallPlugin(plugin, system.GetInstallGateway(plugin));
             }
-            /*else
+            else
             {
-                //todo log
                 //Plugin not found 
-            }*/
+                _logger.Warn("Cannot install Plugin " + id + ": Plugin not found");
+            }
 
             return result;
+        }
+
+        public bool UnInstallPlugin(Guid id, IOhmSystem system)
+        {
+            IPlugin plugin = FindPluginIn(id, _installedPluginsInstance);
+            bool result = false;
+            if (plugin != null)
+            {
+                result = UnInstallPlugin(plugin, system.getUnInstallGateway(plugin));
+            }
+            else
+            {
+                _logger.Warn("Cannot uninstal Plugin " + id + ": Plugin not found");
+            }
+            throw new NotImplementedException();
         }
 
         public IPlugin GetPlugin(Guid id)
@@ -202,5 +216,7 @@ namespace OHM.Plugins
                 }
             }
         }
+
+      
     }
 }

@@ -49,14 +49,19 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\AllOff.cs" />
     <Compile Include="Commands\AllOn.cs" />
     <Compile Include="Commands\CreateControllerCommand.cs" />
-    <Compile Include="IZWaveController.cs" />
-    <Compile Include="IZWaveNode.cs" />
-    <Compile Include="ZWaveController.cs" />
+    <Compile Include="Commands\HardReset.cs" />
+    <Compile Include="Commands\SoftReset.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\IZWaveController.cs" />
+    <Compile Include="Data\IZWaveNode.cs" />
+    <Compile Include="Data\ZWaveController.cs" />
     <Compile Include="ZWaveInterface.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ZWaveNode.cs" />
+    <Compile Include="Data\ZWaveNode.cs" />
     <Compile Include="ZWavePlugin.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -72,6 +77,7 @@
       <Name>Common.Public</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy "$(TargetPath)" "$(SolutionDir)OpenHomeMation\plugins\zwave\" /Y /s /D /E

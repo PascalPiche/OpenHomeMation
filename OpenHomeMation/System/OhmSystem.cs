@@ -43,6 +43,11 @@ namespace OHM.Sys
             return new OhmSystemInterfaceGateway(this, interf);
         }
 
+        public IOhmSystemInstallGateway GetUnInstallGateway(Plugins.IPlugin plugin)
+        {
+            return new OhmSystemUnInstallGateway(this, plugin);
+        }
+
         #endregion
     }
 }

@@ -113,6 +113,18 @@ namespace OHM.Nodes
             return false;
         }
 
+        public bool RemoveChild(string key)
+        {
+            var it = GetChild(key);
+            if (it != null)
+            {
+                _children.Remove(it);
+                _childrenDic.Remove(Key);
+                return true;
+            }
+            return false;
+        }
+
         public INode GetChild(string key)
         {
             INode result;

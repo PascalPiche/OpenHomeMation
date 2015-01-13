@@ -18,5 +18,7 @@ namespace OHM.Plugins
         bool InstallPlugin(Guid id, IOhmSystem system);
 
         IPlugin GetPlugin(Guid id);
+
+        bool UnInstallPlugin(Guid guid, IOhmSystem ohmSystem);
     }
 }

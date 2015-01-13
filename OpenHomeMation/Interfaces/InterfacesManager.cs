@@ -90,11 +90,29 @@ namespace OHM.Interfaces
                 } 
                 catch (Exception ex)
                 {
-                    _logger.Error("Cannot register interface " + key + ", Error on creating Interface", ex);
+                    _logger.Error("Cannot register interface " + key + ", Unhandled exception on creating Interface", ex);
                 }
             }
             
             return result;
+        }
+
+        public bool UnRegisterInterface(IPlugin plugin, IOhmSystemInternal system)
+        {
+            bool result = false;
+
+            IDataDictionary _interfaceData = _dataRegisteredInterfaces.GetDataDictionary(key);
+            if (_interfaceData != null)
+            {
+                //_dataRegisteredInterfaces.r(key, _interfaceData);
+            }
+            else
+            {
+                _logger.Warn("Cannot uninstall interface " + plugin.Id + ": Interace Not found");
+            }
+
+            return result;
+            
         }
 
         public bool StartInterface(string key)
@@ -104,17 +122,6 @@ namespace OHM.Interfaces
             if (_runningDic.TryGetValue(key, out interf))
             {
                 result = StartInterface(interf);
-            }
-            return result;
-        }
-
-        private bool StartInterface(IInterface interf)
-        {
-            bool result = false;
-            if (interf.State == InterfaceState.Disabled)
-            {
-                interf.Start();
-                result = true;
             }
             return result;
         }
@@ -254,7 +261,19 @@ namespace OHM.Interfaces
             return result;
         }
 
+        private bool StartInterface(IInterface interf)
+        {
+            bool result = false;
+            if (interf.State == InterfaceState.Disabled)
+            {
+                interf.Start();
+                result = true;
+            }
+            return result;
+        }
+
         #endregion
 
+        
     }
 }

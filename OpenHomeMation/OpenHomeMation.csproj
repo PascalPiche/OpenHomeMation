@@ -71,6 +71,7 @@
     <Compile Include="System\OhmSystem.cs" />
     <Compile Include="System\OhmSystemInstallGateway.cs" />
     <Compile Include="System\OhmSystemInterfaceGateway.cs" />
+    <Compile Include="System\OhmSystemUnInstallGateway.cs" />
     <Compile Include="System\OpenHomeMation.cs" />
     <Compile Include="Plugins\PluginsManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -2,9 +2,11 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:WpfApplication1"
-        Title="MainWindow" Height="350" Width="525">
+        WindowState="Maximized"
+        Title="MainWindow">
     <Window.CommandBindings>
         <CommandBinding Command="local:MainWindow.InstallPluginCommand" Executed="InstallPluginCommand_Executed" />
+        <CommandBinding Command="local:MainWindow.UnInstallPluginCommand" Executed="UnInstallPluginCommand_Executed" />
         <CommandBinding Command="local:MainWindow.StartInterfaceCommand" Executed="StartInterfaceCommand_Executed" />
         <CommandBinding Command="local:MainWindow.StopInterfaceCommand" Executed="StopInterfaceCommand_Executed" />
         <CommandBinding Command="local:MainWindow.ExecuteInterfaceCommand" Executed="ExecuteInterfaceCommand_Executed" CanExecute="ExecuteInterfaceCommand_CanExecute" />
@@ -16,7 +18,7 @@
             <Label>
                 <Run Text="System" />
             </Label>
-            <TreeView>
+            <TreeView SelectedItemChanged="TreeView_SelectedItemChanged">
                 <TreeViewItem IsSelected="True">
                     <TreeViewItem.Header>
                         <Label>
@@ -24,7 +26,7 @@
                         </Label>
                     </TreeViewItem.Header>
                     <TreeViewItem.Items>
-                        <TreeViewItem Name="InterfacesTreeViewItem" ItemsSource="{Binding}">
+                        <TreeViewItem Name="InterfacesTreeViewItem" ItemsSource="{Binding Path=InterfaceManager.RunnableInterfaces}">
                             <TreeViewItem.ItemContainerStyle>
                                 <Style TargetType="TreeViewItem">
                                     <Setter Property="ContextMenu">
@@ -109,7 +111,7 @@
         </Grid>
         
         <Grid>
-            <Grid>
+            <Grid Visibility="{Binding Path=IsSystemViewVisible}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
@@ -118,7 +120,11 @@
                     <Label DockPanel.Dock="Top">
                         <Run Text="Availables Plugin" />
                     </Label>
-                    <ListBox Name="lbAvailablePlugin" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding Path=AvailablesPlugins}">
+                    <ListBox Name="lbAvailablePlugin" 
+                             HorizontalContentAlignment="Stretch" 
+                             HorizontalAlignment="Stretch" 
+                             VerticalAlignment="Stretch" 
+                             ItemsSource="{Binding Path=PluginManager.AvailablesPlugins}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
@@ -139,16 +145,51 @@
                     <Label DockPanel.Dock="Top">
                         <Run Text="Installed plugins"/>
                     </Label>
-                    <ListBox HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding Path=InstalledPlugins}">
+                    <ListBox HorizontalContentAlignment="Stretch" 
+                             HorizontalAlignment="Stretch" 
+                             VerticalAlignment="Stretch" 
+                             ItemsSource="{Binding Path=PluginManager.InstalledPlugins}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <Label>
-                                    <Run Text="{Binding Path=Name, Mode=OneWay}" />
-                                </Label>
+                                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                    <Grid.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="UnInstall" Command="local:MainWindow.UnInstallPluginCommand" 
+                                                      CommandParameter="{Binding Path=Id}" />
+                                        </ContextMenu>
+                                    </Grid.ContextMenu>
+                                    <Label>
+                                        <Run Text="{Binding Path=Name, Mode=OneWay}" />
+                                    </Label>
+                                </Grid>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
                 </DockPanel>
+            </Grid>
+
+            <Grid Visibility="{Binding Path=IsInterfaceViewVisible}">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Interface" />
+                <TextBlock Text="{Binding Path=SelectedNode.Name}" Grid.Column="1" />
+                <TextBlock Text="{Binding Path=SelectedNode.Key}" Grid.Column="2"/>
+                
+                <TextBlock Grid.Row="1">
+                    <Run Text="Status : " />
+                    <Run Text="{Binding Path=SelectedNode.State}" />
+                </TextBlock>
+            </Grid>
+
+            <Grid Visibility="{Binding Path=IsNodeViewVisible}">
+                <TextBlock Text="Node" />
             </Grid>
         </Grid>
         

@@ -43,7 +43,8 @@ namespace ZWaveLib
             {
                 return false;
             }
-            return _interface.CreateController(port);
+
+            return _interface.CreateController(port, true);
 
         }
     }

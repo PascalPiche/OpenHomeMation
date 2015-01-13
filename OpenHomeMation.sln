@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OHM.Tests", "OHM.Tests\OHM.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OHM.Tests.Stub.Plugin", "OHM.Tests.Stub.Plugin\OHM.Tests.Stub.Plugin.csproj", "{01E4757F-F9C3-498F-88D4-2955FECE30A2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{6EE2369D-2251-4E8C-93C1-2792A79AC692}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{06E8058D-7D7B-4A04-B567-CC3A9CC87073}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,5 +58,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B4427C2E-4974-4DBC-9203-3947924C144D} = {6EE2369D-2251-4E8C-93C1-2792A79AC692}
+		{FC583E82-C9CC-4DFA-A8DE-294AB69E6380} = {06E8058D-7D7B-4A04-B567-CC3A9CC87073}
+		{01E4757F-F9C3-498F-88D4-2955FECE30A2} = {06E8058D-7D7B-4A04-B567-CC3A9CC87073}
 	EndGlobalSection
 EndGlobal

@@ -2,11 +2,13 @@
 using OHM.Data;
 using OHM.Interfaces;
 using OHM.Logger;
+using OHM.Nodes;
 using OHM.Plugins;
 using OHM.Sys;
 using System;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using WpfApplication1.Logger;
 
@@ -17,10 +19,8 @@ namespace WpfApplication1
     /// </summary>
     public partial class MainWindow : Window
     {
-        private OpenHomeMation ohm;
-        private ILoggerManager loggerMng;
-        private IPluginsManager pluginMng;
-        private IInterfacesManager interfacesMng;
+
+        private MainWindowVM vm = new MainWindowVM();
 
         public static readonly RoutedUICommand InstallPluginCommand = new RoutedUICommand
         (
@@ -29,10 +29,10 @@ namespace WpfApplication1
                 typeof(MainWindow)
         );
 
-        public static readonly RoutedUICommand UninstallPluginCommand = new RoutedUICommand
+        public static readonly RoutedUICommand UnInstallPluginCommand = new RoutedUICommand
         (
-                "Uninstall Plugin",
-                "Uninstall Plugin",
+                "UnInstall Plugin",
+                "UnInstall Plugin",
                 typeof(MainWindow)
         );
 
@@ -66,22 +66,15 @@ namespace WpfApplication1
 
         public MainWindow()
         {
-            InitializeComponent();
-            loggerMng = new WpfLoggerManager(txt);
-            var dataMng = new FileDataManager(loggerMng, AppDomain.CurrentDomain.BaseDirectory + "\\data\\");
-            pluginMng = new PluginsManager(loggerMng, AppDomain.CurrentDomain.BaseDirectory + "\\plugins\\");
-            interfacesMng = new InterfacesManager(loggerMng, pluginMng);
-            ohm = new OpenHomeMation(pluginMng, dataMng, loggerMng, interfacesMng);
-
-            ohm.start();
             
-            this.DataContext = pluginMng;
-            InterfacesTreeViewItem.DataContext = interfacesMng.RunnableInterfaces;
+            InitializeComponent();
+            vm.start(txt);
+            this.DataContext = vm;
         }
 
         protected override void OnClosing(CancelEventArgs e)
         {
-            ohm.Shutdown();
+            vm.OHM.Shutdown();
             base.OnClosing(e);
         }
 
@@ -92,19 +85,19 @@ namespace WpfApplication1
 
         private void InstallPluginCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            pluginMng.InstallPlugin((Guid)e.Parameter, ohm.System);
+            vm.PluginManager.InstallPlugin((Guid)e.Parameter, vm.OHM.System);
         }
 
         private void StopInterfaceCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             string key = (string)e.Parameter;
-            interfacesMng.StopInterface(key);
+            vm.InterfaceManager.StopInterface(key);
         }
 
         private void StartInterfaceCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             string key = (string)e.Parameter;
-            interfacesMng.StartInterface(key);
+            vm.InterfaceManager.StartInterface(key);
         }
 
         private void ExecuteInterfaceCommand_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -119,7 +112,7 @@ namespace WpfApplication1
                 }
                 else
                 {
-                    interfacesMng.ExecuteCommand(command.Node.Key, command.Definition.Key, null);
+                    vm.InterfaceManager.ExecuteCommand(command.Node.Key, command.Definition.Key, null);
                 }
             }
         }
@@ -132,7 +125,7 @@ namespace WpfApplication1
 
             if (result.HasValue && result.Value)
             {
-                interfacesMng.ExecuteCommand(command.Node.Key, command.Definition.Key, w.ArgumentsResult);
+                vm.InterfaceManager.ExecuteCommand(command.Node.Key, command.Definition.Key, w.ArgumentsResult);
             }
         }
 
@@ -142,7 +135,7 @@ namespace WpfApplication1
             e.CanExecute = false;
             if (command != null)
             {
-                e.CanExecute = interfacesMng.CanExecuteCommand(command.Node.Key, command.Definition.Key);
+                e.CanExecute = vm.InterfaceManager.CanExecuteCommand(command.Node.Key, command.Definition.Key);
             }
         }
 
@@ -162,6 +155,110 @@ namespace WpfApplication1
             if (command != null)
             {
                 e.CanExecute = command.CanExecute();
+            }
+        }
+
+        private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            vm.SelectedNode = e.NewValue;
+        }
+
+        private void UnInstallPluginCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            vm.PluginManager.UnInstallPlugin((Guid)e.Parameter, vm.OHM.System);
+        }
+    }
+
+    public class MainWindowVM : INotifyPropertyChanged
+    {
+        private OpenHomeMation ohm;
+        private ILoggerManager loggerMng;
+        private IPluginsManager pluginMng;
+        private IInterfacesManager interfacesMng;
+
+        private object selectedNode;
+
+        public MainWindowVM()
+        {
+            
+        }
+
+        public void start(TextBox txt)
+        {
+            loggerMng = new WpfLoggerManager(txt);
+            var dataMng = new FileDataManager(loggerMng, AppDomain.CurrentDomain.BaseDirectory + "\\data\\");
+            pluginMng = new PluginsManager(loggerMng, AppDomain.CurrentDomain.BaseDirectory + "\\plugins\\");
+            interfacesMng = new InterfacesManager(loggerMng, pluginMng);
+            ohm = new OpenHomeMation(pluginMng, dataMng, loggerMng, interfacesMng);
+            ohm.start();
+        }
+
+        public IPluginsManager PluginManager { get { return pluginMng; } }
+
+        public OpenHomeMation OHM { get { return ohm; } }
+
+        public IInterfacesManager InterfaceManager { get { return interfacesMng; } }
+
+        public Object SelectedNode 
+        {
+            get
+            {
+                return selectedNode;
+            }
+
+            set
+            {
+                selectedNode = value;
+                NotifyPropertyChanged("IsSystemViewVisible");
+                NotifyPropertyChanged("IsNodeViewVisible");
+                NotifyPropertyChanged("IsInterfaceViewVisible");
+                NotifyPropertyChanged("SelectedNode");
+            }
+        }
+
+        public Visibility IsInterfaceViewVisible
+        {
+            get
+            {
+                if (selectedNode is IInterface)
+                {
+                    return Visibility.Visible;
+                }
+                return Visibility.Collapsed;
+            }
+        }
+
+        public Visibility IsSystemViewVisible
+        {
+            get
+            {
+                if (IsNodeViewVisible != Visibility.Visible && IsInterfaceViewVisible != Visibility.Visible)
+                {
+                    return Visibility.Visible;
+                }
+                return Visibility.Collapsed;
+            }
+        }
+
+        public Visibility IsNodeViewVisible
+        {
+            get
+            {
+                if (IsInterfaceViewVisible != Visibility.Visible && selectedNode is INode)
+                {
+                    return Visibility.Visible;
+                }
+                return Visibility.Collapsed;
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void NotifyPropertyChanged(String propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
     }

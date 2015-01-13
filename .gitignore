@@ -172,3 +172,7 @@ UpgradeLog*.htm
 
 # Microsoft Fakes
 FakesAssemblies/
+
+/external/open-zwave-trunk-latest/.svn/entries
+/external/open-zwave-trunk-latest/.svn/format
+/external/open-zwave-trunk-latest/.svn

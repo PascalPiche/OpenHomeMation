@@ -68,7 +68,7 @@ namespace ZWaveLib
 
         #region "internal"
 
-        internal bool CreateController(int port)
+        internal bool CreateController(int port, bool saveController = false)
         {
             Logger.Info("Creating ZWave Controller on port: " + port);
 
@@ -82,8 +82,11 @@ namespace ZWaveLib
             Logger.Info("ZWave Controller created on port: " + port);
 
             //Store Controller
-            _registeredControllers.StoreString(port.ToString(), port.ToString());
-            DataStore.Save();
+            if (saveController)
+            {
+                _registeredControllers.StoreString(port.ToString(), port.ToString());
+                DataStore.Save();
+            }
             
             return true;
         }
@@ -104,6 +107,16 @@ namespace ZWaveLib
             _mng.SwitchAllOff(homeId);
         }
 
+        internal void SoftReset(uint homeId)
+        {
+            _mng.SoftReset(homeId);
+        }
+
+        internal void HardReset(uint homeId)
+        {
+            _mng.ResetController(homeId);
+        }
+
         #endregion
 
         #region "private"
@@ -115,6 +128,8 @@ namespace ZWaveLib
                 CreateController(int.Parse(_registeredControllers.GetString(item)));
             }
         }
+
+        #region "Manager Handler"
 
         private void NotificationHandler(ZWNotification n)
         {
@@ -139,34 +154,28 @@ namespace ZWaveLib
 
             switch (n.GetType())
             {
-                //Query
-                case ZWNotification.Type.AllNodesQueried:
-                case ZWNotification.Type.AllNodesQueriedSomeDead:
-                case ZWNotification.Type.AwakeNodesQueried:
-                case ZWNotification.Type.EssentialNodeQueriesComplete:
-                    break;
                 //Driver
                 case ZWNotification.Type.DriverFailed:
-
+                    NotificationDriverFailed(n);
                     break;
                 case ZWNotification.Type.DriverReady:
                     NotificationDriverReady(n);
                     break;
                 case ZWNotification.Type.DriverReset:
-
+                    NotificationDriverReset(n);
                     break;
-                //Polling
-                case ZWNotification.Type.PollingDisabled:
-                case ZWNotification.Type.PollingEnabled:
 
-                //button
-                case ZWNotification.Type.ButtonOff:
-                case ZWNotification.Type.ButtonOn:
-                case ZWNotification.Type.CreateButton:
-                case ZWNotification.Type.DeleteButton:
+                //Initialize Query
+                case ZWNotification.Type.AwakeNodesQueried:
+                    NotificationAwakeNodesQueried(n);
+                    break;
+                case ZWNotification.Type.AllNodesQueried:
+                    NotificationAllNodesQueried(n);
+                    break;
+                case ZWNotification.Type.AllNodesQueriedSomeDead:
+                    NotificationAllNodesQueriedSomeDead(n);
+                    break;
 
-                //Group
-                case ZWNotification.Type.Group:
 
                 //Node
                 case ZWNotification.Type.NodeNew:
@@ -175,29 +184,70 @@ namespace ZWaveLib
                 case ZWNotification.Type.NodeAdded:
                     NotificationNodeAdded(n);
                     break;
+                case ZWNotification.Type.EssentialNodeQueriesComplete:
+                    NotificationEssentialNodeQueriesComplete(n);
+                    break;
+                case ZWNotification.Type.NodeQueriesComplete:
+                    NotificationNodeQueriesComplete(n);
+                    break;
+
+                case ZWNotification.Type.NodeRemoved:
+                    NotificationNodeRemoved(n);
+                    break;
+
                 case ZWNotification.Type.NodeEvent:
+                    NotificationNodeEvent(n);
                     break;
                 case ZWNotification.Type.NodeNaming:
                     NotificationNodeNaming(n);
                     break;
                 case ZWNotification.Type.NodeProtocolInfo:
+                    NotificationNodeProtocolInfo(n);
                     break;
-                case ZWNotification.Type.NodeQueriesComplete:
+
+                //Value
+                case ZWNotification.Type.ValueAdded:
+                    NotificationValueAdded(n);
                     break;
-                case ZWNotification.Type.NodeRemoved:
+                case ZWNotification.Type.ValueChanged:
+                    NotificationValueChanged(n);
+                    break;
+                case ZWNotification.Type.ValueRefreshed:
+                    NotificationValueRefreshed(n);
+                    break;
+                case ZWNotification.Type.ValueRemoved:
+                    NotificationValueRemoved(n);
                     break;
 
                 //Notification
                 case ZWNotification.Type.Notification:
-                
+                    Notification(n);
+                    break;
+
                 //Scene
                 case ZWNotification.Type.SceneEvent:
+                    NotificationSceneEvent(n);
+                    break;
 
-                //Value
-                case ZWNotification.Type.ValueAdded:
-                case ZWNotification.Type.ValueChanged:
-                case ZWNotification.Type.ValueRefreshed:
-                case ZWNotification.Type.ValueRemoved:
+                //Group
+                case ZWNotification.Type.Group:
+                    NotificationGroup(n);
+                    break;
+
+                //Polling
+                case ZWNotification.Type.PollingDisabled:
+                    break;
+                case ZWNotification.Type.PollingEnabled:
+                    break;
+
+                //button
+                case ZWNotification.Type.ButtonOff:
+                    break;
+                case ZWNotification.Type.ButtonOn:
+                    break;
+                case ZWNotification.Type.CreateButton:
+                    break;
+                case ZWNotification.Type.DeleteButton:
                     break;
             }
         }
@@ -207,57 +257,105 @@ namespace ZWaveLib
             Logger.Debug("ControllerStateChanged:  " + state.ToString());
         }
 
+        #endregion
+
+        #region "NotificationHandler"
+
+        #region Driver
+
         private void NotificationDriverReady(ZWNotification n)
         {
-            Logger.Info("ZWave Driver Reader");
+            Logger.Info("ZWave Driver Ready:" + GetNodeIdForLog(n));
             string key = MakeNodeKey(n);
             string name = GetNodeName(n);
             uint homeId = n.GetHomeId();
             byte nodeId = n.GetNodeId();
-            var ctl = new ZWaveController(key, name, this, homeId, nodeId);
-            this.AddChild(ctl);
-            this._runningControllers.Add(homeId, ctl);
+            if (!this._runningControllers.ContainsKey(homeId)) {
+                var ctl = new ZWaveController(key, name, this, homeId, nodeId);
+                this.AddChild(ctl);
+                this._runningControllers.Add(homeId, ctl);
+            }
         }
+
+        private void NotificationDriverReset(ZWNotification n)
+        {
+            Logger.Debug("NotificationDriverReset:" + GetNodeIdForLog(n));
+        }
+
+        private void NotificationDriverFailed(ZWNotification n)
+        {
+            Logger.Debug("NotificationDriverFailed:" + GetNodeIdForLog(n));
+        }
+
+        #endregion
+
+        #region Initialize query
+
+        private void NotificationAllNodesQueried(ZWNotification n)
+        {
+            Logger.Info("ZWave AllNodesQueried: " + GetNodeIdForLog(n));
+        }
+
+        private void NotificationAwakeNodesQueried(ZWNotification n)
+        {
+            Logger.Info("ZWave AwakeNodesQueried: " + GetNodeIdForLog(n));
+        }
+
+        private void NotificationAllNodesQueriedSomeDead(ZWNotification n)
+        {
+            Logger.Info("ZWave AllNodesQueriedSomeDead: " + GetNodeIdForLog(n));
+        }
+
+        #endregion
+
+        #region Node
 
         private void NotificationNodeNew(ZWNotification n)
         {
-            Logger.Info("ZWave New Node : " + n.GetHomeId() + " - " + n.GetNodeId());
-            //Find node
-            var node = this.GetChild(MakeNodeKey(n));
-            if (node == null)
-            {
-                //Create Node
-                CreateNode(n);
-            }
-            else
-            {
-                //Update Node
-                UpdateNode(node, n);
-            }
+            Logger.Info("ZWave New Node: " + GetNodeIdForLog(n));
+            CreateOrUpdateNode(n);
         }
 
         private void NotificationNodeAdded(ZWNotification n)
         {
             //Update State
-            Logger.Info("ZWave Node Added: " + n.GetHomeId() + " - " + n.GetNodeId());
-            //Find node
-            var node = this.GetChild(MakeNodeKey(n));
-            if (node == null)
-            {
-                //Create Node
-                CreateNode(n);
-            }
-            else
-            {
-                //Update Node
-                UpdateNode(node, n);
-            }
+            Logger.Info("ZWave Node Added: " + GetNodeIdForLog(n));
+            CreateOrUpdateNode(n);
+        }
+
+        private void NotificationNodeRemoved(ZWNotification n)
+        {
+            //Update State
+            RemoveNode(n);
+            Logger.Info("ZWave Node Removed: " + GetNodeIdForLog(n));
+        }
+
+
+        private void NotificationEssentialNodeQueriesComplete(ZWNotification n)
+        {
+            Logger.Info("ZWave EssentialNodeQueriesComplete: " + GetNodeIdForLog(n));
+        }
+
+        private void NotificationNodeProtocolInfo(ZWNotification n)
+        {
+            Logger.Info("ZWave NodeProtocolInfo: " + GetNodeIdForLog(n));
+        }
+
+        private void NotificationNodeQueriesComplete(ZWNotification n)
+        {
+            Logger.Debug("NotificationNodeQueriesComplete:" + GetNodeIdForLog(n));
+        }
+
+        private void NotificationNodeEvent(ZWNotification n)
+        {
+            Logger.Debug("NotificationNodeEvent: " + GetNodeIdForLog(n));
+            Logger.Debug("Event: " + n.GetEvent().ToString());
         }
 
         private void NotificationNodeNaming(ZWNotification n)
         {
             //Update State
-            Logger.Info("ZWave Node Naming: " + n.GetHomeId() + " - " + n.GetNodeId());
+            Logger.Info("ZWave Node Naming: " + GetNodeIdForLog(n));
             //Find node
             var node = this.GetChild(MakeNodeKey(n));
             if (node != null)
@@ -267,23 +365,65 @@ namespace ZWaveLib
             }
         }
 
-        private string GetNodeName(ZWNotification n)
+        #endregion
+
+        #region Value
+
+         private void NotificationValueAdded(ZWNotification n)
         {
-            string result = _mng.GetNodeName(n.GetHomeId(), n.GetNodeId());
-            if (String.IsNullOrEmpty(result))
-            {
-                result = _mng.GetNodeProductName(n.GetHomeId(), n.GetNodeId());
-            }
-            if (string.IsNullOrEmpty(result))
-            {
-                result = "Unknow device";
-            }
-            return result;
+            Logger.Info("ZWave NotificationValueAdded: " + GetNodeIdForLog(n));
         }
-        
-        private string MakeNodeKey(ZWNotification n)
+
+         private void NotificationValueChanged(ZWNotification n)
         {
-            return n.GetHomeId().ToString() + "-" + n.GetNodeId().ToString();
+            Logger.Info("ZWave NotificationValueChanged: " + GetNodeIdForLog(n));
+        }
+
+         private void NotificationValueRefreshed(ZWNotification n)
+        {
+            Logger.Info("ZWave NotificationValueRefreshed: " + GetNodeIdForLog(n));
+        }
+
+         private void NotificationValueRemoved(ZWNotification n)
+        {
+            Logger.Info("ZWave NotificationValueRemoved: " + GetNodeIdForLog(n));
+        }
+
+        #endregion
+
+         private void Notification(ZWNotification n)
+        {
+            Logger.Info("ZWave Notification: " + GetNodeIdForLog(n));
+        }
+
+         private void NotificationSceneEvent(ZWNotification n)
+        {
+            Logger.Info("ZWave NotificationSceneEvent: " + GetNodeIdForLog(n));
+        }
+
+         private void NotificationGroup(ZWNotification n)
+        {
+            Logger.Info("ZWave NotificationGroup: " + GetNodeIdForLog(n));
+        }
+
+      
+
+        #endregion
+
+         private void CreateOrUpdateNode(ZWNotification n)
+        {
+            //Find node
+            var node = this.GetChild(MakeNodeKey(n));
+            if (node == null)
+            {
+                //Create Node
+                CreateNode(n);
+            }
+            else
+            {
+                //Update Node
+                UpdateNode(node, n);
+            }
         }
 
         private void CreateNode(ZWNotification n)
@@ -303,6 +443,41 @@ namespace ZWaveLib
             no.UpdateName(name);
 
         }
+
+        private void RemoveNode(ZWNotification n)
+        {
+            string key = MakeNodeKey(n);
+            this.RemoveChild(key);
+            
+        }
+
+        #region Tools
+
+        private string GetNodeIdForLog(ZWNotification n)
+        {
+            return n.GetHomeId() + " - " + n.GetNodeId() + "-" + n.GetGroupIdx();
+        }
+
+        private string GetNodeName(ZWNotification n)
+        {
+            string result = _mng.GetNodeName(n.GetHomeId(), n.GetNodeId());
+            if (String.IsNullOrEmpty(result))
+            {
+                result = _mng.GetNodeProductName(n.GetHomeId(), n.GetNodeId());
+            }
+            if (string.IsNullOrEmpty(result))
+            {
+                result = "Unknow device";
+            }
+            return result;
+        }
+
+        private string MakeNodeKey(ZWNotification n)
+        {
+            return n.GetHomeId().ToString() + "-" + n.GetNodeId().ToString();
+        }
+
+        #endregion
 
         #endregion
     }
