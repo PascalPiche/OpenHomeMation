@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C7AE6787-9A8A-4EBC-A341-FFACF31ACAF7}</ProjectGuid>
+    <ProjectGuid>{3DB57F59-9604-4380-8C99-33130E100926}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Common.Public</RootNamespace>
-    <AssemblyName>Common.Public</AssemblyName>
+    <RootNamespace>UPNPControlPoint</RootNamespace>
+    <AssemblyName>UPNPControlPoint</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,9 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="log4net">
-      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,46 +37,33 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\ArgumentDefinition.cs" />
-    <Compile Include="Commands\CommandAbstract.cs" />
-    <Compile Include="Commands\CommandDefinition.cs" />
-    <Compile Include="Commands\IArgumentDefinition.cs" />
-    <Compile Include="Commands\ICommand.cs" />
-    <Compile Include="Commands\ICommandDefinition.cs" />
-    <Compile Include="Data\IDataDictionary.cs" />
-    <Compile Include="Data\IDataStore.cs" />
-    <Compile Include="Interfaces\InterfaceAbstract.cs" />
-    <Compile Include="Interfaces\InterfaceState.cs" />
-    <Compile Include="Nodes\INode.cs" />
-    <Compile Include="Interfaces\IInterface.cs" />
-    <Compile Include="Logger\ILogger.cs" />
-    <Compile Include="Nodes\INodeProperty.cs" />
-    <Compile Include="Nodes\NodeAbstract.cs" />
-    <Compile Include="Nodes\NodeProperty.cs" />
-    <Compile Include="System\IOhmSystem.cs" />
-    <Compile Include="Plugins\IPlugin.cs" />
-    <Compile Include="Plugins\PluginBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="System\IOhmSystemInstallGateway.cs" />
-    <Compile Include="System\IOhmSystemInterfaceGateway.cs" />
-    <Compile Include="System\IOhmSystemUnInstallGateway.cs" />
+    <Compile Include="UPNPControlPointInterface.cs" />
+    <Compile Include="UPNPControlPointPlugin.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
-    <None Include="Commands\CommandsClassDiagram.cd" />
-    <None Include="Data\DataClassDiagram.cd" />
-    <None Include="Interfaces\InterfacesClassDiagram.cd" />
-    <None Include="Logger\LoggerClassDiagram.cd" />
-    <None Include="Nodes\NodesClassDiagram.cd" />
-    <None Include="Plugins\PluginsClassDiagram.cd" />
-    <None Include="System\SystemClassDiagram.cd" />
-    <None Include="packages.config" />
+    <ProjectReference Include="..\Common.Public\Common.Public.csproj">
+      <Project>{c7ae6787-9a8a-4ebc-a341-ffacf31acaf7}</Project>
+      <Name>Common.Public</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="UPNPLib">
+      <Guid>{DB3442A7-A2E9-4A59-9CB5-F5C1A5D901E5}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy "$(TargetPath)" "$(SolutionDir)OpenHomeMation\plugins\upnpcontrolpoint\" /Y /s /D /E</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

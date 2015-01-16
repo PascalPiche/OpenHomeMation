@@ -46,6 +46,7 @@ namespace OHM.Interfaces
 
         public virtual void Shutdown()
         {
+            NotifyPropertyChanged("State");
             State = Interfaces.InterfaceState.Disabled;
         }
 

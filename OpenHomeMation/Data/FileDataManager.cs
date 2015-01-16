@@ -94,8 +94,12 @@ namespace OHM.Data
         private void DataStoreToFile(IDataStore data, string path) 
         {
             DataContractSerializer formatter = new DataContractSerializer(typeof(DataStore), GetSerializationTypes());
+            if (File.Exists(path)) {
+                File.Delete(path);
+            }
             var writter = File.OpenWrite(path);
             formatter.WriteObject(writter, data);
+            writter.Flush();
             writter.Close();
         }
 

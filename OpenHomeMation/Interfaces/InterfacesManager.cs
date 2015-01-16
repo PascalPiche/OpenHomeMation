@@ -97,20 +97,30 @@ namespace OHM.Interfaces
             return result;
         }
 
-        public bool UnRegisterInterface(IPlugin plugin, IOhmSystemInternal system)
+        public bool UnRegisterInterface(String key, IPlugin plugin, IOhmSystemInternal system)
         {
             bool result = false;
 
+            if (_runningDic.ContainsKey(key))
+            {
+                //Interface is running
+                _runningDic[key].Shutdown();
+                _runningInterfaces.Remove(_runningDic[key]);
+                _runningDic.Remove(key);
+            }
+
             IDataDictionary _interfaceData = _dataRegisteredInterfaces.GetDataDictionary(key);
+            
+
             if (_interfaceData != null)
             {
-                //_dataRegisteredInterfaces.r(key, _interfaceData);
+                result = _dataRegisteredInterfaces.RemoveKey(key);
             }
             else
             {
                 _logger.Warn("Cannot uninstall interface " + plugin.Id + ": Interace Not found");
             }
-
+            _data.Save();
             return result;
             
         }

@@ -27,7 +27,7 @@ namespace OHM.Tests.Stub.Plugin
             return true;
         }
 
-        public override bool Uninstall()
+        public override bool Uninstall(Sys.IOhmSystemUnInstallGateway system)
         {
             throw new NotImplementedException();
         }

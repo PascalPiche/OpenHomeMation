@@ -13,7 +13,7 @@ namespace OHM.Plugins
 
         bool Install(IOhmSystemInstallGateway system);
 
-        bool Uninstall();
+        bool Uninstall(IOhmSystemUnInstallGateway system);
 
         bool Update();
 

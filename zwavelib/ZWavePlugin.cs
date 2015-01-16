@@ -20,18 +20,20 @@ namespace ZWaveLib
         
         private string _name = "Zwave Plugin";
 
+        private const string _interfaceKey = "ZWaveInterface";
+
         public override Guid Id { get { return _id; } }
 
         public override string Name { get { return _name; } }
 
         public override bool Install(IOhmSystemInstallGateway system)
         {
-            return system.RegisterInterface("ZWaveInterface");
+            return system.RegisterInterface(_interfaceKey);
         }
 
-        public override bool Uninstall()
+        public override bool Uninstall(IOhmSystemUnInstallGateway system)
         {
-            return true;
+            return system.UnRegisterInterface(_interfaceKey);
         }
 
         public override bool Update()
@@ -43,11 +45,13 @@ namespace ZWaveLib
         {
             switch (key)
 	        {
-                case "ZWaveInterface":
+                case _interfaceKey:
                     return new ZWaveInterface();
 	        }
             return null;
         }
 
+
+    
     }
 }

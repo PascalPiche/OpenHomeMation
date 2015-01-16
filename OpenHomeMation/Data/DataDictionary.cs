@@ -93,6 +93,11 @@ namespace OHM.Data
 
         #endregion
 
+        public bool RemoveKey(String key)
+        {
+            return _dataValues.Remove(key);
+        }
+
         #endregion
 
         #region "Protected"

@@ -86,13 +86,14 @@ namespace OHM.Plugins
             bool result = false;
             if (plugin != null)
             {
-                result = UnInstallPlugin(plugin, system.getUnInstallGateway(plugin));
+                result = UnInstallPlugin(plugin, system.GetUnInstallGateway(plugin));
             }
             else
             {
                 _logger.Warn("Cannot uninstal Plugin " + id + ": Plugin not found");
             }
-            throw new NotImplementedException();
+
+            return result;
         }
 
         public IPlugin GetPlugin(Guid id)
@@ -119,6 +120,28 @@ namespace OHM.Plugins
             _data.Save();
             _availablesPlugins.Remove(plugin);
             
+            return result;
+        }
+
+        private bool UnInstallPlugin(IPlugin plugin, IOhmSystemUnInstallGateway system)
+        {
+            bool result = false;
+            try
+            {
+                result = plugin.Uninstall(system);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("UnInstall failed for plugin : " + plugin.Name, ex);
+                return false;
+            }
+
+            _installedPluginsInstance.Remove(plugin);
+            //Save to persistent storage
+            _dataInstalledPlugins.RemoveKey(plugin.Id.ToString());
+            _data.Save();
+            _availablesPlugins.Add(plugin);
+
             return result;
         }
 

@@ -14,7 +14,7 @@ namespace OHM.Plugins
 
         public abstract bool Install(IOhmSystemInstallGateway system);
 
-        public abstract bool Uninstall();
+        public abstract bool Uninstall(IOhmSystemUnInstallGateway system);
 
         public abstract bool Update();
 

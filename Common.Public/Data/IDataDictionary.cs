@@ -22,5 +22,7 @@ namespace OHM.Data
 
         IDataDictionary GetDataDictionary(string key);
 
+        bool RemoveKey(string key);
+
     }
 }
