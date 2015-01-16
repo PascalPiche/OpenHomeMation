@@ -15,8 +15,8 @@ namespace OHM.Nodes
         private string _name;
         private ObservableCollection<ICommand> _commands;
         private Dictionary<string, ICommand> _commandsDic;
-        private ObservableCollection<INode> _children;
-        private Dictionary<string, INode> _childrenDic;
+        private ObservableCollection<NodeAbstract> _children;
+        private Dictionary<string, NodeAbstract> _childrenDic;
         private ObservableCollection<INodeProperty> _properties;
         private Dictionary<string, INodeProperty> _propertiesDic;
         private INode _parent;
@@ -31,8 +31,8 @@ namespace OHM.Nodes
             _name = name;
             _commands = new ObservableCollection<ICommand>();
             _commandsDic = new Dictionary<string, ICommand>();
-            _children = new ObservableCollection<INode>();
-            _childrenDic = new Dictionary<string, INode>();
+            _children = new ObservableCollection<NodeAbstract>();
+            _childrenDic = new Dictionary<string, NodeAbstract>();
             _properties = new ObservableCollection<INodeProperty>();
             _propertiesDic = new Dictionary<string, INodeProperty>();
             _parent = parent;
@@ -86,7 +86,23 @@ namespace OHM.Nodes
             get { return _parent; }
         }
 
-        public bool AddChild(INode node)
+
+        public INode GetChild(string key)
+        {
+            NodeAbstract result;
+
+            if (_childrenDic.TryGetValue(key, out result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        #endregion
+
+        #region "Protected"
+
+        protected bool AddChild(NodeAbstract node)
         {
             if (GetChild(node.Key) == null)
             {
@@ -101,7 +117,7 @@ namespace OHM.Nodes
             return false;
         }
 
-        public bool RemoveChild(INode node)
+        protected bool RemoveChild(INode node)
         {
             var it = GetChild(node.Key);
             if (it != null)
@@ -113,7 +129,7 @@ namespace OHM.Nodes
             return false;
         }
 
-        public bool RemoveChild(string key)
+        protected bool RemoveChild(string key)
         {
             var it = GetChild(key);
             if (it != null)
@@ -124,21 +140,6 @@ namespace OHM.Nodes
             }
             return false;
         }
-
-        public INode GetChild(string key)
-        {
-            INode result;
-
-            if (_childrenDic.TryGetValue(key, out result))
-            {
-                return result;
-            }
-            return null;
-        }
-
-        #endregion
-
-        #region "Protected"
 
         protected bool RegisterProperty(NodeProperty nodeProperty)
         {

@@ -338,18 +338,20 @@ namespace ZWaveLib
 
         private void NotificationNodeProtocolInfo(ZWNotification n)
         {
+
             Logger.Info("ZWave NodeProtocolInfo: " + GetNodeIdForLog(n));
+            
         }
 
         private void NotificationNodeQueriesComplete(ZWNotification n)
         {
-            Logger.Debug("NotificationNodeQueriesComplete:" + GetNodeIdForLog(n));
+            Logger.Debug("ZWave NotificationNodeQueriesComplete:" + GetNodeIdForLog(n));
         }
 
         private void NotificationNodeEvent(ZWNotification n)
         {
-            Logger.Debug("NotificationNodeEvent: " + GetNodeIdForLog(n));
-            Logger.Debug("Event: " + n.GetEvent().ToString());
+            Logger.Debug("ZWave NotificationNodeEvent: " + GetNodeIdForLog(n));
+            Logger.Debug("ZWave Event: " + n.GetEvent().ToString());
         }
 
         private void NotificationNodeNaming(ZWNotification n)
@@ -372,6 +374,11 @@ namespace ZWaveLib
          private void NotificationValueAdded(ZWNotification n)
         {
             Logger.Info("ZWave NotificationValueAdded: " + GetNodeIdForLog(n));
+            CreateOrUpdateNodeValue(n);
+
+           
+
+
         }
 
          private void NotificationValueChanged(ZWNotification n)
@@ -425,6 +432,29 @@ namespace ZWaveLib
                 UpdateNode(node, n);
             }
         }
+
+         private void CreateOrUpdateNodeValue(ZWNotification n)
+         {
+             //Find node
+             var node = this.GetChild(MakeNodeKey(n));
+             if (node == null)
+             {
+                //TODO : Problem
+             }
+             else
+             {
+                 var homeId = n.GetHomeId();
+                 var nodeId = n.GetNodeId();
+                 var valueId = n.GetValueID();
+                 var valueLabel = _mng.GetValueLabel(valueId);
+                 var valueHelp = _mng.GetValueHelp(valueId);
+                 node.
+             }
+         }
+
+
+
+         
 
         private void CreateNode(ZWNotification n)
         {

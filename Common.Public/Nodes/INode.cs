@@ -21,9 +21,9 @@ namespace OHM.Nodes
 
         INode Parent { get; }
 
-        bool AddChild(INode node);
+        //bool AddChild(INode node);
 
-        bool RemoveChild(INode node);
+        //bool RemoveChild(INode node);
 
         INode GetChild(string key);
 
