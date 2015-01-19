@@ -15,8 +15,8 @@ namespace OHM.Nodes
         private string _name;
         private ObservableCollection<ICommand> _commands;
         private Dictionary<string, ICommand> _commandsDic;
-        private ObservableCollection<NodeAbstract> _children;
-        private Dictionary<string, NodeAbstract> _childrenDic;
+        private ObservableCollection<INode> _children;
+        private Dictionary<string, INode> _childrenDic;
         private ObservableCollection<INodeProperty> _properties;
         private Dictionary<string, INodeProperty> _propertiesDic;
         private INode _parent;
@@ -31,8 +31,8 @@ namespace OHM.Nodes
             _name = name;
             _commands = new ObservableCollection<ICommand>();
             _commandsDic = new Dictionary<string, ICommand>();
-            _children = new ObservableCollection<NodeAbstract>();
-            _childrenDic = new Dictionary<string, NodeAbstract>();
+            _children = new ObservableCollection<INode>();
+            _childrenDic = new Dictionary<string, INode>();
             _properties = new ObservableCollection<INodeProperty>();
             _propertiesDic = new Dictionary<string, INodeProperty>();
             _parent = parent;
@@ -56,7 +56,7 @@ namespace OHM.Nodes
             }
         }
 
-        public IList<ICommand> Commands { get { return new ReadOnlyObservableCollection<ICommand>(_commands); } }
+        public IReadOnlyList<ICommand> Commands { get { return new ReadOnlyObservableCollection<ICommand>(_commands); } }
 
         public bool CanExecuteCommand(string key)
         {
@@ -76,7 +76,7 @@ namespace OHM.Nodes
             return false;
         }
 
-        public IList<INode> Children
+        public IReadOnlyList<INode> Children
         {
             get { return _children; }
         }
@@ -86,10 +86,9 @@ namespace OHM.Nodes
             get { return _parent; }
         }
 
-
         public INode GetChild(string key)
         {
-            NodeAbstract result;
+            INode result;
 
             if (_childrenDic.TryGetValue(key, out result))
             {

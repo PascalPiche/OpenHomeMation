@@ -11,19 +11,15 @@ namespace OHM.Nodes
 
         string Name { get; }
 
-        IList<ICommand> Commands { get; }
+        IReadOnlyList<ICommand> Commands { get; }
 
         bool CanExecuteCommand(string key);
 
         bool ExecuteCommand(string key, Dictionary<string, object> arguments);
 
-        IList<INode> Children { get; }
+        IReadOnlyList<INode> Children { get; }
 
         INode Parent { get; }
-
-        //bool AddChild(INode node);
-
-        //bool RemoveChild(INode node);
 
         INode GetChild(string key);
 
