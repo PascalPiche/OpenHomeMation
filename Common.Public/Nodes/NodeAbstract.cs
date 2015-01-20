@@ -189,6 +189,15 @@ namespace OHM.Nodes
             return true;
         }
 
+        protected bool UpdateProperty(string key, object value)
+        {
+            INodeProperty property;
+            if (_propertiesDic.TryGetValue(key, out property))
+            {
+                return property.SetValue(value);
+            }
+            return false;
+        }
         #endregion
     }
 }

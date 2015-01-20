@@ -133,6 +133,13 @@ namespace ZWaveLib
         {
             string name = NotificationTool.GetNodeName(n, this.Manager);
             
+            this.UpdateProperty("NodeProductType", Manager.GetNodeProductType(this.HomeId, this.NodeId));
+            this.UpdateProperty("NodeProductName", Manager.GetNodeProductName(this.HomeId, this.NodeId));
+            this.UpdateProperty("NodeProductId", Manager.GetNodeProductId(this.HomeId, this.NodeId));
+            this.UpdateProperty("NodeMaxBaudRate", Manager.GetNodeMaxBaudRate(this.HomeId, this.NodeId));
+            this.UpdateProperty("NodeManufacturerName", Manager.GetNodeManufacturerName(this.HomeId, this.NodeId));
+            this.UpdateProperty("NodeManufacturerId", Manager.GetNodeManufacturerId(this.HomeId, this.NodeId));
+
             this.Name = name;
 
         }
@@ -151,6 +158,10 @@ namespace ZWaveLib
         {
 
         }
-       
+
+        private void UpdateProperty(string key, object value)
+        {
+            //if (this.)
+        }
     }
 }
