@@ -23,7 +23,7 @@ namespace ZWaveLib
 
         protected override bool RunImplementation(Dictionary<string, object> arguments)
         {
-            _interface.AllOn(_node.HomeId);
+            _interface.Manager.SwitchAllOn(_node.HomeId);
             return true;
         }
     }

@@ -189,7 +189,7 @@
             </Grid>
 
             <Grid Visibility="{Binding Path=IsNodeViewVisible}">
-                <TextBlock Text="Node" />
+                
             </Grid>
         </Grid>
         

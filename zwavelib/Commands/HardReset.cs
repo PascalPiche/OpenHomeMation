@@ -22,8 +22,7 @@ namespace ZWaveLib
 
         protected override bool RunImplementation(Dictionary<string, object> arguments)
         {
-            _interface.HardReset(_node.HomeId);
-            
+            _interface.Manager.ResetController(_node.HomeId);
             return true;
         }
     }

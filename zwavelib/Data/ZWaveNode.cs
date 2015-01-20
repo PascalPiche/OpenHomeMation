@@ -25,13 +25,14 @@ namespace ZWaveLib
             get { return _nodeId; }
         }
 
-        private ZWManager Manager
+        /*private ZWManager Manager
         {
             get
             {
                 return ((ZWaveInterface)this.Parent).Manager;
             }
-        }
+        }*/
+        
         public ZWaveNode(string key, string name, INode parent, uint homeId, byte nodeId)
             : base(key, name, parent)
         {

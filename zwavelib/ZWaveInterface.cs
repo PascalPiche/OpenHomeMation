@@ -7,6 +7,7 @@ using OpenZWaveDotNet;
 using System;
 using System.Collections.Generic;
 using System.Windows.Threading;
+using ZWaveLib.Tools;
 
 namespace ZWaveLib
 {
@@ -70,6 +71,7 @@ namespace ZWaveLib
 
         internal bool CreateController(int port, bool saveController = false)
         {
+            bool result = false;
             Logger.Info("Creating ZWave Controller on port: " + port);
 
             //Valid if a Controller exist on this port
@@ -78,43 +80,30 @@ namespace ZWaveLib
                 return false;
             }
 
-            _mng.AddDriver(@"\\.\COM" + port, ZWControllerInterface.Serial);
-            Logger.Info("ZWave Controller created on port: " + port);
-
-            //Store Controller
-            if (saveController)
+            bool mngResult = _mng.AddDriver(@"\\.\COM" + port, ZWControllerInterface.Serial);
+            if (mngResult)
             {
-                _registeredControllers.StoreString(port.ToString(), port.ToString());
-                DataStore.Save();
+                Logger.Info("ZWave Controller created on port: " + port);
+
+                //Store Controller
+                if (saveController)
+                {
+                    _registeredControllers.StoreString(port.ToString(), port.ToString());
+                    DataStore.Save();
+                }
+                result = true;
             }
-            
-            return true;
+            else
+            {
+                Logger.Info("ZWave Cannot create Controller on port: " + port);
+            }
+            return result;
         }
 
         internal void RemoveController(int port)
         {
             Logger.Info("Removing Driver on port: " + port);
             _mng.RemoveDriver(@"\\.\COM" + port);
-        }
-
-        internal void AllOn(uint homeId)
-        {
-            _mng.SwitchAllOn(homeId);
-        }
-
-        internal void AllOff(uint homeId)
-        {
-            _mng.SwitchAllOff(homeId);
-        }
-
-        internal void SoftReset(uint homeId)
-        {
-            _mng.SoftReset(homeId);
-        }
-
-        internal void HardReset(uint homeId)
-        {
-            _mng.ResetController(homeId);
         }
 
         internal ZWManager Manager
@@ -124,6 +113,7 @@ namespace ZWaveLib
                 return _mng;
             }
         }
+        
         #endregion
 
         #region "private"
@@ -254,8 +244,8 @@ namespace ZWaveLib
         private void NotificationDriverReady(ZWNotification n)
         {
             Logger.Info("ZWave Driver Ready:" + GetNodeIdForLog(n));
-            string key = MakeNodeKey(n);
-            string name = GetNodeName(n);
+            string key = NotificationTool.MakeNodeKey(n);
+            string name = NotificationTool.GetNodeName(n, this.Manager);
             uint homeId = n.GetHomeId();
             byte nodeId = n.GetNodeId();
             if (!this._runningControllers.ContainsKey(homeId)) {
@@ -326,9 +316,7 @@ namespace ZWaveLib
 
         private void NotificationNodeProtocolInfo(ZWNotification n)
         {
-
             Logger.Info("ZWave NodeProtocolInfo: " + GetNodeIdForLog(n));
-            
         }
 
         private void NotificationNodeQueriesComplete(ZWNotification n)
@@ -346,13 +334,7 @@ namespace ZWaveLib
         {
             //Update State
             Logger.Info("ZWave Node Naming: " + GetNodeIdForLog(n));
-            //Find node
-            var node = this.GetChild(MakeNodeKey(n));
-            if (node != null)
-            {
-                //Update Node
-                UpdateNode(node, n);
-            }
+            UpdateNode(n);
         }
 
         #endregion
@@ -416,24 +398,44 @@ namespace ZWaveLib
 
         private void CreateOrUpdateNode(ZWNotification n)
         {
-            //Find node
-            var node = this.GetChild(MakeNodeKey(n));
-            if (node == null)
+            //Find controller
+            var homeId = n.GetHomeId();
+            ZWaveController controller;
+
+            if (_runningControllers.TryGetValue(homeId, out controller))
             {
-                //Create Node
-                CreateNode(n);
+                controller.CreateOrUpdateNode(n);
             }
-            else
+        }
+
+        private void UpdateNode(ZWNotification n)
+        {
+            //Find controller
+            var homeId = n.GetHomeId();
+            ZWaveController controller;
+
+            if (_runningControllers.TryGetValue(homeId, out controller))
             {
-                //Update Node
-                UpdateNode(node, n);
+                controller.UpdateNode(n);
+            }
+        }
+
+        private void RemoveNode(ZWNotification n)
+        {
+            //Find controller
+            var homeId = n.GetHomeId();
+            ZWaveController controller;
+
+            if (_runningControllers.TryGetValue(homeId, out controller))
+            {
+                controller.RemoveNode(n);
             }
         }
 
         private void CreateOrUpdateNodeValue(ZWNotification n)
         {
             //Find node
-            var node = this.GetChild(MakeNodeKey(n));
+            var node = this.GetChild(NotificationTool.MakeNodeKey(n));
             if (node == null)
             {
             //TODO : Problem
@@ -447,7 +449,7 @@ namespace ZWaveLib
         private void RemoveNodeValue(ZWNotification n)
         {
             //Find node
-            var node = this.GetChild(MakeNodeKey(n));
+            var node = this.GetChild(NotificationTool.MakeNodeKey(n));
             if (node == null)
             {
                 //TODO : Problem
@@ -457,31 +459,6 @@ namespace ZWaveLib
                 ((ZWaveNode)node).RemoveValue(n);
             }
         }
-
-        private void CreateNode(ZWNotification n)
-        {
-            string key = MakeNodeKey(n);
-            string name = GetNodeName(n);
-            uint homeId = n.GetHomeId();
-            byte nodeId = n.GetNodeId();
-            var newNode = new ZWaveNode(key, name, this, homeId, nodeId);
-            this.AddChild(newNode);
-        }
-
-        private void UpdateNode(INode node, ZWNotification n)
-        {
-            string name = GetNodeName(n);
-            ((ZWaveNode)node).UpdateNode(name, n);
-
-        }
-
-        private void RemoveNode(ZWNotification n)
-        {
-            string key = MakeNodeKey(n);
-            this.RemoveChild(key);
-            
-        }
-
         
         #region Tools
 
@@ -490,24 +467,6 @@ namespace ZWaveLib
             return n.GetHomeId() + " - " + n.GetNodeId() + "-" + n.GetGroupIdx();
         }
 
-        private string GetNodeName(ZWNotification n)
-        {
-            string result = _mng.GetNodeName(n.GetHomeId(), n.GetNodeId());
-            if (String.IsNullOrEmpty(result))
-            {
-                result = _mng.GetNodeProductName(n.GetHomeId(), n.GetNodeId());
-            }
-            if (string.IsNullOrEmpty(result))
-            {
-                result = "Unknow device";
-            }
-            return result;
-        }
-
-        private string MakeNodeKey(ZWNotification n)
-        {
-            return n.GetHomeId().ToString() + "-" + n.GetNodeId().ToString();
-        }
 
         #endregion
 
