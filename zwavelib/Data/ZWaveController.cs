@@ -117,10 +117,7 @@ namespace ZWaveLib
 
         private void UpdateNode(INode node, ZWNotification n)
         {
-            string name = NotificationTool.GetNodeName(n, this.Interface.Manager);
-
-            ((ZWaveNode)node).UpdateNode(name, n);
-
+            ((ZWaveNode)node).UpdateNode(n);
         }
 
         #endregion

@@ -36,6 +36,9 @@ namespace ZWaveLib
             Logger.Info("ZWave Interface initing");
             _runningControllers = new Dictionary<uint, ZWaveController>();
 
+            
+            
+
             var apiPath = @"C:\Users\Scopollif\Documents\Visual Studio 2013\Projects\OpenHomeMation\external\open-zwave\openzwave-1.0.791";
             ZWOptions opt = new ZWOptions();
             opt.Create(apiPath + @"\config\", apiPath + @"", @"");
@@ -248,6 +251,10 @@ namespace ZWaveLib
             string name = NotificationTool.GetNodeName(n, this.Manager);
             uint homeId = n.GetHomeId();
             byte nodeId = n.GetNodeId();
+
+            Logger.Info("ZWave Library Type Name : " + _mng.GetLibraryTypeName(homeId));
+            Logger.Info("ZWave Library Version : " + _mng.GetLibraryVersion(homeId));
+
             if (!this._runningControllers.ContainsKey(homeId)) {
                 var ctl = new ZWaveController(key, name, this, homeId, nodeId);
                 this.AddChild(ctl);
