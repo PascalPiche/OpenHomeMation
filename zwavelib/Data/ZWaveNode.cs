@@ -14,6 +14,7 @@ namespace ZWaveLib
 
         private uint _homeId;
         private byte _nodeId;
+        private ZWManager _manager;
 
         public uint HomeId
         {
@@ -25,19 +26,31 @@ namespace ZWaveLib
             get { return _nodeId; }
         }
 
-        /*private ZWManager Manager
+        
+
+        private ZWManager Manager
         {
             get
             {
-                return ((ZWaveInterface)this.Parent).Manager;
+                return _manager;
             }
-        }*/
+        }
         
-        public ZWaveNode(string key, string name, INode parent, uint homeId, byte nodeId)
+        public ZWaveNode(string key, string name, INode parent, uint homeId, byte nodeId, ZWManager manager)
             : base(key, name, parent)
         {
             _homeId = homeId;
             _nodeId = nodeId;
+            _manager = manager;
+
+            this.RegisterProperty(
+                 new NodeProperty(
+                     "IsNodeBeamingDevice",
+                     "Is Node Beaming Device",
+                     typeof(Boolean),
+                     Manager.IsNodeBeamingDevice(homeId, nodeId)));
+
+
         }
 
         internal void UpdateNode(String name, ZWNotification n)

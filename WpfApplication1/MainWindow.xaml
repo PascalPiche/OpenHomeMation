@@ -189,7 +189,22 @@
             </Grid>
 
             <Grid Visibility="{Binding Path=IsNodeViewVisible}">
-                
+                <ListBox ItemsSource="{Binding Path=SelectedNode.Properties}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="{Binding Path=Name}" />
+
+                                <TextBlock Grid.Column="1" Text="{Binding Path=Value}" />
+                                
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </Grid>
         </Grid>
         

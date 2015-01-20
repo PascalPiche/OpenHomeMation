@@ -18,20 +18,31 @@ namespace OHM.Nodes
             _type = type;
         }
 
+        public NodeProperty(string key, string name, Type type, object value) : this(key,name,type)
+        {
+            SetValue(value);
+        }
+
         public string Key { get { return _key; } }
 
         public string Name { get { return _name; } }
 
         public Type Type { get { return _type; } }
 
+        public bool SetValue(object val)
+        {
+            if (val.GetType() == _type)
+            {
+                _value = val;
+                NotifyPropertyChanged("Value");
+                return true;
+            }
+            return false;
+        }
+
         public object Value
         {
             get { return _value; }
-            set
-            {
-                _value = value;
-                NotifyPropertyChanged("Value");
-            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -11,7 +11,9 @@ namespace OHM.Nodes
 
         Type Type { get; }
 
-        object Value { get; set; }
+        bool SetValue(object val);
+
+        object Value { get; }
 
     }
 }

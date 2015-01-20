@@ -97,6 +97,14 @@ namespace OHM.Nodes
             return null;
         }
 
+        public IReadOnlyList<INodeProperty> Properties
+        {
+            get
+            {
+                return _properties;
+            }
+        }
+
         #endregion
 
         #region "Protected"
@@ -140,7 +148,7 @@ namespace OHM.Nodes
             return false;
         }
 
-        protected bool RegisterProperty(NodeProperty nodeProperty)
+        protected bool RegisterProperty(INodeProperty nodeProperty)
         {
             if (_propertiesDic.ContainsKey(nodeProperty.Key))
             {
