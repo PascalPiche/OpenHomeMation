@@ -13,8 +13,8 @@ namespace OHM.Interfaces
         
         private IOhmSystemInterfaceGateway _system;
 
-        public InterfaceAbstract(string key, string name) 
-            : base(key, name, null)
+        public InterfaceAbstract(string key, string name, ILogger logger) 
+            : base(key, name, null, logger)
         {
             
             //Register Default commands
@@ -50,9 +50,9 @@ namespace OHM.Interfaces
             State = Interfaces.InterfaceState.Disabled;
         }
 
-        public void Init(ILogger logger, IDataStore data, IOhmSystemInterfaceGateway system)
+        public void Init(IDataStore data, IOhmSystemInterfaceGateway system)
         {
-            base.Init(logger, data);
+            base.Init(data);
             _startOnLaunch = data.GetBool("StartOnLaunch");
             NotifyPropertyChanged("StartOnLaunch");
             _system = system;

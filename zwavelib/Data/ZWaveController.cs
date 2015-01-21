@@ -19,8 +19,8 @@ namespace ZWaveLib
 
         //private ZWaveControllerState state = ZWaveControllerState.initializing;
 
-        public ZWaveController(string key, string name, ZWaveInterface parent, uint homeId, byte nodeId)
-            : base(key, name, parent, homeId, nodeId, parent.Manager)
+        public ZWaveController(string key, string name, ZWaveInterface parent, uint homeId, byte nodeId, ILogger logger)
+            : base(key, name, parent, homeId, nodeId, parent.Manager, logger)
         {
             this.RegisterCommand(new AllOnCommand(this, parent));
             this.RegisterCommand(new AllOffCommand(this, parent));
@@ -110,7 +110,7 @@ namespace ZWaveLib
             uint homeId = n.GetHomeId();
             byte nodeId = n.GetNodeId();
 
-            var newNode = new ZWaveNode(key, name, this, homeId, nodeId, this.Interface.Manager);
+            var newNode = new ZWaveNode(key, name, this, homeId, nodeId, this.Interface.Manager, this.Logger);
 
             this.AddChild(newNode);
         }

@@ -20,8 +20,8 @@ namespace ZWaveLib
 
         #region "Ctor"
 
-        public ZWaveInterface()
-            : base("ZWaveInterface", "ZWave")
+        public ZWaveInterface(ILogger logger)
+            : base("ZWaveInterface", "ZWave", logger)
         {
             //Create Commands
             this.RegisterCommand(new CreateControllerCommand(this));
@@ -35,9 +35,6 @@ namespace ZWaveLib
         {
             Logger.Info("ZWave Interface initing");
             _runningControllers = new Dictionary<uint, ZWaveController>();
-
-            
-            
 
             var apiPath = @"C:\Users\Scopollif\Documents\Visual Studio 2013\Projects\OpenHomeMation\external\open-zwave\openzwave-1.0.791";
             ZWOptions opt = new ZWOptions();
@@ -256,7 +253,7 @@ namespace ZWaveLib
             Logger.Info("ZWave Library Version : " + _mng.GetLibraryVersion(homeId));
 
             if (!this._runningControllers.ContainsKey(homeId)) {
-                var ctl = new ZWaveController(key, name, this, homeId, nodeId);
+                var ctl = new ZWaveController(key, name, this, homeId, nodeId, this.Logger);
                 this.AddChild(ctl);
                 this._runningControllers.Add(homeId, ctl);
             }

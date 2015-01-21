@@ -1,4 +1,5 @@
 ﻿using OHM.Interfaces;
+using OHM.Logger;
 using OHM.Sys;
 using System;
 
@@ -18,7 +19,7 @@ namespace OHM.Plugins
 
         public abstract bool Update();
 
-        public abstract InterfaceAbstract CreateInterface(string key);
+        public abstract InterfaceAbstract CreateInterface(string key, ILogger logger);
 
     }
 }

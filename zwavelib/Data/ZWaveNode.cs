@@ -27,8 +27,6 @@ namespace ZWaveLib
             get { return _nodeId; }
         }
 
-        
-
         private ZWManager Manager
         {
             get
@@ -37,8 +35,8 @@ namespace ZWaveLib
             }
         }
         
-        public ZWaveNode(string key, string name, INode parent, uint homeId, byte nodeId, ZWManager manager)
-            : base(key, name, parent)
+        public ZWaveNode(string key, string name, INode parent, uint homeId, byte nodeId, ZWManager manager, ILogger logger)
+            : base(key, name, parent, logger)
         {
             _homeId = homeId;
             _nodeId = nodeId;
@@ -90,42 +88,42 @@ namespace ZWaveLib
                  new NodeProperty(
                      "NodeManufacturerId",
                      "Node Manufacturer Id",
-                     typeof(Boolean),
+                     typeof(String),
                      Manager.GetNodeManufacturerId(homeId, nodeId)));
 
             this.RegisterProperty(
                  new NodeProperty(
                      "NodeManufacturerName",
                      "Node Manufacturer Name",
-                     typeof(Boolean),
+                     typeof(String),
                      Manager.GetNodeManufacturerName(homeId, nodeId)));
 
             this.RegisterProperty(
                  new NodeProperty(
                      "NodeMaxBaudRate",
                      "Node Max Baud Rate",
-                     typeof(Boolean),
+                     typeof(uint),
                      Manager.GetNodeMaxBaudRate(homeId, nodeId)));
 
             this.RegisterProperty(
                  new NodeProperty(
                      "NodeProductId",
                      "Node Product Id",
-                     typeof(Boolean),
+                     typeof(String),
                      Manager.GetNodeProductId(homeId, nodeId)));
 
             this.RegisterProperty(
                  new NodeProperty(
                      "NodeProductName",
                      "Node Product Name",
-                     typeof(Boolean),
+                     typeof(String),
                      Manager.GetNodeProductName(homeId, nodeId)));
 
             this.RegisterProperty(
                  new NodeProperty(
                      "NodeProductType",
                      "Node Product Type",
-                     typeof(Boolean),
+                     typeof(String),
                      Manager.GetNodeProductType(homeId, nodeId)));
         }
 
@@ -146,12 +144,19 @@ namespace ZWaveLib
 
         internal void CreateOrUpdateValue(ZWNotification n)
         {
+            var valueId = n.GetValueID();
+            var valueLabel = Manager.GetValueLabel(valueId);
+            var valueHelp = Manager.GetValueHelp(valueId);
             
-            /*var homeId = n.GetHomeId();
-                var nodeId = n.GetNodeId();
-                var valueId = n.GetValueID();
-                var valueLabel = _mng.GetValueLabel(valueId);
-                var valueHelp = _mng.GetValueHelp(valueId);*/
+        
+            if (this.ContainsProperty(valueId.ToString()) {
+                this.UpdateProperty(key, Manager.get)
+
+            } else {
+                //Create 
+            }
+                
+                
         }
 
         internal void RemoveValue(ZWNotification n)
@@ -161,7 +166,12 @@ namespace ZWaveLib
 
         private void UpdateProperty(string key, object value)
         {
-            //if (this.)
+            if (!base.UpdateProperty(key, value))
+            {
+                Logger.Error("ZWave Cannot Update property : " + key + " with value " + value.ToString());
+            }
         }
+    
+        
     }
 }

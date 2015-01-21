@@ -1,4 +1,5 @@
 ﻿using OHM.Interfaces;
+using OHM.Logger;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +11,8 @@ namespace UPNPControlPoint
     public class UPNPControlPointInterface : InterfaceAbstract
     {
 
-        public UPNPControlPointInterface()
-            : base("UPNPCtlPointInterface", "UPNP Control Point")
+        public UPNPControlPointInterface(ILogger logger)
+            : base("UPNPCtlPointInterface", "UPNP Control Point", logger)
         {
             //Create Commands
             //this.RegisterCommand(new CreateControllerCommand(this));

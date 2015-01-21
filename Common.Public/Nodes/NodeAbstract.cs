@@ -25,10 +25,11 @@ namespace OHM.Nodes
         private IDataStore _data;
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public NodeAbstract(string key, string name, INode parent)
+        public NodeAbstract(string key, string name, INode parent, ILogger logger)
         {
             _key = key;
             _name = name;
+            _logger = logger;
             _commands = new ObservableCollection<ICommand>();
             _commandsDic = new Dictionary<string, ICommand>();
             _children = new ObservableCollection<INode>();
@@ -182,9 +183,8 @@ namespace OHM.Nodes
             }
         }
 
-        protected bool Init(ILogger logger, IDataStore data)
+        protected bool Init(IDataStore data)
         {
-            _logger = logger;
             _data = data;
             return true;
         }
@@ -198,6 +198,13 @@ namespace OHM.Nodes
             }
             return false;
         }
+
+
+        protected bool ContainsProperty(string key)
+        {
+            return _propertiesDic.ContainsKey(key);
+        }
+
         #endregion
     }
 }

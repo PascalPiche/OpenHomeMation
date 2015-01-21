@@ -1,4 +1,5 @@
-﻿using OHM.Plugins;
+﻿using OHM.Logger;
+using OHM.Plugins;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,12 +41,12 @@ namespace UPNPControlPoint
             return true;
         }
 
-        public override OHM.Interfaces.InterfaceAbstract CreateInterface(string key)
+        public override OHM.Interfaces.InterfaceAbstract CreateInterface(string key, ILogger logger)
         {
             switch (key)
             {
                 case "UPNPControlPointInterface":
-                    _runningInterface = new UPNPControlPointInterface();
+                    _runningInterface = new UPNPControlPointInterface(logger);
                     return _runningInterface;
             }
             return null;
