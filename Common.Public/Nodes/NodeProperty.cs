@@ -8,6 +8,7 @@ namespace OHM.Nodes
 
         private string _key;
         private string _name;
+        private string _description;
         private object _value;
         private Type _type;
 
@@ -17,17 +18,27 @@ namespace OHM.Nodes
             _name = name;
             _type = type;
         }
+        public NodeProperty(string key, string name, Type type, string description) : this(key, name, type)
+        {
+            _description = description;
+        }
 
-        public NodeProperty(string key, string name, Type type, object value) : this(key,name,type)
+        public NodeProperty(string key, string name, Type type, string description, object value) : this(key, name, type, description)
         {
             SetValue(value);
         }
+
 
         public string Key { get { return _key; } }
 
         public string Name { get { return _name; } }
 
         public Type Type { get { return _type; } }
+
+        public string Description
+        {
+            get { return _description; }
+        }
 
         public bool SetValue(object val)
         {
@@ -55,5 +66,8 @@ namespace OHM.Nodes
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
+
+        
     }
 }

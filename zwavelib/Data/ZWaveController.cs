@@ -32,6 +32,7 @@ namespace ZWaveLib
                      "IsBridgeController", 
                      "Is Bridge Controller", 
                      typeof(Boolean),
+                     "",
                      parent.Manager.IsBridgeController(homeId)));
 
             this.RegisterProperty(
@@ -39,6 +40,7 @@ namespace ZWaveLib
                      "IsPrimaryController", 
                      "Is Primary Controller", 
                      typeof(Boolean),
+                     "",
                      parent.Manager.IsPrimaryController(homeId)));
 
             this.RegisterProperty(
@@ -46,6 +48,7 @@ namespace ZWaveLib
                      "IsStaticUpdateController", 
                      "Is Static Update Controller", 
                      typeof(Boolean),
+                     "",
                      parent.Manager.IsStaticUpdateController(homeId)));
 
         }

@@ -9,6 +9,8 @@ namespace OHM.Nodes
 
         string Name { get; }
 
+        string Description { get; }
+
         Type Type { get; }
 
         bool SetValue(object val);

@@ -47,6 +47,7 @@ namespace ZWaveLib
                      "IsNodeBeamingDevice",
                      "Is Node Beaming Device",
                      typeof(Boolean),
+                     "",
                      Manager.IsNodeBeamingDevice(homeId, nodeId)));
 
             this.RegisterProperty(
@@ -54,6 +55,7 @@ namespace ZWaveLib
                      "IsNodeListeningDevice",
                      "Is Node Listening Device",
                      typeof(Boolean),
+                     "",
                      Manager.IsNodeListeningDevice(homeId, nodeId)));
 
             this.RegisterProperty(
@@ -61,6 +63,7 @@ namespace ZWaveLib
                      "IsNodeFrequentListeningDevice",
                      "Is Node Frequent Listening Device",
                      typeof(Boolean),
+                     "",
                      Manager.IsNodeFrequentListeningDevice(homeId, nodeId)));
 
             this.RegisterProperty(
@@ -68,6 +71,7 @@ namespace ZWaveLib
                      "IsNodeRoutingDevice",
                      "Is Node Routing Device",
                      typeof(Boolean),
+                     "",
                      Manager.IsNodeRoutingDevice(homeId, nodeId)));
 
             this.RegisterProperty(
@@ -75,6 +79,7 @@ namespace ZWaveLib
                      "IsNodeSecurityDevice",
                      "Is Node Security Device",
                      typeof(Boolean),
+                     "",
                      Manager.IsNodeSecurityDevice(homeId, nodeId)));
 
             this.RegisterProperty(
@@ -82,6 +87,7 @@ namespace ZWaveLib
                      "NodeLocation",
                      "Node Location",
                      typeof(Boolean),
+                     "",
                      Manager.GetNodeLocation(homeId, nodeId)));
 
             this.RegisterProperty(
@@ -89,6 +95,7 @@ namespace ZWaveLib
                      "NodeManufacturerId",
                      "Node Manufacturer Id",
                      typeof(String),
+                     "",
                      Manager.GetNodeManufacturerId(homeId, nodeId)));
 
             this.RegisterProperty(
@@ -96,6 +103,7 @@ namespace ZWaveLib
                      "NodeManufacturerName",
                      "Node Manufacturer Name",
                      typeof(String),
+                     "",
                      Manager.GetNodeManufacturerName(homeId, nodeId)));
 
             this.RegisterProperty(
@@ -103,6 +111,7 @@ namespace ZWaveLib
                      "NodeMaxBaudRate",
                      "Node Max Baud Rate",
                      typeof(uint),
+                     "",
                      Manager.GetNodeMaxBaudRate(homeId, nodeId)));
 
             this.RegisterProperty(
@@ -110,6 +119,7 @@ namespace ZWaveLib
                      "NodeProductId",
                      "Node Product Id",
                      typeof(String),
+                     "",
                      Manager.GetNodeProductId(homeId, nodeId)));
 
             this.RegisterProperty(
@@ -117,6 +127,7 @@ namespace ZWaveLib
                      "NodeProductName",
                      "Node Product Name",
                      typeof(String),
+                     "",
                      Manager.GetNodeProductName(homeId, nodeId)));
 
             this.RegisterProperty(
@@ -124,6 +135,7 @@ namespace ZWaveLib
                      "NodeProductType",
                      "Node Product Type",
                      typeof(String),
+                     "",
                      Manager.GetNodeProductType(homeId, nodeId)));
         }
 
@@ -137,6 +149,12 @@ namespace ZWaveLib
             this.UpdateProperty("NodeMaxBaudRate", Manager.GetNodeMaxBaudRate(this.HomeId, this.NodeId));
             this.UpdateProperty("NodeManufacturerName", Manager.GetNodeManufacturerName(this.HomeId, this.NodeId));
             this.UpdateProperty("NodeManufacturerId", Manager.GetNodeManufacturerId(this.HomeId, this.NodeId));
+            this.UpdateProperty("NodeLocation", Manager.GetNodeLocation(this.HomeId, this.NodeId));
+            this.UpdateProperty("IsNodeSecurityDevice", Manager.IsNodeSecurityDevice(this.HomeId, this.NodeId));
+            this.UpdateProperty("IsNodeRoutingDevice", Manager.IsNodeRoutingDevice(this.HomeId, this.NodeId));
+            this.UpdateProperty("IsNodeFrequentListeningDevice", Manager.IsNodeFrequentListeningDevice(this.HomeId, this.NodeId));
+            this.UpdateProperty("IsNodeListeningDevice", Manager.IsNodeListeningDevice(this.HomeId, this.NodeId));
+            this.UpdateProperty("IsNodeBeamingDevice", Manager.IsNodeBeamingDevice(this.HomeId, this.NodeId));
 
             this.Name = name;
 
@@ -226,7 +244,7 @@ namespace ZWaveLib
 
             } else if (value != null){
                 //var units = Manager.GetValueUnits(valueId);
-                if (!this.RegisterProperty(new NodeProperty(valueId.GetId().ToString(), valueLabel, value.GetType(), value)))
+                if (!this.RegisterProperty(new NodeProperty(valueId.GetId().ToString(), valueLabel, value.GetType(), valueHelp, value)))
                 {
                     Logger.Error("Zwave Cannot Register property : " + valueLabel);
                     return false;
