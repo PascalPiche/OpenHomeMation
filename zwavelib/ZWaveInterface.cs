@@ -436,18 +436,19 @@ namespace ZWaveLib
             }
         }
 
-        private void CreateOrUpdateNodeValue(ZWNotification n)
+        private bool CreateOrUpdateNodeValue(ZWNotification n)
         {
             //Find node
             var node = this.GetChild(NotificationTool.MakeNodeKey(n));
-            if (node == null)
+            if (node != null)
             {
-            //TODO : Problem
+                return ((ZWaveNode)node).CreateOrUpdateValue(n);
             }
             else
             {
-                ((ZWaveNode)node).CreateOrUpdateValue(n);
+                Logger.Error("ZWave Node not found vor Creating or updating value");
             }
+            return false;
         }
 
         private void RemoveNodeValue(ZWNotification n)

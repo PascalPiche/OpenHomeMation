@@ -31,7 +31,8 @@ namespace OHM.Nodes
 
         public bool SetValue(object val)
         {
-            if (val.GetType() == _type)
+            
+            if (val == null || val.GetType() == _type)
             {
                 _value = val;
                 NotifyPropertyChanged("Value");

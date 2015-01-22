@@ -95,6 +95,18 @@ namespace OHM.Nodes
             {
                 return result;
             }
+            else
+            {
+                //Check child
+                foreach (INode item in _children)
+                {
+                    result = item.GetChild(key);
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
             return null;
         }
 
