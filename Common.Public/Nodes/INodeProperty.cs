@@ -11,6 +11,8 @@ namespace OHM.Nodes
 
         string Description { get; }
 
+        bool ReadOnly { get; }
+
         Type Type { get; }
 
         bool SetValue(object val);

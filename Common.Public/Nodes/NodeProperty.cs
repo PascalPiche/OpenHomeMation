@@ -10,6 +10,7 @@ namespace OHM.Nodes
         private string _name;
         private string _description;
         private object _value;
+        private bool _readOnly;
         private Type _type;
 
         public NodeProperty(string key, string name, Type type)
@@ -17,13 +18,20 @@ namespace OHM.Nodes
             _key = key;
             _name = name;
             _type = type;
+            _readOnly = true;
         }
-        public NodeProperty(string key, string name, Type type, string description) : this(key, name, type)
+
+        public NodeProperty(string key, string name, Type type, bool readOnly) : this(key,name,type)
+        {
+            _readOnly = readOnly;
+        }
+
+        public NodeProperty(string key, string name, Type type, bool readOnly, string description) : this(key, name, type, readOnly)
         {
             _description = description;
         }
 
-        public NodeProperty(string key, string name, Type type, string description, object value) : this(key, name, type, description)
+        public NodeProperty(string key, string name, Type type, bool readOnly, string description, object value) : this(key, name, type, readOnly, description)
         {
             SetValue(value);
         }
@@ -38,6 +46,11 @@ namespace OHM.Nodes
         public string Description
         {
             get { return _description; }
+        }
+
+        public bool ReadOnly
+        {
+            get { return _readOnly; }
         }
 
         public bool SetValue(object val)

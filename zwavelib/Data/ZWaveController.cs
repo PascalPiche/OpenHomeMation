@@ -32,6 +32,7 @@ namespace ZWaveLib
                      "IsBridgeController", 
                      "Is Bridge Controller", 
                      typeof(Boolean),
+                     true,
                      "",
                      parent.Manager.IsBridgeController(homeId)));
 
@@ -40,6 +41,7 @@ namespace ZWaveLib
                      "IsPrimaryController", 
                      "Is Primary Controller", 
                      typeof(Boolean),
+                     true,
                      "",
                      parent.Manager.IsPrimaryController(homeId)));
 
@@ -48,6 +50,7 @@ namespace ZWaveLib
                      "IsStaticUpdateController", 
                      "Is Static Update Controller", 
                      typeof(Boolean),
+                     true,
                      "",
                      parent.Manager.IsStaticUpdateController(homeId)));
 
@@ -70,7 +73,7 @@ namespace ZWaveLib
             }
         }
 
-        internal void UpdateNode(ZWNotification n)
+        internal new void UpdateNode(ZWNotification n)
         {
             var node = GetNode(n);
             if(node != null) {

@@ -189,22 +189,43 @@
             </Grid>
 
             <Grid Visibility="{Binding Path=IsNodeViewVisible}">
-                <ListBox ItemsSource="{Binding Path=SelectedNode.Properties}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <ListBox 
+                    ItemsSource="{Binding Path=SelectedNode.Properties}"
+                    HorizontalContentAlignment="Stretch"
+                    Name="NodeList"
+                    >
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition />
                                     <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Text="{Binding Path=Name}" />
-
-                                <TextBlock Grid.Column="1" Text="{Binding Path=Value}" />
-                                
+                                <TextBlock Text="{Binding Path=Key}" />
+                                <TextBlock Grid.Column="1" Text="{Binding Path=Name}" />
+                                <TextBlock Grid.Column="2" Text="{Binding Path=Value}" />
+                                <TextBlock Grid.Column="3" Text="{Binding Path=ReadOnly}" />
                             </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
+            
+                <Grid Grid.Column="1" DataContext="{Binding ElementName=NodeList, Path=SelectedItem}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="{Binding Path=Name}" />
+                    <TextBlock Grid.Row="1" Text="{Binding Path=Description}" />
+                    
+                </Grid>
+            
             </Grid>
         </Grid>
         

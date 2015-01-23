@@ -168,7 +168,12 @@ namespace OHM.Nodes
                 return false;
             }
             _propertiesDic.Add(nodeProperty.Key, nodeProperty);
-            _properties.Add(nodeProperty);
+            //Make sure we are on the right thread before adding the property
+            _dispatcher.Invoke((Action)(() =>
+            {
+                _properties.Add(nodeProperty);
+            }));
+            
             return true;
         }
 

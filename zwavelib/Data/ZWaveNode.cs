@@ -47,6 +47,7 @@ namespace ZWaveLib
                      "IsNodeBeamingDevice",
                      "Is Node Beaming Device",
                      typeof(Boolean),
+                     true,
                      "",
                      Manager.IsNodeBeamingDevice(homeId, nodeId)));
 
@@ -55,6 +56,7 @@ namespace ZWaveLib
                      "IsNodeListeningDevice",
                      "Is Node Listening Device",
                      typeof(Boolean),
+                     true,
                      "",
                      Manager.IsNodeListeningDevice(homeId, nodeId)));
 
@@ -63,6 +65,7 @@ namespace ZWaveLib
                      "IsNodeFrequentListeningDevice",
                      "Is Node Frequent Listening Device",
                      typeof(Boolean),
+                     true,
                      "",
                      Manager.IsNodeFrequentListeningDevice(homeId, nodeId)));
 
@@ -71,6 +74,7 @@ namespace ZWaveLib
                      "IsNodeRoutingDevice",
                      "Is Node Routing Device",
                      typeof(Boolean),
+                     true,
                      "",
                      Manager.IsNodeRoutingDevice(homeId, nodeId)));
 
@@ -79,6 +83,7 @@ namespace ZWaveLib
                      "IsNodeSecurityDevice",
                      "Is Node Security Device",
                      typeof(Boolean),
+                     true,
                      "",
                      Manager.IsNodeSecurityDevice(homeId, nodeId)));
 
@@ -87,6 +92,7 @@ namespace ZWaveLib
                      "NodeLocation",
                      "Node Location",
                      typeof(Boolean),
+                     false,
                      "",
                      Manager.GetNodeLocation(homeId, nodeId)));
 
@@ -95,6 +101,7 @@ namespace ZWaveLib
                      "NodeManufacturerId",
                      "Node Manufacturer Id",
                      typeof(String),
+                     true,
                      "",
                      Manager.GetNodeManufacturerId(homeId, nodeId)));
 
@@ -103,6 +110,7 @@ namespace ZWaveLib
                      "NodeManufacturerName",
                      "Node Manufacturer Name",
                      typeof(String),
+                     true,
                      "",
                      Manager.GetNodeManufacturerName(homeId, nodeId)));
 
@@ -111,6 +119,7 @@ namespace ZWaveLib
                      "NodeMaxBaudRate",
                      "Node Max Baud Rate",
                      typeof(uint),
+                     true,
                      "",
                      Manager.GetNodeMaxBaudRate(homeId, nodeId)));
 
@@ -119,6 +128,7 @@ namespace ZWaveLib
                      "NodeProductId",
                      "Node Product Id",
                      typeof(String),
+                     true,
                      "",
                      Manager.GetNodeProductId(homeId, nodeId)));
 
@@ -127,6 +137,7 @@ namespace ZWaveLib
                      "NodeProductName",
                      "Node Product Name",
                      typeof(String),
+                     true,
                      "",
                      Manager.GetNodeProductName(homeId, nodeId)));
 
@@ -135,6 +146,7 @@ namespace ZWaveLib
                      "NodeProductType",
                      "Node Product Type",
                      typeof(String),
+                     true,
                      "",
                      Manager.GetNodeProductType(homeId, nodeId)));
         }
@@ -243,8 +255,9 @@ namespace ZWaveLib
                 return true;
 
             } else if (value != null){
+                bool isReadOnly = Manager.IsValueReadOnly(valueId);
                 //var units = Manager.GetValueUnits(valueId);
-                if (!this.RegisterProperty(new NodeProperty(valueId.GetId().ToString(), valueLabel, value.GetType(), valueHelp, value)))
+                if (!this.RegisterProperty(new NodeProperty(valueId.GetId().ToString(), valueLabel, value.GetType(), isReadOnly, valueHelp, value)))
                 {
                     Logger.Error("Zwave Cannot Register property : " + valueLabel);
                     return false;
@@ -259,7 +272,7 @@ namespace ZWaveLib
 
         }
 
-        private void UpdateProperty(string key, object value)
+        private new void UpdateProperty(string key, object value)
         {
             if (!base.UpdateProperty(key, value))
             {
