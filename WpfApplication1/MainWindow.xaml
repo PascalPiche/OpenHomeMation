@@ -189,10 +189,14 @@
             </Grid>
 
             <Grid Visibility="{Binding Path=IsNodeViewVisible}">
-                <Grid.ColumnDefinitions>
+                <!--Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
-                </Grid.ColumnDefinitions>
+                </-->
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
                 <ListBox 
                     ItemsSource="{Binding Path=SelectedNode.Properties}"
                     HorizontalContentAlignment="Stretch"
@@ -216,13 +220,14 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
             
-                <Grid Grid.Column="1" DataContext="{Binding ElementName=NodeList, Path=SelectedItem}">
+                <Grid Grid.Row="1" DataContext="{Binding ElementName=NodeList, Path=SelectedItem}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
                     <TextBlock Text="{Binding Path=Name}" />
-                    <TextBlock Grid.Row="1" Text="{Binding Path=Description}" />
+                    
+                    <Label Grid.Row="1" Content="{Binding Path=Description}"  />
                     
                 </Grid>
             
