@@ -17,12 +17,14 @@ namespace ZWaveLib
         private ZWManager _mng = new ZWManager();
         private IDataDictionary _registeredControllers;
         private Dictionary<uint, ZWaveController> _runningControllers;
+        Dispatcher _dispatcher;
 
         #region "Ctor"
 
         public ZWaveInterface(ILogger logger)
             : base("ZWaveInterface", "ZWave", logger)
         {
+            _dispatcher = Dispatcher.CurrentDispatcher;
             //Create Commands
             this.RegisterCommand(new CreateControllerCommand(this));
         }
@@ -128,8 +130,9 @@ namespace ZWaveLib
 
         #region "Manager Handler"
 
-        private void NotificationHandler(ZWNotification n)
+        private void NotificationHandlerThreadSafe(ZWNotification n)
         {
+
             switch (n.GetType())
             {
                 //Driver
@@ -228,6 +231,15 @@ namespace ZWaveLib
                 case ZWNotification.Type.DeleteButton:
                     break;
             }
+        }
+
+        private void NotificationHandler(ZWNotification n)
+        {
+            //Make sure we are on the right thread before adding the property
+            _dispatcher.Invoke((Action)(() =>
+            {
+                NotificationHandlerThreadSafe(n);
+            }));
         }
 
         private void ControllerStateChangedHandler(ZWControllerState state)

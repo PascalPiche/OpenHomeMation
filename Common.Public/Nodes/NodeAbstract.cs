@@ -21,7 +21,7 @@ namespace OHM.Nodes
         private Dictionary<string, INodeProperty> _propertiesDic;
         private INode _parent;
         private ILogger _logger;
-        private Dispatcher _dispatcher;
+        //private Dispatcher _dispatcher;
         private IDataStore _data;
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -37,7 +37,7 @@ namespace OHM.Nodes
             _properties = new ObservableCollection<INodeProperty>();
             _propertiesDic = new Dictionary<string, INodeProperty>();
             _parent = parent;
-            _dispatcher = Dispatcher.CurrentDispatcher;
+            //_dispatcher = Dispatcher.CurrentDispatcher;
         }
 
         #region "Public"
@@ -127,10 +127,11 @@ namespace OHM.Nodes
             if (GetChild(node.Key) == null)
             {
                 _childrenDic.Add(node.Key, node);
-                _dispatcher.Invoke((Action)(() =>
+                /*_dispatcer.Invoke((Action)(() =>
                 {
-                    _children.Add(node);
-                }));
+                    
+                }));*/
+                _children.Add(node);
 
                 return true;
             }
@@ -167,14 +168,8 @@ namespace OHM.Nodes
             {
                 return false;
             }
-            
-            //Make sure we are on the right thread before adding the property
-            _dispatcher.Invoke((Action)(() =>
-            {
-                _propertiesDic.Add(nodeProperty.Key, nodeProperty);
-                _properties.Add(nodeProperty);
-            }));
-            
+            _propertiesDic.Add(nodeProperty.Key, nodeProperty);
+            _properties.Add(nodeProperty);
             return true;
         }
 
