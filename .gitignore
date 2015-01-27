@@ -178,3 +178,5 @@ FakesAssemblies/
 /external/open-zwave-trunk-latest/.svn
 /external/open-zwave/open-zwave/.svn
 /external
+/OpenHomeMation/Plugins/zwave
+/OpenHomeMation/Plugins/upnpcontrolpoint
