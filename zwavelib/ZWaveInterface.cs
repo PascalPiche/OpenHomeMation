@@ -7,6 +7,8 @@ using OpenZWaveDotNet;
 using System;
 using System.Collections.Generic;
 using System.Windows.Threading;
+using ZWaveLib.Commands;
+using ZWaveLib.Data;
 using ZWaveLib.Tools;
 
 namespace ZWaveLib
@@ -135,7 +137,7 @@ namespace ZWaveLib
 
             switch (n.GetType())
             {
-                //Driver
+                //Driver  
                 case ZWNotification.Type.DriverFailed:
                     NotificationDriverFailed(n);
                     break;

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ZWaveLib.Tools;
 
-namespace ZWaveLib
+namespace ZWaveLib.Data
 {
     class ZWaveNode : NodeAbstract, IZWaveNode
     {

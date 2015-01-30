@@ -79,7 +79,6 @@ namespace OHM.Sys
                 _logger.Debug("Data Store for Plugins Manager not found");
                 _logger.Info("Creating new Data Store for Plugins Manager");
                 data = _dataMng.GetOrCreateDataStore("PluginsManager");
-               
             }
             return _pluginsMng.Init(data);
         }
@@ -90,7 +89,7 @@ namespace OHM.Sys
             if (data == null)
             {
                 _logger.Debug("Data Store for Interfaces Manager not found");
-                _logger.Info("Creating new Data Store for Plugins Manager");
+                _logger.Info("Creating new Data Store for Interfaces Manager");
                 data = _dataMng.GetOrCreateDataStore("InterfacesManager");
 
             }

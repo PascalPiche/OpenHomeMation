@@ -2,17 +2,11 @@
 using OHM.Nodes;
 using OpenZWaveDotNet;
 using System;
+using ZWaveLib.Commands;
 using ZWaveLib.Tools;
 
-namespace ZWaveLib
+namespace ZWaveLib.Data
 {
-    /*[Flags]
-    public enum ZWaveControllerState {
-        initializing,
-        ready,
-        error
-    }*/
-
 
     class ZWaveController : ZWaveNode, IZWaveController
     {
