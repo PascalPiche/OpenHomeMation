@@ -91,7 +91,7 @@ namespace ZWaveLib.Data
                  new NodeProperty(
                      "NodeLocation",
                      "Node Location",
-                     typeof(Boolean),
+                     typeof(String),
                      false,
                      "",
                      Manager.GetNodeLocation(homeId, nodeId)));
@@ -153,8 +153,8 @@ namespace ZWaveLib.Data
 
         internal void UpdateNode(ZWNotification n)
         {
-            string name = NotificationTool.GetNodeName(n, this.Manager);
-            
+            this.Name = NotificationTool.GetNodeName(n, this.Manager);
+
             this.UpdateProperty("NodeProductType", Manager.GetNodeProductType(this.HomeId, this.NodeId));
             this.UpdateProperty("NodeProductName", Manager.GetNodeProductName(this.HomeId, this.NodeId));
             this.UpdateProperty("NodeProductId", Manager.GetNodeProductId(this.HomeId, this.NodeId));
@@ -167,38 +167,39 @@ namespace ZWaveLib.Data
             this.UpdateProperty("IsNodeFrequentListeningDevice", Manager.IsNodeFrequentListeningDevice(this.HomeId, this.NodeId));
             this.UpdateProperty("IsNodeListeningDevice", Manager.IsNodeListeningDevice(this.HomeId, this.NodeId));
             this.UpdateProperty("IsNodeBeamingDevice", Manager.IsNodeBeamingDevice(this.HomeId, this.NodeId));
-
-            this.Name = name;
-
         }
 
         private Object GetValue(ZWValueID valueId)
         {
-
-            bool resultBool;
-            byte resultByte;
-            decimal resultDecimal;
-            int resultInt;
-            short resultShort;
-            string resultString;
             Object result = null;
 
             switch (valueId.GetType())
             {
                 case ZWValueID.ValueType.Bool:
+                    bool resultBool;
                     if (Manager.GetValueAsBool(valueId, out resultBool))
                     {
                         result = resultBool;
                     }
+                    else
+                    {
+                        Logger.Error("ZWave Get Value as bool failed");
+                    }
                     break;
                
                 case ZWValueID.ValueType.Byte:
+                    byte resultByte;
                     if (Manager.GetValueAsByte(valueId, out resultByte))
                     {
                         result = resultByte;
                     }
+                    else
+                    {
+                        Logger.Error("ZWave Get Value as Byte failed");
+                    }
                     break;
                 case ZWValueID.ValueType.Decimal:
+                    decimal resultDecimal;
                     //Switch thread language to en for right parsing
                     var currentCulture = System.Threading.Thread.CurrentThread.CurrentCulture;
                     System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.CreateSpecificCulture("en");
@@ -206,36 +207,61 @@ namespace ZWaveLib.Data
                     {
                         result = resultDecimal;
                     }
+                    else
+                    {
+                        Logger.Error("ZWave Get Value as decimal failed");
+                    }
                     System.Threading.Thread.CurrentThread.CurrentCulture = currentCulture;
                     break;
                 case ZWValueID.ValueType.Int:
+                    int resultInt;
                     if (Manager.GetValueAsInt(valueId, out resultInt))
                     {
                         result = resultInt;
                     }
+                    else
+                    {
+                        Logger.Error("ZWave Get Value as Int failed");
+                    }
                     break;
                 case ZWValueID.ValueType.List:
+                    Logger.Warn("ZWave Value list not treated. Incomplete implementation");
+                    //if (Manager.getv)
                     break;
                 
                 case ZWValueID.ValueType.Short:
+                    short resultShort;
                     if (Manager.GetValueAsShort(valueId, out resultShort))
                     {
                         result = resultShort;
                     }
+                    else
+                    {
+                        Logger.Error("ZWave Get Value as short failed");
+                    }
                     break;
                 case ZWValueID.ValueType.String:
+                    string resultString;
                     if (Manager.GetValueAsString(valueId, out resultString))
                     {
                         result = resultString;
                     }
+                    else
+                    {
+                        Logger.Error("ZWave Get Value as string failed");
+                    }
                     break;
                 case ZWValueID.ValueType.Button:
+                    Logger.Warn("ZWave Button value not treated.  Incomplete implementation");
                     break;
                 case ZWValueID.ValueType.Schedule:
+                    Logger.Warn("ZWave Schecule value not treated.  Incomplete implementation");
                     break;
                 case ZWValueID.ValueType.Raw:
+                    Logger.Warn("ZWave Raw value not treated.  Incomplete implementation");
                     break;
                 default:
+                    Logger.Error("ZWave Value Type Unknow!");
                     break;
             }
             return result;
@@ -244,8 +270,7 @@ namespace ZWaveLib.Data
         internal bool CreateOrUpdateValue(ZWNotification n)
         {
             ZWValueID valueId = n.GetValueID();
-            String valueLabel = Manager.GetValueLabel(valueId);
-            String valueHelp = Manager.GetValueHelp(valueId);
+            
             Object value = GetValue(valueId);
         
             
@@ -255,20 +280,38 @@ namespace ZWaveLib.Data
                 return true;
 
             } else if (value != null){
+                String valueLabel = Manager.GetValueLabel(valueId);
+                String valueHelp = Manager.GetValueHelp(valueId);
                 bool isReadOnly = Manager.IsValueReadOnly(valueId);
                 //var units = Manager.GetValueUnits(valueId);
-                if (!this.RegisterProperty(new NodeProperty(valueId.GetId().ToString(), valueLabel, value.GetType(), isReadOnly, valueHelp, value)))
+                if (this.RegisterProperty(new NodeProperty(valueId.GetId().ToString(), valueLabel, value.GetType(), isReadOnly, valueHelp, value)))
+                {
+                    Logger.Info("Zwave Registered property : " + valueLabel + "for nodeId: " + this.NodeId);
+                    return true;
+                }
+                else
                 {
                     Logger.Error("Zwave Cannot Register property : " + valueLabel);
-                    return false;
                 }
-                return true;
             }
             return false;  
         }
 
         internal void RemoveValue(ZWNotification n)
         {
+            ZWValueID valueId = n.GetValueID();
+            string key = valueId.GetId().ToString();
+            if (this.ContainsProperty(key))
+            {
+                if (this.UnRegisterProperty(valueId.GetId().ToString()))
+                {
+                    Logger.Error("ZWave Cannot UnRegister property : " + key);
+                }
+            }
+            else
+            {
+                Logger.Error("ZWave Cannot find property for unregister: " + key);
+            }
 
         }
 

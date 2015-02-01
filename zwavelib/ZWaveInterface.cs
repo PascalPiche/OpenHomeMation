@@ -137,15 +137,18 @@ namespace ZWaveLib
 
             switch (n.GetType())
             {
-                //Driver  
-                case ZWNotification.Type.DriverFailed:
-                    NotificationDriverFailed(n);
-                    break;
+                //Driver 
                 case ZWNotification.Type.DriverReady:
                     NotificationDriverReady(n);
                     break;
+                case ZWNotification.Type.DriverFailed:
+                    NotificationDriverFailed(n);
+                    break;
                 case ZWNotification.Type.DriverReset:
                     NotificationDriverReset(n);
+                    break;
+                case ZWNotification.Type.DriverRemoved:
+                    NotificationDriverRemoved(n);
                     break;
 
                 //Initialize Query
@@ -275,12 +278,17 @@ namespace ZWaveLib
 
         private void NotificationDriverReset(ZWNotification n)
         {
-            Logger.Debug("NotificationDriverReset:" + GetNodeIdForLog(n));
+            Logger.Debug("ZWave NotificationDriverReset:" + GetNodeIdForLog(n));
         }
 
         private void NotificationDriverFailed(ZWNotification n)
         {
-            Logger.Debug("NotificationDriverFailed:" + GetNodeIdForLog(n));
+            Logger.Debug("ZWave NotificationDriverFailed:" + GetNodeIdForLog(n));
+        }
+
+        private void NotificationDriverRemoved(ZWNotification n)
+        {
+            Logger.Debug("ZWave NotificationDriverFailed:" + GetNodeIdForLog(n));
         }
 
         #endregion
@@ -389,7 +397,7 @@ namespace ZWaveLib
 
         private void Notification(ZWNotification n)
         {
-            Logger.Info("ZWave Notification: " + GetNodeIdForLog(n));
+            Logger.Info("ZWave Notification Error???: " + GetNodeIdForLog(n));
         }
 
         #endregion

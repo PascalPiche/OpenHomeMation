@@ -173,6 +173,27 @@ namespace OHM.Nodes
             return true;
         }
 
+        protected bool UnRegisterProperty(String key)
+        {
+            if (_propertiesDic.ContainsKey(Key))
+            {
+                var property = _propertiesDic[key];
+                if (_properties.Remove(property))
+                {
+                    if (_propertiesDic.Remove(key))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        _properties.Add(property);
+                    }
+                }
+                
+                return false;
+            }
+            return false;
+        }
         protected bool RegisterCommand(ICommand command)
         {
             if (_commandsDic.ContainsKey(command.Definition.Key))
