@@ -491,7 +491,7 @@ namespace ZWaveLib
 
         private string GetNodeIdForLog(ZWNotification n)
         {
-            return n.GetHomeId() + " - " + n.GetNodeId() + "-" + n.GetGroupIdx();
+            return " HomeId: " + n.GetHomeId() + " - NodeId: " + n.GetNodeId() + "- InstanceId: " + n.GetGroupIdx();
         }
 
 
