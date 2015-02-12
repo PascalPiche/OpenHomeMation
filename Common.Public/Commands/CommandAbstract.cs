@@ -52,7 +52,6 @@ namespace OHM.Commands
 
         public virtual bool CanExecute()
         {
-
             return IsStateRunning();
         }
 
@@ -78,15 +77,35 @@ namespace OHM.Commands
 
         #endregion
 
-        private bool IsStateRunning()
+
+        private IInterface LookupInterface(INode node)
         {
             if (_node is IInterface)
+                return (IInterface)_node;
+            else
             {
-                var interf = _node as IInterface;
-                return interf.IsRunning;
+                return LookupInterface(_node.Parent);
             }
-            return true;
         }
-        
+
+        private IInterface GetInterface()
+        {
+            if (_node is IInterface)
+                return (IInterface)_node;
+            else
+            {
+                return LookupInterface(_node.Parent);
+            }
+        }
+
+        private bool IsStateRunning()
+        {
+            IInterface interf = GetInterface();
+            if (interf != null)
+            {
+                return interf.IsRunning;
+            } 
+            return false;
+        }
     }
 }

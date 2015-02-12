@@ -38,17 +38,27 @@ namespace OHM.Interfaces
             get { return State == Interfaces.InterfaceState.Enabled; }
         }
 
-        public virtual void Start()
+        public void Starting()
         {
+            Logger.Info( this.Name + " Interface initing");
+            Start();
             State = Interfaces.InterfaceState.Enabled;
             NotifyPropertyChanged("State");
+            Logger.Info(this.Name + " Interface Inited");
         }
 
-        public virtual void Shutdown()
+        protected abstract void Start();
+
+        public void Shutdowning()
         {
-            NotifyPropertyChanged("State");
+            Logger.Info(this.Name + " Interface Shutdowning");
+            Shutdown();
             State = Interfaces.InterfaceState.Disabled;
+            NotifyPropertyChanged("State");
+            Logger.Info(this.Name + " Interface Shutdowned");
         }
+
+        protected abstract void Shutdown();
 
         public void Init(IDataStore data, IOhmSystemInterfaceGateway system)
         {

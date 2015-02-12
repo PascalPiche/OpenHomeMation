@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B4427C2E-4974-4DBC-9203-3947924C144D}</ProjectGuid>
+    <ProjectGuid>{645A5CA5-0505-4312-9C73-364BC66C1F7C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ZWaveLib</RootNamespace>
-    <AssemblyName>ZWaveLib</AssemblyName>
+    <RootNamespace>WUnderground</RootNamespace>
+    <AssemblyName>WUnderground</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -20,8 +20,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -35,46 +33,19 @@
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="OpenZWaveDotNet">
-      <HintPath>bin\OpenZWaveDotNet.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.AddIn" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\AllOff.cs" />
-    <Compile Include="Commands\AllOn.cs" />
-    <Compile Include="Commands\CreateControllerCommand.cs" />
-    <Compile Include="Commands\HardReset.cs" />
-    <Compile Include="Commands\RefreshNode.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Commands\RefreshNodeValue.cs" />
-    <Compile Include="Commands\SoftReset.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Data\IZWaveController.cs" />
-    <Compile Include="Data\IZWaveNode.cs" />
-    <Compile Include="Data\ZWaveController.cs" />
-    <Compile Include="Tools\NotificationTool.cs" />
-    <Compile Include="ZWaveInterface.cs" />
+    <Compile Include="AddAccount.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Data\ZWaveNode.cs" />
-    <Compile Include="ZWavePlugin.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="bin\OpenZWaveDotNet.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
-    <None Include="packages.config" />
+    <Compile Include="WUndergroundInterface.cs" />
+    <Compile Include="WUndergroundPlugin.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common.Public\Common.Public.csproj">
@@ -82,11 +53,12 @@
       <Name>Common.Public</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(TargetPath)" "$(SolutionDir)OpenHomeMation\plugins\zwave\" /Y /s /D /E
-xcopy "$(SolutionDir)ZWaveLib\bin\OpenZWaveDotNet.dll" "$(SolutionDir)OpenHomeMation\plugins\zwave\OpenZWaveDotNet.dll" /Y /s</PostBuildEvent>
+    <PostBuildEvent>xcopy "$(TargetPath)" "$(SolutionDir)OpenHomeMation\plugins\wunderground\" /Y /s /D /E</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

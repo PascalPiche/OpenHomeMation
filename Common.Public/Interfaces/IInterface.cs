@@ -12,9 +12,9 @@ namespace OHM.Interfaces
 
         bool StartOnLaunch { get; set; }
 
-        void Start();
+        void Starting();
 
-        void Shutdown();
+        void Shutdowning();
         
     }
 }

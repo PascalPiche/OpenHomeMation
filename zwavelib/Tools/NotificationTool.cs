@@ -18,7 +18,7 @@ namespace ZWaveLib.Tools
             }
             if (string.IsNullOrEmpty(result))
             {
-                result = "Unknow device";
+                result = "Unknow ZWave device";
             }
             return result;
         }

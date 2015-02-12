@@ -37,7 +37,6 @@ namespace OHM.Nodes
             _properties = new ObservableCollection<INodeProperty>();
             _propertiesDic = new Dictionary<string, INodeProperty>();
             _parent = parent;
-            //_dispatcher = Dispatcher.CurrentDispatcher;
         }
 
         #region "Public"
@@ -232,7 +231,6 @@ namespace OHM.Nodes
             }
             return false;
         }
-
 
         protected bool ContainsProperty(string key)
         {

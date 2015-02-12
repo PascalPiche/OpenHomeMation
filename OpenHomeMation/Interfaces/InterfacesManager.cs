@@ -104,7 +104,7 @@ namespace OHM.Interfaces
             if (_runningDic.ContainsKey(key))
             {
                 //Interface is running
-                _runningDic[key].Shutdown();
+                _runningDic[key].Shutdowning();
                 _runningInterfaces.Remove(_runningDic[key]);
                 _runningDic.Remove(key);
             }
@@ -144,7 +144,7 @@ namespace OHM.Interfaces
             {
                 if (interf.State == InterfaceState.Enabled)
                 {
-                    interf.Shutdown();
+                    interf.Shutdowning();
                     result = true;
                 }
             }
@@ -208,14 +208,14 @@ namespace OHM.Interfaces
             _logger.Info("Loading interface : " + key);
             IDataDictionary _dataPlugin = _dataRegisteredInterfaces.GetDataDictionary(key);
             String id = "";
-            if (_dataPlugin == null)
-            {
-
-            }
-            else
+            if (_dataPlugin != null)
             {
                 id = _dataPlugin.GetString("PluginId");
                 result = _pluginsMng.GetPlugin(new Guid(id));
+            }
+            else
+            {
+                _logger.Error("Loading interface : " + key + " failed, plugin not found");
             }
             return result;
         }
@@ -276,7 +276,7 @@ namespace OHM.Interfaces
             bool result = false;
             if (interf.State == InterfaceState.Disabled)
             {
-                interf.Start();
+                interf.Starting();
                 result = true;
             }
             return result;

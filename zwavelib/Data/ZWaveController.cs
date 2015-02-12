@@ -14,12 +14,23 @@ namespace ZWaveLib.Data
         //private ZWaveControllerState state = ZWaveControllerState.initializing;
 
         public ZWaveController(string key, string name, ZWaveInterface parent, uint homeId, byte nodeId, ILogger logger)
-            : base(key, name, parent, homeId, nodeId, parent.Manager, logger)
+            : base(key, name, parent, homeId, nodeId, parent, logger)
         {
             this.RegisterCommand(new AllOnCommand(this, parent));
             this.RegisterCommand(new AllOffCommand(this, parent));
             this.RegisterCommand(new SoftResetCommand(this, parent));
             this.RegisterCommand(new HardResetCommand(this, parent));
+
+            //parent.Manager.HealNetwork(new HealNetworkCommand(this, parent));
+
+            this.RegisterProperty(
+                 new NodeProperty(
+                     "ControllerInterfaceType",
+                     "Controller Interface Type",
+                     typeof(ZWControllerInterface),
+                     true,
+                     "",
+                     parent.Manager.GetControllerInterfaceType(homeId)));
 
             this.RegisterProperty(
                  new NodeProperty(
@@ -110,7 +121,7 @@ namespace ZWaveLib.Data
             uint homeId = n.GetHomeId();
             byte nodeId = n.GetNodeId();
 
-            var newNode = new ZWaveNode(key, name, this, homeId, nodeId, this.Interface.Manager, this.Logger);
+            var newNode = new ZWaveNode(key, name, this, homeId, nodeId, this.Interface, this.Logger);
 
             this.AddChild(newNode);
         }

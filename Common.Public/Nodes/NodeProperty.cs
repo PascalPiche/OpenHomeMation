@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 
 namespace OHM.Nodes
@@ -12,6 +14,8 @@ namespace OHM.Nodes
         private object _value;
         private bool _readOnly;
         private Type _type;
+        private ObservableCollection<INodeProperty> _extraInfo = new ObservableCollection<INodeProperty>();
+        private Dictionary<String, INodeProperty> _extraInfoDict = new Dictionary<String, INodeProperty>();
 
         public NodeProperty(string key, string name, Type type)
         {
@@ -36,6 +40,15 @@ namespace OHM.Nodes
             SetValue(value);
         }
 
+        public NodeProperty(string key, string name, Type type, bool readOnly, string description, object value, ObservableCollection<INodeProperty> extraInfo)
+            : this(key, name, type, readOnly, description, value)
+        {
+            _extraInfo = extraInfo;
+            foreach (INodeProperty nodeProp in _extraInfo)
+            {
+                _extraInfoDict.Add(nodeProp.Key, nodeProp);
+            }
+        }
 
         public string Key { get { return _key; } }
 

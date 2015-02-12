@@ -18,16 +18,15 @@ namespace UPNPControlPoint
             //this.RegisterCommand(new CreateControllerCommand(this));
         }
 
-        public override void Start()
+        protected override void Start()
         {
             var t = new UPNPLib.UPnPDeviceFinder();
             t.StartAsyncFind(t.CreateAsyncFind(".", 0, null));
-            base.Start();
         }
 
-        public override void Shutdown()
+        protected override void Shutdown()
         {
-            base.Shutdown();
+            
         }
 
     }

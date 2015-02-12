@@ -189,10 +189,6 @@
             </Grid>
 
             <Grid Visibility="{Binding Path=IsNodeViewVisible}">
-                <!--Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </-->
                 <Grid.RowDefinitions>
                     <RowDefinition />
                     <RowDefinition />
@@ -221,14 +217,28 @@
                 </ListBox>
             
                 <Grid Grid.Row="1" DataContext="{Binding ElementName=NodeList, Path=SelectedItem}">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                    </Grid.RowDefinitions>
-                    <TextBlock Text="{Binding Path=Name}" />
-                    
-                    <Label Grid.Row="1" Content="{Binding Path=Description}"  />
-                    
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Name: " />
+                            <TextBlock Text="{Binding Path=Name}" />
+                        </StackPanel>
+                        <StackPanel Grid.Row="1">
+                            <TextBlock Text="Description: " />
+                            <Label Content="{Binding Path=Description}"  />
+                        </StackPanel>
+                    </Grid>
+                    <ItemsControl Grid.Column="1">
+                        
+                        
+                    </ItemsControl>
                 </Grid>
             
             </Grid>
