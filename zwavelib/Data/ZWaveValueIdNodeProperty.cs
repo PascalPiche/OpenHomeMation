@@ -13,7 +13,8 @@ namespace ZWaveLib.Data
 
         internal bool InternalSetValue()
         {
-
+            
+            return false;
         }
 
     }

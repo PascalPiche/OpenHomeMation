@@ -28,7 +28,7 @@ namespace ZWaveLib
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
             //Create Commands
-            this.RegisterCommand(new CreateControllerCommand(this));
+            this.RegisterCommand(new CreateController(this));
         }
             
         #endregion
