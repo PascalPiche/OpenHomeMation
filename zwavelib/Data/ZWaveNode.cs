@@ -12,7 +12,7 @@ using ZWaveLib.Tools;
 
 namespace ZWaveLib.Data
 {
-    class ZWaveNode : NodeAbstract, IZWaveNode
+    public class ZWaveNode : NodeAbstract, IZWaveNode
     {
 
         private uint _homeId;

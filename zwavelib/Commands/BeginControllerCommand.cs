@@ -12,7 +12,7 @@ namespace ZWaveLib.Commands
     {
         private ZWaveController _controller;
 
-        public BeginControllerCommand(ZWaveController controller)
+        protected BeginControllerCommand(ZWaveController controller)
             : base(controller, "beginControllerCommand", "Begin Controller Command")
         {
             _controller = controller;

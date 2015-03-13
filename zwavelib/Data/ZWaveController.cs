@@ -8,7 +8,7 @@ using ZWaveLib.Tools;
 namespace ZWaveLib.Data
 {
 
-    class ZWaveController : ZWaveNode, IZWaveController
+    public class ZWaveController : ZWaveNode, IZWaveController
     {
 
         //private ZWaveControllerState state = ZWaveControllerState.initializing;
