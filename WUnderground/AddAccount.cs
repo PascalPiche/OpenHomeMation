@@ -21,14 +21,48 @@ namespace WUnderground
         public AddAccount(WUndergroundInterface node)
             : base(node, "addAccount", "Add an account")
         {
-           
+            this.Definition.ArgumentsDefinition.Add(
+                "username",
+                new ArgumentDefinition(
+                    "username",
+                    "User Name",
+                    typeof(string),
+                    true
+                )
+            );
 
+            this.Definition.ArgumentsDefinition.Add(
+                "keyid",
+                new ArgumentDefinition(
+                    "keyid",
+                    "Key Id",
+                    typeof(string),
+                    true
+                )
+            );
         }
 
         protected override bool RunImplementation(Dictionary<string, object> arguments)
         {
-            return false;
-            //Interface.CreateAccount();
+            string username;
+            string keyId;
+
+            if (!this.Definition.ArgumentsDefinition["username"].TryGetString(arguments["username"], out username))
+            {
+                return false;
+            }
+
+            if (!this.Definition.ArgumentsDefinition["keyid"].TryGetString(arguments["keyid"], out keyId))
+            {
+                return false;
+            }
+
+            if (username.Length <= 0 || keyId.Length <= 0)
+            {
+                return false;
+            }
+
+            return Interface.CreateAccount(username, keyId);
         }
     }
 }

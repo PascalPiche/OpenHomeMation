@@ -28,6 +28,17 @@ namespace OHM.Data
             }
         }
 
+        public void Shutdown()
+        {
+            //Save All Data store
+            var enumerator = _loadedDataStore.GetEnumerator();
+            while (enumerator.MoveNext())
+            {
+
+                SaveDataStore(enumerator.Current.Value);
+            }
+        }
+
         public IDataStore GetDataStore(string key)
         {
             if (_loadedDataStore.ContainsKey(key)) {
@@ -67,6 +78,7 @@ namespace OHM.Data
 
         public bool SaveDataStore(IDataStore dataStore)
         {
+            _logger.Info("DataManager: Saving DataStore " + dataStore.Key);
             DataStoreToFile(dataStore, BuildDataStorePath(dataStore.Key));
             return true;
         }
@@ -108,6 +120,5 @@ namespace OHM.Data
             return _filePath + key + ".data";
         }
 
-       
     }
 }

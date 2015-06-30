@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C5DF6E96-8157-4901-9CED-F75285AB8E49}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{3E479F23-5600-4ED8-A92D-CB2EF42EB772}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OHM.Logger</RootNamespace>
-    <AssemblyName>OpenHomeMation</AssemblyName>
+    <RootNamespace>OpenHomeMationService</RootNamespace>
+    <AssemblyName>OpenHomeMationService</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -21,13 +22,15 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
+    <AutorunEnabled>true</AutorunEnabled>
+    <ApplicationRevision>1</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -37,6 +40,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -44,41 +48,58 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>FB0F0FAA9360F00490AC604FF0EDC9856EFA7BFE</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>OpenHomeMationService_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>OpenHomeMationService.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\DataDictionary.cs" />
-    <Compile Include="Data\DataStore.cs" />
-    <Compile Include="Data\DataValueBool.cs" />
-    <Compile Include="Data\DataValueDictionary.cs" />
-    <Compile Include="Data\DataValueString.cs" />
-    <Compile Include="Data\FileDataManager.cs" />
-    <Compile Include="Data\IDataValue.cs" />
-    <Compile Include="Interfaces\InterfacesManager.cs" />
-    <Compile Include="Logger\DefaultLogger.cs" />
-    <Compile Include="Logger\LoggerManager.cs" />
-    <Compile Include="System\OhmSystem.cs" />
-    <Compile Include="System\OhmSystemInstallGateway.cs" />
-    <Compile Include="System\OhmSystemInterfaceGateway.cs" />
-    <Compile Include="System\OhmSystemUnInstallGateway.cs" />
-    <Compile Include="System\OpenHomeMation.cs" />
-    <Compile Include="Plugins\PluginsManager.cs" />
+    <Compile Include="OpenHomeMationService.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="OpenHomeMationService.Designer.cs">
+      <DependentUpon>OpenHomeMationService.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\log4net.dll" />
-    <Content Include="bin\log4net.xml" />
+    <None Include="App.config" />
+    <None Include="OpenHomeMationService_TemporaryKey.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common.Public\Common.Public.csproj">
+      <Project>{c7ae6787-9a8a-4ebc-a341-ffacf31acaf7}</Project>
+      <Name>Common.Public</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{f8c3c250-222d-49f4-9582-f7ba0dd6393e}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenHomeMation\OpenHomeMation.csproj">
+      <Project>{c5df6e96-8157-4901-9ced-f75285ab8e49}</Project>
+      <Name>OpenHomeMation</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
@@ -97,38 +118,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Common.Public\Common.Public.csproj">
-      <Project>{c7ae6787-9a8a-4ebc-a341-ffacf31acaf7}</Project>
-      <Name>Common.Public</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Common\Common.csproj">
-      <Project>{f8c3c250-222d-49f4-9582-f7ba0dd6393e}</Project>
-      <Name>Common</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="System\_diagrams\OpenHomeMation_start.sequencediagram" />
-    <None Include="System\_diagrams\ClassDiagram1.cd" />
-    <None Include="Data\DataClassDiagram.cd" />
-    <None Include="Data\DataClassDiagramFull.cd" />
-    <None Include="Logger\LoggerClassDiagram.cd" />
-    <None Include="Logger\LoggerClassDiagramFull.cd" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="System\_diagrams\OpenHomeMation_start.sequencediagram.layout">
-      <DependentUpon>OpenHomeMation_start.sequencediagram</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="_Diagrams\" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
-  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -17,6 +17,8 @@ namespace WUnderground
             this.RegisterCommand(new AddAccount(this));
         }
 
+
+
         protected override void Start()
         {
             
@@ -25,6 +27,13 @@ namespace WUnderground
         protected override void Shutdown()
         {
             
+        }
+
+        internal bool CreateAccount(string username, string keyId) 
+        {
+
+            return false;
+
         }
     }
 }

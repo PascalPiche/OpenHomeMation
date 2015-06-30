@@ -8,9 +8,7 @@ namespace OHM.Sys
     public class OpenHomeMation
     {
         private ILogger _logger;
-        
         private bool _isRunning = false;
-
         private ILoggerManager _loggerMng;
         private IPluginsManager _pluginsMng;
         private IDataManager _dataMng;
@@ -55,13 +53,13 @@ namespace OHM.Sys
             
             this._isRunning = true;
             _logger.Info("Started OHM"); 
-            
-            
         }
 
         public void Shutdown()
         {
             _logger.Info("Stoping OHM");
+            //Save All Data Store
+            _dataMng.Shutdown();
             this._isRunning = false;
             _logger.Info("Stoped OHM");
         }
@@ -95,6 +93,5 @@ namespace OHM.Sys
             }
             return _interfacesMng.Init(data, _ohmSystem);
         }
-
     }
 }

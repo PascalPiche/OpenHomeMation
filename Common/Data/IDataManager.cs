@@ -6,6 +6,8 @@ namespace OHM.Data
 
         void Init();
 
+        void Shutdown();
+
         IDataStore GetDataStore(string key);
 
         IDataStore GetOrCreateDataStore(string key);
