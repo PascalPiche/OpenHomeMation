@@ -37,8 +37,8 @@ namespace ZWaveLib.Data
             }
         }
         
-        public ZWaveNode(string key, string name, INode parent, uint homeId, byte nodeId, ZWaveInterface interf, ILogger logger)
-            : base(key, name, parent, logger)
+        public ZWaveNode(string key, string name, uint homeId, byte nodeId, ZWaveInterface interf, ILogger logger)
+            : base(key, name, logger)
         {
             _homeId = homeId;
             _nodeId = nodeId;
@@ -152,8 +152,8 @@ namespace ZWaveLib.Data
                      "",
                      Manager.GetNodeProductType(homeId, nodeId)));
 
-            this.RegisterCommand(new RefreshNodeCommand(this, _interface));
-            this.RegisterCommand(new RefreshNodeValueCommand(this, _interface));
+            this.RegisterCommand(new RefreshNodeCommand(this));
+            this.RegisterCommand(new RefreshNodeValueCommand(this));
 
         }
 

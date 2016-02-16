@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace OHM.Commands
 {
@@ -45,6 +46,16 @@ namespace OHM.Commands
 
         public bool TryGetInt(object value, out int result)
         {
+            bool fctResult = false;
+            if (value is Dictionary<string, object>)
+            {
+                Dictionary<string, object> temp = (Dictionary<string, object>)value;
+                if (temp.ContainsKey(this.Key))
+                {
+                    value = temp[this.Key];
+                }
+            }
+
             if (value is int)
             {
                 result = (int)value;
@@ -57,11 +68,21 @@ namespace OHM.Commands
             }
 
             result = 0;
-            return false;
+            return fctResult;
         }
 
         public bool TryGetString(object value, out string result)
         {
+            bool fctResult = false;
+            if (value is Dictionary<string, object>)
+            {
+                Dictionary<string, object> temp = (Dictionary<string, object>)value;
+                if (temp.ContainsKey(this.Key))
+                {
+                    value = temp[this.Key];
+                }
+            }
+
             if (value is string)
             {
                 result = (string)value;
@@ -69,8 +90,7 @@ namespace OHM.Commands
             }
 
             result = string.Empty;
-            return false;
+            return fctResult;
         }
-
     }
 }

@@ -9,7 +9,7 @@ namespace OHM.Data
     {
         private Dictionary<string, IDataValue> _dataValues = new Dictionary<string, IDataValue>();
 
-        #region "Public Properties"
+        #region Public Properties
 
         [IgnoreDataMemberAttribute]
         public IEnumerable<string> Keys
@@ -21,9 +21,9 @@ namespace OHM.Data
 
         #endregion
 
-        #region "Public API"
+        #region Public API
 
-        #region "String"
+        #region String
 
         public void StoreString(string key, string value)
         {
@@ -42,7 +42,7 @@ namespace OHM.Data
 
         #endregion
 
-        #region "Dictionary"
+        #region Dictionary
 
         public void StoreDataDictionary(string key, IDataDictionary store)
         {
@@ -74,7 +74,7 @@ namespace OHM.Data
 
         #endregion
 
-        #region "bool"
+        #region bool
 
         public void StoreBool(string key, bool value)
         {
@@ -98,9 +98,14 @@ namespace OHM.Data
             return _dataValues.Remove(key);
         }
 
+        public bool ContainsKey(string key)
+        {
+            return _dataValues.ContainsKey(key);
+        }
+        
         #endregion
 
-        #region "Protected"
+        #region Protected
 
         protected void StoreValue(string key, IDataValue obj)
         {

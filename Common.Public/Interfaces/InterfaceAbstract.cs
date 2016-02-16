@@ -14,7 +14,7 @@ namespace OHM.Interfaces
         private IOhmSystemInterfaceGateway _system;
 
         public InterfaceAbstract(string key, string name, ILogger logger) 
-            : base(key, name, null, logger)
+            : base(key, name, logger)
         {
             
             //Register Default commands

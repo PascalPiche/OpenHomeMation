@@ -9,22 +9,18 @@ using ZWaveLib.Data;
 
 namespace ZWaveLib.Commands
 {
-    public class RefreshNodeCommand : CommandAbstract
+    public class RefreshNodeCommand : ZWaveCommandAbstract
     {
 
-        private ZWaveInterface _interface;
-        private ZWaveNode _node;
-
-        public RefreshNodeCommand(INode node, ZWaveInterface interf)
-            : base(node, "RefreshNodeInfo", "Refresh all Node Info")
+        public RefreshNodeCommand(INode node)
+            : base(node, "RefreshNodeInfo", "Refresh all Node Info", "")
         {
-            _interface = interf;
-            _node = node as ZWaveNode;
+
         }
 
         protected override bool RunImplementation(Dictionary<string, object> arguments)
         {
-            return _interface.Manager.RefreshNodeInfo(_node.HomeId, _node.NodeId);
+            return Interface.Manager.RefreshNodeInfo(Node.HomeId, Node.NodeId);
         }
     }
 }

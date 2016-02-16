@@ -24,6 +24,8 @@ namespace OHM.Sys
             this._interfacesMng = interfacesMng;
         }
 
+        #region "Public"
+
         public IOhmSystem System
         {
             get
@@ -50,7 +52,8 @@ namespace OHM.Sys
                 _logger.Fatal("InterfacesManager failed Init. Abording start");
                 return;
             }
-            
+
+            OpenHomeMationServerImplementation.Run();
             this._isRunning = true;
             _logger.Info("Started OHM"); 
         }
@@ -68,6 +71,10 @@ namespace OHM.Sys
         {
             return this._isRunning;
         }
+
+        #endregion
+
+        #region "Private"
 
         private bool StartPluginMng()
         {
@@ -93,5 +100,7 @@ namespace OHM.Sys
             }
             return _interfacesMng.Init(data, _ohmSystem);
         }
+    
+        #endregion
     }
 }

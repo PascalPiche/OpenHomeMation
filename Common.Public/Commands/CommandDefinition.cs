@@ -59,7 +59,7 @@ namespace OHM.Commands
             {
                 if (item.Required)
                 {
-                    if (!arguments.ContainsKey(item.Key))
+                    if (arguments != null && !arguments.ContainsKey(item.Key))
                     {
                         result = false;
                     }

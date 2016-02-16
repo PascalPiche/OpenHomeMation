@@ -8,12 +8,12 @@ using ZWaveLib.Data;
 
 namespace ZWaveLib.Commands
 {
-    public class BeginControllerCommand : CommandAbstract
+    public class BeginControllerCommand : ZWaveCommandAbstract
     {
         private ZWaveController _controller;
 
         protected BeginControllerCommand(ZWaveController controller)
-            : base(controller, "beginControllerCommand", "Begin Controller Command")
+            : base(controller, "beginControllerCommand", "Begin Controller Command", "")
         {
             _controller = controller;
 

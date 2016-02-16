@@ -5,21 +5,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WUnderground.Data;
 
-namespace WUnderground
+namespace WUnderground.Commands
 {
-    public class AddAccount : CommandAbstract
+    class AddAccount : AbstractWUndergroundCommand
     {
 
-        private WUndergroundInterface Interface 
-        {
-            get
-            {
-                return (WUndergroundInterface)this.Node;
-            }
-        }
         public AddAccount(WUndergroundInterface node)
-            : base(node, "addAccount", "Add an account")
+            : base(node, "addAccount", "Add an account", "")
         {
             this.Definition.ArgumentsDefinition.Add(
                 "username",
@@ -47,12 +41,12 @@ namespace WUnderground
             string username;
             string keyId;
 
-            if (!this.Definition.ArgumentsDefinition["username"].TryGetString(arguments["username"], out username))
+            if (!this.Definition.ArgumentsDefinition["username"].TryGetString(arguments, out username))
             {
                 return false;
             }
 
-            if (!this.Definition.ArgumentsDefinition["keyid"].TryGetString(arguments["keyid"], out keyId))
+            if (!this.Definition.ArgumentsDefinition["keyid"].TryGetString(arguments, out keyId))
             {
                 return false;
             }
@@ -62,7 +56,7 @@ namespace WUnderground
                 return false;
             }
 
-            return Interface.CreateAccount(username, keyId);
+            return WUndergroundInterface.CreateAccountCommand(username, keyId);
         }
     }
 }

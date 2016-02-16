@@ -6,7 +6,7 @@ namespace OHM.Commands
     public interface ICommand
     {
 
-        INode Node { get; }
+        string NodeKey { get; }
 
         ICommandDefinition Definition { get; }
 

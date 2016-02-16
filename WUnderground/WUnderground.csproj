@@ -14,7 +14,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
+    <DebugType>pdbonly</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
@@ -42,9 +42,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddAccount.cs" />
+    <Compile Include="Api\WUndergroundApi.cs" />
+    <Compile Include="Commands\AbstractWUndergroundCommand.cs" />
+    <Compile Include="Commands\AddAccount.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Commands\AddLocation.cs" />
+    <Compile Include="Commands\RemoveAccount.cs" />
+    <Compile Include="Data\Account.cs" />
+    <Compile Include="Data\Location.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WUndergroundInterface.cs" />
+    <Compile Include="Data\WUndergroundInterface.cs" />
     <Compile Include="WUndergroundPlugin.cs" />
   </ItemGroup>
   <ItemGroup>

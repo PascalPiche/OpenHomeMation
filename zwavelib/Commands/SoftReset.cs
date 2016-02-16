@@ -9,21 +9,18 @@ using ZWaveLib.Data;
 
 namespace ZWaveLib.Commands
 {
-    public class SoftResetCommand : CommandAbstract
+    public class SoftResetCommand : ZWaveCommandAbstract
     {
-        private ZWaveInterface _interface;
-        private ZWaveNode _node;
 
-        public SoftResetCommand(INode node, ZWaveInterface interf)
-            : base(node, "SoftReset", "Soft Reset the Z Wave Controller")
+        public SoftResetCommand(INode node)
+            : base(node, "SoftReset", "Soft Reset the Z Wave Controller", "")
         {
-            _interface = interf;
-            _node = node as ZWaveNode;
+            
         }
 
         protected override bool RunImplementation(Dictionary<string, object> arguments)
         {
-            _interface.Manager.SoftReset(_node.HomeId);
+            Interface.Manager.SoftReset(Node.HomeId);
             return true;
         }
     }

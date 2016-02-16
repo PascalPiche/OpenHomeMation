@@ -9,21 +9,20 @@ using ZWaveLib.Data;
 
 namespace ZWaveLib.Commands
 {
-    public class HardResetCommand : CommandAbstract
+    public class HardResetCommand : ZWaveCommandAbstract
     {
-        private ZWaveInterface _interface;
-        private ZWaveNode _node;
+        
+        
 
-        public HardResetCommand(INode node, ZWaveInterface interf)
-            : base(node, "HardReset", "Hard Reset the Z Wave Controller (Warning: Will erase all data in the controller, pairing will need to be done again after the hard reset)")
+        public HardResetCommand(INode node)
+            : base(node, "HardReset", "Hard Reset the Z Wave Controller (Warning: Will erase all data in the controller, pairing will need to be done again after the hard reset)", "")
         {
-            _interface = interf;
-            _node = node as ZWaveNode;
+
         }
 
         protected override bool RunImplementation(Dictionary<string, object> arguments)
         {
-            _interface.Manager.ResetController(_node.HomeId);
+            Interface.Manager.ResetController(Node.HomeId);
             return true;
         }
     }

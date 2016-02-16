@@ -10,10 +10,14 @@ namespace OHM.Commands
 
         private ICommandDefinition _definition;
         private INode _node;
+        private IInterface _interface;
+
         #region "Ctor"
 
         protected CommandAbstract(INode node, string key, string name) 
-            : this(node, key, name, string.Empty, null) { }
+            : this(node, key, name, string.Empty, null) {
+                
+        }
 
         protected CommandAbstract(INode node, string key, string name, string description) 
             : this (node, key, name, description, null) { }
@@ -38,12 +42,7 @@ namespace OHM.Commands
 
         #endregion
 
-        #region "Public"
-
-        public Nodes.INode Node
-        {
-            get { return _node; }
-        }
+        #region Public
 
         public ICommandDefinition Definition
         {
@@ -55,15 +54,31 @@ namespace OHM.Commands
             return IsStateRunning();
         }
 
+        public string NodeKey
+        {
+            get { return Node.Key; }
+        }
+
         #endregion
 
-        #region "Protected"
+        #region Protected
+        
+
+        protected Nodes.INode Node
+        {
+            get { return _node; }
+        }
+
+        protected IInterface Interface
+        {
+            get { return _interface; }
+        }
 
         protected abstract bool RunImplementation(Dictionary<string, object> arguments);
 
         #endregion
 
-        #region "Internal"
+        #region Internal
 
         public bool Execute(Dictionary<string, object> arguments)
         {
@@ -77,35 +92,43 @@ namespace OHM.Commands
 
         #endregion
 
+        #region Private
 
-        private IInterface LookupInterface(INode node)
+        private void LookupAndStoreInterface(INode node)
         {
-            if (_node is IInterface)
-                return (IInterface)_node;
-            else
+
+            if (node == null)
             {
-                return LookupInterface(_node.Parent);
+                node = this.Node;
             }
-        }
 
-        private IInterface GetInterface()
-        {
-            if (_node is IInterface)
-                return (IInterface)_node;
+            if (node is IInterface)
+            {
+                _interface = (IInterface)node;
+            }
+            else if (node.Parent != null)
+            {
+                LookupAndStoreInterface(node.Parent);
+            }
             else
             {
-                return LookupInterface(_node.Parent);
+                //TODO log error
             }
         }
 
         private bool IsStateRunning()
         {
-            IInterface interf = GetInterface();
-            if (interf != null)
+            if (_interface == null)
             {
-                return interf.IsRunning;
+                LookupAndStoreInterface(this._node);
+            }
+            if (_interface != null)
+            {
+                return _interface.IsRunning;
             } 
             return false;
         }
+        
+        #endregion
     }
 }

@@ -7,16 +7,13 @@ using System.Threading.Tasks;
 
 namespace ZWaveLib.Commands
 {
-    public class CreateController : CommandAbstract
+    public class CreateController : ZWaveCommandAbstract
     {
 
-        private ZWaveInterface _interface;
-
-
         public CreateController(ZWaveInterface interf)
-            : base(interf, "createController", "Create a controller")
+            : base(interf, "createController", "Create a controller", "")
         {
-            _interface = interf;
+
             this.Definition.ArgumentsDefinition.Add
             (
                 "port",
@@ -34,7 +31,7 @@ namespace ZWaveLib.Commands
         {
             int port;
 
-            if (!this.Definition.ArgumentsDefinition["port"].TryGetInt(arguments["port"], out port))
+            if (!this.Definition.ArgumentsDefinition["port"].TryGetInt(arguments, out port))
             {
                 return false;
             }
@@ -44,7 +41,7 @@ namespace ZWaveLib.Commands
                 return false;
             }
 
-            return _interface.CreateController(port, true);
+            return Interface.CreateController(port, true);
 
         }
     }

@@ -65,9 +65,7 @@ namespace ZWaveLib
 
         protected override void Shutdown()
         {
-            
             _mng.Destroy();
-            
         }
 
         #endregion

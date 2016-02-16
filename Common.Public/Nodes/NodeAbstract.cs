@@ -1,5 +1,6 @@
 ﻿using OHM.Commands;
 using OHM.Data;
+using OHM.Interfaces;
 using OHM.Logger;
 using System;
 using System.Collections.Generic;
@@ -21,11 +22,10 @@ namespace OHM.Nodes
         private Dictionary<string, INodeProperty> _propertiesDic;
         private INode _parent;
         private ILogger _logger;
-        //private Dispatcher _dispatcher;
         private IDataStore _data;
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public NodeAbstract(string key, string name, INode parent, ILogger logger)
+        public NodeAbstract(string key, string name, ILogger logger)
         {
             _key = key;
             _name = name;
@@ -36,7 +36,6 @@ namespace OHM.Nodes
             _childrenDic = new Dictionary<string, INode>();
             _properties = new ObservableCollection<INodeProperty>();
             _propertiesDic = new Dictionary<string, INodeProperty>();
-            _parent = parent;
         }
 
         #region "Public"
@@ -126,12 +125,8 @@ namespace OHM.Nodes
             if (GetChild(node.Key) == null)
             {
                 _childrenDic.Add(node.Key, node);
-                /*_dispatcer.Invoke((Action)(() =>
-                {
-                    
-                }));*/
                 _children.Add(node);
-
+                node.SetParent(this);
                 return true;
             }
             return false;
@@ -235,6 +230,15 @@ namespace OHM.Nodes
         protected bool ContainsProperty(string key)
         {
             return _propertiesDic.ContainsKey(key);
+        }
+
+        #endregion
+
+        #region internal
+
+        void SetParent(INode node)
+        {
+            _parent = node;
         }
 
         #endregion

@@ -49,8 +49,11 @@
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -75,6 +78,7 @@
     <Compile Include="System\OpenHomeMation.cs" />
     <Compile Include="Plugins\PluginsManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="System\OpenHomeMationServer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\log4net.dll" />

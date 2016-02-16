@@ -9,17 +9,13 @@ using ZWaveLib.Data;
 
 namespace ZWaveLib.Commands
 {
-    public class RefreshNodeValueCommand : CommandAbstract
+    public class RefreshNodeValueCommand : ZWaveCommandAbstract
     {
 
-        private ZWaveInterface _interface;
-        private ZWaveNode _node;
-
-        public RefreshNodeValueCommand(INode node, ZWaveInterface interf)
-            : base(node, "RefreshNodeValue", "Refresh all node value")
+        public RefreshNodeValueCommand(INode node)
+            : base(node, "RefreshNodeValue", "Refresh all node value", "")
         {
-            _interface = interf;
-            _node = node as ZWaveNode;
+
         }
 
         protected override bool RunImplementation(Dictionary<string, object> arguments)

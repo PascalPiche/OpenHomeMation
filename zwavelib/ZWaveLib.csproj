@@ -61,6 +61,7 @@
     <Compile Include="Commands\SoftReset.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Commands\ZWaveCommandAbstract.cs" />
     <Compile Include="Data\IZWaveController.cs" />
     <Compile Include="Data\IZWaveNode.cs" />
     <Compile Include="Data\ZWaveController.cs" />

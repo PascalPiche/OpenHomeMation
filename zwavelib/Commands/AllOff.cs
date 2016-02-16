@@ -9,24 +9,19 @@ using ZWaveLib.Data;
 
 namespace ZWaveLib.Commands
 {
-    
-    public class AllOffCommand : CommandAbstract
+
+    public class AllOffCommand : ZWaveCommandAbstract
     {
 
-        private ZWaveInterface _interface;
-        private ZWaveNode _node;
-
-        public AllOffCommand(INode node, ZWaveInterface interf)
-            : base(node, "allOff", "Switch all off")
+        public AllOffCommand(INode node)
+            : base(node, "allOff", "Switch all off", "")
         {
-            _interface = interf;
-            _node = node as ZWaveNode;
+            
         }
-
 
         protected override bool RunImplementation(Dictionary<string, object> arguments)
         {
-            _interface.Manager.SwitchAllOff(_node.HomeId);
+            Interface.Manager.SwitchAllOff(Node.HomeId);
             return true;
         }
     }

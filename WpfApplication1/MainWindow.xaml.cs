@@ -112,7 +112,7 @@ namespace WpfApplication1
                 }
                 else
                 {
-                    vm.InterfaceManager.ExecuteCommand(command.Node.Key, command.Definition.Key, null);
+                    vm.InterfaceManager.ExecuteCommand(command.NodeKey, command.Definition.Key, null);
                 }
             }
         }
@@ -125,7 +125,11 @@ namespace WpfApplication1
 
             if (result.HasValue && result.Value)
             {
-                vm.InterfaceManager.ExecuteCommand(command.Node.Key, command.Definition.Key, w.ArgumentsResult);
+                if (!vm.InterfaceManager.ExecuteCommand(command.NodeKey, command.Definition.Key, w.ArgumentsResult))
+                {
+                    //Show alert
+                    
+                }
             }
         }
 
@@ -135,7 +139,7 @@ namespace WpfApplication1
             e.CanExecute = false;
             if (command != null)
             {
-                e.CanExecute = vm.InterfaceManager.CanExecuteCommand(command.Node.Key, command.Definition.Key);
+                e.CanExecute = vm.InterfaceManager.CanExecuteCommand(command.NodeKey, command.Definition.Key);
             }
         }
 
@@ -144,7 +148,14 @@ namespace WpfApplication1
             var command = e.Parameter as OHM.Commands.ICommand;
             if (command != null)
             {
-                command.Execute(null);
+                if (command.Definition.ArgumentsDefinition.Count > 0)
+                {
+                    ShowCommandDialog(command);
+                }
+                else
+                {
+                    vm.InterfaceManager.ExecuteCommand(command.NodeKey, command.Definition.Key, null);
+                }
             }
         }
 
