@@ -59,6 +59,11 @@ namespace OHM.Commands
             get { return Node.Key; }
         }
 
+        public string InterfaceKey
+        {
+            get { return Interface.Key; }
+        }
+
         #endregion
 
         #region Protected
@@ -71,7 +76,15 @@ namespace OHM.Commands
 
         protected IInterface Interface
         {
-            get { return _interface; }
+            get
+            {
+                if (_interface == null)
+                {
+                    LookupAndStoreInterface(this._node);
+                }
+                
+                return _interface; 
+            }
         }
 
         protected abstract bool RunImplementation(Dictionary<string, object> arguments);
@@ -118,11 +131,7 @@ namespace OHM.Commands
 
         private bool IsStateRunning()
         {
-            if (_interface == null)
-            {
-                LookupAndStoreInterface(this._node);
-            }
-            if (_interface != null)
+            if (Interface != null)
             {
                 return _interface.IsRunning;
             } 

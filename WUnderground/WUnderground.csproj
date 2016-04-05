@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\Data\WUndergroundResponse.cs" />
     <Compile Include="Api\WUndergroundApi.cs" />
     <Compile Include="Commands\AbstractWUndergroundCommand.cs" />
     <Compile Include="Commands\AddAccount.cs">

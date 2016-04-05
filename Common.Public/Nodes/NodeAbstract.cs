@@ -15,7 +15,7 @@ namespace OHM.Nodes
         private string _key;
         private string _name;
         private ObservableCollection<ICommand> _commands;
-        private Dictionary<string, ICommand> _commandsDic;
+        protected Dictionary<string, ICommand> _commandsDic;
         private ObservableCollection<INode> _children;
         private Dictionary<string, INode> _childrenDic;
         private ObservableCollection<INodeProperty> _properties;
@@ -23,8 +23,10 @@ namespace OHM.Nodes
         private INode _parent;
         private ILogger _logger;
         private IDataStore _data;
+
         public event PropertyChangedEventHandler PropertyChanged;
 
+        #region ctor
         public NodeAbstract(string key, string name, ILogger logger)
         {
             _key = key;
@@ -37,6 +39,8 @@ namespace OHM.Nodes
             _properties = new ObservableCollection<INodeProperty>();
             _propertiesDic = new Dictionary<string, INodeProperty>();
         }
+
+        #endregion
 
         #region "Public"
 
@@ -71,6 +75,15 @@ namespace OHM.Nodes
             if (_commandsDic.ContainsKey(key))
             {
                 return _commandsDic[key].Execute(arguments);
+            }
+            else if (_children.Count != 0)
+            {
+                foreach(INode node in _children) {
+                    if (node.ExecuteCommand(key, arguments))
+                    {
+                        return true;
+                    }
+                }
             }
             return false;
         }
@@ -169,6 +182,7 @@ namespace OHM.Nodes
 
         protected bool UnRegisterProperty(String key)
         {
+            bool result = false;
             if (_propertiesDic.ContainsKey(Key))
             {
                 var property = _propertiesDic[key];
@@ -176,24 +190,26 @@ namespace OHM.Nodes
                 {
                     if (_propertiesDic.Remove(key))
                     {
-                        return true;
+                        result = true;
                     }
-                    else
+                   /* else (Weird line remove on the 4 april 2016
                     {
                         _properties.Add(property);
-                    }
+                    }*/
                 }
-                
-                return false;
+                return result;
             }
-            return false;
+
+            return result;
         }
+       
         protected bool RegisterCommand(ICommand command)
         {
             if (_commandsDic.ContainsKey(command.Definition.Key))
             {
                 return false;
             }
+
             _commandsDic.Add(command.Definition.Key, command);
             _commands.Add(command);
             return true;

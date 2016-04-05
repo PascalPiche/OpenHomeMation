@@ -125,7 +125,7 @@ namespace WpfApplication1
 
             if (result.HasValue && result.Value)
             {
-                if (!vm.InterfaceManager.ExecuteCommand(command.NodeKey, command.Definition.Key, w.ArgumentsResult))
+                if (!vm.InterfaceManager.ExecuteCommand(command.InterfaceKey, command.NodeKey, command.Definition.Key, w.ArgumentsResult))
                 {
                     //Show alert
                     

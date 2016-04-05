@@ -1,4 +1,5 @@
 ﻿using OHM.Nodes;
+using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace OHM.Interfaces
@@ -7,6 +8,8 @@ namespace OHM.Interfaces
     {
 
         InterfaceState State { get; }
+
+        bool ExecuteCommand(string nodeKey, string commandKey, Dictionary<string, object> arguments);
 
         bool IsRunning { get; }
 

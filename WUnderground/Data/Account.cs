@@ -12,13 +12,16 @@ namespace WUnderground.Data
     public class Account : NodeAbstract
     {
 
-        private string _key;
-        public Account(string keyId, string name, ILogger logger, string key)
+        private string _apiKey;
+
+        
+
+        public Account(string keyId, string name, ILogger logger, string apiKey)
             : base(keyId, name, logger)
         {
-            _key = key;
+            _apiKey = apiKey;
 
-            this.RegisterCommand(new AddLocation(this));
+            this.RegisterCommand(new AddLocation(this, _apiKey));
             this.RegisterCommand(new RemoveAccount(this));
         }
 
@@ -26,5 +29,6 @@ namespace WUnderground.Data
         {
             return this.AddChild(location);
         }
+
     }
 }

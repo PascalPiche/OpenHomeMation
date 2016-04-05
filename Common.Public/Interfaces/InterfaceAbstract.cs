@@ -2,6 +2,7 @@
 using OHM.Logger;
 using OHM.Nodes;
 using OHM.Sys;
+using System.Collections.Generic;
 
 namespace OHM.Interfaces
 {
@@ -13,6 +14,7 @@ namespace OHM.Interfaces
         
         private IOhmSystemInterfaceGateway _system;
 
+        #region Ctor
         public InterfaceAbstract(string key, string name, ILogger logger) 
             : base(key, name, logger)
         {
@@ -20,6 +22,10 @@ namespace OHM.Interfaces
             //Register Default commands
 
         }
+
+        #endregion
+
+        #region public
 
         public InterfaceState State
         {
@@ -47,8 +53,6 @@ namespace OHM.Interfaces
             Logger.Info(this.Name + " Interface Inited");
         }
 
-        protected abstract void Start();
-
         public void Shutdowning()
         {
             Logger.Info(this.Name + " Interface Shutdowning");
@@ -58,7 +62,14 @@ namespace OHM.Interfaces
             Logger.Info(this.Name + " Interface Shutdowned");
         }
 
-        protected abstract void Shutdown();
+        public bool ExecuteCommand(string nodeKey, string commandKey, Dictionary<string, object> arguments)
+        {
+            if (_commandsDic.ContainsKey(commandKey))
+            {
+                return _commandsDic[commandKey].Execute(arguments);
+            }
+            return false;
+        }
 
         public void Init(IDataStore data, IOhmSystemInterfaceGateway system)
         {
@@ -68,11 +79,11 @@ namespace OHM.Interfaces
             _system = system;
         }
 
-
         public bool StartOnLaunch
         {
             get { return _startOnLaunch; }
-            set { 
+            set
+            {
 
                 _startOnLaunch = value;
                 DataStore.StoreBool("StartOnLaunch", value);
@@ -81,5 +92,14 @@ namespace OHM.Interfaces
             }
 
         }
+
+        #endregion
+
+        #region protected
+        protected abstract void Start();
+
+        protected abstract void Shutdown();
+
+        #endregion
     }
 }

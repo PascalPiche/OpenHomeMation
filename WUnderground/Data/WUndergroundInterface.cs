@@ -69,16 +69,16 @@ namespace WUnderground.Data
 
         internal bool CreateLocationCommand(Account node, string locationName, int zip, int magic, int wmo)
         {
-            IDataDictionary dataAccount = _registeredAccounts.GetDataDictionary(node.Key);
+            IDataDictionary dataAccount = _registeredAccounts.GetOrCreateDataDictionary(this.Key);
             IDataDictionary accountLocations = dataAccount.GetOrCreateDataDictionary("locations");
 
             if (!accountLocations.ContainsKey(locationName))
             {
-                node.AddLocation(null);
+                node.AddLocation(new Location(locationName, locationName, this.Logger));
             }
             else
             {
-
+                //TODO: Log existing key exist
             }
             
             return false;

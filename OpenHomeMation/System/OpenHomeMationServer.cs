@@ -40,8 +40,9 @@ namespace OHM.Sys
             ServiceHost ohmService = null;
             try
             {
+
                 //Base Address for StudentService
-                Uri httpBaseAddress = new Uri("http://localhost/ohm");
+                Uri httpBaseAddress = new Uri("http://localhost/ohm/api/");
 
                 //Instantiate ServiceHost
                 ohmService = new ServiceHost(typeof(OpenHomeMationServer), httpBaseAddress);

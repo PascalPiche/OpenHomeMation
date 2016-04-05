@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication1", "Cons
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OhmClient", "OhmClient\OhmClient.csproj", "{475D962D-887D-43AE-9FEB-C5515A390334}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WUnderground.test", "WUnderground.test\WUnderground.test.csproj", "{0450B235-BE6F-4159-99DC-EE9B90D6B39A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,10 @@ Global
 		{475D962D-887D-43AE-9FEB-C5515A390334}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{475D962D-887D-43AE-9FEB-C5515A390334}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{475D962D-887D-43AE-9FEB-C5515A390334}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0450B235-BE6F-4159-99DC-EE9B90D6B39A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0450B235-BE6F-4159-99DC-EE9B90D6B39A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0450B235-BE6F-4159-99DC-EE9B90D6B39A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0450B235-BE6F-4159-99DC-EE9B90D6B39A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -101,5 +107,6 @@ Global
 		{3DB57F59-9604-4380-8C99-33130E100926} = {6EE2369D-2251-4E8C-93C1-2792A79AC692}
 		{645A5CA5-0505-4312-9C73-364BC66C1F7C} = {6EE2369D-2251-4E8C-93C1-2792A79AC692}
 		{3E479F23-5600-4ED8-A92D-CB2EF42EB772} = {A9DAFDAB-3662-426A-A666-176F7908D87C}
+		{0450B235-BE6F-4159-99DC-EE9B90D6B39A} = {06E8058D-7D7B-4A04-B567-CC3A9CC87073}
 	EndGlobalSection
 EndGlobal

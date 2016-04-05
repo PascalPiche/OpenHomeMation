@@ -19,10 +19,14 @@ namespace WUnderground.Commands
             }
         }
 
-        public AddLocation(Account node)
+        string _apiKey;
+
+        public AddLocation(Account node, string apiKey)
             : base(node, "addLocation", "Add a location", "")
         {
-            
+
+            _apiKey = apiKey;
+
             this.Definition.ArgumentsDefinition.Add(
                 "name",
                 new ArgumentDefinition(
@@ -105,7 +109,7 @@ namespace WUnderground.Commands
                 return false;
             }
 
-            var result = WUnderground.Api.WUndergroundApi.QueryLocationExist(zip, magic, wmo);
+            var result = WUnderground.Api.WUndergroundApi.QueryLocationExist(_apiKey, zip, magic, wmo);
 
             return WUndergroundInterface.CreateLocationCommand(_account, name, zip, magic, wmo);
         }

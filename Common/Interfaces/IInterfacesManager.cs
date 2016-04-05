@@ -24,5 +24,7 @@ namespace OHM.Interfaces
 
         bool ExecuteCommand(string interfaceKey, string commandKey, Dictionary<string, object> arguments);
 
+        bool ExecuteCommand(string interfaceKey, string nodeKey, string commandKey, Dictionary<string, object> arguments);
+
     }
 }

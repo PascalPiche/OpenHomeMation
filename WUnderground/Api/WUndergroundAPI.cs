@@ -5,6 +5,9 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
+using WUnderground.Api.Data;
+
 
 namespace WUnderground.Api
 {
@@ -12,17 +15,27 @@ namespace WUnderground.Api
     {
         private const string _baseUrl = "http://api.wunderground.com/api/";
 
-        public static bool QueryLocationExist(int zip, int magic, int wmo)
+        public static bool QueryLocationExist(string key, int zip, int magic, int wmo)
         {
-            string result = Query("condition", zip + "." + magic + "." + wmo);
-            return false;
+            string result = Query(key, "conditions", CreateZMW(zip, magic, wmo));
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(result);
+            return (doc.GetElementsByTagName("current_observation").Count == 1);
         }
 
-        
-
-        private static string Query(string type, string zmw)
+        public static WUndergroundConditionsResponse QueryConditions(string key, int zip, int magic, int wmo)
         {
-            string url = _baseUrl + "q/" + type + "/zmw:" + zmw + ".json";
+            return WUndergroudResponseFactory.CreateWUndergroundConditionsResponse(Query(key, "conditions", CreateZMW(zip, magic, wmo)));
+        }
+
+        private static string CreateZMW(int zip, int magic, int wmo)
+        {
+            return zip.ToString("00000") + "." + magic + "." + wmo;
+        }
+
+        private static string Query(string key, string type, string zmw)
+        {
+            string url = _baseUrl + key + "/" + type + "/q/zmw:" + zmw + ".xml";
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             try
             {
@@ -43,6 +56,11 @@ namespace WUnderground.Api
                     // log errorText
                 }
                 throw;
+            }
+            catch (IOException ex)
+            {
+                //Log error
+                return "";
             }
         }
     }

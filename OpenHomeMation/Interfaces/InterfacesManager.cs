@@ -151,15 +151,33 @@ namespace OHM.Interfaces
             return result;
         }
 
-        public bool ExecuteCommand(string interfaceKey, string commandKey, Dictionary<string, object> arguments)
+        public bool ExecuteCommand(string interfaceKey, string nodeKey, string commandKey, Dictionary<string, object> arguments)
         {
+
             //Find interface
             IInterface interf = GetRunningInterface(interfaceKey);
             if (interf != null)
             {
-                return interf.ExecuteCommand(commandKey, arguments);
+                if (nodeKey != interfaceKey)
+                {
+                    //Find node
+                    return interf.ExecuteCommand(commandKey, arguments);
+                }
+                else
+                {
+                    return interf.ExecuteCommand(commandKey, arguments);
+                }
+            }
+            else
+            {
+                //TODO LOG DEBUG
             }
             return false;
+        }
+
+        public bool ExecuteCommand(string interfaceKey, string commandKey, Dictionary<string, object> arguments)
+        {
+            return ExecuteCommand(interfaceKey, interfaceKey, arguments);
         }
 
         public bool CanExecuteCommand(string interfaceKey, string commandKey)
