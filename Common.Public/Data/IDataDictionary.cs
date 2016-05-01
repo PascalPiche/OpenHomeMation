@@ -8,6 +8,10 @@ namespace OHM.Data
 
         IEnumerable<string> Keys { get; }
 
+        void StoreInt(string key, int value);
+
+        int GetInt(string key);
+
         void StoreString(string key, string value);
 
         String GetString(string key);

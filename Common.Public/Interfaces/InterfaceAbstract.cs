@@ -64,6 +64,26 @@ namespace OHM.Interfaces
 
         public bool ExecuteCommand(string nodeKey, string commandKey, Dictionary<string, object> arguments)
         {
+            if (this.Key == nodeKey)
+            {
+                return this.ExecuteCommand(commandKey, arguments);
+            }
+            else
+            {
+                //Lookup the node list
+                INode node = this.GetChild(nodeKey);
+                if (node != null)
+                {
+                    return node.ExecuteCommand(commandKey, arguments);
+                }
+            }
+            
+            return false;
+        }
+
+        internal bool ExecuteCommand(string commandKey, Dictionary<string, object> arguments)
+        {
+            //We need to found the right node
             if (_commandsDic.ContainsKey(commandKey))
             {
                 return _commandsDic[commandKey].Execute(arguments);

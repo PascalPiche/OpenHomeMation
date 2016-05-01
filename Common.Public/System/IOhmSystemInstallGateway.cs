@@ -9,5 +9,6 @@ namespace OHM.Sys
 
         bool RegisterInterface(string key);
 
+        bool RegisterVrType(string key);
     }
 }

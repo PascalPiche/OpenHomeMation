@@ -59,8 +59,8 @@ namespace WUnderground.Api
             }
             catch (IOException ex)
             {
-                //Log error
-                return "";
+
+                throw;
             }
         }
     }

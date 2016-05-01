@@ -65,7 +65,10 @@
     <Compile Include="Data\DataStore.cs" />
     <Compile Include="Data\DataValueBool.cs" />
     <Compile Include="Data\DataValueDictionary.cs" />
-    <Compile Include="Data\DataValueString.cs" />
+    <Compile Include="Data\DataValueInt.cs" />
+    <Compile Include="Data\DataValueString.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Data\FileDataManager.cs" />
     <Compile Include="Data\IDataValue.cs" />
     <Compile Include="Interfaces\InterfacesManager.cs" />
@@ -79,6 +82,7 @@
     <Compile Include="Plugins\PluginsManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="System\OpenHomeMationServer.cs" />
+    <Compile Include="Vr\VrManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\log4net.dll" />
@@ -112,6 +116,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="InterfacesManager_GetPluginForInterface.sequencediagram" />
+    <None Include="IPluginsManager_GetPlugin.sequencediagram" />
     <None Include="System\_diagrams\OpenHomeMation_start.sequencediagram" />
     <None Include="System\_diagrams\ClassDiagram1.cd" />
     <None Include="Data\DataClassDiagram.cd" />
@@ -121,6 +127,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="InterfacesManager_GetPluginForInterface.sequencediagram.layout">
+      <DependentUpon>InterfacesManager_GetPluginForInterface.sequencediagram</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IPluginsManager_GetPlugin.sequencediagram.layout">
+      <DependentUpon>IPluginsManager_GetPlugin.sequencediagram</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="System\_diagrams\OpenHomeMation_start.sequencediagram.layout">
       <DependentUpon>OpenHomeMation_start.sequencediagram</DependentUpon>
     </EmbeddedResource>

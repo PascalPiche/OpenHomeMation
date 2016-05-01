@@ -42,11 +42,11 @@ namespace WUnderground.Data
         {
             if (_registeredAccounts.ContainsKey(username))
             {
-                //todo: Log warning
+                Logger.Error("WUnderground Account : " + username + " already exist, cannot create duplicate account");
                 return false;
             }
 
-            if (CreateAccountNode("Account : " + username, keyId))
+            if (CreateAccountNode(username, keyId))
             {
                 //Store new account
                 IDataDictionary accountsMetaInfo = _registeredAccounts.GetOrCreateDataDictionary(username);
@@ -54,7 +54,7 @@ namespace WUnderground.Data
                 accountsMetaInfo.StoreString("key", keyId);
                 _registeredAccounts.StoreDataDictionary(username, accountsMetaInfo);
 
-                //todo: Log action
+                Logger.Info("WUnderground : Saving new account : " + username);
                 this.DataStore.Save();
                 return true;
             }
@@ -63,49 +63,89 @@ namespace WUnderground.Data
 
         internal bool RemoveAccountCommand(Account node)
         {
-
-            return false;
-        }
-
-        internal bool CreateLocationCommand(Account node, string locationName, int zip, int magic, int wmo)
-        {
-            IDataDictionary dataAccount = _registeredAccounts.GetOrCreateDataDictionary(this.Key);
-            IDataDictionary accountLocations = dataAccount.GetOrCreateDataDictionary("locations");
-
-            if (!accountLocations.ContainsKey(locationName))
+            if (_registeredAccounts.ContainsKey(node.Key))
             {
-                node.AddLocation(new Location(locationName, locationName, this.Logger));
-            }
-            else
-            {
-                //TODO: Log existing key exist
+                if (this.RemoveChild(node))
+                {
+                    _registeredAccounts.RemoveKey(node.Key);
+                    return this.DataStore.Save();
+                }
             }
             
             return false;
         }
 
+        internal bool CreateLocationCommand(Account node, string locationName, int zip, int magic, int wmo)
+        {
+            Boolean result = false;
+            IDataDictionary dataAccount = _registeredAccounts.GetOrCreateDataDictionary(this.Key);
+            IDataDictionary accountLocations = dataAccount.GetOrCreateDataDictionary("locations");
+            _registeredAccounts.StoreDataDictionary("locations", accountLocations);
+
+            if (!accountLocations.ContainsKey(locationName))
+            {
+                
+                if (node.AddLocation(new Location(locationName, locationName, this.Logger, zip, magic, wmo)))
+                {
+                    var locationData = accountLocations.GetOrCreateDataDictionary(locationName);
+                    locationData.StoreString("name", locationName);
+                    locationData.StoreInt("zip", zip);
+                    locationData.StoreInt("magic", magic);
+                    locationData.StoreInt("wmo", wmo);
+
+                    accountLocations.StoreDataDictionary(locationName, locationData);
+                    return DataStore.Save();
+                }
+                else
+                {
+                    Logger.Error("WUnderground : Error when creating new location " + locationName);
+                }
+            }
+            else
+            {
+                Logger.Error("WUnderground : Location " + locationName + " already exists");
+            }
+
+            return result;
+        }
+
         private void LoadRegisteredAccounts()
         {
-            foreach (string item in _registeredAccounts.Keys)
+            foreach (string itemKey in _registeredAccounts.Keys)
             {
-                IDataDictionary data = _registeredAccounts.GetDataDictionary(item);
+                IDataDictionary data = _registeredAccounts.GetDataDictionary(itemKey);
                 string username = data.GetString("username");
                 string key = data.GetString("key");
                 
-                if (CreateAccountNode("Account : " + username, key))
+                if (CreateAccountNode(username, key))
                 {
                     //Load registered location
+                    IDataDictionary locations = data.GetDataDictionary("locations");
+                    foreach (string locationKey in locations.Keys)
+                    {
+                        IDataDictionary locationData = locations.GetDataDictionary(locationKey);
+                        int zip = locationData.GetInt("zip");
+                        int magic = locationData.GetInt("magic");
+                        int wmo = locationData.GetInt("wmo");
+
+                        this.GetAccountNode(username).AddLocation(new Location(locationKey, locationKey, this.Logger, zip, magic, wmo));
+                    }
 
                 } else {
-                    //todo: Log error
+                    Logger.Error("WUnderground : Error will creating saved accound node :  " + username);
                 }
             }
         }
 
         private bool CreateAccountNode(string username, string key) {
             //Create Account
-            var account = new Account(username, username, this.Logger, key);
+            var account = new Account(username, "Account : " + username, this.Logger, key);
             return this.AddChild(account);
+        }
+
+        private Account GetAccountNode(string key)
+        {
+            return (Account)this.GetChild(key);
         }
     }
 }

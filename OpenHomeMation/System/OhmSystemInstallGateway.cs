@@ -24,5 +24,10 @@ namespace OHM.Sys
         {
             return _system.InterfacesMng.RegisterInterface(key, _plugin, _system);
         }
+
+        public bool RegisterVrType(string key)
+        {
+            return _system.InterfacesMng.RegisterInterface(key, _plugin, _system);
+        }
     }
 }

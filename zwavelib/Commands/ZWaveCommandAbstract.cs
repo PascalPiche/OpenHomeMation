@@ -14,11 +14,12 @@ namespace ZWaveLib.Commands
 
         protected new ZWaveNode Node
         {
-            get { return (ZWaveNode)this.Node; }
+            get { return (ZWaveNode)base.Node; }
         }
+
         protected new ZWaveInterface Interface
         {
-            get { return (ZWaveInterface)this.Interface; }
+            get { return (ZWaveInterface)base.Interface; }
         }
 
         public ZWaveCommandAbstract(INode node, string key, string name, string description) 

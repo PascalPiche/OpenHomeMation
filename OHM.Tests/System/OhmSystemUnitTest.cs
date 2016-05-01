@@ -6,6 +6,7 @@ using OHM.Interfaces;
 using OHM.Plugins;
 using OHM.Logger;
 using OHM.Data;
+using OHM.Common.Vr;
 
 namespace OHM.Sys.Tests
 {
@@ -18,7 +19,8 @@ namespace OHM.Sys.Tests
             var intMng = MockRepository.GenerateMock<IInterfacesManager>();
             var loggerMng = MockRepository.GenerateStub<ILoggerManager>();
             var dataMng = MockRepository.GenerateStub<IDataManager>();
-            var target = new OhmSystem(intMng, loggerMng, dataMng);
+            var vrMng = MockRepository.GenerateStub<IVrManager>();
+            var target = new OhmSystem(intMng, vrMng, loggerMng, dataMng);
             var plugin = MockRepository.GenerateStub<IPlugin>();
             var logger = MockRepository.GenerateStub<ILogger>();
             plugin.Stub(x => x.Name).Return("name");

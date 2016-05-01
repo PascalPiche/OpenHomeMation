@@ -1,4 +1,5 @@
-﻿using OHM.Data;
+﻿using OHM.Common.Vr;
+using OHM.Data;
 using OHM.Interfaces;
 using OHM.Logger;
 using OHM.Plugins;
@@ -14,14 +15,16 @@ namespace OHM.Sys
         private IDataManager _dataMng;
         private OhmSystem _ohmSystem;
         private IInterfacesManager _interfacesMng;
+        private IVrManager _vrMng;
 
-        public OpenHomeMation(IPluginsManager pluginsMng, IDataManager dataMng, ILoggerManager loggerMng, IInterfacesManager interfacesMng)
+        public OpenHomeMation(IPluginsManager pluginsMng, IDataManager dataMng, ILoggerManager loggerMng, IInterfacesManager interfacesMng, IVrManager vrMng)
         {
             //Store dependency
             this._loggerMng = loggerMng;
             this._pluginsMng = pluginsMng;
             this._dataMng = dataMng;
             this._interfacesMng = interfacesMng;
+            this._vrMng = vrMng;
         }
 
         #region "Public"
@@ -36,9 +39,9 @@ namespace OHM.Sys
 
         public void start()
         {
-            _logger = _loggerMng.GetLogger("root");
-            _logger.Info("Starting OHM");
-            _ohmSystem = new OhmSystem( _interfacesMng, _loggerMng, _dataMng);
+            _logger = _loggerMng.GetLogger("OHM");
+            _logger.Info(_logger.Logger.Name + ": " + "Starting");
+            _ohmSystem = new OhmSystem( _interfacesMng, _vrMng, _loggerMng, _dataMng);
             _dataMng.Init();
 
             if (!StartPluginMng())

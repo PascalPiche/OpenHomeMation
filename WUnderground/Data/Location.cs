@@ -10,12 +10,10 @@ namespace WUnderground.Data
 {
     public class Location : NodeAbstract
     {
-         //private string _key;
 
-         public Location(string keyId, string name, ILogger logger)
+        public Location(string keyId, string name, ILogger logger, int zip, int magic, int wmo)
             : base(keyId, name, logger)
         {
-            //_key = key;
 
             
         }

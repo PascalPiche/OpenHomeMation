@@ -1,8 +1,10 @@
-﻿using OHM.Data;
+﻿using OHM.Common.Vr;
+using OHM.Data;
 using OHM.Interfaces;
 using OHM.Logger;
 using OHM.Plugins;
 using OHM.Sys;
+using OHM.Vr;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,6 +24,7 @@ namespace OpenHomeMationService
         private ILoggerManager loggerMng;
         private IPluginsManager pluginMng;
         private IInterfacesManager interfacesMng;
+        private IVrManager vrMng;
 
         public OpenHomeMationService()
         {
@@ -34,7 +37,8 @@ namespace OpenHomeMationService
             var dataMng = new FileDataManager(loggerMng, AppDomain.CurrentDomain.BaseDirectory + "\\data\\");
             pluginMng = new PluginsManager(loggerMng, AppDomain.CurrentDomain.BaseDirectory + "\\plugins\\");
             interfacesMng = new InterfacesManager(loggerMng, pluginMng);
-            ohm = new OpenHomeMation(pluginMng, dataMng, loggerMng, interfacesMng);
+            vrMng = new VrManager(loggerMng, pluginMng);
+            ohm = new OpenHomeMation(pluginMng, dataMng, loggerMng, interfacesMng, vrMng);
             ohm.start();
         }
 

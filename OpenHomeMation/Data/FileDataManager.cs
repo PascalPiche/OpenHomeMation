@@ -98,8 +98,9 @@ namespace OHM.Data
             IList<Type> listKnowTypes = new List<Type>();
             listKnowTypes.Add(typeof(DataValueDictionary));
             listKnowTypes.Add(typeof(DataDictionary));
-            listKnowTypes.Add(typeof(DataValueString));
             listKnowTypes.Add(typeof(DataValueBool));
+            listKnowTypes.Add(typeof(DataValueInt));
+            listKnowTypes.Add(typeof(DataValueString));
             return listKnowTypes;
         }
 

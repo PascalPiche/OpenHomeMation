@@ -93,6 +93,25 @@ namespace OHM.Data
 
         #endregion
 
+        #region Int
+
+        public void StoreInt(string key, int value)
+        {
+            StoreValue(key, new DataValueInt(value));
+        }
+
+        public int GetInt(string key)
+        {
+            var value = GetValue(key);
+            if (value != null)
+            {
+                return ((DataValueInt)value).Value;
+            }
+            return -1;
+        }
+
+        #endregion
+
         public bool RemoveKey(String key)
         {
             return _dataValues.Remove(key);

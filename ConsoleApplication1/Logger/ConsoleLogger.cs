@@ -15,38 +15,57 @@ namespace ConsoleApplication1.Logger
 
         public override void Debug(object message)
         {
+            
             base.Debug(message);
-            consoleLog(message.ToString());
+            if (base.IsDebugEnabled)
+            {
+                consoleLog("DEBUG: " + message.ToString());
+            }
         }
 
         public override void Debug(object message, Exception exception)
         {
             base.Debug(message, exception);
-            consoleLog(message.ToString());
+            if (base.IsDebugEnabled)
+            {
+                consoleLog("DEBUG: " + message.ToString());
+            }
         }
 
         public override void Error(object message)
         {
             base.Error(message);
-            consoleLog(message.ToString());
+            if (base.IsErrorEnabled)
+            {
+                consoleLog("ERROR: " + message.ToString());
+            }
         }
 
         public override void Error(object message, Exception exception)
         {
             base.Error(message, exception);
-            consoleLog(message.ToString());
+            if (base.IsErrorEnabled)
+            {
+                consoleLog("ERROR: " + message.ToString());
+            }
         }
 
         public override void Fatal(object message)
         {
             base.Fatal(message);
-            consoleLog(message.ToString());
+            if (base.IsFatalEnabled)
+            {
+                consoleLog("FATAL: " + message.ToString());
+            }
         }
 
         public override void Fatal(object message, Exception exception)
         {
             base.Fatal(message, exception);
-            consoleLog(message.ToString());
+            if (base.IsFatalEnabled)
+            {
+                consoleLog("FATAL: " + message.ToString());
+            }
         }
 
         public override void Info(object message)
@@ -64,16 +83,22 @@ namespace ConsoleApplication1.Logger
         public override void Warn(object message)
         {
             base.Warn(message);
-            consoleLog(message.ToString());
+            if (base.IsWarnEnabled)
+            {
+                consoleLog("WARN: " + message.ToString());
+            }
         }
 
         public override void Warn(object message, Exception exception)
         {
             base.Warn(message, exception);
-            consoleLog(message.ToString());
+            if (base.IsWarnEnabled)
+            {
+                consoleLog("WARN: " + message.ToString());
+            }
         }
 
-        public void consoleLog(string message)
+        private void consoleLog(string message)
         {
             System.Console.WriteLine(message);
         }

@@ -1,10 +1,12 @@
 ﻿using OHM.Commands;
+using OHM.Common.Vr;
 using OHM.Data;
 using OHM.Interfaces;
 using OHM.Logger;
 using OHM.Nodes;
 using OHM.Plugins;
 using OHM.Sys;
+using OHM.Vr;
 using System;
 using System.ComponentModel;
 using System.Windows;
@@ -112,7 +114,11 @@ namespace WpfApplication1
                 }
                 else
                 {
-                    vm.InterfaceManager.ExecuteCommand(command.NodeKey, command.Definition.Key, null);
+                    if (!vm.InterfaceManager.ExecuteCommand(command.InterfaceKey, command.NodeKey, command.Definition.Key, null))
+                    {
+                        //Show alert
+                        MessageBox.Show("The command was not successfully executed", "Command error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
+                    }
                 }
             }
         }
@@ -128,7 +134,7 @@ namespace WpfApplication1
                 if (!vm.InterfaceManager.ExecuteCommand(command.InterfaceKey, command.NodeKey, command.Definition.Key, w.ArgumentsResult))
                 {
                     //Show alert
-                    
+                    MessageBox.Show("The command was not successfully executed", "Command error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
                 }
             }
         }
@@ -154,7 +160,11 @@ namespace WpfApplication1
                 }
                 else
                 {
-                    vm.InterfaceManager.ExecuteCommand(command.NodeKey, command.Definition.Key, null);
+                    if (!vm.InterfaceManager.ExecuteCommand(command.InterfaceKey, command.NodeKey, command.Definition.Key, null))
+                    {
+                        //Show alert
+                        MessageBox.Show("The command was not successfully executed", "Command error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
+                    }
                 }
             }
         }
@@ -186,6 +196,7 @@ namespace WpfApplication1
         private ILoggerManager loggerMng;
         private IPluginsManager pluginMng;
         private IInterfacesManager interfacesMng;
+        private IVrManager vrMng;
 
         private object selectedNode;
 
@@ -200,7 +211,8 @@ namespace WpfApplication1
             var dataMng = new FileDataManager(loggerMng, AppDomain.CurrentDomain.BaseDirectory + "\\data\\");
             pluginMng = new PluginsManager(loggerMng, AppDomain.CurrentDomain.BaseDirectory + "\\plugins\\");
             interfacesMng = new InterfacesManager(loggerMng, pluginMng);
-            ohm = new OpenHomeMation(pluginMng, dataMng, loggerMng, interfacesMng);
+            vrMng = new VrManager(loggerMng, pluginMng);
+            ohm = new OpenHomeMation(pluginMng, dataMng, loggerMng, interfacesMng, vrMng);
             ohm.start();
         }
 

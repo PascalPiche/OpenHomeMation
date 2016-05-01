@@ -134,6 +134,43 @@ namespace ZWaveLib
         private void NotificationHandlerThreadSafe(ZWNotification n)
         {
 
+            // Log Base Notification Value
+            Logger.Debug("ZWave: ReceivingNotification : " + 
+                "Code -> " + n.GetCode() + 
+                " | Type -> " + n.GetType() +
+                " | HomeId -> " + n.GetHomeId() +
+                " | NodeId -> " + n.GetNodeId() + 
+                " | ValueId.CommandClassId -> " + n.GetValueID().GetCommandClassId() +
+                " | ValueId.Genre -> " + n.GetValueID().GetGenre() +
+                " | ValueId.HomeId -> " + n.GetValueID().GetHomeId() + 
+                " | ValueId.Id -> " + n.GetValueID().GetId() +
+                " | ValueId.Index -> " + n.GetValueID().GetIndex() +
+                " | ValueId.Instance -> " + n.GetValueID().GetInstance() +
+                " | ValueId.NodeId -> " + n.GetValueID().GetNodeId() +
+                " | ValueId.Type -> " + n.GetValueID().GetType() +
+                " | GroupIdx -> " + n.GetGroupIdx() +
+                " | Event -> " + n.GetEvent() +
+                " | Byte -> " + n.GetByte());
+
+            switch (n.GetCode())
+            {
+                case ZWNotification.Code.Alive:
+
+                    break;
+                case ZWNotification.Code.Awake:
+                    break;
+                case ZWNotification.Code.Dead:
+                    break;
+                case ZWNotification.Code.MsgComplete:
+                    break;
+                case ZWNotification.Code.NoOperation:
+                    break;
+                case ZWNotification.Code.Sleep:
+                    break;
+                case ZWNotification.Code.Timeout:
+                    break;
+            }
+
             switch (n.GetType())
             {
                 //Driver 
@@ -262,6 +299,8 @@ namespace ZWaveLib
             Logger.Info("ZWave: Notification Controller Ready:" + GetNodeIdForLog(n));
             string key = NotificationTool.MakeNodeKey(n);
             string name = NotificationTool.GetNodeName(n, this.Manager);
+
+            
             uint homeId = n.GetHomeId();
             byte nodeId = n.GetNodeId();
 

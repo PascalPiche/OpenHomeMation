@@ -1,9 +1,11 @@
 ﻿using ConsoleApplication1.Logger;
+using OHM.Common.Vr;
 using OHM.Data;
 using OHM.Interfaces;
 using OHM.Logger;
 using OHM.Plugins;
 using OHM.Sys;
+using OHM.Vr;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +22,7 @@ namespace ConsoleApplication1
         private static ILoggerManager loggerMng;
         private static IPluginsManager pluginMng;
         private static IInterfacesManager interfacesMng;
+        private static IVrManager vrMng;
 
         static void Main(string[] args)
         {
@@ -29,7 +32,8 @@ namespace ConsoleApplication1
             var dataMng = new FileDataManager(loggerMng, AppDomain.CurrentDomain.BaseDirectory + "\\data\\");
             pluginMng = new PluginsManager(loggerMng, AppDomain.CurrentDomain.BaseDirectory + "\\plugins\\");
             interfacesMng = new InterfacesManager(loggerMng, pluginMng);
-            ohm = new OpenHomeMation(pluginMng, dataMng, loggerMng, interfacesMng);
+            vrMng = new VrManager(loggerMng, pluginMng);
+            ohm = new OpenHomeMation(pluginMng, dataMng, loggerMng, interfacesMng, vrMng);
             ohm.start();
 
             while (!exit)

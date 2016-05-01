@@ -40,7 +40,7 @@ namespace OHM.Interfaces
 
         #endregion
 
-        #region "Public api"
+        #region Public API
 
         public bool Init(IDataStore data, IOhmSystemInternal system)
         {
@@ -153,31 +153,27 @@ namespace OHM.Interfaces
 
         public bool ExecuteCommand(string interfaceKey, string nodeKey, string commandKey, Dictionary<string, object> arguments)
         {
+            _logger.Info("Executing Command -> Interface Key : " + interfaceKey + " -> Node Key : " + nodeKey + " -> Command Key : " + commandKey);
 
             //Find interface
             IInterface interf = GetRunningInterface(interfaceKey);
             if (interf != null)
             {
-                if (nodeKey != interfaceKey)
+                /*if (nodeKey != interfaceKey)
                 {
                     //Find node
                     return interf.ExecuteCommand(commandKey, arguments);
                 }
                 else
-                {
-                    return interf.ExecuteCommand(commandKey, arguments);
-                }
+                {*/
+                    return interf.ExecuteCommand(nodeKey, commandKey, arguments);
+                //}
             }
             else
             {
                 //TODO LOG DEBUG
             }
             return false;
-        }
-
-        public bool ExecuteCommand(string interfaceKey, string commandKey, Dictionary<string, object> arguments)
-        {
-            return ExecuteCommand(interfaceKey, interfaceKey, arguments);
         }
 
         public bool CanExecuteCommand(string interfaceKey, string commandKey)
@@ -302,6 +298,5 @@ namespace OHM.Interfaces
 
         #endregion
 
-        
     }
 }

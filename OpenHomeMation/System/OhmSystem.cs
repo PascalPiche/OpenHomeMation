@@ -1,4 +1,5 @@
-﻿using OHM.Data;
+﻿using OHM.Common.Vr;
+using OHM.Data;
 using OHM.Interfaces;
 using OHM.Logger;
 
@@ -9,14 +10,16 @@ namespace OHM.Sys
         private ILoggerManager _loggerMng;
         private IInterfacesManager _interfacesMng;
         private IDataManager _dataMng;
+        private IVrManager _vrMng;
 
         #region "Ctor"
 
-        public OhmSystem(IInterfacesManager interfacesMng, ILoggerManager loggerMng, IDataManager dataMng)
+        public OhmSystem(IInterfacesManager interfacesMng, IVrManager vrMng, ILoggerManager loggerMng, IDataManager dataMng)
         {
             _loggerMng = loggerMng;
             _interfacesMng = interfacesMng;
             _dataMng = dataMng;
+            _vrMng = vrMng;
         }
 
         #endregion
@@ -28,6 +31,11 @@ namespace OHM.Sys
         public IInterfacesManager InterfacesMng { get { return _interfacesMng; } }
 
         public IDataManager DataMng { get { return _dataMng; } }
+
+        public Common.Vr.IVrManager vrMng
+        {
+            get { return _vrMng; }
+        }
 
         #endregion
 
@@ -48,6 +56,6 @@ namespace OHM.Sys
             return new OhmSystemUnInstallGateway(this, plugin);
         }
 
-        #endregion
+        #endregion       
     }
 }

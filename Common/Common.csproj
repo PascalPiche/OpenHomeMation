@@ -48,6 +48,8 @@
     <Compile Include="System\IOhmSystemInternal.cs" />
     <Compile Include="Plugins\IPluginsManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Vr\IVrManager.cs" />
+    <Compile Include="Vr\IVrType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
