@@ -45,8 +45,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration.Install" />
@@ -118,13 +119,13 @@
   <ItemGroup>
     <None Include="InterfacesManager_GetPluginForInterface.sequencediagram" />
     <None Include="IPluginsManager_GetPlugin.sequencediagram" />
+    <None Include="packages.config" />
     <None Include="System\_diagrams\OpenHomeMation_start.sequencediagram" />
     <None Include="System\_diagrams\ClassDiagram1.cd" />
     <None Include="Data\DataClassDiagram.cd" />
     <None Include="Data\DataClassDiagramFull.cd" />
     <None Include="Logger\LoggerClassDiagram.cd" />
     <None Include="Logger\LoggerClassDiagramFull.cd" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="InterfacesManager_GetPluginForInterface.sequencediagram.layout">
