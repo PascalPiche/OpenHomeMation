@@ -35,6 +35,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OhmClient", "OhmClient\OhmC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WUnderground.test", "WUnderground.test\WUnderground.test.csproj", "{0450B235-BE6F-4159-99DC-EE9B90D6B39A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{6BBF5F63-58D3-4A0D-A7EA-C6F66849FFFE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +95,10 @@ Global
 		{0450B235-BE6F-4159-99DC-EE9B90D6B39A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0450B235-BE6F-4159-99DC-EE9B90D6B39A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0450B235-BE6F-4159-99DC-EE9B90D6B39A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BBF5F63-58D3-4A0D-A7EA-C6F66849FFFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BBF5F63-58D3-4A0D-A7EA-C6F66849FFFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BBF5F63-58D3-4A0D-A7EA-C6F66849FFFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BBF5F63-58D3-4A0D-A7EA-C6F66849FFFE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
