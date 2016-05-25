@@ -6,8 +6,10 @@ namespace OHM.Data
     public interface IDataStore : IDataDictionary
     {
 
-        string Key { get; }
+        String Key { get; }
 
-        bool Save();
+        Boolean HasUnsavedData { get; }
+
+        Boolean Save();
     }
 }

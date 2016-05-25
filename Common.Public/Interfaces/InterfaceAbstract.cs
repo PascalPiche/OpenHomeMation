@@ -81,7 +81,7 @@ namespace OHM.Interfaces
             return false;
         }
 
-        internal bool ExecuteCommand(string commandKey, Dictionary<string, object> arguments)
+        internal new bool ExecuteCommand(string commandKey, Dictionary<string, object> arguments)
         {
             //We need to found the right node
             if (_commandsDic.ContainsKey(commandKey))

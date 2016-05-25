@@ -233,6 +233,27 @@ namespace OHM.Nodes
             return true;
         }
 
+        protected bool UpdateProperty(string key, Double value)
+        {
+            INodeProperty property;
+            if (_propertiesDic.TryGetValue(key, out property))
+            {
+                return property.SetValue(value);
+            }
+            return false;
+        }
+
+        protected bool UpdateProperty(string key, Int64 value)
+        {
+            INodeProperty property;
+            if (_propertiesDic.TryGetValue(key, out property))
+            {
+                return property.SetValue(value);
+            }
+            return false;
+        }
+
+
         protected bool UpdateProperty(string key, object value)
         {
             INodeProperty property;

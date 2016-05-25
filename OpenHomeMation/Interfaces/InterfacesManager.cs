@@ -251,15 +251,17 @@ namespace OHM.Interfaces
             if (plugin != null)
             {
                 var interfaceLogger = _loggerMng.GetLogger(GetInterfaceLoggerKey(key, plugin));
-                result = plugin.CreateInterface(key, interfaceLogger);
-                
-                if (result != null)
-                {
-                    var _interfData = system.DataMng.GetOrCreateDataStore(plugin.Id.ToString() + "." + result.Key);
+                var tempResult = plugin.CreateInterface(key, interfaceLogger);
 
-                    result.Init(_interfData, system.GetInterfaceGateway(result));
-                    _runningInterfaces.Add(result);
-                    _runningDic.Add(key, result);
+                if (tempResult != null)
+                {
+                    var _interfData = system.DataMng.GetOrCreateDataStore(plugin.Id.ToString() + "." + tempResult.Key);
+
+                    tempResult.Init(_interfData, system.GetInterfaceGateway(tempResult));
+                    _runningInterfaces.Add(tempResult);
+                    _runningDic.Add(key, tempResult);
+
+                    result = tempResult;
                 }
             }
 

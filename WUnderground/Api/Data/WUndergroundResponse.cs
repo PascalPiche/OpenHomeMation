@@ -43,6 +43,87 @@ namespace WUnderground.Api.Data
 
     public class WUndergroundConditionsResponse : WUndergroundResponse
     {
+
+        private Double _dewPoint_C;
+        public Double DewPoint_C
+        {
+            get
+            {
+                return _dewPoint_C;
+            }
+
+            internal set
+            {
+                _dewPoint_C = value;
+            }
+        }
+
+        private Double _dewPoint_F;
+        public Double DewPoint_F
+        {
+            get
+            {
+                return _dewPoint_F;
+            }
+
+            internal set
+            {
+                _dewPoint_F = value;
+            }
+        }
+
+        private Double _feelsLike_C;
+        public Double FeelsLike_C
+        {
+            get
+            {
+                return _feelsLike_C;
+            }
+            internal set
+            {
+                _feelsLike_C = value;
+            }
+        }
+       
+        private Double _feelsLike_F;
+        public Double FeelsLike_F 
+        {
+            get 
+            {
+                return _feelsLike_F;
+            }
+            internal set 
+            {
+                _feelsLike_F = value;
+            }
+        }
+
+        private String _heatIndex_C;
+        public String HeatIndex_C
+        {
+            get
+            {
+                return _heatIndex_C;
+            }
+            internal set
+            {
+                _heatIndex_C = value;
+            }
+        }
+
+        private String _heatIndex_F;
+        public String HeatIndex_F
+        {
+            get
+            {
+                return _heatIndex_F;
+            }
+            internal set
+            {
+                _heatIndex_F = value;
+            }
+        }
+
         private string _imageUrl;
         public string ImageUrl
         {
@@ -55,174 +136,6 @@ namespace WUnderground.Api.Data
             internal set
             {
                 _imageUrl = value;
-            }
-        }
-
-        private string _stationId;
-        public string StationId
-        {
-            get
-            {
-                return _stationId;
-            }
-            
-            internal set
-            {
-                _stationId = value;
-            }
-        }
-
-        private string _weather;
-        public string Weather
-        {
-            get
-            {
-                return _weather;
-            }
-
-            internal set
-            {
-                _weather = value;
-            }
-        }
-
-        private Int32 _temperatureF;
-        public Int32 TemperatureF
-        {
-            get
-            {
-                return _temperatureF;
-            }
-
-            internal set
-            {
-                _temperatureF = value;
-            }
-        }
-
-        private Int32 _temperatureC;
-        public Int32 TemperatureC
-        {
-            get
-            {
-                return _temperatureC;
-            }
-
-            internal set
-            {
-                _temperatureC = value;
-            }
-        }
-
-        private string _relativeHumidity;
-        public string RelativeHumidity
-        {
-            get
-            {
-                return _relativeHumidity;
-            }
-
-            internal set
-            {
-                _relativeHumidity = value;
-            }
-        }
-
-        private string _windDirection;
-        public string WindDirection
-        {
-            get
-            {
-                return _windDirection;
-            }
-
-            internal set
-            {
-                _windDirection = value;
-            }
-        }
-
-        private Int16 _windDegrees;
-        public Int16 WindDegrees
-        {
-            get
-            {
-                return _windDegrees;
-            }
-
-            internal set
-            {
-                _windDegrees = value;
-            }
-        }
-
-        private Int32 _windSpeed_Mph;
-        public Int32 WindSpeed_Mph
-        {
-            get
-            {
-                return _windSpeed_Mph;
-            }
-
-            internal set
-            {
-                _windSpeed_Mph = value;
-            }
-        }
-
-        private Int32 _windGust_Mph;
-        public Int32 WindGust_Mph
-        {
-            get
-            {
-                return _windGust_Mph;
-            }
-
-            internal set
-            {
-                _windGust_Mph = value;
-            }
-        }
-
-        private Int32 _windSpeed_Kph;
-        public Int32 WindSpeed_Kph
-        {
-            get
-            {
-                return _windSpeed_Kph;
-            }
-
-            internal set
-            {
-                _windSpeed_Kph = value;
-            }
-        }
-
-        private Int32 _windGust_Kph;
-        public Int32 WindGust_Kph
-        {
-            get
-            {
-                return _windGust_Kph;
-            }
-
-            internal set
-            {
-                _windGust_Kph = value;
-            }
-        }
-
-        private Int32 _pressure_mb;
-        public Int32 Pressure_mb
-        {
-            get
-            {
-                return _pressure_mb;
-            }
-
-            internal set
-            {
-                _pressure_mb = value;
             }
         }
 
@@ -240,6 +153,20 @@ namespace WUnderground.Api.Data
             }
         }
 
+        private Double _pressure_mb;
+        public Double Pressure_mb
+        {
+            get
+            {
+                return _pressure_mb;
+            }
+
+            internal set
+            {
+                _pressure_mb = value;
+            }
+        }
+
         private string _pressureTrend;
         public string PressureTrend
         {
@@ -254,64 +181,64 @@ namespace WUnderground.Api.Data
             }
         }
 
-        private Int32 _dewPointC;
-        public Int32 DewPointC
+        private string _relativeHumidity;
+        public string RelativeHumidity
         {
             get
             {
-                return _dewPointC;
+                return _relativeHumidity;
             }
 
             internal set
             {
-                _dewPointC = value;
+                _relativeHumidity = value;
             }
         }
 
-        private Int32 _dewPointF;
-        public Int32 DewPointF
+        private string _stationId;
+        public string StationId
         {
             get
             {
-                return _dewPointF;
+                return _stationId;
             }
-
+            
             internal set
             {
-                _dewPointF = value;
+                _stationId = value;
             }
         }
 
-        private Double _visibility_mi;
-        public Double VisibilityMi
+        private Double _temperatureC;
+        public Double Temperature_C
         {
             get
             {
-                return _visibility_mi;
+                return _temperatureC;
             }
 
             internal set
             {
-                _visibility_mi = value;
+                _temperatureC = value;
             }
         }
 
-        private Double _visibility_km;
-        public Double VisibilityKm
+        private Double _temperatureF;
+        public Double Temperature_F
         {
             get
             {
-                return _visibility_km;
+                return _temperatureF;
             }
 
             internal set
             {
-                _visibility_km = value;
+                _temperatureF = value;
             }
         }
 
         private Int16 _uv;
-        public Int16 UV 
+        public Int16 UV
         {
             get
             {
@@ -324,16 +251,145 @@ namespace WUnderground.Api.Data
             }
         }
 
+        private Double _visibility_km;
+        public Double Visibility_Km
+        {
+            get
+            {
+                return _visibility_km;
+            }
+
+            internal set
+            {
+                _visibility_km = value;
+            }
+        }
+
+        private Double _visibility_mi;
+        public Double Visibility_Mi
+        {
+            get
+            {
+                return _visibility_mi;
+            }
+
+            internal set
+            {
+                _visibility_mi = value;
+            }
+        }
+
+        private string _weather;
+        public string Weather
+        {
+            get
+            {
+                return _weather;
+            }
+
+            internal set
+            {
+                _weather = value;
+            }
+        }
+
         /*
-                heat_index_f
-                heat_index_c
-
-                windchill_f
+        windchill_f
                 windchill_c
+        */
 
-                feelslike_f
-                feelslike_c
+        private Int16 _windDegrees;
+        public Int16 WindDegrees
+        {
+            get
+            {
+                return _windDegrees;
+            }
+
+            internal set
+            {
+                _windDegrees = value;
+            }
+        }
+
+        private string _windDirection;
+        public string WindDirection
+        {
+            get
+            {
+                return _windDirection;
+            }
+
+            internal set
+            {
+                _windDirection = value;
+            }
+        }
+
+        private Double _windGust_Kph;
+        public Double WindGust_Kph
+        {
+            get
+            {
+                return _windGust_Kph;
+            }
+
+            internal set
+            {
+                _windGust_Kph = value;
+            }
+        }
+
+        private Double _windGust_Mph;
+        public Double WindGust_Mph
+        {
+            get
+            {
+                return _windGust_Mph;
+            }
+
+            internal set
+            {
+                _windGust_Mph = value;
+            }
+        }
+        
+        private Double _windSpeed_Kph;
+        public Double WindSpeed_Kph
+        {
+            get
+            {
+                return _windSpeed_Kph;
+            }
+
+            internal set
+            {
+                _windSpeed_Kph = value;
+            }
+        }
+
+        private Double _windSpeed_Mph;
+        public Double WindSpeed_Mph
+        {
+            get
+            {
+                return _windSpeed_Mph;
+            }
+
+            internal set
+            {
+                _windSpeed_Mph = value;
+            }
+        }
+
+
+
+        
+        /*
+
                 
+
+               
                 solarradiation??
                 
                 precip_1hr_in
@@ -379,8 +435,8 @@ namespace WUnderground.Api.Data
                 result.Weather = doc.SelectSingleNode("/response/current_observation/weather").InnerText;
 
                 //temperature
-                result.TemperatureF = Int32.Parse(doc.SelectSingleNode("/response/current_observation/temp_f").InnerText);
-                result.TemperatureC = Int32.Parse(doc.SelectSingleNode("/response/current_observation/temp_c").InnerText);
+                result.Temperature_F = Double.Parse(doc.SelectSingleNode("/response/current_observation/temp_f").InnerText, System.Globalization.NumberFormatInfo.InvariantInfo);
+                result.Temperature_C = Double.Parse(doc.SelectSingleNode("/response/current_observation/temp_c").InnerText, System.Globalization.NumberFormatInfo.InvariantInfo);
 
                 //Humidity
                 result.RelativeHumidity = doc.SelectSingleNode("/response/current_observation/relative_humidity").InnerText;
@@ -388,27 +444,24 @@ namespace WUnderground.Api.Data
                 //Wind (Include direction, speed and gust speed)
                 result.WindDirection = doc.SelectSingleNode("/response/current_observation/wind_dir").InnerText;
                 result.WindDegrees = Int16.Parse(doc.SelectSingleNode("/response/current_observation/wind_degrees").InnerText);
-                result.WindSpeed_Mph = Int32.Parse(doc.SelectSingleNode("/response/current_observation/wind_mph").InnerText);
-                result.WindGust_Mph = Int32.Parse(doc.SelectSingleNode("/response/current_observation/wind_gust_mph").InnerText);
-                result.WindSpeed_Kph = Int32.Parse(doc.SelectSingleNode("/response/current_observation/wind_kph").InnerText);
-                result.WindGust_Kph = Int32.Parse(doc.SelectSingleNode("/response/current_observation/wind_gust_kph").InnerText);
+                result.WindSpeed_Mph = Double.Parse(doc.SelectSingleNode("/response/current_observation/wind_mph").InnerText, System.Globalization.NumberFormatInfo.InvariantInfo);
+                result.WindGust_Mph = Double.Parse(doc.SelectSingleNode("/response/current_observation/wind_gust_mph").InnerText, System.Globalization.NumberFormatInfo.InvariantInfo);
+                result.WindSpeed_Kph = Double.Parse(doc.SelectSingleNode("/response/current_observation/wind_kph").InnerText, System.Globalization.NumberFormatInfo.InvariantInfo);
+                result.WindGust_Kph = Double.Parse(doc.SelectSingleNode("/response/current_observation/wind_gust_kph").InnerText, System.Globalization.NumberFormatInfo.InvariantInfo);
 
                 //Pressure
-                result.Pressure_mb = Int32.Parse(doc.SelectSingleNode("/response/current_observation/pressure_mb").InnerText);
-
-                //TODO MAKE CONVERSION GOOD fwith english version language
-                //result.Pressure_in = Double.Parse(doc.SelectSingleNode("/response/current_observation/pressure_in").InnerText);
-
+                result.Pressure_mb = Double.Parse(doc.SelectSingleNode("/response/current_observation/pressure_mb").InnerText, System.Globalization.NumberFormatInfo.InvariantInfo);
+                result.Pressure_in = Double.Parse(doc.SelectSingleNode("/response/current_observation/pressure_in").InnerText, System.Globalization.NumberFormatInfo.InvariantInfo);
                 result.PressureTrend = doc.SelectSingleNode("/response/current_observation/pressure_trend").InnerText;
 
-                result.DewPointF = Int32.Parse(doc.SelectSingleNode("/response/current_observation/dewpoint_f").InnerText);
-                result.DewPointC = Int32.Parse(doc.SelectSingleNode("/response/current_observation/dewpoint_c").InnerText);
+                result.DewPoint_F = Double.Parse(doc.SelectSingleNode("/response/current_observation/dewpoint_f").InnerText, System.Globalization.NumberFormatInfo.InvariantInfo);
+                result.DewPoint_C = Double.Parse(doc.SelectSingleNode("/response/current_observation/dewpoint_c").InnerText, System.Globalization.NumberFormatInfo.InvariantInfo);
+
+                result.HeatIndex_F = doc.SelectSingleNode("/response/current_observation/heat_index_f").InnerText;
+                result.HeatIndex_C = doc.SelectSingleNode("/response/current_observation/heat_index_c").InnerText;
 
 
                 /* 
-                heat_index_f
-                heat_index_c
-
                 windchill_f
                 windchill_c
 

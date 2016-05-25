@@ -8,14 +8,12 @@ using System.Threading.Tasks;
 
 namespace WUnderground.Data
 {
-    public class Location : NodeAbstract
+    public abstract class WUndergroundNodeAbstract : NodeAbstract
     {
-
-        public Location(string keyId, string name, ILogger logger, int zip, int magic, int wmo)
+        public WUndergroundNodeAbstract(string keyId, string name, ILogger logger)
             : base(keyId, name, logger)
         {
 
-            
         }
     }
 }

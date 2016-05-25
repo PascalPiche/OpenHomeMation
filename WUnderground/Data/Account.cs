@@ -9,23 +9,39 @@ using WUnderground.Commands;
 
 namespace WUnderground.Data
 {
-    public class Account : NodeAbstract
+    public class Account : WUndergroundNodeAbstract
     {
 
         private string _apiKey;
-
-        
 
         public Account(string keyId, string name, ILogger logger, string apiKey)
             : base(keyId, name, logger)
         {
             _apiKey = apiKey;
 
-            this.RegisterCommand(new AddLocation(this, _apiKey));
+            this.RegisterCommand(new AddStation(this, _apiKey));
             this.RegisterCommand(new RemoveAccount(this));
+
+            this.RegisterProperty(
+               new NodeProperty(
+                   "APIKey",
+                   "API Key",
+                   typeof(String),
+                   true,
+                   "",
+                  _apiKey));
+
         }
 
-        public bool AddLocation(Location location)
+        internal string ApiKey
+        {
+            get
+            {
+                return _apiKey;
+            }
+        }
+
+        public bool AddLocation(Station location)
         {
             return this.AddChild(location);
         }

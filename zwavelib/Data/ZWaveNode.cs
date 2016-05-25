@@ -44,6 +44,45 @@ namespace ZWaveLib.Data
             _nodeId = nodeId;
             _interface = interf;
 
+            //Manager.IsNodeAwake(homeid, nodeid) TODO
+
+            //Manager.IsNodeBeamingDevice (DONE)
+            //Manager.IsNodeFailed(homeId, nodeId) (DONE)
+            //Manager.IsNodeFrequentListeningDevice (DONE)
+
+            //Manager.IsNodeInfoReceived(homeId, nodeId) TODO
+
+            //Manager.IsNodeListeningDevice (DONE)
+            //Manager.IsNodeRoutingDevice (DONE)
+            //Manager.IsNodeSecurityDevice (DONE)
+
+            //Manager.GetNodeClassInformation(homeId, nodeId...) TODO
+            //Manager.GetNodeGeneric(homeId, nodeId) TODO
+            //Manager.GetNodeBasic(homeId, nodeId) TODO
+
+            //Manager.GetNodeLocation (DONE)
+            //Manager.GetNodeManufacturerId (DONE)
+            //Manager.GetNodeManufacturerName (DONE)
+            //Manager.GetNodeMaxBaudRate (DONE)
+            //Manager.GetNodeName(homeId, nodeId) (DONE)
+
+            //Manager.GetNodeNeighbors(homeId, nodeId,...) TODO
+
+            //Manager.GetNodeProductId(homeId, nodeId) (DONE)
+            //Manager.GetNodeProductName (DONE)
+            //Manager.GetNodeProductType (DONE)
+
+            //Manager.GetNodeQueryStage(homeId, nodeId) TODO
+            //Manager.GetNodeSecurity(homeId, nodeId) TODO
+            //Manager.GetNodeSpecific(homeId,nodeId) TODO
+
+            //Manager.GetNodeType(homeId, nodeId) TODO
+            //Manager.GetNodeVersion(homeId, nodeId) TODO
+            //Manager.GetNumGroups(homeId, nodeId) TODO
+            //Manager.HasNodeFailed(homeId, nodeId) TODO
+            
+
+
             this.RegisterProperty(
                  new NodeProperty(
                      "IsNodeBeamingDevice",
@@ -52,6 +91,15 @@ namespace ZWaveLib.Data
                      true,
                      "",
                      Manager.IsNodeBeamingDevice(homeId, nodeId)));
+
+            this.RegisterProperty(
+                 new NodeProperty(
+                     "IsNodeFailed",
+                     "Is Node Failed",
+                     typeof(Boolean),
+                     true,
+                     "",
+                     Manager.IsNodeFailed(homeId, nodeId)));
 
             this.RegisterProperty(
                  new NodeProperty(
@@ -127,6 +175,15 @@ namespace ZWaveLib.Data
 
             this.RegisterProperty(
                  new NodeProperty(
+                     "NodeName",
+                     "Node Name",
+                     typeof(string),
+                     true,
+                     "",
+                     Manager.GetNodeName(homeId, nodeId)));
+
+            this.RegisterProperty(
+                 new NodeProperty(
                      "NodeProductId",
                      "Node Product Id",
                      typeof(String),
@@ -151,6 +208,15 @@ namespace ZWaveLib.Data
                      true,
                      "",
                      Manager.GetNodeProductType(homeId, nodeId)));
+
+            this.RegisterProperty(
+                 new NodeProperty(
+                     "NodeType",
+                     "Node Type",
+                     typeof(String),
+                     true,
+                     "",
+                     Manager.GetNodeType(homeId, nodeId)));
 
             this.RegisterCommand(new RefreshNodeCommand(this));
             this.RegisterCommand(new RefreshNodeValueCommand(this));

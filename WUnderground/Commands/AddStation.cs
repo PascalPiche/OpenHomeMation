@@ -8,7 +8,7 @@ using WUnderground.Data;
 
 namespace WUnderground.Commands
 {
-    class AddLocation : AbstractWUndergroundCommand
+    class AddStation : AbstractWUndergroundCommand
     {
 
         private Account _account
@@ -21,7 +21,7 @@ namespace WUnderground.Commands
 
         string _apiKey;
 
-        public AddLocation(Account node, string apiKey)
+        public AddStation(Account node, string apiKey)
             : base(node, "addLocation", "Add a location", "")
         {
 

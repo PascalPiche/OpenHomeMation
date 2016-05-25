@@ -78,14 +78,14 @@ namespace WUnderground.Data
         internal bool CreateLocationCommand(Account node, string locationName, int zip, int magic, int wmo)
         {
             Boolean result = false;
-            IDataDictionary dataAccount = _registeredAccounts.GetOrCreateDataDictionary(this.Key);
+            IDataDictionary dataAccount = _registeredAccounts.GetDataDictionary(node.Key);
             IDataDictionary accountLocations = dataAccount.GetOrCreateDataDictionary("locations");
-            _registeredAccounts.StoreDataDictionary("locations", accountLocations);
+            //accountLocations.StoreDataDictionary("locations", accountLocations);
 
             if (!accountLocations.ContainsKey(locationName))
             {
                 
-                if (node.AddLocation(new Location(locationName, locationName, this.Logger, zip, magic, wmo)))
+                if (node.AddLocation(new Station(locationName, locationName, this.Logger, zip, magic, wmo)))
                 {
                     var locationData = accountLocations.GetOrCreateDataDictionary(locationName);
                     locationData.StoreString("name", locationName);
@@ -120,7 +120,7 @@ namespace WUnderground.Data
                 if (CreateAccountNode(username, key))
                 {
                     //Load registered location
-                    IDataDictionary locations = data.GetDataDictionary("locations");
+                    IDataDictionary locations = data.GetOrCreateDataDictionary("locations");
                     foreach (string locationKey in locations.Keys)
                     {
                         IDataDictionary locationData = locations.GetDataDictionary(locationKey);
@@ -128,7 +128,7 @@ namespace WUnderground.Data
                         int magic = locationData.GetInt("magic");
                         int wmo = locationData.GetInt("wmo");
 
-                        this.GetAccountNode(username).AddLocation(new Location(locationKey, locationKey, this.Logger, zip, magic, wmo));
+                        this.GetAccountNode(username).AddLocation(new Station(locationKey, locationKey, this.Logger, zip, magic, wmo));
                     }
 
                 } else {

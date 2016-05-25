@@ -64,7 +64,7 @@ namespace OHM.Tests.Interfaces
             dataStore.Stub(x => x.Save()).Return(true);
             var plugin = MockRepository.GenerateStub<IPlugin>();
             plugin.Stub(x => x.Id).Return(new Guid("dd985d5b-2d5e-49b5-9b07-64aad480e312"));
-            plugin.Stub(x => x.CreateInterface("testGood", logger)).Return(MockRepository.GenerateStub<InterfaceAbstract>("test","test"));
+            plugin.Stub(x => x.CreateInterface("testGood", logger)).Return(MockRepository.GenerateStub<InterfaceAbstract>("test","test", logger));
             var system = MockRepository.GenerateStub<IOhmSystemInternal>();
 
             var target = new InterfacesManager(loggerMng, pluginsMng);
