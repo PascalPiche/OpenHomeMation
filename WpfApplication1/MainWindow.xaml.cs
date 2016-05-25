@@ -66,6 +66,13 @@ namespace WpfApplication1
                 typeof(MainWindow)
         );
 
+        public static readonly RoutedUICommand ExecuteVrAddNodeBasic = new RoutedUICommand
+        (
+                "Execute vr add node basic command",
+                "Execute vr add node basic command",
+                typeof(MainWindow)
+        );
+
         public MainWindow()
         {
             
@@ -104,7 +111,7 @@ namespace WpfApplication1
 
         private void ExecuteInterfaceCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            var command = e.Parameter as OHM.Commands.ICommand;
+            var command = e.Parameter as OHM.Commands.IInterfaceCommand;
 
             if (command != null)
             {
@@ -123,7 +130,7 @@ namespace WpfApplication1
             }
         }
 
-        private void ShowCommandDialog(OHM.Commands.ICommand command)
+        private void ShowCommandDialog(OHM.Commands.IInterfaceCommand command)
         {
             var w = new CommandDialog();
             w.init(command);
@@ -141,7 +148,7 @@ namespace WpfApplication1
 
         private void ExecuteInterfaceCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            var command = e.Parameter as OHM.Commands.ICommand;
+            var command = e.Parameter as OHM.Commands.IInterfaceCommand;
             e.CanExecute = false;
             if (command != null)
             {
@@ -151,7 +158,7 @@ namespace WpfApplication1
 
         private void ExecuteNodeCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            var command = e.Parameter as OHM.Commands.ICommand;
+            var command = e.Parameter as OHM.Commands.IInterfaceCommand;
             if (command != null)
             {
                 if (command.Definition.ArgumentsDefinition.Count > 0)
@@ -187,6 +194,11 @@ namespace WpfApplication1
         private void UnInstallPluginCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             vm.PluginManager.UnInstallPlugin((Guid)e.Parameter, vm.OHM.System);
+        }
+
+        private void ExecuteVrAddNodeBasic_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+
         }
     }
 

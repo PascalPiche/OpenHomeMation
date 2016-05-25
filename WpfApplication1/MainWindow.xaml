@@ -11,6 +11,7 @@
         <CommandBinding Command="local:MainWindow.StopInterfaceCommand" Executed="StopInterfaceCommand_Executed" />
         <CommandBinding Command="local:MainWindow.ExecuteInterfaceCommand" Executed="ExecuteInterfaceCommand_Executed" CanExecute="ExecuteInterfaceCommand_CanExecute" />
         <CommandBinding Command="local:MainWindow.ExecuteNodeCommand" Executed="ExecuteNodeCommand_Executed" CanExecute="ExecuteNodeCommand_CanExecute" />
+        <CommandBinding Command="local:MainWindow.ExecuteVrAddNodeBasic" Executed="ExecuteVrAddNodeBasic_Executed" />
     </Window.CommandBindings>
     <DockPanel>
         <TextBox  MaxHeight="300" DockPanel.Dock="Bottom" HorizontalAlignment="Stretch" Name="txt" Margin="10" TextWrapping="Wrap" VerticalAlignment="Stretch" />
@@ -184,6 +185,13 @@
                                     </Label>
                                 </HierarchicalDataTemplate>
                             </TreeViewItem.ItemTemplate>
+                            <TreeViewItem.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Command="{Binding local:MainWindow.ExecuteVrAddNodeBasic}" CommandParameter="{Binding}">
+                                        <MenuItem.Header>Add Basic Node</MenuItem.Header>
+                                    </MenuItem>
+                                </ContextMenu>
+                            </TreeViewItem.ContextMenu>
                         </TreeViewItem>
                     </TreeViewItem.Items>
                 </TreeViewItem>

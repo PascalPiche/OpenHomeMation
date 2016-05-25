@@ -74,9 +74,6 @@
     <Compile Include="ZWavePlugin.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\OpenZWaveDotNet.dll" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
   </ItemGroup>
@@ -87,6 +84,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Content Include="bin\OpenZWaveDotNet.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy "$(TargetPath)" "$(SolutionDir)OpenHomeMation\plugins\zwave\" /Y /s /D /E
