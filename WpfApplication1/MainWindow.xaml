@@ -278,10 +278,28 @@
 
             <Grid Visibility="{Binding Path=IsNodeViewVisible}">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
                     <RowDefinition />
                     <RowDefinition />
                 </Grid.RowDefinitions>
+                
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Key" />
+                    <TextBlock Grid.Column="1" Text="Name" />
+                    <TextBlock Grid.Column="2" Text="Value" />
+                    <TextBlock Grid.Column="3" Text="Is Read Only" />
+                    <TextBlock Grid.Column="4" Text="Type" />
+                </Grid>
+                
                 <ListBox 
+                    Grid.Row="1"
                     ItemsSource="{Binding Path=SelectedNode.Properties}"
                     HorizontalContentAlignment="Stretch"
                     Name="NodeList"
@@ -294,17 +312,19 @@
                                     <ColumnDefinition />
                                     <ColumnDefinition />
                                     <ColumnDefinition />
+                                    <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Text="{Binding Path=Key}" />
                                 <TextBlock Grid.Column="1" Text="{Binding Path=Name}" />
                                 <TextBlock Grid.Column="2" Text="{Binding Path=Value}" />
                                 <TextBlock Grid.Column="3" Text="{Binding Path=ReadOnly}" />
+                                <TextBlock Grid.Column="4" Text="{Binding Path=Type}" />
                             </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
             
-                <Grid Grid.Row="1" DataContext="{Binding ElementName=NodeList, Path=SelectedItem}">
+                <Grid Grid.Row="2" DataContext="{Binding ElementName=NodeList, Path=SelectedItem}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
                         <ColumnDefinition />
