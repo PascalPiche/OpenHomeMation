@@ -36,8 +36,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="OpenZWaveDotNet">
-      <HintPath>bin\OpenZWaveDotNet.dll</HintPath>
+    <Reference Include="OpenZWaveDotNet, Version=1.0.5988.40882, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Visual Studio 2013\Projects\OpenHomeMation\zwavelib\bin\OpenZWaveDotNet.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.AddIn" />
@@ -85,12 +86,14 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="bin\OpenZWaveDotNet.dll" />
+    <Content Include="bin\OpenZWaveDotNet.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy "$(TargetPath)" "$(SolutionDir)OpenHomeMation\plugins\zwave\" /Y /s /D /E
-xcopy "$(SolutionDir)ZWaveLib\bin\OpenZWaveDotNet.dll" "$(SolutionDir)OpenHomeMation\plugins\zwave\OpenZWaveDotNet.dll" /Y /s</PostBuildEvent>
+xcopy "$(SolutionDir)ZWaveLib\bin\OpenZWaveDotNet.dll" "$(SolutionDir)OpenHomeMation\plugins\zwave" /Y</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
