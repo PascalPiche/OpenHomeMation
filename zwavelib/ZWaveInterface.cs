@@ -299,10 +299,15 @@ namespace ZWaveLib
             Logger.Info("ZWave: Notification Controller Ready:" + GetNodeIdForLog(n));
             string key = NotificationTool.MakeNodeKey(n);
             string name = NotificationTool.GetNodeName(n, this.Manager);
-
+            
             
             uint homeId = n.GetHomeId();
             byte nodeId = n.GetNodeId();
+
+            string controlerPath = Manager.GetControllerPath(homeId);
+
+
+            Logger.Info("ZWave: Controller Path  : " + controlerPath);
 
             Logger.Info("ZWave: Controller Library Type Name : " + _mng.GetLibraryTypeName(homeId));
             Logger.Info("ZWave: Controller Library Version : " + _mng.GetLibraryVersion(homeId));
