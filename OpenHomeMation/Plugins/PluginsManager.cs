@@ -50,14 +50,9 @@ namespace OHM.Plugins
         {
             this._logger = _loggerMng.GetLogger("PluginsManager");
             _data = data;
-            _dataInstalledPlugins = _data.GetDataDictionary("InstalledPlugins");
-            if (_dataInstalledPlugins == null)
-            {
-                _dataInstalledPlugins = new DataDictionary();
-                _data.StoreDataDictionary("InstalledPlugins", _dataInstalledPlugins);
-                _data.Save();
-            }
-
+            _dataInstalledPlugins = _data.GetOrCreateDataDictionary("InstalledPlugins");
+            _data.StoreDataDictionary("InstalledPlugins", _dataInstalledPlugins);
+            _data.Save();
             InitPluginsList();
             LoadRegisteredPlugins();
             return true;
@@ -74,7 +69,7 @@ namespace OHM.Plugins
             else
             {
                 //Plugin not found 
-                _logger.Warn("Cannot install Plugin " + id + ": Plugin not found");
+                _logger.Warn("PluginsManager : Cannot install Plugin " + id + ": Plugin not found");
             }
 
             return result;
@@ -90,7 +85,7 @@ namespace OHM.Plugins
             }
             else
             {
-                _logger.Warn("Cannot uninstal Plugin " + id + ": Plugin not found");
+                _logger.Warn("PluginsManager : Cannot uninstal Plugin " + id + ": Plugin not found");
             }
 
             return result;
@@ -110,7 +105,7 @@ namespace OHM.Plugins
             }
             catch (Exception ex)
             {
-                _logger.Error("Install failed for plugin : " + plugin.Name, ex);
+                _logger.Error("PluginsManager : Install failed for plugin : " + plugin.Name, ex);
                 return false;
             }
             
@@ -132,7 +127,7 @@ namespace OHM.Plugins
             }
             catch (Exception ex)
             {
-                _logger.Error("UnInstall failed for plugin : " + plugin.Name, ex);
+                _logger.Error("PluginsManager : UnInstall failed for plugin : " + plugin.Name, ex);
                 return false;
             }
 
@@ -164,13 +159,13 @@ namespace OHM.Plugins
         {
             if (!Directory.Exists(_filePath))
             {
-                this._logger.Warn("Plugins directory not found at : " + _filePath);
+                this._logger.Warn("PluginsManager : Plugins directory not found at : " + _filePath);
                 return;
             }
 
             foreach (var file in Directory.GetFiles(_filePath, "*.dll", SearchOption.AllDirectories))
             {
-                this._logger.Debug("DLL Found while loading Plugins:" + file);
+                this._logger.Debug("PluginsManager : DLL Found while loading Plugins:" + file);
 
                 try
                 {
@@ -182,21 +177,21 @@ namespace OHM.Plugins
                         {
                             if (IsPlugin(type))
                             {
-                                this._logger.Info("Plugin Found:" + type.FullName);
+                                this._logger.Info("PluginsManager : Plugin Found:" + type.FullName);
                                 IPlugin plugin = (PluginBase)AppDomain.CurrentDomain.CreateInstanceAndUnwrap(assembly.FullName, type.FullName);
                                 _availablesPlugins.Add(plugin);
-                                this._logger.Info("Plugin " + type.FullName + " added to available plugins");
+                                this._logger.Info("PluginsManager : Plugin " + type.FullName + " added to available plugins");
                             }
                         }
                         catch (Exception ex)
                         {
-                            this._logger.Error("Cannot instantiate plugin type : " + type.ToString() +" : In file : " + file, ex);
+                            this._logger.Error("PluginsManager : Cannot instantiate plugin type : " + type.ToString() + " : In file : " + file, ex);
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    this._logger.Error("Cannot load Assembly file : " + file, ex);
+                    this._logger.Error("PluginsManager : Cannot load Assembly file : " + file, ex);
                 }
             }
         }
@@ -228,13 +223,13 @@ namespace OHM.Plugins
                 var plugin = FindPluginIn(new Guid(item), _availablesPlugins);
                 if (plugin != null)
                 {
-                    _logger.Info("Registered plugin found : " + plugin.Name);
+                    _logger.Info("PluginsManager : Registered plugin found : " + plugin.Name);
                     _installedPluginsInstance.Add(plugin);
                     _availablesPlugins.Remove(plugin);
                 }
                 else
                 {
-                    _logger.Warn("Registered plugin " + item + "not found");
+                    _logger.Warn("PluginsManager : Registered plugin " + item + "not found");
                     //Track plugin status?, code base not found for registered plugins
                 }
             }

@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 
 namespace ClipsAI
 {
-    public class Class1
+    public class API
     {
 
-        public static void test() {
+        public static CLIPSNET.PrimitiveValue Eval(String query) {
             var env = new CLIPSNET.Environment();
-            
+
+            var result = env.Eval(query);
+
+            return result;
         }
         
 

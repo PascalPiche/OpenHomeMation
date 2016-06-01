@@ -9,6 +9,10 @@ namespace ClipsAi.UnitTests
         [TestMethod]
         public void TestMethod1()
         {
+
+            var result = ClipsAI.API.Eval("");
+
+            Assert.IsNotNull(result);
         }
     }
 }
