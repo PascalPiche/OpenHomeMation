@@ -13,344 +13,361 @@
         <CommandBinding Command="local:MainWindow.ExecuteNodeCommand" Executed="ExecuteNodeCommand_Executed" CanExecute="ExecuteNodeCommand_CanExecute" />
         <CommandBinding Command="local:MainWindow.ExecuteVrAddNodeBasic" Executed="ExecuteVrAddNodeBasic_Executed" />
     </Window.CommandBindings>
-    <DockPanel>
-        <TextBox  MaxHeight="300" DockPanel.Dock="Bottom" HorizontalAlignment="Stretch" Name="txt" Margin="10" TextWrapping="Wrap" VerticalAlignment="Stretch" />
-        <Grid DockPanel.Dock="Left" Width="200" >
-            <Label>
-                <Run Text="System" />
-            </Label>
-            <TreeView SelectedItemChanged="TreeView_SelectedItemChanged">
-                <TreeViewItem IsSelected="True">
-                    <TreeViewItem.Header>
-                        <Label>
-                            <Run Text="System" />
-                        </Label>
-                    </TreeViewItem.Header>
-                    <TreeViewItem.Items>
-                        <TreeViewItem Name="InterfacesTreeViewItem" ItemsSource="{Binding Path=InterfaceManager.RunnableInterfaces}">
-                            <TreeViewItem.ItemContainerStyle>
-                                <Style TargetType="TreeViewItem">
-                                    <Setter Property="ContextMenu">
-                                        <Setter.Value>
-                                            <ContextMenu >
-                                                <ContextMenu.ItemContainerStyle>
-                                                    <Style>
-                                                        <Setter Property="MenuItem.Command" Value="local:MainWindow.ExecuteInterfaceCommand" />
-                                                        <Setter Property="MenuItem.CommandParameter" Value="{Binding}" />
-                                                    </Style>
-                                                </ContextMenu.ItemContainerStyle>
-                                                <ContextMenu.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <TextBlock Text="{Binding Definition.Name}" />
-                                                    </DataTemplate>
-                                                </ContextMenu.ItemTemplate>
-
-                                                <ContextMenu.Resources>
-                                                    <CollectionViewSource x:Key="CustomCommandsCollection" Source="{Binding Commands}"/>
-                                                </ContextMenu.Resources>
-                                                <ContextMenu.ItemsSource>
-                                                    <CompositeCollection>
-                                                        <MenuItem Header="Start" Command="local:MainWindow.StartInterfaceCommand" CommandParameter="{Binding Path=Key}" />
-                                                        <MenuItem Header="Stop" Command="local:MainWindow.StopInterfaceCommand" CommandParameter="{Binding Path=Key}" />
-                                                        <MenuItem Header="Start on launch" Command="" CommandParameter="" IsCheckable="True" IsChecked="{Binding Path=StartOnLaunch}" />
-                                                        <Separator />
-                                                        <CollectionContainer Collection="{Binding Source={StaticResource CustomCommandsCollection}}"/>
-                                                    </CompositeCollection>
-                                                </ContextMenu.ItemsSource>
-                                            </ContextMenu>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
-                            </TreeViewItem.ItemContainerStyle>
-                            <TreeViewItem.Header>
-                                <Label>
-                                    <Run>Interfaces</Run>
-                                </Label>
-                            </TreeViewItem.Header>
-                            
-                            <TreeViewItem.ItemTemplate>
-                                <HierarchicalDataTemplate ItemsSource="{Binding Children}">
-                                    <HierarchicalDataTemplate.ItemContainerStyle>
-                                        <Style TargetType="TreeViewItem">
-                                            <Setter Property="ContextMenu">
-                                                <Setter.Value>
-                                                    <ContextMenu >
-                                                        <ContextMenu.ItemContainerStyle>
-                                                            <Style>
-                                                                <Setter Property="MenuItem.Command" Value="local:MainWindow.ExecuteNodeCommand" />
-                                                                <Setter Property="MenuItem.CommandParameter" Value="{Binding}" />
-                                                            </Style>
-                                                        </ContextMenu.ItemContainerStyle>
-                                                        <ContextMenu.ItemTemplate>
-                                                            <DataTemplate>
-                                                                <TextBlock Text="{Binding Definition.Name}" />
-                                                            </DataTemplate>
-                                                        </ContextMenu.ItemTemplate>
-
-                                                        <ContextMenu.Resources>
-                                                            <CollectionViewSource x:Key="CustomCommandsCollection" Source="{Binding Commands}"/>
-                                                        </ContextMenu.Resources>
-                                                        <ContextMenu.ItemsSource>
-                                                            <CompositeCollection>
-                                                                <CollectionContainer Collection="{Binding Source={StaticResource CustomCommandsCollection}}"/>
-                                                            </CompositeCollection>
-                                                        </ContextMenu.ItemsSource>
-                                                    </ContextMenu>
-                                                </Setter.Value>
-                                            </Setter>
-                                        </Style>
-                                    </HierarchicalDataTemplate.ItemContainerStyle>
-                                    <Label>
-                                        <Run Text="{Binding Path=Name, Mode=OneWay}" />
-                                    </Label>
-                                </HierarchicalDataTemplate>
-                            </TreeViewItem.ItemTemplate>
-                        </TreeViewItem>
-                        <!-- ItemsSource="{Binding Path=InterfaceManager.RunnableInterfaces}" -->
-                        <TreeViewItem Name="InterfacesTreeViewItemVr">
-                            <TreeViewItem.ItemContainerStyle>
-                                <Style TargetType="TreeViewItem">
-                                    <Setter Property="ContextMenu">
-                                        <Setter.Value>
-                                            <ContextMenu >
-                                                <ContextMenu.ItemContainerStyle>
-                                                    <Style>
-                                                        <Setter Property="MenuItem.Command" Value="local:MainWindow.ExecuteInterfaceCommand" />
-                                                        <Setter Property="MenuItem.CommandParameter" Value="{Binding}" />
-                                                    </Style>
-                                                </ContextMenu.ItemContainerStyle>
-                                                <ContextMenu.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <TextBlock Text="{Binding Definition.Name}" />
-                                                    </DataTemplate>
-                                                </ContextMenu.ItemTemplate>
-
-                                                <ContextMenu.Resources>
-                                                    <CollectionViewSource x:Key="CustomCommandsCollection" Source="{Binding Commands}"/>
-                                                </ContextMenu.Resources>
-                                                <ContextMenu.ItemsSource>
-                                                    <CompositeCollection>
-                                                        <MenuItem Header="Start" Command="local:MainWindow.StartInterfaceCommand" CommandParameter="{Binding Path=Key}" />
-                                                        <MenuItem Header="Stop" Command="local:MainWindow.StopInterfaceCommand" CommandParameter="{Binding Path=Key}" />
-                                                        <MenuItem Header="Start on launch" Command="" CommandParameter="" IsCheckable="True" IsChecked="{Binding Path=StartOnLaunch}" />
-                                                        <Separator />
-                                                        <CollectionContainer Collection="{Binding Source={StaticResource CustomCommandsCollection}}"/>
-                                                    </CompositeCollection>
-                                                </ContextMenu.ItemsSource>
-                                            </ContextMenu>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
-                            </TreeViewItem.ItemContainerStyle>
-                            <TreeViewItem.Header>
-                                <Label>
-                                    <Run>VR</Run>
-                                </Label>
-                            </TreeViewItem.Header>
-
-                            <TreeViewItem.ItemTemplate>
-                                <HierarchicalDataTemplate ItemsSource="{Binding Children}">
-                                    <HierarchicalDataTemplate.ItemContainerStyle>
-                                        <Style TargetType="TreeViewItem">
-                                            <Setter Property="ContextMenu">
-                                                <Setter.Value>
-                                                    <ContextMenu >
-                                                        <ContextMenu.ItemContainerStyle>
-                                                            <Style>
-                                                                <Setter Property="MenuItem.Command" Value="local:MainWindow.ExecuteNodeCommand" />
-                                                                <Setter Property="MenuItem.CommandParameter" Value="{Binding}" />
-                                                            </Style>
-                                                        </ContextMenu.ItemContainerStyle>
-                                                        <ContextMenu.ItemTemplate>
-                                                            <DataTemplate>
-                                                                <TextBlock Text="{Binding Definition.Name}" />
-                                                            </DataTemplate>
-                                                        </ContextMenu.ItemTemplate>
-
-                                                        <ContextMenu.Resources>
-                                                            <CollectionViewSource x:Key="CustomCommandsCollection" Source="{Binding Commands}"/>
-                                                        </ContextMenu.Resources>
-                                                        <ContextMenu.ItemsSource>
-                                                            <CompositeCollection>
-                                                                <CollectionContainer Collection="{Binding Source={StaticResource CustomCommandsCollection}}"/>
-                                                            </CompositeCollection>
-                                                        </ContextMenu.ItemsSource>
-                                                    </ContextMenu>
-                                                </Setter.Value>
-                                            </Setter>
-                                        </Style>
-                                    </HierarchicalDataTemplate.ItemContainerStyle>
-                                    <Label>
-                                        <Run Text="{Binding Path=Name, Mode=OneWay}" />
-                                    </Label>
-                                </HierarchicalDataTemplate>
-                            </TreeViewItem.ItemTemplate>
-                            <TreeViewItem.ContextMenu>
-                                <ContextMenu>
-                                    <MenuItem Command="{Binding local:MainWindow.ExecuteVrAddNodeBasic}" CommandParameter="{Binding}">
-                                        <MenuItem.Header>Add Basic Node</MenuItem.Header>
-                                    </MenuItem>
-                                </ContextMenu>
-                            </TreeViewItem.ContextMenu>
-                        </TreeViewItem>
-                    </TreeViewItem.Items>
-                </TreeViewItem>
-            </TreeView>
-        </Grid>
-        
-        <Grid>
-            <Grid Visibility="{Binding Path=IsSystemViewVisible}">
+    <Grid HorizontalAlignment="Stretch">
+        <Grid HorizontalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition MinHeight="200"/>
+                <RowDefinition MinHeight="70"/>
+            </Grid.RowDefinitions>
+            
+            <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
+                    <ColumnDefinition Width="auto"/>
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <DockPanel Grid.Column="0" HorizontalAlignment="Stretch">
-                    <Label DockPanel.Dock="Top">
-                        <Run Text="Availables Plugin" />
+
+                <Grid Grid.Column="0" Width="200" >
+                    <Label>
+                        <Run Text="System" />
                     </Label>
-                    <ListBox Name="lbAvailablePlugin" 
+                    <TreeView SelectedItemChanged="TreeView_SelectedItemChanged">
+                        <TreeViewItem IsSelected="True">
+                            <TreeViewItem.Header>
+                                <Label>
+                                    <Run Text="System" />
+                                </Label>
+                            </TreeViewItem.Header>
+                            <TreeViewItem.Items>
+                                <TreeViewItem Name="InterfacesTreeViewItem" ItemsSource="{Binding Path=InterfaceManager.RunnableInterfaces}">
+                                    <TreeViewItem.ItemContainerStyle>
+                                        <Style TargetType="TreeViewItem">
+                                            <Setter Property="ContextMenu">
+                                                <Setter.Value>
+                                                    <ContextMenu >
+                                                        <ContextMenu.ItemContainerStyle>
+                                                            <Style>
+                                                                <Setter Property="MenuItem.Command" Value="local:MainWindow.ExecuteInterfaceCommand" />
+                                                                <Setter Property="MenuItem.CommandParameter" Value="{Binding}" />
+                                                            </Style>
+                                                        </ContextMenu.ItemContainerStyle>
+                                                        <ContextMenu.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <TextBlock Text="{Binding Definition.Name}" />
+                                                            </DataTemplate>
+                                                        </ContextMenu.ItemTemplate>
+
+                                                        <ContextMenu.Resources>
+                                                            <CollectionViewSource x:Key="CustomCommandsCollection" Source="{Binding Commands}"/>
+                                                        </ContextMenu.Resources>
+                                                        <ContextMenu.ItemsSource>
+                                                            <CompositeCollection>
+                                                                <MenuItem Header="Start" Command="local:MainWindow.StartInterfaceCommand" CommandParameter="{Binding Path=Key}" />
+                                                                <MenuItem Header="Stop" Command="local:MainWindow.StopInterfaceCommand" CommandParameter="{Binding Path=Key}" />
+                                                                <MenuItem Header="Start on launch" Command="" CommandParameter="" IsCheckable="True" IsChecked="{Binding Path=StartOnLaunch}" />
+                                                                <Separator />
+                                                                <CollectionContainer Collection="{Binding Source={StaticResource CustomCommandsCollection}}"/>
+                                                            </CompositeCollection>
+                                                        </ContextMenu.ItemsSource>
+                                                    </ContextMenu>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </TreeViewItem.ItemContainerStyle>
+                                    <TreeViewItem.Header>
+                                        <Label>
+                                            <Run>Interfaces</Run>
+                                        </Label>
+                                    </TreeViewItem.Header>
+
+                                    <TreeViewItem.ItemTemplate>
+                                        <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                                            <HierarchicalDataTemplate.ItemContainerStyle>
+                                                <Style TargetType="TreeViewItem">
+                                                    <Setter Property="ContextMenu">
+                                                        <Setter.Value>
+                                                            <ContextMenu >
+                                                                <ContextMenu.ItemContainerStyle>
+                                                                    <Style>
+                                                                        <Setter Property="MenuItem.Command" Value="local:MainWindow.ExecuteNodeCommand" />
+                                                                        <Setter Property="MenuItem.CommandParameter" Value="{Binding}" />
+                                                                    </Style>
+                                                                </ContextMenu.ItemContainerStyle>
+                                                                <ContextMenu.ItemTemplate>
+                                                                    <DataTemplate>
+                                                                        <TextBlock Text="{Binding Definition.Name}" />
+                                                                    </DataTemplate>
+                                                                </ContextMenu.ItemTemplate>
+
+                                                                <ContextMenu.Resources>
+                                                                    <CollectionViewSource x:Key="CustomCommandsCollection" Source="{Binding Commands}"/>
+                                                                </ContextMenu.Resources>
+                                                                <ContextMenu.ItemsSource>
+                                                                    <CompositeCollection>
+                                                                        <CollectionContainer Collection="{Binding Source={StaticResource CustomCommandsCollection}}"/>
+                                                                    </CompositeCollection>
+                                                                </ContextMenu.ItemsSource>
+                                                            </ContextMenu>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </HierarchicalDataTemplate.ItemContainerStyle>
+                                            <Label>
+                                                <Run Text="{Binding Path=Name, Mode=OneWay}" />
+                                            </Label>
+                                        </HierarchicalDataTemplate>
+                                    </TreeViewItem.ItemTemplate>
+                                </TreeViewItem>
+                                <!-- ItemsSource="{Binding Path=InterfaceManager.RunnableInterfaces}" -->
+                                <TreeViewItem Name="InterfacesTreeViewItemVr">
+                                    <TreeViewItem.ItemContainerStyle>
+                                        <Style TargetType="TreeViewItem">
+                                            <Setter Property="ContextMenu">
+                                                <Setter.Value>
+                                                    <ContextMenu >
+                                                        <ContextMenu.ItemContainerStyle>
+                                                            <Style>
+                                                                <Setter Property="MenuItem.Command" Value="local:MainWindow.ExecuteInterfaceCommand" />
+                                                                <Setter Property="MenuItem.CommandParameter" Value="{Binding}" />
+                                                            </Style>
+                                                        </ContextMenu.ItemContainerStyle>
+                                                        <ContextMenu.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <TextBlock Text="{Binding Definition.Name}" />
+                                                            </DataTemplate>
+                                                        </ContextMenu.ItemTemplate>
+
+                                                        <ContextMenu.Resources>
+                                                            <CollectionViewSource x:Key="CustomCommandsCollection" Source="{Binding Commands}"/>
+                                                        </ContextMenu.Resources>
+                                                        <ContextMenu.ItemsSource>
+                                                            <CompositeCollection>
+                                                                <MenuItem Header="Start" Command="local:MainWindow.StartInterfaceCommand" CommandParameter="{Binding Path=Key}" />
+                                                                <MenuItem Header="Stop" Command="local:MainWindow.StopInterfaceCommand" CommandParameter="{Binding Path=Key}" />
+                                                                <MenuItem Header="Start on launch" Command="" CommandParameter="" IsCheckable="True" IsChecked="{Binding Path=StartOnLaunch}" />
+                                                                <Separator />
+                                                                <CollectionContainer Collection="{Binding Source={StaticResource CustomCommandsCollection}}"/>
+                                                            </CompositeCollection>
+                                                        </ContextMenu.ItemsSource>
+                                                    </ContextMenu>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </TreeViewItem.ItemContainerStyle>
+                                    <TreeViewItem.Header>
+                                        <Label>
+                                            <Run>VR</Run>
+                                        </Label>
+                                    </TreeViewItem.Header>
+
+                                    <TreeViewItem.ItemTemplate>
+                                        <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                                            <HierarchicalDataTemplate.ItemContainerStyle>
+                                                <Style TargetType="TreeViewItem">
+                                                    <Setter Property="ContextMenu">
+                                                        <Setter.Value>
+                                                            <ContextMenu >
+                                                                <ContextMenu.ItemContainerStyle>
+                                                                    <Style>
+                                                                        <Setter Property="MenuItem.Command" Value="local:MainWindow.ExecuteNodeCommand" />
+                                                                        <Setter Property="MenuItem.CommandParameter" Value="{Binding}" />
+                                                                    </Style>
+                                                                </ContextMenu.ItemContainerStyle>
+                                                                <ContextMenu.ItemTemplate>
+                                                                    <DataTemplate>
+                                                                        <TextBlock Text="{Binding Definition.Name}" />
+                                                                    </DataTemplate>
+                                                                </ContextMenu.ItemTemplate>
+
+                                                                <ContextMenu.Resources>
+                                                                    <CollectionViewSource x:Key="CustomCommandsCollection" Source="{Binding Commands}"/>
+                                                                </ContextMenu.Resources>
+                                                                <ContextMenu.ItemsSource>
+                                                                    <CompositeCollection>
+                                                                        <CollectionContainer Collection="{Binding Source={StaticResource CustomCommandsCollection}}"/>
+                                                                    </CompositeCollection>
+                                                                </ContextMenu.ItemsSource>
+                                                            </ContextMenu>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </HierarchicalDataTemplate.ItemContainerStyle>
+                                            <Label>
+                                                <Run Text="{Binding Path=Name, Mode=OneWay}" />
+                                            </Label>
+                                        </HierarchicalDataTemplate>
+                                    </TreeViewItem.ItemTemplate>
+                                    <TreeViewItem.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Command="{Binding local:MainWindow.ExecuteVrAddNodeBasic}" CommandParameter="{Binding}">
+                                                <MenuItem.Header>Add Basic Node</MenuItem.Header>
+                                            </MenuItem>
+                                        </ContextMenu>
+                                    </TreeViewItem.ContextMenu>
+                                </TreeViewItem>
+                            </TreeViewItem.Items>
+                        </TreeViewItem>
+                    </TreeView>
+                </Grid>
+
+                <Grid Grid.Column="1">
+                    <Grid Visibility="{Binding Path=IsSystemViewVisible}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <DockPanel Grid.Column="0" HorizontalAlignment="Stretch">
+                            <Label DockPanel.Dock="Top">
+                                <Run Text="Availables Plugin" />
+                            </Label>
+                            <ListBox Name="lbAvailablePlugin" 
                              HorizontalContentAlignment="Stretch" 
                              HorizontalAlignment="Stretch" 
                              VerticalAlignment="Stretch" 
                              ItemsSource="{Binding Path=PluginManager.AvailablesPlugins}">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                    <Grid.ContextMenu>
-                                        <ContextMenu>
-                                            <MenuItem Header="Install" Command="local:MainWindow.InstallPluginCommand" CommandParameter="{Binding Path=Id}" />
-                                        </ContextMenu>
-                                    </Grid.ContextMenu>
-                                    <Label HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                        <Run Text="{Binding Path=Name, Mode=OneWay}" />
-                                    </Label>
-                                </Grid>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                </DockPanel>
-                <DockPanel Grid.Column="1">
-                    <Label DockPanel.Dock="Top">
-                        <Run Text="Installed plugins"/>
-                    </Label>
-                    <ListBox HorizontalContentAlignment="Stretch" 
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                            <Grid.ContextMenu>
+                                                <ContextMenu>
+                                                    <MenuItem Header="Install" Command="local:MainWindow.InstallPluginCommand" CommandParameter="{Binding Path=Id}" />
+                                                </ContextMenu>
+                                            </Grid.ContextMenu>
+                                            <Label HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                                <Run Text="{Binding Path=Name, Mode=OneWay}" />
+                                            </Label>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </DockPanel>
+                        <DockPanel Grid.Column="1">
+                            <Label DockPanel.Dock="Top">
+                                <Run Text="Installed plugins"/>
+                            </Label>
+                            <ListBox HorizontalContentAlignment="Stretch" 
                              HorizontalAlignment="Stretch" 
                              VerticalAlignment="Stretch" 
                              ItemsSource="{Binding Path=PluginManager.InstalledPlugins}">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                    <Grid.ContextMenu>
-                                        <ContextMenu>
-                                            <MenuItem Header="UnInstall" Command="local:MainWindow.UnInstallPluginCommand" 
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                            <Grid.ContextMenu>
+                                                <ContextMenu>
+                                                    <MenuItem Header="UnInstall" Command="local:MainWindow.UnInstallPluginCommand" 
                                                       CommandParameter="{Binding Path=Id}" />
-                                        </ContextMenu>
-                                    </Grid.ContextMenu>
-                                    <Label>
-                                        <Run Text="{Binding Path=Name, Mode=OneWay}" />
-                                    </Label>
-                                </Grid>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                </DockPanel>
-            </Grid>
+                                                </ContextMenu>
+                                            </Grid.ContextMenu>
+                                            <Label>
+                                                <Run Text="{Binding Path=Name, Mode=OneWay}" />
+                                            </Label>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </DockPanel>
+                    </Grid>
 
-            <Grid Visibility="{Binding Path=IsInterfaceViewVisible}">
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Interface" />
-                <TextBlock Text="{Binding Path=SelectedNode.Name}" Grid.Column="1" />
-                <TextBlock Text="{Binding Path=SelectedNode.Key}" Grid.Column="2"/>
-                
-                <TextBlock Grid.Row="1">
+                    <Grid Visibility="{Binding Path=IsInterfaceViewVisible}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Interface" />
+                        <TextBlock Text="{Binding Path=SelectedNode.Name}" Grid.Column="1" />
+                        <TextBlock Text="{Binding Path=SelectedNode.Key}" Grid.Column="2"/>
+
+                        <TextBlock Grid.Row="1">
                     <Run Text="Status : " />
                     <Run Text="{Binding Path=SelectedNode.State}" />
-                </TextBlock>
-            </Grid>
+                        </TextBlock>
+                    </Grid>
 
-            <Grid Visibility="{Binding Path=IsNodeViewVisible}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto" />
-                    <RowDefinition />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                
-                <Grid Grid.Row="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Text="Key" />
-                    <TextBlock Grid.Column="1" Text="Name" />
-                    <TextBlock Grid.Column="2" Text="Value" />
-                    <TextBlock Grid.Column="3" Text="Is Read Only" />
-                    <TextBlock Grid.Column="4" Text="Type" />
-                </Grid>
-                
-                <ListBox 
+                    <Grid Visibility="{Binding Path=IsNodeViewVisible}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Key" />
+                            <TextBlock Grid.Column="1" Text="Name" />
+                            <TextBlock Grid.Column="2" Text="Value" />
+                            <TextBlock Grid.Column="3" Text="Is Read Only" />
+                            <TextBlock Grid.Column="4" Text="Type" />
+                        </Grid>
+
+                        <ListBox 
                     Grid.Row="1"
                     ItemsSource="{Binding Path=SelectedNode.Properties}"
                     HorizontalContentAlignment="Stretch"
                     Name="NodeList"
                     >
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition />
+                                            <ColumnDefinition />
+                                            <ColumnDefinition />
+                                            <ColumnDefinition />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="{Binding Path=Key}" />
+                                        <TextBlock Grid.Column="1" Text="{Binding Path=Name}" />
+                                        <TextBlock Grid.Column="2" Text="{Binding Path=Value}" />
+                                        <TextBlock Grid.Column="3" Text="{Binding Path=ReadOnly}" />
+                                        <TextBlock Grid.Column="4" Text="{Binding Path=Type}" />
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+
+                        <Grid Grid.Row="2" DataContext="{Binding ElementName=NodeList, Path=SelectedItem}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
                             <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition />
-                                    <ColumnDefinition />
-                                    <ColumnDefinition />
-                                    <ColumnDefinition />
-                                    <ColumnDefinition />
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Text="{Binding Path=Key}" />
-                                <TextBlock Grid.Column="1" Text="{Binding Path=Name}" />
-                                <TextBlock Grid.Column="2" Text="{Binding Path=Value}" />
-                                <TextBlock Grid.Column="3" Text="{Binding Path=ReadOnly}" />
-                                <TextBlock Grid.Column="4" Text="{Binding Path=Type}" />
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                </Grid.RowDefinitions>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Name: " />
+                                    <TextBlock Text="{Binding Path=Name}" />
+                                </StackPanel>
+                                <StackPanel Grid.Row="1">
+                                    <TextBlock Text="Description: " />
+                                    <Label Content="{Binding Path=Description}"  />
+                                </StackPanel>
                             </Grid>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            
-                <Grid Grid.Row="2" DataContext="{Binding ElementName=NodeList, Path=SelectedItem}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="auto" />
-                            <RowDefinition Height="auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Name: " />
-                            <TextBlock Text="{Binding Path=Name}" />
-                        </StackPanel>
-                        <StackPanel Grid.Row="1">
-                            <TextBlock Text="Description: " />
-                            <Label Content="{Binding Path=Description}"  />
-                        </StackPanel>
+                            <ItemsControl Grid.Column="1">
+
+
+                            </ItemsControl>
+                        </Grid>
+
                     </Grid>
-                    <ItemsControl Grid.Column="1">
-                        
-                        
-                    </ItemsControl>
                 </Grid>
-            
+
             </Grid>
+            <GridSplitter Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Height="3"/>
+            <TextBox Grid.Row="1" HorizontalAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" Name="txt" Margin="10" VerticalAlignment="Stretch" />
         </Grid>
         
-    </DockPanel>
+        
+    </Grid>
 </Window>

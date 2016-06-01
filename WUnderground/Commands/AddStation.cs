@@ -87,7 +87,7 @@ namespace WUnderground.Commands
             }
 
             //Check zip
-            if (!this.Definition.ArgumentsDefinition["zip"].TryGetInt(arguments, out zip))
+            if (!this.Definition.ArgumentsDefinition["zip"].TryGetInt32(arguments, out zip))
             {
                 return false;
             }
@@ -98,13 +98,13 @@ namespace WUnderground.Commands
             }
 
             //Check magic
-            if (!this.Definition.ArgumentsDefinition["magic"].TryGetInt(arguments, out magic))
+            if (!this.Definition.ArgumentsDefinition["magic"].TryGetInt32(arguments, out magic))
             {
                 return false;
             }
 
             //Check wmo
-            if (!this.Definition.ArgumentsDefinition["wmo"].TryGetInt(arguments, out wmo))
+            if (!this.Definition.ArgumentsDefinition["wmo"].TryGetInt32(arguments, out wmo))
             {
                 return false;
             }

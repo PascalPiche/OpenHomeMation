@@ -14,7 +14,7 @@ namespace OHM.Tests.Stub.Plugin
 
         public FakePluginError()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         public override Guid Id

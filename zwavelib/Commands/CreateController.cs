@@ -31,7 +31,7 @@ namespace ZWaveLib.Commands
         {
             int port;
 
-            if (!this.Definition.ArgumentsDefinition["port"].TryGetInt(arguments, out port))
+            if (!this.Definition.ArgumentsDefinition["port"].TryGetInt32(arguments, out port))
             {
                 return false;
             }

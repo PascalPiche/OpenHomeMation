@@ -5,14 +5,14 @@ namespace OHM.Commands
 {
     public sealed class ArgumentDefinition : IArgumentDefinition
     {
-        private string _key;
-        private string _name;
+        private String _key;
+        private String _name;
         private Type _type;
-        private bool _required;
+        private Boolean _required;
 
-        public ArgumentDefinition(string key, string name, Type t) : this(key, name, t, false) { }
+        public ArgumentDefinition(String key, String name, Type t) : this(key, name, t, false) { }
 
-        public ArgumentDefinition(string key, string name, Type t, bool required)
+        public ArgumentDefinition(String key, String name, Type t, Boolean required)
         {
             _key = key;
             _name = name;
@@ -20,76 +20,78 @@ namespace OHM.Commands
             _required = required;
         }
 
-        public string Key { get { return _key; } }
+        public String Key { get { return _key; } }
 
-        public string Name { get { return _name; } }
+        public String Name { get { return _name; } }
 
         public Type Type { get { return _type; } }
 
-        public bool Required { get { return _required; } }
+        public Boolean Required { get { return _required; } }
 
-        public bool ValidateValue(object value)
+        public Boolean ValidateValue(Object value)
         {
+            Boolean result = false;
 
-            if (_type == typeof(int))
+            if (_type == typeof(Int32))
             {
-                int result;
-                return TryGetInt(value, out result);
-            } 
-            else if (_type == typeof(string))
-            {
-                string result;
-                return TryGetString(value, out result);
+                Int32 resultTemp;
+                result = TryGetInt32(value, out resultTemp);
             }
-            return false;
+            else if (_type == typeof(String))
+            {
+                String resultTemp;
+                result = TryGetString(value, out resultTemp);
+            }
+
+            return result;
         }
 
-        public bool TryGetInt(object value, out int result)
+        public Boolean TryGetInt32(Object value, out Int32 result)
         {
             bool fctResult = false;
-            if (value is Dictionary<string, object>)
+            if (value is Dictionary<String, Object>)
             {
-                Dictionary<string, object> temp = (Dictionary<string, object>)value;
+                Dictionary<String, Object> temp = (Dictionary<String, Object>)value;
                 if (temp.ContainsKey(this.Key))
                 {
                     value = temp[this.Key];
                 }
             }
 
-            if (value is int)
+            if (value is Int32)
             {
-                result = (int)value;
+                result = (Int32)value;
                 return true;
             }
 
-            if (value is string)
+            if (value is String)
             {
-                return int.TryParse((string)value, out result);
+                return Int32.TryParse((String)value, out result);
             }
 
-            result = 0;
+            result = -1;
             return fctResult;
         }
 
-        public bool TryGetString(object value, out string result)
+        public Boolean TryGetString(Object value, out String result)
         {
             bool fctResult = false;
-            if (value is Dictionary<string, object>)
+            if (value is Dictionary<String, Object>)
             {
-                Dictionary<string, object> temp = (Dictionary<string, object>)value;
+                Dictionary<String, Object> temp = (Dictionary<String, Object>)value;
                 if (temp.ContainsKey(this.Key))
                 {
                     value = temp[this.Key];
                 }
             }
 
-            if (value is string)
+            if (value is String)
             {
-                result = (string)value;
+                result = (String)value;
                 return true;
             }
 
-            result = string.Empty;
+            result = null;
             return fctResult;
         }
     }

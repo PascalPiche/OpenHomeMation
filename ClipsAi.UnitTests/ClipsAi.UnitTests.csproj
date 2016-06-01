@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FC583E82-C9CC-4DFA-A8DE-294AB69E6380}</ProjectGuid>
+    <ProjectGuid>677963b4-5a2b-4988-a953-ff25fa7492e3</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OHM.Tests</RootNamespace>
-    <AssemblyName>OHM.Tests</AssemblyName>
+    <RootNamespace>ClipsAi.UnitTests</RootNamespace>
+    <AssemblyName>ClipsAi.UnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -35,13 +35,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
-    </Reference>
-    <Reference Include="Rhino.Mocks">
-      <HintPath>..\packages\RhinoMocks.3.6.1\lib\net\Rhino.Mocks.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -57,38 +50,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Data\DataDictionaryUnitTest.cs" />
-    <Compile Include="Data\FileDataManagerUnitTest.cs" />
-    <Compile Include="Interfaces\UnitTest1.cs" />
-    <Compile Include="Plugins\PluginsManagerUnitTest.cs" />
+    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Logger\DefaultLoggerUnitTest.cs" />
-    <Compile Include="Logger\LoggerManagerUnitTest.cs" />
-    <Compile Include="Data\DataValueStringUnitTest.cs" />
-    <Compile Include="Data\DataValueDictionaryUnitTest.cs" />
-    <Compile Include="Data\DataStoreUnitTest.cs" />
-    <Compile Include="System\OhmSystemUnitTest.cs" />
-    <Compile Include="Commands\ArgumentDefinitionUnitTest.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Common.Public\Common.Public.csproj">
-      <Project>{c7ae6787-9a8a-4ebc-a341-ffacf31acaf7}</Project>
-      <Name>Common.Public</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Common\Common.csproj">
-      <Project>{f8c3c250-222d-49f4-9582-f7ba0dd6393e}</Project>
-      <Name>Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenHomeMation\OpenHomeMation.csproj">
-      <Project>{c5df6e96-8157-4901-9ced-f75285ab8e49}</Project>
-      <Name>OpenHomeMation</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="AllSystemUnitTest.playlist" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
@@ -109,11 +73,6 @@
   </Choose>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>xcopy "$(SolutionDir)OHM.Tests.Stub.Plugin\bin\debug\OHM.Tests.Stub.Plugin.dll" "$(SolutionDir)OHM.Tests\bin\Debug\pluginsStub\" /Y /s
-xcopy "$(SolutionDir)OHM.Tests.Stub.Plugin\bin\debug\OHM.Tests.Stub.Plugin.dll" "$(SolutionDir)OHM.Tests\bin\Debug\pluginsStub1\" /Y /s
-xcopy "$(SolutionDir)OHM.Tests.Stub.Plugin\bin\debug\OHM.Tests.Stub.Plugin.dll" "$(SolutionDir)OHM.Tests\bin\Debug\pluginsStub2\" /Y /s</PostBuildEvent>
-  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

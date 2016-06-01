@@ -83,21 +83,31 @@ namespace ZWaveLib
                 return false;
             }
 
+            // Add Node
+
+
+            //Store Controller
+            if (saveController)
+            {
+                _registeredControllers.StoreString(port.ToString(), port.ToString());
+                DataStore.Save();
+            }
+            
+
             bool mngResult = _mng.AddDriver(@"\\.\COM" + port, ZWControllerInterface.Serial);
             if (mngResult)
             {
-                Logger.Info("ZWave: Controller created on port: " + port);
+                //TODO: Set node to initializing
 
-                //Store Controller
-                if (saveController)
-                {
-                    _registeredControllers.StoreString(port.ToString(), port.ToString());
-                    DataStore.Save();
-                }
+                Logger.Info("ZWave: Controller created on port: " + port);
                 result = true;
+                
             }
             else
             {
+                //TODO : SET NODE TO ERROR
+
+
                 Logger.Info("ZWave: Cannot create Controller on port: " + port);
             }
             return result;

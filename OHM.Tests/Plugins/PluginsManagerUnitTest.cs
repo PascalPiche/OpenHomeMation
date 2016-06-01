@@ -62,7 +62,7 @@ namespace OHM.Plugins.Tests
             Assert.IsTrue(d.Init(dataStore));
 
             dataStore.AssertWasCalled(x => x.Save());
-            Assert.AreEqual(2, d.AvailablesPlugins.Count);
+            Assert.AreEqual(3, d.AvailablesPlugins.Count);
             Assert.AreEqual(0, d.InstalledPlugins.Count);
 
         }
@@ -72,11 +72,16 @@ namespace OHM.Plugins.Tests
         {
             var loggerMng = MockRepository.GenerateStub<ILoggerManager>();
             var logger = MockRepository.GenerateStub<ILogger>();
+
             loggerMng.Stub(x => x.GetLogger("PluginsManager")).Return(logger);
+
             var dataStore = MockRepository.GenerateStub<IDataStore>();
+
             string filePath = AppDomain.CurrentDomain.BaseDirectory + "\\pluginsStub1\\";
+
             var ohmSystem = MockRepository.GenerateStub<IOhmSystem>();
             var d = new PluginsManager(loggerMng, filePath);
+
             var guid = new Guid("dd985d5b-2d5e-49b5-9b07-64aad480e312");
             var guid2 = new Guid("dd985d5b-2d5e-49b5-9b07-64aad480e314");
 

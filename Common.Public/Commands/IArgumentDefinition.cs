@@ -17,7 +17,7 @@ namespace OHM.Commands
 
         bool ValidateValue(object value);
 
-        bool TryGetInt(object value, out int result);
+        bool TryGetInt32(object value, out int result);
 
         bool TryGetString(object value, out string result);
     }
