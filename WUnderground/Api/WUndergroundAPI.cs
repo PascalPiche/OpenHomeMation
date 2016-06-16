@@ -15,7 +15,7 @@ namespace WUnderground.Api
     {
         private const string _baseUrl = "http://api.wunderground.com/api/";
 
-        public static bool QueryLocationExist(string key, int zip, int magic, int wmo)
+        public static bool QueryLocationExist(string key, int zip, int magic, string wmo)
         {
             string result = Query(key, "conditions", CreateZMW(zip, magic, wmo));
             XmlDocument doc = new XmlDocument();
@@ -23,12 +23,12 @@ namespace WUnderground.Api
             return (doc.GetElementsByTagName("current_observation").Count == 1);
         }
 
-        public static WUndergroundConditionsResponse QueryConditions(string key, int zip, int magic, int wmo)
+        public static WUndergroundConditionsResponse QueryConditions(string key, int zip, int magic, string wmo)
         {
             return WUndergroudResponseFactory.CreateWUndergroundConditionsResponse(Query(key, "conditions", CreateZMW(zip, magic, wmo)));
         }
 
-        private static string CreateZMW(int zip, int magic, int wmo)
+        private static string CreateZMW(int zip, int magic, string wmo)
         {
             return zip.ToString("00000") + "." + magic + "." + wmo;
         }

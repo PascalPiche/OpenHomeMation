@@ -75,7 +75,7 @@ namespace WUnderground.Data
             return false;
         }
 
-        internal bool CreateLocationCommand(Account node, string locationName, int zip, int magic, int wmo)
+        internal bool AddStationCommandExecution(Account node, string locationName, int zip, int magic, string wmo)
         {
             Boolean result = false;
             IDataDictionary dataAccount = _registeredAccounts.GetDataDictionary(node.Key);
@@ -91,7 +91,7 @@ namespace WUnderground.Data
                     locationData.StoreString("name", locationName);
                     locationData.StoreInt("zip", zip);
                     locationData.StoreInt("magic", magic);
-                    locationData.StoreInt("wmo", wmo);
+                    locationData.StoreString("wmo", wmo);
 
                     accountLocations.StoreDataDictionary(locationName, locationData);
                     return DataStore.Save();
@@ -126,7 +126,7 @@ namespace WUnderground.Data
                         IDataDictionary locationData = locations.GetDataDictionary(locationKey);
                         int zip = locationData.GetInt("zip");
                         int magic = locationData.GetInt("magic");
-                        int wmo = locationData.GetInt("wmo");
+                        string wmo = locationData.GetString("wmo");
 
                         this.GetAccountNode(username).AddLocation(new Station(locationKey, locationKey, this.Logger, zip, magic, wmo));
                     }

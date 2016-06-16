@@ -62,7 +62,7 @@ namespace WUnderground.Commands
                new ArgumentDefinition(
                    "wmo",
                    "Wmo",
-                   typeof(int),
+                   typeof(string),
                    true
                )
            );
@@ -73,7 +73,7 @@ namespace WUnderground.Commands
             string name;
             int zip;
             int magic;
-            int wmo;
+            string wmo;
 
             //Check name
             if (!this.Definition.ArgumentsDefinition["name"].TryGetString(arguments, out name))
@@ -104,14 +104,14 @@ namespace WUnderground.Commands
             }
 
             //Check wmo
-            if (!this.Definition.ArgumentsDefinition["wmo"].TryGetInt32(arguments, out wmo))
+            if (!this.Definition.ArgumentsDefinition["wmo"].TryGetString(arguments, out wmo))
             {
                 return false;
             }
 
             var result = WUnderground.Api.WUndergroundApi.QueryLocationExist(_apiKey, zip, magic, wmo);
 
-            return WUndergroundInterface.CreateLocationCommand(_account, name, zip, magic, wmo);
+            return WUndergroundInterface.AddStationCommandExecution(_account, name, zip, magic, wmo);
         }
     }
 }

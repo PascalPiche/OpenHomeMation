@@ -14,10 +14,10 @@ namespace WUnderground.Data
 
         private int _zip;
         private int _magic;
-        private int _wmo;
+        private string _wmo;
 
 
-        public Station(string keyId, string name, ILogger logger, int zip, int magic, int wmo)
+        public Station(string keyId, string name, ILogger logger, int zip, int magic, string wmo)
             : base(keyId, name, logger)
         {
 
@@ -47,7 +47,7 @@ namespace WUnderground.Data
                new NodeProperty(
                    "wmo",
                    "wmo",
-                   typeof(int),
+                   typeof(string),
                    true,
                    "",
                   _wmo));
