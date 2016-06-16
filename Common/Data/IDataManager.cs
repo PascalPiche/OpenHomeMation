@@ -4,7 +4,7 @@ namespace OHM.Data
     public interface IDataManager
     {
 
-        void Init();
+        bool Init();
 
         void Shutdown();
 

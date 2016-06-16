@@ -3,13 +3,13 @@ using System;
 
 namespace OHM.Sys
 {
-    public class OhmSystemInterfaceGateway : IOhmSystemInterfaceGateway
+    public sealed class OhmSystemInterfaceGateway : IOhmSystemInterfaceGateway
     {
 
         private IOhmSystemInternal _system;
         private IInterface _interface;
 
-        public OhmSystemInterfaceGateway(IOhmSystemInternal system, IInterface interf)
+        internal OhmSystemInterfaceGateway(IOhmSystemInternal system, IInterface interf)
         {
             _system = system;
             _interface = interf;

@@ -75,6 +75,7 @@
     <Compile Include="Interfaces\InterfacesManager.cs" />
     <Compile Include="Logger\DefaultLogger.cs" />
     <Compile Include="Logger\LoggerManager.cs" />
+    <Compile Include="Plugins\NotFoundPlugin.cs" />
     <Compile Include="System\OhmSystem.cs" />
     <Compile Include="System\OhmSystemInstallGateway.cs" />
     <Compile Include="System\OhmSystemInterfaceGateway.cs" />
@@ -117,10 +118,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="InterfacesManager_GetPluginForInterface.sequencediagram" />
-    <None Include="IPluginsManager_GetPlugin.sequencediagram" />
-    <None Include="packages.config" />
+    <None Include="Plugins\_diagrams\PluginsManager_GetPlugin.sequencediagram" />
+    <None Include="Plugins\_diagrams\PluginsManager_InstallPlugin.sequencediagram" />
+    <None Include="Plugins\_diagrams\PluginsManager_Init.sequencediagram" />
     <None Include="System\_diagrams\OpenHomeMation_start.sequencediagram" />
+    <None Include="packages.config" />
     <None Include="System\_diagrams\ClassDiagram1.cd" />
     <None Include="Data\DataClassDiagram.cd" />
     <None Include="Data\DataClassDiagramFull.cd" />
@@ -128,11 +130,14 @@
     <None Include="Logger\LoggerClassDiagramFull.cd" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="InterfacesManager_GetPluginForInterface.sequencediagram.layout">
-      <DependentUpon>InterfacesManager_GetPluginForInterface.sequencediagram</DependentUpon>
+    <EmbeddedResource Include="Plugins\_diagrams\PluginsManager_GetPlugin.sequencediagram.layout">
+      <DependentUpon>PluginsManager_GetPlugin.sequencediagram</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="IPluginsManager_GetPlugin.sequencediagram.layout">
-      <DependentUpon>IPluginsManager_GetPlugin.sequencediagram</DependentUpon>
+    <EmbeddedResource Include="Plugins\_diagrams\PluginsManager_InstallPlugin.sequencediagram.layout">
+      <DependentUpon>PluginsManager_InstallPlugin.sequencediagram</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plugins\_diagrams\PluginsManager_Init.sequencediagram.layout">
+      <DependentUpon>PluginsManager_Init.sequencediagram</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="System\_diagrams\OpenHomeMation_start.sequencediagram.layout">
       <DependentUpon>OpenHomeMation_start.sequencediagram</DependentUpon>

@@ -27,47 +27,64 @@ namespace OHM.Sys
             this._vrMng = vrMng;
         }
 
-        #region "Public"
+        #region Public
 
-        public IOhmSystem System
-        {
-            get
-            {
-                return _ohmSystem;
-            }
-        }
+        public IOhmSystem System { get { return _ohmSystem; } }
 
-        public void start()
+        public bool start()
         {
             _logger = _loggerMng.GetLogger("OHM");
-            _logger.Info(_logger.Logger.Name + ": " + "Starting");
+            _logger.Debug("Starting");
             _ohmSystem = new OhmSystem( _interfacesMng, _vrMng, _loggerMng, _dataMng);
+
+            //Init DataManager
             _dataMng.Init();
 
-            if (!StartPluginMng())
+            //Init PluginsManager
+            if (!InitPluginsMng())
             {
-                _logger.Fatal("PluginManager failed Init. Abording start");
-                return;
+                _logger.Fatal("PluginsManager failed Init. Abording start");
+                return false;
             }
 
-            if (!StartInterfacesMng())
+            //Init InterfacesManager
+            if (!InitInterfacesMng())
             {
                 _logger.Fatal("InterfacesManager failed Init. Abording start");
-                return;
+                return false;
+            }
+
+            //Init InterfacesManager
+            if (!InitVrMng())
+            {
+                _logger.Fatal("VirtualRealityManager failed Init. Abording start");
+                return false;
             }
 
             OpenHomeMationServerImplementation.Run();
+
+            //Switch inner flag
             this._isRunning = true;
-            _logger.Info("Started OHM"); 
+
+            //Log data
+            _logger.Info("Started");
+
+            return true;
         }
 
         public void Shutdown()
         {
-            _logger.Info("Stoping OHM");
-            //Save All Data Store
+            //Log data
+            _logger.Debug("Stoping");
+
+            //Shutdown DataManager
             _dataMng.Shutdown();
+
+            //Switch inner flag
             this._isRunning = false;
-            _logger.Info("Stoped OHM");
+
+            //Log data
+            _logger.Info("Stoped");
         }
 
         public bool IsRunning()
@@ -79,30 +96,21 @@ namespace OHM.Sys
 
         #region "Private"
 
-        private bool StartPluginMng()
+        private bool InitPluginsMng()
         {
-            IDataStore data = _dataMng.GetDataStore("PluginsManager");
-            if (data == null)
-            {
-                _logger.Debug("Data Store for Plugins Manager not found");
-                _logger.Info("Creating new Data Store for Plugins Manager");
-                data = _dataMng.GetOrCreateDataStore("PluginsManager");
-            }
-            return _pluginsMng.Init(data);
+            return _pluginsMng.Init(_dataMng.GetOrCreateDataStore("PluginsManager"));
         }
 
-        private bool StartInterfacesMng()
+        private bool InitInterfacesMng()
         {
-            IDataStore data = _dataMng.GetDataStore("InterfacesManager");
-            if (data == null)
-            {
-                _logger.Debug("Data Store for Interfaces Manager not found");
-                _logger.Info("Creating new Data Store for Interfaces Manager");
-                data = _dataMng.GetOrCreateDataStore("InterfacesManager");
-
-            }
-            return _interfacesMng.Init(data, _ohmSystem);
+            return _interfacesMng.Init(_dataMng.GetOrCreateDataStore("InterfacesManager"), _ohmSystem);
         }
+
+        private bool InitVrMng()
+        {
+            return _vrMng.Init(_dataMng.GetOrCreateDataStore("VrManager"), _ohmSystem);
+        }
+    
     
         #endregion
     }

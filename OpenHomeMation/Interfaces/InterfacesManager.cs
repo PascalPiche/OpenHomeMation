@@ -21,7 +21,7 @@ namespace OHM.Interfaces
         private IList<IInterface> _runningInterfaces = new ObservableCollection<IInterface>();
         private Dictionary<String, IInterface> _runningDic = new Dictionary<string, IInterface>();
 
-        #region "Public Property"
+        #region Public Properties
 
         public IList<IInterface> RunnableInterfaces
         {
@@ -46,14 +46,16 @@ namespace OHM.Interfaces
         {
             _data = data;
             _logger = _loggerMng.GetLogger("InterfacesManager");
-            _dataRegisteredInterfaces = _data.GetDataDictionary("RegisteredInterfaces");
-            if (_dataRegisteredInterfaces == null)
+            _logger.Debug("Initing");
+            _dataRegisteredInterfaces = _data.GetOrCreateDataDictionary("RegisteredInterfaces");
+            /*if (_dataRegisteredInterfaces == null)
             {
                 _dataRegisteredInterfaces = new DataDictionary();
-                _data.StoreDataDictionary("RegisteredInterfaces", _dataRegisteredInterfaces);
+                _data.StoreDataDictionary("RegisteredInterfaces", _dataRegisteredInterfaces);*/
                 _data.Save();
-            }
+            //}
             loadRegisteredInterfaces(system);
+            _logger.Debug("Inited");
             return true;
         }
 

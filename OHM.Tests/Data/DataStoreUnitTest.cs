@@ -11,11 +11,6 @@ namespace OHM.Data.Tests
         [TestMethod]
         public void TestDataStoreKeyProperty()
         {
-
-            /*var d = new DataStore();
-
-            Assert.IsNull(d.Key);*/
-
             var d = new DataStore("key");
 
             Assert.AreEqual("key", d.Key);

@@ -11,7 +11,6 @@ using System.Configuration;
 using System.Configuration.Install;
 using System.ServiceModel.Description;
 
-
 namespace OHM.Sys
 {
 
@@ -23,18 +22,15 @@ namespace OHM.Sys
     }
 
 
-    public class OpenHomeMationServer : IOpenHomeMationServer
+    public sealed class OpenHomeMationServer : IOpenHomeMationServer
     {
-
-
-
         public string Query(string query)
         {
             return "test";
         }
     }
 
-    public class OpenHomeMationServerImplementation
+    public sealed class OpenHomeMationServerImplementation
     {
         public static void Run() {
             ServiceHost ohmService = null;

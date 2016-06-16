@@ -37,7 +37,36 @@ namespace OHM.Data.Tests
             Assert.IsTrue(Directory.Exists(_filePath));
 
             //Should do nothing
+            Assert.IsTrue(d.Init());
+
+        }
+
+        [TestMethod]
+        public void TestFileDataManagerInitWithError()
+        {
+            var loggerMng = MockRepository.GenerateStub<ILoggerManager>();
+            var logger = MockRepository.GenerateStub<ILogger>();
+            loggerMng.Stub(x => x.GetLogger("FileDataManager")).Return(logger);
+
+            //With Invalid file Path
+            var d = new FileDataManager(loggerMng, "AB:");
+
+            //Make Sure Data is empty
+            /*if (Directory.Exists(_filePath4))
+            {
+                Directory.Delete(_filePath4, true);
+            }
+
+            Assert.IsFalse(Directory.Exists(_filePath4));
+            */
+            //Should throw error
+
             d.Init();
+
+            //Assert.IsTrue(Directory.Exists(_filePath4));
+
+            //Should do nothing
+            Assert.IsFalse(d.Init());
 
         }
 

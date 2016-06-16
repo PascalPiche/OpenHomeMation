@@ -5,16 +5,16 @@ using OHM.Logger;
 
 namespace OHM.Sys
 {
-    public class OhmSystem : IOhmSystemInternal
+    public sealed class OhmSystem : IOhmSystemInternal
     {
         private ILoggerManager _loggerMng;
         private IInterfacesManager _interfacesMng;
         private IDataManager _dataMng;
         private IVrManager _vrMng;
 
-        #region "Ctor"
+        #region Internal Ctor
 
-        public OhmSystem(IInterfacesManager interfacesMng, IVrManager vrMng, ILoggerManager loggerMng, IDataManager dataMng)
+        internal OhmSystem(IInterfacesManager interfacesMng, IVrManager vrMng, ILoggerManager loggerMng, IDataManager dataMng)
         {
             _loggerMng = loggerMng;
             _interfacesMng = interfacesMng;
@@ -24,7 +24,7 @@ namespace OHM.Sys
 
         #endregion
 
-        #region "Public Properties"
+        #region Public Properties
 
         public ILoggerManager LoggerMng { get { return _loggerMng; } }
 
@@ -32,14 +32,11 @@ namespace OHM.Sys
 
         public IDataManager DataMng { get { return _dataMng; } }
 
-        public Common.Vr.IVrManager vrMng
-        {
-            get { return _vrMng; }
-        }
+        public IVrManager vrMng { get { return _vrMng; } }
 
         #endregion
 
-        #region "Public Api"
+        #region Public Api
 
         public IOhmSystemInstallGateway GetInstallGateway(Plugins.IPlugin plugin)
         {

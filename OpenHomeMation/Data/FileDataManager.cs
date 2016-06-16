@@ -8,43 +8,72 @@ namespace OHM.Data
 {
     public class FileDataManager : IDataManager
     {
+        #region Private Member
+        
         private ILoggerManager _loggerMng;
         private ILogger _logger;
         private string _filePath;
         private Dictionary<String, IDataStore> _loadedDataStore = new Dictionary<string,IDataStore>();
+
+        #endregion
+
+        #region Public Ctor
 
         public FileDataManager(ILoggerManager loggerMng, string filePath) {
             _filePath = filePath;
             _loggerMng = loggerMng;
         }
 
-        public void Init()
+        #endregion
+
+        #region Public Api
+
+        public bool Init()
         {
+            bool result = true;
             _logger = _loggerMng.GetLogger("FileDataManager");
+            _logger.Debug("Initing");
+
             if (!Directory.Exists(_filePath))
             {
                 _logger.Debug("Creating Data Directory : " + _filePath);
-                Directory.CreateDirectory(_filePath);
+                try
+                {
+                    Directory.CreateDirectory(_filePath);
+                }
+                catch (Exception ex)
+                {
+                    result = false;
+                    _logger.Error("Can not create data directory : " + _filePath, ex);
+                }
             }
+
+            if (result)
+            {
+                _logger.Debug("Inited");
+            }
+            return result;
         }
 
         public void Shutdown()
         {
             //Save All Data store
+            _logger.Debug("Shutdowning");
             var enumerator = _loadedDataStore.GetEnumerator();
             while (enumerator.MoveNext())
             {
-
                 SaveDataStore(enumerator.Current.Value);
             }
+            _logger.Debug("Shutdowned");
         }
 
         public IDataStore GetDataStore(string key)
         {
-            if (_loadedDataStore.ContainsKey(key)) {
+            IDataStore result = null;
 
-                return _loadedDataStore[key];
-            } 
+            if (_loadedDataStore.ContainsKey(key)) {
+                result = _loadedDataStore[key];
+            }
             else 
             {
                 string path = BuildDataStorePath(key);
@@ -52,36 +81,58 @@ namespace OHM.Data
                 {
                     IDataStore newDataStore = DataStoreFromFile(path);
                     _loadedDataStore.Add(key, newDataStore);
-                    return newDataStore;
+                    result = newDataStore;
                 }
             }
-            return null;
+
+            return result;
         }
 
         public IDataStore GetOrCreateDataStore(string key)
         {
             //Check if DataStore exist
-            IDataStore existing = GetDataStore(key);
-            if (existing != null)
+            IDataStore result = GetDataStore(key);
+
+            if (result == null)
             {
-                return existing;
-            }
-            else
-            {
+                _logger.Debug("Creating new DataStore: " + key);
+
+                //Create object
                 DataStore newDataStore = new DataStore(key);
+
+
+                //Init object
                 newDataStore.Init(this);
-                DataStoreToFile(newDataStore, BuildDataStorePath(key));
+
+                //Save Data Store to disk
+                if (!DataStoreToFile(newDataStore))
+                {
+                    //Save To drive Failed
+                    _logger.Error("New Datastore " + key + " only created in memory");
+                }
+
+                //Add data store to the loaded dataStore
                 _loadedDataStore.Add(key, newDataStore);
-                return newDataStore;
+
+                //Set result to the new value
+                result = newDataStore;
+                _logger.Debug("Created new DataStore: " + key);
             }
+
+            //Return result;
+            return result;
         }
 
         public bool SaveDataStore(IDataStore dataStore)
         {
-            _logger.Info("DataManager: Saving DataStore " + dataStore.Key);
-            DataStoreToFile(dataStore, BuildDataStorePath(dataStore.Key));
+            _logger.Debug("Saving DataStore: " + dataStore.Key);
+            DataStoreToFile(dataStore);
             return true;
         }
+
+        #endregion
+
+        #region Private
 
         private IDataStore DataStoreFromFile(string path)
         {
@@ -104,22 +155,40 @@ namespace OHM.Data
             return listKnowTypes;
         }
 
-        private void DataStoreToFile(IDataStore data, string path) 
+        private bool DataStoreToFile(IDataStore data) 
         {
-            DataContractSerializer formatter = new DataContractSerializer(typeof(DataStore), GetSerializationTypes());
-            if (File.Exists(path)) {
-                File.Delete(path);
+            bool result = false;
+            string path = BuildDataStorePath(data.Key);
+
+            _logger.Debug("Writting DataStore on drive with path: " + path);
+            try
+            {
+                DataContractSerializer formatter = new DataContractSerializer(typeof(DataStore), GetSerializationTypes());
+                if (File.Exists(path))
+                {
+                    File.Delete(path);
+                }
+                var writter = File.OpenWrite(path);
+                formatter.WriteObject(writter, data);
+                writter.Flush();
+                writter.Close();
+                result = true;
             }
-            var writter = File.OpenWrite(path);
-            formatter.WriteObject(writter, data);
-            writter.Flush();
-            writter.Close();
+            catch (Exception ex)
+            {
+                _logger.Error("An Error occured while saving DataStore with path: "  + path, ex);
+                result = false;
+            }
+            _logger.Debug("Writted DataStore on drive with path: " + path);
+            return result;
         }
 
         private string BuildDataStorePath(string key)
         {
             return _filePath + key + ".data";
         }
+
+        #endregion
 
     }
 }

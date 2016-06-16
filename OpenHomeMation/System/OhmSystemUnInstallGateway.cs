@@ -3,13 +3,13 @@
 namespace OHM.Sys
 {
     
-    public class OhmSystemUnInstallGateway : IOhmSystemUnInstallGateway
+    public sealed class OhmSystemUnInstallGateway : IOhmSystemUnInstallGateway
     {
 
         private IOhmSystemInternal _system;
         private IPlugin _plugin;
 
-        public OhmSystemUnInstallGateway(IOhmSystemInternal system, IPlugin plugin)
+        internal OhmSystemUnInstallGateway(IOhmSystemInternal system, IPlugin plugin)
         {
             _system = system;
             _plugin = plugin;
