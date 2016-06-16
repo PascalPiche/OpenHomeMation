@@ -293,8 +293,8 @@ namespace WUnderground.Api.Data
             }
         }
 
-        private Double _windchillF;
-        public Double Windchill_F
+        private Double? _windchillF;
+        public Double? Windchill_F
         {
             get
             {
@@ -307,8 +307,8 @@ namespace WUnderground.Api.Data
             }
         }
 
-        private Double _windchillC;
-        public Double Windchill_C
+        private Double? _windchillC;
+        public Double? Windchill_C
         {
             get
             {
@@ -466,8 +466,8 @@ namespace WUnderground.Api.Data
 
                 //Wind (Include direction, speed and gust speed)
 
-                result.Windchill_F = Double.Parse(doc.SelectSingleNode("/response/current_observation/windchill_f").InnerText, System.Globalization.NumberFormatInfo.InvariantInfo);
-                result.Windchill_C = Double.Parse(doc.SelectSingleNode("/response/current_observation/windchill_c").InnerText, System.Globalization.NumberFormatInfo.InvariantInfo);
+                result.Windchill_F = GetNullableDouble(doc.SelectSingleNode("/response/current_observation/windchill_f").InnerText);
+                result.Windchill_C = GetNullableDouble(doc.SelectSingleNode("/response/current_observation/windchill_c").InnerText);
                 result.WindDirection = doc.SelectSingleNode("/response/current_observation/wind_dir").InnerText;
                 result.WindDegrees = Int16.Parse(doc.SelectSingleNode("/response/current_observation/wind_degrees").InnerText);
                 result.WindSpeed_Mph = Double.Parse(doc.SelectSingleNode("/response/current_observation/wind_mph").InnerText, System.Globalization.NumberFormatInfo.InvariantInfo);
@@ -528,5 +528,16 @@ namespace WUnderground.Api.Data
             return null;
         }
 
+        public static Double? GetNullableDouble(string value)
+        {
+            Double parsedValue;
+
+            if (Double.TryParse(value, System.Globalization.NumberStyles.Float, System.Globalization.NumberFormatInfo.InvariantInfo, out parsedValue))
+            {
+                return new Double?(parsedValue);
+            }
+
+            return new Double?();
+        }
     }
 }
