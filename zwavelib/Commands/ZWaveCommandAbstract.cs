@@ -9,7 +9,7 @@ using ZWaveLib.Data;
 
 namespace ZWaveLib.Commands
 {
-    public abstract class ZWaveCommandAbstract : CommandAbstract
+    public abstract class ZWaveCommandAbstract : CommandAbstract, IInterfaceCommand
     {
 
         protected new ZWaveNode Node

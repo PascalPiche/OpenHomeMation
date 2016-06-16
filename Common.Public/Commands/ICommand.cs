@@ -13,10 +13,4 @@ namespace OHM.Commands
         bool CanExecute();
     }
 
-    public interface IInterfaceCommand : ICommand
-    {
-        string InterfaceKey { get; }
-
-        string NodeKey { get; }
-    }
 }

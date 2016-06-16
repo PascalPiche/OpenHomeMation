@@ -10,7 +10,7 @@ using WUnderground.Data;
 
 namespace WUnderground.Commands
 {
-    public abstract class AbstractWUndergroundCommand : CommandAbstract
+    public abstract class AbstractWUndergroundCommand : CommandAbstract, IInterfaceCommand
     {
 
         protected WUndergroundInterface WUndergroundInterface

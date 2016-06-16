@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ZWaveLib.Commands
 {
-    public class CreateController : ZWaveCommandAbstract, IInterfaceCommand
+    public class CreateController : ZWaveCommandAbstract
     {
 
         public CreateController(ZWaveInterface interf)

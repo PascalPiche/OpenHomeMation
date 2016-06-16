@@ -280,4 +280,12 @@ namespace OHM.Nodes
 
         #endregion
     }
+
+    public abstract class NodeInterfaceAbstract : NodeAbstract
+    {
+        public NodeInterfaceAbstract(string key, string name, ILogger logger)
+            : base(key, name, logger)
+        { }
+         
+    }
 }

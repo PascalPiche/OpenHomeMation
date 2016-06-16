@@ -9,7 +9,7 @@ using WUnderground.Data;
 
 namespace WUnderground.Commands
 {
-    class AddAccount : AbstractWUndergroundCommand, IInterfaceCommand
+    class AddAccount : AbstractWUndergroundCommand
     {
 
         public AddAccount(WUndergroundInterface node)
