@@ -37,6 +37,7 @@ namespace WUnderground.Api
         {
             string url = _baseUrl + key + "/" + type + "/q/zmw:" + zmw + ".xml";
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+
             try
             {
                 WebResponse response = request.GetResponse();
@@ -53,13 +54,11 @@ namespace WUnderground.Api
                 {
                     StreamReader reader = new StreamReader(responseStream, Encoding.GetEncoding("utf-8"));
                     String errorText = reader.ReadToEnd();
-                    // log errorText
                 }
                 throw;
             }
             catch (IOException ex)
             {
-
                 throw;
             }
         }

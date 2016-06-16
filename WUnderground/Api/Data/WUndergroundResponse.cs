@@ -293,10 +293,33 @@ namespace WUnderground.Api.Data
             }
         }
 
-        /*
-        windchill_f
-                windchill_c
-        */
+        private Double _windchillF;
+        public Double Windchill_F
+        {
+            get
+            {
+                return _windchillF;
+            }
+
+            internal set
+            {
+                _windchillF = value;
+            }
+        }
+
+        private Double _windchillC;
+        public Double Windchill_C
+        {
+            get
+            {
+                return _windchillC;
+            }
+
+            internal set
+            {
+                _windchillC = value;
+            }
+        }
 
         private Int16 _windDegrees;
         public Int16 WindDegrees
@@ -442,6 +465,9 @@ namespace WUnderground.Api.Data
                 result.RelativeHumidity = doc.SelectSingleNode("/response/current_observation/relative_humidity").InnerText;
 
                 //Wind (Include direction, speed and gust speed)
+
+                result.Windchill_F = Double.Parse(doc.SelectSingleNode("/response/current_observation/windchill_f").InnerText, System.Globalization.NumberFormatInfo.InvariantInfo);
+                result.Windchill_C = Double.Parse(doc.SelectSingleNode("/response/current_observation/windchill_c").InnerText, System.Globalization.NumberFormatInfo.InvariantInfo);
                 result.WindDirection = doc.SelectSingleNode("/response/current_observation/wind_dir").InnerText;
                 result.WindDegrees = Int16.Parse(doc.SelectSingleNode("/response/current_observation/wind_degrees").InnerText);
                 result.WindSpeed_Mph = Double.Parse(doc.SelectSingleNode("/response/current_observation/wind_mph").InnerText, System.Globalization.NumberFormatInfo.InvariantInfo);
@@ -460,10 +486,9 @@ namespace WUnderground.Api.Data
                 result.HeatIndex_F = doc.SelectSingleNode("/response/current_observation/heat_index_f").InnerText;
                 result.HeatIndex_C = doc.SelectSingleNode("/response/current_observation/heat_index_c").InnerText;
 
+                
 
                 /* 
-                windchill_f
-                windchill_c
 
                 feelslike_f
                 feelslike_c
