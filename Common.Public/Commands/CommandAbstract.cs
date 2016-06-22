@@ -7,12 +7,15 @@ namespace OHM.Commands
     
     public abstract class CommandAbstract : ICommand
     {
+        #region Private Members
 
         private ICommandDefinition _definition;
         private INode _node;
         private IInterface _interface;
 
-        #region "Ctor"
+        #endregion
+
+        #region Protected Ctor
 
         protected CommandAbstract(INode node, string key, string name) 
             : this(node, key, name, string.Empty, null) {
@@ -42,18 +45,13 @@ namespace OHM.Commands
 
         #endregion
 
-        #region Public
+        #region Public Properties
 
         public ICommandDefinition Definition
         {
             get { return _definition; }
         }
-
-        public virtual bool CanExecute()
-        {
-            return IsStateRunning();
-        }
-
+        
         public string NodeKey
         {
             get { return Node.Key; }
@@ -66,8 +64,17 @@ namespace OHM.Commands
 
         #endregion
 
+        #region Public Api
+
+        public virtual bool CanExecute()
+        {
+            return IsStateRunning();
+        }
+
+
+        #endregion
+
         #region Protected
-        
 
         protected Nodes.INode Node
         {

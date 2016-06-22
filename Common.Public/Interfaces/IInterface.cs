@@ -6,7 +6,6 @@ namespace OHM.Interfaces
 {
     public interface IInterface : INode, INotifyPropertyChanged
     {
-
         InterfaceState State { get; }
 
         bool ExecuteCommand(string nodeKey, string commandKey, Dictionary<string, object> arguments);
@@ -18,6 +17,5 @@ namespace OHM.Interfaces
         void Starting();
 
         void Shutdowning();
-        
     }
 }

@@ -5,7 +5,6 @@ namespace OHM.Data
 {
     public interface IDataDictionary
     {
-
         IEnumerable<string> Keys { get; }
 
         void StoreInt(string key, int value);

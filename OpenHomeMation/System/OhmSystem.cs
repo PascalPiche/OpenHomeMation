@@ -12,6 +12,8 @@ namespace OHM.Sys
 {
     public sealed class OhmSystem : IOhmSystemInternal
     {
+        #region Private Members
+
         private ILogger _logger;
         private ILoggerManager _loggerMng;
         private IInterfacesManager _interfacesMng;
@@ -19,6 +21,8 @@ namespace OHM.Sys
         private IVrManager _vrMng;
         private IPluginsManager _pluginsMng;
         private IAPI _api;
+
+        #endregion
 
         #region Internal Ctor
 
@@ -34,58 +38,19 @@ namespace OHM.Sys
 
         #endregion
 
-        #region Internal Properties
+        #region Public Properties
 
-        internal bool Start()
+        public IAPI API
         {
-            bool result = false;
-            _logger = _loggerMng.GetLogger("OhmSystem");
-            result = true;
-
-            //Init DataManager
-            if (!DataMng.Init())
+            get
             {
-                _logger.Fatal("DataManager failed Init. Abording start");
-                return false;
+                return _api;
             }
-
-            //Init PluginsManager
-            if (!InitPluginsMng())
-            {
-                _logger.Fatal("PluginsManager failed Init. Abording start");
-                return false;
-            }
-
-            //Init InterfacesManager
-            if (!InitInterfacesMng())
-            {
-                _logger.Fatal("InterfacesManager failed Init. Abording start");
-                return false;
-            }
-
-            //Init InterfacesManager
-            if (!InitVrMng())
-            {
-                _logger.Fatal("VirtualRealityManager failed Init. Abording start");
-                return false;
-            }
-
-            return result;
         }
-
-        private IPluginsManager PluginsMng { get { return _pluginsMng; } }
-
-        internal ILoggerManager LoggerMng { get { return _loggerMng; } }
-
-        internal IInterfacesManager InterfacesMng { get { return _interfacesMng; } }
-
-        internal IDataManager DataMng { get { return _dataMng; } }
-
-        internal IVrManager vrMng { get { return _vrMng; } }
 
         #endregion
 
-        #region Public Api
+        #region Public Functions
 
         public IOhmSystemInstallGateway GetInstallGateway(Plugins.IPlugin plugin)
         {
@@ -102,21 +67,17 @@ namespace OHM.Sys
             return new OhmSystemUnInstallGateway(plugin, _loggerMng.GetLogger(plugin.Name), _interfacesMng);
         }
 
-        public IAPI API
-        {
-            get
-            {
-                return _api;
-            }
-        }
-
         public IDataStore GetOrCreateDataStore(string key)
         {
             return this._dataMng.GetOrCreateDataStore(key);
         }
+
         
+
         #endregion  
      
+        #region Public sealed class
+
         public sealed class APIInstance : IAPI
         {
 
@@ -204,22 +165,75 @@ namespace OHM.Sys
             }
         }
 
+        #endregion
+
+        #region Internal Properties
+
+        internal bool Start()
+        {
+            bool result = false;
+            _logger = _loggerMng.GetLogger("OhmSystem");
+            result = true;
+
+            //Init DataManager
+            if (!DataMng.Init())
+            {
+                _logger.Fatal("DataManager failed Init. Abording start");
+                return false;
+            }
+
+            //Init PluginsManager
+            if (!InitPluginsMng())
+            {
+                _logger.Fatal("PluginsManager failed Init. Abording start");
+                return false;
+            }
+
+            //Init InterfacesManager
+            if (!InitInterfacesMng())
+            {
+                _logger.Fatal("InterfacesManager failed Init. Abording start");
+                return false;
+            }
+
+            //Init InterfacesManager
+            if (!InitVrMng())
+            {
+                _logger.Fatal("VirtualRealityManager failed Init. Abording start");
+                return false;
+            }
+
+            return result;
+        }
+
+        #endregion
+
+        #region Internal Properties
+
+        internal ILoggerManager LoggerMng { get { return _loggerMng; } }
+
+        internal IDataManager DataMng { get { return _dataMng; } }
+
+        #endregion
+
+        #region Private functions
 
         private bool InitPluginsMng()
         {
-            return PluginsMng.Init(DataMng.GetOrCreateDataStore("PluginsManager"));
+            return _pluginsMng.Init(DataMng.GetOrCreateDataStore("PluginsManager"));
         }
 
         private bool InitInterfacesMng()
         {
-            return InterfacesMng.Init(DataMng.GetOrCreateDataStore("InterfacesManager"), this);
+            return _interfacesMng.Init(DataMng.GetOrCreateDataStore("InterfacesManager"), this);
         }
 
         private bool InitVrMng()
         {
-            return vrMng.Init(DataMng.GetOrCreateDataStore("VrManager"), this);
+            return _vrMng.Init(DataMng.GetOrCreateDataStore("VrManager"), this);
         }
-    
-    
+
+        #endregion
+
     }
 }

@@ -4,10 +4,17 @@ namespace OHM.Commands
 {
     public sealed class CommandDefinition : ICommandDefinition
     {
+
+        #region Private Members
+
         private string _key;
         private string _name;
         private string _description;
         private Dictionary<string, IArgumentDefinition> _argumentsDefinition;
+
+        #endregion
+
+        #region Public Ctor
 
         public CommandDefinition(string key, string name)
             : this(key, name, string.Empty, null) { }
@@ -36,6 +43,10 @@ namespace OHM.Commands
 
         }
 
+        #endregion
+
+        #region Public Properties
+
         public string Key
         {
             get { return _key; }
@@ -50,6 +61,10 @@ namespace OHM.Commands
         {
             get { return _description; }
         }
+
+        #endregion
+
+        #region Public Api
 
         public bool ValidateArguments(Dictionary<string, object> arguments)
         {
@@ -85,5 +100,8 @@ namespace OHM.Commands
         {
             get { return _argumentsDefinition; }
         }
+
+        #endregion
+
     }
 }

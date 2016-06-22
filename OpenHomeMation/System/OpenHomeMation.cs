@@ -8,9 +8,15 @@ namespace OHM.Sys
 {
     public class OpenHomeMation
     {
+        #region Private Members
+
         private ILogger _logger;
         private bool _isRunning = false;
         private OhmSystem _ohmSystem;
+
+        #endregion 
+
+        #region Public Ctor
 
         public OpenHomeMation(IPluginsManager pluginsMng, IDataManager dataMng, ILoggerManager loggerMng, IInterfacesManager interfacesMng, IVrManager vrMng)
         {
@@ -18,6 +24,8 @@ namespace OHM.Sys
             //this._dataMng = dataMng;
             _ohmSystem = new OhmSystem(interfacesMng, vrMng, loggerMng, dataMng, pluginsMng);
         }
+
+        #endregion
 
         #region Public
 

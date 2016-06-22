@@ -5,10 +5,17 @@ namespace OHM.Commands
 {
     public sealed class ArgumentDefinition : IArgumentDefinition
     {
+
+        #region Private Members
+
         private String _key;
         private String _name;
         private Type _type;
         private Boolean _required;
+
+        #endregion
+
+        #region Public Ctor
 
         public ArgumentDefinition(String key, String name, Type t) : this(key, name, t, false) { }
 
@@ -20,6 +27,10 @@ namespace OHM.Commands
             _required = required;
         }
 
+        #endregion
+
+        #region Public Properties
+
         public String Key { get { return _key; } }
 
         public String Name { get { return _name; } }
@@ -27,6 +38,10 @@ namespace OHM.Commands
         public Type Type { get { return _type; } }
 
         public Boolean Required { get { return _required; } }
+
+        #endregion
+
+        #region Public API
 
         public Boolean ValidateValue(Object value)
         {
@@ -94,5 +109,8 @@ namespace OHM.Commands
             result = null;
             return fctResult;
         }
+
+        #endregion
+
     }
 }

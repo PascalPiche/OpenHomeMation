@@ -8,24 +8,23 @@ namespace OHM.Interfaces
 {
     public abstract class InterfaceAbstract : NodeAbstract, IInterface
     {
+        #region Private Members
 
         private InterfaceState _state = InterfaceState.Disabled;
         private bool _startOnLaunch = false;
-        
         private IOhmSystemInterfaceGateway _system;
-
-        #region Ctor
-        public InterfaceAbstract(string key, string name, ILogger logger) 
-            : base(key, name, logger)
-        {
-            
-            //Register Default commands
-
-        }
 
         #endregion
 
-        #region public
+        #region Public Ctor
+
+        public InterfaceAbstract(string key, string name, ILogger logger) 
+            : base(key, name, logger)
+        {}
+
+        #endregion
+
+        #region public Properties
 
         public InterfaceState State
         {
@@ -43,6 +42,24 @@ namespace OHM.Interfaces
         {
             get { return State == Interfaces.InterfaceState.Enabled; }
         }
+
+        public bool StartOnLaunch
+        {
+            get { return _startOnLaunch; }
+            set
+            {
+
+                _startOnLaunch = value;
+                DataStore.StoreBool("StartOnLaunch", value);
+                DataStore.Save();
+                NotifyPropertyChanged("StartOnLaunch");
+            }
+
+        }
+
+        #endregion
+
+        #region Public Api
 
         public void Starting()
         {
@@ -81,7 +98,27 @@ namespace OHM.Interfaces
             return false;
         }
 
-        internal new bool ExecuteCommand(string commandKey, Dictionary<string, object> arguments)
+        public void Init(IDataStore data, IOhmSystemInterfaceGateway system)
+        {
+            base.Init(data);
+            _startOnLaunch = data.GetBool("StartOnLaunch");
+            NotifyPropertyChanged("StartOnLaunch");
+            _system = system;
+        }
+
+        #endregion
+
+        #region Protected abstract functions
+
+        protected abstract void Start();
+
+        protected abstract void Shutdown();
+
+        #endregion
+
+        #region Private functions
+
+        private new bool ExecuteCommand(string commandKey, Dictionary<string, object> arguments)
         {
             //We need to found the right node
             if (_commandsDic.ContainsKey(commandKey))
@@ -91,35 +128,7 @@ namespace OHM.Interfaces
             return false;
         }
 
-        public void Init(IDataStore data, IOhmSystemInterfaceGateway system)
-        {
-            base.Init(data);
-            _startOnLaunch = data.GetBool("StartOnLaunch");
-            NotifyPropertyChanged("StartOnLaunch");
-            _system = system;
-        }
-
-        public bool StartOnLaunch
-        {
-            get { return _startOnLaunch; }
-            set
-            {
-
-                _startOnLaunch = value;
-                DataStore.StoreBool("StartOnLaunch", value);
-                DataStore.Save();
-                NotifyPropertyChanged("StartOnLaunch");
-            }
-
-        }
-
         #endregion
 
-        #region protected
-        protected abstract void Start();
-
-        protected abstract void Shutdown();
-
-        #endregion
     }
 }
