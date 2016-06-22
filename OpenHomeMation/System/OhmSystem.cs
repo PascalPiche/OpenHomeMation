@@ -12,6 +12,7 @@ namespace OHM.Sys
 {
     public sealed class OhmSystem : IOhmSystemInternal
     {
+        private ILogger _logger;
         private ILoggerManager _loggerMng;
         private IInterfacesManager _interfacesMng;
         private IDataManager _dataMng;
@@ -33,13 +34,52 @@ namespace OHM.Sys
 
         #endregion
 
-        #region Public Properties
+        #region Internal Properties
+
+        internal bool Start()
+        {
+            bool result = false;
+            _logger = _loggerMng.GetLogger("OhmSystem");
+            result = true;
+
+            //Init DataManager
+            if (!DataMng.Init())
+            {
+                _logger.Fatal("DataManager failed Init. Abording start");
+                return false;
+            }
+
+            //Init PluginsManager
+            if (!InitPluginsMng())
+            {
+                _logger.Fatal("PluginsManager failed Init. Abording start");
+                return false;
+            }
+
+            //Init InterfacesManager
+            if (!InitInterfacesMng())
+            {
+                _logger.Fatal("InterfacesManager failed Init. Abording start");
+                return false;
+            }
+
+            //Init InterfacesManager
+            if (!InitVrMng())
+            {
+                _logger.Fatal("VirtualRealityManager failed Init. Abording start");
+                return false;
+            }
+
+            return result;
+        }
+
+        private IPluginsManager PluginsMng { get { return _pluginsMng; } }
 
         internal ILoggerManager LoggerMng { get { return _loggerMng; } }
 
         internal IInterfacesManager InterfacesMng { get { return _interfacesMng; } }
 
-        public IDataManager DataMng { get { return _dataMng; } }
+        internal IDataManager DataMng { get { return _dataMng; } }
 
         internal IVrManager vrMng { get { return _vrMng; } }
 
@@ -62,8 +102,6 @@ namespace OHM.Sys
             return new OhmSystemUnInstallGateway(plugin, _loggerMng.GetLogger(plugin.Name), _interfacesMng);
         }
 
-        #endregion  
-     
         public IAPI API
         {
             get
@@ -77,20 +115,19 @@ namespace OHM.Sys
             return this._dataMng.GetOrCreateDataStore(key);
         }
         
+        #endregion  
+     
         public sealed class APIInstance : IAPI
         {
 
             private OhmSystem _system;
+
+            public event PropertyChangedEventHandler PropertyChanged;
+
             internal APIInstance(OhmSystem system)
             {
                 _system = system;
                 ((ObservableCollection<IPlugin>)_system._pluginsMng.InstalledPlugins).CollectionChanged += InstalledPlugins_CollectionChanged;
-
-            }
-
-            void InstalledPlugins_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-            {
-                NotifyPropertyChanged("plugins/installed/");
             }
 
             public IAPIResult ExecuteCommand(string key, Dictionary<String, object> arguments)
@@ -161,7 +198,28 @@ namespace OHM.Sys
                 }
             }
 
-            public event PropertyChangedEventHandler PropertyChanged;
+            private void InstalledPlugins_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+            {
+                NotifyPropertyChanged("plugins/installed/");
+            }
         }
+
+
+        private bool InitPluginsMng()
+        {
+            return PluginsMng.Init(DataMng.GetOrCreateDataStore("PluginsManager"));
+        }
+
+        private bool InitInterfacesMng()
+        {
+            return InterfacesMng.Init(DataMng.GetOrCreateDataStore("InterfacesManager"), this);
+        }
+
+        private bool InitVrMng()
+        {
+            return vrMng.Init(DataMng.GetOrCreateDataStore("VrManager"), this);
+        }
+    
+    
     }
 }

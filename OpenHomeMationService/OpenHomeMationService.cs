@@ -39,7 +39,7 @@ namespace OpenHomeMationService
             interfacesMng = new InterfacesManager(loggerMng, pluginMng);
             vrMng = new VrManager(loggerMng, pluginMng);
             ohm = new OpenHomeMation(pluginMng, dataMng, loggerMng, interfacesMng, vrMng);
-            ohm.start();
+            ohm.Start();
         }
 
         protected override bool OnPowerEvent(PowerBroadcastStatus powerStatus)

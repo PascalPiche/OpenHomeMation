@@ -224,7 +224,7 @@ namespace WpfApplication1
 
             ohm = new OpenHomeMation(pluginMng, dataMng, loggerMng, interfacesMng, vrMng);
             ohm.API.PropertyChanged += API_PropertyChanged;
-            ohm.start();
+            ohm.Start();
         }
 
         void API_PropertyChanged(object sender, PropertyChangedEventArgs e)

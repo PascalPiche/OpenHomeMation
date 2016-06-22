@@ -34,7 +34,7 @@ namespace ConsoleApplication1
             interfacesMng = new InterfacesManager(loggerMng, pluginMng);
             vrMng = new VrManager(loggerMng, pluginMng);
             ohm = new OpenHomeMation(pluginMng, dataMng, loggerMng, interfacesMng, vrMng);
-            ohm.start();
+            ohm.Start();
 
             while (!exit)
             {
