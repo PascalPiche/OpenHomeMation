@@ -4,6 +4,7 @@ using OHM.Interfaces;
 using OHM.Logger;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace OHM.Sys
 {
@@ -55,6 +56,8 @@ namespace OHM.Sys
         IAPIResult ExecuteCommand(string key);
 
         IAPIResult ExecuteCommand(string key, Dictionary<String, object> arguments);
+
+        event PropertyChangedEventHandler PropertyChanged;
     }
 
     public interface IOhmSystemInternal : IOhmSystem

@@ -5,6 +5,8 @@ using OHM.Logger;
 using OHM.Plugins;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace OHM.Sys
 {
@@ -77,10 +79,18 @@ namespace OHM.Sys
         
         public sealed class APIInstance : IAPI
         {
+
             private OhmSystem _system;
             internal APIInstance(OhmSystem system)
             {
                 _system = system;
+                ((ObservableCollection<IPlugin>)_system._pluginsMng.InstalledPlugins).CollectionChanged += InstalledPlugins_CollectionChanged;
+
+            }
+
+            void InstalledPlugins_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+            {
+                NotifyPropertyChanged("plugins/installed/");
             }
 
             public IAPIResult ExecuteCommand(string key, Dictionary<String, object> arguments)
@@ -115,6 +125,7 @@ namespace OHM.Sys
                                 }
                                 else if (splitedKed[2] == "installed")
                                 {
+                                    resultBool = true;
                                     result = _system._pluginsMng.InstalledPlugins;
                                 }
                             }
@@ -141,6 +152,16 @@ namespace OHM.Sys
             {
                 return this.ExecuteCommand(key, null);
             }
+
+            private void NotifyPropertyChanged(String propertyName)
+            {
+                if (PropertyChanged != null)
+                {
+                    PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                }
+            }
+
+            public event PropertyChangedEventHandler PropertyChanged;
         }
     }
 }

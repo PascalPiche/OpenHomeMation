@@ -25,6 +25,8 @@ namespace OHM.Sys
             this._dataMng = dataMng;
             this._interfacesMng = interfacesMng;
             this._vrMng = vrMng;
+
+            _ohmSystem = new OhmSystem(_interfacesMng, _vrMng, _loggerMng, _dataMng, _pluginsMng);
         }
 
         #region Public
@@ -35,7 +37,6 @@ namespace OHM.Sys
         {
             _logger = _loggerMng.GetLogger("OHM");
             _logger.Debug("Starting");
-            _ohmSystem = new OhmSystem( _interfacesMng, _vrMng, _loggerMng, _dataMng, _pluginsMng);
 
             //Init DataManager
             _dataMng.Init();

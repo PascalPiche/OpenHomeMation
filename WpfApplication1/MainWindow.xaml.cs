@@ -99,10 +99,9 @@ namespace WpfApplication1
             vm.InstallPlugin((Guid)e.Parameter);
         }
 
-        private void StopInterfaceCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        private void UnInstallPluginCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            string key = (string)e.Parameter;
-            vm.InterfaceManager.StopInterface(key);
+            vm.UnInstallPlugin((Guid)e.Parameter);
         }
 
         private void StartInterfaceCommand_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -111,6 +110,12 @@ namespace WpfApplication1
             vm.InterfaceManager.StartInterface(key);
         }
 
+        private void StopInterfaceCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            string key = (string)e.Parameter;
+            vm.InterfaceManager.StopInterface(key);
+        }
+       
         private void ExecuteInterfaceCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var command = e.Parameter as OHM.Commands.IInterfaceCommand;
@@ -128,22 +133,6 @@ namespace WpfApplication1
                         //Show alert
                         MessageBox.Show("The command was not successfully executed", "Command error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
                     }
-                }
-            }
-        }
-
-        private void ShowCommandDialog(OHM.Commands.IInterfaceCommand command)
-        {
-            var w = new CommandDialog();
-            w.init(command);
-            var result = w.ShowDialog();
-
-            if (result.HasValue && result.Value)
-            {
-                if (!vm.InterfaceManager.ExecuteCommand(command.InterfaceKey, command.NodeKey, command.Definition.Key, w.ArgumentsResult))
-                {
-                    //Show alert
-                    MessageBox.Show("The command was not successfully executed", "Command error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
                 }
             }
         }
@@ -193,9 +182,20 @@ namespace WpfApplication1
             vm.SelectedNode = e.NewValue;
         }
 
-        private void UnInstallPluginCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        private void ShowCommandDialog(OHM.Commands.IInterfaceCommand command)
         {
-            vm.UnInstallPlugin((Guid)e.Parameter);
+            var w = new CommandDialog();
+            w.init(command);
+            var result = w.ShowDialog();
+
+            if (result.HasValue && result.Value)
+            {
+                if (!vm.InterfaceManager.ExecuteCommand(command.InterfaceKey, command.NodeKey, command.Definition.Key, w.ArgumentsResult))
+                {
+                    //Show alert
+                    MessageBox.Show("The command was not successfully executed", "Command error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
+                }
+            }
         }
 
         private void ExecuteVrAddNodeBasic_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -223,8 +223,16 @@ namespace WpfApplication1
             IVrManager vrMng = new VrManager(loggerMng, pluginMng);
 
             ohm = new OpenHomeMation(pluginMng, dataMng, loggerMng, interfacesMng, vrMng);
-
+            ohm.API.PropertyChanged += API_PropertyChanged;
             ohm.start();
+        }
+
+        void API_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "plugins/installed/")
+            {
+                this.NotifyPropertyChanged("InstalledPlugins");
+            }
         }
 
         public void InstallPlugin(Guid guid)
