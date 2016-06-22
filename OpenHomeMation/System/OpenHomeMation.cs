@@ -29,13 +29,13 @@ namespace OHM.Sys
 
         #region Public
 
-        public IOhmSystem System { get { return _ohmSystem; } }
+        public IAPI API { get { return _ohmSystem.API; } }
 
         public bool start()
         {
             _logger = _loggerMng.GetLogger("OHM");
             _logger.Debug("Starting");
-            _ohmSystem = new OhmSystem( _interfacesMng, _vrMng, _loggerMng, _dataMng);
+            _ohmSystem = new OhmSystem( _interfacesMng, _vrMng, _loggerMng, _dataMng, _pluginsMng);
 
             //Init DataManager
             _dataMng.Init();
@@ -61,7 +61,7 @@ namespace OHM.Sys
                 return false;
             }
 
-            OpenHomeMationServerImplementation.Run();
+            //OpenHomeMationServerImplementation.Run();
 
             //Switch inner flag
             this._isRunning = true;

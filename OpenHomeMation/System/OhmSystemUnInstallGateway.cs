@@ -1,28 +1,32 @@
-﻿using OHM.Plugins;
+﻿using OHM.Interfaces;
+using OHM.Logger;
+using OHM.Plugins;
 
 namespace OHM.Sys
 {
     
     public sealed class OhmSystemUnInstallGateway : IOhmSystemUnInstallGateway
     {
-
-        private IOhmSystemInternal _system;
         private IPlugin _plugin;
+        private ILogger _logger;
+        private IInterfacesManager _interfacesMng;
 
-        internal OhmSystemUnInstallGateway(IOhmSystemInternal system, IPlugin plugin)
+        internal OhmSystemUnInstallGateway(IPlugin plugin, ILogger logger, IInterfacesManager interfacesMng)
         {
-            _system = system;
+            //_system = system;
+            _logger = logger;
             _plugin = plugin;
+            _interfacesMng = interfacesMng;
         }
 
         public Logger.ILogger Logger
         {
-            get { return _system.LoggerMng.GetLogger(_plugin.Name); }
+            get { return _logger; }
         }
 
         public bool UnRegisterInterface(string key)
         {
-            return _system.InterfacesMng.UnRegisterInterface(key, _plugin, _system);
+            return _interfacesMng.UnRegisterInterface(key, _plugin);
         }
     }
 }

@@ -20,6 +20,7 @@ namespace OHM.Interfaces
         private IDataDictionary _dataRegisteredInterfaces;
         private IList<IInterface> _runningInterfaces = new ObservableCollection<IInterface>();
         private Dictionary<String, IInterface> _runningDic = new Dictionary<string, IInterface>();
+        private IOhmSystemInternal _system;
 
         #region Public Properties
 
@@ -48,18 +49,14 @@ namespace OHM.Interfaces
             _logger = _loggerMng.GetLogger("InterfacesManager");
             _logger.Debug("Initing");
             _dataRegisteredInterfaces = _data.GetOrCreateDataDictionary("RegisteredInterfaces");
-            /*if (_dataRegisteredInterfaces == null)
-            {
-                _dataRegisteredInterfaces = new DataDictionary();
-                _data.StoreDataDictionary("RegisteredInterfaces", _dataRegisteredInterfaces);*/
-                _data.Save();
-            //}
+            _data.Save();
+            _system = system;
             loadRegisteredInterfaces(system);
             _logger.Debug("Inited");
             return true;
         }
 
-        public bool RegisterInterface(string key, IPlugin plugin, IOhmSystemInternal system)
+        public bool RegisterInterface(string key, IPlugin plugin)
         {
             bool result = false;
             //Detect if already created
@@ -72,7 +69,7 @@ namespace OHM.Interfaces
             else 
             {
                 try {
-                    IInterface newInterface = CreateInterface(key, plugin, system);
+                    IInterface newInterface = CreateInterface(key, plugin, _system);
                     if (newInterface == null)
                     {
                         _logger.Error("Cannot register interface " + key + ", Error on creating Interface");
@@ -99,7 +96,7 @@ namespace OHM.Interfaces
             return result;
         }
 
-        public bool UnRegisterInterface(String key, IPlugin plugin, IOhmSystemInternal system)
+        public bool UnRegisterInterface(String key, IPlugin plugin)
         {
             bool result = false;
 
@@ -257,7 +254,7 @@ namespace OHM.Interfaces
 
                 if (tempResult != null)
                 {
-                    var _interfData = system.DataMng.GetOrCreateDataStore(plugin.Id.ToString() + "." + tempResult.Key);
+                    var _interfData = system.GetOrCreateDataStore(plugin.Id.ToString() + "." + tempResult.Key);
 
                     tempResult.Init(_interfData, system.GetInterfaceGateway(tempResult));
                     _runningInterfaces.Add(tempResult);

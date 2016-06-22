@@ -20,12 +20,13 @@ namespace OHM.Sys.Tests
             var loggerMng = MockRepository.GenerateStub<ILoggerManager>();
             var dataMng = MockRepository.GenerateStub<IDataManager>();
             var vrMng = MockRepository.GenerateStub<IVrManager>();
-            var target = new OhmSystem(intMng, vrMng, loggerMng, dataMng);
+            var pluginsMng = MockRepository.GenerateStub<IPluginsManager>();
+            var target = new OhmSystem(intMng, vrMng, loggerMng, dataMng, pluginsMng);
             var plugin = MockRepository.GenerateStub<IPlugin>();
             var logger = MockRepository.GenerateStub<ILogger>();
             plugin.Stub(x => x.Name).Return("name");
             loggerMng.Stub(x => x.GetLogger(plugin.Name)).Return(logger);
-            var system = MockRepository.GenerateStub<OhmSystem>();
+            //var system = MockRepository.GenerateStub<OhmSystem>();
 
             var result = target.GetInstallGateway(plugin);
 
@@ -33,7 +34,7 @@ namespace OHM.Sys.Tests
 
             result.RegisterInterface("key");
             Assert.AreSame(logger, result.Logger);
-            target.InterfacesMng.AssertWasCalled(x => x.RegisterInterface("key", plugin, system));
+            target.InterfacesMng.AssertWasCalled(x => x.RegisterInterface("key", plugin));
 
         }
     }

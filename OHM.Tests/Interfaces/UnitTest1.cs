@@ -74,13 +74,13 @@ namespace OHM.Tests.Interfaces
             Assert.AreEqual(0, target.RunnableInterfaces.Count);
 
             //Registering will fail
-            Assert.IsFalse(target.RegisterInterface("existing", plugin, system));
+            Assert.IsFalse(target.RegisterInterface("existing", plugin));
 
             //Registering will fail
-            Assert.IsFalse(target.RegisterInterface("test", plugin, system));
+            Assert.IsFalse(target.RegisterInterface("test", plugin));
 
             //Registering will succeed
-            Assert.IsTrue(target.RegisterInterface("testGood", plugin, system));
+            Assert.IsTrue(target.RegisterInterface("testGood", plugin));
 
             //Registering will succeed
             plugin.AssertWasCalled(x => x.CreateInterface("testGood", logger2));

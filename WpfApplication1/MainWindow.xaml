@@ -223,7 +223,7 @@
                              HorizontalContentAlignment="Stretch" 
                              HorizontalAlignment="Stretch" 
                              VerticalAlignment="Stretch" 
-                             ItemsSource="{Binding Path=PluginManager.AvailablesPlugins}">
+                             ItemsSource="{Binding Path=AvailablesPlugins}">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
@@ -247,7 +247,7 @@
                             <ListBox HorizontalContentAlignment="Stretch" 
                              HorizontalAlignment="Stretch" 
                              VerticalAlignment="Stretch" 
-                             ItemsSource="{Binding Path=PluginManager.InstalledPlugins}">
+                             ItemsSource="{Binding Path=InstalledPlugins}">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">

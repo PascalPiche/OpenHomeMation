@@ -10,9 +10,9 @@ namespace OHM.Interfaces
 
         bool Init(IDataStore data, IOhmSystemInternal system);
 
-        bool RegisterInterface(string key, IPlugin plugin, IOhmSystemInternal system);
+        bool RegisterInterface(string key, IPlugin plugin);
 
-        bool UnRegisterInterface(string key, IPlugin plugin, IOhmSystemInternal system);
+        bool UnRegisterInterface(string key, IPlugin plugin);
 
         IList<IInterface> RunnableInterfaces { get; }
 

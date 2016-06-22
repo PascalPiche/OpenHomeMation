@@ -8,6 +8,7 @@ using OHM.Plugins;
 using OHM.Sys;
 using OHM.Vr;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -83,18 +84,19 @@ namespace WpfApplication1
 
         protected override void OnClosing(CancelEventArgs e)
         {
-            vm.OHM.Shutdown();
+            vm.Shutdown();
+            
             base.OnClosing(e);
         }
 
-        private void PluginInstall_Click(object sender, RoutedEventArgs e)
+        /*private void PluginInstall_Click(object sender, RoutedEventArgs e)
         {
             var d = lbAvailablePlugin.SelectedItem;
-        }
+        }*/
 
         private void InstallPluginCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            vm.PluginManager.InstallPlugin((Guid)e.Parameter, vm.OHM.System);
+            vm.InstallPlugin((Guid)e.Parameter);
         }
 
         private void StopInterfaceCommand_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -193,12 +195,12 @@ namespace WpfApplication1
 
         private void UnInstallPluginCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            vm.PluginManager.UnInstallPlugin((Guid)e.Parameter, vm.OHM.System);
+            vm.UnInstallPlugin((Guid)e.Parameter);
         }
 
         private void ExecuteVrAddNodeBasic_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-
+            //TODO
         }
     }
 
@@ -206,33 +208,62 @@ namespace WpfApplication1
     {
         private OpenHomeMation ohm;
         private ILoggerManager loggerMng;
-        private IPluginsManager pluginMng;
         private IInterfacesManager interfacesMng;
-        private IVrManager vrMng;
 
         private object selectedNode;
 
-        public MainWindowVM()
-        {
-            
-        }
+        public MainWindowVM() {}
 
         public void start(TextBox txt)
         {
             loggerMng = new WpfLoggerManager(txt);
-            var dataMng = new FileDataManager(loggerMng, AppDomain.CurrentDomain.BaseDirectory + "\\data\\");
-            pluginMng = new PluginsManager(loggerMng, AppDomain.CurrentDomain.BaseDirectory + "\\plugins\\");
+            IDataManager dataMng = new FileDataManager(loggerMng, AppDomain.CurrentDomain.BaseDirectory + "\\data\\");
+            IPluginsManager pluginMng = new PluginsManager(loggerMng, AppDomain.CurrentDomain.BaseDirectory + "\\plugins\\");
             interfacesMng = new InterfacesManager(loggerMng, pluginMng);
-            vrMng = new VrManager(loggerMng, pluginMng);
+            IVrManager vrMng = new VrManager(loggerMng, pluginMng);
+
             ohm = new OpenHomeMation(pluginMng, dataMng, loggerMng, interfacesMng, vrMng);
+
             ohm.start();
         }
 
-        public IPluginsManager PluginManager { get { return pluginMng; } }
-
-        public OpenHomeMation OHM { get { return ohm; } }
+        public void InstallPlugin(Guid guid)
+        {
+            Dictionary<string, object> args = new Dictionary<string, object>();
+            args.Add("guid", guid);
+            ohm.API.ExecuteCommand("plugins/install/", args);
+        }
+        
+        public void UnInstallPlugin(Guid guid)
+        {
+            Dictionary<string, object> args = new Dictionary<string, object>();
+            args.Add("guid", guid);
+            ohm.API.ExecuteCommand("plugins/uninstall/", args);
+        }
 
         public IInterfacesManager InterfaceManager { get { return interfacesMng; } }
+
+        public bool Shutdown()
+        {
+            ohm.Shutdown();
+            return true;
+        }
+
+        public IList<IPlugin> AvailablesPlugins
+        {
+            get
+            {
+                return (IList<IPlugin>)ohm.API.ExecuteCommand("plugins/list/availables/").Result;
+            }
+        }
+
+        public IList<IPlugin> InstalledPlugins
+        {
+            get
+            {
+                return (IList<IPlugin>)ohm.API.ExecuteCommand("plugins/list/installed/").Result;
+            }
+        }
 
         public Object SelectedNode 
         {

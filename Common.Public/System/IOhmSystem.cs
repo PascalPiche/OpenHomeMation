@@ -1,4 +1,5 @@
-﻿using OHM.Interfaces;
+﻿using OHM.Data;
+using OHM.Interfaces;
 using OHM.Plugins;
 
 namespace OHM.Sys
@@ -12,5 +13,6 @@ namespace OHM.Sys
 
         IOhmSystemInterfaceGateway GetInterfaceGateway(IInterface interf);
         
+        IDataStore GetOrCreateDataStore(string key);
     }
 }
