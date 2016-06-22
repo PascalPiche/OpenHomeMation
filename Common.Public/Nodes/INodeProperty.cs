@@ -4,6 +4,7 @@ namespace OHM.Nodes
 {
     public interface INodeProperty
     {
+        #region Properties
 
         string Key { get; }
 
@@ -15,9 +16,15 @@ namespace OHM.Nodes
 
         Type Type { get; }
 
+        object Value { get; }
+
+        #endregion
+
+        #region API
+
         bool SetValue(object val);
 
-        object Value { get; }
+        #endregion
 
     }
 }

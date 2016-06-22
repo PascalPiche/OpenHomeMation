@@ -6,6 +6,7 @@ namespace OHM.Nodes
 {
     public interface INode : INotifyPropertyChanged
     {
+        #region Properties
 
         string Key { get; }
 
@@ -13,15 +14,21 @@ namespace OHM.Nodes
 
         IReadOnlyList<ICommand> Commands { get; }
 
-        bool CanExecuteCommand(string key);
-
-        bool ExecuteCommand(string commandKey, Dictionary<string, object> arguments);
-
         IReadOnlyList<INode> Children { get; }
 
         INode Parent { get; }
 
+        #endregion
+
+        #region API
+
+        bool CanExecuteCommand(string key);
+
+        bool ExecuteCommand(string commandKey, Dictionary<string, object> arguments);
+
         INode GetChild(string key);
+
+        #endregion
 
     }
 }

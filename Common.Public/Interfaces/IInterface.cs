@@ -6,16 +6,25 @@ namespace OHM.Interfaces
 {
     public interface IInterface : INode, INotifyPropertyChanged
     {
-        InterfaceState State { get; }
+        #region Properties
 
-        bool ExecuteCommand(string nodeKey, string commandKey, Dictionary<string, object> arguments);
+        InterfaceState State { get; }
 
         bool IsRunning { get; }
 
         bool StartOnLaunch { get; set; }
 
+        #endregion
+
+        #region API
+
+        bool ExecuteCommand(string nodeKey, string commandKey, Dictionary<string, object> arguments);
+
         void Starting();
 
         void Shutdowning();
+
+        #endregion
+
     }
 }

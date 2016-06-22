@@ -12,21 +12,26 @@ namespace OHM.Nodes
 {
     public abstract class NodeAbstract : INode
     {
+
         private string _key;
         private string _name;
         private ObservableCollection<ICommand> _commands;
         protected Dictionary<string, ICommand> _commandsDic;
+
         private ObservableCollection<INode> _children;
         private Dictionary<string, INode> _childrenDic;
+
         private ObservableCollection<INodeProperty> _properties;
         private Dictionary<string, INodeProperty> _propertiesDic;
+
         private INode _parent;
         private ILogger _logger;
         private IDataStore _data;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        #region ctor
+        #region Public ctor
+
         public NodeAbstract(string key, string name, ILogger logger)
         {
             _key = key;
@@ -42,7 +47,7 @@ namespace OHM.Nodes
 
         #endregion
 
-        #region "Public"
+        #region Public Properties
 
         public string Key
         {
@@ -60,6 +65,28 @@ namespace OHM.Nodes
         }
 
         public IReadOnlyList<ICommand> Commands { get { return new ReadOnlyObservableCollection<ICommand>(_commands); } }
+
+        public IReadOnlyList<INode> Children
+        {
+            get { return _children; }
+        }
+
+        public INode Parent
+        {
+            get { return _parent; }
+        }
+
+        public IReadOnlyList<INodeProperty> Properties
+        {
+            get
+            {
+                return _properties;
+            }
+        }
+
+        #endregion
+
+        #region Public API
 
         public bool CanExecuteCommand(string key)
         {
@@ -88,16 +115,6 @@ namespace OHM.Nodes
             return false;
         }
 
-        public IReadOnlyList<INode> Children
-        {
-            get { return _children; }
-        }
-
-        public INode Parent
-        {
-            get { return _parent; }
-        }
-
         public INode GetChild(string key)
         {
             INode result;
@@ -121,17 +138,17 @@ namespace OHM.Nodes
             return null;
         }
 
-        public IReadOnlyList<INodeProperty> Properties
-        {
-            get
-            {
-                return _properties;
-            }
-        }
+        #endregion
+
+        #region Protected Properties
+
+        protected ILogger Logger { get { return _logger; } }
+
+        protected IDataStore DataStore { get { return _data; } }
 
         #endregion
 
-        #region "Protected"
+        #region Protected Functions
 
         protected bool AddChild(NodeAbstract node)
         {
@@ -215,10 +232,6 @@ namespace OHM.Nodes
             return true;
         }
 
-        protected ILogger Logger { get { return _logger; } }
-
-        protected IDataStore DataStore { get { return _data; } }
-
         protected void NotifyPropertyChanged(String propertyName)
         {
             if (PropertyChanged != null)
@@ -253,7 +266,6 @@ namespace OHM.Nodes
             return false;
         }
 
-
         protected bool UpdateProperty(string key, object value)
         {
             INodeProperty property;
@@ -271,7 +283,7 @@ namespace OHM.Nodes
 
         #endregion
 
-        #region internal
+        #region Internal Functions
 
         void SetParent(INode node)
         {

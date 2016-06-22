@@ -7,6 +7,7 @@ namespace OHM.Nodes
 {
     public class NodeProperty : INodeProperty, INotifyPropertyChanged
     {
+        #region Private Members
 
         private string _key;
         private string _name;
@@ -16,6 +17,10 @@ namespace OHM.Nodes
         private Type _type;
         private ObservableCollection<INodeProperty> _extraInfo = new ObservableCollection<INodeProperty>();
         private Dictionary<String, INodeProperty> _extraInfoDict = new Dictionary<String, INodeProperty>();
+
+        #endregion
+
+        #region Public Ctor
 
         public NodeProperty(string key, string name, Type type)
         {
@@ -50,21 +55,25 @@ namespace OHM.Nodes
             }
         }
 
+        #endregion
+
+        #region Public Properties
+
         public string Key { get { return _key; } }
 
         public string Name { get { return _name; } }
 
         public Type Type { get { return _type; } }
 
-        public string Description
-        {
-            get { return _description; }
-        }
+        public string Description { get { return _description; } }
 
-        public bool ReadOnly
-        {
-            get { return _readOnly; }
-        }
+        public bool ReadOnly { get { return _readOnly; } }
+
+        public object Value { get { return _value; } }
+
+        #endregion
+
+        #region Public API
 
         public bool SetValue(object val)
         {
@@ -78,12 +87,11 @@ namespace OHM.Nodes
             return false;
         }
 
-        public object Value
-        {
-            get { return _value; }
-        }
-
         public event PropertyChangedEventHandler PropertyChanged;
+
+        #endregion
+
+        #region Protected Functions
 
         protected void NotifyPropertyChanged(String propertyName)
         {
@@ -93,7 +101,7 @@ namespace OHM.Nodes
             }
         }
 
+        #endregion
 
-        
     }
 }
