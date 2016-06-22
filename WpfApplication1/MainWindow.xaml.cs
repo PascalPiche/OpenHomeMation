@@ -22,8 +22,9 @@ namespace WpfApplication1
     /// </summary>
     public partial class MainWindow : Window
     {
-
         private MainWindowVM vm = new MainWindowVM();
+
+        #region Public Command
 
         public static readonly RoutedUICommand InstallPluginCommand = new RoutedUICommand
         (
@@ -74,25 +75,35 @@ namespace WpfApplication1
                 typeof(MainWindow)
         );
 
+        #endregion 
+
+        #region Public Ctor
+
         public MainWindow()
         {
-            
             InitializeComponent();
             vm.start(txt);
             this.DataContext = vm;
         }
 
+        #endregion
+
+        #region Protected Override functions
+
         protected override void OnClosing(CancelEventArgs e)
         {
-            vm.Shutdown();
-            
+            if (!vm.Shutdown())
+            {
+                e.Cancel = true;
+
+                //TODO SHOW ERROR
+            }
             base.OnClosing(e);
         }
 
-        /*private void PluginInstall_Click(object sender, RoutedEventArgs e)
-        {
-            var d = lbAvailablePlugin.SelectedItem;
-        }*/
+        #endregion
+
+        #region Private Command Implementation
 
         private void InstallPluginCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
@@ -177,10 +188,23 @@ namespace WpfApplication1
             }
         }
 
+        private void ExecuteVrAddNodeBasic_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            //TODO
+        }
+
+        #endregion
+
+        #region Private Handler 
+
         private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             vm.SelectedNode = e.NewValue;
         }
+
+        #endregion
+
+        #region Private Helper functions
 
         private void ShowCommandDialog(OHM.Commands.IInterfaceCommand command)
         {
@@ -198,16 +222,13 @@ namespace WpfApplication1
             }
         }
 
-        private void ExecuteVrAddNodeBasic_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            //TODO
-        }
+        #endregion
+
     }
 
     public class MainWindowVM : INotifyPropertyChanged
     {
         private OpenHomeMation ohm;
-        private ILoggerManager loggerMng;
         private IInterfacesManager interfacesMng;
 
         private object selectedNode;
@@ -216,7 +237,7 @@ namespace WpfApplication1
 
         public void start(TextBox txt)
         {
-            loggerMng = new WpfLoggerManager(txt);
+            ILoggerManager loggerMng = new WpfLoggerManager(txt);
             IDataManager dataMng = new FileDataManager(loggerMng, AppDomain.CurrentDomain.BaseDirectory + "\\data\\");
             IPluginsManager pluginMng = new PluginsManager(loggerMng, AppDomain.CurrentDomain.BaseDirectory + "\\plugins\\");
             interfacesMng = new InterfacesManager(loggerMng, pluginMng);
