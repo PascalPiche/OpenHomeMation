@@ -89,8 +89,8 @@ namespace WUnderground.Data
                 {
                     var locationData = accountLocations.GetOrCreateDataDictionary(locationName);
                     locationData.StoreString("name", locationName);
-                    locationData.StoreInt("zip", zip);
-                    locationData.StoreInt("magic", magic);
+                    locationData.StoreInt32("zip", zip);
+                    locationData.StoreInt32("magic", magic);
                     locationData.StoreString("wmo", wmo);
 
                     accountLocations.StoreDataDictionary(locationName, locationData);
@@ -124,8 +124,8 @@ namespace WUnderground.Data
                     foreach (string locationKey in locations.Keys)
                     {
                         IDataDictionary locationData = locations.GetDataDictionary(locationKey);
-                        int zip = locationData.GetInt("zip");
-                        int magic = locationData.GetInt("magic");
+                        int zip = locationData.GetInt32("zip");
+                        int magic = locationData.GetInt32("magic");
                         string wmo = locationData.GetString("wmo");
 
                         this.GetAccountNode(username).AddLocation(new Station(locationKey, locationKey, this.Logger, zip, magic, wmo));

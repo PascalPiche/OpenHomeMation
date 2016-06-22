@@ -72,14 +72,14 @@
   <ItemGroup />
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
-    <None Include="Commands\CommandsClassDiagram.cd" />
-    <None Include="Data\DataClassDiagram.cd" />
-    <None Include="Interfaces\InterfacesClassDiagram.cd" />
-    <None Include="Logger\LoggerClassDiagram.cd" />
-    <None Include="Nodes\NodesClassDiagram.cd" />
+    <None Include="Commands\_diagrams\CommandsClassDiagram.cd" />
+    <None Include="Data\_diagrams\DataClassDiagram.cd" />
+    <None Include="Interfaces\_diagrams\InterfacesClassDiagram.cd" />
+    <None Include="Logger\_diagrams\LoggerClassDiagram.cd" />
+    <None Include="Nodes\_diagrams\NodesClassDiagram.cd" />
     <None Include="packages.config" />
-    <None Include="Plugins\PluginsClassDiagram.cd" />
-    <None Include="System\SystemClassDiagram.cd" />
+    <None Include="Plugins\_diagrams\PluginsClassDiagram.cd" />
+    <None Include="System\_diagrams\SystemClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

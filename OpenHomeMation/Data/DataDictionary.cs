@@ -93,14 +93,14 @@ namespace OHM.Data
 
         #endregion
 
-        #region Int
+        #region Int32
 
-        public void StoreInt(string key, int value)
+        public void StoreInt32(string key, int value)
         {
             StoreValue(key, new DataValueInt(value));
         }
 
-        public int GetInt(string key)
+        public int GetInt32(string key)
         {
             var value = GetValue(key);
             if (value != null)

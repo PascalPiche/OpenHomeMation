@@ -7,9 +7,9 @@ namespace OHM.Data
     {
         IEnumerable<string> Keys { get; }
 
-        void StoreInt(string key, int value);
+        void StoreInt32(string key, Int32 value);
 
-        int GetInt(string key);
+        int GetInt32(string key);
 
         void StoreString(string key, string value);
 
