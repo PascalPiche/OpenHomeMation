@@ -12,6 +12,8 @@ namespace OHM.Plugins
 
         String Name { get; }
 
+        PluginStatesEnum State { get; }
+
         bool Install(IOhmSystemInstallGateway system);
 
         bool Uninstall(IOhmSystemUnInstallGateway system);
