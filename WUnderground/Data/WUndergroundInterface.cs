@@ -17,12 +17,18 @@ namespace WUnderground.Data
     {
         private IDataDictionary _registeredAccounts;
 
+        #region Public Ctor
+
         public WUndergroundInterface(ILogger logger)
             : base("WUndergroundInterface", "WUnderground", logger)
         {
             //Create Commands
             this.RegisterCommand(new AddAccount(this));
         }
+
+        #endregion
+
+        #region Protected functions
 
         protected override void Start()
         {
@@ -38,11 +44,15 @@ namespace WUnderground.Data
             
         }
 
+        #endregion 
+
+        #region Internal functions
+
         internal bool CreateAccountCommand(string username, string keyId) 
         {
             if (_registeredAccounts.ContainsKey(username))
             {
-                Logger.Error("WUnderground Account : " + username + " already exist, cannot create duplicate account");
+                Logger.Error("Account : " + username + " already exist, cannot create duplicate account");
                 return false;
             }
 
@@ -54,7 +64,7 @@ namespace WUnderground.Data
                 accountsMetaInfo.StoreString("key", keyId);
                 _registeredAccounts.StoreDataDictionary(username, accountsMetaInfo);
 
-                Logger.Info("WUnderground : Saving new account : " + username);
+                Logger.Info("Saving new account : " + username);
                 this.DataStore.Save();
                 return true;
             }
@@ -80,14 +90,13 @@ namespace WUnderground.Data
             Boolean result = false;
             IDataDictionary dataAccount = _registeredAccounts.GetDataDictionary(node.Key);
             IDataDictionary accountLocations = dataAccount.GetOrCreateDataDictionary("locations");
-            //accountLocations.StoreDataDictionary("locations", accountLocations);
 
             if (!accountLocations.ContainsKey(locationName))
             {
                 
                 if (node.AddLocation(new Station(locationName, locationName, this.Logger, zip, magic, wmo)))
                 {
-                    var locationData = accountLocations.GetOrCreateDataDictionary(locationName);
+                    IDataDictionary locationData = accountLocations.GetOrCreateDataDictionary(locationName);
                     locationData.StoreString("name", locationName);
                     locationData.StoreInt32("zip", zip);
                     locationData.StoreInt32("magic", magic);
@@ -98,16 +107,20 @@ namespace WUnderground.Data
                 }
                 else
                 {
-                    Logger.Error("WUnderground : Error when creating new location " + locationName);
+                    Logger.Error("Error when creating new location " + locationName);
                 }
             }
             else
             {
-                Logger.Error("WUnderground : Location " + locationName + " already exists");
+                Logger.Error("Location " + locationName + " already exists");
             }
 
             return result;
         }
+
+        #endregion
+
+        #region Private functions
 
         private void LoadRegisteredAccounts()
         {
@@ -139,7 +152,7 @@ namespace WUnderground.Data
 
         private bool CreateAccountNode(string username, string key) {
             //Create Account
-            var account = new Account(username, "Account : " + username, this.Logger, key);
+            Account account = new Account(username, "Account : " + username, this.Logger, key);
             return this.AddChild(account);
         }
 
@@ -147,5 +160,8 @@ namespace WUnderground.Data
         {
             return (Account)this.GetChild(key);
         }
+
+        #endregion
+
     }
 }
