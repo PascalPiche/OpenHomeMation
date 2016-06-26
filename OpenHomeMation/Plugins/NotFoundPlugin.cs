@@ -47,9 +47,9 @@ namespace OHM.Plugins
             throw new NotImplementedException();
         }
 
-        public PluginStatesEnum State
+        public PluginStates State
         {
-            get { return PluginStatesEnum.NotFound; }
+            get { return PluginStates.NotFound; }
         }
     }
 }

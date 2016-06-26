@@ -141,7 +141,7 @@ namespace OHM.Interfaces
             IInterface interf = null;
             if (_runningDic.TryGetValue(key, out interf))
             {
-                if (interf.State == InterfaceState.Enabled)
+                if (interf.State == InterfaceStates.Enabled)
                 {
                     interf.Shutdowning();
                     result = true;
@@ -289,7 +289,7 @@ namespace OHM.Interfaces
         private bool StartInterface(IInterface interf)
         {
             bool result = false;
-            if (interf.State == InterfaceState.Disabled)
+            if (interf.State == InterfaceStates.Disabled)
             {
                 interf.Starting();
                 result = true;

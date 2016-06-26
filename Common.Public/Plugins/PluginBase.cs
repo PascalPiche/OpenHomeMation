@@ -6,7 +6,7 @@ using System;
 namespace OHM.Plugins
 {
     [Serializable]
-    public enum PluginStatesEnum
+    public enum PluginStates
     {
         NotFound = -2,
         FatalError = -1,
@@ -18,7 +18,7 @@ namespace OHM.Plugins
     [Serializable]
     public abstract class PluginBase : MarshalByRefObject, IPlugin
     {
-        private PluginStatesEnum _state = PluginStatesEnum.Normal;
+        private PluginStates _state = PluginStates.Normal;
 
         public PluginBase() {}
 
@@ -26,7 +26,19 @@ namespace OHM.Plugins
 
         public abstract string Name { get; }
 
-        public PluginStatesEnum State { get { return _state; } }
+        public PluginStates State { 
+            get { return _state; }
+            protected set
+            {
+                if (value == PluginStates.NotFound)
+                {
+                    throw new ArgumentException("NotFound is a reserved status for internal operations only.", "newState");
+                }
+                _state = value;
+                //NotifyPropertyChanged("State");
+                //NotifyPropertyChanged("IsRunning");
+            }
+        }
 
         public abstract bool Install(IOhmSystemInstallGateway system);
 
@@ -35,15 +47,6 @@ namespace OHM.Plugins
         public abstract bool Update();
 
         public abstract InterfaceAbstract CreateInterface(string key, ILogger logger);
-
-        protected void SetState(PluginStatesEnum newState)
-        {
-            if (newState == PluginStatesEnum.NotFound)
-            {
-                throw new ArgumentException("NotFound is a reserved status for internal operations only.", "newState");
-            }
-            _state = newState;
-        }
 
     }
 }

@@ -199,7 +199,7 @@ namespace OHM.Plugins
                             {
                                 this._logger.Debug("Plugin Found:" + type.FullName);
                                 IPlugin plugin = (PluginBase)AppDomain.CurrentDomain.CreateInstanceAndUnwrap(assembly.FullName, type.FullName);
-                                _availablesPlugins.Add(plugin);
+                                _availablesPlugins.Add(new PluginObservableAdapter(plugin));
                                 this._logger.Info("Plugin " + type.FullName + " added to available plugins");
                             }
                         }

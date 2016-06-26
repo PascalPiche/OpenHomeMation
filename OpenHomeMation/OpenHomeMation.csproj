@@ -76,6 +76,7 @@
     <Compile Include="Logger\DefaultLogger.cs" />
     <Compile Include="Logger\LoggerManager.cs" />
     <Compile Include="Plugins\NotFoundPlugin.cs" />
+    <Compile Include="Plugins\PluginObservableAdapter.cs" />
     <Compile Include="System\OhmSystem.cs" />
     <Compile Include="System\OhmSystemInstallGateway.cs" />
     <Compile Include="System\OhmSystemInterfaceGateway.cs" />

@@ -12,7 +12,7 @@ namespace OHM.Plugins
 
         String Name { get; }
 
-        PluginStatesEnum State { get; }
+        PluginStates State { get; }
 
         bool Install(IOhmSystemInstallGateway system);
 

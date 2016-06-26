@@ -10,7 +10,7 @@ namespace OHM.Interfaces
     {
         #region Private Members
 
-        private InterfaceState _state = InterfaceState.Disabled;
+        private InterfaceStates _state = InterfaceStates.Disabled;
         private bool _startOnLaunch = false;
         private IOhmSystemInterfaceGateway _system;
 
@@ -26,7 +26,7 @@ namespace OHM.Interfaces
 
         #region public Properties
 
-        public InterfaceState State
+        public InterfaceStates State
         {
             get { return _state; }
 
@@ -40,7 +40,7 @@ namespace OHM.Interfaces
 
         public bool IsRunning
         {
-            get { return State == Interfaces.InterfaceState.Enabled; }
+            get { return State == Interfaces.InterfaceStates.Enabled; }
         }
 
         public bool StartOnLaunch
@@ -65,7 +65,7 @@ namespace OHM.Interfaces
         {
             Logger.Info( this.Name + " Interface initing");
             Start();
-            State = Interfaces.InterfaceState.Enabled;
+            State = Interfaces.InterfaceStates.Enabled;
             NotifyPropertyChanged("State");
             Logger.Info(this.Name + " Interface Inited");
         }
@@ -74,7 +74,7 @@ namespace OHM.Interfaces
         {
             Logger.Info(this.Name + " Interface Shutdowning");
             Shutdown();
-            State = Interfaces.InterfaceState.Disabled;
+            State = Interfaces.InterfaceStates.Disabled;
             NotifyPropertyChanged("State");
             Logger.Info(this.Name + " Interface Shutdowned");
         }

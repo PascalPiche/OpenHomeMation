@@ -1,7 +1,7 @@
 ﻿
 namespace OHM.Interfaces
 {
-    public enum InterfaceState
+    public enum InterfaceStates
     {
         Enabled,
         Disabled,

@@ -8,7 +8,7 @@ namespace OHM.Interfaces
     {
         #region Properties
 
-        InterfaceState State { get; }
+        InterfaceStates State { get; }
 
         bool IsRunning { get; }
 
