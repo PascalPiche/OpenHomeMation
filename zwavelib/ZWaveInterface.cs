@@ -75,7 +75,7 @@ namespace ZWaveLib
             return CreateController(port, true);
         }
 
-        internal bool CreateController(int port, bool saveController = false)
+        internal bool CreateController(int port, bool isNew = false)
         {
             bool result = false;
             Logger.Info("Creating Controller on port: " + port);
@@ -87,22 +87,24 @@ namespace ZWaveLib
             }
 
             //Store Controller
-            if (saveController)
+            if (isNew)
             {
+                Logger.Info("Saving new controller on port " + port);
                 _registeredControllers.StoreString(port.ToString(), port.ToString());
                 DataStore.Save();
+                Logger.Info("Saved new controller on port " + port);
             }
 
-
-            
+            Logger.Info("Trying to start a controller on port " + port);
             bool mngResult = _mng.AddDriver(@"\\.\COM" + port, ZWControllerInterface.Serial);
             if (mngResult)
             {
+                Logger.Info("Tryed to start a controller on port " + port + " was successfull");
                 //TODO: Set node to initializing
                 //Create new node 
 
 
-                Logger.Info("Controller created on port: " + port);
+                Logger.Info("Controller created on port " + port);
                 result = true;
             }
             else
@@ -110,7 +112,7 @@ namespace ZWaveLib
                 //TODO : SET NODE TO ERROR
                 //Create new node
 
-                Logger.Info("Cannot create Controller on port: " + port);
+                Logger.Info("Cannot create Controller on port " + port);
             }
             return result;
         }
