@@ -210,6 +210,7 @@
                 </Grid>
 
                 <Grid Grid.Column="1">
+                    <!-- System View -->
                     <Grid Visibility="{Binding Path=IsSystemViewVisible}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
@@ -251,14 +252,22 @@
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition />
+                                                <ColumnDefinition Width="auto" />
+                                            </Grid.ColumnDefinitions>
                                             <Grid.ContextMenu>
                                                 <ContextMenu>
                                                     <MenuItem Header="UnInstall" Command="local:MainWindow.UnInstallPluginCommand" 
                                                       CommandParameter="{Binding Path=Id}" />
                                                 </ContextMenu>
                                             </Grid.ContextMenu>
+                                            
                                             <Label>
                                                 <Run Text="{Binding Path=Name, Mode=OneWay}" />
+                                            </Label>
+                                            <Label Grid.Column="1">
+                                                <Run Text="{Binding Path=State, Mode=OneWay}" />
                                             </Label>
                                         </Grid>
                                     </DataTemplate>

@@ -75,14 +75,14 @@
     <Compile Include="Interfaces\InterfacesManager.cs" />
     <Compile Include="Logger\DefaultLogger.cs" />
     <Compile Include="Logger\LoggerManager.cs" />
-    <Compile Include="Plugins\NotFoundPlugin.cs" />
-    <Compile Include="Plugins\PluginObservableAdapter.cs" />
+    <Compile Include="Plugins.Core\NotFoundPlugin.cs" />
+    <Compile Include="Plugins.Core\PluginObservableAdapter.cs" />
     <Compile Include="System\OhmSystem.cs" />
     <Compile Include="System\OhmSystemInstallGateway.cs" />
     <Compile Include="System\OhmSystemInterfaceGateway.cs" />
     <Compile Include="System\OhmSystemUnInstallGateway.cs" />
     <Compile Include="System\OpenHomeMation.cs" />
-    <Compile Include="Plugins\PluginsManager.cs" />
+    <Compile Include="Plugins.Core\PluginsManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="System\OpenHomeMationServer.cs" />
     <Compile Include="Vr\VrManager.cs" />
@@ -119,9 +119,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Plugins\_diagrams\PluginsManager_GetPlugin.sequencediagram" />
-    <None Include="Plugins\_diagrams\PluginsManager_InstallPlugin.sequencediagram" />
-    <None Include="Plugins\_diagrams\PluginsManager_Init.sequencediagram" />
+    <None Include="Plugins.Core\_diagrams\PluginsManager_GetPlugin.sequencediagram" />
+    <None Include="Plugins.Core\_diagrams\PluginsManager_InstallPlugin.sequencediagram" />
+    <None Include="Plugins.Core\_diagrams\PluginsManager_Init.sequencediagram" />
     <None Include="System\_diagrams\OpenHomeMation_start.sequencediagram" />
     <None Include="packages.config" />
     <None Include="System\_diagrams\ClassDiagram1.cd" />
@@ -131,13 +131,13 @@
     <None Include="Logger\LoggerClassDiagramFull.cd" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Plugins\_diagrams\PluginsManager_GetPlugin.sequencediagram.layout">
+    <EmbeddedResource Include="Plugins.Core\_diagrams\PluginsManager_GetPlugin.sequencediagram.layout">
       <DependentUpon>PluginsManager_GetPlugin.sequencediagram</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Plugins\_diagrams\PluginsManager_InstallPlugin.sequencediagram.layout">
+    <EmbeddedResource Include="Plugins.Core\_diagrams\PluginsManager_InstallPlugin.sequencediagram.layout">
       <DependentUpon>PluginsManager_InstallPlugin.sequencediagram</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Plugins\_diagrams\PluginsManager_Init.sequencediagram.layout">
+    <EmbeddedResource Include="Plugins.Core\_diagrams\PluginsManager_Init.sequencediagram.layout">
       <DependentUpon>PluginsManager_Init.sequencediagram</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="System\_diagrams\OpenHomeMation_start.sequencediagram.layout">
