@@ -41,7 +41,7 @@ namespace ZWaveLib.Commands
                 return false;
             }
 
-            return Interface.CreateController(port, true);
+            return Interface.CreateNewController(port);
 
         }
     }

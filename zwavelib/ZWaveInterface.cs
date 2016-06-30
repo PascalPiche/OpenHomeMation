@@ -70,12 +70,17 @@ namespace ZWaveLib
 
         #region "internal"
 
+        internal bool CreateNewController(int port)
+        {
+            return CreateController(port, true);
+        }
+
         internal bool CreateController(int port, bool saveController = false)
         {
             bool result = false;
             Logger.Info("Creating Controller on port: " + port);
 
-            //Valid if a Controller exist on this port
+            //Valid if a Controller already exist on this port
             if (this.GetChild(port.ToString()) != null) {
                 Logger.Error("Controller already exist on port : " + port);
                 return false;
@@ -87,7 +92,8 @@ namespace ZWaveLib
                 _registeredControllers.StoreString(port.ToString(), port.ToString());
                 DataStore.Save();
             }
-            
+
+
             
             bool mngResult = _mng.AddDriver(@"\\.\COM" + port, ZWControllerInterface.Serial);
             if (mngResult)
