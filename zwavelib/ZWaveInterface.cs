@@ -52,15 +52,13 @@ namespace ZWaveLib
             _mng.OnControllerStateChanged += new ManagedControllerStateChangedHandler(ControllerStateChangedHandler);
 
             //Log OpenZWave version
-            Logger.Info("ZWave: OpenZWave Version: " + _mng.GetVersionAsString());
+            Logger.Info("OpenZWave Version: " + _mng.GetVersionAsString());
 
             //Get DataDictionary For installed Controllers
             _registeredControllers = DataStore.GetOrCreateDataDictionary("registeredControllers");
             
             //Load registered controllers
             LoadRegisteredControllers();
-
-            
         }
 
         protected override void Shutdown()
@@ -75,16 +73,13 @@ namespace ZWaveLib
         internal bool CreateController(int port, bool saveController = false)
         {
             bool result = false;
-            Logger.Info("ZWave: Creating Controller on port: " + port);
+            Logger.Info("Creating Controller on port: " + port);
 
             //Valid if a Controller exist on this port
             if (this.GetChild(port.ToString()) != null) {
-                Logger.Error("ZWave: Controller already exist on port : " + port);
+                Logger.Error("Controller already exist on port : " + port);
                 return false;
             }
-
-            // Add Node
-
 
             //Store Controller
             if (saveController)
@@ -93,29 +88,30 @@ namespace ZWaveLib
                 DataStore.Save();
             }
             
-
+            
             bool mngResult = _mng.AddDriver(@"\\.\COM" + port, ZWControllerInterface.Serial);
             if (mngResult)
             {
                 //TODO: Set node to initializing
+                //Create new node 
 
-                Logger.Info("ZWave: Controller created on port: " + port);
+
+                Logger.Info("Controller created on port: " + port);
                 result = true;
-                
             }
             else
             {
                 //TODO : SET NODE TO ERROR
+                //Create new node
 
-
-                Logger.Info("ZWave: Cannot create Controller on port: " + port);
+                Logger.Info("Cannot create Controller on port: " + port);
             }
             return result;
         }
 
         internal void RemoveController(int port)
         {
-            Logger.Info("ZWave: Removing Controller on port: " + port);
+            Logger.Info("Removing Controller on port: " + port);
             _mng.RemoveDriver(@"\\.\COM" + port);
         }
 
@@ -295,7 +291,7 @@ namespace ZWaveLib
 
         private void ControllerStateChangedHandler(ZWControllerState state)
         {
-            Logger.Debug("ZWave: Controller State Changed:  " + state.ToString());
+            Logger.Debug("Controller State Changed:  " + state.ToString());
         }
 
         #endregion
@@ -306,7 +302,7 @@ namespace ZWaveLib
 
         private void NotificationDriverReady(ZWNotification n)
         {
-            Logger.Info("ZWave: Notification Controller Ready:" + GetNodeIdForLog(n));
+            Logger.Info("Notification Controller Ready:" + GetNodeIdForLog(n));
             string key = NotificationTool.MakeNodeKey(n);
             string name = NotificationTool.GetNodeName(n, this.Manager);
             
@@ -316,11 +312,10 @@ namespace ZWaveLib
 
             string controlerPath = Manager.GetControllerPath(homeId);
 
+            Logger.Info("Controller Path  : " + controlerPath);
 
-            Logger.Info("ZWave: Controller Path  : " + controlerPath);
-
-            Logger.Info("ZWave: Controller Library Type Name : " + _mng.GetLibraryTypeName(homeId));
-            Logger.Info("ZWave: Controller Library Version : " + _mng.GetLibraryVersion(homeId));
+            Logger.Info("Controller Library Type Name : " + _mng.GetLibraryTypeName(homeId));
+            Logger.Info("Controller Library Version : " + _mng.GetLibraryVersion(homeId));
 
             if (!this._runningControllers.ContainsKey(homeId)) {
                 var ctl = new ZWaveController(key, name, this, homeId, nodeId, this.Logger);
@@ -331,17 +326,17 @@ namespace ZWaveLib
 
         private void NotificationDriverReset(ZWNotification n)
         {
-            Logger.Debug("ZWave: Notification Driver Reset:" + GetNodeIdForLog(n));
+            Logger.Debug("Notification Driver Reset:" + GetNodeIdForLog(n));
         }
 
         private void NotificationDriverFailed(ZWNotification n)
         {
-            Logger.Debug("ZWave: Notification Driver Failed:" + GetNodeIdForLog(n));
+            Logger.Debug("Notification Driver Failed:" + GetNodeIdForLog(n));
         }
 
         private void NotificationDriverRemoved(ZWNotification n)
         {
-            Logger.Debug("ZWave: Notification Driver Failed:" + GetNodeIdForLog(n));
+            Logger.Debug("Notification Driver Failed:" + GetNodeIdForLog(n));
         }
 
         #endregion
@@ -350,17 +345,17 @@ namespace ZWaveLib
 
         private void NotificationAllNodesQueried(ZWNotification n)
         {
-            Logger.Info("ZWave: Notification All Nodes Queried: " + GetNodeIdForLog(n));
+            Logger.Info("Notification All Nodes Queried: " + GetNodeIdForLog(n));
         }
 
         private void NotificationAwakeNodesQueried(ZWNotification n)
         {
-            Logger.Info("ZWave: Notification Awake Nodes Queried: " + GetNodeIdForLog(n));
+            Logger.Info("Notification Awake Nodes Queried: " + GetNodeIdForLog(n));
         }
 
         private void NotificationAllNodesQueriedSomeDead(ZWNotification n)
         {
-            Logger.Info("ZWave: Notification All Nodes Queried Some Dead: " + GetNodeIdForLog(n));
+            Logger.Info("Notification All Nodes Queried Some Dead: " + GetNodeIdForLog(n));
         }
 
         #endregion
@@ -369,14 +364,14 @@ namespace ZWaveLib
 
         private void NotificationNodeNew(ZWNotification n)
         {
-            Logger.Info("ZWave: Notification New Node: " + GetNodeIdForLog(n));
+            Logger.Info("Notification New Node: " + GetNodeIdForLog(n));
             CreateOrUpdateNode(n);
         }
 
         private void NotificationNodeAdded(ZWNotification n)
         {
             //Update State
-            Logger.Info("ZWave: Notification Node Added: " + GetNodeIdForLog(n));
+            Logger.Info("Notification Node Added: " + GetNodeIdForLog(n));
             CreateOrUpdateNode(n);
         }
 
@@ -384,35 +379,35 @@ namespace ZWaveLib
         {
             //Update State
             RemoveNode(n);
-            Logger.Info("ZWave: Notification Node Removed: " + GetNodeIdForLog(n));
+            Logger.Info("Notification Node Removed: " + GetNodeIdForLog(n));
         }
 
 
         private void NotificationEssentialNodeQueriesComplete(ZWNotification n)
         {
-            Logger.Info("ZWave: Notification Essential Node Queries Complete: " + GetNodeIdForLog(n));
+            Logger.Info("Notification Essential Node Queries Complete: " + GetNodeIdForLog(n));
         }
 
         private void NotificationNodeProtocolInfo(ZWNotification n)
         {
-            Logger.Info("ZWave: Notification Node Protocol Info: " + GetNodeIdForLog(n));
+            Logger.Info("Notification Node Protocol Info: " + GetNodeIdForLog(n));
         }
 
         private void NotificationNodeQueriesComplete(ZWNotification n)
         {
-            Logger.Debug("ZWave: Notification Node Queries Complete:" + GetNodeIdForLog(n));
+            Logger.Debug("Notification Node Queries Complete:" + GetNodeIdForLog(n));
         }
 
         private void NotificationNodeEvent(ZWNotification n)
         {
-            Logger.Debug("ZWave: Notification Node Event: " + GetNodeIdForLog(n));
-            Logger.Debug("ZWave: Event: " + n.GetEvent().ToString());
+            Logger.Debug("Notification Node Event: " + GetNodeIdForLog(n));
+            Logger.Debug("Event: " + n.GetEvent().ToString());
         }
 
         private void NotificationNodeNaming(ZWNotification n)
         {
             //Update State
-            Logger.Info("ZWave: Notification Node Naming: " + GetNodeIdForLog(n));
+            Logger.Info("Notification Node Naming: " + GetNodeIdForLog(n));
             UpdateNode(n);
         }
 
@@ -422,25 +417,25 @@ namespace ZWaveLib
 
          private void NotificationValueAdded(ZWNotification n)
         {
-            Logger.Info("ZWave: Notification Value Added: " + GetNodeIdForLog(n));
+            Logger.Info("Notification Value Added: " + GetNodeIdForLog(n));
             CreateOrUpdateNodeValue(n);
         }
 
          private void NotificationValueChanged(ZWNotification n)
         {
-            Logger.Info("ZWave: Notification Value Changed: " + GetNodeIdForLog(n));
+            Logger.Info("Notification Value Changed: " + GetNodeIdForLog(n));
             CreateOrUpdateNodeValue(n);
         }
 
          private void NotificationValueRefreshed(ZWNotification n)
         {
-            Logger.Info("ZWave: Notification Value Refreshed: " + GetNodeIdForLog(n));
+            Logger.Info("Notification Value Refreshed: " + GetNodeIdForLog(n));
             CreateOrUpdateNodeValue(n);
         }
 
          private void NotificationValueRemoved(ZWNotification n)
         {
-            Logger.Info("ZWave: Notification Value Removed: " + GetNodeIdForLog(n));
+            Logger.Info("Notification Value Removed: " + GetNodeIdForLog(n));
             RemoveNodeValue(n);
         }
 
@@ -450,7 +445,7 @@ namespace ZWaveLib
 
         private void Notification(ZWNotification n)
         {
-            Logger.Info("ZWave: Notification Error???: " + GetNodeIdForLog(n));
+            Logger.Info("Notification Error???: " + GetNodeIdForLog(n));
         }
 
         #endregion
@@ -459,7 +454,7 @@ namespace ZWaveLib
 
         private void NotificationSceneEvent(ZWNotification n)
         {
-            Logger.Info("ZWave: Notification Scene Event: " + GetNodeIdForLog(n));
+            Logger.Info("Notification Scene Event: " + GetNodeIdForLog(n));
         }
 
         #endregion
@@ -468,7 +463,7 @@ namespace ZWaveLib
 
         private void NotificationGroup(ZWNotification n)
         {
-            Logger.Info("ZWave: Notification Group: " + GetNodeIdForLog(n));
+            Logger.Info("Notification Group: " + GetNodeIdForLog(n));
         }
 
         #endregion
@@ -521,7 +516,7 @@ namespace ZWaveLib
             }
             else
             {
-                Logger.Error("ZWave: Node not found for Creating or updating value");
+                Logger.Error("Node not found for Creating or updating value");
             }
             return false;
         }
@@ -546,7 +541,6 @@ namespace ZWaveLib
         {
             return " HomeId: " + n.GetHomeId() + " - NodeId: " + n.GetNodeId() + "- InstanceId: " + n.GetGroupIdx();
         }
-
 
         #endregion
 
