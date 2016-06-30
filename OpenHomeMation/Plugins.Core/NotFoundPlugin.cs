@@ -31,7 +31,7 @@ namespace OHM.Plugins
 
         public bool Install(Sys.IOhmSystemInstallGateway system)
         {
-            throw new NotImplementedException();
+            return false;
         }
 
         public bool Uninstall(Sys.IOhmSystemUnInstallGateway system)
@@ -41,7 +41,7 @@ namespace OHM.Plugins
 
         public bool Update()
         {
-            throw new NotImplementedException();
+            return false;
         }
 
         public Interfaces.InterfaceAbstract CreateInterface(string key, ILogger logger)
