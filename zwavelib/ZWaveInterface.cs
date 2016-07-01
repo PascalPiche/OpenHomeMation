@@ -328,13 +328,13 @@ namespace ZWaveLib
             Logger.Info("Controller Library Type Name : " + _mng.GetLibraryTypeName(homeId));
             Logger.Info("Controller Library Version : " + _mng.GetLibraryVersion(homeId));
 
-            if (!this._runningControllers.ContainsKey(controlerPath))
+            if (this._runningControllers.ContainsKey(controlerPath))
             {
-                Logger.Debug("Controller found... todo : update values");
-
-                /*var ctl = new ZWaveController(key, name, this, this.Logger);
-                this.AddChild(ctl);
-                this._runningControllers.Add(homeId, ctl);*/
+                ZWaveController controller = null;
+                if (this._runningControllers.TryGetValue(controlerPath, out controller))
+                {
+                    controller.Init(homeId, nodeId);
+                }
             }
         }
 
@@ -351,14 +351,11 @@ namespace ZWaveLib
 
             if (this._runningControllers.ContainsKey(controlerPath))
             {
-                Logger.Info("TODO Set controller in fatal state");
                 ZWaveController controller = null;
                 if (this._runningControllers.TryGetValue(controlerPath, out controller))
                 {
-                    //TODO
-                    //controller.State = NodeStates.fatal;
+                    controller.SetFatalState();
                 }
-
             }
             else
             {

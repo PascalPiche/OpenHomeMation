@@ -111,7 +111,7 @@ namespace ZWaveLib.Data
 
         #region Protected
 
-        protected bool Init(uint homeId, byte nodeId)
+        internal bool Init(uint homeId, byte nodeId)
         {
             _homeId = homeId;
             _nodeId = nodeId;
@@ -192,61 +192,49 @@ namespace ZWaveLib.Data
                  new NodeProperty(
                      "IsNodeBeamingDevice",
                      "Is Node Beaming Device",
-                     typeof(Boolean?),
+                     typeof(Boolean),
                      true,
-                     "",
-                     new Boolean?()
-                /*Manager.IsNodeBeamingDevice(homeId, nodeId)*/));
+                     ""));
 
             this.RegisterProperty(
                  new NodeProperty(
                      "IsNodeFailed",
                      "Is Node Failed",
-                     typeof(Boolean?),
+                     typeof(Boolean),
                      true,
-                     "",
-                     new Boolean?()
-                /*Manager.IsNodeFailed(homeId, nodeId)*/));
+                     ""));
 
             this.RegisterProperty(
                  new NodeProperty(
                      "IsNodeListeningDevice",
                      "Is Node Listening Device",
-                     typeof(Boolean?),
+                     typeof(Boolean),
                      true,
-                     "",
-                     new Boolean?()
-                /*Manager.IsNodeListeningDevice(homeId, nodeId)*/));
+                     ""));
 
             this.RegisterProperty(
                  new NodeProperty(
                      "IsNodeFrequentListeningDevice",
                      "Is Node Frequent Listening Device",
-                     typeof(Boolean?),
+                     typeof(Boolean),
                      true,
-                     "",
-                     new Boolean?()
-                /*Manager.IsNodeFrequentListeningDevice(homeId, nodeId)*/));
+                     ""));
 
             this.RegisterProperty(
                  new NodeProperty(
                      "IsNodeRoutingDevice",
                      "Is Node Routing Device",
-                     typeof(Boolean?),
+                     typeof(Boolean),
                      true,
-                     "",
-                     new Boolean?()
-                /*Manager.IsNodeRoutingDevice(homeId, nodeId)*/));
+                     ""));
 
             this.RegisterProperty(
                  new NodeProperty(
                      "IsNodeSecurityDevice",
                      "Is Node Security Device",
-                     typeof(Boolean?),
+                     typeof(Boolean),
                      true,
-                     "",
-                     new Boolean?()
-                /*Manager.IsNodeSecurityDevice(homeId, nodeId)*/));
+                     ""));
 
             this.RegisterProperty(
                  new NodeProperty(
@@ -254,9 +242,7 @@ namespace ZWaveLib.Data
                      "Node Location",
                      typeof(String),
                      false,
-                     "",
-                     null
-                /*Manager.GetNodeLocation(homeId, nodeId)*/));
+                     ""));
 
             this.RegisterProperty(
                  new NodeProperty(
@@ -264,9 +250,7 @@ namespace ZWaveLib.Data
                      "Node Manufacturer Id",
                      typeof(String),
                      true,
-                     "",
-                     null
-                /*Manager.GetNodeManufacturerId(homeId, nodeId)*/));
+                     ""));
 
             this.RegisterProperty(
                  new NodeProperty(
@@ -274,18 +258,16 @@ namespace ZWaveLib.Data
                      "Node Manufacturer Name",
                      typeof(String),
                      true,
-                     "",
-                     null
+                     ""
                 /*Manager.GetNodeManufacturerName(homeId, nodeId)*/));
 
             this.RegisterProperty(
                  new NodeProperty(
                      "NodeMaxBaudRate",
                      "Node Max Baud Rate",
-                     typeof(uint?),
+                     typeof(uint),
                      true,
-                     "",
-                     new uint?()
+                     ""
                 /*Manager.GetNodeMaxBaudRate(homeId, nodeId)*/));
 
             this.RegisterProperty(
@@ -294,8 +276,7 @@ namespace ZWaveLib.Data
                      "Node Name",
                      typeof(String),
                      true,
-                     "",
-                     null
+                     ""
                 /*Manager.GetNodeName(homeId, nodeId)*/));
 
             this.RegisterProperty(
@@ -304,8 +285,7 @@ namespace ZWaveLib.Data
                      "Node Product Id",
                      typeof(String),
                      true,
-                     "",
-                     null
+                     ""
                 /*Manager.GetNodeProductId(homeId, nodeId)*/));
 
             this.RegisterProperty(
@@ -314,8 +294,7 @@ namespace ZWaveLib.Data
                      "Node Product Name",
                      typeof(String),
                      true,
-                     "",
-                     null
+                     ""
                 /*Manager.GetNodeProductName(homeId, nodeId)*/));
 
             this.RegisterProperty(
@@ -324,8 +303,7 @@ namespace ZWaveLib.Data
                      "Node Product Type",
                      typeof(String),
                      true,
-                     "",
-                     null
+                     ""
                 /*Manager.GetNodeProductType(homeId, nodeId)*/));
 
             this.RegisterProperty(
@@ -334,8 +312,7 @@ namespace ZWaveLib.Data
                      "Node Type",
                      typeof(String),
                      true,
-                     "",
-                     null
+                     ""
                 /*Manager.GetNodeType(homeId, nodeId)*/));
 
         }
