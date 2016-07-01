@@ -9,10 +9,9 @@ using ZWaveLib.Data;
 
 namespace ZWaveLib.Commands
 {
-    public class SoftResetCommand : ZWaveCommandAbstract
+    public class ControlerSoftResetCommand : ZWaveCommandAbstract
     {
-
-        public SoftResetCommand(INode node)
+        public ControlerSoftResetCommand(INode node)
             : base(node, "SoftReset", "Soft Reset the Z Wave Controller", "")
         {
             

@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace ZWaveLib.Commands
 {
-    public class CreateController : ZWaveCommandAbstract
+    public class CreateControler : ZWaveCommandAbstract
     {
 
-        public CreateController(ZWaveInterface interf)
+        public CreateControler(ZWaveInterface interf)
             : base(interf, "createController", "Create a controller", "")
         {
 

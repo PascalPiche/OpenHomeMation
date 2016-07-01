@@ -15,7 +15,6 @@ namespace ZWaveLib
 {
     public class ZWaveInterface : InterfaceAbstract
     {
-
         private ZWManager _mng = new ZWManager();
         private IDataDictionary _registeredControllers;
         private Dictionary<string, ZWaveController> _runningControllers;
@@ -28,7 +27,7 @@ namespace ZWaveLib
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
             //Create Commands
-            this.RegisterCommand(new CreateController(this));
+            this.RegisterCommand(new CreateControler(this));
         }
             
         #endregion

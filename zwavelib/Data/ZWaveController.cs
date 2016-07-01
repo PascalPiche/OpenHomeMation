@@ -88,12 +88,11 @@ namespace ZWaveLib.Data
 
         private void RegisterCommands()
         {
-            this.RegisterCommand(new AllOnCommand(this));
-            this.RegisterCommand(new AllOffCommand(this));
-            this.RegisterCommand(new SoftResetCommand(this));
-            this.RegisterCommand(new HardResetCommand(this));
-
-            //parent.Manager.HealNetwork(new HealNetworkCommand(this, parent));
+            this.RegisterCommand(new ControlerAllOnCommand(this));
+            this.RegisterCommand(new ControlerAllOffCommand(this));
+            this.RegisterCommand(new ControlerSoftResetCommand(this));
+            this.RegisterCommand(new ControlerHardResetCommand(this));
+            this.RegisterCommand(new ControlerAddNodeCommand(this)); 
         }
 
         private void RegisterProperties()

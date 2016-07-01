@@ -51,16 +51,16 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\AllOff.cs" />
-    <Compile Include="Commands\AllOn.cs" />
-    <Compile Include="Commands\BeginControllerCommand.cs" />
-    <Compile Include="Commands\CreateController.cs" />
-    <Compile Include="Commands\HardReset.cs" />
+    <Compile Include="Commands\ControlerAllOffCommand.cs" />
+    <Compile Include="Commands\ControlerAllOnCommand.cs" />
+    <Compile Include="Commands\ControlerAddNodeCommand.cs" />
+    <Compile Include="Commands\CreateControler.cs" />
+    <Compile Include="Commands\ControlerHardResetCommand.cs" />
     <Compile Include="Commands\RefreshNode.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Commands\RefreshNodeValue.cs" />
-    <Compile Include="Commands\SoftReset.cs">
+    <Compile Include="Commands\ControlerSoftResetCommand.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Commands\ZWaveCommandAbstract.cs" />
