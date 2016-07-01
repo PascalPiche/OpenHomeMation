@@ -21,7 +21,7 @@ namespace ZWaveLib.Commands
 
         protected override bool RunImplementation(Dictionary<string, object> arguments)
         {
-            Interface.Manager.SwitchAllOff(Node.HomeId);
+            Interface.Manager.SwitchAllOff(Node.HomeId.Value);
             return true;
         }
     }

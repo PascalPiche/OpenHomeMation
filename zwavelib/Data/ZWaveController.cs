@@ -10,9 +10,10 @@ namespace ZWaveLib.Data
 
     public class ZWaveController : ZWaveNode, IZWaveController
     {
+        /*uint homeId, byte nodeId,*/
 
-        public ZWaveController(string key, string name, ZWaveInterface parent, uint homeId, byte nodeId, ILogger logger)
-            : base(key, name, homeId, nodeId, parent, logger)
+        public ZWaveController(string key, string name, ZWaveInterface parent, ILogger logger, NodeStates initialState = NodeStates.initializing)
+            : base(key, name, parent, logger, initialState)
         {
             this.RegisterCommand(new AllOnCommand(this));
             this.RegisterCommand(new AllOffCommand(this));
@@ -25,37 +26,41 @@ namespace ZWaveLib.Data
                  new NodeProperty(
                      "ControllerInterfaceType",
                      "Controller Interface Type",
-                     typeof(ZWControllerInterface),
+                     typeof(ZWControllerInterface?),
                      true,
                      "",
-                     parent.Manager.GetControllerInterfaceType(homeId)));
+                     new ZWControllerInterface?()
+                     /*parent.Manager.GetControllerInterfaceType(homeId)*/));
 
             this.RegisterProperty(
                  new NodeProperty(
                      "IsBridgeController", 
                      "Is Bridge Controller", 
-                     typeof(Boolean),
+                     typeof(Boolean?),
                      true,
                      "",
-                     parent.Manager.IsBridgeController(homeId)));
+                     null
+                     /*parent.Manager.IsBridgeController(homeId)*/));
 
             this.RegisterProperty(
                  new NodeProperty(
                      "IsPrimaryController", 
                      "Is Primary Controller", 
-                     typeof(Boolean),
+                     typeof(Boolean?),
                      true,
                      "",
-                     parent.Manager.IsPrimaryController(homeId)));
+                     null
+                     /*parent.Manager.IsPrimaryController(homeId)*/));
 
             this.RegisterProperty(
                  new NodeProperty(
                      "IsStaticUpdateController", 
                      "Is Static Update Controller", 
-                     typeof(Boolean),
+                     typeof(Boolean?),
                      true,
                      "",
-                     parent.Manager.IsStaticUpdateController(homeId)));
+                     null
+                     /*parent.Manager.IsStaticUpdateController(homeId)*/));
 
         }
 
@@ -88,7 +93,6 @@ namespace ZWaveLib.Data
         {
             string key = NotificationTool.MakeNodeKey(n);
             this.RemoveChild(key);
-
         }
 
         #endregion
@@ -119,7 +123,7 @@ namespace ZWaveLib.Data
             uint homeId = n.GetHomeId();
             byte nodeId = n.GetNodeId();
 
-            var newNode = new ZWaveNode(key, name, homeId, nodeId, this.Interface, this.Logger);
+            var newNode = new ZWaveNode(key, name, this.Interface, this.Logger, homeId, nodeId);
 
             this.AddChild(newNode);
         }

@@ -20,7 +20,7 @@ namespace ZWaveLib.Commands
 
         protected override bool RunImplementation(Dictionary<string, object> arguments)
         {
-            return Interface.Manager.RefreshNodeInfo(Node.HomeId, Node.NodeId);
+            return Interface.Manager.RefreshNodeInfo(Node.HomeId.Value, Node.NodeId.Value);
         }
     }
 }

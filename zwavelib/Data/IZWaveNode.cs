@@ -10,9 +10,9 @@ namespace ZWaveLib.Data
     public interface IZWaveNode : INode
     {
 
-        uint HomeId { get; }
+        uint? HomeId { get; }
 
-        byte NodeId { get; }
+        byte? NodeId { get; }
 
     }
 }

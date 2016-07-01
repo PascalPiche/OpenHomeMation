@@ -20,7 +20,7 @@ namespace ZWaveLib.Commands
 
         protected override bool RunImplementation(Dictionary<string, object> arguments)
         {
-            Interface.Manager.SoftReset(Node.HomeId);
+            Interface.Manager.SoftReset(Node.HomeId.Value);
             return true;
         }
     }

@@ -4,7 +4,6 @@ using OpenZWaveDotNet;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ZWaveLib.Commands;
@@ -14,20 +13,116 @@ namespace ZWaveLib.Data
 {
     public class ZWaveNode : NodeAbstract, IZWaveNode
     {
-
-        private uint _homeId;
-        private byte _nodeId;
+        private uint? _homeId;
+        private byte? _nodeId;
         private ZWaveInterface _interface;
 
-        public uint HomeId
+        #region Public properties
+
+        public uint? HomeId
         {
             get { return _homeId; }
         }
 
-        public byte NodeId
+        public byte? NodeId
         {
             get { return _nodeId; }
         }
+
+        #endregion
+
+        #region Public Ctor
+
+        public ZWaveNode(string key, string name, ZWaveInterface interf, ILogger logger, uint homeId, byte nodeId)
+            : base(key, name, logger)
+        {
+            _homeId = homeId;
+            _nodeId = nodeId;
+            _interface = interf;
+
+            RegisterZWaveNodeProperties();
+            RegisterZWaveNodeCommands();
+            UpdateZWaveNodeProperties();
+        }
+        
+        public ZWaveNode(string key, string name, ZWaveInterface interf, ILogger logger, NodeStates initialState = NodeStates.initializing)
+            : base(key, name, logger, initialState)
+        {
+            
+            _homeId = new uint?();
+            _nodeId = new byte?();
+            _interface = interf;
+
+            RegisterZWaveNodeProperties();
+            RegisterZWaveNodeCommands();
+        }
+
+        #endregion
+
+        #region Internal method
+
+        internal void UpdateNode(ZWNotification n)
+        {
+            //this.Name = NotificationTool.GetNodeName(n, this.Manager);
+            UpdateZWaveNodeProperties();
+        }
+
+        internal bool CreateOrUpdateValue(ZWNotification n)
+        {
+            ZWValueID valueId = n.GetValueID();
+            Object value = GetValue(valueId);
+            bool result = false;
+
+            if (this.ContainsProperty(valueId.GetId().ToString()))
+            {
+                string units = Manager.GetValueUnits(valueId);
+                this.UpdateProperty(valueId.GetId().ToString(), value);
+                result = true;
+            }
+            else if (value != null)
+            {
+                result = CreateValue(n);
+            }
+            return result;
+        }
+
+        internal bool RemoveValue(ZWNotification n)
+        {
+            ZWValueID valueId = n.GetValueID();
+            string key = valueId.GetId().ToString();
+            bool result = false;
+
+            if (this.ContainsProperty(key))
+            {
+                if (this.UnRegisterProperty(valueId.GetId().ToString()))
+                {
+                    Logger.Info("ZWave: Removed property : " + key);
+                }
+            }
+            else
+            {
+                Logger.Error("ZWave: Cannot find property " + key + " for removing");
+            }
+            return result;
+
+        }
+
+        #endregion
+
+        #region Protected
+
+        protected bool Init(uint homeId, byte nodeId)
+        {
+            _homeId = homeId;
+            _nodeId = nodeId;
+            UpdateZWaveNodeProperties();
+            State = NodeStates.normal;
+            return true;
+        }
+
+        #endregion
+
+        #region Private
 
         private ZWManager Manager
         {
@@ -36,13 +131,25 @@ namespace ZWaveLib.Data
                 return _interface.Manager;
             }
         }
-        
-        public ZWaveNode(string key, string name, uint homeId, byte nodeId, ZWaveInterface interf, ILogger logger)
-            : base(key, name, logger)
+
+        private void UpdateZWaveNodeProperties()
         {
-            _homeId = homeId;
-            _nodeId = nodeId;
-            _interface = interf;
+            this.UpdateProperty("NodeProductType", Manager.GetNodeProductType(this.HomeId.Value, this.NodeId.Value));
+            this.UpdateProperty("NodeProductName", Manager.GetNodeProductName(this.HomeId.Value, this.NodeId.Value));
+            this.UpdateProperty("NodeProductId", Manager.GetNodeProductId(this.HomeId.Value, this.NodeId.Value));
+            this.UpdateProperty("NodeMaxBaudRate", Manager.GetNodeMaxBaudRate(this.HomeId.Value, this.NodeId.Value));
+            this.UpdateProperty("NodeManufacturerName", Manager.GetNodeManufacturerName(this.HomeId.Value, this.NodeId.Value));
+            this.UpdateProperty("NodeManufacturerId", Manager.GetNodeManufacturerId(this.HomeId.Value, this.NodeId.Value));
+            this.UpdateProperty("NodeLocation", Manager.GetNodeLocation(this.HomeId.Value, this.NodeId.Value));
+            this.UpdateProperty("IsNodeSecurityDevice", Manager.IsNodeSecurityDevice(this.HomeId.Value, this.NodeId.Value));
+            this.UpdateProperty("IsNodeRoutingDevice", Manager.IsNodeRoutingDevice(this.HomeId.Value, this.NodeId.Value));
+            this.UpdateProperty("IsNodeFrequentListeningDevice", Manager.IsNodeFrequentListeningDevice(this.HomeId.Value, this.NodeId.Value));
+            this.UpdateProperty("IsNodeListeningDevice", Manager.IsNodeListeningDevice(this.HomeId.Value, this.NodeId.Value));
+            this.UpdateProperty("IsNodeBeamingDevice", Manager.IsNodeBeamingDevice(this.HomeId.Value, this.NodeId.Value));
+        }
+
+        private void RegisterZWaveNodeProperties()
+        {
 
             //Manager.IsNodeAwake(homeid, nodeid) TODO
 
@@ -80,62 +187,66 @@ namespace ZWaveLib.Data
             //Manager.GetNodeVersion(homeId, nodeId) TODO
             //Manager.GetNumGroups(homeId, nodeId) TODO
             //Manager.HasNodeFailed(homeId, nodeId) TODO
-            
-
 
             this.RegisterProperty(
                  new NodeProperty(
                      "IsNodeBeamingDevice",
                      "Is Node Beaming Device",
-                     typeof(Boolean),
+                     typeof(Boolean?),
                      true,
                      "",
-                     Manager.IsNodeBeamingDevice(homeId, nodeId)));
+                     new Boolean?()
+                /*Manager.IsNodeBeamingDevice(homeId, nodeId)*/));
 
             this.RegisterProperty(
                  new NodeProperty(
                      "IsNodeFailed",
                      "Is Node Failed",
-                     typeof(Boolean),
+                     typeof(Boolean?),
                      true,
                      "",
-                     Manager.IsNodeFailed(homeId, nodeId)));
+                     new Boolean?()
+                /*Manager.IsNodeFailed(homeId, nodeId)*/));
 
             this.RegisterProperty(
                  new NodeProperty(
                      "IsNodeListeningDevice",
                      "Is Node Listening Device",
-                     typeof(Boolean),
+                     typeof(Boolean?),
                      true,
                      "",
-                     Manager.IsNodeListeningDevice(homeId, nodeId)));
+                     new Boolean?()
+                /*Manager.IsNodeListeningDevice(homeId, nodeId)*/));
 
             this.RegisterProperty(
                  new NodeProperty(
                      "IsNodeFrequentListeningDevice",
                      "Is Node Frequent Listening Device",
-                     typeof(Boolean),
+                     typeof(Boolean?),
                      true,
                      "",
-                     Manager.IsNodeFrequentListeningDevice(homeId, nodeId)));
+                     new Boolean?()
+                /*Manager.IsNodeFrequentListeningDevice(homeId, nodeId)*/));
 
             this.RegisterProperty(
                  new NodeProperty(
                      "IsNodeRoutingDevice",
                      "Is Node Routing Device",
-                     typeof(Boolean),
+                     typeof(Boolean?),
                      true,
                      "",
-                     Manager.IsNodeRoutingDevice(homeId, nodeId)));
+                     new Boolean?()
+                /*Manager.IsNodeRoutingDevice(homeId, nodeId)*/));
 
             this.RegisterProperty(
                  new NodeProperty(
                      "IsNodeSecurityDevice",
                      "Is Node Security Device",
-                     typeof(Boolean),
+                     typeof(Boolean?),
                      true,
                      "",
-                     Manager.IsNodeSecurityDevice(homeId, nodeId)));
+                     new Boolean?()
+                /*Manager.IsNodeSecurityDevice(homeId, nodeId)*/));
 
             this.RegisterProperty(
                  new NodeProperty(
@@ -144,7 +255,8 @@ namespace ZWaveLib.Data
                      typeof(String),
                      false,
                      "",
-                     Manager.GetNodeLocation(homeId, nodeId)));
+                     null
+                /*Manager.GetNodeLocation(homeId, nodeId)*/));
 
             this.RegisterProperty(
                  new NodeProperty(
@@ -153,7 +265,8 @@ namespace ZWaveLib.Data
                      typeof(String),
                      true,
                      "",
-                     Manager.GetNodeManufacturerId(homeId, nodeId)));
+                     null
+                /*Manager.GetNodeManufacturerId(homeId, nodeId)*/));
 
             this.RegisterProperty(
                  new NodeProperty(
@@ -162,25 +275,28 @@ namespace ZWaveLib.Data
                      typeof(String),
                      true,
                      "",
-                     Manager.GetNodeManufacturerName(homeId, nodeId)));
+                     null
+                /*Manager.GetNodeManufacturerName(homeId, nodeId)*/));
 
             this.RegisterProperty(
                  new NodeProperty(
                      "NodeMaxBaudRate",
                      "Node Max Baud Rate",
-                     typeof(uint),
+                     typeof(uint?),
                      true,
                      "",
-                     Manager.GetNodeMaxBaudRate(homeId, nodeId)));
+                     new uint?()
+                /*Manager.GetNodeMaxBaudRate(homeId, nodeId)*/));
 
             this.RegisterProperty(
                  new NodeProperty(
                      "NodeName",
                      "Node Name",
-                     typeof(string),
+                     typeof(String),
                      true,
                      "",
-                     Manager.GetNodeName(homeId, nodeId)));
+                     null
+                /*Manager.GetNodeName(homeId, nodeId)*/));
 
             this.RegisterProperty(
                  new NodeProperty(
@@ -189,7 +305,8 @@ namespace ZWaveLib.Data
                      typeof(String),
                      true,
                      "",
-                     Manager.GetNodeProductId(homeId, nodeId)));
+                     null
+                /*Manager.GetNodeProductId(homeId, nodeId)*/));
 
             this.RegisterProperty(
                  new NodeProperty(
@@ -198,7 +315,8 @@ namespace ZWaveLib.Data
                      typeof(String),
                      true,
                      "",
-                     Manager.GetNodeProductName(homeId, nodeId)));
+                     null
+                /*Manager.GetNodeProductName(homeId, nodeId)*/));
 
             this.RegisterProperty(
                  new NodeProperty(
@@ -207,7 +325,8 @@ namespace ZWaveLib.Data
                      typeof(String),
                      true,
                      "",
-                     Manager.GetNodeProductType(homeId, nodeId)));
+                     null
+                /*Manager.GetNodeProductType(homeId, nodeId)*/));
 
             this.RegisterProperty(
                  new NodeProperty(
@@ -216,29 +335,15 @@ namespace ZWaveLib.Data
                      typeof(String),
                      true,
                      "",
-                     Manager.GetNodeType(homeId, nodeId)));
-
-            this.RegisterCommand(new RefreshNodeCommand(this));
-            this.RegisterCommand(new RefreshNodeValueCommand(this));
+                     null
+                /*Manager.GetNodeType(homeId, nodeId)*/));
 
         }
 
-        internal void UpdateNode(ZWNotification n)
+        private void RegisterZWaveNodeCommands()
         {
-            this.Name = NotificationTool.GetNodeName(n, this.Manager);
-
-            this.UpdateProperty("NodeProductType", Manager.GetNodeProductType(this.HomeId, this.NodeId));
-            this.UpdateProperty("NodeProductName", Manager.GetNodeProductName(this.HomeId, this.NodeId));
-            this.UpdateProperty("NodeProductId", Manager.GetNodeProductId(this.HomeId, this.NodeId));
-            this.UpdateProperty("NodeMaxBaudRate", Manager.GetNodeMaxBaudRate(this.HomeId, this.NodeId));
-            this.UpdateProperty("NodeManufacturerName", Manager.GetNodeManufacturerName(this.HomeId, this.NodeId));
-            this.UpdateProperty("NodeManufacturerId", Manager.GetNodeManufacturerId(this.HomeId, this.NodeId));
-            this.UpdateProperty("NodeLocation", Manager.GetNodeLocation(this.HomeId, this.NodeId));
-            this.UpdateProperty("IsNodeSecurityDevice", Manager.IsNodeSecurityDevice(this.HomeId, this.NodeId));
-            this.UpdateProperty("IsNodeRoutingDevice", Manager.IsNodeRoutingDevice(this.HomeId, this.NodeId));
-            this.UpdateProperty("IsNodeFrequentListeningDevice", Manager.IsNodeFrequentListeningDevice(this.HomeId, this.NodeId));
-            this.UpdateProperty("IsNodeListeningDevice", Manager.IsNodeListeningDevice(this.HomeId, this.NodeId));
-            this.UpdateProperty("IsNodeBeamingDevice", Manager.IsNodeBeamingDevice(this.HomeId, this.NodeId));
+            this.RegisterCommand(new RefreshNodeCommand(this));
+            this.RegisterCommand(new RefreshNodeValueCommand(this));
         }
 
         private Object GetValue(ZWValueID valueId)
@@ -255,7 +360,7 @@ namespace ZWaveLib.Data
                     }
                     else
                     {
-                        Logger.Error("ZWave: Get Value as bool failed");
+                        Logger.Error("Get Value as bool failed");
                     }
                     break;
                
@@ -338,22 +443,6 @@ namespace ZWaveLib.Data
             }
             return result;
         }
-        
-        internal bool CreateOrUpdateValue(ZWNotification n)
-        {
-            ZWValueID valueId = n.GetValueID();
-            Object value = GetValue(valueId);
-            bool result = false;
-            
-            if (this.ContainsProperty(valueId.GetId().ToString())) {
-                string units = Manager.GetValueUnits(valueId);
-                this.UpdateProperty(valueId.GetId().ToString(), value);
-                result = true;
-            } else if (value != null){
-                result = CreateValue(n);
-            }
-            return result;  
-        }
 
         private bool CreateValue(ZWNotification n)
         {
@@ -394,27 +483,6 @@ namespace ZWaveLib.Data
             return false;
         }
 
-        internal bool RemoveValue(ZWNotification n)
-        {
-            ZWValueID valueId = n.GetValueID();
-            string key = valueId.GetId().ToString();
-            bool result = false;
-
-            if (this.ContainsProperty(key))
-            {
-                if (this.UnRegisterProperty(valueId.GetId().ToString()))
-                {
-                    Logger.Info("ZWave: Removed property : " + key);
-                }
-            }
-            else
-            {
-                Logger.Error("ZWave: Cannot find property " + key + " for removing");
-            }
-            return result;
-
-        }
-
         private new void UpdateProperty(string key, object value)
         {
             if (!base.UpdateProperty(key, value))
@@ -422,7 +490,7 @@ namespace ZWaveLib.Data
                 Logger.Error("ZWave Cannot Update property : " + key + " with value " + value.ToString());
             }
         }
-    
-        
+
+        #endregion
     }
 }
