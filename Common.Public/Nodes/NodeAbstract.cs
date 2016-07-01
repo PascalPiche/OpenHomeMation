@@ -12,7 +12,6 @@ namespace OHM.Nodes
 {
     public abstract class NodeAbstract : INode
     {
-
         private string _key;
         private string _name;
         private ObservableCollection<ICommand> _commands;
@@ -27,16 +26,18 @@ namespace OHM.Nodes
         private INode _parent;
         private ILogger _logger;
         private IDataStore _data;
+        private NodeStates _state;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         #region Public ctor
 
-        public NodeAbstract(string key, string name, ILogger logger)
+        public NodeAbstract(string key, string name, ILogger logger, NodeStates initialState = NodeStates.initializing)
         {
             _key = key;
             _name = name;
             _logger = logger;
+            _state = initialState;
             _commands = new ObservableCollection<ICommand>();
             _commandsDic = new Dictionary<string, ICommand>();
             _children = new ObservableCollection<INode>();
@@ -64,6 +65,19 @@ namespace OHM.Nodes
             }
         }
 
+        public NodeStates State
+        {
+            get
+            {
+                return _state;
+            }
+            protected set
+            {
+                _state = value;
+                NotifyPropertyChanged("State");
+            }
+        }
+        
         public IReadOnlyList<ICommand> Commands { get { return new ReadOnlyObservableCollection<ICommand>(_commands); } }
 
         public IReadOnlyList<INode> Children
@@ -209,10 +223,11 @@ namespace OHM.Nodes
                     {
                         result = true;
                     }
-                   /* else (Weird line remove on the 4 april 2016
+                    else
                     {
+                        //Undo first remove to maintain coherence in the system
                         _properties.Add(property);
-                    }*/
+                    }
                 }
                 return result;
             }
@@ -232,6 +247,11 @@ namespace OHM.Nodes
             return true;
         }
 
+        protected bool UnRegisterCommand(ICommand command)
+        {
+            return false;
+        }
+        
         protected void NotifyPropertyChanged(String propertyName)
         {
             if (PropertyChanged != null)
@@ -293,11 +313,4 @@ namespace OHM.Nodes
         #endregion
     }
 
-    public abstract class NodeInterfaceAbstract : NodeAbstract
-    {
-        public NodeInterfaceAbstract(string key, string name, ILogger logger)
-            : base(key, name, logger)
-        { }
-         
-    }
 }

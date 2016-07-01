@@ -60,7 +60,9 @@
     <Compile Include="Logger\ILogger.cs" />
     <Compile Include="Nodes\INodeProperty.cs" />
     <Compile Include="Nodes\NodeAbstract.cs" />
+    <Compile Include="Nodes\NodeInterfaceAbstract.cs" />
     <Compile Include="Nodes\NodeProperty.cs" />
+    <Compile Include="Nodes\NodeStates.cs" />
     <Compile Include="System\IOhmSystem.cs" />
     <Compile Include="Plugins\IPlugin.cs" />
     <Compile Include="Plugins\PluginBase.cs" />

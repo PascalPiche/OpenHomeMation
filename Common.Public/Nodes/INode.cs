@@ -12,6 +12,8 @@ namespace OHM.Nodes
 
         string Name { get; }
 
+        NodeStates State { get; }
+
         IReadOnlyList<ICommand> Commands { get; }
 
         IReadOnlyList<INode> Children { get; }
