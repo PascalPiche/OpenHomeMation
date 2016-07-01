@@ -10,7 +10,6 @@ namespace ZWaveLib.Data
 
     public class ZWaveController : ZWaveNode, IZWaveController
     {
-        /*uint homeId, byte nodeId,*/
 
         private void RegisterCommands()
         {
