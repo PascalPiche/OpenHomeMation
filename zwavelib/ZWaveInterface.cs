@@ -21,7 +21,7 @@ namespace ZWaveLib
         private Dictionary<uint, ZWaveController> _runningControllers;
         Dispatcher _dispatcher;
 
-        #region "Ctor"
+        #region Ctor
 
         public ZWaveInterface(ILogger logger)
             : base("ZWaveInterface", "ZWave", logger)
@@ -33,7 +33,7 @@ namespace ZWaveLib
             
         #endregion
 
-        #region "public"
+        #region public
 
         protected override void Start()
         {
@@ -68,7 +68,7 @@ namespace ZWaveLib
 
         #endregion
 
-        #region "internal"
+        #region internal
 
         internal bool CreateNewController(int port)
         {
@@ -133,7 +133,7 @@ namespace ZWaveLib
         
         #endregion
 
-        #region "private"
+        #region private
 
         private void LoadRegisteredControllers()
         {
