@@ -545,15 +545,31 @@ namespace ZWaveLib
         private bool CreateOrUpdateNodeValue(ZWNotification n)
         {
             //Find node
-            var node = this.GetChild(NotificationTool.MakeNodeKey(n));
-            if (node != null)
+            //Detect if its the controller
+            byte ControllerNodeId = _mng.GetControllerNodeId(n.GetHomeId());
+            bool isControllerNode = false;
+            foreach (ZWaveController item in _runningControllers.Values)
+	        {
+                if (item.NodeId.Value == ControllerNodeId)
+                {
+                    return item.CreateOrUpdateValue(n);
+                }
+	        }
+
+            if (!isControllerNode)
             {
-                return ((ZWaveNode)node).CreateOrUpdateValue(n);
+                var node = this.GetChild(NotificationTool.MakeNodeKey(n));
+
+                if (node != null)
+                {
+                    return ((ZWaveNode)node).CreateOrUpdateValue(n);
+                }
+                else
+                {
+                    Logger.Error("Node not found for Creating or updating value");
+                }
             }
-            else
-            {
-                Logger.Error("Node not found for Creating or updating value");
-            }
+           
             return false;
         }
 
