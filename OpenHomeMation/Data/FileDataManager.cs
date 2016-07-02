@@ -50,7 +50,7 @@ namespace OHM.Data
 
             if (result)
             {
-                _logger.Debug("Inited");
+                _logger.Info("Inited");
             }
             return result;
         }

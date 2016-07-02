@@ -68,7 +68,7 @@ namespace OHM.Plugins
 
             LoadRegisteredPlugins();
 
-            _logger.Debug("Inited");
+            _logger.Info("Inited");
 
             return true;
         }
