@@ -69,6 +69,7 @@ namespace OHM.Commands
         public bool ValidateArguments(Dictionary<string, object> arguments)
         {
             bool result = true;
+
             //Validate required
             foreach (var item in _argumentsDefinition.Values)
             {
@@ -81,7 +82,7 @@ namespace OHM.Commands
                 }
             }
 
-            if (arguments != null)
+            if (arguments != null && result != false)
             {
                 foreach (var item in arguments)
                 {
