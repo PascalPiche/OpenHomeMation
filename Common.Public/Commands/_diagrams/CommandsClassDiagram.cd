@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
   <Class Name="OHM.Commands.ArgumentDefinition">
-    <Position X="3.5" Y="4.75" Width="2.5" />
+    <Position X="9" Y="0.5" Width="2.75" />
     <TypeIdentifier>
       <HashCode>ABAAIAAAAAEAAAQAAACAABQAAAAAAAAAAQAAAAAAgAA=</HashCode>
       <FileName>Commands\ArgumentDefinition.cs</FileName>
@@ -9,30 +9,38 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="OHM.Commands.CommandAbstract">
-    <Position X="0.5" Y="4.75" Width="2.5" />
+    <Position X="3.25" Y="0.5" Width="2.75" />
     <TypeIdentifier>
-      <HashCode>AAAAABQIAAIACAUAAEBAAAAAAAAAEAAAEAAAAAEAAAA=</HashCode>
+      <HashCode>AAAAABAAAAAACAQAAEAAAAAAAAAAEAAAEAAAAAEAAAA=</HashCode>
       <FileName>Commands\CommandAbstract.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="OHM.Commands.CommandDefinition">
-    <Position X="6.5" Y="4.75" Width="2.75" />
+    <Position X="9" Y="5" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAAAMAAAAAAgAAQEAACAAAQAAAAAAIgAAAAAAAAAAAA=</HashCode>
       <FileName>Commands\CommandDefinition.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
+  <Class Name="OHM.Commands.InterfaceCommandAbstract">
+    <Position X="3.25" Y="5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQIAAIAAAEAAEBAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\InterfaceCommandAbstract.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
   <Interface Name="OHM.Commands.IArgumentDefinition">
-    <Position X="3.5" Y="0.75" Width="2" />
+    <Position X="6.5" Y="0.5" Width="2" />
     <TypeIdentifier>
       <HashCode>ABAAAAAAAAEAAAQAAAAAAAQAAAAAAAAAAQAAAAAAgAA=</HashCode>
       <FileName>Commands\IArgumentDefinition.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="OHM.Commands.ICommandDefinition">
-    <Position X="6.5" Y="0.75" Width="2" />
+    <Position X="6.5" Y="5" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAEAAAAAAgAAQAAAAAAAQAAAAAAIAAAAAAAAAAAAA=</HashCode>
       <FileName>Commands\ICommandDefinition.cs</FileName>
@@ -46,7 +54,7 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="OHM.Commands.IInterfaceCommand">
-    <Position X="0.5" Y="2.75" Width="2.25" />
+    <Position X="0.5" Y="5" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
       <FileName>Commands\IInterfaceCommand.cs</FileName>
