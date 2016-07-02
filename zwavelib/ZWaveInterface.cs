@@ -137,14 +137,6 @@ namespace ZWaveLib
 
         #region private
 
-        private void LoadRegisteredControllers()
-        {
-            foreach (var item in _registeredControllers.Keys)
-            {
-                CreateController(int.Parse(_registeredControllers.GetString(item)));
-            }
-        }
-
         #region Manager Handler
 
         private void NotificationHandlerThreadSafe(ZWNotification n)
@@ -406,11 +398,9 @@ namespace ZWaveLib
 
         private void NotificationNodeRemoved(ZWNotification n)
         {
-            //Update State
-            RemoveNode(n);
             Logger.Info("Notification Node Removed: " + GetNodeIdForLog(n));
+            RemoveNode(n);
         }
-
 
         private void NotificationEssentialNodeQueriesComplete(ZWNotification n)
         {
@@ -436,8 +426,8 @@ namespace ZWaveLib
         private void NotificationNodeNaming(ZWNotification n)
         {
             //Update State
-            Logger.Info("Notification Node Naming: " + GetNodeIdForLog(n));
-            UpdateNode(n);
+            Logger.Info("TODO Notification Node Naming: " + GetNodeIdForLog(n));
+            //UpdateNode(n);
         }
 
         #endregion
@@ -499,45 +489,43 @@ namespace ZWaveLib
 
         #endregion
 
+        private void LoadRegisteredControllers()
+        {
+            foreach (var item in _registeredControllers.Keys)
+            {
+                CreateController(int.Parse(_registeredControllers.GetString(item)));
+            }
+        }
+
         private void CreateOrUpdateNode(ZWNotification n)
         {
             //Find controller
-            var homeId = n.GetHomeId();
             ZWaveController controller;
-
-            string controlerPath = Manager.GetControllerPath(homeId);
+            string controlerPath = Manager.GetControllerPath(n.GetHomeId());
 
             if (_runningControllers.TryGetValue(controlerPath, out controller))
             {
                 controller.CreateOrUpdateNode(n);
             }
-        }
-
-        private void UpdateNode(ZWNotification n)
-        {
-            //Find controller
-            var homeId = n.GetHomeId();
-            ZWaveController controller;
-
-            string controlerPath = Manager.GetControllerPath(homeId);
-
-            if (_runningControllers.TryGetValue(controlerPath, out controller))
+            else
             {
-                controller.UpdateNode(n);
+                Logger.Error("Controler Node not found for creating or updating node");
             }
         }
 
         private void RemoveNode(ZWNotification n)
         {
             //Find controller
-            var homeId = n.GetHomeId();
             ZWaveController controller;
-
-            string controlerPath = Manager.GetControllerPath(homeId);
+            string controlerPath = Manager.GetControllerPath(n.GetHomeId());
 
             if (_runningControllers.TryGetValue(controlerPath, out controller))
             {
                 controller.RemoveNode(n);
+            }
+            else
+            {
+                Logger.Error("Controler Node not found for removing node");
             }
         }
 
@@ -546,19 +534,24 @@ namespace ZWaveLib
             //Find node
             //Detect if its the controller
             byte ControllerNodeId = _mng.GetControllerNodeId(n.GetHomeId());
-            bool isControllerNode = false;
-            foreach (ZWaveController item in _runningControllers.Values)
-	        {
-                if (item.NodeId.Value == ControllerNodeId)
-                {
-                    return item.CreateOrUpdateValue(n);
-                }
-	        }
+            bool isControllerNode = ControllerNodeId == n.GetNodeId();
 
-            if (!isControllerNode)
+            if (isControllerNode)
+            {
+                string controllerPath = _mng.GetControllerPath(n.GetHomeId());
+                ZWaveController controller;
+                if (_runningControllers.TryGetValue(controllerPath, out controller))
+                {
+                    controller.CreateOrUpdateValue(n);
+                }
+                else
+                {
+                    Logger.Error("Controler Node not found for Creating or updating value");
+                }
+            }
+            else
             {
                 var node = this.GetChild(NotificationTool.MakeNodeKey(n));
-
                 if (node != null)
                 {
                     return ((ZWaveNode)node).CreateOrUpdateValue(n);
@@ -575,14 +568,34 @@ namespace ZWaveLib
         private void RemoveNodeValue(ZWNotification n)
         {
             //Find node
-            var node = this.GetChild(NotificationTool.MakeNodeKey(n));
-            if (node == null)
+            //Detect if its the controller
+            byte ControllerNodeId = _mng.GetControllerNodeId(n.GetHomeId());
+            bool isControllerNode = ControllerNodeId == n.GetNodeId();
+
+            if (isControllerNode)
             {
-                //TODO : Problem
+                string controllerPath = _mng.GetControllerPath(n.GetHomeId());
+                ZWaveController controller;
+                if (_runningControllers.TryGetValue(controllerPath, out controller))
+                {
+                    controller.RemoveValue(n);
+                }
+                else
+                {
+                    Logger.Error("Controler Node not found for removing value");
+                }
             }
             else
             {
-                ((ZWaveNode)node).RemoveValue(n);
+                var node = this.GetChild(NotificationTool.MakeNodeKey(n));
+                if (node != null)
+                {
+                    ((ZWaveNode)node).RemoveValue(n);
+                }
+                else
+                {
+                    Logger.Error("Node not found for removing value");
+                }
             }
         }
         
