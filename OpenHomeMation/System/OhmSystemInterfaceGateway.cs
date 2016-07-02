@@ -1,7 +1,7 @@
-﻿using OHM.Interfaces;
+﻿using OHM.RAL;
 using System;
 
-namespace OHM.Sys
+namespace OHM.SYS
 {
     public sealed class OhmSystemInterfaceGateway : IOhmSystemInterfaceGateway
     {

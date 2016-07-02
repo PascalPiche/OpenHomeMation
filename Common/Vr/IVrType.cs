@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OHM.Common.Vr
+namespace OHM.VAL
 {
     public interface IVrType
     {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OHM.Sys
+namespace OHM.SYS
 {
     public interface IAPI
     {

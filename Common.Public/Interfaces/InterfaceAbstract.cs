@@ -1,10 +1,10 @@
 ﻿using OHM.Data;
 using OHM.Logger;
 using OHM.Nodes;
-using OHM.Sys;
+using OHM.SYS;
 using System.Collections.Generic;
 
-namespace OHM.Interfaces
+namespace OHM.RAL
 {
     public abstract class InterfaceAbstract : NodeAbstract, IInterface
     {
@@ -40,7 +40,7 @@ namespace OHM.Interfaces
 
         public bool IsRunning
         {
-            get { return State == Interfaces.InterfaceStates.Enabled; }
+            get { return State == InterfaceStates.Enabled; }
         }
 
         public bool StartOnLaunch
@@ -48,13 +48,11 @@ namespace OHM.Interfaces
             get { return _startOnLaunch; }
             set
             {
-
                 _startOnLaunch = value;
                 DataStore.StoreBool("StartOnLaunch", value);
                 DataStore.Save();
                 NotifyPropertyChanged("StartOnLaunch");
             }
-
         }
 
         #endregion
@@ -65,7 +63,7 @@ namespace OHM.Interfaces
         {
             Logger.Info( this.Name + " Interface initing");
             Start();
-            State = Interfaces.InterfaceStates.Enabled;
+            State = InterfaceStates.Enabled;
             NotifyPropertyChanged("State");
             Logger.Info(this.Name + " Interface Inited");
         }
@@ -74,7 +72,7 @@ namespace OHM.Interfaces
         {
             Logger.Info(this.Name + " Interface Shutdowning");
             Shutdown();
-            State = Interfaces.InterfaceStates.Disabled;
+            State = InterfaceStates.Disabled;
             NotifyPropertyChanged("State");
             Logger.Info(this.Name + " Interface Shutdowned");
         }

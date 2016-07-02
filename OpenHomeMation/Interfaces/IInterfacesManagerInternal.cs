@@ -1,9 +1,5 @@
-﻿using OHM.Data;
-using OHM.Plugins;
-using OHM.Sys;
-using System.Collections.Generic;
-
-namespace OHM.Interfaces
+﻿
+namespace OHM.RAL
 {
     public interface IInterfacesManagerInternal
     {

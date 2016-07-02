@@ -1,15 +1,9 @@
-﻿using System.AddIn;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OHM.Logger;
+﻿using OHM.Logger;
 using OHM.Commands;
 using OHM.Plugins;
-using OHM.Sys;
-using OHM.Interfaces;
+using OHM.SYS;
+using OHM.RAL;
+using System;
 
 namespace ZWaveLib
 {
@@ -50,8 +44,5 @@ namespace ZWaveLib
 	        }
             return null;
         }
-
-
-    
     }
 }

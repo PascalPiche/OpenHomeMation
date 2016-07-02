@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using OHM.RAL;
+using OHM.SYS;
+using System;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OHM.Plugins
 {
@@ -31,12 +29,12 @@ namespace OHM.Plugins
             get { return _plugin.State; }
         }
 
-        public bool Install(Sys.IOhmSystemInstallGateway system)
+        public bool Install(IOhmSystemInstallGateway system)
         {
             return _plugin.Install(system);
         }
 
-        public bool Uninstall(Sys.IOhmSystemUnInstallGateway system)
+        public bool Uninstall(IOhmSystemUnInstallGateway system)
         {
             return _plugin.Uninstall(system);
         }
@@ -46,7 +44,7 @@ namespace OHM.Plugins
             return _plugin.Update();
         }
 
-        public Interfaces.InterfaceAbstract CreateInterface(string key, Logger.ILogger logger)
+        public InterfaceAbstract CreateInterface(string key, Logger.ILogger logger)
         {
             return _plugin.CreateInterface(key, logger);
         }

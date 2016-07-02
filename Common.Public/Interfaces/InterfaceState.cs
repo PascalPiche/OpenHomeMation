@@ -1,5 +1,5 @@
 ﻿
-namespace OHM.Interfaces
+namespace OHM.RAL
 {
     public enum InterfaceStates
     {

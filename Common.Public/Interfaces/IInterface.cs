@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace OHM.Interfaces
+namespace OHM.RAL
 {
     public interface IInterface : INode, INotifyPropertyChanged
     {

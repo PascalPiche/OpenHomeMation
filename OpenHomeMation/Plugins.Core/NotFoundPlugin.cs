@@ -1,17 +1,14 @@
 ﻿using OHM.Logger;
-using OHM.Plugins;
+using OHM.RAL;
+using OHM.SYS;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OHM.Plugins
 {
     public sealed class NotFoundPlugin : IPlugin
     {
         private Guid _guid;
-        private String _name;
+        private string _name;
 
         public NotFoundPlugin(string guid, string name)
         {
@@ -29,12 +26,12 @@ namespace OHM.Plugins
             get { return _name; }
         }
 
-        public bool Install(Sys.IOhmSystemInstallGateway system)
+        public bool Install(IOhmSystemInstallGateway system)
         {
             return false;
         }
 
-        public bool Uninstall(Sys.IOhmSystemUnInstallGateway system)
+        public bool Uninstall(IOhmSystemUnInstallGateway system)
         {
             throw new NotImplementedException();
         }
@@ -44,7 +41,7 @@ namespace OHM.Plugins
             return false;
         }
 
-        public Interfaces.InterfaceAbstract CreateInterface(string key, ILogger logger)
+        public InterfaceAbstract CreateInterface(string key, ILogger logger)
         {
             throw new NotImplementedException();
         }

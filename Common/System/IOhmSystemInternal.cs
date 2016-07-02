@@ -1,12 +1,5 @@
-﻿using OHM.Common.Vr;
-using OHM.Data;
-using OHM.Interfaces;
-using OHM.Logger;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-
-namespace OHM.Sys
+﻿
+namespace OHM.SYS
 {
     public interface IOhmSystemInternal : IOhmSystem
     {

@@ -1,13 +1,6 @@
 ﻿using OHM.Data;
-using OHM.Interfaces;
 using OHM.Logger;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+using OHM.RAL;
 using WUnderground.Commands;
 using WUnderground.Data;
 
@@ -87,7 +80,7 @@ namespace WUnderground.Data
 
         internal bool AddStationCommandExecution(Account node, string locationName, int zip, int magic, string wmo)
         {
-            Boolean result = false;
+            bool result = false;
             IDataDictionary dataAccount = _registeredAccounts.GetDataDictionary(node.Key);
             IDataDictionary accountLocations = dataAccount.GetOrCreateDataDictionary("locations");
 

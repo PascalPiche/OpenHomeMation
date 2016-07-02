@@ -1,13 +1,12 @@
-﻿
-using OHM.Data;
+﻿using OHM.Data;
 using OHM.Logger;
 using OHM.Plugins;
-using OHM.Sys;
+using OHM.SYS;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace OHM.Interfaces
+namespace OHM.RAL
 {
 
     public class InterfacesManager : IInterfacesManager
@@ -19,7 +18,7 @@ namespace OHM.Interfaces
         private IDataStore _data;
         private IDataDictionary _dataRegisteredInterfaces;
         private IList<IInterface> _runningInterfaces = new ObservableCollection<IInterface>();
-        private Dictionary<String, IInterface> _runningDic = new Dictionary<string, IInterface>();
+        private Dictionary<string, IInterface> _runningDic = new Dictionary<string, IInterface>();
         private IOhmSystemInternal _system;
 
         #region Public Properties

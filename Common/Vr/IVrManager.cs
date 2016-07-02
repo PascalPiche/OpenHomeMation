@@ -1,12 +1,7 @@
 ﻿using OHM.Data;
-using OHM.Sys;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using OHM.SYS;
 
-namespace OHM.Common.Vr
+namespace OHM.VAL
 {
     public interface IVrManager
     {

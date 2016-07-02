@@ -1,12 +1,10 @@
 ﻿using OHM.Commands;
 using OHM.Data;
-using OHM.Interfaces;
 using OHM.Logger;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Windows.Threading;
 
 namespace OHM.Nodes
 {
@@ -211,7 +209,7 @@ namespace OHM.Nodes
             return true;
         }
 
-        protected bool UnRegisterProperty(String key)
+        protected bool UnRegisterProperty(string key)
         {
             bool result = false;
             if (_propertiesDic.ContainsKey(Key))
@@ -252,7 +250,7 @@ namespace OHM.Nodes
             return false;
         }
         
-        protected void NotifyPropertyChanged(String propertyName)
+        protected void NotifyPropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)
             {
@@ -266,7 +264,7 @@ namespace OHM.Nodes
             return true;
         }
 
-        protected bool UpdateProperty(string key, Double value)
+        protected bool UpdateProperty(string key, double value)
         {
             INodeProperty property;
             if (_propertiesDic.TryGetValue(key, out property))

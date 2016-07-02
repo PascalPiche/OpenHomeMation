@@ -1,10 +1,10 @@
-﻿using OHM.Common.Vr;
-using OHM.Data;
-using OHM.Interfaces;
+﻿using OHM.Data;
 using OHM.Logger;
 using OHM.Plugins;
+using OHM.RAL;
+using OHM.VAL;
 
-namespace OHM.Sys
+namespace OHM.SYS
 {
     public class OpenHomeMation
     {

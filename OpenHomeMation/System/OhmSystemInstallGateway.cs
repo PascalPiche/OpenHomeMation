@@ -1,8 +1,8 @@
-﻿using OHM.Interfaces;
+﻿using OHM.RAL;
 using OHM.Logger;
 using OHM.Plugins;
 
-namespace OHM.Sys
+namespace OHM.SYS
 {
     
     public sealed class OhmSystemInstallGateway : IOhmSystemInstallGateway

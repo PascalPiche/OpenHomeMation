@@ -1,7 +1,7 @@
 ﻿using OHM.Logger;
 using OHM.Nodes;
 
-namespace OHM.Sys
+namespace OHM.SYS
 {
     public interface IOhmSystemUnInstallGateway
     {

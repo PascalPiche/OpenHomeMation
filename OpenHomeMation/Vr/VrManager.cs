@@ -1,15 +1,10 @@
-﻿using OHM.Common.Vr;
-using OHM.Data;
+﻿using OHM.Data;
 using OHM.Logger;
 using OHM.Plugins;
-using OHM.Sys;
+using OHM.SYS;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace OHM.Vr
+namespace OHM.VAL
 {
     public class VrManager : IVrManager
     {
@@ -51,8 +46,6 @@ namespace OHM.Vr
         }
 
         #endregion
-
-
 
         public bool RegisterVrType(string key, IVrType vrType)
         {

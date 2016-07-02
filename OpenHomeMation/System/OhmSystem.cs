@@ -1,14 +1,14 @@
-﻿using OHM.Common.Vr;
-using OHM.Data;
-using OHM.Interfaces;
+﻿using OHM.Data;
 using OHM.Logger;
 using OHM.Plugins;
+using OHM.RAL;
+using OHM.VAL;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 
-namespace OHM.Sys
+namespace OHM.SYS
 {
     public sealed class OhmSystem : IOhmSystemInternal
     {
@@ -146,7 +146,7 @@ namespace OHM.Sys
                 return commandResult;
             }
 
-            public IAPIResult ExecuteCommand(string key)
+            public IAPIResult ExecuteCommand(String key)
             {
                 return this.ExecuteCommand(key, null);
             }
