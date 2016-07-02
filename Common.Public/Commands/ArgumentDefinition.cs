@@ -47,12 +47,12 @@ namespace OHM.Commands
         {
             Boolean result = false;
 
-            if (_type == typeof(Int32))
+            if (Type == typeof(Int32))
             {
                 Int32 resultTemp;
                 result = TryGetInt32(value, out resultTemp);
             }
-            else if (_type == typeof(String))
+            else if (Type == typeof(String))
             {
                 String resultTemp;
                 result = TryGetString(value, out resultTemp);
