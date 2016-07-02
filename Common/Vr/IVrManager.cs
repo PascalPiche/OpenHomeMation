@@ -15,6 +15,5 @@ namespace OHM.Common.Vr
 
         bool RegisterVrType(string key, IVrType vrType/*, IOhmSystemInternal system*/);
 
-
     }
 }
