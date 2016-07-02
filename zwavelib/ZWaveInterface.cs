@@ -15,12 +15,17 @@ namespace ZWaveLib
 {
     public class ZWaveInterface : InterfaceAbstract
     {
+
+        #region Private members
+
         private ZWManager _mng = new ZWManager();
         private IDataDictionary _registeredControllers;
         private Dictionary<string, ZWaveController> _runningControllers;
-        Dispatcher _dispatcher;
+        private Dispatcher _dispatcher;
 
-        #region Ctor
+        #endregion
+
+        #region Public Ctor
 
         public ZWaveInterface(ILogger logger)
             : base("ZWaveInterface", "ZWave", logger)
@@ -32,7 +37,7 @@ namespace ZWaveLib
             
         #endregion
 
-        #region public
+        #region public API
 
         protected override void Start()
         {
@@ -67,7 +72,7 @@ namespace ZWaveLib
 
         #endregion
 
-        #region internal
+        #region internal API
 
         internal bool CreateNewController(int port)
         {
@@ -135,7 +140,7 @@ namespace ZWaveLib
         
         #endregion
 
-        #region private
+        #region private Methods
 
         #region Manager Handler
 
@@ -489,6 +494,8 @@ namespace ZWaveLib
 
         #endregion
 
+        #region Implementations
+
         private void LoadRegisteredControllers()
         {
             foreach (var item in _registeredControllers.Keys)
@@ -598,7 +605,9 @@ namespace ZWaveLib
                 }
             }
         }
-        
+
+        #endregion
+
         #region Tools
 
         private string GetNodeIdForLog(ZWNotification n)

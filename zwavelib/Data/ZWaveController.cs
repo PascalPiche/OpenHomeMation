@@ -7,15 +7,18 @@ using ZWaveLib.Tools;
 
 namespace ZWaveLib.Data
 {
-
     public class ZWaveController : ZWaveNode, IZWaveController
     {
+        #region Public Ctor
+
         public ZWaveController(string key, string name, ZWaveInterface parent, ILogger logger, NodeStates initialState = NodeStates.initializing)
             : base(key, name, parent, logger, initialState)
         {
             RegisterProperties();
             RegisterCommands();
         }
+
+        #endregion
 
         #region Internal
 
