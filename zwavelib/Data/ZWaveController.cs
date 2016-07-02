@@ -30,14 +30,18 @@ namespace ZWaveLib.Data
                 //Create Node
                 CreateNode(n);
             }
-            else
+            else if (node == this)
+            {
+                this.UpdateSelf(n);
+            } 
+            else 
             {
                 //Update Node
-                UpdateNode(node, n);
+                node.UpdateNode(n);
             }
         }
 
-        internal new void UpdateNode(ZWNotification n)
+        /*private void UpdateNode(ZWNotification n)
         {
             var node = GetNode(n);
             if(node != null) {
@@ -47,10 +51,10 @@ namespace ZWaveLib.Data
                 }
                 else
                 {
-                    UpdateNode(node, n);
+                    node.UpdateNode(n);
                 }  
             }
-        }
+        }*/
 
         internal void RemoveNode(ZWNotification n)
         {
@@ -132,11 +136,6 @@ namespace ZWaveLib.Data
             var newNode = new ZWaveNode(key, name, this.Interface, this.Logger, homeId, nodeId);
 
             this.AddChild(newNode);
-        }
-
-        private void UpdateNode(ZWaveNode node, ZWNotification n)
-        {
-            node.UpdateNode(n);
         }
 
         #endregion
