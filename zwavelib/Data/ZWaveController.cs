@@ -20,7 +20,7 @@ namespace ZWaveLib.Data
 
         #endregion
 
-        #region Internal
+        #region Internal Methods
 
         internal void CreateOrUpdateNode(ZWNotification n)
         {
@@ -41,21 +41,6 @@ namespace ZWaveLib.Data
             }
         }
 
-        /*private void UpdateNode(ZWNotification n)
-        {
-            var node = GetNode(n);
-            if(node != null) {
-                if (node == this)
-                {
-                    UpdateSelf(n);
-                }
-                else
-                {
-                    node.UpdateNode(n);
-                }  
-            }
-        }*/
-
         internal void RemoveNode(ZWNotification n)
         {
             string key = NotificationTool.MakeNodeKey(n);
@@ -69,7 +54,19 @@ namespace ZWaveLib.Data
 
         #endregion
 
-        #region Private
+        #region Private Properties
+
+        private ZWaveInterface Interface
+        {
+            get
+            {
+                return ((ZWaveInterface)this.Parent);
+            }
+        }
+
+        #endregion
+
+        #region Private Methods
 
         private void UpdateSelfProperties(ZWNotification n)
         {
@@ -83,14 +80,6 @@ namespace ZWaveLib.Data
         {
             UpdateSelfProperties(n);
             base.UpdateNode(n);
-        }
-
-        private ZWaveInterface Interface
-        {
-            get
-            {
-                return ((ZWaveInterface)this.Parent);
-            }
         }
 
         private void RegisterCommands()
