@@ -15,10 +15,32 @@ namespace ZWaveLib.Commands
 
         private IInterface _interface;
 
+        #region Public Ctor
+
+        public ZWaveCommandAbstract(INode node, string key, string name)
+            : this(node, key, name, string.Empty) { }
+
+        public ZWaveCommandAbstract(INode node, string key, string name, string description)
+            : base(node, key, name, description, null)
+        {}
+
+        #endregion
+
+        #region Public Properties
+
         public string InterfaceKey
         {
             get { return Interface.Key; }
         }
+
+        public override bool CanExecute()
+        {
+            return IsStateRunning();
+        }
+
+        #endregion
+
+        #region Protected Properties
 
         protected IInterface Interface
         {
@@ -39,6 +61,10 @@ namespace ZWaveLib.Commands
                 return (ZWaveInterface)Interface; 
             }
         }
+
+        #endregion
+
+        #region Private Methods
 
         private void LookupAndStoreInterface(INode node)
         {
@@ -71,20 +97,7 @@ namespace ZWaveLib.Commands
             return false;
         }
 
-        public override bool CanExecute()
-        {
-            return IsStateRunning();
-        }
+        #endregion
 
-        /*protected new ZWaveNode Node
-        {
-            get { return (ZWaveNode)base.Node; }
-        }*/
-
-        public ZWaveCommandAbstract(INode node, string key, string name, string description) 
-            : base(node, key, name, description, null)
-        {
-            
-        }
     }
 }
