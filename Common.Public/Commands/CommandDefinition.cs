@@ -17,7 +17,7 @@ namespace OHM.Commands
         #region Public Ctor
 
         public CommandDefinition(string key, string name)
-            : this(key, name, string.Empty, null) { }
+            : this(key, name, string.Empty) { }
 
         public CommandDefinition(string key, string name, string description)
             : this(key, name, description, null) { }
