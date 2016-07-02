@@ -6,21 +6,15 @@ using System;
 namespace OHM.Plugins
 {
     [Serializable]
-    public enum PluginStates
-    {
-        NotFound = -2,
-        FatalError = -1,
-        Error = 0,
-        Warning = 1,
-        Normal = 2
-    }
-
-    [Serializable]
     public abstract class PluginBase : MarshalByRefObject, IPlugin
     {
+        #region Private members
+
         private PluginStates _state = PluginStates.Normal;
 
-        public PluginBase() {}
+        #endregion
+
+        #region Public Properties
 
         public abstract Guid Id { get; }
 
@@ -32,13 +26,15 @@ namespace OHM.Plugins
             {
                 if (value == PluginStates.NotFound)
                 {
-                    throw new ArgumentException("NotFound is a reserved status for internal operations only.", "newState");
+                    throw new ArgumentException("NotFound is a reserved status for internal operations only.", "State");
                 }
                 _state = value;
-                //NotifyPropertyChanged("State");
-                //NotifyPropertyChanged("IsRunning");
             }
         }
+
+        #endregion
+
+        #region Public Methods
 
         public abstract bool Install(IOhmSystemInstallGateway system);
 
@@ -47,6 +43,8 @@ namespace OHM.Plugins
         public abstract bool Update();
 
         public abstract InterfaceAbstract CreateInterface(string key, ILogger logger);
+
+        #endregion
 
     }
 }

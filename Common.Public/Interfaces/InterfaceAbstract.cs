@@ -26,7 +26,7 @@ namespace OHM.Interfaces
 
         #region public Properties
 
-        public InterfaceStates State
+        public new InterfaceStates State
         {
             get { return _state; }
 

@@ -63,6 +63,7 @@
     <Compile Include="Nodes\NodeInterfaceAbstract.cs" />
     <Compile Include="Nodes\NodeProperty.cs" />
     <Compile Include="Nodes\NodeStates.cs" />
+    <Compile Include="Plugins\PluginStates.cs" />
     <Compile Include="System\IOhmSystem.cs" />
     <Compile Include="Plugins\IPlugin.cs" />
     <Compile Include="Plugins\PluginBase.cs" />

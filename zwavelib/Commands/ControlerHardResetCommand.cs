@@ -11,7 +11,7 @@ namespace ZWaveLib.Commands
 {
     public class ControlerHardResetCommand : ZWaveCommandAbstract
     {
-        public ControlerHardResetCommand(INode node)
+        public ControlerHardResetCommand(IZWaveNode node)
             : base(node, "HardReset", "Hard Reset the Z Wave Controller (Warning: Will erase all data in the controller, pairing will need to be done again after the hard reset)", "")
         {
 
@@ -19,7 +19,7 @@ namespace ZWaveLib.Commands
 
         protected override bool RunImplementation(Dictionary<string, object> arguments)
         {
-            Interface.Manager.ResetController(Node.HomeId.Value);
+            ZWaveInterface.Manager.ResetController(((IZWaveNode)Node).HomeId.Value);
             return true;
         }
     }

@@ -11,7 +11,7 @@ namespace ZWaveLib.Commands
 {
     public class ControlerSoftResetCommand : ZWaveCommandAbstract
     {
-        public ControlerSoftResetCommand(INode node)
+        public ControlerSoftResetCommand(IZWaveNode node)
             : base(node, "SoftReset", "Soft Reset the Z Wave Controller", "")
         {
             
@@ -19,7 +19,7 @@ namespace ZWaveLib.Commands
 
         protected override bool RunImplementation(Dictionary<string, object> arguments)
         {
-            Interface.Manager.SoftReset(Node.HomeId.Value);
+            ZWaveInterface.Manager.SoftReset(((IZWaveNode)Node).HomeId.Value);
             return true;
         }
     }

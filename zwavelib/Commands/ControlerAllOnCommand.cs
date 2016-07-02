@@ -11,7 +11,7 @@ namespace ZWaveLib.Commands
 {
     public class ControlerAllOnCommand : ZWaveCommandAbstract
     {
-        public ControlerAllOnCommand(INode node)
+        public ControlerAllOnCommand(IZWaveNode node)
             : base(node, "allOn", "Switch all on", "")
         {
 
@@ -19,7 +19,7 @@ namespace ZWaveLib.Commands
 
         protected override bool RunImplementation(Dictionary<string, object> arguments)
         {
-            Interface.Manager.SwitchAllOn(Node.HomeId.Value);
+            ZWaveInterface.Manager.SwitchAllOn(((IZWaveNode)Node).HomeId.Value);
             return true;
         }
     }

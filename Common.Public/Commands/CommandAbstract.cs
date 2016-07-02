@@ -11,7 +11,6 @@ namespace OHM.Commands
 
         private ICommandDefinition _definition;
         private INode _node;
-        private IInterface _interface;
 
         #endregion
 
@@ -57,48 +56,14 @@ namespace OHM.Commands
             get { return Node.Key; }
         }
 
-        public string InterfaceKey
-        {
-            get { return Interface.Key; }
-        }
-
         #endregion
 
         #region Public Api
 
         public virtual bool CanExecute()
         {
-            return IsStateRunning();
+            return true;
         }
-
-
-        #endregion
-
-        #region Protected
-
-        protected Nodes.INode Node
-        {
-            get { return _node; }
-        }
-
-        protected IInterface Interface
-        {
-            get
-            {
-                if (_interface == null)
-                {
-                    LookupAndStoreInterface(this._node);
-                }
-                
-                return _interface; 
-            }
-        }
-
-        protected abstract bool RunImplementation(Dictionary<string, object> arguments);
-
-        #endregion
-
-        #region Internal
 
         public bool Execute(Dictionary<string, object> arguments)
         {
@@ -112,39 +77,16 @@ namespace OHM.Commands
 
         #endregion
 
-        #region Private
+        #region Protected
 
-        private void LookupAndStoreInterface(INode node)
+        protected Nodes.INode Node
         {
-
-            if (node == null)
-            {
-                node = this.Node;
-            }
-
-            if (node is IInterface)
-            {
-                _interface = (IInterface)node;
-            }
-            else if (node.Parent != null)
-            {
-                LookupAndStoreInterface(node.Parent);
-            }
-            else
-            {
-                //TODO log error
-            }
+            get { return _node; }
         }
 
-        private bool IsStateRunning()
-        {
-            if (Interface != null)
-            {
-                return _interface.IsRunning;
-            } 
-            return false;
-        }
-        
+        protected abstract bool RunImplementation(Dictionary<string, object> arguments);
+
         #endregion
+
     }
 }

@@ -12,7 +12,7 @@ namespace ZWaveLib.Commands
     public class RefreshNodeCommand : ZWaveCommandAbstract
     {
 
-        public RefreshNodeCommand(INode node)
+        public RefreshNodeCommand(IZWaveNode node)
             : base(node, "RefreshNodeInfo", "Refresh all Node Info", "")
         {
 
@@ -20,7 +20,7 @@ namespace ZWaveLib.Commands
 
         protected override bool RunImplementation(Dictionary<string, object> arguments)
         {
-            return Interface.Manager.RefreshNodeInfo(Node.HomeId.Value, Node.NodeId.Value);
+            return ZWaveInterface.Manager.RefreshNodeInfo(((IZWaveNode)Node).HomeId.Value, ((IZWaveNode)Node).NodeId.Value);
         }
     }
 }
