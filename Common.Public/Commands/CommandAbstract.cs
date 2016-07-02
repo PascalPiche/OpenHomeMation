@@ -16,25 +16,14 @@ namespace OHM.Commands
 
         #region Protected Ctor
 
-        protected CommandAbstract(INode node, string key, string name) 
-            : this(node, key, name, string.Empty, null) {
-                
-        }
+        protected CommandAbstract(INode node, string key, string name)
+            : this(node, key, name, string.Empty) { }
 
         protected CommandAbstract(INode node, string key, string name, string description) 
             : this (node, key, name, description, null) { }
-
-        protected CommandAbstract(
-            INode node,
-            string key,
-            string name,
-            string description,
-            Dictionary<string, IArgumentDefinition> argumentsDefinition
-        )
-        {
-            _node = node;
-            _definition = new CommandDefinition(key, name, description, argumentsDefinition);
-        }
+        
+        protected CommandAbstract(INode node, string key, string name, string description, Dictionary<string, IArgumentDefinition> argumentsDefinition)
+            : this(node, new CommandDefinition(key, name, description, argumentsDefinition)) { }
 
         protected CommandAbstract(INode node, ICommandDefinition definition)
         {
