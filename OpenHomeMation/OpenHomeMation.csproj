@@ -72,6 +72,7 @@
     </Compile>
     <Compile Include="Data\FileDataManager.cs" />
     <Compile Include="Data\IDataValue.cs" />
+    <Compile Include="Interfaces\IInterfacesManagerInternal.cs" />
     <Compile Include="Interfaces\InterfacesManager.cs" />
     <Compile Include="Logger\DefaultLogger.cs" />
     <Compile Include="Logger\LoggerManager.cs" />
@@ -121,8 +122,8 @@
     <None Include="System\_diagrams\OpenHomeMation_start.sequencediagram" />
     <None Include="packages.config" />
     <None Include="System\_diagrams\ClassDiagram1.cd" />
-    <None Include="Data\DataClassDiagram.cd" />
-    <None Include="Data\DataClassDiagramFull.cd" />
+    <None Include="Data\_diagrams\DataClassDiagram.cd" />
+    <None Include="Data\_diagrams\DataClassDiagramFull.cd" />
     <None Include="Logger\LoggerClassDiagram.cd" />
     <None Include="Logger\LoggerClassDiagramFull.cd" />
   </ItemGroup>

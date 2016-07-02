@@ -4,7 +4,7 @@ namespace OHM.Data
 {
 
     [Serializable]
-    public class DataStore : DataDictionary, IDataStore
+    public sealed class DataStore : DataDictionary, IDataStore
     {
 
         private string _key;

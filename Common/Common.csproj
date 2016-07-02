@@ -46,6 +46,10 @@
     <Compile Include="Data\IDataManager.cs" />
     <Compile Include="Interfaces\IInterfacesManager.cs" />
     <Compile Include="Logger\ILoggerManager.cs" />
+    <Compile Include="System\APIResultFalse.cs" />
+    <Compile Include="System\APIResultTrue.cs" />
+    <Compile Include="System\IAPI.cs" />
+    <Compile Include="System\IAPIResult.cs" />
     <Compile Include="System\IOhmSystemInternal.cs" />
     <Compile Include="Plugins\IPluginsManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
