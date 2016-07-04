@@ -4,17 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{645A5CA5-0505-4312-9C73-364BC66C1F7C}</ProjectGuid>
+    <ProjectGuid>{F8C3C250-222D-49F4-9582-F7BA0DD6393E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WUnderground</RootNamespace>
-    <AssemblyName>WUnderground</AssemblyName>
+    <RootNamespace>OHM.Common</RootNamespace>
+    <AssemblyName>OHM.Common</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
-    <DebugType>pdbonly</DebugType>
+    <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
@@ -43,36 +43,43 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Api\Data\WUndergroundResponse.cs" />
-    <Compile Include="Api\WUndergroundApi.cs" />
-    <Compile Include="Commands\AbstractWUndergroundCommand.cs" />
-    <Compile Include="Commands\AddAccount.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Commands\AddStation.cs" />
-    <Compile Include="Commands\RefreshCondition.cs" />
-    <Compile Include="Commands\RemoveAccount.cs" />
-    <Compile Include="Data\Account.cs" />
-    <Compile Include="Data\Station.cs" />
-    <Compile Include="Data\StationCondition.cs" />
-    <Compile Include="Data\WUndergroundNode.cs" />
+    <Compile Include="Data\IDataManager.cs" />
+    <Compile Include="Interfaces\IInterfacesManager.cs" />
+    <Compile Include="Logger\ILoggerManager.cs" />
+    <Compile Include="System\APIResultFalse.cs" />
+    <Compile Include="System\APIResultTrue.cs" />
+    <Compile Include="System\IAPI.cs" />
+    <Compile Include="System\IAPIResult.cs" />
+    <Compile Include="System\IOhmSystemInternal.cs" />
+    <Compile Include="Plugins\IPluginsManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Data\WUndergroundInterface.cs" />
-    <Compile Include="WUndergroundPlugin.cs" />
+    <Compile Include="Vr\IVrManager.cs" />
+    <Compile Include="Vr\IVrType.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common.Public\Common.Public.csproj">
+    <None Include="_diagrams\ClassDiagram1.cd" />
+    <None Include="Data\_diagrams\DataClassDiagramFull.cd" />
+    <None Include="Interfaces\_diagrams\InterfacesClassDiagramFull.cd" />
+    <None Include="packages.config" />
+    <None Include="System\_diagrams\SystemClassDiagramFull.cd" />
+    <None Include="System\_diagrams\SystemClassDiagram.cd" />
+    <None Include="Interfaces\_diagrams\InterfacesClassDiagram.cd" />
+    <None Include="Data\_diagrams\DataClassDiagram.cd" />
+    <None Include="Logger\_diagrams\LoggerClassDiagram.cd" />
+    <None Include="Logger\_diagrams\LoggerClassDiagramFull.cd" />
+    <None Include="Plugins\_diagrams\PluginsClassDiagram.cd" />
+    <None Include="Plugins\_diagrams\PluginsClassDiagramFull.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common.Public\OHM.Common.Public.csproj">
       <Project>{c7ae6787-9a8a-4ebc-a341-ffacf31acaf7}</Project>
-      <Name>Common.Public</Name>
+      <Name>OHM.Common.Public</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <Folder Include="Vr\_diagrams\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>xcopy "$(TargetPath)" "$(SolutionDir)OpenHomeMation\plugins\wunderground\" /Y /s /D /E</PostBuildEvent>
-  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

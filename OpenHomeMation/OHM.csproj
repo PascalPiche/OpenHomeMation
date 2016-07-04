@@ -106,13 +106,13 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common.Public\Common.Public.csproj">
+    <ProjectReference Include="..\Common.Public\OHM.Common.Public.csproj">
       <Project>{c7ae6787-9a8a-4ebc-a341-ffacf31acaf7}</Project>
-      <Name>Common.Public</Name>
+      <Name>OHM.Common.Public</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Common\Common.csproj">
+    <ProjectReference Include="..\Common\OHM.Common.csproj">
       <Project>{f8c3c250-222d-49f4-9582-f7ba0dd6393e}</Project>
-      <Name>Common</Name>
+      <Name>OHM.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -5,13 +5,13 @@ VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZWave", "zwavelib\ZWave.csproj", "{B4427C2E-4974-4DBC-9203-3947924C144D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{F8C3C250-222D-49F4-9582-F7BA0DD6393E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OHM.Common", "Common\OHM.Common.csproj", "{F8C3C250-222D-49F4-9582-F7BA0DD6393E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp", "WpfApplication1\WpfApp.csproj", "{7AE3DB22-54D2-4C22-B0DE-0E399EFD1657}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenHomeMation", "OpenHomeMation\OpenHomeMation.csproj", "{C5DF6E96-8157-4901-9CED-F75285AB8E49}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OHM", "OpenHomeMation\OHM.csproj", "{C5DF6E96-8157-4901-9CED-F75285AB8E49}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Public", "Common.Public\Common.Public.csproj", "{C7AE6787-9A8A-4EBC-A341-FFACF31ACAF7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OHM.Common.Public", "Common.Public\OHM.Common.Public.csproj", "{C7AE6787-9A8A-4EBC-A341-FFACF31ACAF7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OHM.Tests", "OHM.Tests\OHM.Tests.csproj", "{FC583E82-C9CC-4DFA-A8DE-294AB69E6380}"
 EndProject
@@ -26,7 +26,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{06E8058D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UPNPControlPoint", "UPNPControlPoint\UPNPControlPoint.csproj", "{3DB57F59-9604-4380-8C99-33130E100926}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WUnderground", "WUnderground\WUnderground.csproj", "{645A5CA5-0505-4312-9C73-364BC66C1F7C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OHM.Plugins.WUndergroundPlugin", "WUnderground\OHM.Plugins.WUndergroundPlugin.csproj", "{645A5CA5-0505-4312-9C73-364BC66C1F7C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OHM", "OHM", "{A9DAFDAB-3662-426A-A666-176F7908D87C}"
 EndProject
@@ -51,6 +51,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WUndergroundPlugin", "WUndergroundPlugin", "{B5F2A21D-6284-40DB-995D-9BB2F812A2E1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ZWavePlugin", "ZWavePlugin", "{EA7D8927-8967-47D8-8D7C-BB671FFBEBDD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OHM.Common.Public.Test", "OHM.Common.Public.Test\OHM.Common.Public.Test.csproj", "{CCDF03DF-8799-4FA1-8C39-920AD2F20A0B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -164,6 +166,12 @@ Global
 		{F94D4199-D387-43AC-8CA5-4FF45936D9DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F94D4199-D387-43AC-8CA5-4FF45936D9DE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F94D4199-D387-43AC-8CA5-4FF45936D9DE}.Release|x64.ActiveCfg = Release|Any CPU
+		{CCDF03DF-8799-4FA1-8C39-920AD2F20A0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCDF03DF-8799-4FA1-8C39-920AD2F20A0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCDF03DF-8799-4FA1-8C39-920AD2F20A0B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{CCDF03DF-8799-4FA1-8C39-920AD2F20A0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCDF03DF-8799-4FA1-8C39-920AD2F20A0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCDF03DF-8799-4FA1-8C39-920AD2F20A0B}.Release|x64.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -185,5 +193,6 @@ Global
 		{F94D4199-D387-43AC-8CA5-4FF45936D9DE} = {0FA50691-C699-4559-9175-A7434A3E1809}
 		{B5F2A21D-6284-40DB-995D-9BB2F812A2E1} = {6EE2369D-2251-4E8C-93C1-2792A79AC692}
 		{EA7D8927-8967-47D8-8D7C-BB671FFBEBDD} = {6EE2369D-2251-4E8C-93C1-2792A79AC692}
+		{CCDF03DF-8799-4FA1-8C39-920AD2F20A0B} = {06E8058D-7D7B-4A04-B567-CC3A9CC87073}
 	EndGlobalSection
 EndGlobal

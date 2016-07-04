@@ -79,9 +79,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common.Public\Common.Public.csproj">
+    <ProjectReference Include="..\Common.Public\OHM.Common.Public.csproj">
       <Project>{c7ae6787-9a8a-4ebc-a341-ffacf31acaf7}</Project>
-      <Name>Common.Public</Name>
+      <Name>OHM.Common.Public</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

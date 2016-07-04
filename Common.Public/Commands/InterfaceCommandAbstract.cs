@@ -36,7 +36,7 @@ namespace OHM.Commands
 
         public override bool CanExecute()
         {
-            return IsStateRunning();
+            return IsInterfaceRunning();
         }
 
         #endregion
@@ -82,7 +82,7 @@ namespace OHM.Commands
             }
         }
 
-        private bool IsStateRunning()
+        private bool IsInterfaceRunning()
         {
             if (Interface != null)
             {
