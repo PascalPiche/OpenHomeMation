@@ -1,8 +1,8 @@
-﻿using OHM.Nodes;
-using OHM.RAL;
+﻿using OHM.Commands;
+using OHM.Nodes;
 using System.Collections.Generic;
 
-namespace OHM.Commands
+namespace OHM.RAL.Commands
 {
     public abstract class InterfaceCommandAbstract : CommandAbstract, IInterfaceCommand
     {

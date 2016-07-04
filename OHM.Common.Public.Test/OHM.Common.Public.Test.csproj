@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Commands\ArgumentDefinitionUnitTest.cs" />
     <Compile Include="Commands\CommandDefinitionUnitTest.cs" />
+    <Compile Include="Commands\CommandAbstractUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

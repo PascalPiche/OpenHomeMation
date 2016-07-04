@@ -1,7 +1,6 @@
-﻿using OHM.Nodes;
-using System.Collections.Generic;
+﻿using OHM.Commands;
 
-namespace OHM.Commands
+namespace OHM.RAL.Commands
 {
 
     public interface IInterfaceCommand : ICommand
