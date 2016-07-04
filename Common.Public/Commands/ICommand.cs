@@ -6,6 +6,8 @@ namespace OHM.Commands
     public interface ICommand
     {
 
+        string NodeKey { get; }
+
         ICommandDefinition Definition { get; }
 
         bool Execute(Dictionary<string, object> arguments);

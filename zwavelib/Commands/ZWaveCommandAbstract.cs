@@ -1,7 +1,5 @@
-﻿using OHM.Commands;
-using OHM.RAL;
-using OHM.Nodes;
-using ZWaveLib.Data;
+﻿using OHM.Nodes;
+using OHM.RAL.Commands;
 
 namespace ZWaveLib.Commands
 {

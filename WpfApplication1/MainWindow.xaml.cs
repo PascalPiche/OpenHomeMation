@@ -4,6 +4,7 @@ using OHM.Logger;
 using OHM.Nodes;
 using OHM.Plugins;
 using OHM.RAL;
+using OHM.RAL.Commands;
 using OHM.SYS;
 using OHM.VAL;
 using System;
@@ -128,7 +129,7 @@ namespace WpfApplication1
        
         private void ExecuteInterfaceCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            var command = e.Parameter as OHM.Commands.IInterfaceCommand;
+            var command = e.Parameter as IInterfaceCommand;
 
             if (command != null)
             {
@@ -149,7 +150,7 @@ namespace WpfApplication1
 
         private void ExecuteInterfaceCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            var command = e.Parameter as OHM.Commands.IInterfaceCommand;
+            var command = e.Parameter as IInterfaceCommand;
             e.CanExecute = false;
             if (command != null)
             {
@@ -159,7 +160,7 @@ namespace WpfApplication1
 
         private void ExecuteNodeCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            var command = e.Parameter as OHM.Commands.IInterfaceCommand;
+            var command = e.Parameter as IInterfaceCommand;
             if (command != null)
             {
                 if (command.Definition.ArgumentsDefinition.Count > 0)
@@ -205,7 +206,7 @@ namespace WpfApplication1
 
         #region Private Helper functions
 
-        private void ShowCommandDialog(OHM.Commands.IInterfaceCommand command)
+        private void ShowCommandDialog(IInterfaceCommand command)
         {
             var w = new CommandDialog();
             w.init(command);
