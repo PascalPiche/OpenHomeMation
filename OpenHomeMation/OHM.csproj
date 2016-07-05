@@ -72,8 +72,8 @@
     </Compile>
     <Compile Include="Data\FileDataManager.cs" />
     <Compile Include="Data\IDataValue.cs" />
-    <Compile Include="Interfaces\IInterfacesManagerInternal.cs" />
-    <Compile Include="Interfaces\InterfacesManager.cs" />
+    <Compile Include="RAL\IInterfacesManagerInternal.cs" />
+    <Compile Include="RAL\InterfacesManager.cs" />
     <Compile Include="Logger\DefaultLogger.cs" />
     <Compile Include="Logger\LoggerManager.cs" />
     <Compile Include="Plugins.Core\NotFoundPlugin.cs" />
@@ -86,7 +86,7 @@
     <Compile Include="Plugins.Core\PluginsManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="System\OpenHomeMationServer.cs" />
-    <Compile Include="Vr\VrManager.cs" />
+    <Compile Include="VAL\VrManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
