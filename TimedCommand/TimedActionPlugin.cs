@@ -1,5 +1,6 @@
 ﻿using OHM.Plugins;
-using OHM.Sys;
+using OHM.RAL;
+using OHM.SYS;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +34,7 @@ namespace TimedCommand
             return true;
         }
 
-        public override OHM.Interfaces.InterfaceAbstract CreateInterface(string key, OHM.Logger.ILogger logger)
+        public override InterfaceAbstract CreateInterface(string key, OHM.Logger.ILogger logger)
         {
             throw new NotImplementedException();
         }

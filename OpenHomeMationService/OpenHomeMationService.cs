@@ -1,25 +1,16 @@
-﻿using OHM.Common.Vr;
-using OHM.Data;
-using OHM.Interfaces;
+﻿using OHM.Data;
 using OHM.Logger;
 using OHM.Plugins;
-using OHM.Sys;
-using OHM.Vr;
+using OHM.RAL;
+using OHM.SYS;
+using OHM.VAL;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Linq;
 using System.ServiceProcess;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenHomeMationService
 {
     public partial class OpenHomeMationService : ServiceBase
     {
-
         private OpenHomeMation ohm;
         private ILoggerManager loggerMng;
         private IPluginsManager pluginMng;

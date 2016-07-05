@@ -1,4 +1,5 @@
-﻿using OHM.Logger;
+﻿using log4net;
+using OHM.Logger;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,12 +18,12 @@ namespace ConsoleApplication1.Logger
 
         public ILogger GetLogger(Type type)
         {
-            return new ConsoleLogger(log4net.LogManager.GetLogger(type));
+            return new ConsoleLogger(LogManager.GetLogger(type));
         }
 
         public ILogger GetLogger(string name)
         {
-            return new ConsoleLogger(log4net.LogManager.GetLogger(name));
+            return new ConsoleLogger(LogManager.GetLogger(name));
         }
     }
 }

@@ -1,5 +1,5 @@
-﻿using OHM.Interfaces;
-using OHM.Logger;
+﻿using OHM.Logger;
+using OHM.RAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,6 @@ namespace UPNPControlPoint
 {
     public class UPNPControlPointInterface : InterfaceAbstract
     {
-
         public UPNPControlPointInterface(ILogger logger)
             : base("UPNPCtlPointInterface", "UPNP Control Point", logger)
         {

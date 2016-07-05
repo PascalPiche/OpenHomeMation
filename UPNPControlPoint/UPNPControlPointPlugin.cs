@@ -1,5 +1,7 @@
 ﻿using OHM.Logger;
 using OHM.Plugins;
+using OHM.RAL;
+using OHM.SYS;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +17,7 @@ namespace UPNPControlPoint
 
         private string _name = "UPNP Control Point";
 
-        private OHM.Interfaces.InterfaceAbstract _runningInterface;
+        private InterfaceAbstract _runningInterface;
 
         public override Guid Id
         {
@@ -30,7 +32,7 @@ namespace UPNPControlPoint
             get { return _name; }
         }
 
-        public override bool Install(OHM.Sys.IOhmSystemInstallGateway system)
+        public override bool Install(IOhmSystemInstallGateway system)
         {
 
             return system.RegisterInterface("UPNPControlPointInterface");
@@ -41,7 +43,7 @@ namespace UPNPControlPoint
             return true;
         }
 
-        public override OHM.Interfaces.InterfaceAbstract CreateInterface(string key, ILogger logger)
+        public override InterfaceAbstract CreateInterface(string key, ILogger logger)
         {
             switch (key)
             {
@@ -52,7 +54,7 @@ namespace UPNPControlPoint
             return null;
         }
 
-        public override bool Uninstall(OHM.Sys.IOhmSystemUnInstallGateway system)
+        public override bool Uninstall(IOhmSystemUnInstallGateway system)
         {
             return system.UnRegisterInterface("UPNPControlPointInterface");
         }

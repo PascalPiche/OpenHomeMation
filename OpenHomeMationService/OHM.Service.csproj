@@ -88,17 +88,17 @@
     <None Include="OpenHomeMationService_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common.Public\Common.Public.csproj">
+    <ProjectReference Include="..\Common.Public\OHM.Common.Public.csproj">
       <Project>{c7ae6787-9a8a-4ebc-a341-ffacf31acaf7}</Project>
-      <Name>Common.Public</Name>
+      <Name>OHM.Common.Public</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Common\Common.csproj">
+    <ProjectReference Include="..\Common\OHM.Common.csproj">
       <Project>{f8c3c250-222d-49f4-9582-f7ba0dd6393e}</Project>
-      <Name>Common</Name>
+      <Name>OHM.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OpenHomeMation\OpenHomeMation.csproj">
+    <ProjectReference Include="..\OpenHomeMation\OHM.csproj">
       <Project>{c5df6e96-8157-4901-9ced-f75285ab8e49}</Project>
-      <Name>OpenHomeMation</Name>
+      <Name>OHM</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

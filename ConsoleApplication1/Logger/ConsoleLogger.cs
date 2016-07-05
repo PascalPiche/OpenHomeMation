@@ -4,7 +4,7 @@ using System;
 
 namespace ConsoleApplication1.Logger
 {
-    public class ConsoleLogger : DefaultLogger, ILogger
+    public class ConsoleLogger : DefaultLogger
     {
        
         public ConsoleLogger(ILog log)
