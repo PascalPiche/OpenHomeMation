@@ -7,7 +7,6 @@ namespace OHM.SYS
 
     public interface IOhmSystem
     {
-        IOhmSystemInstallGateway GetInstallGateway(IPlugin plugin);
 
         IOhmSystemUnInstallGateway GetUnInstallGateway(IPlugin plugin);
 

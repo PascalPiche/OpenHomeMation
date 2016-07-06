@@ -10,7 +10,7 @@ using System.ComponentModel;
 
 namespace OHM.SYS
 {
-    public sealed class OhmSystem : IOhmSystemInternal
+    internal sealed class OhmSystem : IOhmSystemInternal
     {
         #region Private Members
 
@@ -72,18 +72,57 @@ namespace OHM.SYS
             return this._dataMng.GetOrCreateDataStore(key);
         }
 
-        
-
         #endregion  
      
         #region Public sealed class
 
         public sealed class APIInstance : IAPI
         {
+            #region Private members
 
             private OhmSystem _system;
 
+            #endregion
+
+            #region Public Events
+
             public event PropertyChangedEventHandler PropertyChanged;
+
+            #endregion
+
+            #region Public Methods
+
+            public IAPIResult ExecuteCommand(string key, Dictionary<string, string> arguments)
+            {
+                string[] splitedKey = key.Split('/');
+                IAPIResult commandResult = new APIResultFalse();
+
+                if (splitedKey.Length >= 2)
+                {
+                    bool isPlugins = splitedKey[0] == "plugins";
+                    bool isHal = splitedKey[0] == "hal";
+
+                    //Check first value
+                    if (isPlugins)
+                    {
+                        commandResult = ExecutePluginsCommand(splitedKey, arguments);
+                    }
+                    else if (isHal)
+                    {
+                        commandResult = ExecuteHalCommand(splitedKey, arguments);
+                    }
+                }
+                return commandResult;
+            }
+
+            public IAPIResult ExecuteCommand(String key)
+            {
+                return this.ExecuteCommand(key, null);
+            }
+
+            #endregion
+
+            #region Internal Methods
 
             internal APIInstance(OhmSystem system)
             {
@@ -91,64 +130,144 @@ namespace OHM.SYS
                 ((ObservableCollection<IPlugin>)_system._pluginsMng.InstalledPlugins).CollectionChanged += InstalledPlugins_CollectionChanged;
             }
 
-            public IAPIResult ExecuteCommand(string key, Dictionary<String, object> arguments)
+            #endregion
+
+            #region Private Methods
+
+            private IAPIResult ExecutePluginsCommand(string[] splitedKey, Dictionary<string, string> arguments)
             {
-                string[] splitedKed = key.Split('/');
-                bool resultBool = false;
-                object result = null;
+                IAPIResult result = new APIResultFalse();
 
-                IAPIResult commandResult = new APIResultFalse();
-
-                if (splitedKed.Length >= 2)
+                if (splitedKey[1] == "list")
                 {
-                    //Check first value
-                    if (splitedKed[0] == "plugins")
+                    if (splitedKey.Length >= 2)
                     {
-                        if (splitedKed[1] == "install")
+                        if (splitedKey[2] == "availables")
                         {
-                            resultBool = _system._pluginsMng.InstallPlugin((Guid)arguments["guid"], _system);
+                            result = new APIResultTrue(_system._pluginsMng.AvailablesPlugins);
                         }
-                        else if (splitedKed[1] == "uninstall")
+                        else if (splitedKey[2] == "installed")
                         {
-                            resultBool = _system._pluginsMng.UnInstallPlugin((Guid)arguments["guid"], _system);
+                            result = new APIResultTrue(_system._pluginsMng.InstalledPlugins);
                         }
-                        else if (splitedKed[1] == "list")
-                        {
-                            if (splitedKed.Length > 2)
-                            {
-                                if (splitedKed[2] == "availables")
-                                {
-                                    resultBool = true;
-                                    result = _system._pluginsMng.AvailablesPlugins;
-                                }
-                                else if (splitedKed[2] == "installed")
-                                {
-                                    resultBool = true;
-                                    result = _system._pluginsMng.InstalledPlugins;
-                                }
-                            }
-                        }
-                    }
-                }
-
-                if (resultBool)
-                {
-                    if (result != null)
-                    {
-                        commandResult = new APIResultTrue(result);
                     }
                     else
                     {
-                        commandResult = new APIResultTrue(resultBool);
+                        //Output Available list
+                        Collection<string> list = new Collection<string>();
+                        list.Add("availables");
+                        list.Add("installed");
+                        result = new APIResultTrue(list);
                     }
+                    
+                }
+                else if (splitedKey[1] == "execute")
+                {
+                    if (splitedKey.Length > 2)
+                    {
+                        if (splitedKey[2] == "install")
+                        {
+                            if (_system._pluginsMng.InstallPlugin(new Guid(arguments["guid"]), _system))
+                            {
+                                result = new APIResultTrue(true);
+                            }
+                            else
+                            {
+
+                            }
+                        }
+                        else if (splitedKey[2] == "uninstall")
+                        {
+                            if (_system._pluginsMng.UnInstallPlugin(new Guid(arguments["guid"]), _system))
+                            {
+                                result = new APIResultTrue(true);
+                            }
+                            else
+                            {
+
+                            }
+                        }
+                    }
+                    else
+                    {
+                        //Output availaible execute
+                    }
+                    
                 }
 
-                return commandResult;
+                return result;
             }
 
-            public IAPIResult ExecuteCommand(String key)
+            private IAPIResult ExecuteHalCommand(string[] splitedKey, Dictionary<string, string> arguments)
             {
-                return this.ExecuteCommand(key, null);
+                IAPIResult result = new APIResultFalse();
+
+                if (splitedKey[1] == "list")
+                {
+                    if (splitedKey.Length > 2)
+                    {
+                        if (splitedKey[2] == "interfaces")
+                        {
+                            result = new APIResultTrue(_system._interfacesMng.RunnableInterfaces);
+                        }
+                    }
+                    else
+                    {
+                        //TODO: Output Available list
+
+                    }
+                }
+                else if (splitedKey[1] == "execute")
+                {
+                    if (splitedKey.Length > 2)
+                    {
+                        if (splitedKey[2] == "start")
+                        {
+                            /*if (_system._interfacesMng.StartInterface())
+                            {
+                                result = new APIResultTrue(true);
+                            }
+                            else
+                            {
+
+                            }*/
+                        }
+                        else if (splitedKey[2] == "stop")
+                        {
+                            /*if (_system._interfacesMng.StopInterface())
+                            {
+                                result = new APIResultTrue(true);
+                            }
+                            else
+                            {
+
+                            }*/
+                        }
+                        else if (splitedKey[2] == "command")
+                        {
+                            /*if (_system._interfacesMng.ExecuteCommand())
+                            {
+
+                            }
+                            else
+                            {
+
+                            }*/
+                        }
+                    }
+                    else
+                    {
+                        //Output availaible execute
+                    }
+
+                }
+
+                return result;
+            }
+
+            private void InstalledPlugins_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+            {
+                NotifyPropertyChanged("plugins/installed/");
             }
 
             private void NotifyPropertyChanged(String propertyName)
@@ -158,16 +277,21 @@ namespace OHM.SYS
                     PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
                 }
             }
-
-            private void InstalledPlugins_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-            {
-                NotifyPropertyChanged("plugins/installed/");
-            }
+            
+            #endregion
         }
 
         #endregion
 
         #region Internal Properties
+
+        internal ILoggerManager LoggerMng { get { return _loggerMng; } }
+
+        internal IDataManager DataMng { get { return _dataMng; } }
+
+        #endregion
+
+        #region Internal Methods
 
         internal bool Start()
         {
@@ -208,14 +332,6 @@ namespace OHM.SYS
 
         #endregion
 
-        #region Internal Properties
-
-        internal ILoggerManager LoggerMng { get { return _loggerMng; } }
-
-        internal IDataManager DataMng { get { return _dataMng; } }
-
-        #endregion
-
         #region Private functions
 
         private bool InitPluginsMng()
@@ -234,6 +350,5 @@ namespace OHM.SYS
         }
 
         #endregion
-
     }
 }

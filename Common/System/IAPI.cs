@@ -11,7 +11,7 @@ namespace OHM.SYS
     {
         IAPIResult ExecuteCommand(string key);
 
-        IAPIResult ExecuteCommand(string key, Dictionary<String, object> arguments);
+        IAPIResult ExecuteCommand(string key, Dictionary<string, string> arguments);
 
         event PropertyChangedEventHandler PropertyChanged;
     }

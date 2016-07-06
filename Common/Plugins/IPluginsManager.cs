@@ -7,14 +7,13 @@ namespace OHM.Plugins
 {
     public interface IPluginsManager
     {
-
         bool Init(IDataStore data);
 
         IList<IPlugin> InstalledPlugins { get; }
 
         IList<IPlugin> AvailablesPlugins { get; }
 
-        bool InstallPlugin(Guid id, IOhmSystem system);
+        bool InstallPlugin(Guid id, IOhmSystemInternal system);
 
         IPlugin GetPlugin(Guid id);
 

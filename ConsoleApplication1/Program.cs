@@ -6,6 +6,7 @@ using OHM.RAL;
 using OHM.SYS;
 using OHM.VAL;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
@@ -18,20 +19,16 @@ namespace ConsoleApplication1
     class Program
     {
         private static OpenHomeMation ohm;
-        private static ILoggerManager loggerMng;
-        private static IPluginsManager pluginMng;
-        private static IInterfacesManager interfacesMng;
-        private static IVrManager vrMng;
 
         static void Main(string[] args)
         {
             bool exit = false;
 
-            loggerMng = new ConsoleLoggerManager();
+            var loggerMng = new ConsoleLoggerManager();
             var dataMng = new FileDataManager(loggerMng, AppDomain.CurrentDomain.BaseDirectory + "\\data\\");
-            pluginMng = new PluginsManager(loggerMng, AppDomain.CurrentDomain.BaseDirectory + "\\plugins\\");
-            interfacesMng = new InterfacesManager(loggerMng, pluginMng);
-            vrMng = new VrManager(loggerMng, pluginMng);
+            var pluginMng = new PluginsManager(loggerMng, AppDomain.CurrentDomain.BaseDirectory + "\\plugins\\");
+            var interfacesMng = new InterfacesManager(loggerMng, pluginMng);
+            var vrMng = new VrManager(loggerMng, pluginMng);
             ohm = new OpenHomeMation(pluginMng, dataMng, loggerMng, interfacesMng, vrMng);
             ohm.Start();
 
@@ -42,10 +39,96 @@ namespace ConsoleApplication1
                 if (line == "exit") {
                     exit = true;
                 }
+                else if (line == "help")
+                {
+                    outputBasicHelp();
+                }
+                else
+                {
+                    executeCommand(line);
+                }
             }
 
             ohm.Shutdown();
-            //System.Threading.Thread.CurrentThread.Suspend();
+            Console.WriteLine("Press enter to close");
+            Console.ReadLine(); 
+        }
+
+        static void executeCommand(string command)
+        {
+            Console.WriteLine("Sending Command " + command + "");
+            string commandKey = command;
+            Dictionary<String, String> args = new Dictionary<string, string>();
+
+            //Split Args and key
+            if (command.Contains('?'))
+            {
+                string[] splitedCommand = command.Split('?');
+                commandKey = splitedCommand[0];
+
+                //TODO Create Args
+
+            }
+
+            IAPIResult result = ohm.API.ExecuteCommand(command, args);
+            if (result.IsSuccess)
+            {
+                Console.WriteLine("Command " + command + " successfully executed");
+                outputCommandResult(result);
+            }
+            else
+            {
+                Console.WriteLine("Command " + command + " successfully executed");
+            }
+        }
+
+        static void outputCommandResult(IAPIResult result)
+        {
+            //Check Result Type
+            if (result.Result is IEnumerable)
+            {
+                IEnumerable list = result.Result as IEnumerable;
+                IEnumerator enu = list.GetEnumerator();
+
+                //Proceed list
+                while (enu.MoveNext())
+                {
+                    outputItemListResult(enu.Current);
+                }
+
+            }
+            else if (result.Result is Boolean)
+            {
+                Console.WriteLine(result.Result);
+            }
+        }
+
+        static void outputItemListResult(object item)
+        {
+            if (item is IPlugin)
+            {
+                IPlugin plugin = item as IPlugin;
+                Console.WriteLine("PLUGIN : ");
+                Console.WriteLine("Name : " + plugin.Name);
+                Console.WriteLine("Id : " + plugin.Id);
+                Console.WriteLine("State : " + plugin.State);
+            }
+            else
+            {
+                Console.WriteLine("No conversion to console output found for type : " + item.ToString());
+            }
+        }
+
+        static void outputBasicHelp()
+        {
+            Console.WriteLine("-----HELP--------");
+            Console.WriteLine("Root nodes : ");
+            Console.WriteLine("- plugins");
+
+            Console.WriteLine("Base commands : ");
+            Console.WriteLine("- list");
+            Console.WriteLine("- execute");
+            //Console.WriteLine("- plugins");
         }
     }
 }

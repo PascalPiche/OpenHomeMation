@@ -258,15 +258,15 @@ namespace WpfApplication1
 
         public void InstallPlugin(Guid guid)
         {
-            Dictionary<string, object> args = new Dictionary<string, object>();
-            args.Add("guid", guid);
+            Dictionary<string, string> args = new Dictionary<string, string>();
+            args.Add("guid", guid.ToString());
             ohm.API.ExecuteCommand("plugins/install/", args);
         }
         
         public void UnInstallPlugin(Guid guid)
         {
-            Dictionary<string, object> args = new Dictionary<string, object>();
-            args.Add("guid", guid);
+            Dictionary<string, string> args = new Dictionary<string, string>();
+            args.Add("guid", guid.ToString());
             ohm.API.ExecuteCommand("plugins/uninstall/", args);
         }
 
