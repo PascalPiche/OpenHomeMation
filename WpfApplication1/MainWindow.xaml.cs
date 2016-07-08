@@ -1,19 +1,9 @@
-﻿using OHM.Commands;
-using OHM.Data;
-using OHM.Logger;
-using OHM.Nodes;
-using OHM.Plugins;
-using OHM.RAL;
-using OHM.RAL.Commands;
-using OHM.SYS;
-using OHM.VAL;
+﻿using OHM.RAL.Commands;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
-using WpfApplication1.Logger;
+using WpfApplication1.MV;
 
 namespace WpfApplication1
 {
@@ -107,24 +97,36 @@ namespace WpfApplication1
 
         private void InstallPluginCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            vm.InstallPlugin((Guid)e.Parameter);
+            if (!vm.InstallPlugin((Guid)e.Parameter))
+            {
+                //TODO Error
+            }
         }
 
         private void UnInstallPluginCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            vm.UnInstallPlugin((Guid)e.Parameter);
+            if (!vm.UnInstallPlugin((Guid)e.Parameter))
+            {
+                //TODO Error
+            }
         }
 
         private void StartInterfaceCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             string key = (string)e.Parameter;
-            vm.InterfaceManager.StartInterface(key);
+            if (!vm.StartInterface(key))
+            {
+                //TODO Error
+            }
         }
 
         private void StopInterfaceCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             string key = (string)e.Parameter;
-            vm.InterfaceManager.StopInterface(key);
+            if (!vm.StopInterface(key))
+            {
+                //TODO Error
+            }
         }
        
         private void ExecuteInterfaceCommand_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -139,7 +141,7 @@ namespace WpfApplication1
                 }
                 else
                 {
-                    if (!vm.InterfaceManager.ExecuteCommand(command.InterfaceKey, command.NodeKey, command.Definition.Key, null))
+                    if (!vm.ExecuteHalCommand(command.NodeKey, command.Definition.Key))
                     {
                         //Show alert
                         MessageBox.Show("The command was not successfully executed", "Command error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
@@ -154,26 +156,23 @@ namespace WpfApplication1
             e.CanExecute = false;
             if (command != null)
             {
-                e.CanExecute = vm.InterfaceManager.CanExecuteCommand(command.NodeKey, command.Definition.Key);
+                e.CanExecute = vm.CanExecuteHalCommand(command.NodeKey, command.Definition.Key);
             }
         }
 
         private void ExecuteNodeCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var command = e.Parameter as IInterfaceCommand;
+
             if (command != null)
             {
                 if (command.Definition.ArgumentsDefinition.Count > 0)
                 {
                     ShowCommandDialog(command);
                 }
-                else
+                else if (!vm.ExecuteVrCommand(command.NodeKey, command.Definition.Key))
                 {
-                    if (!vm.InterfaceManager.ExecuteCommand(command.InterfaceKey, command.NodeKey, command.Definition.Key, null))
-                    {
-                        //Show alert
-                        MessageBox.Show("The command was not successfully executed", "Command error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
-                    }
+                    MessageBox.Show("The command was not successfully executed", "Command error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
                 }
             }
         }
@@ -182,9 +181,10 @@ namespace WpfApplication1
         {
             var command = e.Parameter as OHM.Commands.ICommand;
             e.CanExecute = false;
+
             if (command != null)
             {
-                e.CanExecute = command.CanExecute();
+                e.CanExecute = vm.CanExecuteVrCommand(command.NodeKey, command.Definition.Key);
             }
         }
 
@@ -214,147 +214,10 @@ namespace WpfApplication1
 
             if (result.HasValue && result.Value)
             {
-                if (!vm.InterfaceManager.ExecuteCommand(command.InterfaceKey, command.NodeKey, command.Definition.Key, w.ArgumentsResult))
-                {
-                    //Show alert
-                    MessageBox.Show("The command was not successfully executed", "Command error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
-                }
+                vm.ExecuteHalCommand(command.NodeKey, command.Definition.Key, w.ArgumentsResult);
             }
         }
 
         #endregion
-
-    }
-
-    public class MainWindowVM : INotifyPropertyChanged
-    {
-        private OpenHomeMation ohm;
-        private IInterfacesManager interfacesMng;
-
-        private object selectedNode;
-
-        public MainWindowVM() {}
-
-        public void start(TextBox txt)
-        {
-            ILoggerManager loggerMng = new WpfLoggerManager(txt);
-            IDataManager dataMng = new FileDataManager(loggerMng, AppDomain.CurrentDomain.BaseDirectory + "\\data\\");
-            IPluginsManager pluginMng = new PluginsManager(loggerMng, AppDomain.CurrentDomain.BaseDirectory + "\\plugins\\");
-            interfacesMng = new InterfacesManager(loggerMng, pluginMng);
-            IVrManager vrMng = new VrManager(loggerMng, pluginMng);
-
-            ohm = new OpenHomeMation(pluginMng, dataMng, loggerMng, interfacesMng, vrMng);
-            ohm.API.PropertyChanged += API_PropertyChanged;
-            ohm.Start();
-        }
-
-        void API_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == "plugins/installed/")
-            {
-                this.NotifyPropertyChanged("InstalledPlugins");
-            }
-        }
-
-        public void InstallPlugin(Guid guid)
-        {
-            Dictionary<string, string> args = new Dictionary<string, string>();
-            args.Add("guid", guid.ToString());
-            ohm.API.ExecuteCommand("plugins/install/", args);
-        }
-        
-        public void UnInstallPlugin(Guid guid)
-        {
-            Dictionary<string, string> args = new Dictionary<string, string>();
-            args.Add("guid", guid.ToString());
-            ohm.API.ExecuteCommand("plugins/uninstall/", args);
-        }
-
-        public IInterfacesManager InterfaceManager { get { return interfacesMng; } }
-
-        public bool Shutdown()
-        {
-            ohm.Shutdown();
-            return true;
-        }
-
-        public IList<IPlugin> AvailablesPlugins
-        {
-            get
-            {
-                return (IList<IPlugin>)ohm.API.ExecuteCommand("plugins/list/availables/").Result;
-            }
-        }
-
-        public IList<IPlugin> InstalledPlugins
-        {
-            get
-            {
-                return (IList<IPlugin>)ohm.API.ExecuteCommand("plugins/list/installed/").Result;
-            }
-        }
-
-        public Object SelectedNode 
-        {
-            get
-            {
-                return selectedNode;
-            }
-
-            set
-            {
-                selectedNode = value;
-                NotifyPropertyChanged("IsSystemViewVisible");
-                NotifyPropertyChanged("IsNodeViewVisible");
-                NotifyPropertyChanged("IsInterfaceViewVisible");
-                NotifyPropertyChanged("SelectedNode");
-            }
-        }
-
-        public Visibility IsInterfaceViewVisible
-        {
-            get
-            {
-                if (selectedNode is IInterface)
-                {
-                    return Visibility.Visible;
-                }
-                return Visibility.Collapsed;
-            }
-        }
-
-        public Visibility IsSystemViewVisible
-        {
-            get
-            {
-                if (IsNodeViewVisible != Visibility.Visible && IsInterfaceViewVisible != Visibility.Visible)
-                {
-                    return Visibility.Visible;
-                }
-                return Visibility.Collapsed;
-            }
-        }
-
-        public Visibility IsNodeViewVisible
-        {
-            get
-            {
-                if (IsInterfaceViewVisible != Visibility.Visible && selectedNode is INode)
-                {
-                    return Visibility.Visible;
-                }
-                return Visibility.Collapsed;
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void NotifyPropertyChanged(String propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
     }
 }

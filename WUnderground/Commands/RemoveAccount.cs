@@ -26,7 +26,7 @@ namespace WUnderground.Commands
             
         }
 
-        protected override bool RunImplementation(Dictionary<string, object> arguments)
+        protected override bool RunImplementation(Dictionary<string, string> arguments)
         {
             return WUndergroundInterface.RemoveAccountCommand(Account);
         }

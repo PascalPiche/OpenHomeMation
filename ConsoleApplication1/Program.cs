@@ -66,8 +66,16 @@ namespace ConsoleApplication1
                 string[] splitedCommand = command.Split('?');
                 commandKey = splitedCommand[0];
 
-                //TODO Create Args
-
+                //Fill Args dictionary
+                string[] splittedArgs = splitedCommand[1].Split('&');
+                foreach (string item in splittedArgs)
+                {
+                    string[] splittedArg = item.Split('=');
+                    if (splittedArg.Length == 2)
+                    {
+                        args.Add(splittedArg[0], splittedArg[1]);
+                    }
+                }
             }
 
             IAPIResult result = ohm.API.ExecuteCommand(command, args);
@@ -78,7 +86,7 @@ namespace ConsoleApplication1
             }
             else
             {
-                Console.WriteLine("Command " + command + " successfully executed");
+                Console.WriteLine("Command " + command + " was not executed");
             }
         }
 
@@ -113,6 +121,10 @@ namespace ConsoleApplication1
                 Console.WriteLine("Id : " + plugin.Id);
                 Console.WriteLine("State : " + plugin.State);
             }
+            else if (item is string)
+            {
+                Console.WriteLine("STRING : " + item.ToString());
+            }
             else
             {
                 Console.WriteLine("No conversion to console output found for type : " + item.ToString());
@@ -124,11 +136,11 @@ namespace ConsoleApplication1
             Console.WriteLine("-----HELP--------");
             Console.WriteLine("Root nodes : ");
             Console.WriteLine("- plugins");
+            Console.WriteLine("- hal");
 
             Console.WriteLine("Base commands : ");
             Console.WriteLine("- list");
             Console.WriteLine("- execute");
-            //Console.WriteLine("- plugins");
         }
     }
 }

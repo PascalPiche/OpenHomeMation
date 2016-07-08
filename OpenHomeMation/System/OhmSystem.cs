@@ -92,32 +92,32 @@ namespace OHM.SYS
 
             #region Public Methods
 
+            public IAPIResult ExecuteCommand(String key)
+            {
+                return this.ExecuteCommand(key, null);
+            }
+
             public IAPIResult ExecuteCommand(string key, Dictionary<string, string> arguments)
             {
                 string[] splitedKey = key.Split('/');
                 IAPIResult commandResult = new APIResultFalse();
 
-                if (splitedKey.Length >= 2)
+                if (splitedKey.Length > 2)
                 {
                     bool isPlugins = splitedKey[0] == "plugins";
-                    bool isHal = splitedKey[0] == "hal";
+                    bool isHal = splitedKey[0] == "ral";
 
                     //Check first value
                     if (isPlugins)
                     {
-                        commandResult = ExecutePluginsCommand(splitedKey, arguments);
+                        commandResult = ExecutePluginsTree(splitedKey, arguments);
                     }
                     else if (isHal)
                     {
-                        commandResult = ExecuteHalCommand(splitedKey, arguments);
+                        commandResult = ExecuteHalTree(splitedKey, arguments);
                     }
                 }
                 return commandResult;
-            }
-
-            public IAPIResult ExecuteCommand(String key)
-            {
-                return this.ExecuteCommand(key, null);
             }
 
             #endregion
@@ -134,13 +134,13 @@ namespace OHM.SYS
 
             #region Private Methods
 
-            private IAPIResult ExecutePluginsCommand(string[] splitedKey, Dictionary<string, string> arguments)
+            private IAPIResult ExecutePluginsTree(string[] splitedKey, Dictionary<string, string> arguments)
             {
                 IAPIResult result = new APIResultFalse();
 
                 if (splitedKey[1] == "list")
                 {
-                    if (splitedKey.Length >= 2)
+                    if (splitedKey.Length > 3)
                     {
                         if (splitedKey[2] == "availables")
                         {
@@ -173,7 +173,7 @@ namespace OHM.SYS
                             }
                             else
                             {
-
+                                //TODO
                             }
                         }
                         else if (splitedKey[2] == "uninstall")
@@ -184,13 +184,17 @@ namespace OHM.SYS
                             }
                             else
                             {
-
+                                //TODO
                             }
                         }
                     }
                     else
                     {
-                        //Output availaible execute
+                        //Output Available list
+                        Collection<string> list = new Collection<string>();
+                        list.Add("install");
+                        list.Add("uninstall");
+                        result = new APIResultTrue(list);
                     }
                     
                 }
@@ -198,13 +202,16 @@ namespace OHM.SYS
                 return result;
             }
 
-            private IAPIResult ExecuteHalCommand(string[] splitedKey, Dictionary<string, string> arguments)
+            private IAPIResult ExecuteHalTree(string[] splitedKey, Dictionary<string, string> arguments)
             {
+
                 IAPIResult result = new APIResultFalse();
+
+                #region list
 
                 if (splitedKey[1] == "list")
                 {
-                    if (splitedKey.Length > 2)
+                    if (splitedKey.Length > 3)
                     {
                         if (splitedKey[2] == "interfaces")
                         {
@@ -213,54 +220,94 @@ namespace OHM.SYS
                     }
                     else
                     {
-                        //TODO: Output Available list
-
+                        //Output Available list
+                        Collection<string> list = new Collection<string>();
+                        list.Add("interfaces");
+                        result = new APIResultTrue(list);
                     }
                 }
+                #endregion
+
+                #region Execute
+
                 else if (splitedKey[1] == "execute")
                 {
-                    if (splitedKey.Length > 2)
+                    if (splitedKey.Length > 4)
                     {
+                        #region start
+
                         if (splitedKey[2] == "start")
                         {
-                            /*if (_system._interfacesMng.StartInterface())
+                            if (_system._interfacesMng.StartInterface(splitedKey[3]))
                             {
                                 result = new APIResultTrue(true);
                             }
                             else
                             {
-
-                            }*/
+                                //TODO
+                            }
                         }
+                        #endregion
+
+                        #region stop
+
                         else if (splitedKey[2] == "stop")
                         {
-                            /*if (_system._interfacesMng.StopInterface())
+                            if (_system._interfacesMng.StopInterface(splitedKey[3]))
                             {
                                 result = new APIResultTrue(true);
                             }
                             else
                             {
-
-                            }*/
+                                //TODO
+                            }
                         }
-                        else if (splitedKey[2] == "command")
-                        {
-                            /*if (_system._interfacesMng.ExecuteCommand())
-                            {
+                        #endregion
 
+                        else
+                        {
+                            //TODO : Create data-arguments
+                            if (_system._interfacesMng.ExecuteCommand(splitedKey[3], splitedKey[2], null))
+                            {
+                                result = new APIResultTrue(true);
                             }
                             else
                             {
-
-                            }*/
+                                //TODO
+                            }
                         }
                     }
                     else
                     {
-                        //Output availaible execute
+                        //Output Available list
+                        Collection<string> list = new Collection<string>();
+                        list.Add("start");
+                        list.Add("stop");
+                        list.Add("*");
+                        result = new APIResultTrue(list);
                     }
 
                 }
+                #endregion
+
+                #region can-execute
+
+                else if (splitedKey[1] == "can-execute")
+                {
+                    if (splitedKey.Length > 4)
+                    {
+                        if (_system._interfacesMng.CanExecuteCommand(splitedKey[3], splitedKey[2]))
+                        {
+                            result = new APIResultTrue(true);
+                        }
+                        else
+                        {
+                            //TODO
+                        }
+                    }
+                }
+
+                #endregion
 
                 return result;
             }

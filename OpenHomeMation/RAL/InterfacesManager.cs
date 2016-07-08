@@ -149,23 +149,21 @@ namespace OHM.RAL
             return result;
         }
 
-        public bool ExecuteCommand(string interfaceKey, string nodeKey, string commandKey, Dictionary<string, object> arguments)
+        public bool ExecuteCommand(string nodeKey, string commandKey, Dictionary<string, string> arguments)
         {
-            _logger.Info("Executing Command -> Interface Key : " + interfaceKey + " -> Node Key : " + nodeKey + " -> Command Key : " + commandKey);
+            _logger.Info("Executing Command -> Node Key : " + nodeKey + " -> Command Key : " + commandKey);
+
+            string interfaceKey = nodeKey;
+
+            if (nodeKey.Contains("/")) {
+                interfaceKey = nodeKey.Split('/')[0];
+            }
 
             //Find interface
             IInterface interf = GetRunningInterface(interfaceKey);
             if (interf != null)
             {
-                /*if (nodeKey != interfaceKey)
-                {
-                    //Find node
-                    return interf.ExecuteCommand(commandKey, arguments);
-                }
-                else
-                {*/
-                    return interf.ExecuteCommand(nodeKey, commandKey, arguments);
-                //}
+                return interf.ExecuteCommand(nodeKey, commandKey, arguments);
             }
             else
             {

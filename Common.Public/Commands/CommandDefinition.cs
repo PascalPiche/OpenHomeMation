@@ -66,7 +66,7 @@ namespace OHM.Commands
 
         #region Public Api
 
-        public bool ValidateArguments(Dictionary<string, object> arguments)
+        public bool ValidateArguments(Dictionary<string, string> arguments)
         {
             bool result = true;
 

@@ -11,7 +11,6 @@ namespace WUnderground.Commands
 {
     class AddAccount : AbstractWUndergroundCommand
     {
-
         public AddAccount(WUndergroundInterface node)
             : base(node, "addAccount", "Add an account", "")
         {
@@ -36,7 +35,7 @@ namespace WUnderground.Commands
             );
         }
 
-        protected override bool RunImplementation(Dictionary<string, object> arguments)
+        protected override bool RunImplementation(Dictionary<string, string> arguments)
         {
             string username;
             string keyId;

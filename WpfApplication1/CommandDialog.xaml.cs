@@ -3,17 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace WpfApplication1
 {
@@ -22,11 +12,8 @@ namespace WpfApplication1
     /// </summary>
     public partial class CommandDialog : Window
     {
-
         private CommandDialogMV _mv;
         
-
-
         public CommandDialog()
         {
             InitializeComponent();
@@ -44,7 +31,7 @@ namespace WpfApplication1
             }
         }
 
-        public Dictionary<String, object> ArgumentsResult { get { return _mv.ArgumentsResult; } }
+        public Dictionary<string, string> ArgumentsResult { get { return _mv.ArgumentsResult; } }
 
         public void init(OHM.Commands.ICommand command)
         {
@@ -52,10 +39,9 @@ namespace WpfApplication1
             
             this.DataContext = _mv;
         }
-
     }
 
-    public class CommandDialogMV
+    public sealed class CommandDialogMV
     {
         private OHM.Commands.ICommand _command;
         private ObservableCollection<ArgumentsDefinitionDesigner> _arguments = new ObservableCollection<ArgumentsDefinitionDesigner>();
@@ -71,7 +57,7 @@ namespace WpfApplication1
             Init();
         }
 
-        internal Dictionary<String, object> ArgumentsResult { get { return CreateArgumentsResult(); } }
+        internal Dictionary<string, string> ArgumentsResult { get { return CreateArgumentsResult(); } }
 
         private void Init()
         {
@@ -89,9 +75,9 @@ namespace WpfApplication1
             }
         }
 
-        private Dictionary<String, object> CreateArgumentsResult()
+        private Dictionary<string, string> CreateArgumentsResult()
         {
-            Dictionary<String, object> result = new Dictionary<String, object>();
+            Dictionary<string, string> result = new Dictionary<string, string>();
 
             foreach (var item in _arguments)
             {
@@ -102,10 +88,10 @@ namespace WpfApplication1
         }
     }
 
-    public class ArgumentsDefinitionDesigner : INotifyPropertyChanged
+    public sealed class ArgumentsDefinitionDesigner : INotifyPropertyChanged
     {
         private IArgumentDefinition _argumentDef;
-        private Object _value;
+        private string _value;
 
         public ArgumentsDefinitionDesigner(IArgumentDefinition argumentDef)
         {
@@ -114,7 +100,7 @@ namespace WpfApplication1
 
         public IArgumentDefinition ArgumentDefinition { get { return _argumentDef; } }
 
-        public object Value { 
+        public string Value { 
             get { return _value; } 
             set 
             {

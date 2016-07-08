@@ -53,7 +53,7 @@ namespace OHM.Commands
             return true;
         }
 
-        public bool Execute(Dictionary<string, object> arguments)
+        public bool Execute(Dictionary<string, string> arguments)
         {
             bool result = false;
             if (_definition.ValidateArguments(arguments))
@@ -72,7 +72,7 @@ namespace OHM.Commands
             get { return _node; }
         }
 
-        protected abstract bool RunImplementation(Dictionary<string, object> arguments);
+        protected abstract bool RunImplementation(Dictionary<string, string> arguments);
 
         #endregion
 

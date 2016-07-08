@@ -109,7 +109,7 @@ namespace OHM.Nodes
             return false;
         }
 
-        public bool ExecuteCommand(string key, Dictionary<string, object> arguments)
+        public bool ExecuteCommand(string key, Dictionary<string, string> arguments)
         {
             if (_commandsDic.ContainsKey(key))
             {

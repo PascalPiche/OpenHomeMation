@@ -68,7 +68,7 @@ namespace WUnderground.Commands
            );
         }
 
-        protected override bool RunImplementation(Dictionary<string, object> arguments)
+        protected override bool RunImplementation(Dictionary<string, string> arguments)
         {
             string name;
             int zip;

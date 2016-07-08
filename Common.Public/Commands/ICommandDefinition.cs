@@ -5,14 +5,14 @@ namespace OHM.Commands
 {
     public interface ICommandDefinition
     {
-        String Key { get; }
+        string Key { get; }
 
-        String Name { get; }
+        string Name { get; }
 
-        String Description { get; }
+        string Description { get; }
 
-        Dictionary<String, IArgumentDefinition> ArgumentsDefinition { get; }
+        Dictionary<string, IArgumentDefinition> ArgumentsDefinition { get; }
 
-        bool ValidateArguments(Dictionary<string, object> arguments);
+        bool ValidateArguments(Dictionary<string, string> arguments);
     }
 }

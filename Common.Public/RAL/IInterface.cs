@@ -18,7 +18,7 @@ namespace OHM.RAL
 
         #region API
 
-        bool ExecuteCommand(string nodeKey, string commandKey, Dictionary<string, object> arguments);
+        bool ExecuteCommand(string nodeKey, string commandKey, Dictionary<string, string> arguments);
 
         void Starting();
 

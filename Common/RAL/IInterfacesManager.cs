@@ -20,9 +20,9 @@ namespace OHM.RAL
 
         bool StopInterface(string key);
 
-        bool CanExecuteCommand(string interfaceKey, string commandKey);
+        bool CanExecuteCommand(string nodeKey, string commandKey);
 
-        bool ExecuteCommand(string interfaceKey, string nodeKey, string commandKey, Dictionary<string, object> arguments);
+        bool ExecuteCommand(string nodeKey, string commandKey, Dictionary<string, string> arguments);
 
     }
 }

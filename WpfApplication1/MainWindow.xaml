@@ -38,7 +38,7 @@
                                 </Label>
                             </TreeViewItem.Header>
                             <TreeViewItem.Items>
-                                <TreeViewItem Name="InterfacesTreeViewItem" ItemsSource="{Binding Path=InterfaceManager.RunnableInterfaces}">
+                                <TreeViewItem Name="InterfacesTreeViewItem" ItemsSource="{Binding Path=Interfaces}">
                                     <TreeViewItem.ItemContainerStyle>
                                         <Style TargetType="TreeViewItem">
                                             <Setter Property="ContextMenu">

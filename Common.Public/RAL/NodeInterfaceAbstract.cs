@@ -77,7 +77,7 @@ namespace OHM.RAL
             Logger.Info(this.Name + " Interface Shutdowned");
         }
 
-        public bool ExecuteCommand(string nodeKey, string commandKey, Dictionary<string, object> arguments)
+        public bool ExecuteCommand(string nodeKey, string commandKey, Dictionary<string, string> arguments)
         {
             if (this.Key == nodeKey)
             {
@@ -116,7 +116,7 @@ namespace OHM.RAL
 
         #region Private functions
 
-        private new bool ExecuteCommand(string commandKey, Dictionary<string, object> arguments)
+        private new bool ExecuteCommand(string commandKey, Dictionary<string, string> arguments)
         {
             if (_commandsDic.ContainsKey(commandKey))
             {
