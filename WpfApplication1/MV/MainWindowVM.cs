@@ -60,7 +60,7 @@ namespace WpfApplication1.MV
         {
             get
             {
-                return (IList<IInterface>)ohm.API.ExecuteCommand("hal/list/interfaces/").Result;
+                return (IList<IInterface>)ohm.API.ExecuteCommand("ral/list/interfaces/").Result;
             }
         }
 
@@ -149,12 +149,12 @@ namespace WpfApplication1.MV
 
         public bool StartInterface(string key)
         {
-            return ohm.API.ExecuteCommand("hal/execute/start/" + key + "/").IsSuccess;
+            return ohm.API.ExecuteCommand("ral/execute/start/" + key + "/").IsSuccess;
         }
 
         public bool StopInterface(string key)
         {
-            return ohm.API.ExecuteCommand("hal/execute/stop/" + key + "/").IsSuccess;
+            return ohm.API.ExecuteCommand("ral/execute/stop/" + key + "/").IsSuccess;
         }
 
         public bool ExecuteHalCommand(string nodeKey, string commandKey)
@@ -164,12 +164,12 @@ namespace WpfApplication1.MV
 
         public bool ExecuteHalCommand(string nodeKey, string commandKey, Dictionary<string, string> args)
         {
-            return ohm.API.ExecuteCommand("hal/execute/" + commandKey + "/" + nodeKey, args).IsSuccess;
+            return ohm.API.ExecuteCommand("ral/execute/" + commandKey + "/" + nodeKey, args).IsSuccess;
         }
 
         public bool CanExecuteHalCommand(string nodeKey, string commandKey)
         {
-            return ohm.API.ExecuteCommand("hal/can-execute/" + commandKey + "/" + nodeKey + "/").IsSuccess;
+            return ohm.API.ExecuteCommand("ral/can-execute/" + commandKey + "/" + nodeKey + "/").IsSuccess;
         }
 
         #endregion
@@ -183,12 +183,12 @@ namespace WpfApplication1.MV
 
         public bool ExecuteVrCommand(string nodeKey, string commandKey, Dictionary<string, string> args)
         {
-            return ohm.API.ExecuteCommand("vr/execute/" + commandKey + "/" + nodeKey, args).IsSuccess;
+            return ohm.API.ExecuteCommand("val/execute/" + commandKey + "/" + nodeKey, args).IsSuccess;
         }
 
         public bool CanExecuteVrCommand(string nodeKey, string commandKey)
         {
-            return ohm.API.ExecuteCommand("vr/can-execute/" + commandKey + "/" + nodeKey).IsSuccess;
+            return ohm.API.ExecuteCommand("val/can-execute/" + commandKey + "/" + nodeKey).IsSuccess;
         }
 
         #endregion
