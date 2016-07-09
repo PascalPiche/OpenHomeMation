@@ -77,55 +77,8 @@ namespace OHM.RAL
             Logger.Info(this.Name + " Interface Shutdowned");
         }
 
-        public bool ExecuteCommand(string nodeKey, string commandKey, Dictionary<string, string> arguments)
-        {
-            if (this.Key == nodeKey)
-            {
-                return this.ExecuteCommand(commandKey, arguments);
-            }
-            else
-            {
-                //Remove Extra interface key
-                if (nodeKey.Contains("."))
-                {
-                    nodeKey = nodeKey.Substring(nodeKey.IndexOf('.') + 1);
-                }
-
-                //Lookup ALL LEVEL the node list
-                INode node = this.GetChild(nodeKey);
-                if (node != null)
-                {
-                    return node.ExecuteCommand(commandKey, arguments);
-                }
-            }
-            return false;
-        }
-
-        public bool CanExecuteCommand(string nodeKey, string commandKey)
-        {
-            if (this.Key == nodeKey)
-            {
-                return this.CanExecuteCommand(commandKey);
-            }
-            else
-            {
-                //Remove Extra interface key
-                if (nodeKey.Contains("."))
-                {
-                    nodeKey = nodeKey.Substring(nodeKey.IndexOf('.') + 1);
-                }
-
-                //Lookup ALL LEVEL the node list
-                INode node = this.GetChild(nodeKey);
-                if (node != null)
-                {
-                    return node.CanExecuteCommand(commandKey);
-                }
-            }
-
-            return false;
-        }
-
+        
+        
         public void Init(IDataStore data, IOhmSystemInterfaceGateway system)
         {
             base.Init(data);

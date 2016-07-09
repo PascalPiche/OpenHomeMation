@@ -15,8 +15,8 @@ namespace OHM.Nodes
         private ObservableCollection<ICommand> _commands;
         protected Dictionary<string, ICommand> _commandsDic;
 
-        private ObservableCollection<INode> _children;
-        private Dictionary<string, INode> _childrenDic;
+        private ObservableCollection<NodeAbstract> _children;
+        private Dictionary<string, NodeAbstract> _childrenDic;
 
         private ObservableCollection<INodeProperty> _properties;
         private Dictionary<string, INodeProperty> _propertiesDic;
@@ -38,8 +38,8 @@ namespace OHM.Nodes
             _state = initialState;
             _commands = new ObservableCollection<ICommand>();
             _commandsDic = new Dictionary<string, ICommand>();
-            _children = new ObservableCollection<INode>();
-            _childrenDic = new Dictionary<string, INode>();
+            _children = new ObservableCollection<NodeAbstract>();
+            _childrenDic = new Dictionary<string, NodeAbstract>();
             _properties = new ObservableCollection<INodeProperty>();
             _propertiesDic = new Dictionary<string, INodeProperty>();
         }
@@ -51,7 +51,7 @@ namespace OHM.Nodes
         public string FullKey { get {
                 if (Parent != null)
                 {
-                    return Parent.FullKey + Key;
+                    return Parent.FullKey + "." + Key;
                 }
                 else
                 {
@@ -106,6 +106,36 @@ namespace OHM.Nodes
             return false;
         }
 
+        public bool CanExecuteCommand(string nodeFullKey, string commandKey)
+        {
+            if (this.Key == nodeFullKey)
+            {
+                return this.CanExecuteCommand(commandKey);
+            }
+            else
+            {
+                //Remove Extra checked key
+                if (nodeFullKey.Contains("."))
+                {
+                    nodeFullKey = nodeFullKey.Substring(nodeFullKey.IndexOf('.') + 1);
+                }
+                string nextNode = nodeFullKey;
+                if (nextNode.Contains("."))
+                {
+                    nextNode = nextNode.Split('.')[0];
+                }
+
+                //Lookup ALL LEVEL the node list
+                NodeAbstract node = this.GetChild(nextNode);
+                if (node != null)
+                {
+                    return node.CanExecuteCommand(nodeFullKey, commandKey);
+                }
+            }
+
+            return false;
+        }
+
         public bool ExecuteCommand(string key, Dictionary<string, string> arguments)
         {
             if (_commandsDic.ContainsKey(key))
@@ -124,9 +154,38 @@ namespace OHM.Nodes
             return false;
         }
 
-        public INode GetChild(string key)
+        public bool ExecuteCommand(string nodeFullKey, string commandKey, Dictionary<string, string> arguments)
         {
-            INode result;
+            if (this.Key == nodeFullKey)
+            {
+                return this.ExecuteCommand(commandKey, arguments);
+            }
+            else
+            {
+                //Remove Extra checked key
+                if (nodeFullKey.Contains("."))
+                {
+                    nodeFullKey = nodeFullKey.Substring(nodeFullKey.IndexOf('.') + 1);
+                }
+                string nextNode = nodeFullKey;
+                if (nextNode.Contains("."))
+                {
+                    nextNode = nextNode.Split('.')[0];
+                }
+
+                //Lookup ALL LEVEL the node list
+                INode node = this.GetChild(nextNode);
+                if (node != null)
+                {
+                    return node.ExecuteCommand(commandKey, arguments);
+                }
+            }
+            return false;
+        }
+
+        public NodeAbstract GetChild(string key)
+        {
+            NodeAbstract result;
 
             if (_childrenDic.TryGetValue(key, out result))
             {
@@ -135,7 +194,7 @@ namespace OHM.Nodes
             else
             {
                 //Check child
-                foreach (INode item in _children)
+                foreach (NodeAbstract item in _children)
                 {
                     result = item.GetChild(key);
                     if (result != null)
@@ -303,13 +362,8 @@ namespace OHM.Nodes
         void SetParent(INode node)
         {
             _parent = node;
-
-            //Sync full key
-            //_fullKey = node.FullKey + _fullKey;
         }
 
         #endregion
-        
     }
-
 }
