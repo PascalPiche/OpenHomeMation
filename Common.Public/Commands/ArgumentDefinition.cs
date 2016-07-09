@@ -47,14 +47,12 @@ namespace OHM.Commands
         {
             Boolean result = false;
 
-
-
             if (Type == typeof(Int32))
             {
                 Int32 resultTemp;
                 result = TryGetInt32(value, out resultTemp);
             }
-            else if (Type == typeof(String))
+            else if (Type == typeof(string))
             {
                 String resultTemp;
                 result = TryGetString(value, out resultTemp);
@@ -66,9 +64,17 @@ namespace OHM.Commands
         public Boolean TryGetInt32(Object value, out Int32 result)
         {
             bool fctResult = false;
-            if (value is Dictionary<String, Object>)
+            if (value is Dictionary<string, Object>)
             {
-                Dictionary<String, Object> temp = (Dictionary<String, Object>)value;
+                Dictionary<string, Object> temp = (Dictionary<string, Object>)value;
+                if (temp.ContainsKey(this.Key))
+                {
+                    value = temp[this.Key];
+                }
+            }
+            else if (value is Dictionary<string, string>)
+            {
+                Dictionary<string, string> temp = (Dictionary<string, string>)value;
                 if (temp.ContainsKey(this.Key))
                 {
                     value = temp[this.Key];

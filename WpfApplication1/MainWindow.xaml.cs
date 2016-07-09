@@ -99,7 +99,7 @@ namespace WpfApplication1
         {
             if (!vm.InstallPlugin((Guid)e.Parameter))
             {
-                //TODO Error
+                MessageBox.Show("The command was not successfully executed", "Command error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
             }
         }
 
@@ -107,7 +107,7 @@ namespace WpfApplication1
         {
             if (!vm.UnInstallPlugin((Guid)e.Parameter))
             {
-                //TODO Error
+                MessageBox.Show("The command was not successfully executed", "Command error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
             }
         }
 
@@ -116,7 +116,7 @@ namespace WpfApplication1
             string key = (string)e.Parameter;
             if (!vm.StartInterface(key))
             {
-                //TODO Error
+                MessageBox.Show("The command was not successfully executed", "Command error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
             }
         }
 
@@ -125,7 +125,7 @@ namespace WpfApplication1
             string key = (string)e.Parameter;
             if (!vm.StopInterface(key))
             {
-                //TODO Error
+                MessageBox.Show("The command was not successfully executed", "Command error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
             }
         }
        
@@ -214,7 +214,10 @@ namespace WpfApplication1
 
             if (result.HasValue && result.Value)
             {
-                vm.ExecuteHalCommand(command.NodeKey, command.Definition.Key, w.ArgumentsResult);
+                if (!vm.ExecuteHalCommand(command.NodeKey, command.Definition.Key, w.ArgumentsResult))
+                {
+                    MessageBox.Show("The command was not successfully executed", "Command error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
+                }
             }
         }
 

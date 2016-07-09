@@ -242,10 +242,6 @@ namespace OHM.SYS
                             {
                                 result = new APIResultTrue(true);
                             }
-                            else
-                            {
-                                //TODO
-                            }
                         }
                         #endregion
 
@@ -257,23 +253,14 @@ namespace OHM.SYS
                             {
                                 result = new APIResultTrue(true);
                             }
-                            else
-                            {
-                                //TODO
-                            }
                         }
                         #endregion
 
                         else
                         {
-                            //TODO : Create data-arguments
-                            if (_system._interfacesMng.ExecuteCommand(splitedKey[3], splitedKey[2], null))
+                            if (_system._interfacesMng.ExecuteCommand(splitedKey[3], splitedKey[2], arguments))
                             {
                                 result = new APIResultTrue(true);
-                            }
-                            else
-                            {
-                                //TODO
                             }
                         }
                     }
@@ -299,10 +286,6 @@ namespace OHM.SYS
                         if (_system._interfacesMng.CanExecuteCommand(splitedKey[3], splitedKey[2]))
                         {
                             result = new APIResultTrue(true);
-                        }
-                        else
-                        {
-                            //TODO
                         }
                     }
                 }
