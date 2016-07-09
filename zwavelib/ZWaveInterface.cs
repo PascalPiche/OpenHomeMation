@@ -2,7 +2,6 @@
 using OHM.RAL;
 using OHM.Logger;
 using OHM.Nodes;
-using OHM.SYS;
 using OpenZWaveDotNet;
 using System;
 using System.Collections.Generic;
@@ -496,7 +495,7 @@ namespace ZWaveLib
             else
             {
                 //Create new node
-                var ctl = new ZWaveController(@"\\.\COM" + port, @"\\.\COM" + port, this, this.Logger, NodeStates.fatal);
+                var ctl = new ZWaveController("COM" + port, "COM" + port, this, this.Logger, NodeStates.fatal);
                 this.AddChild(ctl);
                 this._runningControllers.Add(@"\\.\COM" + port, ctl);
 
