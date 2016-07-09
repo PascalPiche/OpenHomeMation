@@ -77,7 +77,7 @@
   <ItemGroup>
     <None Include="Commands\_diagrams\Relations-overall-detail.dgml" />
     <None Include="Commands\_diagrams\Relations-overall-simple.dgml" />
-    <None Include="_diagrams\ClassDiagram1.cd" />
+    <None Include="_diagrams\ClassDiagram.cd" />
     <None Include="Commands\_diagrams\CommandsClassDiagram.cd" />
     <None Include="Data\_diagrams\DataClassDiagram.cd" />
     <None Include="RAL\_diagrams\InterfacesClassDiagram.cd" />

@@ -1,15 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="OHM.Nodes.NodeAbstract">
-    <Position X="0.5" Y="3.75" Width="2.5" />
+    <Position X="0.5" Y="4" Width="2.75" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier>
-      <HashCode>AIAwIgAABAIAEIQAAAKESQYQoAIgCAGgAEADABACAAA=</HashCode>
+      <HashCode>AIAwIgAABAIAEIQAAAKGSQYQoCIgCAGgAEADBBACAAA=</HashCode>
       <FileName>Nodes\NodeAbstract.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="OHM.Nodes.NodeProperty">
-    <Position X="3.75" Y="4" Width="1.5" />
+    <Position X="3.75" Y="4" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier>
       <HashCode>ABAAIAAAAAAgAoQEAACAAIQAgAAAAAEAAQA4AAAAAAA=</HashCode>
       <FileName>Nodes\NodeProperty.cs</FileName>
@@ -17,9 +23,9 @@
     <Lollipop Position="0.2" />
   </Class>
   <Interface Name="OHM.Nodes.INode">
-    <Position X="0.5" Y="0.5" Width="2" />
+    <Position X="0.5" Y="0.5" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AIAgAgAAAAAAAAQAAAIEQAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AIAgAgAAAAAAAAQAAAAEQAQAACAAAAAAAAAABAACAAA=</HashCode>
       <FileName>Nodes\INode.cs</FileName>
     </TypeIdentifier>
   </Interface>
@@ -30,5 +36,12 @@
       <FileName>Nodes\INodeProperty.cs</FileName>
     </TypeIdentifier>
   </Interface>
+  <Enum Name="OHM.Nodes.NodeStates">
+    <Position X="6" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAEAAAAEAAAgAAAAAAAAAAAABAAAAAAA=</HashCode>
+      <FileName>Nodes\NodeStates.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

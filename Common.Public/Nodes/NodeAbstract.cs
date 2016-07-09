@@ -28,9 +28,9 @@ namespace OHM.Nodes
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        #region Public ctor
+        #region Protected ctor
 
-        public NodeAbstract(string key, string name, ILogger logger, NodeStates initialState = NodeStates.initializing)
+        protected NodeAbstract(string key, string name, ILogger logger, NodeStates initialState = NodeStates.initializing)
         {
             _key = key;
             _name = name;
