@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 namespace OHM.Commands
 {
-    
     public abstract class CommandAbstract : ICommand
     {
         #region Private Members
@@ -34,20 +33,13 @@ namespace OHM.Commands
 
         #region Public Properties
 
-        public string Key
-        {
-            get { return _definition.Key; }
-        }
+        public string Key { get { return _definition.Key; } }
 
-        public string NodeFullKey
-        {
-            get { return Node.FullKey; }
-        }
+        public string Name { get { return _definition.Name; } }
 
-        public ICommandDefinition Definition
-        {
-            get { return _definition; }
-        }
+        public string NodeFullKey { get { return Node.FullKey; } }
+
+        public ICommandDefinition Definition { get { return _definition; } }
 
         #endregion
 

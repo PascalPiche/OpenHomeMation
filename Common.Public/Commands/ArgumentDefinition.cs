@@ -6,7 +6,6 @@ namespace OHM.Commands
 {
     public sealed class ArgumentDefinition : IArgumentDefinition
     {
-
         #region Private Members
 
         private String _key;
@@ -62,31 +61,6 @@ namespace OHM.Commands
             return result;
         }
 
-        private Object ExtractValueFromDictionary(Object value)
-        {
-            if (value is IDictionary)
-            {
-                if (value is Dictionary<string, Object>)
-                {
-                    Dictionary<string, Object> temp = (Dictionary<string, Object>)value;
-                    if (temp.ContainsKey(this.Key))
-                    {
-                        value = temp[this.Key];
-                    }
-                }
-                else if (value is Dictionary<string, string>)
-                {
-                    Dictionary<string, string> temp = (Dictionary<string, string>)value;
-                    if (temp.ContainsKey(this.Key))
-                    {
-                        value = temp[this.Key];
-                    }
-                }
-            }
-
-            return value;
-        }
-
         public Boolean TryGetInt32(Object value, out Int32 result)
         {
             bool fctResult = false;
@@ -124,5 +98,33 @@ namespace OHM.Commands
 
         #endregion
 
+        #region Private methods
+
+        private Object ExtractValueFromDictionary(Object value)
+        {
+            if (value is IDictionary)
+            {
+                if (value is Dictionary<string, Object>)
+                {
+                    Dictionary<string, Object> temp = (Dictionary<string, Object>)value;
+                    if (temp.ContainsKey(this.Key))
+                    {
+                        value = temp[this.Key];
+                    }
+                }
+                else if (value is Dictionary<string, string>)
+                {
+                    Dictionary<string, string> temp = (Dictionary<string, string>)value;
+                    if (temp.ContainsKey(this.Key))
+                    {
+                        value = temp[this.Key];
+                    }
+                }
+            }
+
+            return value;
+        }
+
+        #endregion
     }
 }

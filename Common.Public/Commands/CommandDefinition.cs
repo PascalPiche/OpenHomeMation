@@ -4,7 +4,6 @@ namespace OHM.Commands
 {
     public sealed class CommandDefinition : ICommandDefinition
     {
-
         #region Private Members
 
         private string _key;
@@ -14,24 +13,20 @@ namespace OHM.Commands
 
         #endregion
 
-        #region Public Ctor
+        #region Internal Ctor
 
-        public CommandDefinition(string key, string name)
+        internal CommandDefinition(string key, string name)
             : this(key, name, string.Empty) { }
 
-        public CommandDefinition(string key, string name, string description)
+        internal CommandDefinition(string key, string name, string description)
             : this(key, name, description, null) { }
 
-        public CommandDefinition(
-            string key,
-            string name,
-            string description,
-            Dictionary<string, IArgumentDefinition> argumentsDefinition
-        )
+        internal CommandDefinition(string key, string name, string description, Dictionary<string, IArgumentDefinition> argumentsDefinition)
         {
             _key = key;
             _name = name;
             _description = description;
+
             if (argumentsDefinition != null)
             {
                 _argumentsDefinition = argumentsDefinition;
@@ -47,20 +42,11 @@ namespace OHM.Commands
 
         #region Public Properties
 
-        public string Key
-        {
-            get { return _key; }
-        }
+        public string Key { get { return _key; } }
 
-        public string Name
-        {
-            get { return _name; }
-        }
+        public string Name { get { return _name; } }
 
-        public string Description
-        {
-            get { return _description; }
-        }
+        public string Description { get { return _description; } }
 
         #endregion
 
@@ -103,6 +89,5 @@ namespace OHM.Commands
         }
 
         #endregion
-
     }
 }

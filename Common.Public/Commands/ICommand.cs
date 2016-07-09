@@ -1,11 +1,12 @@
-﻿using OHM.Nodes;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace OHM.Commands
 {
     public interface ICommand
     {
         string Key { get; }
+
+        string Name { get; }
 
         string NodeFullKey { get; }
 
