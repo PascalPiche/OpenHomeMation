@@ -151,7 +151,7 @@ namespace OHM.RAL
 
         public bool ExecuteCommand(string nodeKey, string commandKey, Dictionary<string, string> arguments)
         {
-            _logger.Info("Executing Command -> Node Key : " + nodeKey + " -> Command Key : " + commandKey);
+            _logger.Debug("Executing Command -> Node Key : " + nodeKey + " -> Command Key : " + commandKey);
 
             string interfaceKey = nodeKey;
 
@@ -167,7 +167,7 @@ namespace OHM.RAL
             }
             else
             {
-                //TODO LOG DEBUG
+                _logger.Debug("Interface for nodeKey (" + nodeKey + ") was not found while executing command " + commandKey);
             }
             return false;
         }
@@ -184,7 +184,7 @@ namespace OHM.RAL
 
         #endregion
 
-        #region "Private"
+        #region Private
 
         private void loadRegisteredInterfaces(IOhmSystemInternal system)
         {

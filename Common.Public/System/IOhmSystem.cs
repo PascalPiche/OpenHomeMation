@@ -5,13 +5,12 @@ using OHM.RAL;
 namespace OHM.SYS
 {
 
-    public interface IOhmSystem
+    public interface IOhmSystemPlugins
     {
 
-        IOhmSystemUnInstallGateway GetUnInstallGateway(IPlugin plugin);
+        IOhmSystemInstallGateway GetInstallGateway(IPlugin plugin);
 
-        IOhmSystemInterfaceGateway GetInterfaceGateway(IInterface interf);
+        IOhmSystemUnInstallGateway GetUnInstallGateway(IPlugin plugin);
         
-        IDataStore GetOrCreateDataStore(string key);
     }
 }

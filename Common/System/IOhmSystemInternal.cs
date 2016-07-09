@@ -1,10 +1,15 @@
 ﻿
+using OHM.Data;
 using OHM.Plugins;
+using OHM.RAL;
 namespace OHM.SYS
 {
-    public interface IOhmSystemInternal : IOhmSystem
+    public interface IOhmSystemInternal : IOhmSystemPlugins
     {
-        IOhmSystemInstallGateway GetInstallGateway(IPlugin plugin);
+
+        IDataStore GetOrCreateDataStore(string key);
+
+        IOhmSystemInterfaceGateway GetInterfaceGateway(IInterface interf);
 
         IAPI API { get; }
     }
