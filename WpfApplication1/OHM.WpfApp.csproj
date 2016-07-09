@@ -72,6 +72,7 @@
     <Compile Include="CommandDialog.xaml.cs">
       <DependentUpon>CommandDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Designer\ArgumentsDefinitionDesigner.cs" />
     <Compile Include="Logger\WpfLogger.cs" />
     <Compile Include="Logger\WpfLoggerManager.cs" />
     <Compile Include="MainWindow.xaml.cs">
@@ -80,6 +81,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MV\CommandDialogMV.cs" />
     <Compile Include="MV\MainWindowVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
