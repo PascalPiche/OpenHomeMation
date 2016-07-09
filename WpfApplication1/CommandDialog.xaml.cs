@@ -112,7 +112,7 @@ namespace WpfApplication1
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void NotifyPropertyChanged(String propertyName)
+        private void NotifyPropertyChanged(String propertyName)
         {
             if (PropertyChanged != null)
             {

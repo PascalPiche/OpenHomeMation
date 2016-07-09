@@ -164,7 +164,7 @@ namespace WpfApplication1.MV
 
         public bool ExecuteHalCommand(string nodeKey, string commandKey, Dictionary<string, string> args)
         {
-            return ohm.API.ExecuteCommand("ral/execute/" + commandKey + "/" + nodeKey, args).IsSuccess;
+            return ohm.API.ExecuteCommand("ral/execute/" + commandKey + "/" + nodeKey + "/", args).IsSuccess;
         }
 
         public bool CanExecuteHalCommand(string nodeKey, string commandKey)
