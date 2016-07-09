@@ -20,6 +20,8 @@ namespace OHM.RAL
 
         bool ExecuteCommand(string nodeKey, string commandKey, Dictionary<string, string> arguments);
 
+        bool CanExecuteCommand(string nodeKey, string key);
+
         void Starting();
 
         void Shutdowning();

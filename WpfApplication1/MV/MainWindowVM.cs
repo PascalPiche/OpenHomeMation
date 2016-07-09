@@ -8,9 +8,6 @@ using OHM.VAL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using WpfApplication1.Logger;
@@ -121,12 +118,6 @@ namespace WpfApplication1.MV
 
         #region Public Methods
 
-        public bool Shutdown()
-        {
-            ohm.Shutdown();
-            return true;
-        }
-
         #region PluginsManager
 
         public bool InstallPlugin(Guid guid)
@@ -208,6 +199,12 @@ namespace WpfApplication1.MV
             ohm = new OpenHomeMation(pluginMng, dataMng, loggerMng, interfacesMng, vrMng);
             ohm.API.PropertyChanged += API_PropertyChanged;
             ohm.Start();
+        }
+
+        internal bool Shutdown()
+        {
+            ohm.Shutdown();
+            return true;
         }
 
         #endregion

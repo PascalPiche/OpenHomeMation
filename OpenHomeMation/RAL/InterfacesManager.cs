@@ -153,14 +153,12 @@ namespace OHM.RAL
         {
             _logger.Debug("Executing Command -> Node Key : " + nodeKey + " -> Command Key : " + commandKey);
 
-            string interfaceKey = nodeKey;
-
-            if (nodeKey.Contains("/")) {
-                interfaceKey = nodeKey.Split('/')[0];
-            }
+           
 
             //Find interface
-            IInterface interf = GetRunningInterface(interfaceKey);
+            IInterface interf = GetRunningInterface(nodeKey);
+
+
             if (interf != null)
             {
                 return interf.ExecuteCommand(nodeKey, commandKey, arguments);
@@ -172,12 +170,14 @@ namespace OHM.RAL
             return false;
         }
 
-        public bool CanExecuteCommand(string interfaceKey, string commandKey)
+        public bool CanExecuteCommand(string nodeKey, string commandKey)
         {
-            IInterface interf = GetRunningInterface(interfaceKey);
+            IInterface interf = GetRunningInterface(nodeKey);
+
+
             if (interf != null)
             {
-                return interf.CanExecuteCommand(commandKey);
+                return interf.CanExecuteCommand(nodeKey, commandKey);
             }
             return false;
         }
@@ -272,14 +272,21 @@ namespace OHM.RAL
             return result;
         }
 
-        private IInterface GetRunningInterface(string key)
+        private IInterface GetRunningInterface(string nodeKey)
         {
             IInterface result;
+            string interfaceKey = nodeKey;
 
-            if (!_runningDic.TryGetValue(key, out result))
+            if (nodeKey.Contains("."))
+            {
+                interfaceKey = nodeKey.Split('.')[0];
+            }
+
+            if (!_runningDic.TryGetValue(interfaceKey, out result))
             {
                 result = null;
             }
+
             return result;
         }
 

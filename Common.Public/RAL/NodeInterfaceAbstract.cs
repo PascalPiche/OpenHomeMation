@@ -96,6 +96,25 @@ namespace OHM.RAL
             return false;
         }
 
+        public bool CanExecuteCommand(string nodeKey, string commandKey)
+        {
+            if (this.Key == nodeKey)
+            {
+                return this.CanExecuteCommand(commandKey);
+            }
+            else
+            {
+                //Lookup the node list
+                INode node = this.GetChild(nodeKey);
+                if (node != null)
+                {
+                    return node.CanExecuteCommand(commandKey);
+                }
+            }
+
+            return false;
+        }
+
         public void Init(IDataStore data, IOhmSystemInterfaceGateway system)
         {
             base.Init(data);

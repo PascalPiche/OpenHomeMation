@@ -170,7 +170,7 @@ namespace WpfApplication1
                 {
                     ShowCommandDialog(command);
                 }
-                else if (!vm.ExecuteVrCommand(command.NodeKey, command.Definition.Key))
+                else if (!vm.ExecuteHalCommand(command.NodeKey, command.Definition.Key))
                 {
                     MessageBox.Show("The command was not successfully executed", "Command error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
                 }
@@ -179,12 +179,12 @@ namespace WpfApplication1
 
         private void ExecuteNodeCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            var command = e.Parameter as OHM.Commands.ICommand;
+            var command = e.Parameter as IInterfaceCommand;
             e.CanExecute = false;
 
             if (command != null)
             {
-                e.CanExecute = vm.CanExecuteVrCommand(command.NodeKey, command.Definition.Key);
+                e.CanExecute = vm.CanExecuteHalCommand(command.InterfaceKey + "." + command.NodeKey, command.Definition.Key);
             }
         }
 
