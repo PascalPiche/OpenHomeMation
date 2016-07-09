@@ -10,15 +10,15 @@ namespace OHM.RAL
     {
         #region Private Members
 
-        private InterfaceStates _state = InterfaceStates.Disabled;
+        private InterfaceStates _interfaceState = InterfaceStates.Disabled;
         private bool _startOnLaunch = false;
         private IOhmSystemInterfaceGateway _system;
 
         #endregion
 
-        #region Public Ctor
+        #region Protected Ctor
 
-        public NodeInterfaceAbstract(string key, string name, ILogger logger)
+        protected NodeInterfaceAbstract(string key, string name, ILogger logger)
             : base(key, name, logger)
         { }
 
@@ -26,13 +26,13 @@ namespace OHM.RAL
 
         #region public Properties
 
-        public new InterfaceStates State
+        public InterfaceStates InterfaceState
         {
-            get { return _state; }
+            get { return _interfaceState; }
 
             protected set
             {
-                _state = value;
+                _interfaceState = value;
                 NotifyPropertyChanged("State");
                 NotifyPropertyChanged("IsRunning");
             }
@@ -40,7 +40,7 @@ namespace OHM.RAL
 
         public bool IsRunning
         {
-            get { return State == InterfaceStates.Enabled; }
+            get { return InterfaceState == InterfaceStates.Enabled; }
         }
 
         public bool StartOnLaunch
@@ -63,7 +63,7 @@ namespace OHM.RAL
         {
             Logger.Info(this.Name + " Interface initing");
             Start();
-            State = InterfaceStates.Enabled;
+            InterfaceState = InterfaceStates.Enabled;
             NotifyPropertyChanged("State");
             Logger.Info(this.Name + " Interface Inited");
         }
@@ -72,7 +72,7 @@ namespace OHM.RAL
         {
             Logger.Info(this.Name + " Interface Shutdowning");
             Shutdown();
-            State = InterfaceStates.Disabled;
+            InterfaceState = InterfaceStates.Disabled;
             NotifyPropertyChanged("State");
             Logger.Info(this.Name + " Interface Shutdowned");
         }

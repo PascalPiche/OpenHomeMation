@@ -140,7 +140,7 @@ namespace OHM.RAL
             IInterface interf = null;
             if (_runningDic.TryGetValue(key, out interf))
             {
-                if (interf.State == InterfaceStates.Enabled)
+                if (interf.InterfaceState == InterfaceStates.Enabled)
                 {
                     interf.Shutdowning();
                     result = true;
@@ -292,7 +292,7 @@ namespace OHM.RAL
         private bool StartInterface(IInterface interf)
         {
             bool result = false;
-            if (interf.State == InterfaceStates.Disabled)
+            if (interf.InterfaceState == InterfaceStates.Disabled)
             {
                 interf.Starting();
                 result = true;

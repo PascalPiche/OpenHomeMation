@@ -1,25 +1,47 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="OHM.Interfaces.InterfaceAbstract">
-    <Position X="0.5" Y="3.75" Width="1.5" />
+  <Class Name="OHM.RAL.InterfaceAbstract">
+    <Position X="4" Y="4.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AIAAAAAAkCBAAAAAAAAASQAAAAAAAAAIAAAGBAAAAAA=</HashCode>
-      <FileName>Interfaces\InterfaceAbstract.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RAL\InterfaceAbstract.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OHM.RAL.Commands.InterfaceCommandAbstract">
+    <Position X="7" Y="2.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQIAAAAAAEAAEBAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>RAL\InterfaceCommandAbstract.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Interface Name="OHM.Interfaces.IInterface">
-    <Position X="0.5" Y="0.5" Width="1.75" />
+  <Class Name="OHM.RAL.NodeInterfaceAbstract">
+    <Position X="0.5" Y="3.75" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AIAAAAAAEABAAAAAAAAAQAAAAAAAAAAIAAAABAAAAAA=</HashCode>
-      <FileName>Interfaces\IInterface.cs</FileName>
+      <HashCode>AIAAAAAAkCBAAAAAAAAASQAAAAAAAAAIAAAGBAAAAAA=</HashCode>
+      <FileName>RAL\NodeInterfaceAbstract.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="OHM.RAL.IInterface">
+    <Position X="0.5" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AIAgAAAAEABAAAAAAAAAQAAAAAAAAAAIAAAABAAAAAA=</HashCode>
+      <FileName>RAL\IInterface.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Enum Name="OHM.Interfaces.InterfaceState">
-    <Position X="3" Y="0.5" Width="1.5" />
+  <Interface Name="OHM.RAL.Commands.IInterfaceCommand">
+    <Position X="7" Y="0.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RAL\IInterfaceCommand.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="OHM.RAL.InterfaceStates">
+    <Position X="5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAYAAAACAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Interfaces\InterfaceState.cs</FileName>
+      <FileName>RAL\InterfaceState.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Font Name="Segoe UI" Size="9" />
