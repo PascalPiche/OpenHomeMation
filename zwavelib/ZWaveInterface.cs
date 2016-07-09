@@ -79,51 +79,6 @@ namespace ZWaveLib
             return CreateController(port, true);
         }
 
-        internal bool CreateController(int port, bool isNew = false)
-        {
-            bool result = false;
-            Logger.Info("Creating Controller on port: " + port);
-
-            //Valid if a Controller already exist on this port
-            if (this.GetChild(port.ToString()) != null) {
-                Logger.Error("Controller already exist on port : " + port);
-                return false;
-            }
-
-            //Store Controller
-            if (isNew)
-            {
-                Logger.Info("Saving new controller on port " + port);
-                _registeredControllers.StoreString(port.ToString(), port.ToString());
-                DataStore.Save();
-                Logger.Info("Saved new controller on port " + port);
-            }
-
-            Logger.Info("Trying to start a controller on port " + port);
-            bool mngResult = _mng.AddDriver(@"\\.\COM" + port, ZWControllerInterface.Serial);
-            if (mngResult)
-            {
-                Logger.Info("Tryed to start a controller on port " + port + " was successfull");
-                //Create new node 
-                var ctl = new ZWaveController(@"\\.\COM" + port, @"\\.\COM" + port, this, this.Logger);
-                this.AddChild(ctl);
-                this._runningControllers.Add(@"\\.\COM" + port, ctl);
-
-                Logger.Info("Controller created on port " + port);
-                result = true;
-            }
-            else
-            {
-                //Create new node
-                var ctl = new ZWaveController(@"\\.\COM" + port, @"\\.\COM" + port, this, this.Logger, NodeStates.fatal);
-                this.AddChild(ctl);
-                this._runningControllers.Add(@"\\.\COM" + port, ctl);
-                
-                Logger.Info("Cannot create Controller on port " + port);
-            }
-            return result;
-        }
-
         internal void RemoveController(int port)
         {
             Logger.Info("Removing Controller on port: " + port);
@@ -502,6 +457,52 @@ namespace ZWaveLib
             {
                 CreateController(int.Parse(_registeredControllers.GetString(item)));
             }
+        }
+
+        private bool CreateController(int port, bool isNew = false)
+        {
+            bool result = false;
+            Logger.Info("Creating Controller on port: " + port);
+
+            //Valid if a Controller already exist on this port
+            if (this.GetChild(port.ToString()) != null)
+            {
+                Logger.Error("Controller already exist on port : " + port);
+                return false;
+            }
+
+            //Store Controller
+            if (isNew)
+            {
+                Logger.Info("Saving new controller on port " + port);
+                _registeredControllers.StoreString(port.ToString(), port.ToString());
+                DataStore.Save();
+                Logger.Info("Saved new controller on port " + port);
+            }
+
+            Logger.Info("Trying to start a controller on port " + port);
+            bool mngResult = _mng.AddDriver(@"\\.\COM" + port, ZWControllerInterface.Serial);
+            if (mngResult)
+            {
+                Logger.Info("Tryed to start a controller on port " + port + " was successfull");
+                //Create new node 
+                var ctl = new ZWaveController("COM" + port, "COM" + port, this, this.Logger);
+                this.AddChild(ctl);
+                this._runningControllers.Add(@"\\.\COM" + port, ctl);
+
+                Logger.Info("Controller created on port " + port);
+                result = true;
+            }
+            else
+            {
+                //Create new node
+                var ctl = new ZWaveController(@"\\.\COM" + port, @"\\.\COM" + port, this, this.Logger, NodeStates.fatal);
+                this.AddChild(ctl);
+                this._runningControllers.Add(@"\\.\COM" + port, ctl);
+
+                Logger.Info("Cannot create Controller on port " + port);
+            }
+            return result;
         }
 
         private void CreateOrUpdateNode(ZWNotification n)

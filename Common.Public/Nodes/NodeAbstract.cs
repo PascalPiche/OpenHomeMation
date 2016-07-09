@@ -183,7 +183,20 @@ namespace OHM.Nodes
             return false;
         }
 
-        public NodeAbstract GetChild(string key)
+        
+        #endregion
+
+        #region Protected Properties
+
+        protected ILogger Logger { get { return _logger; } }
+
+        protected IDataStore DataStore { get { return _data; } }
+
+        #endregion
+
+        #region Protected Functions
+
+        protected NodeAbstract GetChild(string key)
         {
             NodeAbstract result;
 
@@ -205,18 +218,6 @@ namespace OHM.Nodes
             }
             return null;
         }
-
-        #endregion
-
-        #region Protected Properties
-
-        protected ILogger Logger { get { return _logger; } }
-
-        protected IDataStore DataStore { get { return _data; } }
-
-        #endregion
-
-        #region Protected Functions
 
         protected bool AddChild(NodeAbstract node)
         {

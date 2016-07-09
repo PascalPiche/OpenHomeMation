@@ -76,8 +76,6 @@ namespace OHM.RAL
             NotifyPropertyChanged("State");
             Logger.Info(this.Name + " Interface Shutdowned");
         }
-
-        
         
         public void Init(IDataStore data, IOhmSystemInterfaceGateway system)
         {

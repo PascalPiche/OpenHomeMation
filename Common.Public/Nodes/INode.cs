@@ -30,8 +30,6 @@ namespace OHM.Nodes
 
         bool ExecuteCommand(string commandKey, Dictionary<string, string> arguments);
 
-        NodeAbstract GetChild(string key);
-
         #endregion
 
     }
