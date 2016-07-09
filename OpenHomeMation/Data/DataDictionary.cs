@@ -117,7 +117,7 @@ namespace OHM.Data
             return _dataValues.Remove(key);
         }
 
-        public bool ContainsKey(string key)
+        public bool ContainKey(string key)
         {
             return _dataValues.ContainsKey(key);
         }

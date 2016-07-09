@@ -43,7 +43,7 @@ namespace WUnderground.Data
 
         internal bool CreateAccountCommand(string username, string keyId) 
         {
-            if (_registeredAccounts.ContainsKey(username))
+            if (_registeredAccounts.ContainKey(username))
             {
                 Logger.Error("Account : " + username + " already exist, cannot create duplicate account");
                 return false;
@@ -66,7 +66,7 @@ namespace WUnderground.Data
 
         internal bool RemoveAccountCommand(Account node)
         {
-            if (_registeredAccounts.ContainsKey(node.Key))
+            if (_registeredAccounts.ContainKey(node.Key))
             {
                 if (this.RemoveChild(node))
                 {
@@ -84,7 +84,7 @@ namespace WUnderground.Data
             IDataDictionary dataAccount = _registeredAccounts.GetDataDictionary(node.Key);
             IDataDictionary accountLocations = dataAccount.GetOrCreateDataDictionary("locations");
 
-            if (!accountLocations.ContainsKey(locationName))
+            if (!accountLocations.ContainKey(locationName))
             {
                 
                 if (node.AddLocation(new Station(locationName, locationName, this.Logger, zip, magic, wmo)))

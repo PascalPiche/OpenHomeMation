@@ -27,7 +27,7 @@ namespace OHM.Data
 
         bool RemoveKey(string key);
 
-        bool ContainsKey(string key);
+        bool ContainKey(string key);
 
     }
 }
