@@ -27,10 +27,8 @@
                 </Grid.ColumnDefinitions>
 
                 <Grid Grid.Column="0" Width="200" >
-                    <Label>
-                        <Run Text="System" />
-                    </Label>
                     <TreeView SelectedItemChanged="TreeView_SelectedItemChanged">
+                        <!-- Root Tree View Item (System) -->
                         <TreeViewItem IsSelected="True">
                             <TreeViewItem.Header>
                                 <Label>
@@ -117,9 +115,9 @@
                                         </HierarchicalDataTemplate>
                                     </TreeViewItem.ItemTemplate>
                                 </TreeViewItem>
-                                <!-- ItemsSource="{Binding Path=InterfaceManager.RunnableInterfaces}" -->
+                                
                                 <TreeViewItem Name="InterfacesTreeViewItemVr">
-                                    <TreeViewItem.ItemContainerStyle>
+                                    <!--TreeViewItem.ItemContainerStyle>
                                         <Style TargetType="TreeViewItem">
                                             <Setter Property="ContextMenu">
                                                 <Setter.Value>
@@ -152,14 +150,15 @@
                                                 </Setter.Value>
                                             </Setter>
                                         </Style>
-                                    </TreeViewItem.ItemContainerStyle>
+                                    </TreeViewItem.ItemContainerStyle -->
+                                    
                                     <TreeViewItem.Header>
                                         <Label>
                                             <Run>VR</Run>
                                         </Label>
                                     </TreeViewItem.Header>
 
-                                    <TreeViewItem.ItemTemplate>
+                                    <!--TreeViewItem.ItemTemplate>
                                         <HierarchicalDataTemplate ItemsSource="{Binding Children}">
                                             <HierarchicalDataTemplate.ItemContainerStyle>
                                                 <Style TargetType="TreeViewItem">
@@ -195,15 +194,18 @@
                                                 <Run Text="{Binding Path=Name, Mode=OneWay}" />
                                             </Label>
                                         </HierarchicalDataTemplate>
-                                    </TreeViewItem.ItemTemplate>
-                                    <TreeViewItem.ContextMenu>
+                                    </TreeViewItem.ItemTemplate -->
+                                    
+                                    <!--TreeViewItem.ContextMenu>
                                         <ContextMenu>
                                             <MenuItem Command="{Binding local:MainWindow.ExecuteVrAddNodeBasic}" CommandParameter="{Binding}">
                                                 <MenuItem.Header>Add Basic Node</MenuItem.Header>
                                             </MenuItem>
                                         </ContextMenu>
-                                    </TreeViewItem.ContextMenu>
+                                    </TreeViewItem.ContextMenu-->
+                                    
                                 </TreeViewItem>
+                                
                             </TreeViewItem.Items>
                         </TreeViewItem>
                     </TreeView>
