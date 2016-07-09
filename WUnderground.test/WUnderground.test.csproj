@@ -54,7 +54,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WUnderground\WUnderground.csproj">
+    <ProjectReference Include="..\WUnderground\OHM.Plugins.WUndergroundPlugin.csproj">
       <Project>{645a5ca5-0505-4312-9c73-364bc66c1f7c}</Project>
       <Name>WUnderground</Name>
     </ProjectReference>

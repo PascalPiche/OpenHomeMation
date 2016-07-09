@@ -211,10 +211,13 @@ namespace WpfApplication1
             var w = new CommandDialog();
             w.init(command);
             var result = w.ShowDialog();
+            string fullNodeKey = command.InterfaceKey != command.NodeKey ? 
+                command.InterfaceKey + "." + command.NodeKey : 
+                command.InterfaceKey;
 
             if (result.HasValue && result.Value)
             {
-                if (!vm.ExecuteHalCommand(command.NodeKey, command.Definition.Key, w.ArgumentsResult))
+                if (!vm.ExecuteHalCommand(fullNodeKey, command.Definition.Key, w.ArgumentsResult))
                 {
                     MessageBox.Show("The command was not successfully executed", "Command error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
                 }

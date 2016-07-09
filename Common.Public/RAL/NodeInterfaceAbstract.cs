@@ -85,14 +85,19 @@ namespace OHM.RAL
             }
             else
             {
-                //Lookup the node list
+                //Remove Extra interface key
+                if (nodeKey.Contains("."))
+                {
+                    nodeKey = nodeKey.Substring(nodeKey.IndexOf('.') + 1);
+                }
+
+                //Lookup ALL LEVEL the node list
                 INode node = this.GetChild(nodeKey);
                 if (node != null)
                 {
                     return node.ExecuteCommand(commandKey, arguments);
                 }
             }
-
             return false;
         }
 
@@ -104,7 +109,13 @@ namespace OHM.RAL
             }
             else
             {
-                //Lookup the node list
+                //Remove Extra interface key
+                if (nodeKey.Contains("."))
+                {
+                    nodeKey = nodeKey.Substring(nodeKey.IndexOf('.') + 1);
+                }
+
+                //Lookup ALL LEVEL the node list
                 INode node = this.GetChild(nodeKey);
                 if (node != null)
                 {

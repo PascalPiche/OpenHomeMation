@@ -174,7 +174,6 @@ namespace OHM.RAL
         {
             IInterface interf = GetRunningInterface(nodeKey);
 
-
             if (interf != null)
             {
                 return interf.CanExecuteCommand(nodeKey, commandKey);
