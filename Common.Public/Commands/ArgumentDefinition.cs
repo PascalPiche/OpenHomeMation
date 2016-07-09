@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace OHM.Commands
@@ -61,25 +62,35 @@ namespace OHM.Commands
             return result;
         }
 
+        private Object ExtractValueFromDictionary(Object value)
+        {
+            if (value is IDictionary)
+            {
+                if (value is Dictionary<string, Object>)
+                {
+                    Dictionary<string, Object> temp = (Dictionary<string, Object>)value;
+                    if (temp.ContainsKey(this.Key))
+                    {
+                        value = temp[this.Key];
+                    }
+                }
+                else if (value is Dictionary<string, string>)
+                {
+                    Dictionary<string, string> temp = (Dictionary<string, string>)value;
+                    if (temp.ContainsKey(this.Key))
+                    {
+                        value = temp[this.Key];
+                    }
+                }
+            }
+
+            return value;
+        }
+
         public Boolean TryGetInt32(Object value, out Int32 result)
         {
             bool fctResult = false;
-            if (value is Dictionary<string, Object>)
-            {
-                Dictionary<string, Object> temp = (Dictionary<string, Object>)value;
-                if (temp.ContainsKey(this.Key))
-                {
-                    value = temp[this.Key];
-                }
-            }
-            else if (value is Dictionary<string, string>)
-            {
-                Dictionary<string, string> temp = (Dictionary<string, string>)value;
-                if (temp.ContainsKey(this.Key))
-                {
-                    value = temp[this.Key];
-                }
-            }
+            value = ExtractValueFromDictionary(value);
 
             if (value is Int32)
             {
@@ -99,14 +110,7 @@ namespace OHM.Commands
         public Boolean TryGetString(Object value, out String result)
         {
             bool fctResult = false;
-            if (value is Dictionary<String, Object>)
-            {
-                Dictionary<String, Object> temp = (Dictionary<String, Object>)value;
-                if (temp.ContainsKey(this.Key))
-                {
-                    value = temp[this.Key];
-                }
-            }
+            value = ExtractValueFromDictionary(value);
 
             if (value is String)
             {
