@@ -5,8 +5,9 @@ namespace OHM.Commands
 {
     public interface ICommand
     {
+        string Key { get; }
 
-        string NodeKey { get; }
+        string NodeFullKey { get; }
 
         ICommandDefinition Definition { get; }
 

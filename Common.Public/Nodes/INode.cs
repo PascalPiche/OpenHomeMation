@@ -8,6 +8,8 @@ namespace OHM.Nodes
     {
         #region Properties
 
+        string FullKey { get; }
+
         string Key { get; }
 
         string Name { get; }

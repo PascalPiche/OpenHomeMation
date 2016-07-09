@@ -48,10 +48,21 @@ namespace OHM.Nodes
 
         #region Public Properties
 
-        public string Key
-        {
-            get { return _key; }
+        public string FullKey { get {
+                if (Parent != null)
+                {
+                    return Parent.FullKey + Key;
+                }
+                else
+                {
+                    return Key;
+                }
+            } 
         }
+
+        public string Key { get { return _key; } }
+
+        public IReadOnlyList<ICommand> Commands { get { return new ReadOnlyObservableCollection<ICommand>(_commands); } }
 
         public string Name
         {
@@ -75,26 +86,12 @@ namespace OHM.Nodes
                 NotifyPropertyChanged("State");
             }
         }
-        
-        public IReadOnlyList<ICommand> Commands { get { return new ReadOnlyObservableCollection<ICommand>(_commands); } }
 
-        public IReadOnlyList<INode> Children
-        {
-            get { return _children; }
-        }
+        public IReadOnlyList<INode> Children { get { return _children; } }
 
-        public INode Parent
-        {
-            get { return _parent; }
-        }
+        public INode Parent { get { return _parent; } }
 
-        public IReadOnlyList<INodeProperty> Properties
-        {
-            get
-            {
-                return _properties;
-            }
-        }
+        public IReadOnlyList<INodeProperty> Properties { get { return _properties; } }
 
         #endregion
 
@@ -306,9 +303,13 @@ namespace OHM.Nodes
         void SetParent(INode node)
         {
             _parent = node;
+
+            //Sync full key
+            //_fullKey = node.FullKey + _fullKey;
         }
 
         #endregion
+        
     }
 
 }

@@ -34,14 +34,19 @@ namespace OHM.Commands
 
         #region Public Properties
 
+        public string Key
+        {
+            get { return _definition.Key; }
+        }
+
+        public string NodeFullKey
+        {
+            get { return Node.FullKey; }
+        }
+
         public ICommandDefinition Definition
         {
             get { return _definition; }
-        }
-        
-        public string NodeKey
-        {
-            get { return Node.Key; }
         }
 
         #endregion
@@ -74,7 +79,6 @@ namespace OHM.Commands
 
         protected abstract bool RunImplementation(Dictionary<string, string> arguments);
 
-        #endregion
-
+        #endregion        
     }
 }

@@ -10,7 +10,7 @@
         <CommandBinding Command="local:MainWindow.StartInterfaceCommand" Executed="StartInterfaceCommand_Executed" />
         <CommandBinding Command="local:MainWindow.StopInterfaceCommand" Executed="StopInterfaceCommand_Executed" />
         <CommandBinding Command="local:MainWindow.ExecuteInterfaceCommand" Executed="ExecuteInterfaceCommand_Executed" CanExecute="ExecuteInterfaceCommand_CanExecute" />
-        <CommandBinding Command="local:MainWindow.ExecuteNodeCommand" Executed="ExecuteNodeCommand_Executed" CanExecute="ExecuteNodeCommand_CanExecute" />
+        <CommandBinding Command="local:MainWindow.ExecuteNodeCommand" Executed="ExecuteInterfaceCommand_Executed" CanExecute="ExecuteInterfaceCommand_CanExecute" />
         <CommandBinding Command="local:MainWindow.ExecuteVrAddNodeBasic" Executed="ExecuteVrAddNodeBasic_Executed" />
     </Window.CommandBindings>
     <Grid HorizontalAlignment="Stretch">

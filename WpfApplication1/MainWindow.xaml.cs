@@ -141,7 +141,7 @@ namespace WpfApplication1
                 }
                 else
                 {
-                    if (!vm.ExecuteHalCommand(command.NodeKey, command.Definition.Key))
+                    if (!vm.ExecuteHalCommand(command.NodeFullKey, command.Key))
                     {
                         //Show alert
                         MessageBox.Show("The command was not successfully executed", "Command error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
@@ -156,35 +156,7 @@ namespace WpfApplication1
             e.CanExecute = false;
             if (command != null)
             {
-                e.CanExecute = vm.CanExecuteHalCommand(command.NodeKey, command.Definition.Key);
-            }
-        }
-
-        private void ExecuteNodeCommand_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            var command = e.Parameter as IInterfaceCommand;
-
-            if (command != null)
-            {
-                if (command.Definition.ArgumentsDefinition.Count > 0)
-                {
-                    ShowCommandDialog(command);
-                }
-                else if (!vm.ExecuteHalCommand(command.NodeKey, command.Definition.Key))
-                {
-                    MessageBox.Show("The command was not successfully executed", "Command error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
-                }
-            }
-        }
-
-        private void ExecuteNodeCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            var command = e.Parameter as IInterfaceCommand;
-            e.CanExecute = false;
-
-            if (command != null)
-            {
-                e.CanExecute = vm.CanExecuteHalCommand(command.InterfaceKey + "." + command.NodeKey, command.Definition.Key);
+                e.CanExecute = vm.CanExecuteHalCommand(command.NodeFullKey, command.Key);
             }
         }
 
@@ -211,13 +183,10 @@ namespace WpfApplication1
             var w = new CommandDialog();
             w.init(command);
             var result = w.ShowDialog();
-            string fullNodeKey = command.InterfaceKey != command.NodeKey ? 
-                command.InterfaceKey + "." + command.NodeKey : 
-                command.InterfaceKey;
 
             if (result.HasValue && result.Value)
             {
-                if (!vm.ExecuteHalCommand(fullNodeKey, command.Definition.Key, w.ArgumentsResult))
+                if (!vm.ExecuteHalCommand(command.NodeFullKey, command.Definition.Key, w.ArgumentsResult))
                 {
                     MessageBox.Show("The command was not successfully executed", "Command error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
                 }
