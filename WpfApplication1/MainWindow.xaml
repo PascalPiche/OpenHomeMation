@@ -284,18 +284,39 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition />
+                            <ColumnDefinition Width="auto" />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="Interface" />
-                        <TextBlock Text="{Binding Path=SelectedNode.Name}" Grid.Column="1" />
-                        <TextBlock Text="{Binding Path=SelectedNode.Key}" Grid.Column="2"/>
-
-                        <TextBlock Grid.Row="1">
-                    <Run Text="Status : " />
-                    <Run Text="{Binding Path=SelectedNode.State}" />
-                        </TextBlock>
+                        
+                        <Grid Grid.Row="0" Grid.Column="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                            </Grid.RowDefinitions>
+                            
+                            <TextBlock Grid.Column="0" Grid.Row="0" Text="Interface : " />
+                            <TextBlock Grid.Column="1" Grid.Row="0">
+                                <Run Text="{Binding Path=SelectedNode.Name, Mode=OneWay}" />
+                                <Run Text=" (" />
+                                <Run Text="{Binding Path=SelectedNode.Key, Mode=OneWay}" />
+                                <Run Text=" }" />
+                            </TextBlock>
+                            
+                            <TextBlock Grid.Column="0" Grid.Row="1" Text="Node Status : " />
+                            <TextBlock Grid.Column="1" Grid.Row="1">
+                                <Run Text="{Binding Path=SelectedNode.State}" />
+                            </TextBlock>
+                            
+                            <TextBlock Grid.Column="0" Grid.Row="2" Text="Interface Status : " />
+                            <TextBlock Grid.Column="1" Grid.Row="2">
+                                <Run Text="{Binding Path=SelectedNode.InterfaceState}" />
+                            </TextBlock>
+                        </Grid>
                     </Grid>
 
                     <Grid Visibility="{Binding Path=IsNodeViewVisible}">

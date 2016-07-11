@@ -33,7 +33,7 @@ namespace OHM.RAL
             protected set
             {
                 _interfaceState = value;
-                NotifyPropertyChanged("State");
+                NotifyPropertyChanged("InterfaceState");
                 NotifyPropertyChanged("IsRunning");
             }
         }

@@ -318,6 +318,7 @@ namespace OHM.Nodes
         protected bool Init(IDataStore data)
         {
             _data = data;
+            this.State = NodeStates.normal; 
             return true;
         }
 
