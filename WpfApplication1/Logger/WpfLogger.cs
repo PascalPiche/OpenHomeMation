@@ -78,7 +78,15 @@ namespace WpfApplication1.Logger
         {
             output.Dispatcher.BeginInvoke(new Action(delegate
             {
-                output.AppendText(message + "\n");
+                try
+                {
+                    output.AppendText(message + "\n");
+                }
+                catch (Exception)
+                {
+                    //throw;
+                }
+                
             }));
         }
     }
