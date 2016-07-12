@@ -16,7 +16,7 @@ namespace WUnderground.Data
             : base("WUndergroundInterface", "WUnderground", logger)
         {
             //Create Commands
-            this.RegisterCommand(new AddAccount(this));
+            this.RegisterCommand(new AddAccount());
         }
 
         #endregion

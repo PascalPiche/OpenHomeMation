@@ -11,8 +11,8 @@ namespace ZWaveLib.Commands
 {
     public class ControlerSoftResetCommand : ZWaveCommandAbstract
     {
-        public ControlerSoftResetCommand(IZWaveNode node)
-            : base(node, "SoftReset", "Soft Reset the Z Wave Controller", "")
+        public ControlerSoftResetCommand()
+            : base("SoftReset", "Soft Reset the Z Wave Controller", "")
         {
             
         }

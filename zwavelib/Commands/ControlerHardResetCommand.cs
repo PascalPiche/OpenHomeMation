@@ -11,8 +11,8 @@ namespace ZWaveLib.Commands
 {
     public class ControlerHardResetCommand : ZWaveCommandAbstract
     {
-        public ControlerHardResetCommand(IZWaveNode node)
-            : base(node, "HardReset", "Hard Reset the Z Wave Controller (Warning: Will erase all data in the controller, pairing will need to be done again after the hard reset)", "")
+        public ControlerHardResetCommand()
+            : base("HardReset", "Hard Reset the Z Wave Controller (Warning: Will erase all data in the controller, pairing will need to be done again after the hard reset)", "")
         {
 
         }

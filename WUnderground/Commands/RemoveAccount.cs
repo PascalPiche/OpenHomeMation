@@ -20,8 +20,8 @@ namespace WUnderground.Commands
             }
         }
 
-        public RemoveAccount(Account node)
-            : base(node, "removeAccount", "Remove the account", "")
+        public RemoveAccount()
+            : base("removeAccount", "Remove the account", "")
         {
             
         }

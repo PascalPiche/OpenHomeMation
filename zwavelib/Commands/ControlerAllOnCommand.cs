@@ -11,8 +11,8 @@ namespace ZWaveLib.Commands
 {
     public class ControlerAllOnCommand : ZWaveCommandAbstract
     {
-        public ControlerAllOnCommand(IZWaveNode node)
-            : base(node, "allOn", "Switch all on", "")
+        public ControlerAllOnCommand()
+            : base("allOn", "Switch all on", "")
         {
 
         }

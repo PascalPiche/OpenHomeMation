@@ -19,8 +19,8 @@ namespace WUnderground.Data
         {
             _apiKey = apiKey;
 
-            this.RegisterCommand(new AddStation(this, _apiKey));
-            this.RegisterCommand(new RemoveAccount(this));
+            this.RegisterCommand(new AddStation(_apiKey));
+            this.RegisterCommand(new RemoveAccount());
 
             this.RegisterProperty(
                new NodeProperty(

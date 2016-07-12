@@ -11,8 +11,8 @@ namespace WUnderground.Commands
     class RefreshCondition : AbstractWUndergroundCommand
     {
 
-         public RefreshCondition(StationCondition node, string key, string name, string description)
-            : base(node, key, name, description)
+         public RefreshCondition(string key, string name, string description)
+            : base(key, name, description)
         {
 
         }

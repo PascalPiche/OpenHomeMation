@@ -84,11 +84,11 @@ namespace ZWaveLib.Data
 
         private void RegisterCommands()
         {
-            this.RegisterCommand(new ControlerAllOnCommand(this));
-            this.RegisterCommand(new ControlerAllOffCommand(this));
-            this.RegisterCommand(new ControlerSoftResetCommand(this));
-            this.RegisterCommand(new ControlerHardResetCommand(this));
-            this.RegisterCommand(new ControlerAddNodeCommand(this)); 
+            this.RegisterCommand(new ControlerAllOnCommand());
+            this.RegisterCommand(new ControlerAllOffCommand());
+            this.RegisterCommand(new ControlerSoftResetCommand());
+            this.RegisterCommand(new ControlerHardResetCommand());
+            this.RegisterCommand(new ControlerAddNodeCommand()); 
         }
 
         private void RegisterProperties()

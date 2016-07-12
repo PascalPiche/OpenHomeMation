@@ -32,7 +32,7 @@ namespace ZWaveLib
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
             //Create Commands
-            this.RegisterCommand(new CreateControler(this));
+            this.RegisterCommand(new CreateControler());
         }
             
         #endregion
@@ -256,7 +256,7 @@ namespace ZWaveLib
 
         private void ControllerStateChangedHandler(ZWControllerState state)
         {
-            Logger.Debug("Controller State Changed:  " + state.ToString());
+            Logger.Debug("TODO: Controller State Changed:  " + state.ToString());
         }
 
         #endregion
@@ -267,13 +267,10 @@ namespace ZWaveLib
 
         private void NotificationDriverReady(ZWNotification n)
         {
-            Logger.Info("Notification Controller Ready:" + GetNodeIdForLog(n));
-            string key = NotificationTool.MakeNodeKey(n);
-            string name = NotificationTool.GetNodeName(n, this.Manager);
             uint homeId = n.GetHomeId();
             byte nodeId = n.GetNodeId();
-            string controlerPath = Manager.GetControllerPath(homeId);
 
+            string controlerPath = Manager.GetControllerPath(homeId);
             Logger.Info("Notification Driver Ready: Controller Path=" + controlerPath);
 
             if (this._runningControllers.ContainsKey(controlerPath))
@@ -292,7 +289,7 @@ namespace ZWaveLib
 
         private void NotificationDriverReset(ZWNotification n)
         {
-            Logger.Debug("Notification Driver Reset: NodeId=" + GetNodeIdForLog(n));
+            Logger.Debug("TODO: Notification Driver Reset: NodeId=" + GetNodeIdForLog(n));
         }
 
         private void NotificationDriverFailed(ZWNotification n)

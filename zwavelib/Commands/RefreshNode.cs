@@ -12,8 +12,8 @@ namespace ZWaveLib.Commands
     public class RefreshNodeCommand : ZWaveCommandAbstract
     {
 
-        public RefreshNodeCommand(IZWaveNode node)
-            : base(node, "RefreshNodeInfo", "Refresh all Node Info", "")
+        public RefreshNodeCommand()
+            : base("RefreshNodeInfo", "Refresh all Node Info", "")
         {
 
         }

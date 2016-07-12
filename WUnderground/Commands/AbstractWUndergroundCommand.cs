@@ -11,8 +11,8 @@ namespace WUnderground.Commands
             get { return (WUndergroundInterface)base.Interface; }
         }
 
-        public AbstractWUndergroundCommand(INode node, string key, string name, string description) 
-            : base(node, key, name, description, null)
+        public AbstractWUndergroundCommand(string key, string name, string description) 
+            : base(key, name, description, null)
         {
           
         }

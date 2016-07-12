@@ -21,8 +21,8 @@ namespace WUnderground.Commands
 
         string _apiKey;
 
-        public AddStation(Account node, string apiKey)
-            : base(node, "addLocation", "Add a location", "")
+        public AddStation(string apiKey)
+            : base("addLocation", "Add a location", "")
         {
 
             _apiKey = apiKey;

@@ -8,11 +8,11 @@ namespace ZWaveLib.Commands
 
         #region Public Ctor
 
-        public ZWaveCommandAbstract(INode node, string key, string name)
-            : this(node, key, name, string.Empty) { }
+        public ZWaveCommandAbstract(string key, string name)
+            : this(key, name, string.Empty) { }
 
-        public ZWaveCommandAbstract(INode node, string key, string name, string description)
-            : base(node, key, name, description)
+        public ZWaveCommandAbstract(string key, string name, string description)
+            : base(key, name, description)
         {}
 
         #endregion

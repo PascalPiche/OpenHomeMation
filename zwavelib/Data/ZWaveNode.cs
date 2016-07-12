@@ -238,8 +238,9 @@ namespace ZWaveLib.Data
 
         private void RegisterZWaveNodeCommands()
         {
-            this.RegisterCommand(new RefreshNodeCommand(this));
-            this.RegisterCommand(new RefreshNodeValueCommand(this));
+            this.RegisterCommand(new RefreshNodeCommand());
+
+            //this.RegisterCommand(new RefreshNodeValueCommand(this));
         }
 
         private Object GetValue(ZWValueID valueId)

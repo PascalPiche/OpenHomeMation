@@ -289,17 +289,20 @@ namespace OHM.Nodes
 
             return result;
         }
-       
-        protected bool RegisterCommand(ICommand command)
+
+        protected bool RegisterCommand(CommandAbstract command)
         {
-            if (_commandsDic.ContainsKey(command.Definition.Key))
+            if (!_commandsDic.ContainsKey(command.Definition.Key))
             {
-                return false;
+                if (command.Init(this))
+                {
+                    _commandsDic.Add(command.Definition.Key, command);
+                    _commands.Add(command);
+                    return true;
+                }
             }
 
-            _commandsDic.Add(command.Definition.Key, command);
-            _commands.Add(command);
-            return true;
+            return false;
         }
 
         protected bool UnRegisterCommand(ICommand command)

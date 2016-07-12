@@ -11,8 +11,8 @@ namespace WUnderground.Commands
 {
     class AddAccount : AbstractWUndergroundCommand
     {
-        public AddAccount(WUndergroundInterface node)
-            : base(node, "addAccount", "Add an account", "")
+        public AddAccount()
+            : base("addAccount", "Add an account", "")
         {
             this.Definition.ArgumentsDefinition.Add(
                 "username",

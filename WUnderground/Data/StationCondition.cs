@@ -16,11 +16,9 @@ namespace WUnderground.Data
         public StationCondition(string keyId, string name, ILogger logger, Station station)
             : base(keyId, name, logger)
         {
-
             _station = station;
             
-
-            this.RegisterCommand(new RefreshCondition(this, "refreshCondition", "Refresh", ""));
+            this.RegisterCommand(new RefreshCondition("refreshCondition", "Refresh", ""));
 
             this.RegisterProperty(
                new NodeProperty(

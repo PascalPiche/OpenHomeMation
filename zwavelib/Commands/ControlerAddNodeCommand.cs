@@ -10,8 +10,8 @@ namespace ZWaveLib.Commands
 {
     public class ControlerAddNodeCommand : ZWaveCommandAbstract
     {
-        public ControlerAddNodeCommand(IZWaveNode node)
-            : base(node, "AddNode", "Add node", "")
+        public ControlerAddNodeCommand()
+            : base("AddNode", "Add node", "")
         {
 
         }

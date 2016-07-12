@@ -14,18 +14,17 @@ namespace OHM.Commands
 
         #region Protected Ctor
 
-        protected CommandAbstract(INode node, string key, string name)
-            : this(node, key, name, string.Empty) { }
+        protected CommandAbstract(string key, string name)
+            : this(key, name, string.Empty) { }
 
-        protected CommandAbstract(INode node, string key, string name, string description) 
-            : this (node, key, name, description, null) { }
-        
-        protected CommandAbstract(INode node, string key, string name, string description, Dictionary<string, IArgumentDefinition> argumentsDefinition)
-            : this(node, new CommandDefinition(key, name, description, argumentsDefinition)) { }
+        protected CommandAbstract(string key, string name, string description)
+            : this(key, name, description, null) { }
 
-        protected CommandAbstract(INode node, ICommandDefinition definition)
+        protected CommandAbstract(string key, string name, string description, Dictionary<string, IArgumentDefinition> argumentsDefinition)
+            : this(new CommandDefinition(key, name, description, argumentsDefinition)) { }
+
+        protected CommandAbstract(ICommandDefinition definition)
         {
-            _node = node;
             _definition = definition;
         }
 
@@ -64,13 +63,31 @@ namespace OHM.Commands
 
         #region Protected
 
+        #region Properties
+
         protected Nodes.INode Node
         {
             get { return _node; }
         }
 
+        #endregion
+
+        #region Methods
+
         protected abstract bool RunImplementation(Dictionary<string, string> arguments);
 
-        #endregion        
+        #endregion
+
+        #endregion    
+    
+        #region Internal Methods
+
+        internal bool Init(INode node)
+        {
+            _node = node;
+            return true;
+        }
+
+        #endregion
     }
 }

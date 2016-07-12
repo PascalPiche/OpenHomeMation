@@ -10,10 +10,9 @@ namespace ZWaveLib.Commands
     public class CreateControler : ZWaveCommandAbstract
     {
 
-        public CreateControler(ZWaveInterface interf)
-            : base(interf, "createController", "Create a controller", "")
+        public CreateControler()
+            : base("createController", "Create a controller", "")
         {
-
             this.Definition.ArgumentsDefinition.Add
             (
                 "port",
@@ -25,7 +24,6 @@ namespace ZWaveLib.Commands
                 )
             );
         }
-
 
         protected override bool RunImplementation(Dictionary<string, string> arguments)
         {
@@ -42,7 +40,6 @@ namespace ZWaveLib.Commands
             }
 
             return ZWaveInterface.CreateNewController(port);
-
         }
     }
 }

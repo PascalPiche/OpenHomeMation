@@ -15,11 +15,11 @@ namespace OHM.RAL.Commands
 
         #region Protected Ctor
 
-        protected InterfaceCommandAbstract(INode node, string key, string name, string description) 
-            : this (node, key, name, description, null) { }
+        protected InterfaceCommandAbstract(string key, string name, string description) 
+            : this (key, name, description, null) { }
 
-        protected InterfaceCommandAbstract(INode node, string key, string name, string description, Dictionary<string, IArgumentDefinition> argumentsDefinition)
-            : base(node, new CommandDefinition(key, name, description, argumentsDefinition)) { }
+        protected InterfaceCommandAbstract(string key, string name, string description, Dictionary<string, IArgumentDefinition> argumentsDefinition)
+            : base(new CommandDefinition(key, name, description, argumentsDefinition)) { }
 
         #endregion
 
