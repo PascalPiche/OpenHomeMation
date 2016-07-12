@@ -19,8 +19,8 @@ namespace ZWaveLib
 
         private ZWManager _mng;
         private Dictionary<uint, string> _controllerPathMapping = new Dictionary<uint, string>();
+        private Dictionary<string, ZWaveController> _runningControllers = new Dictionary<string, ZWaveController>();
         private IDataDictionary _registeredControllers;
-        private Dictionary<string, ZWaveController> _runningControllers;
         private Dispatcher _dispatcher;
 
         #endregion
@@ -31,6 +31,7 @@ namespace ZWaveLib
             : base("ZWaveInterface", "ZWave", logger)
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
+
             //Create Commands
             this.RegisterCommand(new CreateControler());
         }
@@ -41,9 +42,6 @@ namespace ZWaveLib
 
         protected override void Start()
         {
-            
-            _runningControllers = new Dictionary<string, ZWaveController>();
-
             var apiPath = @"C:\Users\Scopollif\Documents\Visual Studio 2013\Projects\OpenHomeMation\external\open-zwave\openzwave-1.0.791";
             ZWOptions opt = new ZWOptions();
             opt.Create(apiPath + @"\config\", apiPath + @"", @"");
@@ -55,6 +53,10 @@ namespace ZWaveLib
             _mng.Create();
             _mng.OnNotification += new ManagedNotificationsHandler(NotificationHandler);
             _mng.OnControllerStateChanged += new ManagedControllerStateChangedHandler(ControllerStateChangedHandler);
+
+            //Manager.GetLoggingState
+            //Manager.SetLoggingState
+            //Manager.SetLogFileName
 
             //Log OpenZWave version
             Logger.Info("OpenZWave Version: " + _mng.GetVersionAsString());
@@ -69,7 +71,6 @@ namespace ZWaveLib
         protected override void Shutdown()
         {
             _mng.Destroy();
-
             _mng = null;
         }
 
@@ -353,49 +354,49 @@ namespace ZWaveLib
 
         private void NotificationNodeNew(ZWNotification n)
         {
-            Logger.Info("Notification New Node: " + GetNodeIdForLog(n));
+            Logger.Info("Notification New Node: NodeId=" + GetNodeIdForLog(n));
             CreateOrUpdateNode(n);
         }
 
         private void NotificationNodeAdded(ZWNotification n)
         {
             //Update State
-            Logger.Info("Notification Node Added: " + GetNodeIdForLog(n));
+            Logger.Info("Notification Node Added: NodeId=" + GetNodeIdForLog(n));
             CreateOrUpdateNode(n);
         }
 
         private void NotificationNodeRemoved(ZWNotification n)
         {
-            Logger.Info("Notification Node Removed: " + GetNodeIdForLog(n));
+            Logger.Info("Notification Node Removed: NodeId=" + GetNodeIdForLog(n));
             RemoveNode(n);
         }
 
         private void NotificationEssentialNodeQueriesComplete(ZWNotification n)
         {
-            Logger.Info("Notification Essential Node Queries Complete: " + GetNodeIdForLog(n));
+            Logger.Info("Notification Essential Node Queries Complete: NodeId=" + GetNodeIdForLog(n));
         }
 
         private void NotificationNodeProtocolInfo(ZWNotification n)
         {
-            Logger.Info("Notification Node Protocol Info: " + GetNodeIdForLog(n));
+            Logger.Info("Notification Node Protocol Info: NodeId=" + GetNodeIdForLog(n));
         }
 
         private void NotificationNodeQueriesComplete(ZWNotification n)
         {
-            Logger.Debug("Notification Node Queries Complete:" + GetNodeIdForLog(n));
+            Logger.Debug("Notification Node Queries Complete: NodeId=" + GetNodeIdForLog(n));
         }
 
         private void NotificationNodeEvent(ZWNotification n)
         {
-            Logger.Debug("Notification Node Event: " + GetNodeIdForLog(n));
-            Logger.Debug("Event: " + n.GetEvent().ToString());
+            Logger.Debug("Notification Node Event: NodeId=" + GetNodeIdForLog(n));
+            Logger.Debug("Event: NodeId=" + n.GetEvent().ToString());
         }
 
         private void NotificationNodeNaming(ZWNotification n)
         {
             //Update State
-            Logger.Info("TODO Notification Node Naming: " + GetNodeIdForLog(n));
-            //UpdateNode(n);
+            Logger.Info("TODO Notification Node Naming: NodeId=" + GetNodeIdForLog(n));
+            CreateOrUpdateNode(n);
         }
 
         #endregion

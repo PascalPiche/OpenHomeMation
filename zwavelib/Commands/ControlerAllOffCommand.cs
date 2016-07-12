@@ -14,7 +14,7 @@ namespace ZWaveLib.Commands
     {
 
         public ControlerAllOffCommand()
-            : base("allOff", "Switch all off", "")
+            : base("allOff", "Switch all off")
         {
             
         }
