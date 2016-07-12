@@ -103,46 +103,8 @@ namespace ZWaveLib
 
         #region Manager Handler
 
-        private void NotificationHandlerThreadSafe(ZWNotification n)
+        private void ProcessZWNotificationTypeSwitch(ZWNotification n)
         {
-
-            // Log Base Notification Value
-            Logger.Debug("ZWave: ReceivingNotification : " + 
-                "Code -> " + n.GetCode() + 
-                " | Type -> " + n.GetType() +
-                " | HomeId -> " + n.GetHomeId() +
-                " | NodeId -> " + n.GetNodeId() + 
-                " | ValueId.CommandClassId -> " + n.GetValueID().GetCommandClassId() +
-                " | ValueId.Genre -> " + n.GetValueID().GetGenre() +
-                " | ValueId.HomeId -> " + n.GetValueID().GetHomeId() + 
-                " | ValueId.Id -> " + n.GetValueID().GetId() +
-                " | ValueId.Index -> " + n.GetValueID().GetIndex() +
-                " | ValueId.Instance -> " + n.GetValueID().GetInstance() +
-                " | ValueId.NodeId -> " + n.GetValueID().GetNodeId() +
-                " | ValueId.Type -> " + n.GetValueID().GetType() +
-                " | GroupIdx -> " + n.GetGroupIdx() +
-                " | Event -> " + n.GetEvent() +
-                " | Byte -> " + n.GetByte());
-
-            switch (n.GetCode())
-            {
-                case ZWNotification.Code.Alive:
-
-                    break;
-                case ZWNotification.Code.Awake:
-                    break;
-                case ZWNotification.Code.Dead:
-                    break;
-                case ZWNotification.Code.MsgComplete:
-                    break;
-                case ZWNotification.Code.NoOperation:
-                    break;
-                case ZWNotification.Code.Sleep:
-                    break;
-                case ZWNotification.Code.Timeout:
-                    break;
-            }
-
             switch (n.GetType())
             {
                 //Driver 
@@ -230,8 +192,10 @@ namespace ZWaveLib
 
                 //Polling
                 case ZWNotification.Type.PollingDisabled:
+
                     break;
                 case ZWNotification.Type.PollingEnabled:
+
                     break;
 
                 //button
@@ -242,6 +206,53 @@ namespace ZWaveLib
                 case ZWNotification.Type.CreateButton:
                     break;
                 case ZWNotification.Type.DeleteButton:
+                    break;
+            }
+        }
+
+        private void NotificationHandlerThreadSafe(ZWNotification n)
+        {
+            // Log Base Notification Value
+            Logger.Debug("ZWave: ReceivingNotification : " + 
+                "Code -> " + n.GetCode() + 
+                " | Type -> " + n.GetType() +
+                " | HomeId -> " + n.GetHomeId() +
+                " | NodeId -> " + n.GetNodeId() + 
+                " | ValueId.CommandClassId -> " + n.GetValueID().GetCommandClassId() +
+                " | ValueId.Genre -> " + n.GetValueID().GetGenre() +
+                " | ValueId.HomeId -> " + n.GetValueID().GetHomeId() + 
+                " | ValueId.Id -> " + n.GetValueID().GetId() +
+                " | ValueId.Index -> " + n.GetValueID().GetIndex() +
+                " | ValueId.Instance -> " + n.GetValueID().GetInstance() +
+                " | ValueId.NodeId -> " + n.GetValueID().GetNodeId() +
+                " | ValueId.Type -> " + n.GetValueID().GetType() +
+                " | GroupIdx -> " + n.GetGroupIdx() +
+                " | Event -> " + n.GetEvent() +
+                " | Byte -> " + n.GetByte());
+
+            switch (n.GetCode())
+            {
+                case ZWNotification.Code.Alive:
+                    Logger.Debug("TODO: Receiving Notification Alive code");
+                    break;
+                case ZWNotification.Code.Awake:
+                    Logger.Debug("TODO: Receiving Notification Awake code");
+                    break;
+                case ZWNotification.Code.Dead:
+                    Logger.Debug("TODO: Receiving Notification Dead code");
+                    break;
+                case ZWNotification.Code.MsgComplete:
+                    Logger.Debug("Receiving Notification Message complete code");
+                    ProcessZWNotificationTypeSwitch(n);
+                    break;
+                case ZWNotification.Code.NoOperation:
+                    Logger.Debug("TODO: Receiving Notification No Operation code");
+                    break;
+                case ZWNotification.Code.Sleep:
+                    Logger.Debug("TODO: Receiving Notification Sleep code");
+                    break;
+                case ZWNotification.Code.Timeout:
+                    Logger.Debug("TODO: Receiving Notification Timeout code");
                     break;
             }
         }

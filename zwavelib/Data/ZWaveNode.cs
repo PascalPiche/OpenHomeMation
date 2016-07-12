@@ -68,7 +68,6 @@ namespace ZWaveLib.Data
 
         internal void UpdateNode(ZWNotification n)
         {
-            //this.Name = NotificationTool.GetNodeName(n, this.Manager);
             UpdateZWaveNodeProperties();
         }
 
@@ -78,9 +77,16 @@ namespace ZWaveLib.Data
             Object value = GetValue(valueId);
             bool result = false;
 
+            //Grouping values by Command Class
+            byte commandClassId = valueId.GetCommandClassId();
+            //if (this.Children)
             if (this.ContainsProperty(valueId.GetId().ToString()))
             {
-                string units = Manager.GetValueUnits(valueId);
+                //string units = Manager.GetValueUnits(valueId);
+                //Manager.GetPollIntensity
+                //Manager.IsPolled
+                //Manager.IsValueSet
+                //Manager.IsValuePolled
                 this.UpdateProperty(valueId.GetId().ToString(), value);
                 result = true;
             }
