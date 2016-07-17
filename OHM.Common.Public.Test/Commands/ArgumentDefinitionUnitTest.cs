@@ -41,14 +41,17 @@ namespace OHM.Tests
             string key = "tata";
             var target = new ArgumentDefinition(key, "toto", typeof(Int32), true);
 
+
             Int32 targetValue = 65;
-            Dictionary<string, object> tempObject = new Dictionary<string, object>();
+            
+            /*Dictionary<string, object> tempObject = new Dictionary<string, object>();
+             * tempObject.Add(key, targetValue);*/
+
             Boolean result = false;
-            tempObject.Add(key, targetValue);
             Int32 outValue = -1;
 
             // Test
-            result = target.TryGetInt32(tempObject, out outValue);
+            result = target.TryGetInt32(targetValue, out outValue);
 
             // Assert
             Assert.AreEqual(true, result);
@@ -63,13 +66,64 @@ namespace OHM.Tests
 
             String inputValue = "65";
             Int32 targetValue = 65;
-            Dictionary<string, object> tempObject = new Dictionary<string, object>();
+
+            //Dictionary<string, object> tempObject = new Dictionary<string, object>();
             Boolean result = false;
-            tempObject.Add(key, inputValue);
+
+            //tempObject.Add(key, inputValue);
+
             Int32 outValue = -1;
 
             // Test
-            result = target.TryGetInt32(tempObject, out outValue);
+            result = target.TryGetInt32(inputValue, out outValue);
+
+            // Assert
+            Assert.AreEqual(true, result);
+            Assert.AreEqual(targetValue, outValue);
+        }
+
+        [TestMethod]
+        public void TestArgumentDefinitionTryGetInt32WithDictionnaryObject()
+        {
+            string key = "tata2";
+            var target = new ArgumentDefinition(key, "toto", typeof(Int32), true);
+
+            String inputValue = "65";
+            Int32 targetValue = 65;
+
+            Dictionary<string, object> dicInput = new Dictionary<string, object>();
+            dicInput.Add(key, inputValue);
+
+            Boolean result = false;
+
+            Int32 outValue = -1;
+
+            // Test
+            result = target.TryGetInt32(dicInput, out outValue);
+
+            // Assert
+            Assert.AreEqual(true, result);
+            Assert.AreEqual(targetValue, outValue);
+        }
+
+        [TestMethod]
+        public void TestArgumentDefinitionTryGetInt32WithDictionnaryString()
+        {
+            string key = "tata2";
+            var target = new ArgumentDefinition(key, "toto", typeof(Int32), true);
+
+            String inputValue = "65";
+            Int32 targetValue = 65;
+
+            Dictionary<string, string> dicInput = new Dictionary<string, string>();
+            dicInput.Add(key, inputValue);
+
+            Boolean result = false;
+
+            Int32 outValue = -1;
+
+            // Test
+            result = target.TryGetInt32(dicInput, out outValue);
 
             // Assert
             Assert.AreEqual(true, result);

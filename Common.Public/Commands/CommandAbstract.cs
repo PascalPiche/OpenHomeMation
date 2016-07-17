@@ -52,7 +52,7 @@ namespace OHM.Commands
         public bool Execute(Dictionary<string, string> arguments)
         {
             bool result = false;
-            if (_definition.ValidateArguments(arguments))
+            if (CanExecute() && _definition.ValidateArguments(arguments))
             {
                 result = RunImplementation(arguments);
             }

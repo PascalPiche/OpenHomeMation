@@ -15,13 +15,13 @@ namespace OHM.Commands
 
         #region Internal Ctor
 
-        internal CommandDefinition(string key, string name)
+        public CommandDefinition(string key, string name)
             : this(key, name, string.Empty) { }
 
-        internal CommandDefinition(string key, string name, string description)
+        public CommandDefinition(string key, string name, string description)
             : this(key, name, description, null) { }
 
-        internal CommandDefinition(string key, string name, string description, Dictionary<string, IArgumentDefinition> argumentsDefinition)
+        public CommandDefinition(string key, string name, string description, Dictionary<string, IArgumentDefinition> argumentsDefinition)
         {
             _key = key;
             _name = name;
@@ -68,7 +68,8 @@ namespace OHM.Commands
                 }
             }
 
-            if (arguments != null && result != false)
+            //Validate type value
+            if (result != false && arguments != null)
             {
                 foreach (var item in arguments)
                 {

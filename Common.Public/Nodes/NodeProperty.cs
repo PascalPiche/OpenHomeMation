@@ -16,43 +16,35 @@ namespace OHM.Nodes
         private bool _readOnly;
         private Type _type;
         private ObservableCollection<INodeProperty> _extraInfo = new ObservableCollection<INodeProperty>();
-        private Dictionary<String, INodeProperty> _extraInfoDict = new Dictionary<String, INodeProperty>();
+        private Dictionary<String, INodeProperty> _extraInfoDict;
 
         #endregion
 
         #region Public Ctor
 
-        public NodeProperty(string key, string name, Type type)
+        public NodeProperty(string key, string name, Type type) 
+            : this(key, name, type, true) {}
+
+        public NodeProperty(string key, string name, Type type, bool readOnly) 
+            : this(key,name,type, readOnly, "") {}
+
+        public NodeProperty(string key, string name, Type type, bool readOnly, string description)
+            : this(key, name, type, readOnly, description, null) {}
+
+        public NodeProperty(string key, string name, Type type, bool readOnly, string description, object value) 
+            : this(key, name, type, readOnly, description, value, new ObservableCollection<INodeProperty>()) {}
+
+        public NodeProperty(string key, string name, Type type, bool readOnly, string description, object value, ObservableCollection<INodeProperty> extraInfo)
         {
             _key = key;
             _name = name;
             _type = type;
-            _readOnly = true;
-        }
-
-        public NodeProperty(string key, string name, Type type, bool readOnly) : this(key,name,type)
-        {
             _readOnly = readOnly;
-        }
-
-        public NodeProperty(string key, string name, Type type, bool readOnly, string description) : this(key, name, type, readOnly)
-        {
             _description = description;
-        }
-
-        public NodeProperty(string key, string name, Type type, bool readOnly, string description, object value) : this(key, name, type, readOnly, description)
-        {
             SetValue(value);
-        }
-
-        public NodeProperty(string key, string name, Type type, bool readOnly, string description, object value, ObservableCollection<INodeProperty> extraInfo)
-            : this(key, name, type, readOnly, description, value)
-        {
             _extraInfo = extraInfo;
-            foreach (INodeProperty nodeProp in _extraInfo)
-            {
-                _extraInfoDict.Add(nodeProp.Key, nodeProp);
-            }
+
+            InitializeExtraInfoDict();
         }
 
         #endregion
@@ -103,5 +95,17 @@ namespace OHM.Nodes
 
         #endregion
 
+        #region Private functions
+
+        private void InitializeExtraInfoDict()
+        {
+            _extraInfoDict = new Dictionary<String, INodeProperty>();
+            foreach (INodeProperty nodeProp in _extraInfo)
+            {
+                _extraInfoDict.Add(nodeProp.Key, nodeProp);
+            }
+        }
+
+        #endregion
     }
 }

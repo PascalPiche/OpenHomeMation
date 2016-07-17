@@ -53,6 +53,7 @@
     <Compile Include="Commands\ArgumentDefinitionUnitTest.cs" />
     <Compile Include="Commands\CommandDefinitionUnitTest.cs" />
     <Compile Include="Commands\CommandAbstractUnitTest.cs" />
+    <Compile Include="Nodes\NodePropertyUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -60,6 +61,9 @@
       <Project>{c7ae6787-9a8a-4ebc-a341-ffacf31acaf7}</Project>
       <Name>OHM.Common.Public</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Plugins\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

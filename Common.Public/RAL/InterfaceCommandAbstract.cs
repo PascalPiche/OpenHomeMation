@@ -6,7 +6,6 @@ namespace OHM.RAL.Commands
 {
     public abstract class InterfaceCommandAbstract : CommandAbstract, IInterfaceCommand
     {
-
         #region Private Members
 
         private IInterface _interface;
@@ -92,6 +91,5 @@ namespace OHM.RAL.Commands
         }
 
         #endregion
-
     }
 }
