@@ -3,8 +3,5 @@
 namespace OHM.Logger
 {
     public interface ILogger : ILog
-    {
-
-        
-    }
+    {}
 }

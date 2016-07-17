@@ -1,9 +1,6 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OHM.Commands;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OHM.Nodes;
+using System;
 using System.Collections.ObjectModel;
 
 namespace OHM.Tests
