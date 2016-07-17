@@ -12,18 +12,27 @@ namespace OpenHomeMationService
     public partial class OpenHomeMationService : ServiceBase
     {
         private OpenHomeMation ohm;
-        private ILoggerManager loggerMng;
-        private IPluginsManager pluginMng;
-        private IInterfacesManager interfacesMng;
-        private IVrManager vrMng;
 
         public OpenHomeMationService()
         {
+            this.AutoLog = true;
+            this.CanHandlePowerEvent = false;
+            this.CanHandleSessionChangeEvent = false;
+            this.CanPauseAndContinue = false;
+            this.CanShutdown = true;
+            this.CanStop = false;
+            this.ServiceName = "OvWra";
             InitializeComponent();
         }
 
         protected override void OnStart(string[] args)
         {
+            
+            ILoggerManager loggerMng;
+            IPluginsManager pluginMng;
+            IInterfacesManager interfacesMng;
+            IVrManager vrMng;
+
             loggerMng = new LoggerManager();
             var dataMng = new FileDataManager(loggerMng, AppDomain.CurrentDomain.BaseDirectory + "\\data\\");
             pluginMng = new PluginsManager(loggerMng, AppDomain.CurrentDomain.BaseDirectory + "\\plugins\\");
