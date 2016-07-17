@@ -104,5 +104,30 @@ namespace OHM.Tests
             Assert.AreEqual(value, target.Value);
 
         }
+
+        // Boolean state for the event trigger
+        private bool _CheckPropertyChangedForTestNodePropertySetValueWithNull = false;
+        
+        [TestMethod]
+        public void TestNodePropertySetValueWithNull()
+        {
+            string key = "key1";
+            string name = "name1";
+            Type type = typeof(Int32);
+            NodeProperty target = new NodeProperty(key, name, type);
+            target.PropertyChanged += target_PropertyChanged;
+
+            _CheckPropertyChangedForTestNodePropertySetValueWithNull = false;
+
+            bool result = target.SetValue(null);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(_CheckPropertyChangedForTestNodePropertySetValueWithNull);
+        }
+
+        void target_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            _CheckPropertyChangedForTestNodePropertySetValueWithNull = true;
+        }
     }
 }

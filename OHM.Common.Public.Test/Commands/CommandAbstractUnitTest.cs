@@ -81,6 +81,19 @@ namespace OHM.Common.Public.Test.Commands
             Assert.IsTrue(target.Execute(null));
 
         }
+
+        [TestMethod]
+        public void TestCommandAbstractExecuteWithArgs()
+        {
+            //Should not be valid with a null Node
+            string key = "key";
+            string name = "name";
+
+            var target = new CommandAbstractIMP(null, key, name); ;
+
+            Assert.IsTrue(target.Execute(new Dictionary<string, string>()));
+
+        }
     }
 
     public class CommandAbstractIMP : CommandAbstract
