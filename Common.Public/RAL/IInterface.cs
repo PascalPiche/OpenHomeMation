@@ -8,7 +8,7 @@ namespace OHM.RAL
     {
         #region Properties
 
-        new InterfaceStates InterfaceState { get; }
+        InterfaceStates InterfaceState { get; }
 
         bool IsRunning { get; }
 

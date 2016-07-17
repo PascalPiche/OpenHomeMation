@@ -71,7 +71,7 @@ namespace OHM.Plugins
             return true;
         }
 
-        public bool InstallPlugin(Guid id, IOhmSystemInternal system)
+        public bool InstallPlugin(Guid id, IOhmSystemPlugins system)
         {
             IPlugin plugin = FindPluginIn(id, _availablesPlugins);
             bool result = false;

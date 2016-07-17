@@ -27,9 +27,13 @@ namespace OHM.Plugins.Tests
         public void TestPluginsManagerInitWithMissingDirectory()
         {
             var loggerMng = MockRepository.GenerateStub<ILoggerManager>();
+
             var logger = MockRepository.GenerateStub<ILogger>();
             loggerMng.Stub(x => x.GetLogger("PluginsManager")).Return(logger);
+
             var dataStore = MockRepository.GenerateStub<IDataStore>();
+            dataStore.Stub(x => x.GetOrCreateDataDictionary("InstalledPlugins")).Return(new DataDictionary());
+
             string filePath = AppDomain.CurrentDomain.BaseDirectory + "\\pluginsTest\\";
 
             var d = new PluginsManager(loggerMng, filePath);
@@ -42,7 +46,6 @@ namespace OHM.Plugins.Tests
 
             Assert.AreEqual(0, d.AvailablesPlugins.Count);
             Assert.AreEqual(0, d.InstalledPlugins.Count);
-
         }
 
         
@@ -50,9 +53,12 @@ namespace OHM.Plugins.Tests
         public void TestPluginsManagerInitWithPlugin()
         {
             var loggerMng = MockRepository.GenerateStub<ILoggerManager>();
+
             var logger = MockRepository.GenerateStub<ILogger>();
             loggerMng.Stub(x => x.GetLogger("PluginsManager")).Return(logger);
             var dataStore = MockRepository.GenerateStub<IDataStore>();
+            dataStore.Stub(x => x.GetOrCreateDataDictionary("InstalledPlugins")).Return(new DataDictionary());
+
             string filePath = AppDomain.CurrentDomain.BaseDirectory + "\\pluginsStub\\";
 
             var d = new PluginsManager(loggerMng, filePath);
@@ -77,10 +83,11 @@ namespace OHM.Plugins.Tests
             loggerMng.Stub(x => x.GetLogger("PluginsManager")).Return(logger);
 
             var dataStore = MockRepository.GenerateStub<IDataStore>();
+            dataStore.Stub(x => x.GetOrCreateDataDictionary("InstalledPlugins")).Return(new DataDictionary());
 
             string filePath = AppDomain.CurrentDomain.BaseDirectory + "\\pluginsStub1\\";
 
-            var ohmSystem = MockRepository.GenerateStub<IOhmSystem>();
+            var ohmSystem = MockRepository.GenerateStub<IOhmSystemPlugins>();
             var d = new PluginsManager(loggerMng, filePath);
 
             var guid = new Guid("dd985d5b-2d5e-49b5-9b07-64aad480e312");
@@ -115,15 +122,21 @@ namespace OHM.Plugins.Tests
             var loggerMng = MockRepository.GenerateStub<ILoggerManager>();
             var logger = MockRepository.GenerateStub<ILogger>();
             loggerMng.Stub(x => x.GetLogger("PluginsManager")).Return(logger);
+
             var dataDic = MockRepository.GenerateStub<IDataDictionary>();
             var listKeys = new List<string>();
+
             var guidStr = "dd985d5b-2d5e-49b5-9b07-64aad480e312";
             var guid = new Guid(guidStr);
+
             listKeys.Add(guidStr); //Valid key
             listKeys.Add("dd985d5b-2d5e-49b5-4b07-64aad480e312"); //Invalid key
+
             dataDic.Stub(x => x.Keys).Return(listKeys);
+
             var dataStore = MockRepository.GenerateStub<IDataStore>();
-            dataStore.Stub(x => x.GetDataDictionary("InstalledPlugins")).Return(dataDic);
+            dataStore.Stub(x => x.GetOrCreateDataDictionary("InstalledPlugins")).Return(dataDic);
+
             string filePath = AppDomain.CurrentDomain.BaseDirectory + "\\pluginsStub2\\";
 
             var target = new PluginsManager(loggerMng, filePath);

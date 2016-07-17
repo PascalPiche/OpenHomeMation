@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OHM.RAL.Commands;
 
 namespace OHM.Tests
 {
@@ -10,9 +11,11 @@ namespace OHM.Tests
         public void TestInterfaceCommandAbstractConstructorDefault()
         {
 
+            //InterfaceCommandAbstract target = new InterfaceCommandAbstract("", "", "");
 
           
         }
+
 
     }
 }

@@ -13,7 +13,7 @@ namespace OHM.Plugins
 
         IList<IPlugin> AvailablesPlugins { get; }
 
-        bool InstallPlugin(Guid id, IOhmSystemInternal system);
+        bool InstallPlugin(Guid id, IOhmSystemPlugins system);
 
         IPlugin GetPlugin(Guid id);
 

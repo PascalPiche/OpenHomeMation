@@ -1,6 +1,7 @@
-﻿using OHM.Interfaces;
-using OHM.Logger;
+﻿using OHM.Logger;
 using OHM.Plugins;
+using OHM.RAL;
+using OHM.SYS;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,13 +28,13 @@ namespace OHM.Tests.Stub.Plugin
             get { return "Fake Plugin Error"; }
         }
 
-        public override bool Install(Sys.IOhmSystemInstallGateway system)
+        public override bool Install(IOhmSystemInstallGateway system)
         {
             throw new NotImplementedException();
             //return true;
         }
 
-        public override bool Uninstall(Sys.IOhmSystemUnInstallGateway system)
+        public override bool Uninstall(IOhmSystemUnInstallGateway system)
         {
             throw new NotImplementedException();
         }
@@ -42,7 +43,6 @@ namespace OHM.Tests.Stub.Plugin
         {
             throw new NotImplementedException();
         }
-
 
         public override InterfaceAbstract CreateInterface(string key, ILogger logger)
         {
