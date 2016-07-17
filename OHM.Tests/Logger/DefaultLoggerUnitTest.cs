@@ -1,8 +1,7 @@
-﻿using System;
+﻿using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OHM.Logger;
 using Rhino.Mocks;
-using log4net;
+using System;
 
 namespace OHM.Logger.Tests
 {

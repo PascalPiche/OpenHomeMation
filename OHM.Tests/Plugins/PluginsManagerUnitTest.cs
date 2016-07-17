@@ -1,14 +1,11 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OHM.Plugins;
-using Rhino.Mocks;
-using OHM.Logger;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OHM.Data;
-using System.IO;
-using OHM.Sys;
-using System.Collections;
-using System.Collections.Generic;
+using OHM.Logger;
 using OHM.SYS;
+using Rhino.Mocks;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace OHM.Plugins.Tests
 {

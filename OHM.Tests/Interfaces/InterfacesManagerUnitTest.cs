@@ -1,12 +1,12 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Rhino.Mocks;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OHM.Data;
 using OHM.Logger;
 using OHM.Plugins;
-using OHM.Data;
-using System.Collections.Generic;
 using OHM.RAL;
 using OHM.SYS;
+using Rhino.Mocks;
+using System;
+using System.Collections.Generic;
 
 namespace OHM.Tests.Interfaces
 {

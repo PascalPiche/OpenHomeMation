@@ -1,9 +1,8 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OHM.Data;
-using System.IO;
-using Rhino.Mocks;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OHM.Logger;
+using Rhino.Mocks;
+using System;
+using System.IO;
 
 namespace OHM.Data.Tests
 {

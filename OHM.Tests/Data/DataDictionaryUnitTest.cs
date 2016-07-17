@@ -1,6 +1,5 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OHM.Data;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace OHM.Data.Tests
 {
