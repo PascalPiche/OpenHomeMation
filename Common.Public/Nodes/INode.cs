@@ -30,7 +30,7 @@ namespace OHM.Nodes
 
         bool CanExecuteCommand(string key);
 
-        bool ExecuteCommand(string commandKey, Dictionary<string, string> arguments);
+        bool ExecuteCommand(string commandKey, IDictionary<string, string> arguments);
 
         #endregion
 

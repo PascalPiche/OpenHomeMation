@@ -7,6 +7,14 @@ namespace OHM.Data
     {
         IEnumerable<string> Keys { get; }
 
+        bool ContainKey(string key);
+
+        bool RemoveKey(string key);
+
+        bool GetBool(string key);
+
+        void StoreBool(string key, bool value);
+
         void StoreInt32(string key, Int32 value);
 
         int GetInt32(string key);
@@ -15,19 +23,10 @@ namespace OHM.Data
 
         String GetString(string key);
 
-        void StoreDataDictionary(string key, IDataDictionary store);
-
         IDataDictionary GetOrCreateDataDictionary(string key);
 
-        bool GetBool(string key);
+        //IDataDictionary GetDataDictionary(string key);
 
-        void StoreBool(string key, bool value);
-
-        IDataDictionary GetDataDictionary(string key);
-
-        bool RemoveKey(string key);
-
-        bool ContainKey(string key);
-
+        //void StoreDataDictionary(string key, IDataDictionary store);
     }
 }

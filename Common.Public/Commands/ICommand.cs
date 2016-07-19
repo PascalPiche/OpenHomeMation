@@ -12,7 +12,7 @@ namespace OHM.Commands
 
         ICommandDefinition Definition { get; }
 
-        bool Execute(Dictionary<string, string> arguments);
+        bool Execute(IDictionary<string, string> arguments);
 
         bool CanExecute();
     }

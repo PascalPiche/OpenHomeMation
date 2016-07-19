@@ -136,15 +136,15 @@ namespace OHM.Nodes
             return false;
         }
 
-        public bool ExecuteCommand(string key, Dictionary<string, string> arguments)
+        public bool ExecuteCommand(string key, IDictionary<string, string> arguments)
         {
             if (_commandsDic.ContainsKey(key))
             {
                 return _commandsDic[key].Execute(arguments);
             }
-            else if (_children.Count != 0)
+            else if (Children.Count != 0)
             {
-                foreach(INode node in _children) {
+                foreach(INode node in Children) {
                     if (node.ExecuteCommand(key, arguments))
                     {
                         return true;
@@ -196,6 +196,8 @@ namespace OHM.Nodes
 
         #region Protected Functions
 
+        protected IList<NodeAbstract> GetChildren () { return _children; }
+
         protected NodeAbstract GetChild(string key)
         {
             NodeAbstract result;
@@ -207,7 +209,7 @@ namespace OHM.Nodes
             else
             {
                 //Check child
-                foreach (NodeAbstract item in _children)
+                foreach (NodeAbstract item in Children)
                 {
                     result = item.GetChild(key);
                     if (result != null)
@@ -233,14 +235,7 @@ namespace OHM.Nodes
 
         protected bool RemoveChild(INode node)
         {
-            var it = GetChild(node.Key);
-            if (it != null)
-            {
-                _children.Remove(it);
-                _childrenDic.Remove(node.Key);
-                return true;
-            }
-            return false;
+            return this.RemoveChild(node.Key);
         }
 
         protected bool RemoveChild(string key)
@@ -248,7 +243,7 @@ namespace OHM.Nodes
             var it = GetChild(key);
             if (it != null)
             {
-                _children.Remove(it);
+                GetChildren().Remove(it);
                 _childrenDic.Remove(Key);
                 return true;
             }
@@ -269,7 +264,7 @@ namespace OHM.Nodes
         protected bool UnRegisterProperty(string key)
         {
             bool result = false;
-            if (_propertiesDic.ContainsKey(Key))
+            if (_propertiesDic.ContainsKey(key))
             {
                 var property = _propertiesDic[key];
                 if (_properties.Remove(property))

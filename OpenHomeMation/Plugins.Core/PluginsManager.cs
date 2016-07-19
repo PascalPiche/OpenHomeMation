@@ -59,7 +59,7 @@ namespace OHM.Plugins
 
             //Create or get Dictionnary for installed plugins
             _dataInstalledPlugins = _data.GetOrCreateDataDictionary("InstalledPlugins");
-            _data.StoreDataDictionary("InstalledPlugins", _dataInstalledPlugins);
+            //_data.StoreDataDictionary("InstalledPlugins", _dataInstalledPlugins);
             _data.Save();
 
             InitPluginsList();
@@ -251,7 +251,7 @@ namespace OHM.Plugins
                 else
                 {
                     //Get Info from the bd to track missing plugin
-                    IDataDictionary pluginData = _dataInstalledPlugins.GetDataDictionary(item);
+                    IDataDictionary pluginData = _dataInstalledPlugins.GetOrCreateDataDictionary(item);
                     _logger.Warn("Registered plugin " + item + "not found");
                     plugin = new NotFoundPlugin(item, pluginData.GetString("name"));
                     _installedPluginsInstance.Add(plugin);

@@ -49,12 +49,12 @@ namespace OHM.Commands
             return true;
         }
 
-        public bool Execute(Dictionary<string, string> arguments)
+        public bool Execute(IDictionary<string, string> arguments)
         {
             bool result = false;
-            if (this.CanExecute() && Definition.ValidateArguments(arguments))
+            if (this.CanExecute() && this.Definition.ValidateArguments(arguments))
             {
-                result = RunImplementation(arguments);
+                result = this.RunImplementation(arguments);
             }
             return result;
         }
@@ -74,7 +74,7 @@ namespace OHM.Commands
 
         #region Methods
 
-        protected abstract bool RunImplementation(Dictionary<string, string> arguments);
+        protected abstract bool RunImplementation(IDictionary<string, string> arguments);
 
         #endregion
 

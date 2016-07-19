@@ -50,49 +50,181 @@ namespace OHM.Commands
             if (Type == typeof(Int32))
             {
                 Int32 resultTemp;
-                result = TryGetInt32(value, out resultTemp);
+                result = this.TryGetInt32(value, out resultTemp);
             }
             else if (Type == typeof(string))
             {
                 String resultTemp;
-                result = TryGetString(value, out resultTemp);
+                result = this.TryGetString(value, out resultTemp);
             }
 
             return result;
         }
 
+        public Boolean TryGetBool(Object value, out bool result)
+        {
+            bool fctResult = false;
+            result = false;
+
+            value = this.ExtractValueFromDictionary(value);
+            if (value is bool)
+            {
+                result = (bool)value;
+                fctResult = true;
+            }
+            else if (value is String)
+            {
+                fctResult = Boolean.TryParse((String)value, out result);
+            }
+
+            return fctResult;
+        }
+
+        public Boolean TryGetUInt16(Object value, out UInt16 result)
+        {
+            bool fctResult = false;
+            result = 0;
+
+            value = this.ExtractValueFromDictionary(value);
+            if (value is UInt16)
+            {
+                result = (UInt16)value;
+                fctResult = true;
+            }
+            else if (value is String)
+            {
+                fctResult = UInt16.TryParse((String)value, out result);
+            }
+
+            return fctResult;
+        }
+
+        public Boolean TryGetInt16(Object value, out Int16 result)
+        {
+            bool fctResult = false;
+            result = Int16.MinValue;
+
+            value = this.ExtractValueFromDictionary(value);
+            if (value is Int16)
+            {
+                result = (Int16)value;
+                fctResult = true;
+            }
+            else if (value is String)
+            {
+                fctResult = Int16.TryParse((String)value, out result);
+            }
+            
+            return fctResult;
+        }
+
+        public Boolean TryGetUInt32(Object value, out UInt32 result)
+        {
+            bool fctResult = false;
+            result = 0;
+
+            value = this.ExtractValueFromDictionary(value);
+            if (value is UInt32)
+            {
+                result = (UInt32)value;
+                fctResult = true;
+            }
+            else if (value is String)
+            {
+                fctResult = UInt32.TryParse((String)value, out result);
+            }
+
+            return fctResult;
+        }
+
         public Boolean TryGetInt32(Object value, out Int32 result)
         {
             bool fctResult = false;
-            value = ExtractValueFromDictionary(value);
+            result = Int32.MinValue;
+            value = this.ExtractValueFromDictionary(value);
 
             if (value is Int32)
             {
                 result = (Int32)value;
-                return true;
+                fctResult = true;
             }
-
-            if (value is String)
+            else if (value is String)
             {
-                return Int32.TryParse((String)value, out result);
+                fctResult = Int32.TryParse((String)value, out result);
+            }
+            
+            return fctResult;
+        }
+
+        public Boolean TryGetUInt64(Object value, out UInt64 result)
+        {
+            bool fctResult = false;
+            result = 0;
+            value = this.ExtractValueFromDictionary(value);
+
+            if (value is UInt64)
+            {
+                result = (UInt64)value;
+                fctResult = true;
+            }
+            else if (value is String)
+            {
+                fctResult = UInt64.TryParse((String)value, out result);
             }
 
-            result = -1;
+            return fctResult;
+        }
+
+        public Boolean TryGetInt64(Object value, out Int64 result)
+        {
+            bool fctResult = false;
+            result = Int64.MinValue;
+            value = this.ExtractValueFromDictionary(value);
+
+            if (value is Int64)
+            {
+                result = (Int64)value;
+                fctResult = true;
+            }
+            else if (value is String)
+            {
+                fctResult = Int64.TryParse((String)value, out result);
+            }
+            
+            return fctResult;
+        }
+
+        public Boolean TryGetDouble(Object value, out Double result)
+        {
+            bool fctResult = false;
+            result = Double.MinValue;
+            value = this.ExtractValueFromDictionary(value);
+
+            if (value is Double)
+            {
+                result = (Double)value;
+                fctResult = true;
+            }
+            else if (value is String)
+            {
+                fctResult = Double.TryParse((String)value, out result);
+            }
+
             return fctResult;
         }
 
         public Boolean TryGetString(Object value, out String result)
         {
             bool fctResult = false;
-            value = ExtractValueFromDictionary(value);
+            result = null;
 
+            value = this.ExtractValueFromDictionary(value);
             if (value is String)
             {
                 result = (String)value;
-                return true;
+                fctResult = true;
             }
-
-            result = null;
+            
             return fctResult;
         }
 

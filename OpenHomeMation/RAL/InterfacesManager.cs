@@ -58,38 +58,28 @@ namespace OHM.RAL
         public bool RegisterInterface(string key, IPlugin plugin)
         {
             bool result = false;
-            //Detect if already created
-            IDataDictionary _interfaceData = _dataRegisteredInterfaces.GetDataDictionary(key);
-            if (_interfaceData != null)
-            {
-                //Interface already registered ???
-                _logger.Warn("Cannot register interface " + key + ", Key already used");
-            }
-            else 
-            {
-                try {
-                    IInterface newInterface = CreateInterface(key, plugin, _system);
-                    if (newInterface == null)
-                    {
-                        _logger.Error("Cannot register interface " + key + ", Error on creating Interface");
-                    }
-                    else
-                    {
-                        _interfaceData = CreateInterfaceData(key, plugin);
-
-                        _dataRegisteredInterfaces.StoreDataDictionary(key, _interfaceData);
-
-                        result = _data.Save();
-                        if (result)
-                        {
-                            _logger.Info("Registered interfaces : " + key + " with plugin " + plugin.Name);
-                        }
-                    }
-                } 
-                catch (Exception ex)
+            IDataDictionary _interfaceData = _dataRegisteredInterfaces.GetOrCreateDataDictionary(key);
+            
+            try {
+                IInterface newInterface = CreateInterface(key, plugin, _system);
+                if (newInterface == null)
                 {
-                    _logger.Error("Cannot register interface " + key + ", Unhandled exception on creating Interface", ex);
+                    _logger.Error("Cannot register interface " + key + ", Error on creating Interface");
                 }
+                else
+                {
+                    _interfaceData = CreateInterfaceData(key, plugin);
+                    result = _data.Save();
+
+                    if (result)
+                    {
+                        _logger.Info("Registered interfaces : " + key + " with plugin " + plugin.Name);
+                    }
+                }
+            } 
+            catch (Exception ex)
+            {
+                _logger.Error("Cannot register interface " + key + ", Unhandled exception on creating Interface", ex);
             }
             
             return result;
@@ -107,7 +97,7 @@ namespace OHM.RAL
                 _runningDic.Remove(key);
             }
 
-            IDataDictionary _interfaceData = _dataRegisteredInterfaces.GetDataDictionary(key);
+            IDataDictionary _interfaceData = _dataRegisteredInterfaces.GetOrCreateDataDictionary(key);
             
 
             if (_interfaceData != null)
@@ -215,7 +205,7 @@ namespace OHM.RAL
         {
             IPlugin result = null;
             _logger.Info("Loading interface : " + key);
-            IDataDictionary _dataPlugin = _dataRegisteredInterfaces.GetDataDictionary(key);
+            IDataDictionary _dataPlugin = _dataRegisteredInterfaces.GetOrCreateDataDictionary(key);
             String id = "";
             if (_dataPlugin != null)
             {

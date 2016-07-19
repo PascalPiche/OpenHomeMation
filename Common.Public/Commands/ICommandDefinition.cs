@@ -12,6 +12,6 @@ namespace OHM.Commands
 
         Dictionary<string, IArgumentDefinition> ArgumentsDefinition { get; }
 
-        bool ValidateArguments(Dictionary<string, string> arguments);
+        bool ValidateArguments(IDictionary<string, string> arguments);
     }
 }
