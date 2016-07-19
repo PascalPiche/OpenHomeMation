@@ -35,7 +35,7 @@ namespace WUnderground.Commands
             );
         }
 
-        protected override bool RunImplementation(Dictionary<string, string> arguments)
+        protected override bool RunImplementation(IDictionary<string, string> arguments)
         {
             string username;
             string keyId;

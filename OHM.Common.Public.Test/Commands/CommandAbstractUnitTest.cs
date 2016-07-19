@@ -106,7 +106,7 @@ namespace OHM.Common.Public.Test.Commands
         public CommandAbstractIMP(string key, string name, string description, Dictionary<string, IArgumentDefinition> argumentsDefinition)
             : base(key, name, description, argumentsDefinition) { }
 
-        protected override bool RunImplementation(Dictionary<string, string> arguments)
+        protected override bool RunImplementation(IDictionary<string, string> arguments)
         {
             return true;
         }

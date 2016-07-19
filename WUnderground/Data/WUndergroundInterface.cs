@@ -55,7 +55,7 @@ namespace WUnderground.Data
                 IDataDictionary accountsMetaInfo = _registeredAccounts.GetOrCreateDataDictionary(username);
                 accountsMetaInfo.StoreString("username", username);
                 accountsMetaInfo.StoreString("key", keyId);
-                _registeredAccounts.StoreDataDictionary(username, accountsMetaInfo);
+                //_registeredAccounts.StoreDataDictionary(username, accountsMetaInfo);
 
                 Logger.Info("Saving new account : " + username);
                 this.DataStore.Save();
@@ -81,7 +81,7 @@ namespace WUnderground.Data
         internal bool AddStationCommandExecution(Account node, string locationName, int zip, int magic, string wmo)
         {
             bool result = false;
-            IDataDictionary dataAccount = _registeredAccounts.GetDataDictionary(node.Key);
+            IDataDictionary dataAccount = _registeredAccounts.GetOrCreateDataDictionary(node.Key);
             IDataDictionary accountLocations = dataAccount.GetOrCreateDataDictionary("locations");
 
             if (!accountLocations.ContainKey(locationName))
@@ -95,7 +95,7 @@ namespace WUnderground.Data
                     locationData.StoreInt32("magic", magic);
                     locationData.StoreString("wmo", wmo);
 
-                    accountLocations.StoreDataDictionary(locationName, locationData);
+                    //accountLocations.StoreDataDictionary(locationName, locationData);
                     return DataStore.Save();
                 }
                 else
@@ -119,7 +119,7 @@ namespace WUnderground.Data
         {
             foreach (string itemKey in _registeredAccounts.Keys)
             {
-                IDataDictionary data = _registeredAccounts.GetDataDictionary(itemKey);
+                IDataDictionary data = _registeredAccounts.GetOrCreateDataDictionary(itemKey);
                 string username = data.GetString("username");
                 string key = data.GetString("key");
                 
@@ -129,7 +129,7 @@ namespace WUnderground.Data
                     IDataDictionary locations = data.GetOrCreateDataDictionary("locations");
                     foreach (string locationKey in locations.Keys)
                     {
-                        IDataDictionary locationData = locations.GetDataDictionary(locationKey);
+                        IDataDictionary locationData = locations.GetOrCreateDataDictionary(locationKey);
                         int zip = locationData.GetInt32("zip");
                         int magic = locationData.GetInt32("magic");
                         string wmo = locationData.GetString("wmo");

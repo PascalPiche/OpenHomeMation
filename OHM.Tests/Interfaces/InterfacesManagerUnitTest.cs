@@ -59,8 +59,8 @@ namespace OHM.Tests.Interfaces
             var dataStore = MockRepository.GenerateStub<IDataStore>();
             var dataDic = MockRepository.GenerateStub<IDataDictionary>();
             dataDic.Stub(x => x.Keys).Return(new List<string>());
-            dataDic.Stub(x => x.GetDataDictionary("existing")).Return(dataDic);
-            dataStore.Stub(x => x.GetDataDictionary("RegisteredInterfaces")).Return(dataDic);
+            dataDic.Stub(x => x.GetOrCreateDataDictionary("existing")).Return(dataDic);
+            dataStore.Stub(x => x.GetOrCreateDataDictionary("RegisteredInterfaces")).Return(dataDic);
             dataStore.Stub(x => x.Save()).Return(true);
             var plugin = MockRepository.GenerateStub<IPlugin>();
             plugin.Stub(x => x.Id).Return(new Guid("dd985d5b-2d5e-49b5-9b07-64aad480e312"));
@@ -104,12 +104,12 @@ namespace OHM.Tests.Interfaces
             listKeys.Add("test3"); //valid key, no plugin id
             listKeys.Add("test4"); //invalid key
             dataDic.Stub(x => x.Keys).Return(listKeys);
-            dataStore.Stub(x => x.GetDataDictionary("RegisteredInterfaces")).Return(dataDic);
+            dataStore.Stub(x => x.GetOrCreateDataDictionary("RegisteredInterfaces")).Return(dataDic);
             var plugin = MockRepository.GenerateStub<IPlugin>();
 
             //Case 1 (Test)
             var dataDic2 = MockRepository.GenerateStub<IDataDictionary>();
-            dataDic.Stub(x => x.GetDataDictionary("test")).Return(dataDic2);
+            dataDic.Stub(x => x.GetOrCreateDataDictionary("test")).Return(dataDic2);
             dataDic2.Stub(x => x.GetString("PluginId")).Return("dd985d5b-2d5e-49b5-9b07-64aad480e312");
             var guid = new Guid("dd985d5b-2d5e-49b5-9b07-64aad480e312");
             pluginsMng.Stub(x => x.GetPlugin(guid)).Return(plugin);
