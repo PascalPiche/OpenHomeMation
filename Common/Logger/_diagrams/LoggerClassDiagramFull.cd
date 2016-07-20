@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Comment CommentText="Factory Method">
-    <Position X="1.281" Y="0.677" Height="0.365" Width="1.179" />
+    <Position X="1.291" Y="0.792" Height="0.291" Width="1.179" />
   </Comment>
   <Interface Name="OHM.Logger.ILoggerManager">
     <Position X="0.5" Y="0.5" Width="2" />

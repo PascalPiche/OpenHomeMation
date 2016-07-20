@@ -20,8 +20,6 @@ namespace OHM.SYS
 
         public OpenHomeMation(IPluginsManager pluginsMng, IDataManager dataMng, ILoggerManager loggerMng, IInterfacesManager interfacesMng, IVrManager vrMng)
         {
-            //Store dependency
-            //this._dataMng = dataMng;
             _ohmSystem = new OhmSystem(interfacesMng, vrMng, loggerMng, dataMng, pluginsMng);
         }
 

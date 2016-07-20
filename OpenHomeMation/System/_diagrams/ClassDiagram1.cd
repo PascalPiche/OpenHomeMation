@@ -1,43 +1,73 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="OHM.Sys.OhmSystem" BaseTypeListCollapsed="true">
-    <Position X="2.75" Y="0.5" Width="2" />
+  <Class Name="OHM.SYS.OhmSystem">
+    <Position X="5.75" Y="2" Width="2" />
+    <NestedTypes>
+      <Class Name="OHM.SYS.OhmSystem.APIInstance" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>System\OhmSystem.cs</NewMemberFileName>
+        </TypeIdentifier>
+        <Lollipop Position="0.2" />
+      </Class>
+    </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAABECAAgAAAACAEAAAAIABAAAAgA=</HashCode>
+      <HashCode>AAAAQAABACAAEAAAABECAAggIACiAEAAAAIABAAICAA=</HashCode>
       <FileName>System\OhmSystem.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="OHM.Sys.OhmSystemInstallGateway" BaseTypeListCollapsed="true">
-    <Position X="8" Y="0.5" Width="2.25" />
+  <Class Name="OHM.SYS.OhmSystemInstallGateway">
+    <Position X="8" Y="2" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAEAAAAAAIAAAAAAAAAAAAAAAAgAAAAAAAEAAAAAAA=</HashCode>
+      <HashCode>AAAEAAAAAAIAAAAAAAACAAAAIAAgAgAAAAAAAAAAAAA=</HashCode>
       <FileName>System\OhmSystemInstallGateway.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="OHM.Sys.OhmSystemInterfaceGateway" BaseTypeListCollapsed="true">
-    <Position X="5.25" Y="3.5" Width="2.25" />
+  <Class Name="OHM.SYS.OhmSystemInterfaceGateway">
+    <Position X="10.5" Y="2" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAIAAAAAAEAAAEAAAAAAAAAAAAAAAAEAAAAAAA=</HashCode>
       <FileName>System\OhmSystemInterfaceGateway.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="OHM.Sys.OhmSystemUnInstallGateway" BaseTypeListCollapsed="true">
-    <Position X="5.25" Y="0.5" Width="2.25" />
+  <Class Name="OHM.SYS.OhmSystemUnInstallGateway">
+    <Position X="13" Y="2" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAIAAAAAAAAQAAAAAAAgAAAAAAAEAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAIAAAAAAAASAAAAIAAgAAAAAAAAAAAAAAA=</HashCode>
       <FileName>System\OhmSystemUnInstallGateway.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="OHM.Sys.OpenHomeMation">
-    <Position X="0.5" Y="0.5" Width="1.75" />
+  <Class Name="OHM.SYS.OpenHomeMation">
+    <Position X="3.75" Y="2" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAMAAAAAgAIACQQgAMAAAAAAAAAYAAAAACAA=</HashCode>
+      <HashCode>AAAAAAAAACAAAAAAAIAAQQAgIAAAAAAAAAQAAAAAAAA=</HashCode>
       <FileName>System\OpenHomeMation.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="OHM.Sys.OpenHomeMationServer" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="2" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>System\OpenHomeMationServer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OHM.Sys.OpenHomeMationServerImplementation">
+    <Position X="0.5" Y="3.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>System\OpenHomeMationServer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="OHM.Sys.IOpenHomeMationServer">
+    <Position X="0.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>System\OpenHomeMationServer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
