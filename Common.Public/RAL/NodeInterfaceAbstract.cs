@@ -94,18 +94,5 @@ namespace OHM.RAL
         protected abstract void Shutdown();
 
         #endregion
-
-        #region Private functions
-
-        private new bool ExecuteCommand(string commandKey, Dictionary<string, string> arguments)
-        {
-            if (_commandsDic.ContainsKey(commandKey))
-            {
-                return _commandsDic[commandKey].Execute(arguments);
-            }
-            return false;
-        }
-
-        #endregion
     }
 }

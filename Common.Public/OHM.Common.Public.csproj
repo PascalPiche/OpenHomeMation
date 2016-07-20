@@ -75,12 +75,16 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <None Include="Data\_diagrams\Graph1.dgml" />
     <None Include="Nodes\Commands\_diagrams\Relations-expanded.dgml" />
     <None Include="Nodes\Commands\_diagrams\Relations-simple.dgml" />
     <None Include="Nodes\_diagrams\Relations-expanded - Copy.dgml" />
     <None Include="Nodes\_diagrams\Relations-expanded.dgml" />
     <None Include="Nodes\_diagrams\Relations-simple.dgml" />
     <None Include="Plugins\_diagrams\Graph1.dgml" />
+    <None Include="RAL\Commands\_diagrams\ClassDiagram1.cd" />
+    <None Include="RAL\Commands\_diagrams\Graph1.dgml" />
+    <None Include="RAL\_diagrams\Graph1.dgml" />
     <None Include="_diagrams\ClassDiagram.cd" />
     <None Include="Nodes\Commands\_diagrams\CommandsClassDiagram.cd" />
     <None Include="Data\_diagrams\DataClassDiagram.cd" />

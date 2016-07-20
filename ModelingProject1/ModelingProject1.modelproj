@@ -27,6 +27,8 @@
       <SubType>Content</SubType>
     </Content>
     <Folder Include="OHM" />
+    <Folder Include="OHM\OHM.Common.dll" />
+    <Folder Include="OHM\OHM.Common.dll\Data" />
     <Folder Include="OHM\OHM.Common.Public.dll\Data" />
     <Folder Include="OHM\OHM.Common.Public.dll\Logger" />
     <Folder Include="OHM\OHM.Common.Public.dll\Nodes" />

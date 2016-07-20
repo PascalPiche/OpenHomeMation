@@ -57,7 +57,7 @@
     <Compile Include="VAL\IVrType.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="_diagrams\ClassDiagram1.cd" />
+    <None Include="_diagrams\ClassDiagram.cd" />
     <None Include="Data\_diagrams\DataClassDiagramFull.cd" />
     <None Include="RAL\_diagrams\InterfacesClassDiagramFull.cd" />
     <None Include="packages.config" />
@@ -69,6 +69,7 @@
     <None Include="Logger\_diagrams\LoggerClassDiagramFull.cd" />
     <None Include="Plugins\_diagrams\PluginsClassDiagram.cd" />
     <None Include="Plugins\_diagrams\PluginsClassDiagramFull.cd" />
+    <None Include="_diagrams\ClassDiagramFull.cd" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common.Public\OHM.Common.Public.csproj">
