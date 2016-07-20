@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<layerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="94ec8080-045f-4b9e-840d-0eab8e3252a1" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/LayerDesigner">
+  <layers>
+    <layer Id="e2cfb034-f6d9-4c7a-a0bc-09d2de2bae10" name="IDataDictionary.cs">
+      <references>
+        <reference Id="2186af51-d74d-4a8a-ba6f-20004ff38585" name="IDataDictionary.cs">
+          <ArtifactNode Label="IDataDictionary.cs" Category="CodeSchema_ProjectItem" Id="(Assembly=&quot;$(PersonalUri)/Personnel/GIT/Pascal Repo/OpenHomeMation/Common.Public/OHM.Common.Public.csproj&quot; File=&quot;$(PersonalUri)/Personnel/GIT/Pascal Repo/OpenHomeMation/Common.Public/Data/IDataDictionary.cs&quot;)">
+            <Category Ref="File" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=Common.Public Namespace=OHM.Data Type=IDataDictionary)" Label="IDataDictionary" Category="CodeSchema_Interface">
+            <LinkCategory Ref="Contains" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="08165590-3cd7-4dc0-ad13-a19c41ba9cac" name="IDataStore.cs">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="f3d6c1da-9610-453c-b5b9-0ba3883f8699" direction="Forward">
+          <layerMoniker Id="e2cfb034-f6d9-4c7a-a0bc-09d2de2bae10" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <references>
+        <reference Id="ff1e2426-80a7-4afa-a3be-c5f903fb4de8" name="IDataStore.cs">
+          <ArtifactNode Label="IDataStore.cs" Category="CodeSchema_ProjectItem" Id="(Assembly=&quot;$(PersonalUri)/Personnel/GIT/Pascal Repo/OpenHomeMation/Common.Public/OHM.Common.Public.csproj&quot; File=&quot;$(PersonalUri)/Personnel/GIT/Pascal Repo/OpenHomeMation/Common.Public/Data/IDataStore.cs&quot;)">
+            <Category Ref="File" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=Common.Public Namespace=OHM.Data Type=IDataStore)" Label="IDataStore" Category="CodeSchema_Interface">
+            <LinkCategory Ref="Contains" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+  </layers>
+</layerModel>

@@ -44,14 +44,14 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\ArgumentDefinition.cs" />
-    <Compile Include="Commands\CommandAbstract.cs" />
-    <Compile Include="Commands\CommandDefinition.cs" />
-    <Compile Include="Commands\IArgumentDefinition.cs" />
-    <Compile Include="Commands\ICommand.cs" />
-    <Compile Include="Commands\ICommandDefinition.cs" />
-    <Compile Include="RAL\IInterfaceCommand.cs" />
-    <Compile Include="RAL\InterfaceCommandAbstract.cs" />
+    <Compile Include="Nodes\Commands\ArgumentDefinition.cs" />
+    <Compile Include="Nodes\Commands\CommandAbstract.cs" />
+    <Compile Include="Nodes\Commands\CommandDefinition.cs" />
+    <Compile Include="Nodes\Commands\IArgumentDefinition.cs" />
+    <Compile Include="Nodes\Commands\ICommand.cs" />
+    <Compile Include="Nodes\Commands\ICommandDefinition.cs" />
+    <Compile Include="RAL\Commands\IInterfaceCommand.cs" />
+    <Compile Include="RAL\Commands\InterfaceCommandAbstract.cs" />
     <Compile Include="Data\IDataDictionary.cs" />
     <Compile Include="Data\IDataStore.cs" />
     <Compile Include="RAL\InterfaceAbstract.cs" />
@@ -75,14 +75,14 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <None Include="Commands\_diagrams\Relations-expanded.dgml" />
-    <None Include="Commands\_diagrams\Relations-simple.dgml" />
+    <None Include="Nodes\Commands\_diagrams\Relations-expanded.dgml" />
+    <None Include="Nodes\Commands\_diagrams\Relations-simple.dgml" />
     <None Include="Nodes\_diagrams\Relations-expanded - Copy.dgml" />
     <None Include="Nodes\_diagrams\Relations-expanded.dgml" />
     <None Include="Nodes\_diagrams\Relations-simple.dgml" />
     <None Include="Plugins\_diagrams\Graph1.dgml" />
     <None Include="_diagrams\ClassDiagram.cd" />
-    <None Include="Commands\_diagrams\CommandsClassDiagram.cd" />
+    <None Include="Nodes\Commands\_diagrams\CommandsClassDiagram.cd" />
     <None Include="Data\_diagrams\DataClassDiagram.cd" />
     <None Include="RAL\_diagrams\InterfacesClassDiagram.cd" />
     <None Include="Logger\_diagrams\LoggerClassDiagram.cd" />
@@ -90,6 +90,7 @@
     <None Include="packages.config" />
     <None Include="Plugins\_diagrams\PluginsClassDiagram.cd" />
     <None Include="System\_diagrams\SystemClassDiagram.cd" />
+    <None Include="_diagrams\Graph1.dgml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<layerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="cc721af8-0975-43b0-82e1-6365b16675c9" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/LayerDesigner">
+  <layers>
+    <layer Id="9703d06e-605c-4287-9533-a39da9080be1" name="INode.cs">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="15723217-6d56-46d0-a85a-22bc19c08623" direction="Forward">
+          <layerMoniker Id="536a0284-010e-46fc-a1ce-68cd36f17ec5" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="125062d8-738b-4f54-873e-21b079024575" direction="Forward">
+          <layerMoniker Id="f43cf897-4a27-43a2-8ac2-d07f521cd651" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <references>
+        <reference Id="5b01aac7-9653-43e9-ab2b-b881ceef28be" name="INode.cs">
+          <ArtifactNode Label="INode.cs" Category="CodeSchema_ProjectItem" Id="(Assembly=&quot;$(PersonalUri)/Personnel/GIT/Pascal Repo/OpenHomeMation/Common.Public/OHM.Common.Public.csproj&quot; File=&quot;$(PersonalUri)/Personnel/GIT/Pascal Repo/OpenHomeMation/Common.Public/Nodes/INode.cs&quot;)">
+            <Category Ref="File" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=Common.Public Namespace=OHM.Nodes Type=INode)" Label="INode" Category="CodeSchema_Interface">
+            <LinkCategory Ref="Contains" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="f43cf897-4a27-43a2-8ac2-d07f521cd651" name="INodeProperty.cs">
+      <references>
+        <reference Id="4a83e8c7-30d7-4551-868b-e76168e7b17e" name="INodeProperty.cs">
+          <ArtifactNode Label="INodeProperty.cs" Category="CodeSchema_ProjectItem" Id="(Assembly=&quot;$(PersonalUri)/Personnel/GIT/Pascal Repo/OpenHomeMation/Common.Public/OHM.Common.Public.csproj&quot; File=&quot;$(PersonalUri)/Personnel/GIT/Pascal Repo/OpenHomeMation/Common.Public/Nodes/INodeProperty.cs&quot;)">
+            <Category Ref="File" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=Common.Public Namespace=OHM.Nodes Type=INodeProperty)" Label="INodeProperty" Category="CodeSchema_Interface">
+            <LinkCategory Ref="Contains" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="bfdf3e47-8fab-4058-8e74-d1a987fcc977" name="NodeAbstract.cs">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="c2e60e8b-faba-4221-b7ed-edc665974fa8" direction="Forward">
+          <layerMoniker Id="9703d06e-605c-4287-9533-a39da9080be1" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="a5d9f3ab-6556-4e31-becb-6b070f1c4310" direction="Forward">
+          <layerMoniker Id="536a0284-010e-46fc-a1ce-68cd36f17ec5" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="2042b6b4-0093-49fe-9463-513d24a90728" direction="Forward">
+          <layerMoniker Id="f43cf897-4a27-43a2-8ac2-d07f521cd651" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <references>
+        <reference Id="9b3ad157-6554-4b78-9188-7634756bd8aa" name="NodeAbstract.cs">
+          <ArtifactNode Label="NodeAbstract.cs" Category="CodeSchema_ProjectItem" Id="(Assembly=&quot;$(PersonalUri)/Personnel/GIT/Pascal Repo/OpenHomeMation/Common.Public/OHM.Common.Public.csproj&quot; File=&quot;$(PersonalUri)/Personnel/GIT/Pascal Repo/OpenHomeMation/Common.Public/Nodes/NodeAbstract.cs&quot;)">
+            <Category Ref="File" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=Common.Public Namespace=OHM.Nodes Type=NodeAbstract)" Label="NodeAbstract" Category="CodeSchema_Class">
+            <LinkCategory Ref="Contains" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="29be1cdc-8da6-41b9-ba4f-eeba75c166df" name="NodeProperty.cs">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="cd4b06c0-1050-46e0-a69c-f52390cf4792" direction="Forward">
+          <layerMoniker Id="f43cf897-4a27-43a2-8ac2-d07f521cd651" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <references>
+        <reference Id="ab4fff58-9ae8-444c-ac08-4e88a44e2464" name="NodeProperty.cs">
+          <ArtifactNode Label="NodeProperty.cs" Category="CodeSchema_ProjectItem" Id="(Assembly=&quot;$(PersonalUri)/Personnel/GIT/Pascal Repo/OpenHomeMation/Common.Public/OHM.Common.Public.csproj&quot; File=&quot;$(PersonalUri)/Personnel/GIT/Pascal Repo/OpenHomeMation/Common.Public/Nodes/NodeProperty.cs&quot;)">
+            <Category Ref="File" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=Common.Public Namespace=OHM.Nodes Type=NodeProperty)" Label="NodeProperty" Category="CodeSchema_Class">
+            <LinkCategory Ref="Contains" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="536a0284-010e-46fc-a1ce-68cd36f17ec5" name="NodeStates.cs">
+      <references>
+        <reference Id="8e625a0a-5300-46a2-bd48-6ae5fdc3f873" name="NodeStates.cs">
+          <ArtifactNode Label="NodeStates.cs" Category="CodeSchema_ProjectItem" Id="(Assembly=&quot;$(PersonalUri)/Personnel/GIT/Pascal Repo/OpenHomeMation/Common.Public/OHM.Common.Public.csproj&quot; File=&quot;$(PersonalUri)/Personnel/GIT/Pascal Repo/OpenHomeMation/Common.Public/Nodes/NodeStates.cs&quot;)">
+            <Category Ref="File" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=Common.Public Namespace=OHM.Nodes Type=NodeStates)" Label="NodeStates" Category="CodeSchema_Enum">
+            <LinkCategory Ref="Contains" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+  </layers>
+</layerModel>

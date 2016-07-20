@@ -1,4 +1,4 @@
-﻿using OHM.Commands;
+﻿using OHM.Nodes.Commands;
 
 namespace OHM.RAL.Commands
 {

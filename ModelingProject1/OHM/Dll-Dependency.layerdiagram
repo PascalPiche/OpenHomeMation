@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<layerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="53ad138c-e19f-4062-b5a5-45348e8a3ea7" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/LayerDesigner">
+  <layers>
+    <layer Id="e3fbea53-ff36-426d-9cdb-7ba6d40a141b" name="OHM.Common.Public">
+      <references>
+        <reference Id="87705f45-9bf1-450d-b0e5-1a668bbf603d" name="OHM.Common.Public">
+          <ArtifactNode Label="OHM.Common.Public" Category="CodeSchema_Project" Id="(Assembly=&quot;$(PersonalUri)/Personnel/GIT/Pascal Repo/OpenHomeMation/Common.Public/OHM.Common.Public.csproj&quot;)">
+            <Category Ref="File" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=Common.Public)" Label="Common.Public.dll" Category="CodeSchema_Assembly">
+            <Category Ref="FileSystem.Category.FileOfType.dll" />
+            <LinkCategory Ref="Produces" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="e81ad3f1-9263-42fd-a857-5722d3ccb0da" name="OHM.Common">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="2e1242fc-6062-4a1c-90d3-457b3a89e93b" direction="Forward">
+          <layerMoniker Id="e3fbea53-ff36-426d-9cdb-7ba6d40a141b" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <references>
+        <reference Id="fbc9afc7-f801-47f2-ae04-7836bc67c95d" name="OHM.Common">
+          <ArtifactNode Label="OHM.Common" Category="CodeSchema_Project" Id="(Assembly=&quot;$(PersonalUri)/Personnel/GIT/Pascal Repo/OpenHomeMation/Common/OHM.Common.csproj&quot;)">
+            <Category Ref="File" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=OHM.Common)" Label="OHM.Common.dll" Category="CodeSchema_Assembly">
+            <Category Ref="FileSystem.Category.FileOfType.dll" />
+            <LinkCategory Ref="Produces" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="faa4fd61-bbfc-447c-84d6-606bc089032d" name="OHM">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="45f37485-76b1-417a-9e23-a55ea356e1c1" direction="Forward">
+          <layerMoniker Id="e81ad3f1-9263-42fd-a857-5722d3ccb0da" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="51580ad0-45d0-47da-8e13-1ae0a80d3109" direction="Forward">
+          <layerMoniker Id="e3fbea53-ff36-426d-9cdb-7ba6d40a141b" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <references>
+        <reference Id="086528a6-cd14-4f2b-9c6a-9d517ef6ec24" name="OHM">
+          <ArtifactNode Label="OHM" Category="CodeSchema_Project" Id="(Assembly=&quot;$(PersonalUri)/Personnel/GIT/Pascal Repo/OpenHomeMation/OpenHomeMation/OHM.csproj&quot;)">
+            <Category Ref="File" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=OpenHomeMation)" Label="OpenHomeMation.dll" Category="CodeSchema_Assembly">
+            <Category Ref="FileSystem.Category.FileOfType.dll" />
+            <LinkCategory Ref="Produces" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+  </layers>
+</layerModel>

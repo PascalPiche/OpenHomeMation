@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace OHM.Commands
+namespace OHM.Nodes.Commands
 {
     public sealed class CommandDefinition : ICommandDefinition
     {

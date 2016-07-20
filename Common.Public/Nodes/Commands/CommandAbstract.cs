@@ -1,7 +1,7 @@
 ﻿using OHM.Nodes;
 using System.Collections.Generic;
 
-namespace OHM.Commands
+namespace OHM.Nodes.Commands
 {
     public abstract class CommandAbstract : ICommand
     {

@@ -1,11 +1,4 @@
-﻿using OHM.Commands;
-using OHM.Nodes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ZWaveLib.Data;
+﻿using System.Collections.Generic;
 
 namespace ZWaveLib.Commands
 {
@@ -18,9 +11,13 @@ namespace ZWaveLib.Commands
 
         }
 
+        public override bool CanExecute()
+        {
+            return false;
+        }
+
         protected override bool RunImplementation(IDictionary<string, string> arguments)
         {
-
             return false;
             //return ZWaveInterface.Manager.RefreshValue(_node.HomeId, _node.NodeId);
         }

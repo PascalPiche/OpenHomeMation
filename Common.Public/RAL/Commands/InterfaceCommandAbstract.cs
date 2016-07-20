@@ -1,5 +1,5 @@
-﻿using OHM.Commands;
-using OHM.Nodes;
+﻿using OHM.Nodes;
+using OHM.Nodes.Commands;
 using System.Collections.Generic;
 
 namespace OHM.RAL.Commands

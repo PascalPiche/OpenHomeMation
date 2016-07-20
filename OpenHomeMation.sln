@@ -62,6 +62,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OHM.TimedCommandPlugin", "O
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OHM.UPNPControlPointPlugin", "OHM.UPNPControlPointPlugin", "{BF92A4C6-0580-46BA-8214-EAECDED539CA}"
 EndProject
+Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "ModelingProject1", "ModelingProject1\ModelingProject1.modelproj", "{32226000-E0E2-4508-A06B-5197229D8DF1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -180,6 +182,12 @@ Global
 		{CCDF03DF-8799-4FA1-8C39-920AD2F20A0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CCDF03DF-8799-4FA1-8C39-920AD2F20A0B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CCDF03DF-8799-4FA1-8C39-920AD2F20A0B}.Release|x64.ActiveCfg = Release|Any CPU
+		{32226000-E0E2-4508-A06B-5197229D8DF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32226000-E0E2-4508-A06B-5197229D8DF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32226000-E0E2-4508-A06B-5197229D8DF1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{32226000-E0E2-4508-A06B-5197229D8DF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32226000-E0E2-4508-A06B-5197229D8DF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32226000-E0E2-4508-A06B-5197229D8DF1}.Release|x64.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,8 +1,7 @@
 ﻿using OHM.Logger;
-using OHM.Commands;
 using OHM.Plugins;
-using OHM.SYS;
 using OHM.RAL;
+using OHM.SYS;
 using System;
 
 namespace ZWaveLib

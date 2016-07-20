@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using OHM.Nodes.Commands;
+using System.Collections.Generic;
 using System.Windows;
 using WpfApplication1.MV;
 
@@ -30,7 +31,7 @@ namespace WpfApplication1
 
         public Dictionary<string, string> ArgumentsResult { get { return _mv.ArgumentsResult; } }
 
-        public void init(OHM.Commands.ICommand command)
+        public void init(ICommand command)
         {
             _mv = new CommandDialogMV(command);
             

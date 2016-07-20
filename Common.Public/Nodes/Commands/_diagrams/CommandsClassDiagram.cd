@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
   <Class Name="OHM.Commands.ArgumentDefinition">
-    <Position X="4" Y="4.5" Width="2.75" />
+    <Position X="4" Y="4.75" Width="2.75" />
     <TypeIdentifier>
-      <HashCode>ABACIAAAAAEBAgQAAACAgRQAAAAAAAAAAQAAAAAAggA=</HashCode>
+      <HashCode>ABACIAAAAAEBAgQAAACAiRQAAAAAAAAAAQAAAAAAggA=</HashCode>
       <FileName>Commands\ArgumentDefinition.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="OHM.Commands.CommandAbstract">
-    <Position X="0.5" Y="4.5" Width="2.75" />
+    <Position X="0.5" Y="4.75" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAAAABAAAAAACAQAAEAAAAQAAAAAEAAQAAACAAEAAAA=</HashCode>
       <FileName>Commands\CommandAbstract.cs</FileName>
@@ -17,7 +17,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="OHM.Commands.CommandDefinition">
-    <Position X="7.5" Y="4.5" Width="4.25" />
+    <Position X="7.5" Y="4.75" Width="4.25" />
     <TypeIdentifier>
       <HashCode>AAAAMAAAAAAgAAQEAACAAAQAAAAAAIgAAAAAAAAAAAA=</HashCode>
       <FileName>Commands\CommandDefinition.cs</FileName>
@@ -27,7 +27,7 @@
   <Interface Name="OHM.Commands.IArgumentDefinition">
     <Position X="4" Y="0.5" Width="2.75" />
     <TypeIdentifier>
-      <HashCode>ABAAAAAAAAEBAgQAAAAAgQQAAAAAAAAAAQAAAAAAggA=</HashCode>
+      <HashCode>ABAAAAAAAAEBAgQAAAAAiQQAAAAAAAAAAQAAAAAAggA=</HashCode>
       <FileName>Commands\IArgumentDefinition.cs</FileName>
     </TypeIdentifier>
   </Interface>

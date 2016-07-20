@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{32226000-e0e2-4508-a06b-5197229d8df1}</ProjectGuid>
+    <ArchitectureToolsVersion>2.0.0.0</ArchitectureToolsVersion>
+    <Name>ModelingProject1</Name>
+    <RootNamespace>ModelingProject1</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(VSToolsPath)\ArchitectureTools\Microsoft.VisualStudio.TeamArchitect.ModelingProject.targets" Condition="'$(VSToolsPath)' != ''" />
+  <ItemGroup>
+    <Folder Include="ModelDefinition\" />
+    <Content Include="ModelDefinition\ModelingProject1.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Folder Include="OHM" />
+    <Folder Include="OHM\OHM.Common.Public.dll\Data" />
+    <Folder Include="OHM\OHM.Common.Public.dll\Logger" />
+    <Folder Include="OHM\OHM.Common.Public.dll\Nodes" />
+    <Folder Include="OHM\OHM.dll" />
+    <Folder Include="OHM\OHM.Common.Public.dll" />
+    <Folder Include="OHM\OHM.dll\Data" />
+  </ItemGroup>
+  <ItemGroup>
+    <Validate Include="OHM\Dll-Dependency.layerdiagram">
+      <SubType>Content</SubType>
+    </Validate>
+    <Validate Include="OHM\Dll-Dependency.layerdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>OHM\Dll-Dependency.layerdiagram</DependentUpon>
+    </Validate>
+    <Validate Include="OHM\Dll-Dependency.layerdiagram.suppressions">
+      <SubType>Content</SubType>
+      <DependentUpon>OHM\Dll-Dependency.layerdiagram</DependentUpon>
+    </Validate>
+    <Validate Include="OHM\OHM.Common.Public.dll\Data\Dependencies.layerdiagram">
+      <SubType>Content</SubType>
+    </Validate>
+    <Validate Include="OHM\OHM.Common.Public.dll\Data\Dependencies.layerdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>OHM\OHM.Common.Public.dll\Data\Dependencies.layerdiagram</DependentUpon>
+    </Validate>
+    <Validate Include="OHM\OHM.Common.Public.dll\Data\Dependencies.layerdiagram.suppressions">
+      <SubType>Content</SubType>
+      <DependentUpon>OHM\OHM.Common.Public.dll\Data\Dependencies.layerdiagram</DependentUpon>
+    </Validate>
+    <Validate Include="OHM\OHM.Common.Public.dll\Nodes\Dependencies.layerdiagram">
+      <SubType>Content</SubType>
+    </Validate>
+    <Validate Include="OHM\OHM.Common.Public.dll\Nodes\Dependencies.layerdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>OHM\OHM.Common.Public.dll\Nodes\Dependencies.layerdiagram</DependentUpon>
+    </Validate>
+    <Validate Include="OHM\OHM.Common.Public.dll\Nodes\Dependencies.layerdiagram.suppressions">
+      <SubType>Content</SubType>
+      <DependentUpon>OHM\OHM.Common.Public.dll\Nodes\Dependencies.layerdiagram</DependentUpon>
+    </Validate>
+    <Validate Include="OHM\OHM.dll\Data\Dependency.layerdiagram">
+      <SubType>Content</SubType>
+    </Validate>
+    <Validate Include="OHM\OHM.dll\Data\Dependency.layerdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>OHM\OHM.dll\Data\Dependency.layerdiagram</DependentUpon>
+    </Validate>
+    <Validate Include="OHM\OHM.dll\Data\Dependency.layerdiagram.suppressions">
+      <SubType>Content</SubType>
+      <DependentUpon>OHM\OHM.dll\Data\Dependency.layerdiagram</DependentUpon>
+    </Validate>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common.Public\OHM.Common.Public.csproj">
+      <Name>OHM.Common.Public</Name>
+      <Project>{c7ae6787-9a8a-4ebc-a341-ffacf31acaf7}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\OHM.Common.csproj">
+      <Name>OHM.Common</Name>
+      <Project>{f8c3c250-222d-49f4-9582-f7ba0dd6393e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenHomeMation\OHM.csproj">
+      <Name>OHM</Name>
+      <Project>{c5df6e96-8157-4901-9ced-f75285ab8e49}</Project>
+    </ProjectReference>
+  </ItemGroup>
+</Project>

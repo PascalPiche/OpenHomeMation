@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OHM.Commands
+namespace OHM.Nodes.Commands
 {
     public interface IArgumentDefinition
     {

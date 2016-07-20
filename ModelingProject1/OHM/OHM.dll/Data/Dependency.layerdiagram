@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<layerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="ea6e8608-dff5-44c9-9213-f5487f00eb36" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/LayerDesigner">
+  <layers>
+    <layer Id="d11fa469-6b31-4ac3-8a1a-26340019a93b" name="DataDictionary.cs">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="1fdce3e2-b9ae-48f6-bc92-2dea26d7c18c" direction="Forward">
+          <layerMoniker Id="56289005-216a-4bed-9c6a-df0c16e1f293" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="f64d330c-60eb-49a8-a1c4-8492b84b3384" direction="Forward">
+          <layerMoniker Id="2b17b677-fa77-4163-8a94-bda7ccd3552f" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="fa09ed73-0862-4e26-9708-aacc9f9d6d7b" direction="Forward">
+          <layerMoniker Id="2c4b8a25-2a30-4a8b-a1e9-7e6e1e53e834" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="8a83db48-aed9-4738-992d-7a13ef5af5f5" direction="Forward">
+          <layerMoniker Id="1156d23e-b974-473d-9a77-6939ca6a3d90" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="521a74f6-440a-491d-8963-eff2c0717c5f" direction="Forward">
+          <layerMoniker Id="c792d67a-01d4-4789-9d67-2b8a2984008c" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <references>
+        <reference Id="89cb9553-ffcf-4695-bf7a-194e191d4878" name="DataDictionary.cs">
+          <ArtifactNode Label="DataDictionary.cs" Category="CodeSchema_ProjectItem" Id="(Assembly=&quot;$(PersonalUri)/Personnel/GIT/Pascal Repo/OpenHomeMation/OpenHomeMation/OHM.csproj&quot; File=&quot;$(PersonalUri)/Personnel/GIT/Pascal Repo/OpenHomeMation/OpenHomeMation/Data/DataDictionary.cs&quot;)">
+            <Category Ref="File" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=OpenHomeMation Namespace=OHM.Data Type=DataDictionary)" Label="DataDictionary" Category="CodeSchema_Class">
+            <LinkCategory Ref="Contains" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="d1140fed-5674-45c5-86f7-91c6c5335246" name="DataStore.cs">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="a1d80a91-bbfd-4f6a-863e-d6d9b093cb7a" direction="Forward">
+          <layerMoniker Id="d11fa469-6b31-4ac3-8a1a-26340019a93b" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <references>
+        <reference Id="675cce70-e246-4831-ae40-804421a29507" name="DataStore.cs">
+          <ArtifactNode Label="DataStore.cs" Category="CodeSchema_ProjectItem" Id="(Assembly=&quot;$(PersonalUri)/Personnel/GIT/Pascal Repo/OpenHomeMation/OpenHomeMation/OHM.csproj&quot; File=&quot;$(PersonalUri)/Personnel/GIT/Pascal Repo/OpenHomeMation/OpenHomeMation/Data/DataStore.cs&quot;)">
+            <Category Ref="File" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=OpenHomeMation Namespace=OHM.Data Type=DataStore)" Label="DataStore" Category="CodeSchema_Class">
+            <LinkCategory Ref="Contains" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="1156d23e-b974-473d-9a77-6939ca6a3d90" name="DataValueBool.cs">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="8d1a596c-277d-48f7-aa5d-6d17d4698399" direction="Forward">
+          <layerMoniker Id="56289005-216a-4bed-9c6a-df0c16e1f293" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <references>
+        <reference Id="01829777-d2f2-4339-a792-4a0d25711b12" name="DataValueBool.cs">
+          <ArtifactNode Label="DataValueBool.cs" Category="CodeSchema_ProjectItem" Id="(Assembly=&quot;$(PersonalUri)/Personnel/GIT/Pascal Repo/OpenHomeMation/OpenHomeMation/OHM.csproj&quot; File=&quot;$(PersonalUri)/Personnel/GIT/Pascal Repo/OpenHomeMation/OpenHomeMation/Data/DataValueBool.cs&quot;)">
+            <Category Ref="File" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=OpenHomeMation Namespace=OHM.Data Type=DataValueBool)" Label="DataValueBool" Category="CodeSchema_Class">
+            <LinkCategory Ref="Contains" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="2c4b8a25-2a30-4a8b-a1e9-7e6e1e53e834" name="DataValueDictionary.cs">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="511b9546-ad7c-42ce-814d-d0f66fec2f6e" direction="Forward">
+          <layerMoniker Id="56289005-216a-4bed-9c6a-df0c16e1f293" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <references>
+        <reference Id="0fdf3907-1e91-464f-9432-5caa1bd51de1" name="DataValueDictionary.cs">
+          <ArtifactNode Label="DataValueDictionary.cs" Category="CodeSchema_ProjectItem" Id="(Assembly=&quot;$(PersonalUri)/Personnel/GIT/Pascal Repo/OpenHomeMation/OpenHomeMation/OHM.csproj&quot; File=&quot;$(PersonalUri)/Personnel/GIT/Pascal Repo/OpenHomeMation/OpenHomeMation/Data/DataValueDictionary.cs&quot;)">
+            <Category Ref="File" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=OpenHomeMation Namespace=OHM.Data Type=DataValueDictionary)" Label="DataValueDictionary" Category="CodeSchema_Class">
+            <LinkCategory Ref="Contains" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="c792d67a-01d4-4789-9d67-2b8a2984008c" name="DataValueInt.cs">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="3523e95b-1ac7-4bf6-8f90-5ce4366cae1e" direction="Forward">
+          <layerMoniker Id="56289005-216a-4bed-9c6a-df0c16e1f293" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <references>
+        <reference Id="fc0b1f77-8aa8-4a2c-9b82-93d518ab0757" name="DataValueInt.cs">
+          <ArtifactNode Label="DataValueInt.cs" Category="CodeSchema_ProjectItem" Id="(Assembly=&quot;$(PersonalUri)/Personnel/GIT/Pascal Repo/OpenHomeMation/OpenHomeMation/OHM.csproj&quot; File=&quot;$(PersonalUri)/Personnel/GIT/Pascal Repo/OpenHomeMation/OpenHomeMation/Data/DataValueInt.cs&quot;)">
+            <Category Ref="File" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=OpenHomeMation Namespace=OHM.Data Type=DataValueInt)" Label="DataValueInt" Category="CodeSchema_Class">
+            <LinkCategory Ref="Contains" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="2b17b677-fa77-4163-8a94-bda7ccd3552f" name="DataValueString.cs">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="b4371857-8e80-48a9-a6af-8574cdbb767b" direction="Forward">
+          <layerMoniker Id="56289005-216a-4bed-9c6a-df0c16e1f293" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <references>
+        <reference Id="3f4e3e64-27b3-48e7-b979-58e9d4852bfd" name="DataValueString.cs">
+          <ArtifactNode Label="DataValueString.cs" Category="CodeSchema_ProjectItem" Id="(Assembly=&quot;$(PersonalUri)/Personnel/GIT/Pascal Repo/OpenHomeMation/OpenHomeMation/OHM.csproj&quot; File=&quot;$(PersonalUri)/Personnel/GIT/Pascal Repo/OpenHomeMation/OpenHomeMation/Data/DataValueString.cs&quot;)">
+            <Category Ref="File" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=OpenHomeMation Namespace=OHM.Data Type=DataValueString)" Label="DataValueString" Category="CodeSchema_Class">
+            <LinkCategory Ref="Contains" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="11d4c11c-b8ee-4497-8fa0-3efe4f1039d3" name="FileDataManager.cs">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="3aff1605-334c-482d-93dd-85a7defd7607" direction="Forward">
+          <layerMoniker Id="d1140fed-5674-45c5-86f7-91c6c5335246" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="32cd16d4-6c56-488e-9bdb-7d06e4c32066" direction="Forward">
+          <layerMoniker Id="2c4b8a25-2a30-4a8b-a1e9-7e6e1e53e834" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="f5481d1d-2f67-403c-b901-0722d8896909" direction="Forward">
+          <layerMoniker Id="d11fa469-6b31-4ac3-8a1a-26340019a93b" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="6252bcd9-e1eb-4c80-a477-8f55d68c3760" direction="Forward">
+          <layerMoniker Id="1156d23e-b974-473d-9a77-6939ca6a3d90" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="d685641f-ce45-4f20-ab60-6cd7b1822c17" direction="Forward">
+          <layerMoniker Id="c792d67a-01d4-4789-9d67-2b8a2984008c" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="156499c7-4f85-419f-ac99-df36940708f1" direction="Forward">
+          <layerMoniker Id="2b17b677-fa77-4163-8a94-bda7ccd3552f" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <references>
+        <reference Id="89ce3361-17c2-43e6-84ea-564481228b80" name="FileDataManager.cs">
+          <ArtifactNode Label="FileDataManager.cs" Category="CodeSchema_ProjectItem" Id="(Assembly=&quot;$(PersonalUri)/Personnel/GIT/Pascal Repo/OpenHomeMation/OpenHomeMation/OHM.csproj&quot; File=&quot;$(PersonalUri)/Personnel/GIT/Pascal Repo/OpenHomeMation/OpenHomeMation/Data/FileDataManager.cs&quot;)">
+            <Category Ref="File" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=OpenHomeMation Namespace=OHM.Data Type=FileDataManager)" Label="FileDataManager" Category="CodeSchema_Class">
+            <LinkCategory Ref="Contains" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="56289005-216a-4bed-9c6a-df0c16e1f293" name="IDataValue.cs">
+      <references>
+        <reference Id="3182391f-300a-4839-a3b3-f9ff08e15e29" name="IDataValue.cs">
+          <ArtifactNode Label="IDataValue.cs" Category="CodeSchema_ProjectItem" Id="(Assembly=&quot;$(PersonalUri)/Personnel/GIT/Pascal Repo/OpenHomeMation/OpenHomeMation/OHM.csproj&quot; File=&quot;$(PersonalUri)/Personnel/GIT/Pascal Repo/OpenHomeMation/OpenHomeMation/Data/IDataValue.cs&quot;)">
+            <Category Ref="File" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=OpenHomeMation Namespace=OHM.Data Type=IDataValue)" Label="IDataValue" Category="CodeSchema_Interface">
+            <LinkCategory Ref="Contains" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+  </layers>
+</layerModel>

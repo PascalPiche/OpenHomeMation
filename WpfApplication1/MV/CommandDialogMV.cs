@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using OHM.Nodes.Commands;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using WpfApplication1.Designer;
 
@@ -6,15 +7,15 @@ namespace WpfApplication1.MV
 {
     public sealed class CommandDialogMV
     {
-        private OHM.Commands.ICommand _command;
+        private ICommand _command;
         private ObservableCollection<ArgumentsDefinitionDesigner> _arguments = new ObservableCollection<ArgumentsDefinitionDesigner>();
         private ObservableCollection<string> _optionalArguments = new ObservableCollection<string>();
 
-        public OHM.Commands.ICommand Command { get { return _command; } }
+        public ICommand Command { get { return _command; } }
 
         public ObservableCollection<ArgumentsDefinitionDesigner> Arguments { get { return _arguments; } }
 
-        internal CommandDialogMV(OHM.Commands.ICommand command)
+        internal CommandDialogMV(ICommand command)
         {
             _command = command;
             Init();
