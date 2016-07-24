@@ -16,7 +16,6 @@ namespace WUnderground.Data
         private int _magic;
         private string _wmo;
 
-
         public Station(string keyId, string name, int zip, int magic, string wmo)
             : base(keyId, name)
         {
@@ -25,37 +24,9 @@ namespace WUnderground.Data
             _magic = magic;
             _wmo = wmo;
 
-            this.RegisterProperty(
-               new NodeProperty(
-                   "zip",
-                   "zip",
-                   typeof(int),
-                   true,
-                   "",
-                  _zip));
-
-            this.RegisterProperty(
-               new NodeProperty(
-                   "magic",
-                   "magic",
-                   typeof(int),
-                   true,
-                   "",
-                  _magic));
-
-            this.RegisterProperty(
-               new NodeProperty(
-                   "wmo",
-                   "wmo",
-                   typeof(string),
-                   true,
-                   "",
-                  _wmo));
-
-
-            
-            //  new StationCondition(keyId + "-condition", "Condition", this));
-            
+            this.RegisterProperty(new NodeProperty("zip", "zip", typeof(int), true, "", _zip));
+            this.RegisterProperty(new NodeProperty("magic", "magic", typeof(int), true, "", _magic));
+            this.RegisterProperty(new NodeProperty("wmo", "wmo", typeof(string), true, "", _wmo));
         }
 
         protected override bool Initing()
