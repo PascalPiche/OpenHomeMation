@@ -15,6 +15,7 @@ namespace OHM.Nodes
         private INodeProperty _nameProperty;
         private ObservableCollection<ICommand> _commands;
         private Dictionary<string, ICommand> _commandsDic;
+        private ReadOnlyObservableCollection<ICommand> _commandsReadOnly;
 
         private ObservableCollection<NodeAbstract> _children;
         private Dictionary<string, NodeAbstract> _childrenDic;
@@ -43,6 +44,7 @@ namespace OHM.Nodes
             _state = initialState;
             _commands = new ObservableCollection<ICommand>();
             _commandsDic = new Dictionary<string, ICommand>();
+            _commandsReadOnly = new ReadOnlyObservableCollection<ICommand>(_commands); 
             _children = new ObservableCollection<NodeAbstract>();
             _childrenDic = new Dictionary<string, NodeAbstract>();
             _properties = new ObservableCollection<INodeProperty>();
@@ -79,7 +81,7 @@ namespace OHM.Nodes
 
         public string Key { get { return _keyProperty.Value as string; } }
 
-        public IReadOnlyList<ICommand> Commands { get { return new ReadOnlyObservableCollection<ICommand>(_commands); } }
+        public IReadOnlyList<ICommand> Commands { get { return _commandsReadOnly; } }
 
         public string Name
         {
@@ -342,8 +344,14 @@ namespace OHM.Nodes
 
         protected virtual bool Initing()
         {
+            RegisterCommands();
+            RegisterProperties();
             return true;
         }
+
+        protected abstract void RegisterCommands();
+
+        protected abstract void RegisterProperties();
 
         #endregion
 

@@ -1,9 +1,5 @@
-﻿using OHM.Logger;
-using OHM.Nodes;
+﻿using OHM.Nodes;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using WUnderground.Api.Data;
 using WUnderground.Commands;
 
@@ -11,45 +7,14 @@ namespace WUnderground.Data
 {
     public class StationCondition : WUndergroundNodeAbstract
     {
-        private Station _station;
 
-        public StationCondition(string keyId, string name, Station station)
+        public StationCondition(string keyId, string name)
             : base(keyId, name)
-        {
-            _station = station;
-            this.RegisterCommand(new RefreshCondition("refreshCondition", "Refresh", ""));
-
-            this.RegisterProperty(new NodeProperty("DewPoint_C",        "Dew Point Celsius",    typeof(Double), true));
-            this.RegisterProperty(new NodeProperty("DewPoint_F",        "Dew Point F",          typeof(Double), true));
-            this.RegisterProperty(new NodeProperty("FeelsLike_C",       "Feels Like Celsius",   typeof(Double), true));
-            this.RegisterProperty(new NodeProperty("FeelsLike_F",       "Feels Like F",         typeof(Double), true));
-            this.RegisterProperty(new NodeProperty("HeatIndex_C",       "Heat Index Celsius",   typeof(String), true));
-            this.RegisterProperty(new NodeProperty("HeatIndex_F",       "Heat Index F",         typeof(String), true));
-            this.RegisterProperty(new NodeProperty("ImageUrl",          "Image Url",            typeof(String), true));
-            this.RegisterProperty(new NodeProperty("Pressure_in",       "Pressure inch",        typeof(Double), true));
-            this.RegisterProperty(new NodeProperty("Pressure_mb",       "Pressure millibar",    typeof(Double), true));
-            this.RegisterProperty(new NodeProperty("PressureTrend",     "Pressure Trend",       typeof(String), true));
-            this.RegisterProperty(new NodeProperty("RelativeHumidity",  "Relative Humidity",    typeof(String), true));
-            this.RegisterProperty(new NodeProperty("Temperature_C",     "Temperature Celsius",  typeof(Double), true));
-            this.RegisterProperty(new NodeProperty("Temperature_F",     "Temperature F",        typeof(Double), true));
-            this.RegisterProperty(new NodeProperty("TermOfService",     "Term Of Service",      typeof(String), true));
-            this.RegisterProperty(new NodeProperty("StationId",         "Station Id",           typeof(String), true));
-            this.RegisterProperty(new NodeProperty("UV",                "UV",                   typeof(Int64),  true));
-            this.RegisterProperty(new NodeProperty("Version",           "Version",              typeof(String), true));
-            this.RegisterProperty(new NodeProperty("Visibility_Km",     "Visibility Kilometers",typeof(Double), true));
-            this.RegisterProperty(new NodeProperty("Visibility_Mi",     "Visibility Miles",     typeof(Double), true));
-            this.RegisterProperty(new NodeProperty("Weather",           "Weather",              typeof(String), true));
-            this.RegisterProperty(new NodeProperty("WindDegrees",       "Wind Degrees",         typeof(Int64),  true));            
-            this.RegisterProperty(new NodeProperty("WindDirection",     "Wind Direction",       typeof(String), true));
-            this.RegisterProperty(new NodeProperty("WindGust_Kph",      "WindGust Kph",         typeof(Double), true));
-            this.RegisterProperty(new NodeProperty("WindGust_Mph",      "WindGust Mph",         typeof(Double), true));
-            this.RegisterProperty(new NodeProperty("WindSpeed_Kph",     "WindSpeed Kph",        typeof(Double), true));
-            this.RegisterProperty(new NodeProperty("WindSpeed_Mph",     "WindSpeed Mph",        typeof(Double), true));
-        }
+        { }
 
         internal bool refresh()
         {
-            return _station.GetCondition(this);
+            return ((Station)this.Parent).GetCondition(this);
         }
 
         internal bool update(WUndergroundConditionsResponse data)
@@ -82,6 +47,41 @@ namespace WUnderground.Data
             this.UpdateProperty("WindSpeed_Mph",    data.WindSpeed_Mph);
                 
             return true;
+        }
+
+        protected override void RegisterCommands()
+        {
+            this.RegisterCommand(new RefreshCondition("refreshCondition", "Refresh", ""));
+        }
+
+        protected override void RegisterProperties()
+        {
+            this.RegisterProperty(new NodeProperty("DewPoint_C", "Dew Point Celsius", typeof(Double), true));
+            this.RegisterProperty(new NodeProperty("DewPoint_F", "Dew Point F", typeof(Double), true));
+            this.RegisterProperty(new NodeProperty("FeelsLike_C", "Feels Like Celsius", typeof(Double), true));
+            this.RegisterProperty(new NodeProperty("FeelsLike_F", "Feels Like F", typeof(Double), true));
+            this.RegisterProperty(new NodeProperty("HeatIndex_C", "Heat Index Celsius", typeof(String), true));
+            this.RegisterProperty(new NodeProperty("HeatIndex_F", "Heat Index F", typeof(String), true));
+            this.RegisterProperty(new NodeProperty("ImageUrl", "Image Url", typeof(String), true));
+            this.RegisterProperty(new NodeProperty("Pressure_in", "Pressure inch", typeof(Double), true));
+            this.RegisterProperty(new NodeProperty("Pressure_mb", "Pressure millibar", typeof(Double), true));
+            this.RegisterProperty(new NodeProperty("PressureTrend", "Pressure Trend", typeof(String), true));
+            this.RegisterProperty(new NodeProperty("RelativeHumidity", "Relative Humidity", typeof(String), true));
+            this.RegisterProperty(new NodeProperty("Temperature_C", "Temperature Celsius", typeof(Double), true));
+            this.RegisterProperty(new NodeProperty("Temperature_F", "Temperature F", typeof(Double), true));
+            this.RegisterProperty(new NodeProperty("TermOfService", "Term Of Service", typeof(String), true));
+            this.RegisterProperty(new NodeProperty("StationId", "Station Id", typeof(String), true));
+            this.RegisterProperty(new NodeProperty("UV", "UV", typeof(Int64), true));
+            this.RegisterProperty(new NodeProperty("Version", "Version", typeof(String), true));
+            this.RegisterProperty(new NodeProperty("Visibility_Km", "Visibility Kilometers", typeof(Double), true));
+            this.RegisterProperty(new NodeProperty("Visibility_Mi", "Visibility Miles", typeof(Double), true));
+            this.RegisterProperty(new NodeProperty("Weather", "Weather", typeof(String), true));
+            this.RegisterProperty(new NodeProperty("WindDegrees", "Wind Degrees", typeof(Int64), true));
+            this.RegisterProperty(new NodeProperty("WindDirection", "Wind Direction", typeof(String), true));
+            this.RegisterProperty(new NodeProperty("WindGust_Kph", "WindGust Kph", typeof(Double), true));
+            this.RegisterProperty(new NodeProperty("WindGust_Mph", "WindGust Mph", typeof(Double), true));
+            this.RegisterProperty(new NodeProperty("WindSpeed_Kph", "WindSpeed Kph", typeof(Double), true));
+            this.RegisterProperty(new NodeProperty("WindSpeed_Mph", "WindSpeed Mph", typeof(Double), true));
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using OHM.Data;
-using OHM.RAL;
-using OHM.Logger;
 using OHM.Nodes;
+using OHM.RAL;
 using OpenZWaveDotNet;
 using System;
 using System.Collections.Generic;
@@ -31,9 +30,6 @@ namespace ZWaveLib
             : base("ZWaveInterface", "ZWave")
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
-
-            //Create Commands
-            this.RegisterCommand(new CreateControler());
         }
             
         #endregion
@@ -269,6 +265,45 @@ namespace ZWaveLib
         private void ControllerStateChangedHandler(ZWControllerState state)
         {
             Logger.Debug("TODO: Controller State Changed:  " + state.ToString());
+            switch (state)
+            {
+                case ZWControllerState.Cancel:
+                    
+                    break;
+                case ZWControllerState.Completed:
+
+                    break;
+                case ZWControllerState.Error:
+
+                    break;
+                case ZWControllerState.Failed:
+
+                    break;
+                case ZWControllerState.InProgress:
+
+                    break;
+                case ZWControllerState.NodeFailed:
+
+                    break;
+                case ZWControllerState.NodeOK:
+
+                    break;
+                case ZWControllerState.Normal:
+
+                    break;
+                case ZWControllerState.Sleeping:
+
+                    break;
+                case ZWControllerState.Starting:
+
+                    break;
+                case ZWControllerState.Waiting:
+
+                    break;
+                default:
+                    break;
+            }
+            
         }
 
         #endregion
@@ -662,6 +697,17 @@ namespace ZWaveLib
             }
 
             throw new NotImplementedException();
+        }
+
+        protected override void RegisterCommands()
+        {
+            //Create Commands
+            this.RegisterCommand(new CreateControler());
+        }
+
+        protected override void RegisterProperties()
+        {
+            
         }
     }
 }

@@ -1,10 +1,5 @@
-﻿using OHM.Logger;
-using OHM.Nodes;
-using System;
+﻿using OHM.Nodes;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WUnderground.Api;
 
 namespace WUnderground.Data
@@ -24,9 +19,6 @@ namespace WUnderground.Data
             _magic = magic;
             _wmo = wmo;
 
-            this.RegisterProperty(new NodeProperty("zip", "zip", typeof(int), true, "", _zip));
-            this.RegisterProperty(new NodeProperty("magic", "magic", typeof(int), true, "", _magic));
-            this.RegisterProperty(new NodeProperty("wmo", "wmo", typeof(string), true, "", _wmo));
         }
 
         protected override bool Initing()
@@ -45,6 +37,18 @@ namespace WUnderground.Data
         {
             Account acc = (Account)this.Parent;
             return condition.update(WUndergroundApi.QueryConditions(acc.ApiKey, _zip, _magic, _wmo));
+        }
+
+        protected override void RegisterCommands()
+        {
+            //No commands
+        }
+
+        protected override void RegisterProperties()
+        {
+            this.RegisterProperty(new NodeProperty("zip", "zip", typeof(int), true, "", _zip));
+            this.RegisterProperty(new NodeProperty("magic", "magic", typeof(int), true, "", _magic));
+            this.RegisterProperty(new NodeProperty("wmo", "wmo", typeof(string), true, "", _wmo));
         }
     }
 }

@@ -244,14 +244,6 @@ namespace OHM.RAL
             return result;
         }
 
-        /*private IDataDictionary CreateInterfaceData(string key, IPlugin plugin) {
-            var result = new DataDictionary();
-
-            result.StoreString("PluginId", plugin.Id.ToString());
-
-            return result;
-        }*/
-
         private IInterface GetRunningInterface(string nodeKey)
         {
             IInterface result;

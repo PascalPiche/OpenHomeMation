@@ -1,12 +1,10 @@
 ﻿using OHM.Data;
-using OHM.Logger;
 using OHM.Nodes;
 using OHM.RAL;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using WUnderground.Commands;
-using WUnderground.Data;
 
 namespace WUnderground.Data
 {
@@ -19,8 +17,7 @@ namespace WUnderground.Data
         public WUndergroundInterface()
             : base("WUndergroundInterface", "WUnderground")
         {
-            //Create Commands
-            this.RegisterCommand(new AddAccount());
+            
         }
 
         #endregion
@@ -179,13 +176,25 @@ namespace WUnderground.Data
                     result = new Station(key, name, (Int32)options["zip"], (Int32)options["magic"], options["wmo"] as string);
                     break;
                 case "station-condition":
-                    result = new StationCondition(key, name, options["station"] as Station);
+                    result = new StationCondition(key, name);
                     break;
                 default:
+
                     break;
             }
 
             return result;
+        }
+
+        protected override void RegisterCommands()
+        {
+            //Create Commands
+            this.RegisterCommand(new AddAccount());
+        }
+
+        protected override void RegisterProperties()
+        {
+            
         }
     }
 }

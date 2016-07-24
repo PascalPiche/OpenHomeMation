@@ -1,5 +1,4 @@
-﻿using OHM.Logger;
-using OHM.Nodes;
+﻿using OHM.Nodes;
 using OHM.RAL;
 using OpenZWaveDotNet;
 using System;
@@ -10,8 +9,8 @@ namespace ZWaveLib.Data
 {
     public class ZWaveNode : RalNodeAbstract, IZWaveNode
     {
-        private uint? _homeId;
-        private byte? _nodeId;
+        private uint? _homeId = new uint?();
+        private byte? _nodeId = new byte?();
 
         #region Public properties
 
@@ -30,14 +29,7 @@ namespace ZWaveLib.Data
         #region Public Ctor
 
         public ZWaveNode(string key, string name)
-            : base(key, name)
-        {
-            _homeId = new uint?();
-            _nodeId = new byte?();
-
-            RegisterZWaveNodeProperties();
-            RegisterZWaveNodeCommands();
-        }
+            : base(key, name) { }
 
         #endregion
 
@@ -152,88 +144,6 @@ namespace ZWaveLib.Data
 
             //Manager.GetNumGroups(homeId, nodeId) TODO
             //Manager.HasNodeFailed(homeId, nodeId) TODO (STANDBY)
-        }
-
-        private void RegisterZWaveNodeProperties()
-        {
-            //Manager.GetAllScenes
-            //Manager.GetAssociations
-            //Manager.GetNodeClassInformation(homeId, nodeId...) TODO
-            //Manager.GetNodeGeneric(homeId, nodeId) TODO
-            //Manager.GetNodeBasic(homeId, nodeId) TODO
-            //Manager.GetNodeQueryStage(homeId, nodeId) TODO
-            //Manager.GetNodeSecurity(homeId, nodeId) TODO
-            //Manager.GetNodeSpecific(homeId,nodeId) TODO
-            //Manager.GetNumGroups(homeId, nodeId) TODO
-            //Manager.HasNodeFailed(homeId, nodeId) TODO (STANDBY)
-
-            this.RegisterProperty(
-                 new NodeProperty("IsNodeAwake", "Is Node Awake", typeof(Boolean), true));
-
-            this.RegisterProperty(
-                 new NodeProperty("IsNodeBeamingDevice", "Is Node Beaming Device", typeof(Boolean), true));
-
-            this.RegisterProperty(
-                 new NodeProperty("IsNodeFailed", "Is Node Failed", typeof(Boolean), true));
-
-            this.RegisterProperty(
-                new NodeProperty("IsNodeFrequentListeningDevice", "Is Node Frequent Listening Device", typeof(Boolean), true));
-
-            this.RegisterProperty(
-                new NodeProperty("IsNodeInfoReceived", "Is Node Info Received", typeof(Boolean), true));
-
-            this.RegisterProperty(
-                 new NodeProperty("IsNodeListeningDevice", "Is Node Listening Device", typeof(Boolean), true));
-
-            this.RegisterProperty(
-                 new NodeProperty("IsNodeRoutingDevice", "Is Node Routing Device", typeof(Boolean), true));
-
-            this.RegisterProperty(
-                 new NodeProperty("IsNodeSecurityDevice", "Is Node Security Device", typeof(Boolean), true));
-
-            
-
-            this.RegisterProperty(
-                 new NodeProperty("NodeLocation", "Node Location", typeof(String), false));
-
-            this.RegisterProperty(
-                 new NodeProperty("NodeManufacturerId", "Node Manufacturer Id", typeof(String), true));
-
-            this.RegisterProperty(
-                 new NodeProperty("NodeManufacturerName", "Node Manufacturer Name", typeof(String), true));
-
-            this.RegisterProperty(
-                 new NodeProperty("NodeMaxBaudRate", "Node Max Baud Rate", typeof(uint), true));
-
-            this.RegisterProperty(
-                 new NodeProperty("NodeName", "Node Name", typeof(String), true));
-
-            //Manager.GetNodeNeighbors(homeId, nodeId,...) TODO
-
-            this.RegisterProperty(
-                 new NodeProperty("NodeProductId", "Node Product Id", typeof(String), true));
-
-            this.RegisterProperty(
-                 new NodeProperty("NodeProductName", "Node Product Name", typeof(String), true));
-
-            this.RegisterProperty(
-                 new NodeProperty("NodeProductType", "Node Product Type", typeof(String), true));
-
-
-            this.RegisterProperty(
-                 new NodeProperty("NodeType", "Node Type", typeof(String), true, ""));
-
-            this.RegisterProperty(
-                 new NodeProperty("NodeVersion", "Node Version", typeof(byte), true, ""));
-
-            
-        }
-
-        private void RegisterZWaveNodeCommands()
-        {
-            this.RegisterCommand(new RefreshNodeCommand());
-
-            //this.RegisterCommand(new RefreshNodeValueCommand(this));
         }
 
         private Object GetValue(ZWValueID valueId)
@@ -383,5 +293,48 @@ namespace ZWaveLib.Data
 
         #endregion
 
+        protected override void RegisterCommands()
+        {
+            this.RegisterCommand(new RefreshNodeCommand());
+
+            //this.RegisterCommand(new RefreshNodeValueCommand(this));
+        }
+
+        protected override void RegisterProperties()
+        {
+            //Manager.GetAllScenes
+            //Manager.GetAssociations
+
+            //Manager.GetNodeClassInformation(homeId, nodeId...) TODO
+            //Manager.GetNodeGeneric(homeId, nodeId) TODO
+            //Manager.GetNodeBasic(homeId, nodeId) TODO
+            //Manager.GetNodeQueryStage(homeId, nodeId) TODO
+            //Manager.GetNodeSecurity(homeId, nodeId) TODO
+            //Manager.GetNodeSpecific(homeId,nodeId) TODO
+            //Manager.GetNumGroups(homeId, nodeId) TODO
+            //Manager.HasNodeFailed(homeId, nodeId) TODO (STANDBY)
+
+            this.RegisterProperty(new NodeProperty("IsNodeAwake", "Is Node Awake", typeof(Boolean), true));
+            this.RegisterProperty(new NodeProperty("IsNodeBeamingDevice", "Is Node Beaming Device", typeof(Boolean), true));
+            this.RegisterProperty(new NodeProperty("IsNodeFailed", "Is Node Failed", typeof(Boolean), true));
+            this.RegisterProperty(new NodeProperty("IsNodeFrequentListeningDevice", "Is Node Frequent Listening Device", typeof(Boolean), true));
+            this.RegisterProperty(new NodeProperty("IsNodeInfoReceived", "Is Node Info Received", typeof(Boolean), true));
+            this.RegisterProperty(new NodeProperty("IsNodeListeningDevice", "Is Node Listening Device", typeof(Boolean), true));
+            this.RegisterProperty(new NodeProperty("IsNodeRoutingDevice", "Is Node Routing Device", typeof(Boolean), true));
+            this.RegisterProperty(new NodeProperty("IsNodeSecurityDevice", "Is Node Security Device", typeof(Boolean), true));
+            this.RegisterProperty(new NodeProperty("NodeLocation", "Node Location", typeof(String), false));
+            this.RegisterProperty(new NodeProperty("NodeManufacturerId", "Node Manufacturer Id", typeof(String), true));
+            this.RegisterProperty(new NodeProperty("NodeManufacturerName", "Node Manufacturer Name", typeof(String), true));
+            this.RegisterProperty(new NodeProperty("NodeMaxBaudRate", "Node Max Baud Rate", typeof(uint), true));
+            this.RegisterProperty(new NodeProperty("NodeName", "Node Name", typeof(String), true));
+
+            //Manager.GetNodeNeighbors(homeId, nodeId,...) TODO
+
+            this.RegisterProperty(new NodeProperty("NodeProductId", "Node Product Id", typeof(String), true));
+            this.RegisterProperty(new NodeProperty("NodeProductName", "Node Product Name", typeof(String), true));
+            this.RegisterProperty(new NodeProperty("NodeProductType", "Node Product Type", typeof(String), true));
+            this.RegisterProperty(new NodeProperty("NodeType", "Node Type", typeof(String), true));
+            this.RegisterProperty(new NodeProperty("NodeVersion", "Node Version", typeof(byte), true));
+        }
     }
 }

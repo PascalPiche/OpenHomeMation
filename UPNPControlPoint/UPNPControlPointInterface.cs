@@ -1,11 +1,7 @@
-﻿using OHM.Logger;
-using OHM.Nodes;
+﻿using OHM.Nodes;
 using OHM.RAL;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace UPNPControlPoint
 {
@@ -14,8 +10,7 @@ namespace UPNPControlPoint
         public UPNPControlPointInterface()
             : base("UPNPCtlPointInterface", "UPNP Control Point")
         {
-            //Create Commands
-            //this.RegisterCommand(new CreateControllerCommand(this));
+            
         }
 
         protected override void Start()
@@ -32,6 +27,17 @@ namespace UPNPControlPoint
         protected override NodeAbstract CreateNodeInstance(string model, string key, string name, IDictionary<string, object> options)
         {
             throw new NotImplementedException();
+        }
+
+        protected override void RegisterCommands()
+        {
+            //Create Commands
+            //this.RegisterCommand(new CreateControllerCommand(this));
+        }
+
+        protected override void RegisterProperties()
+        {
+            
         }
     }
 }

@@ -55,8 +55,6 @@ namespace OHM.RAL
             }
         }
 
-        
-
         #endregion
 
         #region Public Api
@@ -85,6 +83,7 @@ namespace OHM.RAL
             _startOnLaunch = data.GetBool("StartOnLaunch");
             NotifyPropertyChanged("StartOnLaunch");
             _system = system;
+            this.Initing();
         }
 
         public new bool ExecuteCommand(string nodeKey, string commandKey, Dictionary<string, string> arguments)
