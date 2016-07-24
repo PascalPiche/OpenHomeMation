@@ -12,7 +12,7 @@ using ZWaveLib.Tools;
 
 namespace ZWaveLib
 {
-    public class ZWaveInterface : InterfaceAbstract
+    public class ZWaveInterface : RalInterfaceNodeAbstract
     {
 
         #region Private members
@@ -27,8 +27,8 @@ namespace ZWaveLib
 
         #region Public Ctor
 
-        public ZWaveInterface(ILogger logger)
-            : base("ZWaveInterface", "ZWave", logger)
+        public ZWaveInterface()
+            : base("ZWaveInterface", "ZWave")
         {
             _dispatcher = Dispatcher.CurrentDispatcher;
 
@@ -485,7 +485,7 @@ namespace ZWaveLib
             Logger.Info("Creating Controller on port: " + port);
 
             //Valid if a Controller already exist on this port
-            if (this.GetChild(port.ToString()) != null)
+            if (this.FindChild(port.ToString()) != null)
             {
                 Logger.Error("Controller already exist on port : " + port);
                 return false;
@@ -502,25 +502,38 @@ namespace ZWaveLib
 
             Logger.Info("Trying to start a controller on port " + port);
             bool mngResult = _mng.AddDriver(@"\\.\COM" + port, ZWControllerInterface.Serial);
+
+            IDictionary<string, object> options = new Dictionary<string, object>();
+            options.Add("interface", this);
+
             if (mngResult)
             {
-                Logger.Info("Tryed to start a controller on port " + port + " was successfull");
-                //Create new node 
-                var ctl = new ZWaveController("COM" + port, "COM" + port, this, this.Logger);
-                this.AddChild(ctl);
-                this._runningControllers.Add(@"\\.\COM" + port, ctl);
+                Logger.Info("Trying to start a controller on port " + port + " was successfull");
+                
+                //Create new node
+                ZWaveController ctl = this.CreateChildNode("zwavecontroller", "COM" + port, "COM" + port, options) as ZWaveController;
 
-                Logger.Info("Controller created on port " + port);
-                result = true;
+                if (ctl != null)
+                {
+                    this._runningControllers.Add(@"\\.\COM" + port, ctl);
+                    Logger.Info("Controller created on port " + port);
+                    
+                    result = true;
+                }
             }
             else
             {
-                //Create new node
-                var ctl = new ZWaveController("COM" + port, "COM" + port, this, this.Logger, NodeStates.fatal);
-                this.AddChild(ctl);
-                this._runningControllers.Add(@"\\.\COM" + port, ctl);
-
                 Logger.Info("Cannot create Controller on port " + port);
+
+                //Create new node
+                options.Add("initialState", NodeStates.fatal);
+                ZWaveController ctl = this.CreateChildNode("zwavecontroller", "COM" + port, "COM" + port, options) as ZWaveController;
+
+                if (ctl != null)
+                {
+                    this._runningControllers.Add(@"\\.\COM" + port, ctl);
+                }
+                
             }
             return result;
         }
@@ -579,7 +592,7 @@ namespace ZWaveLib
             }
             else
             {
-                var node = this.GetChild(NotificationTool.MakeNodeKey(n));
+                var node = this.FindChild(NotificationTool.MakeNodeKey(n));
                 if (node != null)
                 {
                     return ((ZWaveNode)node).CreateOrUpdateValue(n);
@@ -615,7 +628,7 @@ namespace ZWaveLib
             }
             else
             {
-                var node = this.GetChild(NotificationTool.MakeNodeKey(n));
+                var node = this.FindChild(NotificationTool.MakeNodeKey(n));
                 if (node != null)
                 {
                     ((ZWaveNode)node).RemoveValue(n);
@@ -639,5 +652,10 @@ namespace ZWaveLib
         #endregion
 
         #endregion
+
+        protected override NodeAbstract CreateNodeInstance(string model, string key, string name, IDictionary<string, object> options)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -34,12 +34,12 @@ namespace WUnderground
             return true;
         }
 
-        public override InterfaceAbstract CreateInterface(string key, ILogger logger)
+        public override RalInterfaceNodeAbstract CreateInterface(string key)
         {
             switch (key)
             {
                 case _interfaceKey:
-                    return new WUndergroundInterface(logger);
+                    return new WUndergroundInterface();
             }
             return null;
         }

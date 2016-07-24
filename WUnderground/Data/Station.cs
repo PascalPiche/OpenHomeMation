@@ -17,8 +17,8 @@ namespace WUnderground.Data
         private string _wmo;
 
 
-        public Station(string keyId, string name, ILogger logger, int zip, int magic, string wmo)
-            : base(keyId, name, logger)
+        public Station(string keyId, string name, int zip, int magic, string wmo)
+            : base(keyId, name)
         {
 
             _zip = zip;
@@ -52,7 +52,10 @@ namespace WUnderground.Data
                    "",
                   _wmo));
 
-            this.AddChild(new StationCondition(keyId + "-condition", "Condition", logger, this));
+            IDictionary<string, object> options = new Dictionary<string, object>();
+            options.Add("station", this);
+            this.CreateChildNode("station-condition", keyId + "-condition", "Condition", options);
+            //  new StationCondition(keyId + "-condition", "Condition", this));
             
         }
 

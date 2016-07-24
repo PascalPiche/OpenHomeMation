@@ -1,4 +1,5 @@
 ﻿using OHM.Logger;
+using OHM.Nodes;
 using OHM.RAL;
 using System;
 using System.Collections.Generic;
@@ -8,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace UPNPControlPoint
 {
-    public class UPNPControlPointInterface : InterfaceAbstract
+    public class UPNPControlPointInterface : RalInterfaceNodeAbstract
     {
-        public UPNPControlPointInterface(ILogger logger)
-            : base("UPNPCtlPointInterface", "UPNP Control Point", logger)
+        public UPNPControlPointInterface()
+            : base("UPNPCtlPointInterface", "UPNP Control Point")
         {
             //Create Commands
             //this.RegisterCommand(new CreateControllerCommand(this));
@@ -28,5 +29,9 @@ namespace UPNPControlPoint
             
         }
 
+        protected override NodeAbstract CreateNodeInstance(string model, string key, string name, IDictionary<string, object> options)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -46,7 +46,13 @@ namespace OHM.Nodes.Commands
 
         public virtual bool CanExecute()
         {
-            return true;
+            bool result = false;
+
+            if (_node != null) {
+                result = true;
+            }
+
+            return result;
         }
 
         public bool Execute(IDictionary<string, string> arguments)

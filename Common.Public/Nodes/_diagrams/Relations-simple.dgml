@@ -1,28 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<DirectedGraph DataVirtualized="True" Layout="Sugiyama" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+<DirectedGraph DataVirtualized="True" GraphDirection="BottomToTop" Layout="Sugiyama" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
   <Nodes>
-    <Node Id="(@1 @2 Type=NodeProperty)" Category="CodeSchema_Class" Bounds="182.193333333333,-108,135.65,25" CodeSchemaProperty_IsPublic="True" CommonLabel="NodeProperty" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Icon="CodeSchema_Class" Label="NodeProperty" Language="{B5E9BD34-6D3E-4B5D-925E-8A43B79820B4}" SourceLocation="(Assembly=&quot;file:///C:/Users/Scopollif/Documents/Personnel/GIT/Pascal Repo/OpenHomeMation/Common.Public/Nodes/NodeProperty.cs&quot; StartLineNumber=7 StartCharacterOffset=4 EndLineNumber=7 EndCharacterOffset=4)" UseManualLocation="True" />
-    <Node Id="@3" Category="CodeSchema_Interface" Bounds="-200,34,93.5433333333334,25" CodeSchemaProperty_IsPublic="True" CommonLabel="INode" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Icon="CodeSchema_Interface" Label="INode" Language="{B5E9BD34-6D3E-4B5D-925E-8A43B79820B4}" SourceLocation="(Assembly=&quot;file:///C:/Users/Scopollif/Documents/Personnel/GIT/Pascal Repo/OpenHomeMation/Common.Public/Nodes/INode.cs&quot; StartLineNumber=6 StartCharacterOffset=4 EndLineNumber=6 EndCharacterOffset=4)" UseManualLocation="True" />
-    <Node Id="@4" Category="CodeSchema_Interface" Bounds="-20,-169,138.843333333333,25" CodeSchemaProperty_IsPublic="True" CommonLabel="INodeProperty" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Icon="CodeSchema_Interface" Label="INodeProperty" Language="{B5E9BD34-6D3E-4B5D-925E-8A43B79820B4}" SourceLocation="(Assembly=&quot;file:///C:/Users/Scopollif/Documents/Personnel/GIT/Pascal Repo/OpenHomeMation/Common.Public/Nodes/INodeProperty.cs&quot; StartLineNumber=4 StartCharacterOffset=4 EndLineNumber=4 EndCharacterOffset=4)" UseManualLocation="True" />
-    <Node Id="@5" Category="CodeSchema_Class" Bounds="107,30,134.193333333333,25" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsPublic="True" CommonLabel="NodeAbstract" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Icon="CodeSchema_Class" Label="NodeAbstract" Language="{B5E9BD34-6D3E-4B5D-925E-8A43B79820B4}" SourceLocation="(Assembly=&quot;file:///C:/Users/Scopollif/Documents/Personnel/GIT/Pascal Repo/OpenHomeMation/Common.Public/Nodes/NodeAbstract.cs&quot; StartLineNumber=10 StartCharacterOffset=4 EndLineNumber=10 EndCharacterOffset=4)" UseManualLocation="True" />
-    <Node Id="@6" Category="CodeSchema_Enum" Bounds="-31.4566666666666,-42,118.333333333333,25" CodeSchemaProperty_IsFinal="True" CodeSchemaProperty_IsPublic="True" CommonLabel="NodeStates" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Icon="CodeSchema_Enum" Label="NodeStates" Language="{B5E9BD34-6D3E-4B5D-925E-8A43B79820B4}" SourceLocation="(Assembly=&quot;file:///C:/Users/Scopollif/Documents/Personnel/GIT/Pascal Repo/OpenHomeMation/Common.Public/Nodes/NodeStates.cs&quot; StartLineNumber=3 StartCharacterOffset=4 EndLineNumber=3 EndCharacterOffset=4)" UseManualLocation="True" />
+    <Node Id="(@1 @2 Type=NodeProperty)" Category="CodeSchema_Class" Bounds="-2.8421709430404E-14,55,135.65,25" CodeSchemaProperty_IsPublic="True" CommonLabel="NodeProperty" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Icon="CodeSchema_Class" Label="NodeProperty" Language="{B5E9BD34-6D3E-4B5D-925E-8A43B79820B4}" SourceLocation="(Assembly=&quot;file:///C:/Users/Scopollif/Documents/Personnel/GIT/Pascal Repo/OpenHomeMation/Common.Public/Nodes/NodeProperty.cs&quot; StartLineNumber=7 StartCharacterOffset=4 EndLineNumber=7 EndCharacterOffset=4)" />
+    <Node Id="@3" Category="CodeSchema_Interface" Bounds="198.053333333333,55,93.5433333333334,25" CodeSchemaProperty_IsPublic="True" CommonLabel="INode" DelayedChildNodesState="NotFetched" Group="Collapsed" Icon="CodeSchema_Interface" Label="INode" Language="{B5E9BD34-6D3E-4B5D-925E-8A43B79820B4}" SourceLocation="(Assembly=&quot;file:///C:/Users/Scopollif/Documents/Personnel/GIT/Pascal Repo/OpenHomeMation/Common.Public/Nodes/INode.cs&quot; StartLineNumber=6 StartCharacterOffset=4 EndLineNumber=6 EndCharacterOffset=4)" />
+    <Node Id="@4" Category="CodeSchema_Interface" Bounds="94.4033333333333,0,138.843333333333,25" CodeSchemaProperty_IsPublic="True" CommonLabel="INodeProperty" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Icon="CodeSchema_Interface" Label="INodeProperty" Language="{B5E9BD34-6D3E-4B5D-925E-8A43B79820B4}" SourceLocation="(Assembly=&quot;file:///C:/Users/Scopollif/Documents/Personnel/GIT/Pascal Repo/OpenHomeMation/Common.Public/Nodes/INodeProperty.cs&quot; StartLineNumber=4 StartCharacterOffset=4 EndLineNumber=4 EndCharacterOffset=4)" />
+    <Node Id="@5" Category="CodeSchema_Class" Bounds="177.728333333333,110,134.193333333333,25" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsPublic="True" CommonLabel="NodeAbstract" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Icon="CodeSchema_Class" Label="NodeAbstract" Language="{B5E9BD34-6D3E-4B5D-925E-8A43B79820B4}" SourceLocation="(Assembly=&quot;file:///C:/Users/Scopollif/Documents/Personnel/GIT/Pascal Repo/OpenHomeMation/Common.Public/Nodes/NodeAbstract.cs&quot; StartLineNumber=9 StartCharacterOffset=4 EndLineNumber=9 EndCharacterOffset=4)" />
+    <Node Id="@6" Category="CodeSchema_Enum" Bounds="263.658333333333,0,118.333333333333,25" CodeSchemaProperty_IsFinal="True" CodeSchemaProperty_IsPublic="True" CommonLabel="NodeStates" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Icon="CodeSchema_Enum" Label="NodeStates" Language="{B5E9BD34-6D3E-4B5D-925E-8A43B79820B4}" SourceLocation="(Assembly=&quot;file:///C:/Users/Scopollif/Documents/Personnel/GIT/Pascal Repo/OpenHomeMation/Common.Public/Nodes/NodeStates.cs&quot; StartLineNumber=3 StartCharacterOffset=4 EndLineNumber=3 EndCharacterOffset=4)" />
   </Nodes>
   <Links>
-    <Link Source="(@1 @2 Type=NodeProperty)" Target="@4" Category="References" Bounds="99.1382173710901,-141.381555394889,109.774241645303,33.3815553948894" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="11">
+    <Link Source="(@1 @2 Type=NodeProperty)" Target="@4" Category="References" Bounds="89.643180847168,29.7225646972656,44.1206130981445,25.2774353027344" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="11">
       <Category Ref="CodeSchema_Calls" />
       <Category Ref="Implements" />
     </Link>
-    <Link Source="@3" Target="@4" Category="References" Bounds="-140.749885057471,-137.630550433333,171.334635691207,171.630550433333" IsSourceVirtualized="True" Weight="1" />
-    <Link Source="@3" Target="@6" Category="CodeSchema_ReturnTypeLink" Bounds="-123.468739035088,-13.5146776429269,113.121402389234,47.5146776429269" IsSourceVirtualized="True" Weight="1" />
-    <Link Source="@5" Target="@3" Category="References" Bounds="-97.4573385989463,43.3199394078261,204.457338598946,2.49852395752169" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="11">
+    <Link Source="@3" Target="@4" Category="References" Bounds="189.679840087891,30.0557613372803,36.7360687255859,24.9442386627197" IsSourceVirtualized="True" Weight="1" />
+    <Link Source="@3" Target="@6" Category="CodeSchema_ReturnTypeLink" Bounds="262.552276611328,30.1864452362061,35.1901245117188,24.8135547637939" IsSourceVirtualized="True" Weight="1" />
+    <Link Source="@5" Target="@3" Category="References" Bounds="244.824996948242,89.5,0,20.5" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="8">
       <Category Ref="CodeSchema_Calls" />
       <Category Ref="CodeSchema_ReturnTypeLink" />
       <Category Ref="Implements" />
     </Link>
-    <Link Source="@5" Target="@4" Category="References" Bounds="62.0312665632199,-136.373187251541,104.234055882341,166.373187251541" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="23">
+    <Link Source="@5" Target="@4" Category="References" Bounds="164.996994018555,33.9866409301758,62.1007385253906,76.0133590698242" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="19">
       <Category Ref="CodeSchema_Calls" />
     </Link>
-    <Link Source="@5" Target="@6" Category="References" Bounds="61.200358276582,-13.0278317976553,87.4819565382328,43.0278317976553" IsSourceVirtualized="True" Weight="4">
+    <Link Source="@5" Target="@6" Category="References" Bounds="262.552276611328,34,60.2727355957031,76" IsSourceVirtualized="True" Weight="4">
       <Category Ref="CodeSchema_ReturnTypeLink" />
     </Link>
   </Links>
@@ -49,6 +49,7 @@
     <Property Id="DelayedChildNodesState" Label="Delayed Child Nodes State" Description="Unspecified if the delayed child nodes state is not specified. NotFetched if the group contains child nodes that are not fetched into the graph yet. Fetched if the group has all its delayed child nodes already fetched." DataType="Microsoft.VisualStudio.GraphModel.DelayedDataState" />
     <Property Id="DelayedCrossGroupLinksState" Label="Delayed Cross-Group Links State" Description="Unspecified if the delayed cross-group links state is not specified. NotFetched if delayed cross-group links on this node are not fetched into the graph yet. Fetched if all delayed cross-group links have already fetched." DataType="Microsoft.VisualStudio.GraphModel.DelayedDataState" />
     <Property Id="Expression" DataType="System.String" />
+    <Property Id="GraphDirection" DataType="Microsoft.VisualStudio.Diagrams.Layout.LayoutOrientation" />
     <Property Id="Group" Label="Group" Description="Display the node as a group" DataType="Microsoft.VisualStudio.GraphModel.GraphGroupStyle" />
     <Property Id="GroupLabel" DataType="System.String" />
     <Property Id="Icon" Label="Icon" Description="Icon" DataType="System.String" />
@@ -63,7 +64,6 @@
     <Property Id="OutgoingActionLabel" Label="OutgoingActionLabel" Description="OutgoingActionLabel" DataType="System.String" />
     <Property Id="SourceLocation" Label="Start Line Number" DataType="Microsoft.VisualStudio.GraphModel.CodeSchema.SourceLocation" />
     <Property Id="TargetType" DataType="System.Type" />
-    <Property Id="UseManualLocation" DataType="System.Boolean" />
     <Property Id="Value" DataType="System.String" />
     <Property Id="ValueLabel" DataType="System.String" />
     <Property Id="Visibility" Label="Visibility" Description="Defines whether a node in the graph is visible or not" DataType="System.Windows.Visibility" />

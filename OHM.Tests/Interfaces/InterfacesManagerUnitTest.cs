@@ -64,7 +64,7 @@ namespace OHM.Tests.Interfaces
             dataStore.Stub(x => x.Save()).Return(true);
             var plugin = MockRepository.GenerateStub<IPlugin>();
             plugin.Stub(x => x.Id).Return(new Guid("dd985d5b-2d5e-49b5-9b07-64aad480e312"));
-            plugin.Stub(x => x.CreateInterface("testGood", logger)).Return(MockRepository.GenerateStub<InterfaceAbstract>("test","test", logger));
+            plugin.Stub(x => x.CreateInterface("testGood")).Return(MockRepository.GenerateStub<RalInterfaceNodeAbstract>("test","test", logger));
             var system = MockRepository.GenerateStub<IOhmSystemInternal>();
 
             var target = new InterfacesManager(loggerMng, pluginsMng);
@@ -83,7 +83,7 @@ namespace OHM.Tests.Interfaces
             Assert.IsTrue(target.RegisterInterface("testGood", plugin));
 
             //Registering will succeed
-            plugin.AssertWasCalled(x => x.CreateInterface("testGood", logger2));
+            plugin.AssertWasCalled(x => x.CreateInterface("testGood"));
             Assert.AreEqual(1, target.RunnableInterfaces.Count);
 
         }

@@ -42,7 +42,7 @@ namespace OHM.Plugins
 
         public abstract bool Update();
 
-        public abstract InterfaceAbstract CreateInterface(string key, ILogger logger);
+        public abstract RalInterfaceNodeAbstract CreateInterface(string key);
 
         #endregion
 

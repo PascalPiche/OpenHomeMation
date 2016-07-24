@@ -219,7 +219,7 @@ namespace OHM.RAL
             return result;
         }
 
-        private InterfaceAbstract CreateInterface(string key, IOhmSystemInternal system)
+        private RalInterfaceNodeAbstract CreateInterface(string key, IOhmSystemInternal system)
         {
             return CreateInterface(key, GetPluginForInterface(key), system);
         }
@@ -229,20 +229,20 @@ namespace OHM.RAL
             return plugin.Id.ToString() + '.' + key;
         }
 
-        private InterfaceAbstract CreateInterface(string key, IPlugin plugin, IOhmSystemInternal system)
+        private RalInterfaceNodeAbstract CreateInterface(string key, IPlugin plugin, IOhmSystemInternal system)
         {
-            InterfaceAbstract result = null;
+            RalInterfaceNodeAbstract result = null;
 
             if (plugin != null)
             {
                 var interfaceLogger = _loggerMng.GetLogger(GetInterfaceLoggerKey(key, plugin));
-                var tempResult = plugin.CreateInterface(key, interfaceLogger);
+                var tempResult = plugin.CreateInterface(key);
 
                 if (tempResult != null)
                 {
                     var _interfData = system.GetOrCreateDataStore(plugin.Id.ToString() + "." + tempResult.Key);
 
-                    tempResult.Init(_interfData, system.GetInterfaceGateway(tempResult));
+                    tempResult.Init(_interfData, interfaceLogger, system.GetInterfaceGateway(tempResult));
                     _runningInterfaces.Add(tempResult);
                     _runningDic.Add(key, tempResult);
 

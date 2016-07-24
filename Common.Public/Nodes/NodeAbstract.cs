@@ -1,7 +1,6 @@
 ﻿using OHM.Data;
 using OHM.Logger;
 using OHM.Nodes.Commands;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -10,10 +9,12 @@ namespace OHM.Nodes
 {
     public abstract class NodeAbstract : INode
     {
+        #region Private Members
+
         private string _key;
         private string _name;
         private ObservableCollection<ICommand> _commands;
-        protected Dictionary<string, ICommand> _commandsDic;
+        private Dictionary<string, ICommand> _commandsDic;
 
         private ObservableCollection<NodeAbstract> _children;
         private Dictionary<string, NodeAbstract> _childrenDic;
@@ -26,15 +27,20 @@ namespace OHM.Nodes
         private IDataStore _data;
         private NodeStates _state;
 
+        #endregion
+
+        #region Public Events
+
         public event PropertyChangedEventHandler PropertyChanged;
 
-        #region Protected ctor
+        #endregion
 
-        protected NodeAbstract(string key, string name, ILogger logger, NodeStates initialState = NodeStates.initializing)
+        #region Internal ctor
+
+        internal NodeAbstract(string key, string name, NodeStates initialState = NodeStates.initializing)
         {
             _key = key;
             _name = name;
-            _logger = logger;
             _state = initialState;
             _commands = new ObservableCollection<ICommand>();
             _commandsDic = new Dictionary<string, ICommand>();
@@ -48,15 +54,21 @@ namespace OHM.Nodes
 
         #region Public Properties
 
-        public string FullKey { get {
-                if (Parent != null)
+        public string FullKey { 
+            get {
+                string result = null;
+                if (_state != NodeStates.initializing)
                 {
-                    return Parent.FullKey + "." + Key;
+                    if (Parent != null)
+                    {
+                        result = Parent.FullKey + "." + Key;
+                    }
+                    else
+                    {
+                        result = Key;
+                    }
                 }
-                else
-                {
-                    return Key;
-                }
+                return result;
             } 
         }
 
@@ -95,97 +107,6 @@ namespace OHM.Nodes
 
         #endregion
 
-        #region Public API
-
-        public bool CanExecuteCommand(string key)
-        {
-            if (_commandsDic.ContainsKey(key))
-            {
-                return _commandsDic[key].CanExecute();
-            }
-            return false;
-        }
-
-        public bool CanExecuteCommand(string nodeFullKey, string commandKey)
-        {
-            if (this.Key == nodeFullKey)
-            {
-                return this.CanExecuteCommand(commandKey);
-            }
-            else
-            {
-                //Remove Extra checked key
-                if (nodeFullKey.Contains("."))
-                {
-                    nodeFullKey = nodeFullKey.Substring(nodeFullKey.IndexOf('.') + 1);
-                }
-                string nextNode = nodeFullKey;
-                if (nextNode.Contains("."))
-                {
-                    nextNode = nextNode.Split('.')[0];
-                }
-
-                //Lookup ALL LEVEL the node list
-                NodeAbstract node = this.GetChild(nextNode);
-                if (node != null)
-                {
-                    return node.CanExecuteCommand(nodeFullKey, commandKey);
-                }
-            }
-
-            return false;
-        }
-
-        public bool ExecuteCommand(string key, IDictionary<string, string> arguments)
-        {
-            if (_commandsDic.ContainsKey(key))
-            {
-                return _commandsDic[key].Execute(arguments);
-            }
-            else if (Children.Count != 0)
-            {
-                foreach(INode node in Children) {
-                    if (node.ExecuteCommand(key, arguments))
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-
-        public bool ExecuteCommand(string nodeFullKey, string commandKey, Dictionary<string, string> arguments)
-        {
-            if (this.Key == nodeFullKey)
-            {
-                return this.ExecuteCommand(commandKey, arguments);
-            }
-            else
-            {
-                //Remove Extra checked key
-                if (nodeFullKey.Contains("."))
-                {
-                    nodeFullKey = nodeFullKey.Substring(nodeFullKey.IndexOf('.') + 1);
-                }
-                string nextNode = nodeFullKey;
-                if (nextNode.Contains("."))
-                {
-                    nextNode = nextNode.Split('.')[0];
-                }
-
-                //Lookup ALL LEVEL the node list
-                INode node = this.GetChild(nextNode);
-                if (node != null)
-                {
-                    return node.ExecuteCommand(commandKey, arguments);
-                }
-            }
-            return false;
-        }
-
-        
-        #endregion
-
         #region Protected Properties
 
         protected ILogger Logger { get { return _logger; } }
@@ -196,9 +117,7 @@ namespace OHM.Nodes
 
         #region Protected Functions
 
-        protected IList<NodeAbstract> GetChildren () { return _children; }
-
-        protected NodeAbstract GetChild(string key)
+        protected NodeAbstract FindChild(string key)
         {
             NodeAbstract result;
 
@@ -211,7 +130,7 @@ namespace OHM.Nodes
                 //Check child
                 foreach (NodeAbstract item in Children)
                 {
-                    result = item.GetChild(key);
+                    result = item.FindChild(key);
                     if (result != null)
                     {
                         return result;
@@ -221,33 +140,20 @@ namespace OHM.Nodes
             return null;
         }
 
-        protected bool AddChild(NodeAbstract node)
+        protected bool RemoveChild(NodeAbstract node)
         {
-            if (GetChild(node.Key) == null)
+            if (node != null)
             {
-                _childrenDic.Add(node.Key, node);
-                _children.Add(node);
-                node.SetParent(this);
+                _children.Remove(node);
+                _childrenDic.Remove(node.Key);
                 return true;
             }
             return false;
-        }
-
-        protected bool RemoveChild(INode node)
-        {
-            return this.RemoveChild(node.Key);
         }
 
         protected bool RemoveChild(string key)
         {
-            var it = GetChild(key);
-            if (it != null)
-            {
-                GetChildren().Remove(it);
-                _childrenDic.Remove(Key);
-                return true;
-            }
-            return false;
+            return RemoveChild(FindChild(key));
         }
 
         protected bool RegisterProperty(INodeProperty nodeProperty)
@@ -287,22 +193,29 @@ namespace OHM.Nodes
 
         protected bool RegisterCommand(CommandAbstract command)
         {
-            if (!_commandsDic.ContainsKey(command.Definition.Key))
+            bool result = false;
+            if (!_commandsDic.ContainsKey(command.Key))
             {
                 if (command.Init(this))
                 {
-                    _commandsDic.Add(command.Definition.Key, command);
+                    _commandsDic.Add(command.Key, command);
                     _commands.Add(command);
-                    return true;
+                    result = true;
                 }
             }
 
-            return false;
+            return result;
         }
 
         protected bool UnRegisterCommand(ICommand command)
         {
-            return false;
+            bool result = false;
+            if (_commandsDic.ContainsKey(command.Key)) {
+                _commandsDic.Remove(command.Key);
+                _commands.Remove(command);
+                result = true;
+            }
+            return result; ;
         }
         
         protected void NotifyPropertyChanged(string propertyName)
@@ -311,33 +224,6 @@ namespace OHM.Nodes
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
-        }
-
-        protected bool Init(IDataStore data)
-        {
-            _data = data;
-            this.State = NodeStates.normal; 
-            return true;
-        }
-
-        protected bool UpdateProperty(string key, double value)
-        {
-            INodeProperty property;
-            if (_propertiesDic.TryGetValue(key, out property))
-            {
-                return property.SetValue(value);
-            }
-            return false;
-        }
-
-        protected bool UpdateProperty(string key, Int64 value)
-        {
-            INodeProperty property;
-            if (_propertiesDic.TryGetValue(key, out property))
-            {
-                return property.SetValue(value);
-            }
-            return false;
         }
 
         protected bool UpdateProperty(string key, object value)
@@ -350,20 +236,126 @@ namespace OHM.Nodes
             return false;
         }
 
-        protected bool ContainsProperty(string key)
+        protected bool ContainProperty(string key)
         {
             return _propertiesDic.ContainsKey(key);
         }
+
+        protected bool CanExecuteCommand(string nodeFullKey, string commandKey)
+        {
+            if (this.Key == nodeFullKey)
+            {
+                return this.CanExecuteCommand(commandKey);
+            }
+            else
+            {
+                //Remove Extra checked key
+                if (nodeFullKey.Contains("."))
+                {
+                    nodeFullKey = nodeFullKey.Substring(nodeFullKey.IndexOf('.') + 1);
+                }
+                string nextNode = nodeFullKey;
+                if (nextNode.Contains("."))
+                {
+                    nextNode = nextNode.Split('.')[0];
+                }
+
+                //Lookup ALL LEVEL the node list
+                NodeAbstract node = this.FindChild(nextNode);
+                if (node != null)
+                {
+                    return node.CanExecuteCommand(nodeFullKey, commandKey);
+                }
+            }
+
+            return false;
+        }
+
+        protected bool ExecuteCommand(string nodeFullKey, string commandKey, Dictionary<string, string> arguments)
+        {
+            bool result = false;
+            if (this.Key == nodeFullKey)
+            {
+                result = this.ExecuteCommand(commandKey, arguments);
+            }
+            else
+            {
+                //Remove Extra checked key
+                if (nodeFullKey.Contains("."))
+                {
+                    nodeFullKey = nodeFullKey.Substring(nodeFullKey.IndexOf('.') + 1);
+                }
+
+                string nextNode = nodeFullKey;
+                if (nextNode.Contains("."))
+                {
+                    nextNode = nextNode.Split('.')[0];
+                }
+
+                NodeAbstract node = this.FindChild(nextNode);
+                if (node != null)
+                {
+                    result = node.ExecuteCommand(nodeFullKey, commandKey, arguments);
+                }
+            }
+            return result;
+        }
+
+        protected abstract NodeAbstract CreateChildNode(string model, string key, string name, IDictionary<string, object> options = null);
 
         #endregion
 
         #region Internal Functions
 
-        void SetParent(INode node)
+        internal void SetParent(INode node)
         {
             _parent = node;
         }
 
+        internal bool AddChild(NodeAbstract node)
+        {
+            if (!_childrenDic.ContainsKey(node.Key))
+            {
+                _childrenDic.Add(node.Key, node);
+                _children.Add(node);
+                node.SetParent(this);
+                return true;
+            }
+            return false;
+        }
+
+        internal bool Init(IDataStore data, ILogger logger)
+        {
+            _data = data;
+            _logger = logger;
+            this.State = NodeStates.normal;
+            return true;
+        }
+
         #endregion
+
+        #region Private Functions
+
+        private bool CanExecuteCommand(string key)
+        {
+            if (_commandsDic.ContainsKey(key))
+            {
+                return _commandsDic[key].CanExecute();
+            }
+            return false;
+        }
+
+        private bool ExecuteCommand(string commandKey, IDictionary<string, string> arguments)
+        {
+            bool result = false;
+            if (_commandsDic.ContainsKey(commandKey))
+            {
+                result = _commandsDic[commandKey].Execute(arguments);
+            }
+            return result;
+        }
+
+        #endregion
+
     }
 }

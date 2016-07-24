@@ -41,7 +41,7 @@ namespace OHM.Plugins
             return false;
         }
 
-        public InterfaceAbstract CreateInterface(string key, ILogger logger)
+        public RalInterfaceNodeAbstract CreateInterface(string key)
         {
             throw new NotImplementedException();
         }

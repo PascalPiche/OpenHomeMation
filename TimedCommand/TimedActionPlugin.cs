@@ -34,7 +34,7 @@ namespace TimedCommand
             return true;
         }
 
-        public override InterfaceAbstract CreateInterface(string key, OHM.Logger.ILogger logger)
+        public override RalInterfaceNodeAbstract CreateInterface(string key)
         {
             throw new NotImplementedException();
         }

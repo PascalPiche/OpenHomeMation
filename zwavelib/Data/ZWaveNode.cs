@@ -1,5 +1,6 @@
 ﻿using OHM.Logger;
 using OHM.Nodes;
+using OHM.RAL;
 using OpenZWaveDotNet;
 using System;
 using System.Collections.ObjectModel;
@@ -7,7 +8,7 @@ using ZWaveLib.Commands;
 
 namespace ZWaveLib.Data
 {
-    public class ZWaveNode : NodeAbstract, IZWaveNode
+    public class ZWaveNode : RalNodeAbstract, IZWaveNode
     {
         private uint? _homeId;
         private byte? _nodeId;
@@ -29,22 +30,9 @@ namespace ZWaveLib.Data
 
         #region Public Ctor
 
-        public ZWaveNode(string key, string name, ZWaveInterface interf, ILogger logger, uint homeId, byte nodeId)
-            : base(key, name, logger)
+        public ZWaveNode(string key, string name, ZWaveInterface interf)
+            : base(key, name)
         {
-            _homeId = homeId;
-            _nodeId = nodeId;
-            _interface = interf;
-
-            RegisterZWaveNodeProperties();
-            RegisterZWaveNodeCommands();
-            UpdateZWaveNodeProperties();
-        }
-        
-        public ZWaveNode(string key, string name, ZWaveInterface interf, ILogger logger, NodeStates initialState = NodeStates.initializing)
-            : base(key, name, logger, initialState)
-        {
-            
             _homeId = new uint?();
             _nodeId = new byte?();
             _interface = interf;
@@ -80,7 +68,7 @@ namespace ZWaveLib.Data
             //Grouping values by Command Class
             byte commandClassId = valueId.GetCommandClassId();
             //if (this.Children)
-            if (this.ContainsProperty(valueId.GetId().ToString()))
+            if (this.ContainProperty(valueId.GetId().ToString()))
             {
                 //string units = Manager.GetValueUnits(valueId);
                 //Manager.GetPollIntensity
@@ -103,7 +91,7 @@ namespace ZWaveLib.Data
             string key = valueId.GetId().ToString();
             bool result = false;
 
-            if (this.ContainsProperty(key))
+            if (this.ContainProperty(key))
             {
                 if (this.UnRegisterProperty(valueId.GetId().ToString()))
                 {
@@ -396,5 +384,6 @@ namespace ZWaveLib.Data
         }
 
         #endregion
+
     }
 }

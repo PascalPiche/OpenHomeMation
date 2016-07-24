@@ -23,15 +23,7 @@ namespace OHM.Nodes
         IReadOnlyList<INode> Children { get; }
 
         INode Parent { get; }
-
-        #endregion
-
-        #region API
-
-        bool CanExecuteCommand(string key);
-
-        bool ExecuteCommand(string commandKey, IDictionary<string, string> arguments);
-
+        
         #endregion
 
     }

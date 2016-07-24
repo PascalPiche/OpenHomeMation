@@ -54,14 +54,14 @@
     <Compile Include="RAL\Commands\InterfaceCommandAbstract.cs" />
     <Compile Include="Data\IDataDictionary.cs" />
     <Compile Include="Data\IDataStore.cs" />
-    <Compile Include="RAL\InterfaceAbstract.cs" />
+    <Compile Include="RAL\RalNodeAbstract.cs" />
     <Compile Include="RAL\InterfaceState.cs" />
     <Compile Include="Nodes\INode.cs" />
     <Compile Include="RAL\IInterface.cs" />
     <Compile Include="Logger\ILogger.cs" />
     <Compile Include="Nodes\INodeProperty.cs" />
     <Compile Include="Nodes\NodeAbstract.cs" />
-    <Compile Include="RAL\NodeInterfaceAbstract.cs" />
+    <Compile Include="RAL\RalInterfaceNodeAbstract.cs" />
     <Compile Include="Nodes\NodeProperty.cs" />
     <Compile Include="Nodes\NodeStates.cs" />
     <Compile Include="Plugins\PluginStates.cs" />
@@ -73,12 +73,11 @@
     <Compile Include="System\IOhmSystemInterfaceGateway.cs" />
     <Compile Include="System\IOhmSystemUnInstallGateway.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="Data\_diagrams\Graph1.dgml" />
     <None Include="Nodes\Commands\_diagrams\Relations-expanded.dgml" />
     <None Include="Nodes\Commands\_diagrams\Relations-simple.dgml" />
-    <None Include="Nodes\_diagrams\Relations-expanded - Copy.dgml" />
+    <None Include="Nodes\_diagrams\Graph1.dgml" />
     <None Include="Nodes\_diagrams\Relations-expanded.dgml" />
     <None Include="Nodes\_diagrams\Relations-simple.dgml" />
     <None Include="Plugins\_diagrams\Graph1.dgml" />
@@ -94,6 +93,7 @@
     <None Include="packages.config" />
     <None Include="Plugins\_diagrams\PluginsClassDiagram.cd" />
     <None Include="System\_diagrams\SystemClassDiagram.cd" />
+    <None Include="_diagrams\ClassDiagram1.cd" />
     <None Include="_diagrams\Graph1.dgml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

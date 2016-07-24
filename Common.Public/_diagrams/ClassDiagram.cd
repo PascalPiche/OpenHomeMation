@@ -27,7 +27,7 @@
   <Class Name="OHM.Nodes.NodeAbstract" Collapsed="true">
     <Position X="2.25" Y="3" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AIAwIgAABAIAEIQAAAKGSQYQoCIgSAGgAEADBBACAAA=</HashCode>
+      <HashCode>AIAwIgAABAIAEIQAAAGGSQYQoCIgCAGgAEADBBACAAA=</HashCode>
       <FileName>Nodes\NodeAbstract.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -48,13 +48,6 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="OHM.RAL.InterfaceAbstract" Collapsed="true">
-    <Position X="2.25" Y="5" Width="1.75" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>RAL\InterfaceAbstract.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="OHM.RAL.Commands.InterfaceCommandAbstract" Collapsed="true">
     <Position X="6" Y="4" Width="1.75" />
     <TypeIdentifier>
@@ -66,7 +59,7 @@
   <Class Name="OHM.RAL.NodeInterfaceAbstract" Collapsed="true">
     <Position X="2.25" Y="4" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AIAAAAACkCBAAAAAAAAAQQAAAAAAAAAIAAAGAEAAAAA=</HashCode>
+      <HashCode>AAAgAAACkCBAAAAAAAEAQQAAAAAAAAAIAAAGAEAAAAA=</HashCode>
       <FileName>RAL\NodeInterfaceAbstract.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />

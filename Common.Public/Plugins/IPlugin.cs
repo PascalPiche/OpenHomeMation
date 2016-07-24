@@ -20,7 +20,7 @@ namespace OHM.Plugins
 
         bool Update();
 
-        InterfaceAbstract CreateInterface(string key, ILogger logger);
+        RalInterfaceNodeAbstract CreateInterface(string key);
 
     }
 }

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace OHM.RAL
 {
-    public abstract class NodeInterfaceAbstract : NodeAbstract, IInterface
+    public abstract class RalInterfaceNodeAbstract : RalNodeAbstract, IInterface
     {
         #region Private Members
 
@@ -18,8 +18,8 @@ namespace OHM.RAL
 
         #region Protected Ctor
 
-        protected NodeInterfaceAbstract(string key, string name, ILogger logger)
-            : base(key, name, logger)
+        protected RalInterfaceNodeAbstract(string key, string name)
+            : base(key, name)
         { }
 
         #endregion
@@ -55,6 +55,8 @@ namespace OHM.RAL
             }
         }
 
+        
+
         #endregion
 
         #region Public Api
@@ -77,9 +79,9 @@ namespace OHM.RAL
             Logger.Info(this.Name + " Interface Shutdowned");
         }
         
-        public void Init(IDataStore data, IOhmSystemInterfaceGateway system)
+        public void Init(IDataStore data, ILogger logger, IOhmSystemInterfaceGateway system)
         {
-            base.Init(data);
+            base.Init(data, logger);
             _startOnLaunch = data.GetBool("StartOnLaunch");
             NotifyPropertyChanged("StartOnLaunch");
             _system = system;
@@ -94,5 +96,32 @@ namespace OHM.RAL
         protected abstract void Shutdown();
 
         #endregion
+
+        protected override NodeAbstract CreateChildNode(string model, string key, string name, IDictionary<string, object> options)
+        {
+            NodeAbstract result = null;
+            NodeAbstract newNode = this.CreateNodeInstance(model, key, name, options);
+            if (newNode != null)
+            {
+                newNode.Init(this.DataStore, this.Logger);   
+                if (this.AddChild(newNode))
+                {
+                    result = newNode;
+                }
+            }
+            return result;
+        }
+
+        protected abstract NodeAbstract CreateNodeInstance(string model, string key, string name, IDictionary<string, object> options);
+
+        public new bool ExecuteCommand(string nodeKey, string commandKey, Dictionary<string, string> arguments)
+        {
+            return base.ExecuteCommand(nodeKey, commandKey, arguments);
+        }
+
+        public new bool CanExecuteCommand(string nodeKey, string key)
+        {
+            return base.CanExecuteCommand(nodeKey, key);
+        }
     }
 }

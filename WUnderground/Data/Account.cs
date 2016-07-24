@@ -14,8 +14,8 @@ namespace WUnderground.Data
 
         private string _apiKey;
 
-        public Account(string keyId, string name, ILogger logger, string apiKey)
-            : base(keyId, name, logger)
+        public Account(string keyId, string name, string apiKey)
+            : base(keyId, name)
         {
             _apiKey = apiKey;
 
@@ -41,9 +41,18 @@ namespace WUnderground.Data
             }
         }
 
-        public bool AddLocation(Station location)
+        public bool AddLocation(string locationName, int zip, int magic, string wmo)
         {
-            return this.AddChild(location);
+            //new Station(locationName, locationName, zip, magic, wmo)
+            IDictionary<string, object> options = new Dictionary<string, object>();
+            options.Add("zip", zip);
+            options.Add("magic", magic);
+            options.Add("wmo", wmo);
+            INode node = this.CreateChildNode("station", locationName, locationName, options);
+            if (node != null) {
+                return true;
+            }
+            return false;//this.AddChild(location);
         }
 
     }

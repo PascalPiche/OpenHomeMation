@@ -44,9 +44,9 @@ namespace OHM.Plugins
             return _plugin.Update();
         }
 
-        public InterfaceAbstract CreateInterface(string key, Logger.ILogger logger)
+        public RalInterfaceNodeAbstract CreateInterface(string key)
         {
-            return _plugin.CreateInterface(key, logger);
+            return _plugin.CreateInterface(key);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

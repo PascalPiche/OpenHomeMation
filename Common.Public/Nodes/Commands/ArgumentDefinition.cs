@@ -102,7 +102,7 @@ namespace OHM.Nodes.Commands
         public Boolean TryGetInt16(Object value, out Int16 result)
         {
             bool fctResult = false;
-            result = Int16.MinValue;
+            result = 0;
 
             value = this.ExtractValueFromDictionary(value);
             if (value is Int16)
@@ -140,10 +140,10 @@ namespace OHM.Nodes.Commands
         public Boolean TryGetInt32(Object value, out Int32 result)
         {
             bool fctResult = false;
-            result = Int32.MinValue;
+            result = 0;
             value = this.ExtractValueFromDictionary(value);
 
-            if (value is Int32)
+            if (value is Int32 /*|| value is Int16*/)
             {
                 result = (Int32)value;
                 fctResult = true;
@@ -178,7 +178,7 @@ namespace OHM.Nodes.Commands
         public Boolean TryGetInt64(Object value, out Int64 result)
         {
             bool fctResult = false;
-            result = Int64.MinValue;
+            result = 0;
             value = this.ExtractValueFromDictionary(value);
 
             if (value is Int64)
@@ -197,7 +197,7 @@ namespace OHM.Nodes.Commands
         public Boolean TryGetDouble(Object value, out Double result)
         {
             bool fctResult = false;
-            result = Double.MinValue;
+            result = 0;
             value = this.ExtractValueFromDictionary(value);
 
             if (value is Double)
@@ -207,7 +207,7 @@ namespace OHM.Nodes.Commands
             }
             else if (value is String)
             {
-                fctResult = Double.TryParse((String)value, out result);
+                fctResult = Double.TryParse((String)value, System.Globalization.NumberStyles.Float, System.Globalization.NumberFormatInfo.InvariantInfo, out result);
             }
 
             return fctResult;

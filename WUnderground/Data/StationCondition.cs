@@ -13,8 +13,8 @@ namespace WUnderground.Data
     {
         private Station _station;
 
-        public StationCondition(string keyId, string name, ILogger logger, Station station)
-            : base(keyId, name, logger)
+        public StationCondition(string keyId, string name, Station station)
+            : base(keyId, name)
         {
             _station = station;
             

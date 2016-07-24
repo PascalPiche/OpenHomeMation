@@ -1,19 +1,22 @@
 ﻿using OHM.Data;
 using OHM.Logger;
+using OHM.Nodes;
 using OHM.RAL;
+using System.Collections;
+using System.Collections.Generic;
 using WUnderground.Commands;
 using WUnderground.Data;
 
 namespace WUnderground.Data
 {
-    public class WUndergroundInterface : InterfaceAbstract
+    public class WUndergroundInterface : RalInterfaceNodeAbstract
     {
         private IDataDictionary _registeredAccounts;
 
         #region Public Ctor
 
-        public WUndergroundInterface(ILogger logger)
-            : base("WUndergroundInterface", "WUnderground", logger)
+        public WUndergroundInterface()
+            : base("WUndergroundInterface", "WUnderground")
         {
             //Create Commands
             this.RegisterCommand(new AddAccount());
@@ -43,13 +46,11 @@ namespace WUnderground.Data
 
         internal bool CreateAccountCommand(string username, string keyId) 
         {
+            bool result = false;
             if (_registeredAccounts.ContainKey(username))
             {
                 Logger.Error("Account : " + username + " already exist, cannot create duplicate account");
-                return false;
-            }
-
-            if (CreateAccountNode(username, keyId))
+            } else if (CreateAccountNode(username, keyId))
             {
                 //Store new account
                 IDataDictionary accountsMetaInfo = _registeredAccounts.GetOrCreateDataDictionary(username);
@@ -59,9 +60,9 @@ namespace WUnderground.Data
 
                 Logger.Info("Saving new account : " + username);
                 this.DataStore.Save();
-                return true;
+                result = true;
             }
-            return false;
+            return result;
         }
 
         internal bool RemoveAccountCommand(Account node)
@@ -87,7 +88,7 @@ namespace WUnderground.Data
             if (!accountLocations.ContainKey(locationName))
             {
                 
-                if (node.AddLocation(new Station(locationName, locationName, this.Logger, zip, magic, wmo)))
+                if (node.AddLocation(locationName, zip, magic, wmo))
                 {
                     IDataDictionary locationData = accountLocations.GetOrCreateDataDictionary(locationName);
                     locationData.StoreString("name", locationName);
@@ -95,8 +96,9 @@ namespace WUnderground.Data
                     locationData.StoreInt32("magic", magic);
                     locationData.StoreString("wmo", wmo);
 
-                    //accountLocations.StoreDataDictionary(locationName, locationData);
-                    return DataStore.Save();
+                    DataStore.Save();
+
+                    return true;
                 }
                 else
                 {
@@ -134,7 +136,7 @@ namespace WUnderground.Data
                         int magic = locationData.GetInt32("magic");
                         string wmo = locationData.GetString("wmo");
 
-                        this.GetAccountNode(username).AddLocation(new Station(locationKey, locationKey, this.Logger, zip, magic, wmo));
+                        this.GetAccountNode(username).AddLocation(locationKey, zip, magic, wmo);
                     }
 
                 } else {
@@ -144,17 +146,39 @@ namespace WUnderground.Data
         }
 
         private bool CreateAccountNode(string username, string key) {
+
             //Create Account
-            Account account = new Account(username, "Account : " + username, this.Logger, key);
-            return this.AddChild(account);
+            IDictionary<string, object> paramsDic = new Dictionary<string, object>();
+            paramsDic.Add("username", username);
+
+            Account account = this.CreateChildNode("Account", key, "Account : " + username, paramsDic) as Account;
+            if (account != null)
+            {
+                return true;
+            }
+            return false;
         }
 
         private Account GetAccountNode(string key)
         {
-            return (Account)this.GetChild(key);
+            return (Account)this.FindChild(key);
         }
 
         #endregion
 
+        protected override NodeAbstract CreateNodeInstance(string model, string key, string name, IDictionary<string, object> options)
+        {
+            NodeAbstract result = null; 
+            switch (model)
+            {
+                case "Account":
+                    result = new Account(key, name, key);
+                    break;
+                default:
+                    break;
+            }
+
+            return result;
+        }
     }
 }

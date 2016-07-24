@@ -11,8 +11,8 @@ namespace ZWaveLib.Data
     {
         #region Public Ctor
 
-        public ZWaveController(string key, string name, ZWaveInterface parent, ILogger logger, NodeStates initialState = NodeStates.initializing)
-            : base(key, name, parent, logger, initialState)
+        public ZWaveController(string key, string name, ZWaveInterface parent)
+            : base(key, name, parent)
         {
             RegisterProperties();
             RegisterCommands();
@@ -112,7 +112,7 @@ namespace ZWaveLib.Data
             {
                 return this;
             }
-            return (ZWaveNode)this.GetChild(NotificationTool.MakeNodeKey(n));
+            return (ZWaveNode)this.FindChild(NotificationTool.MakeNodeKey(n));
         }
 
         private void CreateNode(ZWNotification n)
@@ -122,9 +122,12 @@ namespace ZWaveLib.Data
             uint homeId = n.GetHomeId();
             byte nodeId = n.GetNodeId();
 
-            var newNode = new ZWaveNode(key, name, this.Interface, this.Logger, homeId, nodeId);
+            //TODO ZWaveNode newNode = this.CreateChildNode("zwavenode", key, name);
+            //newNode.Init(homeId, nodeId);
 
-            this.AddChild(newNode);
+            // OLD SHIT
+            //var newNode = new ZWaveNode(key, name, this.Interface, this.Logger);
+            //this.AddChild(newNode);
         }
 
         #endregion

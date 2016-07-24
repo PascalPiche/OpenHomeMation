@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OHM.Nodes.Commands;
+using OHM.Common.Public.Test.Commands.Stubs;
 using System;
 using System.Collections.Generic;
 
@@ -15,7 +15,7 @@ namespace OHM.Common.Public.Test.Commands
             string key = "key";
             string name = "name";
 
-            var target = new CommandAbstractIMP(key, name); ;
+            var target = new CommandAbstractStub(key, name); ;
 
             Assert.IsNotNull(target.Definition);
             Assert.AreEqual(key, target.Definition.Key);
@@ -39,7 +39,7 @@ namespace OHM.Common.Public.Test.Commands
             string key = "key";
             string name = "name";
 
-            var target = new CommandAbstractIMP(key, name); ;
+            var target = new CommandAbstractStub(key, name); ;
 
             Assert.IsNotNull(target.Definition);
             Assert.AreEqual(key, target.Definition.Key);
@@ -57,58 +57,41 @@ namespace OHM.Common.Public.Test.Commands
         }*/
 
         [TestMethod]
-        public void TestCommandAbstractCanExecute()
+        public void TestCommandAbstractNotInitedCanExecute()
         {
             //Should not be valid with a null Node
             string key = "key";
             string name = "name";
 
-            var target = new CommandAbstractIMP(null, key, name); ;
+            var target = new CommandAbstractStub(null, key, name); ;
 
-            Assert.IsTrue(target.CanExecute());
+            //Node not inited
+            Assert.IsFalse(target.CanExecute());
         }
 
         [TestMethod]
-        public void TestCommandAbstractExecute()
+        public void TestCommandAbstractNotInitedExecute()
         {
             //Should not be valid with a null Node
             string key = "key";
             string name = "name";
 
-            var target = new CommandAbstractIMP(null, key, name); ;
+            var target = new CommandAbstractStub(null, key, name); ;
 
-            Assert.IsTrue(target.Execute(null));
-
+            Assert.IsFalse(target.Execute(null));
         }
 
         [TestMethod]
-        public void TestCommandAbstractExecuteWithArgs()
+        public void TestCommandAbstractNotInitedExecuteWithArgs()
         {
             //Should not be valid with a null Node
             string key = "key";
             string name = "name";
 
-            var target = new CommandAbstractIMP(null, key, name); ;
+            var target = new CommandAbstractStub(null, key, name); ;
 
-            Assert.IsTrue(target.Execute(new Dictionary<string, string>()));
+            Assert.IsFalse(target.Execute(new Dictionary<string, string>()));
 
-        }
-    }
-
-    public class CommandAbstractIMP : CommandAbstract
-    {
-        public CommandAbstractIMP(string key, string name)
-            : base(key, name) { }
-
-        public CommandAbstractIMP(string key, string name, string description) 
-            : base (key, name, description) { }
-
-        public CommandAbstractIMP(string key, string name, string description, Dictionary<string, IArgumentDefinition> argumentsDefinition)
-            : base(key, name, description, argumentsDefinition) { }
-
-        protected override bool RunImplementation(IDictionary<string, string> arguments)
-        {
-            return true;
         }
     }
 }
