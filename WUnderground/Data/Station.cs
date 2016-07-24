@@ -52,11 +52,22 @@ namespace WUnderground.Data
                    "",
                   _wmo));
 
-            IDictionary<string, object> options = new Dictionary<string, object>();
-            options.Add("station", this);
-            this.CreateChildNode("station-condition", keyId + "-condition", "Condition", options);
+
+            
             //  new StationCondition(keyId + "-condition", "Condition", this));
             
+        }
+
+        protected override bool Initing()
+        {
+            bool result = false;
+            result = base.Initing();
+
+            IDictionary<string, object> options = new Dictionary<string, object>();
+            options.Add("station", this);
+            this.CreateChildNode("station-condition", base.Key + "-condition", "Condition", options);
+
+            return result;
         }
 
         internal bool GetCondition(StationCondition condition)

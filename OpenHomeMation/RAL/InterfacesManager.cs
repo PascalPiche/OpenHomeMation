@@ -58,7 +58,7 @@ namespace OHM.RAL
         public bool RegisterInterface(string key, IPlugin plugin)
         {
             bool result = false;
-            IDataDictionary _interfaceData = _dataRegisteredInterfaces.GetOrCreateDataDictionary(key);
+            IDataDictionary _interfaceMetaData = _dataRegisteredInterfaces.GetOrCreateDataDictionary(key);
             
             try {
                 IInterface newInterface = CreateInterface(key, plugin, _system);
@@ -68,7 +68,7 @@ namespace OHM.RAL
                 }
                 else
                 {
-                    _interfaceData = CreateInterfaceData(key, plugin);
+                    _interfaceMetaData.StoreString("PluginId", plugin.Id.ToString());
                     result = _data.Save();
 
                     if (result)
@@ -89,28 +89,22 @@ namespace OHM.RAL
         {
             bool result = false;
 
+            //Interface may running
             if (_runningDic.ContainsKey(key))
             {
-                //Interface is running
                 _runningDic[key].Shutdowning();
                 _runningInterfaces.Remove(_runningDic[key]);
                 _runningDic.Remove(key);
             }
 
-            IDataDictionary _interfaceData = _dataRegisteredInterfaces.GetOrCreateDataDictionary(key);
-            
+            result = _dataRegisteredInterfaces.RemoveKey(key);
 
-            if (_interfaceData != null)
-            {
-                result = _dataRegisteredInterfaces.RemoveKey(key);
+            if (!result) {
+                _logger.Warn("Cannot uninstall interface " + plugin.Id + ": Interface Not found");
             }
-            else
-            {
-                _logger.Warn("Cannot uninstall interface " + plugin.Id + ": Interace Not found");
-            }
+            
             _data.Save();
             return result;
-            
         }
 
         public bool StartInterface(string key)
@@ -143,11 +137,8 @@ namespace OHM.RAL
         {
             _logger.Debug("Executing Command -> Node Key : " + nodeKey + " -> Command Key : " + commandKey);
 
-           
-
             //Find interface
             IInterface interf = GetRunningInterface(nodeKey);
-
 
             if (interf != null)
             {
@@ -253,13 +244,13 @@ namespace OHM.RAL
             return result;
         }
 
-        private IDataDictionary CreateInterfaceData(string key, IPlugin plugin) {
+        /*private IDataDictionary CreateInterfaceData(string key, IPlugin plugin) {
             var result = new DataDictionary();
 
             result.StoreString("PluginId", plugin.Id.ToString());
 
             return result;
-        }
+        }*/
 
         private IInterface GetRunningInterface(string nodeKey)
         {

@@ -655,6 +655,12 @@ namespace ZWaveLib
 
         protected override NodeAbstract CreateNodeInstance(string model, string key, string name, IDictionary<string, object> options)
         {
+            switch (model)
+            {
+                case "zwavecontroller":
+                    return new ZWaveController(key, name);
+            }
+
             throw new NotImplementedException();
         }
     }

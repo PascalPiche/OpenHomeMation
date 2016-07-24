@@ -1,10 +1,14 @@
-﻿using OHM.Logger;
+﻿using OHM.Data;
+using OHM.Logger;
 using OHM.Nodes;
+using System.Collections.Generic;
 
 namespace OHM.RAL
 {
     public abstract class RalNodeAbstract : NodeAbstract
     {
+
+        private RalInterfaceNodeAbstract _interface;
 
         #region Public Ctor
 
@@ -14,9 +18,27 @@ namespace OHM.RAL
 
         #endregion
 
-        protected override NodeAbstract CreateChildNode(string model, string key, string name, System.Collections.Generic.IDictionary<string, object> options = null)
+        protected RalInterfaceNodeAbstract Interface { get { return _interface; } }
+
+        internal bool Init(IDataStore data, ILogger logger, RalInterfaceNodeAbstract inter)
         {
-            throw new System.NotImplementedException();
+            _interface = inter;
+            return this.Init(data, logger);
+        }
+
+        protected NodeAbstract CreateChildNode(string model, string key, string name, IDictionary<string, object> options = null)
+        {
+            NodeAbstract result = null;
+            RalNodeAbstract newNode = Interface.CreateNodeInstance(model, key, name, options) as RalNodeAbstract;
+            if (newNode != null)
+            {
+                newNode.Init(DataStore, Logger, Interface);
+                if (this.AddChild(newNode))
+                {
+                    result = newNode;
+                }
+            }
+            return result;
         }
     }
 }

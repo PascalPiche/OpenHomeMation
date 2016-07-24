@@ -12,7 +12,7 @@ namespace ZWaveLib.Data
     {
         private uint? _homeId;
         private byte? _nodeId;
-        private ZWaveInterface _interface;
+        //private ZWaveInterface _interface;
 
         #region Public properties
 
@@ -30,12 +30,12 @@ namespace ZWaveLib.Data
 
         #region Public Ctor
 
-        public ZWaveNode(string key, string name, ZWaveInterface interf)
+        public ZWaveNode(string key, string name/*, ZWaveInterface interf*/)
             : base(key, name)
         {
             _homeId = new uint?();
             _nodeId = new byte?();
-            _interface = interf;
+            //_interface = interf;
 
             RegisterZWaveNodeProperties();
             RegisterZWaveNodeCommands();
@@ -114,7 +114,7 @@ namespace ZWaveLib.Data
         {
             get
             {
-                return _interface.Manager;
+                return ((ZWaveInterface)base.Interface).Manager;
             }
         }
 

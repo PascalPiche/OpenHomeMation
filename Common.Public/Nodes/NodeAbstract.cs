@@ -301,8 +301,6 @@ namespace OHM.Nodes
             return result;
         }
 
-        protected abstract NodeAbstract CreateChildNode(string model, string key, string name, IDictionary<string, object> options = null);
-
         #endregion
 
         #region Internal Functions
@@ -324,11 +322,17 @@ namespace OHM.Nodes
             return false;
         }
 
-        internal bool Init(IDataStore data, ILogger logger)
+        protected bool Init(IDataStore data, ILogger logger)
         {
             _data = data;
             _logger = logger;
             this.State = NodeStates.normal;
+
+            return Initing();
+        }
+
+        protected virtual bool Initing()
+        {
             return true;
         }
 

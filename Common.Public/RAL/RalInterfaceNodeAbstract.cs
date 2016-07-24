@@ -81,10 +81,20 @@ namespace OHM.RAL
         
         public void Init(IDataStore data, ILogger logger, IOhmSystemInterfaceGateway system)
         {
-            base.Init(data, logger);
+            base.Init(data, logger, this);
             _startOnLaunch = data.GetBool("StartOnLaunch");
             NotifyPropertyChanged("StartOnLaunch");
             _system = system;
+        }
+
+        public new bool ExecuteCommand(string nodeKey, string commandKey, Dictionary<string, string> arguments)
+        {
+            return base.ExecuteCommand(nodeKey, commandKey, arguments);
+        }
+
+        public new bool CanExecuteCommand(string nodeKey, string key)
+        {
+            return base.CanExecuteCommand(nodeKey, key);
         }
 
         #endregion
@@ -97,31 +107,10 @@ namespace OHM.RAL
 
         #endregion
 
-        protected override NodeAbstract CreateChildNode(string model, string key, string name, IDictionary<string, object> options)
-        {
-            NodeAbstract result = null;
-            NodeAbstract newNode = this.CreateNodeInstance(model, key, name, options);
-            if (newNode != null)
-            {
-                newNode.Init(this.DataStore, this.Logger);   
-                if (this.AddChild(newNode))
-                {
-                    result = newNode;
-                }
-            }
-            return result;
-        }
+        #region Protected Functions
 
-        protected abstract NodeAbstract CreateNodeInstance(string model, string key, string name, IDictionary<string, object> options);
+        internal protected abstract NodeAbstract CreateNodeInstance(string model, string key, string name, IDictionary<string, object> options);
 
-        public new bool ExecuteCommand(string nodeKey, string commandKey, Dictionary<string, string> arguments)
-        {
-            return base.ExecuteCommand(nodeKey, commandKey, arguments);
-        }
-
-        public new bool CanExecuteCommand(string nodeKey, string key)
-        {
-            return base.CanExecuteCommand(nodeKey, key);
-        }
+        #endregion
     }
 }

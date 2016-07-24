@@ -2,6 +2,7 @@
 using OHM.Logger;
 using OHM.Nodes;
 using OHM.RAL;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using WUnderground.Commands;
@@ -173,6 +174,12 @@ namespace WUnderground.Data
             {
                 case "Account":
                     result = new Account(key, name, key);
+                    break;
+                case "station":
+                    result = new Station(key, name, (Int32)options["zip"], (Int32)options["magic"], options["wmo"] as string);
+                    break;
+                case "station-condition":
+                    result = new StationCondition(key, name, options["station"] as Station);
                     break;
                 default:
                     break;

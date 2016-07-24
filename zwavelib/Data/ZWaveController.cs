@@ -11,8 +11,8 @@ namespace ZWaveLib.Data
     {
         #region Public Ctor
 
-        public ZWaveController(string key, string name, ZWaveInterface parent)
-            : base(key, name, parent)
+        public ZWaveController(string key, string name)
+            : base(key, name)
         {
             RegisterProperties();
             RegisterCommands();
