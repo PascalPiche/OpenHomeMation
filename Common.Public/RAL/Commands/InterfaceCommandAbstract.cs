@@ -46,11 +46,11 @@ namespace OHM.RAL.Commands
         {
             get
             {
-                if (_interface == null)
+                /*if (_interface == null)
                 {
                     LookupAndStoreInterface(this.Node);
                 }
-
+                */
                 return _interface;
             }
         }
@@ -59,7 +59,7 @@ namespace OHM.RAL.Commands
 
         #region Private methods
 
-        private void LookupAndStoreInterface(INode node)
+        /*private void LookupAndStoreInterface(NodeAbstract node)
         {
 
             if (node == null)
@@ -79,7 +79,7 @@ namespace OHM.RAL.Commands
             {
                 //TODO log error
             }
-        }
+        }*/
 
         private bool IsInterfaceRunning()
         {

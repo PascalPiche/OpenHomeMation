@@ -22,7 +22,7 @@ namespace OHM.Nodes
 
         IReadOnlyList<INode> Children { get; }
 
-        INode Parent { get; }
+        //INode Parent { get; }
         
         #endregion
 

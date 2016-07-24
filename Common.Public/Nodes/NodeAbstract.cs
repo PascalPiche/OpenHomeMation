@@ -11,8 +11,8 @@ namespace OHM.Nodes
     {
         #region Private Members
 
-        private string _key;
-        private string _name;
+        private INodeProperty _keyProperty;
+        private INodeProperty _nameProperty;
         private ObservableCollection<ICommand> _commands;
         private Dictionary<string, ICommand> _commandsDic;
 
@@ -22,7 +22,7 @@ namespace OHM.Nodes
         private ObservableCollection<INodeProperty> _properties;
         private Dictionary<string, INodeProperty> _propertiesDic;
 
-        private INode _parent;
+        private NodeAbstract _parent;
         private ILogger _logger;
         private IDataStore _data;
         private NodeStates _state;
@@ -39,8 +39,7 @@ namespace OHM.Nodes
 
         internal NodeAbstract(string key, string name, NodeStates initialState = NodeStates.initializing)
         {
-            _key = key;
-            _name = name;
+            //_name = name;
             _state = initialState;
             _commands = new ObservableCollection<ICommand>();
             _commandsDic = new Dictionary<string, ICommand>();
@@ -48,6 +47,12 @@ namespace OHM.Nodes
             _childrenDic = new Dictionary<string, NodeAbstract>();
             _properties = new ObservableCollection<INodeProperty>();
             _propertiesDic = new Dictionary<string, INodeProperty>();
+
+            //Register Name and Key Properties
+            _keyProperty = new NodeProperty("system-key", "System key", typeof(string), true, "System node key", key);
+            this.RegisterProperty(_keyProperty);
+            _nameProperty = new NodeProperty("system-name", "System name", typeof(string), false, "System node name", name);
+            this.RegisterProperty(_nameProperty);
         }
 
         #endregion
@@ -72,16 +77,16 @@ namespace OHM.Nodes
             } 
         }
 
-        public string Key { get { return _key; } }
+        public string Key { get { return _keyProperty.Value as string; } }
 
         public IReadOnlyList<ICommand> Commands { get { return new ReadOnlyObservableCollection<ICommand>(_commands); } }
 
         public string Name
         {
-            get { return _name; }
+            get { return _nameProperty.Value as string; }
             protected set
             {
-                _name = value;
+                UpdateProperty("system-name", value);
                 NotifyPropertyChanged("Name");
             }
         }
@@ -101,7 +106,7 @@ namespace OHM.Nodes
 
         public IReadOnlyList<INode> Children { get { return _children; } }
 
-        public INode Parent { get { return _parent; } }
+        protected NodeAbstract Parent { get { return _parent; } }
 
         public IReadOnlyList<INodeProperty> Properties { get { return _properties; } }
 
@@ -226,10 +231,15 @@ namespace OHM.Nodes
             }
         }
 
+        protected bool TryGetProperty(string key, out INodeProperty result)
+        {
+            return _propertiesDic.TryGetValue(key, out result);
+        }
+
         protected bool UpdateProperty(string key, object value)
         {
             INodeProperty property;
-            if (_propertiesDic.TryGetValue(key, out property))
+            if (TryGetProperty(key, out property))
             {
                 return property.SetValue(value);
             }
@@ -305,9 +315,10 @@ namespace OHM.Nodes
 
         #region Internal Functions
 
-        internal void SetParent(INode node)
+        internal void SetParent(NodeAbstract node)
         {
             _parent = node;
+            this.State = NodeStates.normal;
         }
 
         internal bool AddChild(NodeAbstract node)
@@ -326,9 +337,7 @@ namespace OHM.Nodes
         {
             _data = data;
             _logger = logger;
-            this.State = NodeStates.normal;
-
-            return Initing();
+            return true;
         }
 
         protected virtual bool Initing()

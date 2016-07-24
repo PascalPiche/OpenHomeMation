@@ -2,6 +2,7 @@
 using OHM.Nodes;
 using OpenZWaveDotNet;
 using System;
+using System.Collections.Generic;
 using ZWaveLib.Commands;
 using ZWaveLib.Tools;
 
@@ -54,18 +55,6 @@ namespace ZWaveLib.Data
 
         #endregion
 
-        #region Private Properties
-
-        private ZWaveInterface Interface
-        {
-            get
-            {
-                return ((ZWaveInterface)this.Parent);
-            }
-        }
-
-        #endregion
-
         #region Private Methods
 
         private void UpdateSelfProperties(ZWNotification n)
@@ -93,17 +82,10 @@ namespace ZWaveLib.Data
 
         private void RegisterProperties()
         {
-            this.RegisterProperty(
-                 new NodeProperty("ControllerInterfaceType", "Controller Interface Type", typeof(ZWControllerInterface), true, ""));
-
-            this.RegisterProperty(
-                 new NodeProperty("IsBridgeController", "Is Bridge Controller", typeof(Boolean), true, ""));
-
-            this.RegisterProperty(
-                 new NodeProperty("IsPrimaryController", "Is Primary Controller", typeof(Boolean), true, ""));
-
-            this.RegisterProperty(
-                 new NodeProperty("IsStaticUpdateController", "Is Static Update Controller", typeof(Boolean), true, ""));
+            this.RegisterProperty(new NodeProperty("ControllerInterfaceType",   "Controller Interface Type",    typeof(ZWControllerInterface),  true));
+            this.RegisterProperty(new NodeProperty("IsBridgeController",        "Is Bridge Controller",         typeof(Boolean),                true));
+            this.RegisterProperty(new NodeProperty("IsPrimaryController",       "Is Primary Controller",        typeof(Boolean),                true));
+            this.RegisterProperty(new NodeProperty("IsStaticUpdateController",  "Is Static Update Controller",  typeof(Boolean),                true));
         }
 
         private ZWaveNode GetNode(ZWNotification n)
@@ -118,16 +100,12 @@ namespace ZWaveLib.Data
         private void CreateNode(ZWNotification n)
         {
             string key = NotificationTool.MakeNodeKey(n);
-            string name = NotificationTool.GetNodeName(n, this.Interface.Manager);
+            string name = NotificationTool.GetNodeName(n, ((ZWaveInterface)this.Interface).Manager);
             uint homeId = n.GetHomeId();
             byte nodeId = n.GetNodeId();
 
-            //TODO ZWaveNode newNode = this.CreateChildNode("zwavenode", key, name);
-            //newNode.Init(homeId, nodeId);
-
-            // OLD SHIT
-            //var newNode = new ZWaveNode(key, name, this.Interface, this.Logger);
-            //this.AddChild(newNode);
+            ZWaveNode newNode = this.CreateChildNode("zwavenode", key, name) as ZWaveNode;
+            newNode.Init(homeId, nodeId);
         }
 
         #endregion

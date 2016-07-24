@@ -8,7 +8,7 @@ namespace OHM.Nodes.Commands
         #region Private Members
 
         private ICommandDefinition _definition;
-        private INode _node;
+        private NodeAbstract _node;
 
         #endregion
 
@@ -71,7 +71,7 @@ namespace OHM.Nodes.Commands
 
         #region Properties
 
-        protected Nodes.INode Node
+        protected NodeAbstract Node
         {
             get { return _node; }
         }
@@ -88,7 +88,7 @@ namespace OHM.Nodes.Commands
     
         #region Internal Methods
 
-        internal bool Init(INode node)
+        internal bool Init(NodeAbstract node)
         {
             _node = node;
             return true;

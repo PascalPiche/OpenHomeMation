@@ -35,6 +35,7 @@ namespace OHM.RAL
                 newNode.Init(DataStore, Logger, Interface);
                 if (this.AddChild(newNode))
                 {
+                    newNode.Initing();
                     result = newNode;
                 }
             }
