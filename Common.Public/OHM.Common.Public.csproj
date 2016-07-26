@@ -77,7 +77,8 @@
     <None Include="Data\_diagrams\Graph1.dgml" />
     <None Include="Nodes\Commands\_diagrams\Relations-expanded.dgml" />
     <None Include="Nodes\Commands\_diagrams\Relations-simple.dgml" />
-    <None Include="Nodes\_diagrams\Graph1.dgml" />
+    <None Include="Nodes\_diagrams\Graph-NodeAbstract-2016-07-21.dgml" />
+    <None Include="Nodes\_diagrams\Graph-NodeAbstract-2016-07-25.dgml" />
     <None Include="Nodes\_diagrams\Relations-expanded.dgml" />
     <None Include="Nodes\_diagrams\Relations-simple.dgml" />
     <None Include="Plugins\_diagrams\Graph1.dgml" />

@@ -11,6 +11,7 @@ namespace OHM.RAL
 
     public class InterfacesManager : IInterfacesManager
     {
+        #region Private Members
 
         private ILoggerManager _loggerMng;
         private ILogger _logger;
@@ -21,6 +22,8 @@ namespace OHM.RAL
         private Dictionary<string, IInterface> _runningDic = new Dictionary<string, IInterface>();
         private IOhmSystemInternal _system;
 
+        #endregion
+
         #region Public Properties
 
         public IList<IInterface> RunnableInterfaces
@@ -30,7 +33,7 @@ namespace OHM.RAL
 
         #endregion
 
-        #region Ctor
+        #region Public Ctor
 
         public InterfacesManager(ILoggerManager loggerMng, IPluginsManager pluginsMng)
         {
@@ -48,7 +51,7 @@ namespace OHM.RAL
             _logger = _loggerMng.GetLogger("InterfacesManager");
             _logger.Debug("Initing");
             _dataRegisteredInterfaces = _data.GetOrCreateDataDictionary("RegisteredInterfaces");
-            _data.Save();
+            //_data.Save();
             _system = system;
             loadRegisteredInterfaces(system);
             _logger.Debug("Inited");
@@ -195,17 +198,18 @@ namespace OHM.RAL
         private IPlugin GetPluginForInterface(string key)
         {
             IPlugin result = null;
-            _logger.Info("Loading interface : " + key);
-            IDataDictionary _dataPlugin = _dataRegisteredInterfaces.GetOrCreateDataDictionary(key);
-            String id = "";
-            if (_dataPlugin != null)
+            _logger.Debug("Looking for Plugin Id from interface key : " + key);
+
+            if (!_dataRegisteredInterfaces.ContainKey(key))
             {
-                id = _dataPlugin.GetString("PluginId");
-                result = _pluginsMng.GetPlugin(new Guid(id));
+                _logger.Error("Cannot find Plugin for interface : " + key + " in the registered interface data");
             }
             else
             {
-                _logger.Error("Loading interface : " + key + " failed, plugin not found");
+                IDataDictionary _dataPlugin = _dataRegisteredInterfaces.GetOrCreateDataDictionary(key);
+                String id = _dataPlugin.GetString("PluginId");
+                result = _pluginsMng.GetPlugin(new Guid(id));
+                _logger.Debug("Looking for Plugin Id from interface key : " + key + " was successfull");
             }
             return result;
         }

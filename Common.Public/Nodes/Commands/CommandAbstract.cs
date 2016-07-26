@@ -8,7 +8,7 @@ namespace OHM.Nodes.Commands
         #region Private Members
 
         private ICommandDefinition _definition;
-        private NodeAbstract _node;
+        protected NodeAbstract _node;
 
         #endregion
 
@@ -36,7 +36,7 @@ namespace OHM.Nodes.Commands
 
         public string Name { get { return _definition.Name; } }
 
-        public string NodeFullKey { get { return Node.FullKey; } }
+        public string NodeFullKey { get { return _node.FullKey; } }
 
         public ICommandDefinition Definition { get { return _definition; } }
 
@@ -68,15 +68,6 @@ namespace OHM.Nodes.Commands
         #endregion
 
         #region Protected
-
-        #region Properties
-
-        protected NodeAbstract Node
-        {
-            get { return _node; }
-        }
-
-        #endregion
 
         #region Methods
 

@@ -8,7 +8,6 @@ namespace OHM.RAL.Commands
     {
         #region Private Members
 
-        private IInterface _interface;
 
         #endregion
 
@@ -22,14 +21,9 @@ namespace OHM.RAL.Commands
 
         #endregion
 
-        #region Public Properties
+        protected RalNodeAbstract Node { get { return base._node as RalNodeAbstract; } }
 
-        public string InterfaceKey
-        {
-            get { return Interface.Key; }
-        }
-
-        #endregion
+        protected RalInterfaceNodeAbstract Interface { get { return ((RalNodeAbstract)base._node).Interface; } }
 
         #region Public override methods
 
@@ -40,56 +34,15 @@ namespace OHM.RAL.Commands
 
         #endregion
 
-        #region Protected Properties
-
-        protected IInterface Interface
-        {
-            get
-            {
-                /*if (_interface == null)
-                {
-                    LookupAndStoreInterface(this.Node);
-                }
-                */
-                return _interface;
-            }
-        }
-
-        #endregion
-
         #region Private methods
-
-        /*private void LookupAndStoreInterface(NodeAbstract node)
-        {
-
-            if (node == null)
-            {
-                node = this.Node;
-            }
-
-            if (node is IInterface)
-            {
-                _interface = (IInterface)node;
-            }
-            else if (node.Parent != null)
-            {
-                LookupAndStoreInterface(node.Parent);
-            }
-            else
-            {
-                //TODO log error
-            }
-        }*/
 
         private bool IsInterfaceRunning()
         {
-            if (Interface != null)
-            {
-                return _interface.IsRunning;
-            }
-            return false;
+            return this.Node.Interface.IsRunning;
         }
 
         #endregion
+
+        protected abstract override bool RunImplementation(IDictionary<string, string> arguments);
     }
 }

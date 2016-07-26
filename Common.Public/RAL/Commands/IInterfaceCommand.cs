@@ -4,6 +4,6 @@ namespace OHM.RAL.Commands
 {
     public interface IInterfaceCommand : ICommand
     {
-        string InterfaceKey { get; }
+        //RalNodeAbstract Node { get; }
     }
 }

@@ -20,8 +20,8 @@ namespace OHM.Common.Public.Test.Commands.Stubs
             return true;
         }
 
-        public INode GetAssignedNodeForTest() {
+        /*public INode GetAssignedNodeForTest() {
             return this.Node;
-        }
+        }*/
     }
 }

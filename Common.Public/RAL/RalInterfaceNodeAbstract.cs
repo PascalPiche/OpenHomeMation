@@ -24,6 +24,8 @@ namespace OHM.RAL
 
         #endregion
 
+        protected new RalInterfaceNodeAbstract Interface { get { return this; } }
+
         #region public Properties
 
         public InterfaceStates InterfaceState
@@ -81,6 +83,7 @@ namespace OHM.RAL
         {
             base.Init(data, logger, this);
             _startOnLaunch = data.GetBool("StartOnLaunch");
+            this.State = NodeStates.normal;
             NotifyPropertyChanged("StartOnLaunch");
             _system = system;
             this.Initing();
@@ -106,7 +109,7 @@ namespace OHM.RAL
 
         #endregion
 
-        #region Protected Functions
+        #region internal Protected Functions
 
         internal protected abstract NodeAbstract CreateNodeInstance(string model, string key, string name, IDictionary<string, object> options);
 

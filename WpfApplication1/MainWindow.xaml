@@ -10,8 +10,8 @@
         <CommandBinding Command="local:MainWindow.StartInterfaceCommand" Executed="StartInterfaceCommand_Executed" />
         <CommandBinding Command="local:MainWindow.StopInterfaceCommand" Executed="StopInterfaceCommand_Executed" />
         <CommandBinding Command="local:MainWindow.ExecuteInterfaceCommand" Executed="ExecuteInterfaceCommand_Executed" CanExecute="ExecuteInterfaceCommand_CanExecute" />
-        <CommandBinding Command="local:MainWindow.ExecuteNodeCommand" Executed="ExecuteInterfaceCommand_Executed" CanExecute="ExecuteInterfaceCommand_CanExecute" />
-        <CommandBinding Command="local:MainWindow.ExecuteVrAddNodeBasic" Executed="ExecuteVrAddNodeBasic_Executed" />
+        <!--CommandBinding Command="local:MainWindow.ExecuteNodeCommand" Executed="ExecuteInterfaceCommand_Executed" CanExecute="ExecuteInterfaceCommand_CanExecute" /-->
+        <!--CommandBinding Command="local:MainWindow.ExecuteVrAddNodeBasic" Executed="ExecuteVrAddNodeBasic_Executed" /-->
     </Window.CommandBindings>
     <Grid HorizontalAlignment="Stretch">
         <Grid HorizontalAlignment="Stretch">
@@ -86,7 +86,7 @@
                                                             <ContextMenu >
                                                                 <ContextMenu.ItemContainerStyle>
                                                                     <Style>
-                                                                        <Setter Property="MenuItem.Command" Value="local:MainWindow.ExecuteNodeCommand" />
+                                                                        <Setter Property="MenuItem.Command" Value="local:MainWindow.ExecuteInterfaceCommand" />
                                                                         <Setter Property="MenuItem.CommandParameter" Value="{Binding}" />
                                                                     </Style>
                                                                 </ContextMenu.ItemContainerStyle>

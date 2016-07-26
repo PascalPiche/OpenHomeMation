@@ -108,13 +108,13 @@ namespace OHM.Nodes
 
         public IReadOnlyList<INode> Children { get { return _children; } }
 
-        protected NodeAbstract Parent { get { return _parent; } }
-
         public IReadOnlyList<INodeProperty> Properties { get { return _properties; } }
 
         #endregion
 
         #region Protected Properties
+
+        protected NodeAbstract Parent { get { return _parent; } }
 
         protected ILogger Logger { get { return _logger; } }
 
@@ -313,6 +313,17 @@ namespace OHM.Nodes
             return result;
         }
 
+        protected virtual bool Initing()
+        {
+            RegisterCommands();
+            RegisterProperties();
+            return true;
+        }
+
+        protected abstract void RegisterCommands();
+
+        protected abstract void RegisterProperties();
+
         #endregion
 
         #region Internal Functions
@@ -335,23 +346,12 @@ namespace OHM.Nodes
             return false;
         }
 
-        protected bool Init(IDataStore data, ILogger logger)
+        internal bool Init(IDataStore data, ILogger logger)
         {
             _data = data;
             _logger = logger;
             return true;
         }
-
-        protected virtual bool Initing()
-        {
-            RegisterCommands();
-            RegisterProperties();
-            return true;
-        }
-
-        protected abstract void RegisterCommands();
-
-        protected abstract void RegisterProperties();
 
         #endregion
 

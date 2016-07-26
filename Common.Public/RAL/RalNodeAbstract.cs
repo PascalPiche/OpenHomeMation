@@ -18,7 +18,7 @@ namespace OHM.RAL
 
         #endregion
 
-        protected RalInterfaceNodeAbstract Interface { get { return _interface; } }
+        internal protected RalInterfaceNodeAbstract Interface { get { return _interface; } }
 
         internal bool Init(IDataStore data, ILogger logger, RalInterfaceNodeAbstract inter)
         {
