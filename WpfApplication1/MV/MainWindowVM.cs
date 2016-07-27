@@ -72,9 +72,22 @@ namespace WpfApplication1.MV
             {
                 selectedNode = value;
                 NotifyPropertyChanged("IsSystemViewVisible");
-                NotifyPropertyChanged("IsNodeViewVisible");
+                NotifyPropertyChanged("IsPluginsManagerViewVisible");
                 NotifyPropertyChanged("IsInterfaceViewVisible");
+                NotifyPropertyChanged("IsNodeViewVisible");
                 NotifyPropertyChanged("SelectedNode");
+            }
+        }
+
+        public Visibility IsPluginsManagerViewVisible
+        {
+            get
+            {
+                if (selectedNode is TreeViewItem && ((TreeViewItem)selectedNode).Tag.ToString() == "pluginsManager")
+                {
+                    return Visibility.Visible;
+                }
+                return Visibility.Collapsed;
             }
         }
 
@@ -94,7 +107,7 @@ namespace WpfApplication1.MV
         {
             get
             {
-                if (IsNodeViewVisible != Visibility.Visible && IsInterfaceViewVisible != Visibility.Visible)
+                if (selectedNode is TreeViewItem && ((TreeViewItem)selectedNode).Tag.ToString() == "system")
                 {
                     return Visibility.Visible;
                 }
@@ -106,7 +119,7 @@ namespace WpfApplication1.MV
         {
             get
             {
-                if (IsInterfaceViewVisible != Visibility.Visible && selectedNode is INode)
+                if (IsInterfaceViewVisible != Visibility.Visible && selectedNode is ITreeNode)
                 {
                     return Visibility.Visible;
                 }

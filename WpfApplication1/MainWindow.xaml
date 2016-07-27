@@ -26,17 +26,29 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
-                <Grid Grid.Column="0" Width="200" >
-                    <TreeView SelectedItemChanged="TreeView_SelectedItemChanged">
+                <Grid Grid.Column="0" MinWidth="200" >
+                    <TreeView SelectedItemChanged="TreeView_SelectedItemChanged" HorizontalAlignment="Stretch">
                         <!-- Root Tree View Item (System) -->
-                        <TreeViewItem IsSelected="True">
+                        <TreeViewItem IsSelected="True" Tag="system">
                             <TreeViewItem.Header>
                                 <Label>
                                     <Run Text="System" />
                                 </Label>
                             </TreeViewItem.Header>
                             <TreeViewItem.Items>
-                                <TreeViewItem Name="InterfacesTreeViewItem" ItemsSource="{Binding Path=Interfaces}">
+                                <TreeViewItem Tag="datasManager">
+                                    <TreeViewItem.Header>
+                                        <Label>Data Manager</Label>
+                                    </TreeViewItem.Header>
+                                </TreeViewItem>
+                                <TreeViewItem Tag="pluginsManager">
+                                    <TreeViewItem.Header>
+                                        <Label>Plugins Manager</Label>
+                                    </TreeViewItem.Header>
+                                </TreeViewItem>
+                                <TreeViewItem Name="InterfacesTreeViewItem" 
+                                              Tag="interfacesManager"
+                                              ItemsSource="{Binding Path=Interfaces}">
                                     <TreeViewItem.ItemContainerStyle>
                                         <Style TargetType="TreeViewItem">
                                             <Setter Property="ContextMenu">
@@ -73,7 +85,7 @@
                                     </TreeViewItem.ItemContainerStyle>
                                     <TreeViewItem.Header>
                                         <Label>
-                                            <Run>Interfaces</Run>
+                                            <Run>Interfaces Manager</Run>
                                         </Label>
                                     </TreeViewItem.Header>
 
@@ -116,7 +128,7 @@
                                     </TreeViewItem.ItemTemplate>
                                 </TreeViewItem>
                                 
-                                <TreeViewItem Name="InterfacesTreeViewItemVr">
+                                <TreeViewItem Name="InterfacesTreeViewItemVr" Tag="VrManager">
                                     <!--TreeViewItem.ItemContainerStyle>
                                         <Style TargetType="TreeViewItem">
                                             <Setter Property="ContextMenu">
@@ -154,7 +166,7 @@
                                     
                                     <TreeViewItem.Header>
                                         <Label>
-                                            <Run>VR</Run>
+                                            <Run>VR Manager</Run>
                                         </Label>
                                     </TreeViewItem.Header>
 
@@ -211,9 +223,21 @@
                     </TreeView>
                 </Grid>
 
+                <GridSplitter Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="3"/>
+                
                 <Grid Grid.Column="1">
                     <!-- System View -->
                     <Grid Visibility="{Binding Path=IsSystemViewVisible}">
+                        <Label>System View (TO FILL)</Label>
+                    </Grid>
+
+                    <!-- Datas Manager View -->
+                    <Grid Visibility="{Binding Path=IsSystemViewVisible}">
+                        <Label>System View (TO FILL)</Label>
+                    </Grid>
+
+                    <!-- Plugins Manager View -->
+                    <Grid Visibility="{Binding Path=IsPluginsManagerViewVisible}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
                             <ColumnDefinition />
@@ -278,6 +302,7 @@
                         </DockPanel>
                     </Grid>
 
+                    <!-- Interface View -->
                     <Grid Visibility="{Binding Path=IsInterfaceViewVisible}">
                         <Grid.RowDefinitions>
                             <RowDefinition />
@@ -319,6 +344,7 @@
                         </Grid>
                     </Grid>
 
+                    <!-- Node View -->
                     <Grid Visibility="{Binding Path=IsNodeViewVisible}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto" />
@@ -397,7 +423,7 @@
 
             </Grid>
             <GridSplitter Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Height="3"/>
-            <TextBox Grid.Row="1" HorizontalAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" Name="txt" Margin="10" VerticalAlignment="Stretch" />
+            <TextBox Grid.Row="1" IsReadOnly="True" HorizontalAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" Name="txt" Margin="0" VerticalAlignment="Stretch" />
         </Grid>
         
         

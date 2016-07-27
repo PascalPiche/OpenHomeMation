@@ -25,7 +25,7 @@ namespace OHM.Common.Public.Test.Commands
 
             try
             {
-                var temp = target.NodeFullKey;
+                var temp = target.NodeTreeKey;
                 Assert.Fail("Should throw exception. This command is not inited");
             } catch(Exception ex) {
                 
@@ -49,7 +49,7 @@ namespace OHM.Common.Public.Test.Commands
 
             try
             {
-                var temp = target.NodeFullKey;
+                var temp = target.NodeTreeKey;
                 Assert.Fail("Should throw exception. This command is not inited");
             } catch(Exception ex) {
                 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ZWaveLib.Data
 {
-    public interface IZWaveNode : INode
+    public interface IZWaveNode : ITreeNode
     {
 
         uint? HomeId { get; }

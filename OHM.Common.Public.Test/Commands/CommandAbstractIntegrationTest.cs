@@ -24,7 +24,7 @@ namespace OHM.Common.Public.Test.Commands
             Assert.IsTrue(result);
             //Assert.IsNotNull(target.GetAssignedNodeForTest());
             //Assert.AreEqual(holder, target.GetAssignedNodeForTest());
-            Assert.IsNull(target.NodeFullKey);
+            Assert.IsNull(target.NodeTreeKey);
 
         }
 

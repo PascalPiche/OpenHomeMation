@@ -141,7 +141,7 @@ namespace WpfApplication1
                 }
                 else
                 {
-                    if (!vm.ExecuteHalCommand(command.NodeFullKey, command.Key))
+                    if (!vm.ExecuteHalCommand(command.NodeTreeKey, command.Key))
                     {
                         //Show alert
                         MessageBox.Show("The command was not successfully executed", "Command error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
@@ -156,7 +156,7 @@ namespace WpfApplication1
             e.CanExecute = false;
             if (command != null)
             {
-                e.CanExecute = vm.CanExecuteHalCommand(command.NodeFullKey, command.Key);
+                e.CanExecute = vm.CanExecuteHalCommand(command.NodeTreeKey, command.Key);
             }
         }
 
@@ -186,7 +186,7 @@ namespace WpfApplication1
 
             if (result.HasValue && result.Value)
             {
-                if (!vm.ExecuteHalCommand(command.NodeFullKey, command.Definition.Key, w.ArgumentsResult))
+                if (!vm.ExecuteHalCommand(command.NodeTreeKey, command.Definition.Key, w.ArgumentsResult))
                 {
                     MessageBox.Show("The command was not successfully executed", "Command error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
                 }

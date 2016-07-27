@@ -34,7 +34,7 @@ namespace OHM.Tests
             Assert.AreEqual(0, target.Properties.Count);
 
 
-            Assert.IsNull(target.FullKey);
+            Assert.IsNull(target.TreeKey);
 
             Assert.AreEqual(NodeStates.initializing, target.State);
             

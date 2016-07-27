@@ -694,6 +694,10 @@ namespace ZWaveLib
             {
                 case "zwavecontroller":
                     return new ZWaveController(key, name);
+                    break;
+                case "zwavenode":
+                    return new ZWaveNode(key, name);
+                    break;
             }
 
             throw new NotImplementedException();

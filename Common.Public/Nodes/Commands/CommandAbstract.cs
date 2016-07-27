@@ -36,7 +36,7 @@ namespace OHM.Nodes.Commands
 
         public string Name { get { return _definition.Name; } }
 
-        public string NodeFullKey { get { return _node.FullKey; } }
+        public string NodeTreeKey { get { return _node.TreeKey; } }
 
         public ICommandDefinition Definition { get { return _definition; } }
 

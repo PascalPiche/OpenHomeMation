@@ -8,7 +8,7 @@ namespace OHM.Nodes.Commands
 
         string Name { get; }
 
-        string NodeFullKey { get; }
+        string NodeTreeKey { get; }
 
         ICommandDefinition Definition { get; }
 

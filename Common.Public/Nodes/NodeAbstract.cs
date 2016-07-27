@@ -7,7 +7,7 @@ using System.ComponentModel;
 
 namespace OHM.Nodes
 {
-    public abstract class NodeAbstract : INode
+    public abstract class NodeAbstract : ITreeNode
     {
         #region Private Members
 
@@ -61,14 +61,14 @@ namespace OHM.Nodes
 
         #region Public Properties
 
-        public string FullKey { 
+        public string TreeKey { 
             get {
                 string result = null;
                 if (_state != NodeStates.initializing)
                 {
                     if (Parent != null)
                     {
-                        result = Parent.FullKey + "." + Key;
+                        result = Parent.TreeKey + "." + Key;
                     }
                     else
                     {
@@ -106,7 +106,7 @@ namespace OHM.Nodes
             }
         }
 
-        public IReadOnlyList<INode> Children { get { return _children; } }
+        public IReadOnlyList<ITreeNode> Children { get { return _children; } }
 
         public IReadOnlyList<INodeProperty> Properties { get { return _properties; } }
 
