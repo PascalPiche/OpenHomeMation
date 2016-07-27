@@ -72,10 +72,36 @@ namespace WpfApplication1.MV
             {
                 selectedNode = value;
                 NotifyPropertyChanged("IsSystemViewVisible");
+                NotifyPropertyChanged("IsDatasManagerViewVisible");
                 NotifyPropertyChanged("IsPluginsManagerViewVisible");
+                NotifyPropertyChanged("IsInterfacesManagerViewVisible");
                 NotifyPropertyChanged("IsInterfaceViewVisible");
                 NotifyPropertyChanged("IsNodeViewVisible");
                 NotifyPropertyChanged("SelectedNode");
+            }
+        }
+
+        public Visibility IsSystemViewVisible
+        {
+            get
+            {
+                if (selectedNode is TreeViewItem && ((TreeViewItem)selectedNode).Tag.ToString() == "system")
+                {
+                    return Visibility.Visible;
+                }
+                return Visibility.Collapsed;
+            }
+        }
+
+        public Visibility IsDatasManagerViewVisible
+        {
+            get
+            {
+                if (selectedNode is TreeViewItem && ((TreeViewItem)selectedNode).Tag.ToString() == "datasManager")
+                {
+                    return Visibility.Visible;
+                }
+                return Visibility.Collapsed;
             }
         }
 
@@ -91,11 +117,11 @@ namespace WpfApplication1.MV
             }
         }
 
-        public Visibility IsInterfaceViewVisible
+        public Visibility IsInterfacesManagerViewVisible
         {
             get
             {
-                if (selectedNode is IInterface)
+                if (selectedNode is TreeViewItem && ((TreeViewItem)selectedNode).Tag.ToString() == "interfacesManager")
                 {
                     return Visibility.Visible;
                 }
@@ -103,11 +129,11 @@ namespace WpfApplication1.MV
             }
         }
 
-        public Visibility IsSystemViewVisible
+        public Visibility IsInterfaceViewVisible
         {
             get
             {
-                if (selectedNode is TreeViewItem && ((TreeViewItem)selectedNode).Tag.ToString() == "system")
+                if (selectedNode is IInterface)
                 {
                     return Visibility.Visible;
                 }

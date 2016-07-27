@@ -232,8 +232,8 @@
                     </Grid>
 
                     <!-- Datas Manager View -->
-                    <Grid Visibility="{Binding Path=IsSystemViewVisible}">
-                        <Label>System View (TO FILL)</Label>
+                    <Grid Visibility="{Binding Path=IsDatasManagerViewVisible}">
+                        <Label>Datas Manager (TO FILL)</Label>
                     </Grid>
 
                     <!-- Plugins Manager View -->
@@ -302,6 +302,11 @@
                         </DockPanel>
                     </Grid>
 
+                    <!-- Interfaces Manager View -->
+                    <Grid Visibility="{Binding Path=IsInterfacesManagerViewVisible}">
+                        <Label>Interfaces Manager (TO FILL)</Label>
+                    </Grid>
+                    
                     <!-- Interface View -->
                     <Grid Visibility="{Binding Path=IsInterfaceViewVisible}">
                         <Grid.RowDefinitions>
@@ -354,11 +359,11 @@
 
                         <Grid Grid.Row="0">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition />
-                                <ColumnDefinition />
-                                <ColumnDefinition />
-                                <ColumnDefinition />
-                                <ColumnDefinition />
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Text="Key" />
                             <TextBlock Grid.Column="1" Text="Name" />
@@ -368,11 +373,10 @@
                         </Grid>
 
                         <ListBox 
-                    Grid.Row="1"
-                    ItemsSource="{Binding Path=SelectedNode.Properties}"
-                    HorizontalContentAlignment="Stretch"
-                    Name="NodeList"
-                    >
+                            Grid.Row="1"
+                            ItemsSource="{Binding Path=SelectedNode.Properties}"
+                            HorizontalContentAlignment="Stretch"
+                            Name="NodeList">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <Grid>

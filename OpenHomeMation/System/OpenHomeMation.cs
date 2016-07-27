@@ -33,6 +33,7 @@ namespace OHM.SYS
         {
             bool result = false;
             _logger = _ohmSystem.LoggerMng.GetLogger("OHM");
+
             _logger.Debug("Starting");
 
             if (_ohmSystem.Start())
