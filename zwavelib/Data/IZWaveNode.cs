@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 
 namespace ZWaveLib.Data
 {
-    public interface IZWaveNode : ITreeNode
+    public interface IZWaveDriverControlerNode : ITreeNode
     {
-
         uint? HomeId { get; }
+    }
 
+    public interface IZWaveNode : IZWaveDriverControlerNode
+    {
         byte? NodeId { get; }
-
     }
 }

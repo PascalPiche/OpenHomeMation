@@ -63,16 +63,16 @@ namespace OHM.RAL
 
         public void Starting()
         {
-            Logger.Info(this.Name + " Interface initing");
+            Logger.Debug("Starting interface : " + this.Name);
             Start();
             InterfaceState = InterfaceStates.Enabled;
             NotifyPropertyChanged("State");
-            Logger.Info(this.Name + " Interface Inited");
+            Logger.Info("Starting interface : " + this.Name + " was successfull");
         }
 
         public void Shutdowning()
         {
-            Logger.Info(this.Name + " Interface Shutdowning");
+            Logger.Debug(this.Name + " Interface Shutdowning");
             Shutdown();
             InterfaceState = InterfaceStates.Disabled;
             NotifyPropertyChanged("State");
@@ -114,5 +114,15 @@ namespace OHM.RAL
         internal protected abstract NodeAbstract CreateNodeInstance(string model, string key, string name, IDictionary<string, object> options);
 
         #endregion
+
+        protected override void RegisterCommands()
+        {
+            
+        }
+
+        protected override void RegisterProperties()
+        {
+            
+        }
     }
 }

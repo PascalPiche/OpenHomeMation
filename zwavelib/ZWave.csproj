@@ -66,7 +66,7 @@
     <Compile Include="Commands\ZWaveCommandAbstract.cs" />
     <Compile Include="Data\IZWaveController.cs" />
     <Compile Include="Data\IZWaveNode.cs" />
-    <Compile Include="Data\ZWaveController.cs" />
+    <Compile Include="Data\ZWaveDriver.cs" />
     <Compile Include="Data\ZWaveValueIdNodeProperty.cs" />
     <Compile Include="Tools\NotificationTool.cs" />
     <Compile Include="ZWaveInterface.cs" />

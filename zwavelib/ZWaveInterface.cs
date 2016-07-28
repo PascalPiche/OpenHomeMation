@@ -16,8 +16,8 @@ namespace ZWaveLib
         #region Private members
 
         private ZWManager _mng;
-        private Dictionary<uint, string> _controllerPathMapping = new Dictionary<uint, string>();
-        private Dictionary<string, ZWaveDriver> _runningDrivers = new Dictionary<string, ZWaveDriver>();
+        private Dictionary<uint, string> _driverControlerPathMapping = new Dictionary<uint, string>();
+        private Dictionary<string, ZWaveDriverControlerRalNode> _runningDriverControlers = new Dictionary<string, ZWaveDriverControlerRalNode>();
         private Dispatcher _dispatcher;
 
         #endregion
@@ -53,7 +53,7 @@ namespace ZWaveLib
             //Manager.SetLogFileName
 
             //Log OpenZWave version
-            Logger.Info("OpenZWave Version: " + _mng.GetVersionAsString());
+            Logger.Debug("OpenZWave Version: " + _mng.GetVersionAsString());
             
             //Load registered controllers
             LoadRegisteredControllers();
@@ -76,8 +76,15 @@ namespace ZWaveLib
 
         internal void RemoveController(int port)
         {
-            Logger.Info("Removing Controller on port: " + port);
-            _mng.RemoveDriver(@"\\.\COM" + port);
+            Logger.Debug("Removing Driver Controller on port: " + port);
+            if (_mng.RemoveDriver(@"\\.\COM" + port))
+            {
+                Logger.Info("Removing Driver Controller on port: " + port + " was successfull");
+            }
+            else
+            {
+                Logger.Error("Removing Driver Controller on port: " + port + " was not successfull");
+            }
         }
 
         internal ZWManager Manager
@@ -224,26 +231,26 @@ namespace ZWaveLib
             switch (n.GetCode())
             {
                 case ZWNotification.Code.Alive:
-                    Logger.Debug("TODO: Receiving Notification Alive code");
+                    Logger.Warn("TODO: Receiving Notification Alive code");
                     break;
                 case ZWNotification.Code.Awake:
-                    Logger.Debug("TODO: Receiving Notification Awake code");
+                    Logger.Warn("TODO: Receiving Notification Awake code");
                     break;
                 case ZWNotification.Code.Dead:
-                    Logger.Debug("TODO: Receiving Notification Dead code");
+                    Logger.Warn("TODO: Receiving Notification Dead code");
                     break;
                 case ZWNotification.Code.MsgComplete:
-                    Logger.Debug("Receiving Notification Message complete code");
+                    Logger.Warn("Receiving Notification Message complete code");
                     ProcessZWNotificationTypeSwitch(n);
                     break;
                 case ZWNotification.Code.NoOperation:
-                    Logger.Debug("TODO: Receiving Notification No Operation code");
+                    Logger.Warn("TODO: Receiving Notification No Operation code");
                     break;
                 case ZWNotification.Code.Sleep:
-                    Logger.Debug("TODO: Receiving Notification Sleep code");
+                    Logger.Warn("TODO: Receiving Notification Sleep code");
                     break;
                 case ZWNotification.Code.Timeout:
-                    Logger.Debug("TODO: Receiving Notification Timeout code");
+                    Logger.Warn("TODO: Receiving Notification Timeout code");
                     break;
             }
         }
@@ -259,7 +266,7 @@ namespace ZWaveLib
 
         private void ControllerStateChangedHandler(ZWControllerState state)
         {
-            Logger.Debug("TODO: Controller State Changed:  " + state.ToString());
+            Logger.Warn("TODO: Controller State Changed:  " + state.ToString());
             switch (state)
             {
                 case ZWControllerState.Cancel:
@@ -312,38 +319,41 @@ namespace ZWaveLib
             uint homeId = n.GetHomeId();
             byte nodeId = n.GetNodeId();
 
-            string controlerPath = Manager.GetControllerPath(homeId);
-            Logger.Info("Notification Driver Ready: Controller Path=" + controlerPath);
+            string driverControlerPath = Manager.GetControllerPath(homeId);
+            Logger.Debug("Processing notification Driver Ready with Controler Path : " + driverControlerPath);
 
-            if (this._runningDrivers.ContainsKey(controlerPath))
+            if (this._runningDriverControlers.ContainsKey(driverControlerPath))
             {
-                ZWaveDriver controller = null;
-                if (this._runningDrivers.TryGetValue(controlerPath, out controller))
+                ZWaveDriverControlerRalNode driverControler = null;
+                if (this._runningDriverControlers.TryGetValue(driverControlerPath, out driverControler))
                 {
                     //Update controllerPathMapping
-                    _controllerPathMapping.Add(homeId, controlerPath);
+                    _driverControlerPathMapping.Add(homeId, driverControlerPath);
 
-                    //Init Controller
-                    controller.Init(homeId, nodeId);
+                    //Assign Home Id to the Driver Controller
+                    driverControler.AssignHomeId(homeId);
+
+                    Logger.Info("Processing notification Driver Controler Ready with Controler Path : " + driverControlerPath + " was successfull");
                 }
             }
         }
 
         private void NotificationDriverReset(ZWNotification n)
         {
-            Logger.Debug("TODO: Notification Driver Reset: NodeId=" + GetNodeIdForLog(n));
+            Logger.Warn("TODO: Notification Driver Reset: NodeId=" + GetNodeIdForLog(n));
         }
 
         private void NotificationDriverFailed(ZWNotification n)
         {
             uint homeId = n.GetHomeId();
-            string controllerPath = Manager.GetControllerPath(homeId);
-            ZWaveDriver controller = null;
-            Logger.Debug("Notification Driver Failed: ControllerPath=" + controllerPath);
+            string DriverControlerPath = Manager.GetControllerPath(homeId);
+            ZWaveDriverControlerRalNode driverControler = null;
+            Logger.Debug("Processing Notification Driver Failed with ControlerPath " + DriverControlerPath);
 
-            if (this._runningDrivers.TryGetValue(controllerPath, out controller))
+            if (this._runningDriverControlers.TryGetValue(DriverControlerPath, out driverControler))
             {
-                controller.SetFatalState();
+                driverControler.SetFatalState();
+                Logger.Debug("Processing Notification Driver Failed with ControlerPath " + DriverControlerPath);
             }
             else
             {
@@ -354,15 +364,15 @@ namespace ZWaveLib
         private void NotificationDriverRemoved(ZWNotification n)
         {
             uint homeId = n.GetHomeId();
-            string controlerPath = _controllerPathMapping[homeId].Clone() as string;
-            ZWaveDriver controller = null;
+            string controlerPath = _driverControlerPathMapping[homeId].Clone() as string;
+            ZWaveDriverControlerRalNode controller = null;
 
             Logger.Debug("Notification Driver removing: ControllerPath=" + controlerPath);
-            if (this._runningDrivers.TryGetValue(controlerPath, out controller))
+            if (this._runningDriverControlers.TryGetValue(controlerPath, out controller))
             {
                 this.RemoveChild(controller);
-                this._runningDrivers.Remove(controlerPath);
-                _controllerPathMapping.Remove(homeId);
+                this._runningDriverControlers.Remove(controlerPath);
+                _driverControlerPathMapping.Remove(homeId);
 
                 Logger.Info("Notification Driver Removed completed with success: ControllerPath=" + controlerPath);
             } else {
@@ -376,17 +386,17 @@ namespace ZWaveLib
 
         private void NotificationAllNodesQueried(ZWNotification n)
         {
-            Logger.Info("TODO: Notification All Nodes Queried: " + GetNodeIdForLog(n));
+            Logger.Warn("TODO: Notification All Nodes Queried: " + GetNodeIdForLog(n));
         }
 
         private void NotificationAwakeNodesQueried(ZWNotification n)
         {
-            Logger.Info("TODO: Notification Awake Nodes Queried: " + GetNodeIdForLog(n));
+            Logger.Warn("TODO: Notification Awake Nodes Queried: " + GetNodeIdForLog(n));
         }
 
         private void NotificationAllNodesQueriedSomeDead(ZWNotification n)
         {
-            Logger.Info("TODO: Notification All Nodes Queried Some Dead: " + GetNodeIdForLog(n));
+            Logger.Warn("TODO: Notification All Nodes Queried Some Dead: " + GetNodeIdForLog(n));
         }
 
         #endregion
@@ -395,49 +405,48 @@ namespace ZWaveLib
 
         private void NotificationNodeNew(ZWNotification n)
         {
-            Logger.Info("Notification New Node: NodeId=" + GetNodeIdForLog(n));
+            Logger.Debug("Notification New Node: NodeId=" + GetNodeIdForLog(n));
             CreateOrUpdateNode(n);
         }
 
         private void NotificationNodeAdded(ZWNotification n)
         {
             //Update State
-            Logger.Info("Notification Node Added: NodeId=" + GetNodeIdForLog(n));
+            Logger.Debug("Notification Node Added: NodeId=" + GetNodeIdForLog(n));
             CreateOrUpdateNode(n);
         }
 
         private void NotificationNodeRemoved(ZWNotification n)
         {
-            Logger.Info("Notification Node Removed: NodeId=" + GetNodeIdForLog(n));
+            Logger.Debug("Notification Node Removed: NodeId=" + GetNodeIdForLog(n));
             RemoveNode(n);
         }
 
         private void NotificationEssentialNodeQueriesComplete(ZWNotification n)
         {
-            Logger.Info("Notification Essential Node Queries Complete: NodeId=" + GetNodeIdForLog(n));
+            Logger.Warn("TODO Notification Essential Node Queries Complete: NodeId=" + GetNodeIdForLog(n));
         }
 
         private void NotificationNodeProtocolInfo(ZWNotification n)
         {
-            Logger.Info("Notification Node Protocol Info: NodeId=" + GetNodeIdForLog(n));
+            Logger.Warn("TODO Notification Node Protocol Info: NodeId=" + GetNodeIdForLog(n));
         }
 
         private void NotificationNodeQueriesComplete(ZWNotification n)
         {
-            Logger.Debug("Notification Node Queries Complete: NodeId=" + GetNodeIdForLog(n));
+            Logger.Warn("TODO Notification Node Queries Complete: NodeId=" + GetNodeIdForLog(n));
         }
 
         private void NotificationNodeEvent(ZWNotification n)
         {
-            Logger.Debug("Notification Node Event: NodeId=" + GetNodeIdForLog(n));
-            Logger.Debug("Event: NodeId=" + n.GetEvent().ToString());
+            Logger.Warn("TODO Notification Node Event: NodeId=" + GetNodeIdForLog(n));
+            Logger.Warn("TODO Event: NodeId=" + n.GetEvent().ToString());
         }
 
         private void NotificationNodeNaming(ZWNotification n)
         {
             //Update State
-            Logger.Info("TODO Notification Node Naming: NodeId=" + GetNodeIdForLog(n));
-            CreateOrUpdateNode(n);
+            Logger.Warn("TODO Notification Node Naming: NodeId=" + GetNodeIdForLog(n));
         }
 
         #endregion
@@ -446,25 +455,25 @@ namespace ZWaveLib
 
          private void NotificationValueAdded(ZWNotification n)
         {
-            Logger.Info("Notification Value Added: " + GetNodeIdForLog(n));
+            Logger.Debug("Notification Value Added: " + GetNodeIdForLog(n));
             CreateOrUpdateNodeValue(n);
         }
 
          private void NotificationValueChanged(ZWNotification n)
         {
-            Logger.Info("Notification Value Changed: " + GetNodeIdForLog(n));
+            Logger.Debug("Notification Value Changed: " + GetNodeIdForLog(n));
             CreateOrUpdateNodeValue(n);
         }
 
          private void NotificationValueRefreshed(ZWNotification n)
         {
-            Logger.Info("Notification Value Refreshed: " + GetNodeIdForLog(n));
+            Logger.Debug("Notification Value Refreshed: " + GetNodeIdForLog(n));
             CreateOrUpdateNodeValue(n);
         }
 
          private void NotificationValueRemoved(ZWNotification n)
         {
-            Logger.Info("Notification Value Removed: " + GetNodeIdForLog(n));
+            Logger.Debug("Notification Value Removed: " + GetNodeIdForLog(n));
             RemoveNodeValue(n);
         }
 
@@ -474,7 +483,7 @@ namespace ZWaveLib
 
         private void Notification(ZWNotification n)
         {
-            Logger.Info("Notification Error???: " + GetNodeIdForLog(n));
+            Logger.Warn("TODO Notification Error???: " + GetNodeIdForLog(n));
         }
 
         #endregion
@@ -483,7 +492,7 @@ namespace ZWaveLib
 
         private void NotificationSceneEvent(ZWNotification n)
         {
-            Logger.Info("Notification Scene Event: " + GetNodeIdForLog(n));
+            Logger.Warn("TODO Notification Scene Event: " + GetNodeIdForLog(n));
         }
 
         #endregion
@@ -492,7 +501,7 @@ namespace ZWaveLib
 
         private void NotificationGroup(ZWNotification n)
         {
-            Logger.Info("Notification Group: " + GetNodeIdForLog(n));
+            Logger.Warn("TODO Notification Group: " + GetNodeIdForLog(n));
         }
 
         #endregion
@@ -515,26 +524,18 @@ namespace ZWaveLib
         private bool CreateController(int port, bool isNew = false)
         {
             bool result = false;
-            Logger.Info("Creating Controller on port: " + port);
+            Logger.Debug("Creating Driver Controler on port: " + port);
 
             //Valid if a Controller already exist on this port
             if (this.FindChild(port.ToString()) != null)
             {
-                Logger.Error("Controller already exist on port : " + port);
+                Logger.Error("Creating Driver Controler on port: " + port + " Failed. A Controler already exist on port : " + port);
                 return false;
             }
 
-            //Store Controller
-            if (isNew)
-            {
-                Logger.Info("Saving new controller on port " + port);
-                var registeredControllers = DataStore.GetOrCreateDataDictionary("registeredControllers");
-                registeredControllers.StoreString(port.ToString(), port.ToString());
-                DataStore.Save();
-                Logger.Info("Saved new controller on port " + port);
-            }
+            
 
-            Logger.Info("Trying to start a controller on port " + port);
+            Logger.Debug("Trying to start a Driver Controler on port " + port);
             bool mngResult = _mng.AddDriver(@"\\.\COM" + port, ZWControllerInterface.Serial);
 
             IDictionary<string, object> options = new Dictionary<string, object>();
@@ -542,30 +543,41 @@ namespace ZWaveLib
 
             if (mngResult)
             {
-                Logger.Info("Trying to start a controller on port " + port + " was successfull");
-                
+                Logger.Info("Trying to start a Driver Controler on port " + port + " was successfull");
+                Logger.Debug("Creating new Driver Controler node for port " + port);
+
                 //Create new node
-                ZWaveDriver ctl = this.CreateChildNode("zwavecontroller", "COM" + port, "COM" + port, options) as ZWaveDriver;
+                ZWaveDriverControlerRalNode ctl = this.CreateChildNode("zwavecontroller", "COM" + port, "COM" + port, options) as ZWaveDriverControlerRalNode;
 
                 if (ctl != null)
                 {
-                    this._runningDrivers.Add(@"\\.\COM" + port, ctl);
-                    Logger.Info("Controller created on port " + port);
-                    
+                    this._runningDriverControlers.Add(@"\\.\COM" + port, ctl);
+                    Logger.Info("Creating new Driver Controler node for port " + port + " was successfull");
+
+                    //Store Driver Controler in the DataStore
+                    if (isNew)
+                    {
+                        Logger.Debug("Saving new Driver Controler with port " + port);
+                        var registeredControllers = DataStore.GetOrCreateDataDictionary("registeredControllers");
+                        registeredControllers.StoreString(port.ToString(), port.ToString());
+                        DataStore.Save();
+                        Logger.Info("Saving new Driver Controler with port " + port + " was successfull");
+                    }
+
                     result = true;
                 }
             }
             else
             {
-                Logger.Info("Cannot create Controller on port " + port);
+                Logger.Error("Trying to start a Driver Controler on port " + port + " failed");
 
                 //Create new node
                 options.Add("initialState", NodeStates.fatal);
-                ZWaveDriver ctl = this.CreateChildNode("zwavecontroller", "COM" + port, "COM" + port, options) as ZWaveDriver;
+                ZWaveDriverControlerRalNode ctl = this.CreateChildNode("zwavecontroller", "COM" + port, "COM" + port, options) as ZWaveDriverControlerRalNode;
 
                 if (ctl != null)
                 {
-                    this._runningDrivers.Add(@"\\.\COM" + port, ctl);
+                    this._runningDriverControlers.Add(@"\\.\COM" + port, ctl);
                 }
                 
             }
@@ -574,13 +586,13 @@ namespace ZWaveLib
 
         private void CreateOrUpdateNode(ZWNotification n)
         {
-            //Find controller
-            ZWaveDriver controller;
+            //Find driverControler
+            ZWaveDriverControlerRalNode controller;
             string controlerPath = Manager.GetControllerPath(n.GetHomeId());
 
-            if (_runningDrivers.TryGetValue(controlerPath, out controller))
+            if (_runningDriverControlers.TryGetValue(controlerPath, out controller))
             {
-                controller.CreateOrUpdateNode(n);
+                //TODO driverControler.CreateOrUpdateNode(n);
             }
             else
             {
@@ -590,13 +602,13 @@ namespace ZWaveLib
 
         private void RemoveNode(ZWNotification n)
         {
-            //Find controller
-            ZWaveDriver controller;
+            //Find driverControler
+            ZWaveDriverControlerRalNode controller;
             string controlerPath = Manager.GetControllerPath(n.GetHomeId());
 
-            if (_runningDrivers.TryGetValue(controlerPath, out controller))
+            if (_runningDriverControlers.TryGetValue(controlerPath, out controller))
             {
-                controller.RemoveNode(n);
+                //TODO driverControler.RemoveNode(n);
             }
             else
             {
@@ -607,17 +619,17 @@ namespace ZWaveLib
         private bool CreateOrUpdateNodeValue(ZWNotification n)
         {
             //Find node
-            //Detect if its the controller
+            //Detect if its the driverControler
             byte ControllerNodeId = _mng.GetControllerNodeId(n.GetHomeId());
             bool isControllerNode = ControllerNodeId == n.GetNodeId();
 
             if (isControllerNode)
             {
                 string controllerPath = _mng.GetControllerPath(n.GetHomeId());
-                ZWaveDriver controller;
-                if (_runningDrivers.TryGetValue(controllerPath, out controller))
+                ZWaveDriverControlerRalNode controller;
+                if (_runningDriverControlers.TryGetValue(controllerPath, out controller))
                 {
-                    controller.CreateOrUpdateValue(n);
+                    //TODO driverControler.CreateOrUpdateValue(n);
                 }
                 else
                 {
@@ -643,17 +655,17 @@ namespace ZWaveLib
         private void RemoveNodeValue(ZWNotification n)
         {
             //Find node
-            //Detect if its the controller
+            //Detect if its the driverControler
             byte ControllerNodeId = _mng.GetControllerNodeId(n.GetHomeId());
             bool isControllerNode = ControllerNodeId == n.GetNodeId();
 
             if (isControllerNode)
             {
                 string controllerPath = _mng.GetControllerPath(n.GetHomeId());
-                ZWaveDriver controller;
-                if (_runningDrivers.TryGetValue(controllerPath, out controller))
+                ZWaveDriverControlerRalNode controller;
+                if (_runningDriverControlers.TryGetValue(controllerPath, out controller))
                 {
-                    controller.RemoveValue(n);
+                    //TODO driverControler.RemoveValue(n);
                 }
                 else
                 {
@@ -692,11 +704,13 @@ namespace ZWaveLib
             switch (model)
             {
                 case "zwavecontroller":
-                    return new ZWaveDriver(key, name);
+                    return new ZWaveDriverControlerRalNode(key, name);
                     break;
                 case "zwavenode":
                     return new ZWaveNode(key, name);
                     break;
+                default:
+                    return new BasicRalNode(key, name);
             }
 
             throw new NotImplementedException();
