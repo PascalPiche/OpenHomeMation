@@ -1,5 +1,4 @@
-﻿using OHM.Data;
-using OHM.Nodes;
+﻿using OHM.Nodes;
 using OHM.RAL;
 using OpenZWaveDotNet;
 using System;
@@ -18,8 +17,7 @@ namespace ZWaveLib
 
         private ZWManager _mng;
         private Dictionary<uint, string> _controllerPathMapping = new Dictionary<uint, string>();
-        private Dictionary<string, ZWaveController> _runningControllers = new Dictionary<string, ZWaveController>();
-        private IDataDictionary _registeredControllers;
+        private Dictionary<string, ZWaveDriver> _runningDrivers = new Dictionary<string, ZWaveDriver>();
         private Dispatcher _dispatcher;
 
         #endregion
@@ -56,9 +54,6 @@ namespace ZWaveLib
 
             //Log OpenZWave version
             Logger.Info("OpenZWave Version: " + _mng.GetVersionAsString());
-
-            //Get DataDictionary For installed Controllers
-            _registeredControllers = DataStore.GetOrCreateDataDictionary("registeredControllers");
             
             //Load registered controllers
             LoadRegisteredControllers();
@@ -320,10 +315,10 @@ namespace ZWaveLib
             string controlerPath = Manager.GetControllerPath(homeId);
             Logger.Info("Notification Driver Ready: Controller Path=" + controlerPath);
 
-            if (this._runningControllers.ContainsKey(controlerPath))
+            if (this._runningDrivers.ContainsKey(controlerPath))
             {
-                ZWaveController controller = null;
-                if (this._runningControllers.TryGetValue(controlerPath, out controller))
+                ZWaveDriver controller = null;
+                if (this._runningDrivers.TryGetValue(controlerPath, out controller))
                 {
                     //Update controllerPathMapping
                     _controllerPathMapping.Add(homeId, controlerPath);
@@ -343,10 +338,10 @@ namespace ZWaveLib
         {
             uint homeId = n.GetHomeId();
             string controllerPath = Manager.GetControllerPath(homeId);
-            ZWaveController controller = null;
+            ZWaveDriver controller = null;
             Logger.Debug("Notification Driver Failed: ControllerPath=" + controllerPath);
 
-            if (this._runningControllers.TryGetValue(controllerPath, out controller))
+            if (this._runningDrivers.TryGetValue(controllerPath, out controller))
             {
                 controller.SetFatalState();
             }
@@ -360,13 +355,13 @@ namespace ZWaveLib
         {
             uint homeId = n.GetHomeId();
             string controlerPath = _controllerPathMapping[homeId].Clone() as string;
-            ZWaveController controller = null;
+            ZWaveDriver controller = null;
 
             Logger.Debug("Notification Driver removing: ControllerPath=" + controlerPath);
-            if (this._runningControllers.TryGetValue(controlerPath, out controller))
+            if (this._runningDrivers.TryGetValue(controlerPath, out controller))
             {
                 this.RemoveChild(controller);
-                this._runningControllers.Remove(controlerPath);
+                this._runningDrivers.Remove(controlerPath);
                 _controllerPathMapping.Remove(homeId);
 
                 Logger.Info("Notification Driver Removed completed with success: ControllerPath=" + controlerPath);
@@ -508,9 +503,12 @@ namespace ZWaveLib
 
         private void LoadRegisteredControllers()
         {
-            foreach (var item in _registeredControllers.Keys)
+            //Get DataDictionary For installed Controllers
+            var registeredControllers = DataStore.GetOrCreateDataDictionary("registeredControllers");
+
+            foreach (var item in registeredControllers.Keys)
             {
-                CreateController(int.Parse(_registeredControllers.GetString(item)));
+                CreateController(int.Parse(registeredControllers.GetString(item)));
             }
         }
 
@@ -530,7 +528,8 @@ namespace ZWaveLib
             if (isNew)
             {
                 Logger.Info("Saving new controller on port " + port);
-                _registeredControllers.StoreString(port.ToString(), port.ToString());
+                var registeredControllers = DataStore.GetOrCreateDataDictionary("registeredControllers");
+                registeredControllers.StoreString(port.ToString(), port.ToString());
                 DataStore.Save();
                 Logger.Info("Saved new controller on port " + port);
             }
@@ -546,11 +545,11 @@ namespace ZWaveLib
                 Logger.Info("Trying to start a controller on port " + port + " was successfull");
                 
                 //Create new node
-                ZWaveController ctl = this.CreateChildNode("zwavecontroller", "COM" + port, "COM" + port, options) as ZWaveController;
+                ZWaveDriver ctl = this.CreateChildNode("zwavecontroller", "COM" + port, "COM" + port, options) as ZWaveDriver;
 
                 if (ctl != null)
                 {
-                    this._runningControllers.Add(@"\\.\COM" + port, ctl);
+                    this._runningDrivers.Add(@"\\.\COM" + port, ctl);
                     Logger.Info("Controller created on port " + port);
                     
                     result = true;
@@ -562,11 +561,11 @@ namespace ZWaveLib
 
                 //Create new node
                 options.Add("initialState", NodeStates.fatal);
-                ZWaveController ctl = this.CreateChildNode("zwavecontroller", "COM" + port, "COM" + port, options) as ZWaveController;
+                ZWaveDriver ctl = this.CreateChildNode("zwavecontroller", "COM" + port, "COM" + port, options) as ZWaveDriver;
 
                 if (ctl != null)
                 {
-                    this._runningControllers.Add(@"\\.\COM" + port, ctl);
+                    this._runningDrivers.Add(@"\\.\COM" + port, ctl);
                 }
                 
             }
@@ -576,10 +575,10 @@ namespace ZWaveLib
         private void CreateOrUpdateNode(ZWNotification n)
         {
             //Find controller
-            ZWaveController controller;
+            ZWaveDriver controller;
             string controlerPath = Manager.GetControllerPath(n.GetHomeId());
 
-            if (_runningControllers.TryGetValue(controlerPath, out controller))
+            if (_runningDrivers.TryGetValue(controlerPath, out controller))
             {
                 controller.CreateOrUpdateNode(n);
             }
@@ -592,10 +591,10 @@ namespace ZWaveLib
         private void RemoveNode(ZWNotification n)
         {
             //Find controller
-            ZWaveController controller;
+            ZWaveDriver controller;
             string controlerPath = Manager.GetControllerPath(n.GetHomeId());
 
-            if (_runningControllers.TryGetValue(controlerPath, out controller))
+            if (_runningDrivers.TryGetValue(controlerPath, out controller))
             {
                 controller.RemoveNode(n);
             }
@@ -615,8 +614,8 @@ namespace ZWaveLib
             if (isControllerNode)
             {
                 string controllerPath = _mng.GetControllerPath(n.GetHomeId());
-                ZWaveController controller;
-                if (_runningControllers.TryGetValue(controllerPath, out controller))
+                ZWaveDriver controller;
+                if (_runningDrivers.TryGetValue(controllerPath, out controller))
                 {
                     controller.CreateOrUpdateValue(n);
                 }
@@ -651,8 +650,8 @@ namespace ZWaveLib
             if (isControllerNode)
             {
                 string controllerPath = _mng.GetControllerPath(n.GetHomeId());
-                ZWaveController controller;
-                if (_runningControllers.TryGetValue(controllerPath, out controller))
+                ZWaveDriver controller;
+                if (_runningDrivers.TryGetValue(controllerPath, out controller))
                 {
                     controller.RemoveValue(n);
                 }
@@ -693,7 +692,7 @@ namespace ZWaveLib
             switch (model)
             {
                 case "zwavecontroller":
-                    return new ZWaveController(key, name);
+                    return new ZWaveDriver(key, name);
                     break;
                 case "zwavenode":
                     return new ZWaveNode(key, name);

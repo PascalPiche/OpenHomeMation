@@ -41,7 +41,7 @@ namespace ZWaveLib.Data
             _nodeId = nodeId;
             UpdateZWaveNodeProperties();
             State = NodeStates.normal;
-            return true;
+            return base.Initing();
         }
 
         internal void UpdateNode(ZWNotification n)

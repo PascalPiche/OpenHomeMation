@@ -1,18 +1,16 @@
-﻿using OHM.Logger;
-using OHM.Nodes;
+﻿using OHM.Nodes;
 using OpenZWaveDotNet;
 using System;
-using System.Collections.Generic;
 using ZWaveLib.Commands;
 using ZWaveLib.Tools;
 
 namespace ZWaveLib.Data
 {
-    public class ZWaveController : ZWaveNode, IZWaveController
+    public class ZWaveDriver : ZWaveNode, IZWaveController
     {
         #region Public Ctor
 
-        public ZWaveController(string key, string name)
+        public ZWaveDriver(string key, string name)
             : base(key, name)
         {
             RegisterProperties();
@@ -71,8 +69,9 @@ namespace ZWaveLib.Data
             base.UpdateNode(n);
         }
 
-        private void RegisterCommands()
+        private new void RegisterCommands()
         {
+            base.RegisterCommands();
             this.RegisterCommand(new ControlerAllOnCommand());
             this.RegisterCommand(new ControlerAllOffCommand());
             this.RegisterCommand(new ControlerSoftResetCommand());
@@ -80,8 +79,9 @@ namespace ZWaveLib.Data
             this.RegisterCommand(new ControlerAddNodeCommand()); 
         }
 
-        private void RegisterProperties()
+        private new void RegisterProperties()
         {
+            base.RegisterProperties();
             this.RegisterProperty(new NodeProperty("ControllerInterfaceType",   "Controller Interface Type",    typeof(ZWControllerInterface),  true));
             this.RegisterProperty(new NodeProperty("IsBridgeController",        "Is Bridge Controller",         typeof(Boolean),                true));
             this.RegisterProperty(new NodeProperty("IsPrimaryController",       "Is Primary Controller",        typeof(Boolean),                true));
