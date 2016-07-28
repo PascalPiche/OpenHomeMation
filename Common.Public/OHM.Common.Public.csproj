@@ -50,6 +50,7 @@
     <Compile Include="Nodes\Commands\IArgumentDefinition.cs" />
     <Compile Include="Nodes\Commands\ICommand.cs" />
     <Compile Include="Nodes\Commands\ICommandDefinition.cs" />
+    <Compile Include="RAL\BasicRalNode.cs" />
     <Compile Include="RAL\Commands\IInterfaceCommand.cs" />
     <Compile Include="RAL\Commands\InterfaceCommandAbstract.cs" />
     <Compile Include="Data\IDataDictionary.cs" />
