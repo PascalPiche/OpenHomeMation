@@ -64,14 +64,17 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Commands\ZWaveCommandAbstract.cs" />
-    <Compile Include="Data\IZWaveController.cs" />
-    <Compile Include="Data\IZWaveNode.cs" />
-    <Compile Include="Data\ZWaveDriver.cs" />
-    <Compile Include="Data\ZWaveValueIdNodeProperty.cs" />
+    <Compile Include="Nodes\IZWaveController.cs" />
+    <Compile Include="Nodes\IZWaveDriverControlerNode.cs" />
+    <Compile Include="Nodes\IZWaveNode.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Nodes\ZWaveDriver.cs" />
+    <Compile Include="Nodes\ZWaveValueIdNodeProperty.cs" />
     <Compile Include="Tools\NotificationTool.cs" />
     <Compile Include="ZWaveInterface.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Data\ZWaveNode.cs" />
+    <Compile Include="Nodes\ZWaveNode.cs" />
     <Compile Include="ZWavePlugin.cs" />
   </ItemGroup>
   <ItemGroup>
