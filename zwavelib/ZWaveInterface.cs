@@ -240,7 +240,7 @@ namespace ZWaveLib
                     Logger.Warn("TODO: Receiving Notification Dead code");
                     break;
                 case ZWNotification.Code.MsgComplete:
-                    Logger.Warn("Receiving Notification Message complete code");
+                    Logger.Debug("Receiving Notification Message complete code");
                     ProcessZWNotificationTypeSwitch(n);
                     break;
                 case ZWNotification.Code.NoOperation:

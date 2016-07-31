@@ -228,8 +228,12 @@ namespace ZWaveLib.Data
                     }
                     break;
                 case ZWValueID.ValueType.List:
-                    Logger.Warn("ZWave: Value list not treated. Incomplete implementation");
-                    //if (Manager.getv)
+                    //Logger.Warn("ZWave: Value list not treated. Incomplete implementation");
+                    string value;
+                    Manager.GetValueListSelection(valueId, out value);
+
+                    result = value;
+                    
                     break;
                 
                 case ZWValueID.ValueType.Short:
