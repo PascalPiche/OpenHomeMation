@@ -2,7 +2,7 @@
 
 namespace ZWaveLib.Data
 {
-    public interface IZWaveNode : IZWaveDriverControlerNode
+    public interface IZWaveNode : IZWaveHomeNode
     {
         byte? NodeId { get; }
     }

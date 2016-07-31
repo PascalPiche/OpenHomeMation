@@ -69,7 +69,10 @@
     <Compile Include="Nodes\IZWaveNode.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Nodes\ZWaveDriver.cs" />
+    <Compile Include="Nodes\ZWaveDriver.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Nodes\ZWaveNodesContainer.cs" />
     <Compile Include="Nodes\ZWaveValueIdNodeProperty.cs" />
     <Compile Include="Tools\NotificationTool.cs" />
     <Compile Include="ZWaveInterface.cs" />

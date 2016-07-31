@@ -2,14 +2,14 @@
 using OHM.RAL;
 using OpenZWaveDotNet;
 using System;
+using System.Collections.Generic;
 using ZWaveLib.Commands;
-using ZWaveLib.Tools;
 
 namespace ZWaveLib.Data
 {
-    public class ZWaveDriverControlerRalNode : RalNodeAbstract, IZWaveDriverControlerNode
+    public class ZWaveDriverControlerRalNode : ZWaveHomeNode, IZWaveDriverControlerNode
     {
-        private uint _homeId;
+        private ZWaveNodesContainer nodesCtn;
 
         #region Public Ctor
 
@@ -18,22 +18,36 @@ namespace ZWaveLib.Data
 
         #endregion
 
-       #region Internal Methods
+        #region Internal Methods
 
-        internal void AssignHomeId(uint homeId)
+        internal void AssignHomeId(uint homeId, byte controlerId)
         {
-            this._homeId = homeId;
+            base.AssignZWaveId(homeId);
+
             //Update Self properties
             UpdateSelfProperties();
 
             //Create node for ZWaveNode
-            this.CreateChildNode("BasicRalNode", "nodes", "Nodes");
-            this.CreateChildNode("BasicRalNode", "scenes", "Scenes");
+            IDictionary<string, object> options = new Dictionary<string,object>();
+            options.Add("controlerId", controlerId);
+            nodesCtn = this.CreateChildNode("ZwaveRalNodesContainer", "nodes", "Nodes", options) as ZWaveNodesContainer;
+            nodesCtn.AssignZWaveId(homeId);
+            this.CreateChildNode("BasicRalNode", "scenes", "Scenes (Planned)");
         }
 
         internal void SetFatalState()
         {
             this.State = NodeStates.fatal;
+        }
+
+        internal void CreateOrUpdateNode(ZWNotification n)
+        {
+            nodesCtn.CreateOrUpdateNode(n);
+        }
+
+        internal void CreateOrUpdateValue(ZWNotification n)
+        {
+            nodesCtn.CreateOrUpdateValue(n);
         }
 
         #endregion
@@ -43,17 +57,15 @@ namespace ZWaveLib.Data
         private void UpdateSelfProperties()
         {
             this.UpdateProperty("DriverControllerInterfaceType", ((ZWaveInterface)Parent).Manager.GetControllerInterfaceType(this.HomeId.Value));
-            //this.UpdateProperty("IsBridgeController", ((ZWaveInterface)Parent).Manager.IsBridgeController(this.HomeId.Value));
-            //this.UpdateProperty("IsPrimaryController", ((ZWaveInterface)Parent).Manager.IsPrimaryController(this.HomeId.Value));
-            //this.UpdateProperty("IsStaticUpdateController", ((ZWaveInterface)Parent).Manager.IsStaticUpdateController(this.HomeId.Value));
+            this.UpdateProperty("IsBridgeController", ((ZWaveInterface)Parent).Manager.IsBridgeController(this.HomeId.Value));
+            this.UpdateProperty("IsPrimaryController", ((ZWaveInterface)Parent).Manager.IsPrimaryController(this.HomeId.Value));
+            this.UpdateProperty("IsStaticUpdateController", ((ZWaveInterface)Parent).Manager.IsStaticUpdateController(this.HomeId.Value));
         }
 
         #endregion
 
         protected override void RegisterCommands()
         {
-            this.RegisterCommand(new ControlerAllOnCommand());
-            this.RegisterCommand(new ControlerAllOffCommand());
             this.RegisterCommand(new ControlerSoftResetCommand());
             this.RegisterCommand(new ControlerHardResetCommand());
             this.RegisterCommand(new ControlerAddNodeCommand());
@@ -62,14 +74,9 @@ namespace ZWaveLib.Data
         protected override void RegisterProperties()
         {
             this.RegisterProperty(new NodeProperty("DriverControllerInterfaceType", "Driver Controller Interface Type", typeof(ZWControllerInterface), true));
-            //this.RegisterProperty(new NodeProperty("IsBridgeController", "Is Bridge Controller", typeof(Boolean), true));
-            //this.RegisterProperty(new NodeProperty("IsPrimaryController", "Is Primary Controller", typeof(Boolean), true));
-            //this.RegisterProperty(new NodeProperty("IsStaticUpdateController", "Is Static Update Controller", typeof(Boolean), true));
-        }
-
-        public uint? HomeId
-        {
-            get { return this._homeId; }
+            this.RegisterProperty(new NodeProperty("IsBridgeController", "Is Bridge Controller", typeof(Boolean), true));
+            this.RegisterProperty(new NodeProperty("IsPrimaryController", "Is Primary Controller", typeof(Boolean), true));
+            this.RegisterProperty(new NodeProperty("IsStaticUpdateController", "Is Static Update Controller", typeof(Boolean), true));
         }
     }
 }

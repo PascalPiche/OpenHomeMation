@@ -7,17 +7,38 @@ using ZWaveLib.Commands;
 
 namespace ZWaveLib.Data
 {
-    public class ZWaveNode : RalNodeAbstract, IZWaveNode
+    public abstract class ZWaveHomeNode : RalNodeAbstract, IZWaveHomeNode
     {
-        private uint? _homeId = new uint?();
-        private byte? _nodeId = new byte?();
+        private uint _homeId;
 
-        #region Public properties
+        public ZWaveHomeNode(string key, string name)
+            : base(key, name) {}
 
         public uint? HomeId
         {
             get { return _homeId; }
         }
+
+        internal bool AssignZWaveId(uint homeId)
+        {
+            _homeId = homeId;
+            return true;
+        }
+    }
+
+    public class ZWaveControler : ZWaveNode
+    {
+        public ZWaveControler(string key, string name)
+            : base(key, name) {}
+    }
+
+
+    public class ZWaveNode : ZWaveHomeNode, IZWaveNode
+    {
+        
+        private byte? _nodeId = new byte?();
+
+        #region Public properties
 
         public byte? NodeId
         {
@@ -35,13 +56,17 @@ namespace ZWaveLib.Data
 
         #region Internal method
 
-        internal bool Init(uint homeId, byte nodeId)
+        internal bool AssignZWaveId(uint homeId, byte nodeId)
         {
-            _homeId = homeId;
-            _nodeId = nodeId;
-            UpdateZWaveNodeProperties();
-            State = NodeStates.normal;
-            return base.Initing();
+            bool result = false;
+            if (base.AssignZWaveId(homeId))
+            {
+                _nodeId = nodeId;
+                UpdateZWaveNodeProperties();
+                State = NodeStates.normal;
+                result = true;
+            }
+            return result;
         }
 
         internal void UpdateNode(ZWNotification n)
@@ -119,9 +144,10 @@ namespace ZWaveLib.Data
             this.UpdateProperty("IsNodeRoutingDevice", Manager.IsNodeRoutingDevice(this.HomeId.Value, this.NodeId.Value));
             this.UpdateProperty("IsNodeSecurityDevice", Manager.IsNodeSecurityDevice(this.HomeId.Value, this.NodeId.Value));
 
-            //Manager.GetNodeClassInformation(homeId, nodeId...) TODO
-            //Manager.GetNodeGeneric(homeId, nodeId) TODO
-            //Manager.GetNodeBasic(homeId, nodeId) TODO
+
+            //Manager.GetNodeClassInformation(homeId, nodeId, )
+            //Manager.GetNodeGeneric(homeId, nodeId)
+            //Manager.GetNodeBasic(homeId, nodeId)
 
             this.UpdateProperty("NodeLocation", Manager.GetNodeLocation(this.HomeId.Value, this.NodeId.Value));
             this.UpdateProperty("NodeManufacturerId", Manager.GetNodeManufacturerId(this.HomeId.Value, this.NodeId.Value));

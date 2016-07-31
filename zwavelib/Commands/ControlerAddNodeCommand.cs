@@ -18,7 +18,7 @@ namespace ZWaveLib.Commands
 
         protected override bool RunImplementation(IDictionary<string, string> arguments)
         {
-            return ZWaveInterface.Manager.AddNode(((IZWaveNode)Node).HomeId.Value, false);
+            return ZWaveInterface.Manager.AddNode(((IZWaveHomeNode)Node).HomeId.Value, false);
         }
     }
 }

@@ -2,9 +2,13 @@
 
 namespace ZWaveLib.Data
 {
-    public interface IZWaveDriverControlerNode : ITreeNode
+    public interface IZWaveHomeNode : ITreeNode 
     {
         uint? HomeId { get; }
     }
 
+    public interface IZWaveDriverControlerNode : IZWaveHomeNode
+    {
+        
+    }
 }

@@ -13,7 +13,7 @@ namespace ZWaveLib.Commands
 
         protected override bool RunImplementation(IDictionary<string, string> arguments)
         {
-            ZWaveInterface.Manager.SoftReset(((IZWaveNode)Node).HomeId.Value);
+            ZWaveInterface.Manager.SoftReset(((IZWaveHomeNode)Node).HomeId.Value);
             return true;
         }
     }

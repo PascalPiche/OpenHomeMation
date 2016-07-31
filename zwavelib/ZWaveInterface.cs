@@ -331,7 +331,7 @@ namespace ZWaveLib
                     _driverControlerPathMapping.Add(homeId, driverControlerPath);
 
                     //Assign Home Id to the Driver Controller
-                    driverControler.AssignHomeId(homeId);
+                    driverControler.AssignHomeId(homeId, nodeId);
 
                     Logger.Info("Processing notification Driver Controler Ready with Controler Path : " + driverControlerPath + " was successfull");
                 }
@@ -422,19 +422,22 @@ namespace ZWaveLib
             RemoveNode(n);
         }
 
-        private void NotificationEssentialNodeQueriesComplete(ZWNotification n)
-        {
-            Logger.Warn("TODO Notification Essential Node Queries Complete: NodeId=" + GetNodeIdForLog(n));
-        }
-
         private void NotificationNodeProtocolInfo(ZWNotification n)
         {
-            Logger.Warn("TODO Notification Node Protocol Info: NodeId=" + GetNodeIdForLog(n));
+            Logger.Debug("Notification Node Protocol Info: NodeId=" + GetNodeIdForLog(n));
+            CreateOrUpdateNode(n);
+        }
+
+        private void NotificationEssentialNodeQueriesComplete(ZWNotification n)
+        {
+            Logger.Debug("Notification Essential Node Queries Complete: NodeId=" + GetNodeIdForLog(n));
+            CreateOrUpdateNode(n);
         }
 
         private void NotificationNodeQueriesComplete(ZWNotification n)
         {
-            Logger.Warn("TODO Notification Node Queries Complete: NodeId=" + GetNodeIdForLog(n));
+            Logger.Debug("Notification Node Queries Complete: NodeId=" + GetNodeIdForLog(n));
+            CreateOrUpdateNode(n);
         }
 
         private void NotificationNodeEvent(ZWNotification n)
@@ -446,7 +449,8 @@ namespace ZWaveLib
         private void NotificationNodeNaming(ZWNotification n)
         {
             //Update State
-            Logger.Warn("TODO Notification Node Naming: NodeId=" + GetNodeIdForLog(n));
+            Logger.Debug("Notification Node Naming: NodeId=" + GetNodeIdForLog(n));
+            CreateOrUpdateNode(n);
         }
 
         #endregion
@@ -533,8 +537,6 @@ namespace ZWaveLib
                 return false;
             }
 
-            
-
             Logger.Debug("Trying to start a Driver Controler on port " + port);
             bool mngResult = _mng.AddDriver(@"\\.\COM" + port, ZWControllerInterface.Serial);
 
@@ -547,7 +549,7 @@ namespace ZWaveLib
                 Logger.Debug("Creating new Driver Controler node for port " + port);
 
                 //Create new node
-                ZWaveDriverControlerRalNode ctl = this.CreateChildNode("zwavecontroller", "COM" + port, "COM" + port, options) as ZWaveDriverControlerRalNode;
+                ZWaveDriverControlerRalNode ctl = this.CreateChildNode("zwaveDriver", "COM" + port, "COM" + port, options) as ZWaveDriverControlerRalNode;
 
                 if (ctl != null)
                 {
@@ -587,16 +589,17 @@ namespace ZWaveLib
         private void CreateOrUpdateNode(ZWNotification n)
         {
             //Find driverControler
-            ZWaveDriverControlerRalNode controller;
+
+            ZWaveDriverControlerRalNode controler;
             string controlerPath = Manager.GetControllerPath(n.GetHomeId());
 
-            if (_runningDriverControlers.TryGetValue(controlerPath, out controller))
+            if (_runningDriverControlers.TryGetValue(controlerPath, out controler))
             {
-                //TODO driverControler.CreateOrUpdateNode(n);
+                controler.CreateOrUpdateNode(n);
             }
             else
             {
-                Logger.Error("Controler Node not found for creating or updating node");
+                Logger.Error("Controler not found for creating or updating node");
             }
         }
 
@@ -618,35 +621,16 @@ namespace ZWaveLib
 
         private bool CreateOrUpdateNodeValue(ZWNotification n)
         {
-            //Find node
-            //Detect if its the driverControler
-            byte ControllerNodeId = _mng.GetControllerNodeId(n.GetHomeId());
-            bool isControllerNode = ControllerNodeId == n.GetNodeId();
+            string controlerPath = _mng.GetControllerPath(n.GetHomeId());
+            ZWaveDriverControlerRalNode controler;
 
-            if (isControllerNode)
+            if (_runningDriverControlers.TryGetValue(controlerPath, out controler))
             {
-                string controllerPath = _mng.GetControllerPath(n.GetHomeId());
-                ZWaveDriverControlerRalNode controller;
-                if (_runningDriverControlers.TryGetValue(controllerPath, out controller))
-                {
-                    //TODO driverControler.CreateOrUpdateValue(n);
-                }
-                else
-                {
-                    Logger.Error("Controler Node not found for Creating or updating value");
-                }
+                controler.CreateOrUpdateValue(n);
             }
             else
             {
-                var node = this.FindChild(NotificationTool.MakeNodeKey(n));
-                if (node != null)
-                {
-                    return ((ZWaveNode)node).CreateOrUpdateValue(n);
-                }
-                else
-                {
-                    Logger.Error("Node not found for Creating or updating value");
-                }
+                Logger.Error("Controler not found for Creating or updating node value");
             }
            
             return false;
@@ -701,19 +685,28 @@ namespace ZWaveLib
 
         protected override NodeAbstract CreateNodeInstance(string model, string key, string name, IDictionary<string, object> options)
         {
+            NodeAbstract result = null ;
+
             switch (model)
             {
-                case "zwavecontroller":
-                    return new ZWaveDriverControlerRalNode(key, name);
+                case "zwaveDriver":
+                    result = new ZWaveDriverControlerRalNode(key, name);
                     break;
-                case "zwavenode":
-                    return new ZWaveNode(key, name);
+                case "ZwaveRalNodesContainer":
+                    result = new ZWaveNodesContainer(key, name, (byte)options["controlerId"]);
+                    break;
+                case "zwaveControler":
+                    result = new ZWaveControler(key, name);
+                    break;
+                case "zwaveNode":
+                    result = new ZWaveNode(key, name);
                     break;
                 default:
-                    return new BasicRalNode(key, name);
+                    result = new BasicRalNode(key, name);
+                    break;
             }
 
-            throw new NotImplementedException();
+            return result;
         }
 
         protected override void RegisterCommands()

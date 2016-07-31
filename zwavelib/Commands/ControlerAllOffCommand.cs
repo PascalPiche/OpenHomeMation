@@ -15,7 +15,7 @@ namespace ZWaveLib.Commands
 
         protected override bool RunImplementation(IDictionary<string, string> arguments)
         {
-            ZWaveInterface.Manager.SwitchAllOff(((IZWaveNode)Node).HomeId.Value);
+            ZWaveInterface.Manager.SwitchAllOff(((IZWaveHomeNode)Node).HomeId.Value);
             return true;
         }
     }
