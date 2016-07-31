@@ -7,17 +7,17 @@ namespace WpfApplication1.MV
 {
     public sealed class CommandDialogMV
     {
-        private ICommand _command;
+        private ICommandDefinition _commandDefinition;
         private ObservableCollection<ArgumentsDefinitionDesigner> _arguments = new ObservableCollection<ArgumentsDefinitionDesigner>();
         private ObservableCollection<string> _optionalArguments = new ObservableCollection<string>();
 
-        public ICommand Command { get { return _command; } }
+        public ICommandDefinition CommandDefinition { get { return _commandDefinition; } }
 
         public ObservableCollection<ArgumentsDefinitionDesigner> Arguments { get { return _arguments; } }
 
-        internal CommandDialogMV(ICommand command)
+        internal CommandDialogMV(ICommandDefinition commandDefinition)
         {
-            _command = command;
+            _commandDefinition = commandDefinition;
             Init();
         }
 
@@ -26,7 +26,7 @@ namespace WpfApplication1.MV
         private void Init()
         {
             //Add required arguments
-            foreach (var item in _command.Definition.ArgumentsDefinition.Values)
+            foreach (var item in _commandDefinition.ArgumentsDefinition.Values)
             {
                 if (item.Required)
                 {

@@ -1,4 +1,5 @@
-﻿using OHM.RAL.Commands;
+﻿using OHM.Nodes.Commands;
+using OHM.RAL.Commands;
 using System;
 using System.ComponentModel;
 using System.Windows;
@@ -14,7 +15,7 @@ namespace WpfApplication1
     {
         private MainWindowVM vm = new MainWindowVM();
 
-        #region Public Command
+        #region Public CommandDefinition
 
         public static readonly RoutedUICommand InstallPluginCommand = new RoutedUICommand
         (
@@ -58,10 +59,10 @@ namespace WpfApplication1
                 typeof(MainWindow)
         );
 
-        public static readonly RoutedUICommand ExecuteVrAddNodeBasic = new RoutedUICommand
+        public static readonly RoutedUICommand ExecuteVrAddNodeCommand = new RoutedUICommand
         (
-                "Execute vr add node basic command",
-                "Execute vr add node basic command",
+                "Execute VR add node basic command",
+                "Execute VR add node basic command",
                 typeof(MainWindow)
         );
 
@@ -93,7 +94,7 @@ namespace WpfApplication1
 
         #endregion
 
-        #region Private Command Implementation
+        #region Private CommandDefinition Implementation
 
         private void InstallPluginCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
@@ -160,12 +161,23 @@ namespace WpfApplication1
             }
         }
 
-        private void ExecuteVrAddNodeBasic_Executed(object sender, ExecutedRoutedEventArgs e)
+        private void ExecuteVrAddNodeCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            //TODO
+            //Create fake commandDefinition
+            //ICommand commandDefinition = new VrAddNodeCommand();
+
         }
 
         #endregion
+
+        /*private class VrAddNodeCommand : CommandAbstract
+        {
+
+            protected override bool RunImplementation(System.Collections.Generic.IDictionary<string, string> arguments)
+            {
+                throw new NotImplementedException();
+            }
+        }*/
 
         #region Private Handler 
 
@@ -181,7 +193,7 @@ namespace WpfApplication1
         private void ShowCommandDialog(IInterfaceCommand command)
         {
             var w = new CommandDialog();
-            w.init(command);
+            w.init(command.Definition);
             var result = w.ShowDialog();
 
             if (result.HasValue && result.Value)

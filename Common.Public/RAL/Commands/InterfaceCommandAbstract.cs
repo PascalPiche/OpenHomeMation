@@ -6,10 +6,6 @@ namespace OHM.RAL.Commands
 {
     public abstract class InterfaceCommandAbstract : CommandAbstract, IInterfaceCommand
     {
-        #region Private Members
-
-
-        #endregion
 
         #region Protected Ctor
 

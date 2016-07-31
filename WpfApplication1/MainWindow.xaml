@@ -11,7 +11,7 @@
         <CommandBinding Command="local:MainWindow.StopInterfaceCommand" Executed="StopInterfaceCommand_Executed" />
         <CommandBinding Command="local:MainWindow.ExecuteInterfaceCommand" Executed="ExecuteInterfaceCommand_Executed" CanExecute="ExecuteInterfaceCommand_CanExecute" />
         <!--CommandBinding Command="local:MainWindow.ExecuteNodeCommand" Executed="ExecuteInterfaceCommand_Executed" CanExecute="ExecuteInterfaceCommand_CanExecute" /-->
-        <!--CommandBinding Command="local:MainWindow.ExecuteVrAddNodeBasic" Executed="ExecuteVrAddNodeBasic_Executed" /-->
+        <CommandBinding Command="local:MainWindow.ExecuteVrAddNodeCommand" Executed="ExecuteVrAddNodeCommand_Executed" />
     </Window.CommandBindings>
     <Grid HorizontalAlignment="Stretch">
         <Grid HorizontalAlignment="Stretch">
@@ -129,40 +129,7 @@
                                 </TreeViewItem>
                                 
                                 <TreeViewItem Name="InterfacesTreeViewItemVr" Tag="VrManager">
-                                    <!--TreeViewItem.ItemContainerStyle>
-                                        <Style TargetType="TreeViewItem">
-                                            <Setter Property="ContextMenu">
-                                                <Setter.Value>
-                                                    <ContextMenu >
-                                                        <ContextMenu.ItemContainerStyle>
-                                                            <Style>
-                                                                <Setter Property="MenuItem.Command" Value="local:MainWindow.ExecuteInterfaceCommand" />
-                                                                <Setter Property="MenuItem.CommandParameter" Value="{Binding}" />
-                                                            </Style>
-                                                        </ContextMenu.ItemContainerStyle>
-                                                        <ContextMenu.ItemTemplate>
-                                                            <DataTemplate>
-                                                                <TextBlock Text="{Binding Definition.Name}" />
-                                                            </DataTemplate>
-                                                        </ContextMenu.ItemTemplate>
-
-                                                        <ContextMenu.Resources>
-                                                            <CollectionViewSource x:Key="CustomCommandsCollection" Source="{Binding Commands}"/>
-                                                        </ContextMenu.Resources>
-                                                        <ContextMenu.ItemsSource>
-                                                            <CompositeCollection>
-                                                                <MenuItem Header="Start" Command="local:MainWindow.StartInterfaceCommand" CommandParameter="{Binding Path=Key}" />
-                                                                <MenuItem Header="Stop" Command="local:MainWindow.StopInterfaceCommand" CommandParameter="{Binding Path=Key}" />
-                                                                <MenuItem Header="Start on launch" Command="" CommandParameter="" IsCheckable="True" IsChecked="{Binding Path=StartOnLaunch}" />
-                                                                <Separator />
-                                                                <CollectionContainer Collection="{Binding Source={StaticResource CustomCommandsCollection}}"/>
-                                                            </CompositeCollection>
-                                                        </ContextMenu.ItemsSource>
-                                                    </ContextMenu>
-                                                </Setter.Value>
-                                            </Setter>
-                                        </Style>
-                                    </TreeViewItem.ItemContainerStyle -->
+                                    
                                     
                                     <TreeViewItem.Header>
                                         <Label>
@@ -208,13 +175,13 @@
                                         </HierarchicalDataTemplate>
                                     </TreeViewItem.ItemTemplate -->
                                     
-                                    <!--TreeViewItem.ContextMenu>
+                                    <TreeViewItem.ContextMenu>
                                         <ContextMenu>
-                                            <MenuItem Command="{Binding local:MainWindow.ExecuteVrAddNodeBasic}" CommandParameter="{Binding}">
-                                                <MenuItem.Header>Add Basic Node</MenuItem.Header>
+                                            <MenuItem Command="{Binding local:MainWindow.ExecuteVrAddNodeCommand}" CommandParameter="{Binding}">
+                                                <MenuItem.Header>Add Node</MenuItem.Header>
                                             </MenuItem>
                                         </ContextMenu>
-                                    </TreeViewItem.ContextMenu-->
+                                    </TreeViewItem.ContextMenu>
                                     
                                 </TreeViewItem>
                                 

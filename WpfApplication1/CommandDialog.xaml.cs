@@ -22,7 +22,7 @@ namespace WpfApplication1
         {
             //Validate arguments
             var args = ArgumentsResult;
-            if (_mv.Command.Definition.ValidateArguments(args))
+            if (_mv.CommandDefinition.ValidateArguments(args))
             {
                 this.DialogResult = true;
                 this.Close();
@@ -31,9 +31,9 @@ namespace WpfApplication1
 
         public Dictionary<string, string> ArgumentsResult { get { return _mv.ArgumentsResult; } }
 
-        public void init(ICommand command)
+        public void init(ICommandDefinition commandDefinition)
         {
-            _mv = new CommandDialogMV(command);
+            _mv = new CommandDialogMV(commandDefinition);
             
             this.DataContext = _mv;
         }
