@@ -4,9 +4,9 @@ namespace OHM.SYS
 {
     public interface IOhmSystemInterfaceGateway
     {
-        bool CreateNode(ITreeNode node);
+        bool CreateNode(ITreePowerNode node);
 
-        bool RemoveNode(ITreeNode node);
+        bool RemoveNode(ITreePowerNode node);
 
     }
 }

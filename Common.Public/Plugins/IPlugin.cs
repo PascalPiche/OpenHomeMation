@@ -1,6 +1,6 @@
-﻿using OHM.Logger;
-using OHM.RAL;
+﻿using OHM.RAL;
 using OHM.SYS;
+using OHM.VAL;
 using System;
 
 namespace OHM.Plugins
@@ -21,6 +21,8 @@ namespace OHM.Plugins
         bool Update();
 
         RalInterfaceNodeAbstract CreateInterface(string key);
+
+        IVrType CreateVrNode(string key);
 
     }
 }

@@ -54,7 +54,6 @@
     <Compile Include="Plugins\IPluginsManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VAL\IVrManager.cs" />
-    <Compile Include="VAL\IVrType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="_diagrams\ClassDiagram.cd" />

@@ -2,10 +2,6 @@
 using OHM.RAL;
 using OHM.SYS;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TimedCommand
 {
@@ -35,6 +31,11 @@ namespace TimedCommand
         }
 
         public override RalInterfaceNodeAbstract CreateInterface(string key)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override OHM.VAL.IVrType CreateVrNode(string key)
         {
             throw new NotImplementedException();
         }

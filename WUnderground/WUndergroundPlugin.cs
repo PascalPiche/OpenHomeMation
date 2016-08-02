@@ -1,5 +1,4 @@
-﻿using OHM.Logger;
-using OHM.Plugins;
+﻿using OHM.Plugins;
 using OHM.RAL;
 using OHM.SYS;
 using System;
@@ -44,5 +43,10 @@ namespace WUnderground
             return null;
         }
 
+
+        public override OHM.VAL.IVrType CreateVrNode(string key)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

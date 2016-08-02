@@ -3,12 +3,13 @@ using System.Collections.Generic;
 
 namespace OHM.Nodes.Commands
 {
+
     public abstract class CommandAbstract : ICommand
     {
         #region Private Members
 
         private ICommandDefinition _definition;
-        protected NodeAbstract _node;
+        private NodeAbstract _node;
 
         #endregion
 
@@ -30,19 +31,13 @@ namespace OHM.Nodes.Commands
 
         #endregion
 
-        #region Public Properties
+        #region Public
 
         public string Key { get { return _definition.Key; } }
 
         public string Name { get { return _definition.Name; } }
 
-        public string NodeTreeKey { get { return _node.TreeKey; } }
-
         public ICommandDefinition Definition { get { return _definition; } }
-
-        #endregion
-
-        #region Public Api
 
         public virtual bool CanExecute()
         {
@@ -69,22 +64,36 @@ namespace OHM.Nodes.Commands
 
         #region Protected
 
-        #region Methods
+        protected NodeAbstract Node { get { return _node; } }
 
         protected abstract bool RunImplementation(IDictionary<string, string> arguments);
 
         #endregion
 
-        #endregion    
-    
         #region Internal Methods
 
-        internal bool Init(NodeAbstract node)
+        internal virtual bool Init(NodeAbstract node)
         {
             _node = node;
             return true;
         }
 
         #endregion
+    }
+
+    public abstract class TreeCommandAbstract : CommandAbstract, ITreeCommand
+    {
+        protected TreeCommandAbstract(string key, string name, string description, Dictionary<string, IArgumentDefinition> argumentsDefinition)
+            : this(new CommandDefinition(key, name, description, argumentsDefinition)) { }
+
+        protected TreeCommandAbstract(ICommandDefinition definition)
+            :base(definition) { }
+
+        public string NodeTreeKey { get { return ((TreeNodeAbstract)Node).TreeKey; } }
+
+        internal bool Init(TreeNodeAbstract node)
+        {
+            return base.Init(node);
+        }
     }
 }

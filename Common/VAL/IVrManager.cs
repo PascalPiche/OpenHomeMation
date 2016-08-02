@@ -1,4 +1,5 @@
 ﻿using OHM.Data;
+using OHM.Plugins;
 using OHM.SYS;
 
 namespace OHM.VAL
@@ -8,7 +9,8 @@ namespace OHM.VAL
 
         bool Init(IDataStore data, IOhmSystemInternal system);
 
-        bool RegisterVrType(string key, IVrType vrType/*, IOhmSystemInternal system*/);
+        bool RegisterVrType(string key, IPlugin plugin);
 
+        bool CreateRootNode(string model, string key, string name);
     }
 }

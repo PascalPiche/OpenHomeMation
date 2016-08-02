@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace OHM.RAL
 {
-    public interface IInterface : ITreeNode, INotifyPropertyChanged
+    public interface IInterface : ITreePowerNode, INotifyPropertyChanged
     {
         #region Properties
 

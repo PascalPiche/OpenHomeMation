@@ -4,15 +4,15 @@ using System.Collections.Generic;
 
 namespace OHM.Common.Public.Test.Commands.Stubs
 {
-    public class CommandAbstractStub : CommandAbstract
+    public class TreeCommandAbstractStub : TreeCommandAbstract
     {
-        public CommandAbstractStub(string key, string name)
+        /*public TreeCommandAbstractStub(string key, string name)
             : base(key, name) { }
 
-        public CommandAbstractStub(string key, string name, string description)
+        public TreeCommandAbstractStub(string key, string name, string description)
             : base(key, name, description) { }
-
-        public CommandAbstractStub(string key, string name, string description, Dictionary<string, IArgumentDefinition> argumentsDefinition)
+        */
+        public TreeCommandAbstractStub(string key, string name, string description, Dictionary<string, IArgumentDefinition> argumentsDefinition)
             : base(key, name, description, argumentsDefinition) { }
 
         protected override bool RunImplementation(IDictionary<string, string> arguments)
@@ -20,7 +20,7 @@ namespace OHM.Common.Public.Test.Commands.Stubs
             return true;
         }
 
-        /*public ITreeNode GetAssignedNodeForTest() {
+        /*public ITreePowerNode GetAssignedNodeForTest() {
             return this.Node;
         }*/
     }

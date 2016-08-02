@@ -24,7 +24,7 @@ namespace OHM.RAL
 
         #endregion
 
-        protected new RalInterfaceNodeAbstract Interface { get { return this; } }
+        //protected new RalInterfaceNodeAbstract Interface { get { return this; } }
 
         #region public Properties
 

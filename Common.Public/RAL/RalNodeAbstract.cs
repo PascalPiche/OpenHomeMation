@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace OHM.RAL
 {
-    public abstract class RalNodeAbstract : NodeAbstract
+    public abstract class RalNodeAbstract : TreeNodeAbstract
     {
 
         private RalInterfaceNodeAbstract _interface;
@@ -26,9 +26,9 @@ namespace OHM.RAL
             return this.Init(data, logger);
         }
 
-        protected NodeAbstract CreateChildNode(string model, string key, string name, IDictionary<string, object> options = null)
+        protected TreeNodeAbstract CreateChildNode(string model, string key, string name, IDictionary<string, object> options = null)
         {
-            NodeAbstract result = null;
+            TreeNodeAbstract result = null;
             RalNodeAbstract newNode = Interface.CreateNodeInstance(model, key, name, options) as RalNodeAbstract;
             if (newNode != null)
             {

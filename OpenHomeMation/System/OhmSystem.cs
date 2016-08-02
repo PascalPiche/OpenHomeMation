@@ -54,7 +54,7 @@ namespace OHM.SYS
 
         public IOhmSystemInstallGateway GetInstallGateway(Plugins.IPlugin plugin)
         {
-            return new OhmSystemInstallGateway(plugin, _loggerMng.GetLogger(plugin.Name), _interfacesMng);
+            return new OhmSystemInstallGateway(plugin, _loggerMng.GetLogger(plugin.Name), _interfacesMng, _vrMng);
         }
 
         public IOhmSystemInterfaceGateway GetInterfaceGateway(IInterface interf)
@@ -104,17 +104,17 @@ namespace OHM.SYS
 
                 if (splitedKey.Length > 2)
                 {
-                    bool isPlugins = splitedKey[0] == "plugins";
-                    bool isHal = splitedKey[0] == "ral";
-
-                    //Check first value
-                    if (isPlugins)
+                    switch (splitedKey[0])
                     {
-                        commandResult = ExecutePluginsTree(splitedKey, arguments);
-                    }
-                    else if (isHal)
-                    {
-                        commandResult = ExecuteHalTree(splitedKey, arguments);
+                        case "plugins":
+                            commandResult = ExecutePluginsTree(splitedKey, arguments);
+                            break;
+                        case "ral":
+                            commandResult = ExecuteHalTree(splitedKey, arguments);
+                            break;
+                        case "val":
+                            commandResult = ExecuteValTree(splitedKey, arguments);
+                            break;
                     }
                 }
                 return commandResult;
@@ -271,6 +271,78 @@ namespace OHM.SYS
                         list.Add("start");
                         list.Add("stop");
                         list.Add("*");
+                        result = new APIResultTrue(list);
+                    }
+
+                }
+                #endregion
+
+                #region can-execute
+
+                else if (splitedKey[1] == "can-execute")
+                {
+                    if (splitedKey.Length > 4)
+                    {
+                        if (_system._interfacesMng.CanExecuteCommand(splitedKey[3], splitedKey[2]))
+                        {
+                            result = new APIResultTrue(true);
+                        }
+                    }
+                }
+
+                #endregion
+
+                return result;
+            }
+
+            private IAPIResult ExecuteValTree(string[] splitedKey, Dictionary<string, string> arguments)
+            {
+
+                IAPIResult result = new APIResultFalse();
+
+                #region list
+
+                if (splitedKey[1] == "list")
+                {
+                    if (splitedKey.Length > 3)
+                    {
+                        /*if (splitedKey[2] == "interfaces")
+                        {
+                            result = new APIResultTrue(_system._interfacesMng.RunnableInterfaces);
+                        }*/
+                    }
+                    else
+                    {
+                        //Output Available list
+                        /*Collection<string> list = new Collection<string>();
+                        list.Add("interfaces");
+                        result = new APIResultTrue(list);*/
+                    }
+                }
+                #endregion
+
+                #region Execute
+
+                else if (splitedKey[1] == "execute")
+                {
+                    if (splitedKey.Length > 3)
+                    {
+                        #region start
+
+                        if (splitedKey[2] == "addVrNode")
+                        {
+                            if (_system._vrMng.CreateRootNode(arguments["nodeType"], arguments["key"], arguments["name"]))
+                            {
+                                result = new APIResultTrue(true);
+                            }
+                        }
+                        #endregion
+                    }
+                    else
+                    {
+                        //Output Available list
+                        Collection<string> list = new Collection<string>();
+                        list.Add("addVrNode");
                         result = new APIResultTrue(list);
                     }
 

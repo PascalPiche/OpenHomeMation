@@ -2,7 +2,7 @@
 
 namespace OHM.RAL.Commands
 {
-    public interface IInterfaceCommand : ICommand
+    public interface IInterfaceCommand : ITreeCommand
     {
         
     }

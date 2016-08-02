@@ -14,7 +14,7 @@ namespace OHM.Common.Public.Test.Commands
             string name = "name";
 
             RalNodeAbstractStub holder = new RalNodeAbstractStub(key, name);
-            CommandAbstractStub target = new CommandAbstractStub("key", "name");
+            TreeCommandAbstractStub target = new TreeCommandAbstractStub("key", "name", "", null);
 
             //Assert.IsNull(target.GetAssignedNodeForTest());
             bool result = false;
@@ -35,7 +35,7 @@ namespace OHM.Common.Public.Test.Commands
             string name = "name";
 
             RalNodeAbstractStub holder = new RalNodeAbstractStub(key, name);
-            CommandAbstractStub target = new CommandAbstractStub("key", "name");
+            TreeCommandAbstractStub target = new TreeCommandAbstractStub("key", "name", "", null);
 
             //Assert.IsNull(target.GetAssignedNodeForTest());
             bool result = false;
@@ -55,7 +55,7 @@ namespace OHM.Common.Public.Test.Commands
             string name = "name";
 
             RalNodeAbstractStub holder = new RalNodeAbstractStub(key, name);
-            CommandAbstractStub target = new CommandAbstractStub("key", "name");
+            TreeCommandAbstractStub target = new TreeCommandAbstractStub("key", "name", "", null);
 
             //Assert.IsNull(target.GetAssignedNodeForTest());
             bool result = false;

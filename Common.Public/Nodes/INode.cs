@@ -4,31 +4,38 @@ using System.ComponentModel;
 
 namespace OHM.Nodes
 {
-
-    public interface INode :  INotifyPropertyChanged
+    public interface INode : INotifyPropertyChanged
     {
-        #region Properties
-
         string Key { get; }
 
         string Name { get; }
 
-        IReadOnlyList<INodeProperty> Properties { get; }
-
-        IReadOnlyList<ICommand> Commands { get; }
-
-        #endregion
+        NodeStates State { get; }
     }
 
-    public interface ITreeNode : INode
+    public interface INodeProperties
     {
+        IReadOnlyList<INodeProperty> Properties { get; }
+    }
+
+    public interface INodeCommands
+    {
+        IReadOnlyList<ICommand> Commands { get; }
+    }
+
+    public interface IPowerNode :  INode, INodeProperties, INodeCommands
+    {
+       
+    }
+
+    public interface ITreePowerNode : IPowerNode
+    {
+
         #region Properties
 
         string TreeKey { get; }        
 
-        NodeStates State { get; }
-
-        IReadOnlyList<ITreeNode> Children { get; }
+        IReadOnlyList<ITreePowerNode> Children { get; }
         
         #endregion
     }

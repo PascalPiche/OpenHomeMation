@@ -8,13 +8,16 @@ namespace OHM.Nodes.Commands
 
         string Name { get; }
 
-        string NodeTreeKey { get; }
-
         ICommandDefinition Definition { get; }
 
         bool Execute(IDictionary<string, string> arguments);
 
         bool CanExecute();
+    }
+
+    public interface ITreeCommand : ICommand
+    {
+        string NodeTreeKey { get; }
     }
 
 }

@@ -73,6 +73,8 @@
     <Compile Include="System\IOhmSystemInstallGateway.cs" />
     <Compile Include="System\IOhmSystemInterfaceGateway.cs" />
     <Compile Include="System\IOhmSystemUnInstallGateway.cs" />
+    <Compile Include="VAL\IVrType.cs" />
+    <Compile Include="VAL\ValNodeAbstract.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Data\_diagrams\Graph1.dgml" />

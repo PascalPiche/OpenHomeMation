@@ -1,5 +1,4 @@
-﻿using OHM.Logger;
-using OHM.RAL;
+﻿using OHM.RAL;
 using OHM.SYS;
 using System;
 
@@ -30,15 +29,20 @@ namespace OHM.Plugins
         {
             return false;
         }
+        
+        public bool Update()
+        {
+            return false;
+        }
+
+        public PluginStates State
+        {
+            get { return PluginStates.NotFound; }
+        }
 
         public bool Uninstall(IOhmSystemUnInstallGateway system)
         {
             throw new NotImplementedException();
-        }
-
-        public bool Update()
-        {
-            return false;
         }
 
         public RalInterfaceNodeAbstract CreateInterface(string key)
@@ -46,9 +50,9 @@ namespace OHM.Plugins
             throw new NotImplementedException();
         }
 
-        public PluginStates State
+        public VAL.IVrType CreateVrNode(string key)
         {
-            get { return PluginStates.NotFound; }
+            throw new NotImplementedException();
         }
     }
 }

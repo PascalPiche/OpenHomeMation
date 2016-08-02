@@ -1,6 +1,7 @@
 ﻿using OHM.Nodes.Commands;
 using OHM.RAL.Commands;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
@@ -138,7 +139,17 @@ namespace WpfApplication1
             {
                 if (command.Definition.ArgumentsDefinition.Count > 0)
                 {
-                    ShowCommandDialog(command);
+                    Dictionary<string, string> arguments;
+                    bool? result = ShowCommandDialog(command.Definition, out arguments);
+
+                    if (result.HasValue && result.Value)
+                    {
+                        if (!vm.ExecuteHalCommand(command.NodeTreeKey, command.Definition.Key, arguments))
+                        {
+                            MessageBox.Show("The command was not successfully executed", "Command error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
+                        }
+                    }
+
                 }
                 else
                 {
@@ -163,21 +174,29 @@ namespace WpfApplication1
 
         private void ExecuteVrAddNodeCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            //Create fake commandDefinition
-            //ICommand commandDefinition = new VrAddNodeCommand();
+            //Create fake commandDefinition for commandDialog
+            Dictionary<string, IArgumentDefinition> argumentsDefinitions = new Dictionary<string,IArgumentDefinition>();
+            argumentsDefinitions.Add("nodeType", new ArgumentDefinition("nodeType", "Node Type", typeof(string), true));
+            argumentsDefinitions.Add("key", new ArgumentDefinition("key", "Key", typeof(string), true));
+            argumentsDefinitions.Add("name", new ArgumentDefinition("name", "Name", typeof(string), true));
+
+            ICommandDefinition commandDefinition = new CommandDefinition("addVrNode", "Add Vr Node", "", argumentsDefinitions);
+
+            Dictionary<string, string> arguments;
+
+            bool? result = ShowCommandDialog(commandDefinition, out arguments);
+
+            if (result.HasValue && result.Value)
+            {
+                if (!vm.ExecuteVrCommand("vrManager", commandDefinition.Key, arguments))
+                {
+                    MessageBox.Show("The command was not successfully executed", "Command error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
+                }
+            }
 
         }
 
         #endregion
-
-        /*private class VrAddNodeCommand : CommandAbstract
-        {
-
-            protected override bool RunImplementation(System.Collections.Generic.IDictionary<string, string> arguments)
-            {
-                throw new NotImplementedException();
-            }
-        }*/
 
         #region Private Handler 
 
@@ -190,19 +209,16 @@ namespace WpfApplication1
 
         #region Private Helper functions
 
-        private void ShowCommandDialog(IInterfaceCommand command)
+        private bool? ShowCommandDialog(ICommandDefinition commandDefinition, out Dictionary<string,string> arguments)
         {
             var w = new CommandDialog();
-            w.init(command.Definition);
-            var result = w.ShowDialog();
+            w.init(commandDefinition);
 
-            if (result.HasValue && result.Value)
-            {
-                if (!vm.ExecuteHalCommand(command.NodeTreeKey, command.Definition.Key, w.ArgumentsResult))
-                {
-                    MessageBox.Show("The command was not successfully executed", "Command error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
-                }
-            }
+            bool? result = w.ShowDialog();
+
+            arguments = w.ArgumentsResult;
+
+            return result;
         }
 
         #endregion

@@ -1,6 +1,7 @@
 ﻿using OHM.Logger;
 using OHM.Plugins;
 using OHM.RAL;
+using OHM.VAL;
 
 namespace OHM.SYS
 {
@@ -10,12 +11,14 @@ namespace OHM.SYS
         private IPlugin _plugin;
         private ILogger _logger;
         private IInterfacesManager _interfacesMng;
+        private IVrManager _vrMng;
 
-        internal OhmSystemInstallGateway(IPlugin plugin, ILogger logger, IInterfacesManager interfacesMng)
+        internal OhmSystemInstallGateway(IPlugin plugin, ILogger logger, IInterfacesManager interfacesMng, IVrManager vrMng)
         {
             _logger = logger;
             _interfacesMng = interfacesMng;
             _plugin = plugin;
+            _vrMng = vrMng;
         }
 
         public Logger.ILogger Logger
@@ -30,7 +33,7 @@ namespace OHM.SYS
 
         public bool RegisterVrType(string key)
         {
-            return false;
+            return _vrMng.RegisterVrType(key, _plugin);
         }
     }
 }

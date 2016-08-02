@@ -1,6 +1,6 @@
-﻿using OHM.Logger;
-using OHM.RAL;
+﻿using OHM.RAL;
 using OHM.SYS;
+using OHM.VAL;
 using System;
 
 namespace OHM.Plugins
@@ -44,7 +44,9 @@ namespace OHM.Plugins
 
         public abstract RalInterfaceNodeAbstract CreateInterface(string key);
 
-        #endregion
+        public abstract IVrType CreateVrNode(string key);
 
+        #endregion
+       
     }
 }

@@ -1,12 +1,7 @@
-﻿using OHM.Logger;
-using OHM.Plugins;
+﻿using OHM.Plugins;
 using OHM.RAL;
 using OHM.SYS;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace UPNPControlPoint
 {
@@ -57,6 +52,11 @@ namespace UPNPControlPoint
         public override bool Uninstall(IOhmSystemUnInstallGateway system)
         {
             return system.UnRegisterInterface("UPNPControlPointInterface");
+        }
+
+        public override OHM.VAL.IVrType CreateVrNode(string key)
+        {
+            throw new NotImplementedException();
         }
     }
 }

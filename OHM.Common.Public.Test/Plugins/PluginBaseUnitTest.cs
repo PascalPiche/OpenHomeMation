@@ -1,8 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OHM.Nodes;
 using OHM.Plugins;
 using System;
-using System.Collections.ObjectModel;
 
 namespace OHM.Tests
 {
@@ -44,7 +42,6 @@ namespace OHM.Tests
 
     internal class PluginBaseStub : PluginBase
     {
-
         public override Guid Id
         {
             get { throw new NotImplementedException(); }
@@ -78,6 +75,11 @@ namespace OHM.Tests
         public void SetStateTest(PluginStates state)
         {
             this.State = state;
+        }
+
+        public override VAL.IVrType CreateVrNode(string key)
+        {
+            throw new NotImplementedException();
         }
     }
 }

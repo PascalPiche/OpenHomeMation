@@ -25,7 +25,7 @@ namespace WUnderground.Data
             options.Add("zip", zip);
             options.Add("magic", magic);
             options.Add("wmo", wmo);
-            ITreeNode node = this.CreateChildNode("station", locationName, locationName, options);
+            ITreePowerNode node = this.CreateChildNode("station", locationName, locationName, options);
             if (node != null) {
                 return true;
             }

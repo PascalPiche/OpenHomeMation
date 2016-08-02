@@ -1,5 +1,6 @@
 ﻿using OHM.RAL;
 using OHM.SYS;
+using OHM.VAL;
 using System;
 using System.ComponentModel;
 
@@ -50,5 +51,10 @@ namespace OHM.Plugins
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public IVrType CreateVrNode(string key)
+        {
+            return _plugin.CreateVrNode(key);
+        }
     }
 }

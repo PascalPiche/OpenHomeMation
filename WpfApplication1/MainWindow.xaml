@@ -177,7 +177,7 @@
                                     
                                     <TreeViewItem.ContextMenu>
                                         <ContextMenu>
-                                            <MenuItem Command="{Binding local:MainWindow.ExecuteVrAddNodeCommand}" CommandParameter="{Binding}">
+                                            <MenuItem Command="local:MainWindow.ExecuteVrAddNodeCommand">
                                                 <MenuItem.Header>Add Node</MenuItem.Header>
                                             </MenuItem>
                                         </ContextMenu>

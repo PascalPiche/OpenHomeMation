@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace OHM.RAL.Commands
 {
-    public abstract class InterfaceCommandAbstract : CommandAbstract, IInterfaceCommand
+    public abstract class InterfaceCommandAbstract : TreeCommandAbstract, IInterfaceCommand
     {
 
         #region Protected Ctor
@@ -17,9 +17,9 @@ namespace OHM.RAL.Commands
 
         #endregion
 
-        protected RalNodeAbstract Node { get { return base._node as RalNodeAbstract; } }
+        protected new RalNodeAbstract Node { get { return base.Node as RalNodeAbstract; } }
 
-        protected RalInterfaceNodeAbstract Interface { get { return ((RalNodeAbstract)base._node).Interface; } }
+        protected RalInterfaceNodeAbstract Interface { get { return ((RalNodeAbstract)base.Node).Interface; } }
 
         #region Public override methods
 
