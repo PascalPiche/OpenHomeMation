@@ -7,7 +7,7 @@ namespace OHM.Common.Public.Test.Commands
     [TestClass]
     public class CommandAbstractIntegrationTest
     {
-        [TestMethod]
+        /*[TestMethod]
         public void TestInitIntegration()
         {
             string key = "key";
@@ -69,5 +69,6 @@ namespace OHM.Common.Public.Test.Commands
 
             Assert.IsTrue(target.Execute(null));
         }
+         */
     }
 }

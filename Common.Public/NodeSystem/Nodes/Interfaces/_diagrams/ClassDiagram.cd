@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Interface Name="OHM.Nodes.INode" Collapsed="true">
+    <Position X="4" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAQAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Nodes\Interfaces\INode.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OHM.Nodes.INodeCommands">
+    <Position X="1.25" Y="2" Width="1.5" />
+    <InheritanceLine Type="OHM.Nodes.INode" FixedFromPoint="true">
+      <Path>
+        <Point X="4.312" Y="1.441" />
+        <Point X="4.312" Y="1.7" />
+        <Point X="2" Y="1.7" />
+        <Point X="2" Y="2" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Nodes\Interfaces\INodeCommands.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OHM.Nodes.INodeProperties">
+    <Position X="4" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>Nodes\Interfaces\INodeProperties.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OHM.Nodes.IPowerNode">
+    <Position X="2.5" Y="4" Width="1.5" />
+    <InheritanceLine Type="OHM.Nodes.INodeCommands" FixedFromPoint="true">
+      <Path>
+        <Point X="2.5" Y="3.233" />
+        <Point X="2.5" Y="3.625" />
+        <Point X="3.25" Y="3.625" />
+        <Point X="3.25" Y="4" />
+      </Path>
+    </InheritanceLine>
+    <InheritanceLine Type="OHM.Nodes.INodeProperties" FixedFromPoint="true">
+      <Path>
+        <Point X="4.312" Y="3.233" />
+        <Point X="4.312" Y="3.625" />
+        <Point X="3.25" Y="3.625" />
+        <Point X="3.25" Y="4" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Nodes\Interfaces\IPowerNode.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OHM.Nodes.IPowerTreeNode">
+    <Position X="6.5" Y="8.75" Width="1.5" />
+    <InheritanceLine Type="OHM.Nodes.ITreeNode" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="9.438" Y="3.425" />
+        <Point X="9.438" Y="8.375" />
+        <Point X="7.75" Y="8.375" />
+        <Point X="7.75" Y="8.75" />
+      </Path>
+    </InheritanceLine>
+    <InheritanceLine Type="OHM.Nodes.ITreeNodeProperties" FixedToPoint="true">
+      <Path>
+        <Point X="7.125" Y="5.127" />
+        <Point X="7.125" Y="8.75" />
+      </Path>
+    </InheritanceLine>
+    <InheritanceLine Type="OHM.Nodes.ITreeNodeCommands" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="4.312" Y="8.127" />
+        <Point X="4.312" Y="8.43" />
+        <Point X="6.688" Y="8.43" />
+        <Point X="6.688" Y="8.75" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Nodes\Interfaces\IPowerTreeNode.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OHM.Nodes.ITreeNode">
+    <Position X="8.75" Y="2" Width="1.5" />
+    <InheritanceLine Type="OHM.Nodes.INode" FixedFromPoint="true">
+      <Path>
+        <Point X="5.188" Y="1.441" />
+        <Point X="5.188" Y="1.7" />
+        <Point X="9.5" Y="1.7" />
+        <Point X="9.5" Y="2" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Nodes\Interfaces\ITreeNode.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OHM.Nodes.ITreeNodeCommands">
+    <Position X="2.5" Y="7" Width="2.5" />
+    <InheritanceLine Type="OHM.Nodes.INodeCommands" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="1.438" Y="3.233" />
+        <Point X="1.438" Y="6.625" />
+        <Point X="4.114" Y="6.625" />
+        <Point X="4.114" Y="6.876" />
+        <Point X="4.125" Y="6.876" />
+        <Point X="4.125" Y="7" />
+      </Path>
+    </InheritanceLine>
+    <InheritanceLine Type="OHM.Nodes.ITreeNode" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="10" Y="3.425" />
+        <Point X="10" Y="10.554" />
+        <Point X="1.993" Y="10.554" />
+        <Point X="1.993" Y="6.876" />
+        <Point X="2.812" Y="6.876" />
+        <Point X="2.812" Y="7" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Nodes\Interfaces\ITreeNodeCommands.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OHM.Nodes.ITreeNodeProperties">
+    <Position X="6.25" Y="4" Width="1.75" />
+    <InheritanceLine Type="OHM.Nodes.ITreeNode" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="9.062" Y="3.425" />
+        <Point X="9.062" Y="3.625" />
+        <Point X="7.5" Y="3.625" />
+        <Point X="7.5" Y="4" />
+      </Path>
+    </InheritanceLine>
+    <InheritanceLine Type="OHM.Nodes.INodeProperties" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5.188" Y="3.233" />
+        <Point X="5.188" Y="3.625" />
+        <Point X="6.562" Y="3.625" />
+        <Point X="6.562" Y="4" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Nodes\Interfaces\ITreeNodeProperties.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

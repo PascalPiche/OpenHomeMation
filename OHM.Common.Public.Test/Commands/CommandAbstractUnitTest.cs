@@ -9,7 +9,7 @@ namespace OHM.Common.Public.Test.Commands
     public class CommandAbstractUnitTest
     {
 
-        [TestMethod]
+        /*[TestMethod]
         public void TestCommandAbstractConstructorDefaultNotInited()
         {
             string key = "key";
@@ -30,7 +30,7 @@ namespace OHM.Common.Public.Test.Commands
             } catch(Exception ex) {
                 
             }
-        }
+        }*/
 
         /*[TestMethod]
         public void TestCommandAbstractInit()

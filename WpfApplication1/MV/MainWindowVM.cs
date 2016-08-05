@@ -145,7 +145,7 @@ namespace WpfApplication1.MV
         {
             get
             {
-                if (IsInterfaceViewVisible != Visibility.Visible && selectedNode is ITreePowerNode)
+                if (IsInterfaceViewVisible != Visibility.Visible && selectedNode is RalNodeAbstract)
                 {
                     return Visibility.Visible;
                 }

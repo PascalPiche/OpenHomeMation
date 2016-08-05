@@ -20,16 +20,20 @@ namespace WUnderground.Data
 
         public bool AddLocation(string locationName, int zip, int magic, string wmo)
         {
-            //new Station(locationName, locationName, zip, magic, wmo)
+            bool result = false;
+
             IDictionary<string, object> options = new Dictionary<string, object>();
             options.Add("zip", zip);
             options.Add("magic", magic);
             options.Add("wmo", wmo);
-            ITreePowerNode node = this.CreateChildNode("station", locationName, locationName, options);
+
+            TreeNodeAbstract node = this.CreateChildNode("station", locationName, locationName, options);
+
             if (node != null) {
-                return true;
+                result = true;
             }
-            return false;//this.AddChild(location);
+
+            return result;
         }
 
         protected override void RegisterCommands()

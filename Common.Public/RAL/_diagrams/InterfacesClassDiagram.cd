@@ -1,19 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="OHM.RAL.InterfaceAbstract">
-    <Position X="0.5" Y="8.25" Width="2.5" />
+  <Class Name="OHM.RAL.RalInterfaceNodeAbstract">
+    <Position X="5.25" Y="3.75" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>RAL\InterfaceAbstract.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="OHM.RAL.NodeInterfaceAbstract">
-    <Position X="0.5" Y="3.75" Width="2.5" />
-    <TypeIdentifier>
-      <HashCode>AIAAAAACkCBAAAAAAAAAQQAAAAAAAAAIAAAGAEAAAAA=</HashCode>
-      <FileName>RAL\NodeInterfaceAbstract.cs</FileName>
+      <HashCode>AIAgAAACkCBAAAAAAAAAQQAAAAAAAAAIAAAmAEAAAAA=</HashCode>
+      <FileName>RAL\RalInterfaceNodeAbstract.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OHM.RAL.RalNodeAbstract">
+    <Position X="5.25" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAAAABAQAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>RAL\RalNodeAbstract.cs</FileName>
+    </TypeIdentifier>
   </Class>
   <Interface Name="OHM.RAL.IInterface">
     <Position X="0.5" Y="0.5" Width="2.5" />

@@ -2,7 +2,7 @@
 
 namespace ZWaveLib.Data
 {
-    public interface IZWaveHomeNode : ITreePowerNode 
+    public interface IZWaveHomeNode : ITreeNode, INode
     {
         uint? HomeId { get; }
     }

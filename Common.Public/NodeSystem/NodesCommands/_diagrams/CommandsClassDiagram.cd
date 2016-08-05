@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="OHM.Nodes.Commands.ArgumentDefinition">
+    <Position X="8" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>ABACIAAAAAEBAgQAAACAiRQAAAAAAAAAAQAAAAAAggA=</HashCode>
+      <FileName>Nodes\Commands\ArgumentDefinition.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OHM.Nodes.Commands.CommandAbstract">
+    <Position X="0.5" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAACAQAAEAAAAQAAAAAEAAAAAACAAEAAAA=</HashCode>
+      <FileName>Nodes\Commands\TreeCommandAbstract.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OHM.Nodes.Commands.TreeCommandAbstract">
+    <Position X="0.5" Y="4.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Nodes\Commands\TreeCommandAbstract.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OHM.Nodes.Commands.CommandDefinition">
+    <Position X="3.5" Y="0.5" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAMAAAAAAgAAQEAACAAAQAAAAAAIgAAAAAAAAAAAA=</HashCode>
+      <FileName>Nodes\Commands\CommandDefinition.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

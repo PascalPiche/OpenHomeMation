@@ -1,4 +1,5 @@
-﻿using OHM.RAL;
+﻿using OHM.Nodes;
+using OHM.RAL;
 using System;
 
 namespace OHM.SYS
@@ -15,12 +16,12 @@ namespace OHM.SYS
             _interface = interf;
         }
 
-        public bool CreateNode(Nodes.ITreePowerNode node)
+        public bool CreateNode(TreeNodeAbstract node)
         {
             throw new NotImplementedException();
         }
 
-        public bool RemoveNode(Nodes.ITreePowerNode node)
+        public bool RemoveNode(TreeNodeAbstract node)
         {
             throw new NotImplementedException();
         }
