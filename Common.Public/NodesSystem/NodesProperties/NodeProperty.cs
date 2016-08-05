@@ -42,9 +42,7 @@ namespace OHM.Nodes
             _readOnly = readOnly;
             _description = description;
             SetValue(value);
-            _extraInfo = extraInfo;
-
-            InitializeExtraInfoDict();
+            InitializeExtraInfo(extraInfo);
         }
 
         #endregion
@@ -85,7 +83,7 @@ namespace OHM.Nodes
 
         #region Protected Functions
 
-        protected void NotifyPropertyChanged(String propertyName)
+        protected void NotifyPropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)
             {
@@ -97,9 +95,10 @@ namespace OHM.Nodes
 
         #region Private functions
 
-        private void InitializeExtraInfoDict()
+        private void InitializeExtraInfo(ObservableCollection<INodeProperty> extraInfo)
         {
-            _extraInfoDict = new Dictionary<String, INodeProperty>();
+            _extraInfo = extraInfo;
+            _extraInfoDict = new Dictionary<string, INodeProperty>();
             foreach (INodeProperty nodeProp in _extraInfo)
             {
                 _extraInfoDict.Add(nodeProp.Key, nodeProp);

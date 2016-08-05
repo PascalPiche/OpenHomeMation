@@ -100,10 +100,12 @@
     <None Include="NodesSystem\NodesCommands\_Interfaces\_Diagrams\Graph.dgml" />
     <None Include="NodesSystem\NodesCommands\_Diagrams\GraphClass-2016-08-04.dgml" />
     <None Include="NodesSystem\NodesCommands\_Diagrams\GraphFull-2016-08-04.dgml" />
+    <None Include="NodesSystem\NodesProperties\_Diagrams\GraphExpanded-2016-08-04.dgml" />
+    <None Include="NodesSystem\NodesProperties\_Interfaces\_Diagrams\ClassDiagram.cd" />
     <None Include="NodesSystem\Nodes\_Interfaces\_Diagrams\ClassDiagram.cd" />
     <None Include="NodesSystem\Nodes\_Interfaces\_Diagrams\Graph.dgml" />
     <None Include="NodesSystem\NodesProperties\_Diagrams\ClassDiagram.cd" />
-    <None Include="NodesSystem\NodesProperties\_Diagrams\Graph.dgml" />
+    <None Include="NodesSystem\NodesProperties\_Diagrams\Graph-201-08-04.dgml" />
     <None Include="NodesSystem\Nodes\_Diagrams\Graph-NodeAbstract-2016-07-21.dgml" />
     <None Include="NodesSystem\Nodes\_Diagrams\Graph-NodeAbstract-2016-07-25.dgml" />
     <None Include="NodesSystem\Nodes\_Diagrams\Relations-expanded.dgml" />
