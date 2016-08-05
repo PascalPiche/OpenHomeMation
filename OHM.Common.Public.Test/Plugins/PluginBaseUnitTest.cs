@@ -67,7 +67,7 @@ namespace OHM.Tests
             throw new NotImplementedException();
         }
 
-        public override RAL.RalInterfaceNodeAbstract CreateInterface(string key)
+        public override RAL.ALRInterfaceAbstractNode CreateInterface(string key)
         {
             throw new NotImplementedException();
         }

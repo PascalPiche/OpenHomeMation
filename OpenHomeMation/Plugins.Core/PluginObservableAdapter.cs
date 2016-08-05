@@ -45,7 +45,7 @@ namespace OHM.Plugins
             return _plugin.Update();
         }
 
-        public RalInterfaceNodeAbstract CreateInterface(string key)
+        public ALRInterfaceAbstractNode CreateInterface(string key)
         {
             return _plugin.CreateInterface(key);
         }

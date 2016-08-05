@@ -18,15 +18,15 @@ namespace OHM.RAL
         private IPluginsManager _pluginsMng;
         private IDataStore _data;
         private IDataDictionary _dataRegisteredInterfaces;
-        private IList<IInterface> _runningInterfaces = new ObservableCollection<IInterface>();
-        private Dictionary<string, IInterface> _runningDic = new Dictionary<string, IInterface>();
+        private IList<IALRInterface> _runningInterfaces = new ObservableCollection<IALRInterface>();
+        private Dictionary<string, IALRInterface> _runningDic = new Dictionary<string, IALRInterface>();
         private IOhmSystemInternal _system;
 
         #endregion
 
         #region Public Properties
 
-        public IList<IInterface> RunnableInterfaces
+        public IList<IALRInterface> RunnableInterfaces
         {
             get { return _runningInterfaces; }
         }
@@ -64,7 +64,7 @@ namespace OHM.RAL
             IDataDictionary _interfaceMetaData = _dataRegisteredInterfaces.GetOrCreateDataDictionary(key);
             
             try {
-                IInterface newInterface = CreateInterface(key, plugin, _system);
+                IALRInterface newInterface = CreateInterface(key, plugin, _system);
                 if (newInterface == null)
                 {
                     _logger.Error("Cannot register interface " + key + ", Error on creating Interface");
@@ -113,7 +113,7 @@ namespace OHM.RAL
         public bool StartInterface(string key)
         {
             bool result = false;
-            IInterface interf = null;
+            IALRInterface interf = null;
             if (_runningDic.TryGetValue(key, out interf))
             {
                 result = StartInterface(interf);
@@ -124,10 +124,10 @@ namespace OHM.RAL
         public bool StopInterface(string key)
         {
             bool result = false;
-            IInterface interf = null;
+            IALRInterface interf = null;
             if (_runningDic.TryGetValue(key, out interf))
             {
-                if (interf.InterfaceState == InterfaceStates.Enabled)
+                if (interf.InterfaceState == ALRInterfaceStates.Enabled)
                 {
                     interf.Shutdowning();
                     result = true;
@@ -141,7 +141,7 @@ namespace OHM.RAL
             _logger.Debug("Executing Command -> Node Key : " + nodeKey + " -> Command Key : " + commandKey);
 
             //Find interface
-            IInterface interf = GetRunningInterface(nodeKey);
+            IALRInterface interf = GetRunningInterface(nodeKey);
 
             if (interf != null)
             {
@@ -156,7 +156,7 @@ namespace OHM.RAL
 
         public bool CanExecuteCommand(string nodeKey, string commandKey)
         {
-            IInterface interf = GetRunningInterface(nodeKey);
+            IALRInterface interf = GetRunningInterface(nodeKey);
 
             if (interf != null)
             {
@@ -214,7 +214,7 @@ namespace OHM.RAL
             return result;
         }
 
-        private RalInterfaceNodeAbstract CreateInterface(string key, IOhmSystemInternal system)
+        private ALRInterfaceAbstractNode CreateInterface(string key, IOhmSystemInternal system)
         {
             return CreateInterface(key, GetPluginForInterface(key), system);
         }
@@ -224,9 +224,9 @@ namespace OHM.RAL
             return plugin.Id.ToString() + '.' + key;
         }
 
-        private RalInterfaceNodeAbstract CreateInterface(string key, IPlugin plugin, IOhmSystemInternal system)
+        private ALRInterfaceAbstractNode CreateInterface(string key, IPlugin plugin, IOhmSystemInternal system)
         {
-            RalInterfaceNodeAbstract result = null;
+            ALRInterfaceAbstractNode result = null;
 
             if (plugin != null)
             {
@@ -248,9 +248,9 @@ namespace OHM.RAL
             return result;
         }
 
-        private IInterface GetRunningInterface(string nodeKey)
+        private IALRInterface GetRunningInterface(string nodeKey)
         {
-            IInterface result;
+            IALRInterface result;
             string interfaceKey = nodeKey;
 
             if (nodeKey.Contains("."))
@@ -266,10 +266,10 @@ namespace OHM.RAL
             return result;
         }
 
-        private bool StartInterface(IInterface interf)
+        private bool StartInterface(IALRInterface interf)
         {
             bool result = false;
-            if (interf.InterfaceState == InterfaceStates.Disabled)
+            if (interf.InterfaceState == ALRInterfaceStates.Disabled)
             {
                 interf.Starting();
                 result = true;

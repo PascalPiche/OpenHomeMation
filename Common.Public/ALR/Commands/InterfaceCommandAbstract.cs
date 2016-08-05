@@ -17,9 +17,9 @@ namespace OHM.RAL.Commands
 
         #endregion
 
-        protected new RalNodeAbstract Node { get { return base.Node as RalNodeAbstract; } }
+        protected new ALRAbstractNode Node { get { return base.Node as ALRAbstractNode; } }
 
-        protected RalInterfaceNodeAbstract Interface { get { return ((RalNodeAbstract)base.Node).Interface; } }
+        protected ALRInterfaceAbstractNode Interface { get { return ((ALRAbstractNode)base.Node).Interface; } }
 
         #region Public override methods
 

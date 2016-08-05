@@ -7,7 +7,7 @@ using System.ComponentModel;
 
 namespace OHM.Nodes
 {
-    public abstract class NodeAbstract : INode, ICommandsNode, IPropertiesNode
+    public abstract class AbstractNode : INode, ICommandsNode, IPropertiesNode
     {
         #region Private Members
 
@@ -35,7 +35,7 @@ namespace OHM.Nodes
 
         #region Internal ctor
 
-        internal NodeAbstract(string key, string name, NodeStates initialState = NodeStates.initializing)
+        internal AbstractNode(string key, string name, NodeStates initialState = NodeStates.initializing)
         {
             //_name = name;
             _state = initialState;
@@ -210,7 +210,7 @@ namespace OHM.Nodes
                 }
 
                 //Lookup ALL LEVEL the node list
-                NodeAbstract node = this.FindChild(nextNode);
+                AbstractNode node = this.FindChild(nextNode);
                 if (node != null)
                 {
                     return node.CanExecuteCommand(nodeFullKey, commandKey);
@@ -241,7 +241,7 @@ namespace OHM.Nodes
                     nextNode = nextNode.Split('.')[0];
                 }
 
-                NodeAbstract node = this.FindChild(nextNode);
+                AbstractNode node = this.FindChild(nextNode);
                 if (node != null)
                 {
                     result = node.ExecuteCommand(nodeFullKey, commandKey, arguments);

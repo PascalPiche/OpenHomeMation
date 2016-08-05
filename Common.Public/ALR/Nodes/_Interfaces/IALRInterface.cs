@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace OHM.RAL
 {
-    public interface IInterface : IPowerTreeNode
+    public interface IALRInterface : IPowerTreeNode
     {
         #region Properties
 
-        InterfaceStates InterfaceState { get; }
+        ALRInterfaceStates InterfaceState { get; }
 
         bool IsRunning { get; }
 

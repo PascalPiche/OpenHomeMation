@@ -53,11 +53,11 @@ namespace WpfApplication1.MV
             }
         }
 
-        public IList<IInterface> Interfaces
+        public IList<IALRInterface> Interfaces
         {
             get
             {
-                return (IList<IInterface>)ohm.API.ExecuteCommand("ral/list/interfaces/").Result;
+                return (IList<IALRInterface>)ohm.API.ExecuteCommand("ral/list/interfaces/").Result;
             }
         }
 
@@ -133,7 +133,7 @@ namespace WpfApplication1.MV
         {
             get
             {
-                if (selectedNode is IInterface)
+                if (selectedNode is IALRInterface)
                 {
                     return Visibility.Visible;
                 }
@@ -145,7 +145,7 @@ namespace WpfApplication1.MV
         {
             get
             {
-                if (IsInterfaceViewVisible != Visibility.Visible && selectedNode is RalNodeAbstract)
+                if (IsInterfaceViewVisible != Visibility.Visible && selectedNode is ALRAbstractNode)
                 {
                     return Visibility.Visible;
                 }

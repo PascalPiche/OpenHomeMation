@@ -57,7 +57,7 @@ namespace OHM.SYS
             return new OhmSystemInstallGateway(plugin, _loggerMng.GetLogger(plugin.Name), _interfacesMng, _vrMng);
         }
 
-        public IOhmSystemInterfaceGateway GetInterfaceGateway(IInterface interf)
+        public IOhmSystemInterfaceGateway GetInterfaceGateway(IALRInterface interf)
         {
             return new OhmSystemInterfaceGateway(this, interf);
         }

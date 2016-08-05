@@ -32,7 +32,7 @@ namespace ZWaveLib
             return true;
         }
 
-        public override RalInterfaceNodeAbstract CreateInterface(string key)
+        public override ALRInterfaceAbstractNode CreateInterface(string key)
         {
             switch (key)
 	        {

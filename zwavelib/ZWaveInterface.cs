@@ -10,7 +10,7 @@ using ZWaveLib.Tools;
 
 namespace ZWaveLib
 {
-    public class ZWaveInterface : RalInterfaceNodeAbstract
+    public class ZWaveInterface : ALRInterfaceAbstractNode
     {
 
         #region Private members
@@ -683,9 +683,9 @@ namespace ZWaveLib
 
         #endregion
 
-        protected override NodeAbstract CreateNodeInstance(string model, string key, string name, IDictionary<string, object> options)
+        protected override AbstractNode CreateNodeInstance(string model, string key, string name, IDictionary<string, object> options)
         {
-            NodeAbstract result = null ;
+            AbstractNode result = null ;
 
             switch (model)
             {
@@ -702,7 +702,7 @@ namespace ZWaveLib
                     result = new ZWaveNode(key, name);
                     break;
                 default:
-                    result = new BasicRalNode(key, name);
+                    result = new ALRBasicNode(key, name);
                     break;
             }
 

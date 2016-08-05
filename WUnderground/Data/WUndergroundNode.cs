@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace WUnderground.Data
 {
-    public abstract class WUndergroundNodeAbstract : RalNodeAbstract
+    public abstract class WUndergroundNodeAbstract : ALRAbstractNode
     {
         public WUndergroundNodeAbstract(string keyId, string name)
             : base(keyId, name)

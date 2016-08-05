@@ -8,7 +8,7 @@ namespace OHM.SYS
 
         IDataStore GetOrCreateDataStore(string key);
 
-        IOhmSystemInterfaceGateway GetInterfaceGateway(IInterface interf);
+        IOhmSystemInterfaceGateway GetInterfaceGateway(IALRInterface interf);
 
         IAPI API { get; }
     }

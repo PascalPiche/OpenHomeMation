@@ -8,20 +8,20 @@ namespace OHM.SYS
     {
 
         private IOhmSystemInternal _system;
-        private IInterface _interface;
+        private IALRInterface _interface;
 
-        internal OhmSystemInterfaceGateway(IOhmSystemInternal system, IInterface interf)
+        internal OhmSystemInterfaceGateway(IOhmSystemInternal system, IALRInterface interf)
         {
             _system = system;
             _interface = interf;
         }
 
-        public bool CreateNode(TreeNodeAbstract node)
+        public bool CreateNode(AbstractTreeNode node)
         {
             throw new NotImplementedException();
         }
 
-        public bool RemoveNode(TreeNodeAbstract node)
+        public bool RemoveNode(AbstractTreeNode node)
         {
             throw new NotImplementedException();
         }

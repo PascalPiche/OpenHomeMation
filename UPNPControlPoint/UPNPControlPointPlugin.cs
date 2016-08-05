@@ -12,7 +12,7 @@ namespace UPNPControlPoint
 
         private string _name = "UPNP Control Point";
 
-        private RalInterfaceNodeAbstract _runningInterface;
+        private ALRInterfaceAbstractNode _runningInterface;
 
         public override Guid Id
         {
@@ -38,7 +38,7 @@ namespace UPNPControlPoint
             return true;
         }
 
-        public override RalInterfaceNodeAbstract CreateInterface(string key)
+        public override ALRInterfaceAbstractNode CreateInterface(string key)
         {
             switch (key)
             {

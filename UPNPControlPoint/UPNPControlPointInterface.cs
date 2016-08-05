@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace UPNPControlPoint
 {
-    public class UPNPControlPointInterface : RalInterfaceNodeAbstract
+    public class UPNPControlPointInterface : ALRInterfaceAbstractNode
     {
         public UPNPControlPointInterface()
             : base("UPNPCtlPointInterface", "UPNP Control Point")
@@ -24,7 +24,7 @@ namespace UPNPControlPoint
             
         }
 
-        protected override NodeAbstract CreateNodeInstance(string model, string key, string name, IDictionary<string, object> options)
+        protected override AbstractNode CreateNodeInstance(string model, string key, string name, IDictionary<string, object> options)
         {
             throw new NotImplementedException();
         }

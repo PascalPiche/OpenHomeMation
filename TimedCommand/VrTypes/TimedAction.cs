@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace TimedCommand.VrTypes
 {
-    public class TimedAction : ValNodeAbstract, IVrType
+    public class TimedAction : ALVAbstractNode, IVrType
     {
         public TimedAction(string key, string name)
             : base(key, name)

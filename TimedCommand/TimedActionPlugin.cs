@@ -30,7 +30,7 @@ namespace TimedCommand
             return true;
         }
 
-        public override RalInterfaceNodeAbstract CreateInterface(string key)
+        public override ALRInterfaceAbstractNode CreateInterface(string key)
         {
             throw new NotImplementedException();
         }

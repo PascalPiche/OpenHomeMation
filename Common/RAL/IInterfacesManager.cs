@@ -14,7 +14,7 @@ namespace OHM.RAL
 
         bool UnRegisterInterface(string key, IPlugin plugin);
 
-        IList<IInterface> RunnableInterfaces { get; }
+        IList<IALRInterface> RunnableInterfaces { get; }
 
         bool StartInterface(string key);
 

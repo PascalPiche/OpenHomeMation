@@ -45,7 +45,7 @@ namespace OHM.Plugins
             throw new NotImplementedException();
         }
 
-        public RalInterfaceNodeAbstract CreateInterface(string key)
+        public ALRInterfaceAbstractNode CreateInterface(string key)
         {
             throw new NotImplementedException();
         }

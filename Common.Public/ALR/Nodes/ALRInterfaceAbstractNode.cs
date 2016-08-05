@@ -6,11 +6,11 @@ using System.Collections.Generic;
 
 namespace OHM.RAL
 {
-    public abstract class RalInterfaceNodeAbstract : RalNodeAbstract, IInterface
+    public abstract class ALRInterfaceAbstractNode : ALRAbstractNode, IALRInterface
     {
         #region Private Members
 
-        private InterfaceStates _interfaceState = InterfaceStates.Disabled;
+        private ALRInterfaceStates _interfaceState = ALRInterfaceStates.Disabled;
         private bool _startOnLaunch = false;
         private IOhmSystemInterfaceGateway _system;
 
@@ -18,7 +18,7 @@ namespace OHM.RAL
 
         #region Protected Ctor
 
-        protected RalInterfaceNodeAbstract(string key, string name)
+        protected ALRInterfaceAbstractNode(string key, string name)
             : base(key, name)
         { }
 
@@ -26,7 +26,7 @@ namespace OHM.RAL
 
         #region public Properties
 
-        public InterfaceStates InterfaceState
+        public ALRInterfaceStates InterfaceState
         {
             get { return _interfaceState; }
 
@@ -40,7 +40,7 @@ namespace OHM.RAL
 
         public bool IsRunning
         {
-            get { return InterfaceState == InterfaceStates.Enabled; }
+            get { return InterfaceState == ALRInterfaceStates.Enabled; }
         }
 
         public bool StartOnLaunch
@@ -63,7 +63,7 @@ namespace OHM.RAL
         {
             Logger.Debug("Starting interface : " + this.Name);
             Start();
-            InterfaceState = InterfaceStates.Enabled;
+            InterfaceState = ALRInterfaceStates.Enabled;
             NotifyPropertyChanged("State");
             Logger.Info("Starting interface : " + this.Name + " was successfull");
         }
@@ -72,7 +72,7 @@ namespace OHM.RAL
         {
             Logger.Debug(this.Name + " Interface Shutdowning");
             Shutdown();
-            InterfaceState = InterfaceStates.Disabled;
+            InterfaceState = ALRInterfaceStates.Disabled;
             NotifyPropertyChanged("State");
             Logger.Info(this.Name + " Interface Shutdowned");
         }
@@ -109,7 +109,7 @@ namespace OHM.RAL
 
         #region internal Protected Functions
 
-        internal protected abstract NodeAbstract CreateNodeInstance(string model, string key, string name, IDictionary<string, object> options);
+        internal protected abstract AbstractNode CreateNodeInstance(string model, string key, string name, IDictionary<string, object> options);
 
         #endregion
     }

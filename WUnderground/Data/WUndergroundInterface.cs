@@ -8,7 +8,7 @@ using WUnderground.Commands;
 
 namespace WUnderground.Data
 {
-    public class WUndergroundInterface : RalInterfaceNodeAbstract
+    public class WUndergroundInterface : ALRInterfaceAbstractNode
     {
         private IDataDictionary _registeredAccounts;
 
@@ -164,9 +164,9 @@ namespace WUnderground.Data
 
         #endregion
 
-        protected override NodeAbstract CreateNodeInstance(string model, string key, string name, IDictionary<string, object> options)
+        protected override AbstractNode CreateNodeInstance(string model, string key, string name, IDictionary<string, object> options)
         {
-            NodeAbstract result = null; 
+            AbstractNode result = null; 
             switch (model)
             {
                 case "Account":

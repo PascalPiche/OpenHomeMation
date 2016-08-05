@@ -1,7 +1,7 @@
 ﻿
 namespace OHM.RAL
 {
-    public enum InterfaceStates
+    public enum ALRInterfaceStates
     {
         Enabled,
         Disabled,

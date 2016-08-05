@@ -3,18 +3,18 @@ using System.Collections.ObjectModel;
 
 namespace OHM.Nodes
 {
-    public abstract class TreeNodeAbstract : NodeAbstract, ITreeNode
+    public abstract class AbstractTreeNode : AbstractNode, ITreeNode
     {
-        private TreeNodeAbstract _parent;
+        private AbstractTreeNode _parent;
 
-        private ObservableCollection<TreeNodeAbstract> _children;
-        private Dictionary<string, TreeNodeAbstract> _childrenDic;
+        private ObservableCollection<AbstractTreeNode> _children;
+        private Dictionary<string, AbstractTreeNode> _childrenDic;
 
-        internal TreeNodeAbstract(string key, string name, NodeStates initialState = NodeStates.initializing)
+        internal AbstractTreeNode(string key, string name, NodeStates initialState = NodeStates.initializing)
             : base(key, name, initialState)
         {
-            _children = new ObservableCollection<TreeNodeAbstract>();
-            _childrenDic = new Dictionary<string, TreeNodeAbstract>();
+            _children = new ObservableCollection<AbstractTreeNode>();
+            _childrenDic = new Dictionary<string, AbstractTreeNode>();
         }
 
         public string TreeKey
@@ -39,9 +39,9 @@ namespace OHM.Nodes
 
         public IReadOnlyList<ITreeNode> Children { get { return _children; } }
 
-        protected TreeNodeAbstract Parent { get { return _parent; } }
+        protected AbstractTreeNode Parent { get { return _parent; } }
 
-        protected bool RemoveChild(TreeNodeAbstract node)
+        protected bool RemoveChild(AbstractTreeNode node)
         {
             if (node != null)
             {
@@ -57,9 +57,9 @@ namespace OHM.Nodes
             return RemoveChild(FindChild(key));
         }
 
-        protected TreeNodeAbstract FindChild(string key)
+        protected AbstractTreeNode FindChild(string key)
         {
-            TreeNodeAbstract result;
+            AbstractTreeNode result;
 
             if (_childrenDic.TryGetValue(key, out result))
             {
@@ -68,7 +68,7 @@ namespace OHM.Nodes
             else
             {
                 //Check child
-                foreach (TreeNodeAbstract item in Children)
+                foreach (AbstractTreeNode item in Children)
                 {
                     result = item.FindChild(key);
                     if (result != null)
@@ -100,7 +100,7 @@ namespace OHM.Nodes
                 }
 
                 //Lookup ALL LEVEL the node list
-                TreeNodeAbstract node = this.FindChild(nextNode);
+                AbstractTreeNode node = this.FindChild(nextNode);
                 if (node != null)
                 {
                     return node.CanExecuteCommand(nodeFullKey, commandKey);
@@ -131,7 +131,7 @@ namespace OHM.Nodes
                     nextNode = nextNode.Split('.')[0];
                 }
 
-                TreeNodeAbstract node = this.FindChild(nextNode);
+                AbstractTreeNode node = this.FindChild(nextNode);
                 if (node != null)
                 {
                     result = node.ExecuteCommand(nodeFullKey, commandKey, arguments);
@@ -140,13 +140,13 @@ namespace OHM.Nodes
             return result;
         }
 
-        internal void SetParent(TreeNodeAbstract node)
+        internal void SetParent(AbstractTreeNode node)
         {
             _parent = node;
             this.State = NodeStates.normal;
         }
 
-        internal bool AddChild(TreeNodeAbstract node)
+        internal bool AddChild(AbstractTreeNode node)
         {
             if (!_childrenDic.ContainsKey(node.Key))
             {

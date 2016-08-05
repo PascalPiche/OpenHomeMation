@@ -20,7 +20,7 @@ namespace OHM.Plugins
 
         bool Update();
 
-        RalInterfaceNodeAbstract CreateInterface(string key);
+        ALRInterfaceAbstractNode CreateInterface(string key);
 
         IVrType CreateVrNode(string key);
 

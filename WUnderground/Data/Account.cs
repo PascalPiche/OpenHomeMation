@@ -27,7 +27,7 @@ namespace WUnderground.Data
             options.Add("magic", magic);
             options.Add("wmo", wmo);
 
-            TreeNodeAbstract node = this.CreateChildNode("station", locationName, locationName, options);
+            AbstractTreeNode node = this.CreateChildNode("station", locationName, locationName, options);
 
             if (node != null) {
                 result = true;
