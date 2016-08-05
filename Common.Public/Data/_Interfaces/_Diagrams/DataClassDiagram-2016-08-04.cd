@@ -4,14 +4,14 @@
     <Position X="0.75" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAIAAAAAAAAQAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
-      <FileName>Data\IDataStore.cs</FileName>
+      <FileName>Data\_Interfaces\IDataStore.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="OHM.Data.IDataDictionary">
     <Position X="0.5" Y="0.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>iACAAAAAAAAEQAAACAAEBAAAAAAAAgAAAAAAAACAQQA=</HashCode>
-      <FileName>Data\IDataDictionary.cs</FileName>
+      <HashCode>CACAAAAAAAEAQAAACAAEBAAAAAAAAAAQAAAAAAAAAQg=</HashCode>
+      <FileName>Data\_Interfaces\IDataDictionary.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Font Name="Segoe UI" Size="9" />

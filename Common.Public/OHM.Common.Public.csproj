@@ -49,36 +49,36 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="NodeSystem\NodesCommands\CommandDefinition.cs" />
-    <Compile Include="NodeSystem\NodesCommands\Interfaces\IArgumentDefinition.cs" />
-    <Compile Include="NodeSystem\NodesCommands\Interfaces\ICommand.cs">
+    <Compile Include="NodeSystem\NodesCommands\_Interfaces\IArgumentDefinition.cs" />
+    <Compile Include="NodeSystem\NodesCommands\_Interfaces\ICommand.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="NodeSystem\NodesCommands\Interfaces\ICommandDefinition.cs" />
-    <Compile Include="NodeSystem\NodesCommands\Interfaces\ITreeCommand.cs" />
+    <Compile Include="NodeSystem\NodesCommands\_Interfaces\ICommandDefinition.cs" />
+    <Compile Include="NodeSystem\NodesCommands\_Interfaces\ITreeCommand.cs" />
     <Compile Include="NodeSystem\NodesCommands\TreeCommandAbstract.cs" />
-    <Compile Include="NodeSystem\Nodes\Interfaces\IPowerNode.cs">
+    <Compile Include="NodeSystem\Nodes\_Interfaces\IPowerNode.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="NodeSystem\Nodes\Interfaces\IPowerTreeNode.cs">
+    <Compile Include="NodeSystem\Nodes\_Interfaces\IPowerTreeNode.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="NodeSystem\Nodes\Interfaces\ITreeNode.cs" />
-    <Compile Include="NodeSystem\Nodes\Interfaces\ICommandsNode.cs" />
-    <Compile Include="NodeSystem\Nodes\Interfaces\IPropertiesNode.cs" />
-    <Compile Include="NodeSystem\Nodes\Interfaces\ICommandsTreeNode.cs" />
-    <Compile Include="NodeSystem\Nodes\Interfaces\IPropertiesTreeNode.cs" />
+    <Compile Include="NodeSystem\Nodes\_Interfaces\ITreeNode.cs" />
+    <Compile Include="NodeSystem\Nodes\_Interfaces\ICommandsNode.cs" />
+    <Compile Include="NodeSystem\Nodes\_Interfaces\IPropertiesNode.cs" />
+    <Compile Include="NodeSystem\Nodes\_Interfaces\ICommandsTreeNode.cs" />
+    <Compile Include="NodeSystem\Nodes\_Interfaces\IPropertiesTreeNode.cs" />
     <Compile Include="NodeSystem\Nodes\TreeNodeAbstract.cs" />
     <Compile Include="RAL\Nodes\BasicRalNode.cs" />
     <Compile Include="RAL\Commands\Interfaces\IInterfaceCommand.cs" />
     <Compile Include="RAL\Commands\InterfaceCommandAbstract.cs" />
-    <Compile Include="Data\Interfaces\IDataDictionary.cs" />
-    <Compile Include="Data\Interfaces\IDataStore.cs" />
+    <Compile Include="Data\_Interfaces\IDataDictionary.cs" />
+    <Compile Include="Data\_Interfaces\IDataStore.cs" />
     <Compile Include="RAL\Nodes\RalNodeAbstract.cs" />
     <Compile Include="RAL\Nodes\InterfaceState.cs" />
-    <Compile Include="NodeSystem\Nodes\Interfaces\INode.cs" />
+    <Compile Include="NodeSystem\Nodes\_Interfaces\INode.cs" />
     <Compile Include="RAL\Nodes\Interfaces\IInterface.cs" />
-    <Compile Include="Logger\Interfaces\ILogger.cs" />
-    <Compile Include="NodeSystem\NodesProperties\Interfaces\INodeProperty.cs" />
+    <Compile Include="Logger\_Interfaces\ILogger.cs" />
+    <Compile Include="NodeSystem\NodesProperties\_Interfaces\INodeProperty.cs" />
     <Compile Include="NodeSystem\Nodes\NodeAbstract.cs" />
     <Compile Include="RAL\Nodes\RalInterfaceNodeAbstract.cs" />
     <Compile Include="NodeSystem\NodesProperties\NodeProperty.cs" />
@@ -95,34 +95,34 @@
     <Compile Include="VAL\Nodes\ValNodeAbstract.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Data\_diagrams\Graph1.dgml" />
-    <None Include="NodeSystem\NodesCommands\Interfaces\_diagrams\ClassDiagram.cd" />
-    <None Include="NodeSystem\NodesCommands\Interfaces\_diagrams\Graph.dgml" />
-    <None Include="NodeSystem\NodesCommands\_diagrams\GraphClass-2016-08-04.dgml" />
-    <None Include="NodeSystem\NodesCommands\_diagrams\GraphFull-2016-08-04.dgml" />
-    <None Include="NodeSystem\Nodes\Interfaces\_diagrams\ClassDiagram.cd" />
-    <None Include="NodeSystem\Nodes\Interfaces\_diagrams\Graph.dgml" />
+    <None Include="Data\_Interfaces\_diagrams\GraphRelations.dgml" />
+    <None Include="NodeSystem\NodesCommands\_Interfaces\_diagrams\ClassDiagram.cd" />
+    <None Include="NodeSystem\NodesCommands\_Interfaces\_diagrams\Graph.dgml" />
+    <None Include="NodeSystem\NodesCommands\_Diagrams\GraphClass-2016-08-04.dgml" />
+    <None Include="NodeSystem\NodesCommands\_Diagrams\GraphFull-2016-08-04.dgml" />
+    <None Include="NodeSystem\Nodes\_Interfaces\_diagrams\ClassDiagram.cd" />
+    <None Include="NodeSystem\Nodes\_Interfaces\_diagrams\Graph.dgml" />
     <None Include="NodeSystem\NodesProperties\_diagrams\ClassDiagram.cd" />
     <None Include="NodeSystem\NodesProperties\_diagrams\Graph.dgml" />
-    <None Include="NodeSystem\Nodes\_diagrams\Graph-NodeAbstract-2016-07-21.dgml" />
-    <None Include="NodeSystem\Nodes\_diagrams\Graph-NodeAbstract-2016-07-25.dgml" />
-    <None Include="NodeSystem\Nodes\_diagrams\Relations-expanded.dgml" />
-    <None Include="NodeSystem\Nodes\_diagrams\Relations-simple.dgml" />
+    <None Include="NodeSystem\Nodes\_Diagrams\Graph-NodeAbstract-2016-07-21.dgml" />
+    <None Include="NodeSystem\Nodes\_Diagrams\Graph-NodeAbstract-2016-07-25.dgml" />
+    <None Include="NodeSystem\Nodes\_Diagrams\Relations-expanded.dgml" />
+    <None Include="NodeSystem\Nodes\_Diagrams\Relations-simple.dgml" />
     <None Include="Plugins\_diagrams\Graph1.dgml" />
     <None Include="RAL\Commands\_diagrams\ClassDiagram1.cd" />
     <None Include="RAL\Commands\_diagrams\Graph1.dgml" />
     <None Include="RAL\_diagrams\Graph1.dgml" />
     <None Include="_diagrams\ClassDiagram.cd" />
-    <None Include="NodeSystem\NodesCommands\_diagrams\CommandsClassDiagram.cd" />
-    <None Include="Data\_diagrams\DataClassDiagram.cd" />
+    <None Include="NodeSystem\NodesCommands\_Diagrams\CommandsClassDiagram.cd" />
+    <None Include="Data\_Interfaces\_diagrams\DataClassDiagram.cd" />
     <None Include="RAL\_diagrams\InterfacesClassDiagram.cd" />
-    <None Include="Logger\_diagrams\LoggerClassDiagram.cd" />
-    <None Include="NodeSystem\Nodes\_diagrams\NodesClassDiagram.cd" />
+    <None Include="Logger\_Interfaces\_Diagrams\LoggerClassDiagram.cd" />
+    <None Include="NodeSystem\Nodes\_Diagrams\NodesClassDiagram.cd" />
     <None Include="packages.config" />
     <None Include="Plugins\_diagrams\PluginsClassDiagram.cd" />
     <None Include="System\Interfaces\_diagrams\SystemClassDiagram.cd" />
-    <None Include="_diagrams\ClassDiagram1.cd" />
-    <None Include="_diagrams\Graph1.dgml" />
+    <None Include="NodeSystem\Nodes\_Diagrams\ClassDiagramExpanded.cd" />
+    <None Include="_diagrams\GraphNamespaces-2016-07-20.dgml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
