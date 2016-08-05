@@ -26,10 +26,7 @@ namespace OHM.RAL
 
         #region public Properties
 
-        public ALRInterfaceStates InterfaceState
-        {
-            get { return _interfaceState; }
-
+        public ALRInterfaceStates InterfaceState { get { return _interfaceState; }
             protected set
             {
                 _interfaceState = value;
@@ -38,17 +35,13 @@ namespace OHM.RAL
             }
         }
 
-        public bool IsRunning
-        {
-            get { return InterfaceState == ALRInterfaceStates.Enabled; }
-        }
+        public bool IsRunning { get { return InterfaceState == ALRInterfaceStates.Enabled; } }
 
-        public bool StartOnLaunch
-        {
-            get { return _startOnLaunch; }
-            set
+        public bool StartOnLaunch { get { return _startOnLaunch; }
+            internal set
             {
                 _startOnLaunch = value;
+                //TODO : MOVE IT INSIDE A SUB META DICTIONARY FOR INTERFACE
                 DataStore.StoreBool("StartOnLaunch", value);
                 DataStore.Save();
                 NotifyPropertyChanged("StartOnLaunch");
@@ -61,20 +54,20 @@ namespace OHM.RAL
 
         public void Starting()
         {
-            Logger.Debug("Starting interface : " + this.Name);
+            Logger.Debug("Starting interface");
             Start();
             InterfaceState = ALRInterfaceStates.Enabled;
             NotifyPropertyChanged("State");
-            Logger.Info("Starting interface : " + this.Name + " was successfull");
+            Logger.Info("Starting interface was successfully");
         }
 
         public void Shutdowning()
         {
-            Logger.Debug(this.Name + " Interface Shutdowning");
+            Logger.Debug("Interface Shutdowning");
             Shutdown();
             InterfaceState = ALRInterfaceStates.Disabled;
             NotifyPropertyChanged("State");
-            Logger.Info(this.Name + " Interface Shutdowned");
+            Logger.Info("Interface Shutdowning was successfully");
         }
         
         public void Init(IDataStore data, ILogger logger, IOhmSystemInterfaceGateway system)
@@ -87,7 +80,7 @@ namespace OHM.RAL
             this.Initing();
         }
 
-        public new bool ExecuteCommand(string nodeKey, string commandKey, Dictionary<string, string> arguments)
+        public new bool ExecuteCommand(string nodeKey, string commandKey, IDictionary<string, string> arguments)
         {
             return base.ExecuteCommand(nodeKey, commandKey, arguments);
         }
@@ -100,11 +93,11 @@ namespace OHM.RAL
         #endregion
         
         #region Protected abstract functions
-
+        
         protected abstract void Start();
 
         protected abstract void Shutdown();
-
+        
         #endregion
 
         #region internal Protected Functions

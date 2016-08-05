@@ -5,10 +5,15 @@ namespace OHM.Nodes
 {
     public abstract class AbstractTreeNode : AbstractNode, ITreeNode
     {
-        private AbstractTreeNode _parent;
+        #region Private Members
 
+        private AbstractTreeNode _parent;
         private ObservableCollection<AbstractTreeNode> _children;
-        private Dictionary<string, AbstractTreeNode> _childrenDic;
+        private IDictionary<string, AbstractTreeNode> _childrenDic;
+
+        #endregion
+
+        #region Internal CTOR
 
         internal AbstractTreeNode(string key, string name, NodeStates initialState = NodeStates.initializing)
             : base(key, name, initialState)
@@ -16,6 +21,10 @@ namespace OHM.Nodes
             _children = new ObservableCollection<AbstractTreeNode>();
             _childrenDic = new Dictionary<string, AbstractTreeNode>();
         }
+
+        #endregion
+
+        #region Public Properties
 
         public string TreeKey
         {
@@ -39,18 +48,15 @@ namespace OHM.Nodes
 
         public IReadOnlyList<ITreeNode> Children { get { return _children; } }
 
+        #endregion
+
+        #region Protected Properties
+
         protected AbstractTreeNode Parent { get { return _parent; } }
 
-        protected bool RemoveChild(AbstractTreeNode node)
-        {
-            if (node != null)
-            {
-                _children.Remove(node);
-                _childrenDic.Remove(node.Key);
-                return true;
-            }
-            return false;
-        }
+        #endregion
+
+        #region Protected Methods
 
         protected bool RemoveChild(string key)
         {
@@ -80,7 +86,29 @@ namespace OHM.Nodes
             return null;
         }
 
-        protected new bool CanExecuteCommand(string nodeFullKey, string commandKey)
+        #endregion
+
+        #region Internal methods
+
+        internal void SetParent(AbstractTreeNode node)
+        {
+            _parent = node;
+            this.State = NodeStates.normal;
+        }
+
+        internal bool AddChild(AbstractTreeNode node)
+        {
+            if (!_childrenDic.ContainsKey(node.Key))
+            {
+                _childrenDic.Add(node.Key, node);
+                _children.Add(node);
+                node.SetParent(this);
+                return true;
+            }
+            return false;
+        }
+
+        internal bool CanExecuteCommand(string nodeFullKey, string commandKey)
         {
             if (this.Key == nodeFullKey)
             {
@@ -110,7 +138,7 @@ namespace OHM.Nodes
             return false;
         }
 
-        protected new bool ExecuteCommand(string nodeFullKey, string commandKey, Dictionary<string, string> arguments)
+        internal bool ExecuteCommand(string nodeFullKey, string commandKey, IDictionary<string, string> arguments)
         {
             bool result = false;
             if (this.Key == nodeFullKey)
@@ -140,22 +168,21 @@ namespace OHM.Nodes
             return result;
         }
 
-        internal void SetParent(AbstractTreeNode node)
-        {
-            _parent = node;
-            this.State = NodeStates.normal;
-        }
+        #endregion
 
-        internal bool AddChild(AbstractTreeNode node)
+        #region Private methods
+
+        private bool RemoveChild(AbstractTreeNode node)
         {
-            if (!_childrenDic.ContainsKey(node.Key))
+            if (node != null)
             {
-                _childrenDic.Add(node.Key, node);
-                _children.Add(node);
-                node.SetParent(this);
+                _children.Remove(node);
+                _childrenDic.Remove(node.Key);
                 return true;
             }
             return false;
         }
+
+        #endregion
     }
 }

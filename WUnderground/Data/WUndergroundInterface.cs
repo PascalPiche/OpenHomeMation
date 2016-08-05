@@ -10,19 +10,21 @@ namespace WUnderground.Data
 {
     public class WUndergroundInterface : ALRInterfaceAbstractNode
     {
+        #region Private Members
+
         private IDataDictionary _registeredAccounts;
+
+        #endregion
 
         #region Public Ctor
 
         public WUndergroundInterface()
             : base("WUndergroundInterface", "WUnderground")
-        {
-            
-        }
+        { /*Nothing to initialize*/ }
 
         #endregion
 
-        #region Protected functions
+        #region Protected Methods
 
         protected override void Start()
         {
@@ -35,12 +37,43 @@ namespace WUnderground.Data
 
         protected override void Shutdown()
         {
-            
+            //TODO: ? // (Scopollif:)Guest Nothing
         }
 
+        protected override AbstractNode CreateNodeInstance(string model, string key, string name, IDictionary<string, object> options)
+        {
+            AbstractNode result = null;
+            switch (model)
+            {
+                case "Account":
+                    result = new Account(key, name, key);
+                    break;
+                case "station":
+                    result = new Station(key, name, (Int32)options["zip"], (Int32)options["magic"], options["wmo"] as string);
+                    break;
+                case "station-condition":
+                    result = new StationCondition(key, name);
+                    break;
+                default:
+                    throw new NotImplementedException("model not found");
+            }
+            return result;
+        }
+
+        protected override void RegisterCommands()
+        {
+            //Create Commands
+            RegisterCommand(new AddAccount());
+        }
+
+        protected override void RegisterProperties()
+        {
+            //No properties to register
+        }
+        
         #endregion 
 
-        #region Internal functions
+        #region Internal Methods
 
         internal bool CreateAccountCommand(string username, string keyId) 
         {
@@ -54,10 +87,9 @@ namespace WUnderground.Data
                 IDataDictionary accountsMetaInfo = _registeredAccounts.GetOrCreateDataDictionary(username);
                 accountsMetaInfo.StoreString("username", username);
                 accountsMetaInfo.StoreString("key", keyId);
-                //_registeredAccounts.StoreDataDictionary(username, accountsMetaInfo);
 
                 Logger.Info("Saving new account : " + username);
-                this.DataStore.Save();
+                DataStore.Save();
                 result = true;
             }
             return result;
@@ -65,16 +97,16 @@ namespace WUnderground.Data
 
         internal bool RemoveAccountCommand(Account node)
         {
+            bool result = false;
             if (_registeredAccounts.ContainKey(node.Key))
             {
-                if (this.RemoveChild(node))
+                if (RemoveChild(node.Key))
                 {
                     _registeredAccounts.RemoveKey(node.Key);
-                    return this.DataStore.Save();
+                    result = DataStore.Save();
                 }
             }
-            
-            return false;
+            return result;
         }
 
         internal bool AddStationCommandExecution(Account node, string locationName, int zip, int magic, string wmo)
@@ -95,8 +127,7 @@ namespace WUnderground.Data
                     locationData.StoreString("wmo", wmo);
 
                     DataStore.Save();
-
-                    return true;
+                    result = true;
                 }
                 else
                 {
@@ -113,7 +144,7 @@ namespace WUnderground.Data
 
         #endregion
 
-        #region Private functions
+        #region Private Methods
 
         private void LoadRegisteredAccounts()
         {
@@ -134,22 +165,20 @@ namespace WUnderground.Data
                         int magic = locationData.GetInt32("magic");
                         string wmo = locationData.GetString("wmo");
 
-                        this.GetAccountNode(username).AddLocation(locationKey, zip, magic, wmo);
+                        GetAccountNodeFromUsername(username).AddLocation(locationKey, zip, magic, wmo);
                     }
 
                 } else {
-                    Logger.Error("WUnderground : Error will creating saved accound node :  " + username);
+                    Logger.Error("Error will creating saved accound node :  " + username);
                 }
             }
         }
 
         private bool CreateAccountNode(string username, string key) {
-
-            //Create Account
             IDictionary<string, object> paramsDic = new Dictionary<string, object>();
             paramsDic.Add("username", username);
 
-            Account account = this.CreateChildNode("Account", key, "Account : " + username, paramsDic) as Account;
+            Account account = CreateChildNode("Account", key, "Account : " + username, paramsDic) as Account;
             if (account != null)
             {
                 return true;
@@ -157,44 +186,11 @@ namespace WUnderground.Data
             return false;
         }
 
-        private Account GetAccountNode(string key)
+        private Account GetAccountNodeFromUsername(string username)
         {
-            return (Account)this.FindChild(key);
+            return (Account)FindChild(username);
         }
 
         #endregion
-
-        protected override AbstractNode CreateNodeInstance(string model, string key, string name, IDictionary<string, object> options)
-        {
-            AbstractNode result = null; 
-            switch (model)
-            {
-                case "Account":
-                    result = new Account(key, name, key);
-                    break;
-                case "station":
-                    result = new Station(key, name, (Int32)options["zip"], (Int32)options["magic"], options["wmo"] as string);
-                    break;
-                case "station-condition":
-                    result = new StationCondition(key, name);
-                    break;
-                default:
-
-                    break;
-            }
-
-            return result;
-        }
-
-        protected override void RegisterCommands()
-        {
-            //Create Commands
-            this.RegisterCommand(new AddAccount());
-        }
-
-        protected override void RegisterProperties()
-        {
-            
-        }
     }
 }

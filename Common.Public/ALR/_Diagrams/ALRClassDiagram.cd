@@ -1,32 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="OHM.RAL.RalInterfaceNodeAbstract">
+  <Class Name="OHM.RAL.ALRInterfaceAbstractNode">
     <Position X="5.25" Y="3.75" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AIAgAAACkCBAAAAAAAAAQQAAAAAAAAAIAAAmAEAAAAA=</HashCode>
-      <FileName>RAL\RalInterfaceNodeAbstract.cs</FileName>
+      <FileName>ALR\Nodes\ALRInterfaceAbstractNode.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="OHM.RAL.RalNodeAbstract">
+  <Class Name="OHM.RAL.ALRAbstractNode">
     <Position X="5.25" Y="0.5" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAIAAAAAAAAAABAQAAAAAAAAAAAAAACAAAAAAA=</HashCode>
-      <FileName>RAL\RalNodeAbstract.cs</FileName>
+      <FileName>ALR\Nodes\ALRAbstractNode.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Interface Name="OHM.RAL.IInterface">
+  <Interface Name="OHM.RAL.IALRInterface">
     <Position X="0.5" Y="0.5" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AIAgAAAAEABAAAAAAAAAQAAAAAAAAAAIAAAAAEAAAAA=</HashCode>
-      <FileName>RAL\IInterface.cs</FileName>
+      <FileName>ALR\Nodes\_Interfaces\IALRInterface.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Enum Name="OHM.RAL.InterfaceStates">
     <Position X="3.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAYAAAACAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>RAL\InterfaceState.cs</FileName>
+      <FileName>ALR\Nodes\ALRInterfaceState.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Font Name="Segoe UI" Size="9" />

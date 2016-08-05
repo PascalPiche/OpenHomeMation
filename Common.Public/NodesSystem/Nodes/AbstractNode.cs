@@ -13,13 +13,13 @@ namespace OHM.Nodes
 
         private INodeProperty _keyProperty;
         private INodeProperty _nameProperty;
+        private INodeProperty _nodeStateProperty;
 
         private ILogger _logger;
         private IDataStore _data;
-        private NodeStates _state;
 
         private ObservableCollection<ICommand> _commands;
-        private Dictionary<string, ICommand> _commandsDic;
+        private IDictionary<string, ICommand> _commandsDic;
         private ReadOnlyObservableCollection<ICommand> _commandsReadOnly;
 
         private ObservableCollection<INodeProperty> _properties;
@@ -37,8 +37,6 @@ namespace OHM.Nodes
 
         internal AbstractNode(string key, string name, NodeStates initialState = NodeStates.initializing)
         {
-            //_name = name;
-            _state = initialState;
             _commands = new ObservableCollection<ICommand>();
             _commandsDic = new Dictionary<string, ICommand>();
             _commandsReadOnly = new ReadOnlyObservableCollection<ICommand>(_commands); 
@@ -46,11 +44,17 @@ namespace OHM.Nodes
             _properties = new ObservableCollection<INodeProperty>();
             _propertiesDic = new Dictionary<string, INodeProperty>();
 
-            //Register Name and Key Properties
-            _keyProperty = new NodeProperty("system-key", "System key", typeof(string), true, "System node key", key);
+            //Register Key Property
+            _keyProperty = new NodeProperty("system-key", "System node key", typeof(string), true, "System node key", key);
             this.RegisterProperty(_keyProperty);
-            _nameProperty = new NodeProperty("system-name", "System name", typeof(string), false, "System node name", name);
+
+            //Register Name Property
+            _nameProperty = new NodeProperty("system-name", "System node name", typeof(string), false, "System node name", name);
             this.RegisterProperty(_nameProperty);
+
+            //Register Node State Property
+            _nodeStateProperty = new NodeProperty("system-node-state", "System node state", typeof(NodeStates), false, "System node state", initialState);
+            this.RegisterProperty(_nodeStateProperty);
         }
 
         #endregion
@@ -59,9 +63,7 @@ namespace OHM.Nodes
 
         public string Key { get { return _keyProperty.Value as string; } }
 
-        public string Name
-        {
-            get { return _nameProperty.Value as string; }
+        public string Name { get { return _nameProperty.Value as string; }
             protected set
             {
                 UpdateProperty("system-name", value);
@@ -69,15 +71,10 @@ namespace OHM.Nodes
             }
         }
 
-        public NodeStates State
-        {
-            get
-            {
-                return _state;
-            }
+        public NodeStates State { get { return (NodeStates)_nodeStateProperty.Value; }
             protected set
             {
-                _state = value;
+                UpdateProperty("system-node-state", value);
                 NotifyPropertyChanged("State");
             }
         }
@@ -100,13 +97,14 @@ namespace OHM.Nodes
 
         protected bool RegisterProperty(INodeProperty nodeProperty)
         {
-            if (_propertiesDic.ContainsKey(nodeProperty.Key))
+            bool result = false;
+            if (!_propertiesDic.ContainsKey(nodeProperty.Key))
             {
-                return false;
+                _propertiesDic.Add(nodeProperty.Key, nodeProperty);
+                _properties.Add(nodeProperty);
+                result = true;
             }
-            _propertiesDic.Add(nodeProperty.Key, nodeProperty);
-            _properties.Add(nodeProperty);
-            return true;
+            return result;
         }
 
         protected bool UnRegisterProperty(string key)
@@ -145,7 +143,6 @@ namespace OHM.Nodes
                     result = true;
                 }
             }
-
             return result;
         }
 
@@ -159,15 +156,7 @@ namespace OHM.Nodes
             }
             return result; ;
         }
-        
-        protected void NotifyPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
+       
         protected bool TryGetProperty(string key, out INodeProperty result)
         {
             return _propertiesDic.TryGetValue(key, out result);
@@ -188,66 +177,12 @@ namespace OHM.Nodes
             return _propertiesDic.ContainsKey(key);
         }
 
-        protected bool CanExecuteCommand(string nodeFullKey, string commandKey)
+        protected void NotifyPropertyChanged(string propertyName)
         {
-            bool result = false;
-            if (this.Key == nodeFullKey)
+            if (PropertyChanged != null)
             {
-                result =  this.CanExecuteCommand(commandKey);
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
-
-            /*else
-            {
-                //Remove Extra checked key
-                if (nodeFullKey.Contains("."))
-                {
-                    nodeFullKey = nodeFullKey.Substring(nodeFullKey.IndexOf('.') + 1);
-                }
-                string nextNode = nodeFullKey;
-                if (nextNode.Contains("."))
-                {
-                    nextNode = nextNode.Split('.')[0];
-                }
-
-                //Lookup ALL LEVEL the node list
-                AbstractNode node = this.FindChild(nextNode);
-                if (node != null)
-                {
-                    return node.CanExecuteCommand(nodeFullKey, commandKey);
-                }
-            }*/
-
-            return result;
-        }
-
-        protected bool ExecuteCommand(string nodeFullKey, string commandKey, Dictionary<string, string> arguments)
-        {
-            bool result = false;
-            if (this.Key == nodeFullKey)
-            {
-                result = this.ExecuteCommand(commandKey, arguments);
-            }
-            /*else
-            {
-                //Remove Extra checked key
-                if (nodeFullKey.Contains("."))
-                {
-                    nodeFullKey = nodeFullKey.Substring(nodeFullKey.IndexOf('.') + 1);
-                }
-
-                string nextNode = nodeFullKey;
-                if (nextNode.Contains("."))
-                {
-                    nextNode = nextNode.Split('.')[0];
-                }
-
-                AbstractNode node = this.FindChild(nextNode);
-                if (node != null)
-                {
-                    result = node.ExecuteCommand(nodeFullKey, commandKey, arguments);
-                }
-            }*/
-            return result;
         }
 
         protected virtual bool Initing()
@@ -263,7 +198,7 @@ namespace OHM.Nodes
 
         #endregion
 
-        #region Internal Functions
+        #region Internal Methods
 
         internal bool Init(IDataStore data, ILogger logger)
         {
@@ -271,10 +206,6 @@ namespace OHM.Nodes
             _logger = logger;
             return true;
         }
-
-        #endregion
-
-        #region Private Functions
 
         internal bool CanExecuteCommand(string key)
         {

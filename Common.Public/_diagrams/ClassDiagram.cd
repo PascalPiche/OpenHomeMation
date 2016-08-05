@@ -4,7 +4,7 @@
     <Position X="8" Y="3" Width="1.75" />
     <TypeIdentifier>
       <HashCode>ABACIAAAAAEBAgQAAACAiRQAAAAAAAAAAQAAAAAAggA=</HashCode>
-      <FileName>NodeSystem\NodesCommands\ArgumentDefinition.cs</FileName>
+      <FileName>NodesSystem\NodesCommands\ArgumentDefinition.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
@@ -12,7 +12,7 @@
     <Position X="6" Y="3" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAABAAAAAACAQAAEAAAAQAAAAAEAAAAAACAAEAAAA=</HashCode>
-      <FileName>NodeSystem\NodesCommands\CommandAbstract.cs</FileName>
+      <FileName>NodesSystem\NodesCommands\CommandAbstract.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
@@ -20,15 +20,15 @@
     <Position X="10" Y="3" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAMAAAAAAgAAQEAACAAAQAAAAAAIgAAAAAAAAAAAA=</HashCode>
-      <FileName>NodeSystem\NodesCommands\CommandDefinition.cs</FileName>
+      <FileName>NodesSystem\NodesCommands\CommandDefinition.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="OHM.Nodes.NodeAbstract" Collapsed="true">
+  <Class Name="OHM.Nodes.AbstractNode" Collapsed="true">
     <Position X="2.25" Y="3" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AMAgAgABBAIAEIUAAACCCQYAoAAgAAGAEQADRBACAAA=</HashCode>
-      <FileName>NodeSystem\Nodes\NodeAbstract.cs</FileName>
+      <FileName>NodesSystem\Nodes\AbstractNode.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
@@ -36,7 +36,7 @@
     <Position X="4.25" Y="3" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ABAAIAAAAAAgAoQEAACAAIQAwAAAAAEAAQA4AAAAAAA=</HashCode>
-      <FileName>NodeSystem\NodesProperties\NodeProperty.cs</FileName>
+      <FileName>NodesSystem\NodesProperties\NodeProperty.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
@@ -44,7 +44,7 @@
     <Position X="13.75" Y="3" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQCAAAAACAAAAAEAAAACAQAAAAABAAAgAAABAAAAAA=</HashCode>
-      <FileName>Plugins\PluginBase.cs</FileName>
+      <FileName>PluginsSystem\PluginBase.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
@@ -52,15 +52,15 @@
     <Position X="6" Y="4" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAACAAAAEBAAAAAAAAAABAAAAAAAAEAAAA=</HashCode>
-      <FileName>RAL\Commands\InterfaceCommandAbstract.cs</FileName>
+      <FileName>ALR\Commands\InterfaceCommandAbstract.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="OHM.RAL.RalInterfaceNodeAbstract" Collapsed="true">
+  <Class Name="OHM.RAL.ALRInterfaceAbstractNode" Collapsed="true">
     <Position X="2.25" Y="4" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AIAgAAACkCBAAAAAAAAAQQAAAAAAAAAIAAAmAEAAAAA=</HashCode>
-      <FileName>RAL\Nodes\RalInterfaceNodeAbstract.cs</FileName>
+      <FileName>ALR\Nodes\ALRInterfaceAbstractNode.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
@@ -68,126 +68,126 @@
     <Position X="8" Y="0.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>ABAAAAAAAAEBAgQAAAAAiQQAAAAAAAAAAQAAAAAAggA=</HashCode>
-      <FileName>NodeSystem\NodesCommands\_Interfaces\IArgumentDefinition.cs</FileName>
+      <FileName>NodesSystem\NodesCommands\_Interfaces\IArgumentDefinition.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="OHM.Nodes.Commands.ICommand" Collapsed="true">
     <Position X="6" Y="0.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAACAQAAEAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>NodeSystem\NodesCommands\_Interfaces\ICommand.cs</FileName>
+      <FileName>NodesSystem\NodesCommands\_Interfaces\ICommand.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="OHM.Nodes.Commands.ICommandDefinition" Collapsed="true">
     <Position X="10" Y="0.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAEAAAAAAgAAQAAAAAAAQAAAAAAIAAAAAAAAAAAAA=</HashCode>
-      <FileName>NodeSystem\NodesCommands\_Interfaces\ICommandDefinition.cs</FileName>
+      <FileName>NodesSystem\NodesCommands\_Interfaces\ICommandDefinition.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="OHM.Data.IDataDictionary" Collapsed="true">
     <Position X="15.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>CACAAAAAAAEAQAAACAAEBAAAAAAAAAAQAAAAAAAAAQg=</HashCode>
-      <FileName>Data\_Interfaces\IDataDictionary.cs</FileName>
+      <FileName>DataSystem\_Interfaces\IDataDictionary.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="OHM.Data.IDataStore" Collapsed="true">
     <Position X="15.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAIAAAAAAAAQAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
-      <FileName>Data\_Interfaces\IDataStore.cs</FileName>
+      <FileName>DataSystem\_Interfaces\IDataStore.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="OHM.Logger.ILogger" Collapsed="true">
     <Position X="17.25" Y="0.5" Width="1.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Logger\_Interfaces\ILogger.cs</FileName>
+      <FileName>LoggingSystem\_Interfaces\ILogger.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="OHM.Nodes.INode" Collapsed="true">
     <Position X="2.25" Y="0.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAQAAAAAAAQAAAAAAAAAAAAABAAAAAA=</HashCode>
-      <FileName>NodeSystem\Nodes\_Interfaces\INode.cs</FileName>
+      <FileName>NodesSystem\Nodes\_Interfaces\INode.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="OHM.Nodes.INodeProperty" Collapsed="true">
     <Position X="4.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAgAgQAAAAAAAQAAAAAAAAAAQAoAAAAAAA=</HashCode>
-      <FileName>NodeSystem\NodesProperties\_Interfaces\INodeProperty.cs</FileName>
+      <FileName>NodesSystem\NodesProperties\_Interfaces\INodeProperty.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="OHM.Plugins.IPlugin" Collapsed="true">
     <Position X="13.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQCAAAAACAAAAAEAAAAAAQAAAAABAAAgAAABAAAAAA=</HashCode>
-      <FileName>Plugins\Interfaces\IPlugin.cs</FileName>
+      <FileName>PluginsSystem\_Interfaces\IPlugin.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="OHM.SYS.IOhmSystemInstallGateway" Collapsed="true">
     <Position X="18.75" Y="2.75" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAEAAAAAAIAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAA=</HashCode>
-      <FileName>System\Interfaces\IOhmSystemInstallGateway.cs</FileName>
+      <FileName>System\_Interfaces\IOhmSystemInstallGateway.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="OHM.SYS.IOhmSystemInterfaceGateway" Collapsed="true">
     <Position X="18.75" Y="0.5" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAEAAAEAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>System\Interfaces\IOhmSystemInterfaceGateway.cs</FileName>
+      <FileName>System\_Interfaces\IOhmSystemInterfaceGateway.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="OHM.RAL.IInterface" Collapsed="true">
+  <Interface Name="OHM.RAL.IALRInterface" Collapsed="true">
     <Position X="2.25" Y="1.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AIAgAAAAEABAAAAAAAAAQAAAAAAAAAAIAAAAAEAAAAA=</HashCode>
-      <FileName>RAL\Nodes\Interfaces\IInterface.cs</FileName>
+      <FileName>ALR\Nodes\_Interfaces\IALRInterface.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="OHM.RAL.Commands.IInterfaceCommand" Collapsed="true">
     <Position X="6" Y="1.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>RAL\Commands\Interfaces\IInterfaceCommand.cs</FileName>
+      <FileName>ALR\Commands\_Interfaces\IInterfaceCommand.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="OHM.SYS.IOhmSystemPlugins" Collapsed="true">
     <Position X="18.75" Y="1.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAABAAAAAA=</HashCode>
-      <FileName>System\Interfaces\IOhmSystem.cs</FileName>
+      <FileName>System\_Interfaces\IOhmSystem.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="OHM.SYS.IOhmSystemUnInstallGateway" Collapsed="true">
     <Position X="18.75" Y="2" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAIAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>System\Interfaces\IOhmSystemUnInstallGateway.cs</FileName>
+      <FileName>System\_Interfaces\IOhmSystemUnInstallGateway.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Enum Name="OHM.Nodes.NodeStates" Collapsed="true">
     <Position X="0.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAEAAAAEAAAgAAAAAAAAAAAABAAAAAAA=</HashCode>
-      <FileName>NodeSystem\Nodes\NodeStates.cs</FileName>
+      <FileName>NodesSystem\Nodes\NodeStates.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="OHM.Plugins.PluginStates" Collapsed="true">
     <Position X="12" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAEAEAAAAAAAAQAAAAAAABAAAAAIAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Plugins\PluginStates.cs</FileName>
+      <FileName>PluginsSystem\PluginStates.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="OHM.RAL.InterfaceStates" Collapsed="true">
     <Position X="0.5" Y="1.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAYAAAACAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>RAL\Nodes\InterfaceState.cs</FileName>
+      <FileName>ALR\Nodes\ALRInterfaceState.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Font Name="Segoe UI" Size="9" />

@@ -11,13 +11,13 @@ namespace OHM.RAL
 
         bool IsRunning { get; }
 
-        bool StartOnLaunch { get; set; }
+        bool StartOnLaunch { get; }
 
         #endregion
 
         #region API
 
-        bool ExecuteCommand(string nodeKey, string commandKey, Dictionary<string, string> arguments);
+        bool ExecuteCommand(string nodeKey, string commandKey, IDictionary<string, string> arguments);
 
         bool CanExecuteCommand(string nodeKey, string key);
 
@@ -26,6 +26,5 @@ namespace OHM.RAL
         void Shutdowning();
 
         #endregion
-
     }
 }

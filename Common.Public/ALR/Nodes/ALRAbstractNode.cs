@@ -7,10 +7,13 @@ namespace OHM.RAL
 {
     public abstract class ALRAbstractNode : AbstractTreeNode
     {
+        #region Private members
 
         private ALRInterfaceAbstractNode _interface;
 
-        #region Public Ctor
+        #endregion
+
+        #region Protected Ctor
 
         protected ALRAbstractNode(string key, string name) 
             : base(key, name)
@@ -18,13 +21,7 @@ namespace OHM.RAL
 
         #endregion
 
-        internal protected ALRInterfaceAbstractNode Interface { get { return _interface; } }
-
-        internal bool Init(IDataStore data, ILogger logger, ALRInterfaceAbstractNode inter)
-        {
-            _interface = inter;
-            return this.Init(data, logger);
-        }
+        #region Protected Methods
 
         protected AbstractTreeNode CreateChildNode(string model, string key, string name, IDictionary<string, object> options = null)
         {
@@ -41,6 +38,19 @@ namespace OHM.RAL
             }
             return result;
         }
-    
+
+        #endregion
+
+        #region Internal Methods
+
+        internal protected ALRInterfaceAbstractNode Interface { get { return _interface; } }
+
+        internal bool Init(IDataStore data, ILogger logger, ALRInterfaceAbstractNode inter)
+        {
+            _interface = inter;
+            return this.Init(data, logger);
+        }
+
+        #endregion
     }
 }

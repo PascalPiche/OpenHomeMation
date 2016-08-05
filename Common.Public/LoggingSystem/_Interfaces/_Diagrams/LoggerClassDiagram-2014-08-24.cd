@@ -4,7 +4,7 @@
     <Position X="1.5" Y="5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Logger\ILogger.cs</FileName>
+      <FileName>LoggingSystem\_Interfaces\ILogger.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="log4net.ILog">

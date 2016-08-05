@@ -12,7 +12,6 @@ namespace ZWaveLib
 {
     public class ZWaveInterface : ALRInterfaceAbstractNode
     {
-
         #region Private members
 
         private ZWManager _mng;
@@ -365,12 +364,12 @@ namespace ZWaveLib
         {
             uint homeId = n.GetHomeId();
             string controlerPath = _driverControlerPathMapping[homeId].Clone() as string;
-            ZWaveDriverControlerRalNode controller = null;
+            ZWaveDriverControlerRalNode controler = null;
 
             Logger.Debug("Notification Driver removing: ControllerPath=" + controlerPath);
-            if (this._runningDriverControlers.TryGetValue(controlerPath, out controller))
+            if (this._runningDriverControlers.TryGetValue(controlerPath, out controler))
             {
-                this.RemoveChild(controller);
+                this.RemoveChild(controler.Key);
                 this._runningDriverControlers.Remove(controlerPath);
                 _driverControlerPathMapping.Remove(homeId);
 
