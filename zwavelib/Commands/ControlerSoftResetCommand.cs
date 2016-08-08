@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using ZWaveLib.Data;
+using ZWaveLib.Nodes;
 
 namespace ZWaveLib.Commands
 {

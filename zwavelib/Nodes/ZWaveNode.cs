@@ -6,7 +6,7 @@ using System;
 using System.Collections.ObjectModel;
 using ZWaveLib.Commands;
 
-namespace ZWaveLib.Data
+namespace ZWaveLib.Nodes
 {
     public abstract class ZWaveHomeNode : ALRAbstractTreeNode, IZWaveHomeNode
     {

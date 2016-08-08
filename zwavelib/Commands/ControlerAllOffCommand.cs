@@ -1,17 +1,13 @@
 ﻿using System.Collections.Generic;
-using ZWaveLib.Data;
+using ZWaveLib.Nodes;
 
 namespace ZWaveLib.Commands
 {
-
     public class ControlerAllOffCommand : ZWaveCommandAbstract
     {
-
         public ControlerAllOffCommand()
             : base("allOff", "Switch all off")
-        {
-            
-        }
+        { }
 
         protected override bool RunImplementation(IDictionary<string, string> arguments)
         {

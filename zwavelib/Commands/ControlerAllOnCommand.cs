@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using ZWaveLib.Data;
+using ZWaveLib.Nodes;
 
 namespace ZWaveLib.Commands
 {
@@ -7,9 +7,7 @@ namespace ZWaveLib.Commands
     {
         public ControlerAllOnCommand()
             : base("allOn", "Switch all on", "")
-        {
-
-        }
+        { }
 
         protected override bool RunImplementation(IDictionary<string, string> arguments)
         {

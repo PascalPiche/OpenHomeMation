@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using ZWaveLib.Data;
+using ZWaveLib.Nodes;
 
 namespace ZWaveLib.Commands
 {
@@ -7,9 +7,7 @@ namespace ZWaveLib.Commands
     {
         public ControlerHardResetCommand()
             : base("HardReset", "Hard Reset the Z Wave Controller (Warning: Will erase all data in the controller, pairing will need to be done again after the hard reset)", "")
-        {
-
-        }
+        { }
 
         protected override bool RunImplementation(IDictionary<string, string> arguments)
         {
@@ -17,5 +15,4 @@ namespace ZWaveLib.Commands
             return true;
         }
     }
-
 }

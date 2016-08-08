@@ -1,6 +1,6 @@
 ﻿using OHM.Nodes;
 
-namespace ZWaveLib.Data
+namespace ZWaveLib.Nodes
 {
     public interface IZWaveHomeNode : ITreeNode, INode
     {
@@ -8,7 +8,5 @@ namespace ZWaveLib.Data
     }
 
     public interface IZWaveDriverControlerNode : IZWaveHomeNode
-    {
-        
-    }
+    { }
 }

@@ -1,10 +1,5 @@
-﻿using OHM.Nodes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ZWaveLib.Data;
+﻿using System.Collections.Generic;
+using ZWaveLib.Nodes;
 
 namespace ZWaveLib.Commands
 {
@@ -12,9 +7,7 @@ namespace ZWaveLib.Commands
     {
         public ControlerAddNodeCommand()
             : base("AddNode", "Add node")
-        {
-
-        }
+        { }
 
         protected override bool RunImplementation(IDictionary<string, string> arguments)
         {

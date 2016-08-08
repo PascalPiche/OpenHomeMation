@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Threading;
 using ZWaveLib.Commands;
-using ZWaveLib.Data;
+using ZWaveLib.Nodes;
 using ZWaveLib.Tools;
 
 namespace ZWaveLib

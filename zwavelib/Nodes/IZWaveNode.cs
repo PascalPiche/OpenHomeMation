@@ -1,6 +1,5 @@
-﻿using OHM.Nodes;
-
-namespace ZWaveLib.Data
+﻿
+namespace ZWaveLib.Nodes
 {
     public interface IZWaveNode : IZWaveHomeNode
     {

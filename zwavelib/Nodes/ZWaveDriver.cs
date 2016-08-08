@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using ZWaveLib.Commands;
 
-namespace ZWaveLib.Data
+namespace ZWaveLib.Nodes
 {
     public class ZWaveDriverControlerRalNode : ZWaveHomeNode, IZWaveDriverControlerNode
     {
