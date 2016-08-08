@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 
-namespace OHM.Nodes
+namespace OHM.Nodes.Properties
 {
     public class NodeProperty : INodeProperty, INotifyPropertyChanged
     {

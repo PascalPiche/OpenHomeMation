@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OHM.Nodes;
+using OHM.Nodes.Properties;
 using System;
 using System.Collections.ObjectModel;
 

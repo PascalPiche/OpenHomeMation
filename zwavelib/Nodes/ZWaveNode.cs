@@ -1,4 +1,5 @@
 ﻿using OHM.Nodes;
+using OHM.Nodes.Properties;
 using OHM.RAL;
 using OpenZWaveDotNet;
 using System;
@@ -32,10 +33,8 @@ namespace ZWaveLib.Data
             : base(key, name) {}
     }
 
-
     public class ZWaveNode : ZWaveHomeNode, IZWaveNode
     {
-        
         private byte? _nodeId = new byte?();
 
         #region Public properties

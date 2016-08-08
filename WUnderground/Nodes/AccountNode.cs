@@ -1,4 +1,5 @@
 ﻿using OHM.Nodes;
+using OHM.Nodes.Properties;
 using System;
 using System.Collections.Generic;
 using WUnderground.Commands;
@@ -7,7 +8,6 @@ namespace WUnderground.Nodes
 {
     public class AccountNode : WUndergroundNodeAbstract
     {
-
         private INodeProperty _apiKeyProperty;
 
         public AccountNode(string keyId, string name, string apiKey)

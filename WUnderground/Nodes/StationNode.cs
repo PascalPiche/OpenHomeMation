@@ -1,4 +1,4 @@
-﻿using OHM.Nodes;
+﻿using OHM.Nodes.Properties;
 using System.Collections.Generic;
 using WUnderground.Api;
 
@@ -6,10 +6,15 @@ namespace WUnderground.Nodes
 {
     public class StationNode : WUndergroundNodeAbstract
     {
+        #region Private Members
 
         private int _zip;
         private int _magic;
         private string _wmo;
+
+        #endregion
+
+        #region Public Ctor
 
         public StationNode(string keyId, string name, int zip, int magic, string wmo)
             : base(keyId, name)
@@ -18,6 +23,10 @@ namespace WUnderground.Nodes
             _magic = magic;
             _wmo = wmo;
         }
+
+        #endregion
+
+        #region Protected Methods
 
         protected override bool Initing()
         {
@@ -31,12 +40,6 @@ namespace WUnderground.Nodes
             return result;
         }
 
-        internal bool GetCondition(StationConditionNode condition)
-        {
-            AccountNode acc = (AccountNode)this.Parent;
-            return condition.update(WUndergroundApi.QueryConditions(acc.ApiKey, _zip, _magic, _wmo));
-        }
-
         protected override void RegisterCommands()
         {
             //No commands
@@ -48,5 +51,17 @@ namespace WUnderground.Nodes
             this.RegisterProperty(new NodeProperty("magic", "magic", typeof(int), true, "", _magic));
             this.RegisterProperty(new NodeProperty("wmo", "wmo", typeof(string), true, "", _wmo));
         }
+
+        #endregion
+
+        #region Internal Methods
+
+        internal bool GetCondition(StationConditionNode condition)
+        {
+            AccountNode acc = (AccountNode)this.Parent;
+            return condition.update(WUndergroundApi.QueryConditions(acc.ApiKey, _zip, _magic, _wmo));
+        }
+
+        #endregion
     }
 }

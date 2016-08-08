@@ -1,6 +1,7 @@
 ﻿using OHM.Data;
 using OHM.Logger;
 using OHM.Nodes.Commands;
+using OHM.Nodes.Properties;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;

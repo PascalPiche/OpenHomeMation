@@ -15,53 +15,17 @@ namespace WUnderground.Commands
             }
         }
 
-        string _apiKey;
+        private string _apiKey;
 
         public AddStation(string apiKey)
             : base("addLocation", "Add a location", "")
         {
-
             _apiKey = apiKey;
 
-            this.Definition.ArgumentsDefinition.Add(
-                "name",
-                new ArgumentDefinition(
-                    "name",
-                    "Name",
-                    typeof(string),
-                    true
-                )
-            );
-
-            this.Definition.ArgumentsDefinition.Add(
-                "zip",
-                new ArgumentDefinition(
-                    "zip",
-                    "Zip",
-                    typeof(int),
-                    true
-                )
-            );
-
-            this.Definition.ArgumentsDefinition.Add(
-               "magic",
-               new ArgumentDefinition(
-                   "magic",
-                   "Magic",
-                   typeof(int),
-                   true
-               )
-            );
-
-            this.Definition.ArgumentsDefinition.Add(
-               "wmo",
-               new ArgumentDefinition(
-                   "wmo",
-                   "Wmo",
-                   typeof(string),
-                   true
-               )
-           );
+            this.Definition.ArgumentsDefinition.Add("name",     new ArgumentDefinition("name",  "Name",     typeof(string), true));
+            this.Definition.ArgumentsDefinition.Add("zip",      new ArgumentDefinition("zip",   "Zip",      typeof(int),    true));
+            this.Definition.ArgumentsDefinition.Add("magic",    new ArgumentDefinition("magic", "Magic",    typeof(int),    true));
+            this.Definition.ArgumentsDefinition.Add("wmo",      new ArgumentDefinition("wmo",   "Wmo",      typeof(string), true));
         }
 
         protected override bool RunImplementation(IDictionary<string, string> arguments)

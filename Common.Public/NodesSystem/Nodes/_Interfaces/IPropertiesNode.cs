@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using OHM.Nodes.Properties;
+using System.Collections.Generic;
 
 namespace OHM.Nodes
 {

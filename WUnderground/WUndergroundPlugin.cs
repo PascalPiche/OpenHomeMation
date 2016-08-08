@@ -6,12 +6,10 @@ using WUnderground.Nodes;
 
 namespace WUnderground
 {
-    public class WUndergroundPlugin : PluginBase
+    public sealed class WUndergroundPlugin : PluginBase
     {
         private Guid _id = new Guid("6e1ab586-e584-4eb3-ab3e-b46bd2a2d2c0");
-
-        private string _name = "Weather Underground Plugin";
-
+        private const string _name = "Weather Underground Plugin";
         private const string _interfaceKey = "WUndergroundInterface";
 
         public override Guid Id { get { return _id; } }

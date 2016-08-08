@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OHM.Nodes
+namespace OHM.Nodes.Properties
 {
     public interface INodeProperty
     {
