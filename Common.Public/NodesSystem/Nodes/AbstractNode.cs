@@ -23,7 +23,7 @@ namespace OHM.Nodes
         private ReadOnlyObservableCollection<ICommand> _commandsReadOnly;
 
         private ObservableCollection<INodeProperty> _properties;
-        private Dictionary<string, INodeProperty> _propertiesDic;
+        private IDictionary<string, INodeProperty> _propertiesDic;
 
         #endregion
 

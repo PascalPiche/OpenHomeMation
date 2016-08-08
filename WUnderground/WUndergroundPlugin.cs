@@ -2,7 +2,7 @@
 using OHM.RAL;
 using OHM.SYS;
 using System;
-using WUnderground.Data;
+using WUnderground.Nodes;
 
 namespace WUnderground
 {
@@ -38,7 +38,7 @@ namespace WUnderground
             switch (key)
             {
                 case _interfaceKey:
-                    return new WUndergroundInterface();
+                    return new WUndergroundInterfaceNode();
             }
             return null;
         }

@@ -451,7 +451,7 @@ namespace WUnderground.Api.Data
                 //Base Image for weather
                 result.ImageUrl = doc.SelectSingleNode("/response/current_observation/image/url").InnerText;
 
-                //Station Id
+                //StationNode Id
                 result.StationId = doc.SelectSingleNode("/response/current_observation/station_id").InnerText;
 
                 //General Weather (Should be in link with the Base image for weather)

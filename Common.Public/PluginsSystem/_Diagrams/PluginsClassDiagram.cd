@@ -8,10 +8,17 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Enum Name="OHM.Plugins.PluginStates">
-    <Position X="2.25" Y="0.5" Width="1.5" />
+  <Interface Name="OHM.Plugins.IPlugin">
+    <Position X="2.25" Y="1" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAEAEAAAAAAAAQAAAAAAABAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAQCAAAAACAAAAAEAAAAAAQAAAAABAAAgAAABAAAAAA=</HashCode>
+      <FileName>PluginsSystem\_Interfaces\IPlugin.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="OHM.Plugins.PluginStates">
+    <Position X="4.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAEAAAAAAAAQEAAAAAABAAAAAIAAAAAAAAAAAAAAA=</HashCode>
       <FileName>PluginsSystem\PluginStates.cs</FileName>
     </TypeIdentifier>
   </Enum>

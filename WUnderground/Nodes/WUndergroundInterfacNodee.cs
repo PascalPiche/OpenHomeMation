@@ -6,9 +6,9 @@ using System.Collections;
 using System.Collections.Generic;
 using WUnderground.Commands;
 
-namespace WUnderground.Data
+namespace WUnderground.Nodes
 {
-    public class WUndergroundInterface : ALRInterfaceAbstractNode
+    public class WUndergroundInterfaceNode : ALRInterfaceAbstractNode
     {
         #region Private Members
 
@@ -18,7 +18,7 @@ namespace WUnderground.Data
 
         #region Public Ctor
 
-        public WUndergroundInterface()
+        public WUndergroundInterfaceNode()
             : base("WUndergroundInterface", "WUnderground")
         { /*Nothing to initialize*/ }
 
@@ -46,13 +46,13 @@ namespace WUnderground.Data
             switch (model)
             {
                 case "Account":
-                    result = new Account(key, name, key);
+                    result = new AccountNode(key, name, key);
                     break;
                 case "station":
-                    result = new Station(key, name, (Int32)options["zip"], (Int32)options["magic"], options["wmo"] as string);
+                    result = new StationNode(key, name, (Int32)options["zip"], (Int32)options["magic"], options["wmo"] as string);
                     break;
                 case "station-condition":
-                    result = new StationCondition(key, name);
+                    result = new StationConditionNode(key, name);
                     break;
                 default:
                     throw new NotImplementedException("model not found");
@@ -95,7 +95,7 @@ namespace WUnderground.Data
             return result;
         }
 
-        internal bool RemoveAccountCommand(Account node)
+        internal bool RemoveAccountCommand(AbstractNode node)
         {
             bool result = false;
             if (_registeredAccounts.ContainKey(node.Key))
@@ -109,7 +109,7 @@ namespace WUnderground.Data
             return result;
         }
 
-        internal bool AddStationCommandExecution(Account node, string locationName, int zip, int magic, string wmo)
+        internal bool AddStationCommandExecution(AccountNode node, string locationName, int zip, int magic, string wmo)
         {
             bool result = false;
             IDataDictionary dataAccount = _registeredAccounts.GetOrCreateDataDictionary(node.Key);
@@ -178,7 +178,7 @@ namespace WUnderground.Data
             IDictionary<string, object> paramsDic = new Dictionary<string, object>();
             paramsDic.Add("username", username);
 
-            Account account = CreateChildNode("Account", key, "Account : " + username, paramsDic) as Account;
+            AccountNode account = CreateChildNode("Account", key, "Account : " + username, paramsDic) as AccountNode;
             if (account != null)
             {
                 return true;
@@ -186,9 +186,9 @@ namespace WUnderground.Data
             return false;
         }
 
-        private Account GetAccountNodeFromUsername(string username)
+        private AccountNode GetAccountNodeFromUsername(string username)
         {
-            return (Account)FindChild(username);
+            return (AccountNode)FindChild(username);
         }
 
         #endregion

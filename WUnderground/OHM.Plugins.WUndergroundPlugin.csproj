@@ -52,12 +52,12 @@
     <Compile Include="Commands\AddStation.cs" />
     <Compile Include="Commands\RefreshCondition.cs" />
     <Compile Include="Commands\RemoveAccount.cs" />
-    <Compile Include="Data\Account.cs" />
-    <Compile Include="Data\Station.cs" />
-    <Compile Include="Data\StationCondition.cs" />
-    <Compile Include="Data\WUndergroundNode.cs" />
+    <Compile Include="Nodes\AccountNode.cs" />
+    <Compile Include="Nodes\StationNode.cs" />
+    <Compile Include="Nodes\StationConditionNode.cs" />
+    <Compile Include="Nodes\WUndergroundNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Data\WUndergroundInterface.cs" />
+    <Compile Include="Nodes\WUndergroundInterfacNodee.cs" />
     <Compile Include="WUndergroundPlugin.cs" />
   </ItemGroup>
   <ItemGroup>

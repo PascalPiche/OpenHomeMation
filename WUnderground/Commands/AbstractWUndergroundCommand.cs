@@ -1,14 +1,13 @@
-﻿using OHM.Nodes;
-using OHM.RAL.Commands;
-using WUnderground.Data;
+﻿using OHM.RAL.Commands;
+using WUnderground.Nodes;
 
 namespace WUnderground.Commands
 {
     public abstract class AbstractWUndergroundCommand : InterfaceCommandAbstract
     {
-        protected WUndergroundInterface WUndergroundInterface
+        protected WUndergroundInterfaceNode WUndergroundInterface
         {
-            get { return (WUndergroundInterface)base.Interface; }
+            get { return (WUndergroundInterfaceNode)base.Interface; }
         }
 
         public AbstractWUndergroundCommand(string key, string name, string description) 

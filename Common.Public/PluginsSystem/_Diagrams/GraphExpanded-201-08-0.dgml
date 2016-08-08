@@ -1,87 +1,54 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <DirectedGraph DataVirtualized="True" GraphDirection="BottomToTop" Layout="Sugiyama" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
   <Nodes>
-    <Node Id="(@1 @2 @3 Member=(Name=CreateInterface OverloadingParameters=[(@9 Namespace=System Type=String),(@1 Namespace=OHM.Logger Type=ILogger)]))" Category="CodeSchema_Method" Bounds="268.20562886556,267.075885842542,116.513333333333,25.96" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsVirtual="True" DelayedCrossGroupLinksState="Fetched" Label="CreateInterface">
-      <Category Ref="Category2" />
-    </Node>
-    <Node Id="(@1 @2 @3 Member=(Name=Install OverloadingParameters=[(@1 Namespace=OHM.SYS Type=IOhmSystemInstallGateway)]))" Category="CodeSchema_Method" Bounds="268.205638020833,211.115785842542,67.0633333333335,25.96" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsVirtual="True" DelayedCrossGroupLinksState="Fetched" Label="Install">
-      <Category Ref="Category2" />
-    </Node>
-    <Node Id="(@1 @2 @3 Member=(Name=Uninstall OverloadingParameters=[(@1 Namespace=OHM.SYS Type=IOhmSystemUnInstallGateway)]))" Category="CodeSchema_Method" Bounds="470.082274169922,211.115785842542,81.8100000000001,25.96" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsVirtual="True" DelayedCrossGroupLinksState="Fetched" Label="Uninstall">
-      <Category Ref="Category2" />
-    </Node>
-    <Node Id="(@1 @2 @3 Member=Id)" Category="CodeSchema_Property" Bounds="414.718993915931,267.075885842542,68.7090614540482,25" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsVirtual="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="Id">
-      <Category Ref="Category2" />
-    </Node>
-    <Node Id="(@1 @2 @3 Member=Update)" Category="CodeSchema_Method" Bounds="365.268961995443,211.115785842542,74.8133333333333,25.96" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsVirtual="True" DelayedCrossGroupLinksState="Fetched" Label="Update">
-      <Category Ref="Category2" />
-    </Node>
-    <Node Id="(@1 @2 @3 Member=get_Name)" Category="CodeSchema_Method" Bounds="-578.494735004673,53.7882902959407,90.0866666666666,25.96" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsVirtual="True" DelayedCrossGroupLinksState="Fetched" Label="get_Name" UseManualLocation="True" />
-    <Node Id="(@1 @2 @5 Member=(Name=CreateInterface OverloadingParameters=[(@9 Namespace=System Type=String),(@1 Namespace=OHM.Logger Type=ILogger)]))" Category="CodeSchema_Method" Bounds="131.81,550.68,116.513333333333,25.96" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsVirtual="True" DelayedCrossGroupLinksState="Fetched" Label="CreateInterface">
-      <Category Ref="Category2" />
-    </Node>
-    <Node Id="(@1 @2 @5 Member=(Name=Install OverloadingParameters=[(@1 Namespace=OHM.SYS Type=IOhmSystemInstallGateway)]))" Category="CodeSchema_Method" Bounds="259.437864060357,438.76,67.0633333333335,25.96" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsVirtual="True" DelayedCrossGroupLinksState="Fetched" Label="Install">
-      <Category Ref="Category2" />
-    </Node>
-    <Node Id="(@1 @2 @5 Member=(Name=Uninstall OverloadingParameters=[(@1 Namespace=OHM.SYS Type=IOhmSystemUnInstallGateway)]))" Category="CodeSchema_Method" Bounds="20,550.68,81.8099999999999,25.96" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsVirtual="True" DelayedCrossGroupLinksState="Fetched" Label="Uninstall">
-      <Category Ref="Category2" />
-    </Node>
-    <Node Id="(@1 @2 @5 Member=Id)" Category="CodeSchema_Property" Bounds="278.323333333333,550.68,68.7090614540482,25" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsVirtual="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="Id">
-      <Category Ref="Category2" />
-    </Node>
-    <Node Id="(@1 @2 @5 Member=Name)" Category="CodeSchema_Property" Bounds="20,606.64,90.1457281207149,25" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsVirtual="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="Name">
-      <Category Ref="Category2" />
-    </Node>
-    <Node Id="(@1 @2 @5 Member=Update)" Category="CodeSchema_Method" Bounds="259.437864060357,494.72,74.8133333333335,25.96" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsVirtual="True" DelayedCrossGroupLinksState="Fetched" Label="Update">
-      <Category Ref="Category2" />
-    </Node>
-    <Node Id="(@1 @2 @7 Member=Error)" Category="CodeSchema_Field" Bounds="96.1895727539063,25.2754809597299,62.6199999999999,25.96" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsStatic="True" DelayedCrossGroupLinksState="Fetched" Label="Error" />
-    <Node Id="(@1 @2 @7 Member=FatalError)" Category="CodeSchema_Field" Bounds="96.1895853678386,53.235472414808,87.6666666666665,25.96" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsStatic="True" DelayedCrossGroupLinksState="Fetched" Label="FatalError" />
-    <Node Id="(@1 @2 @7 Member=Normal)" Category="CodeSchema_Field" Bounds="96.1895593261719,81.1954867580697,76.53,25.96" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsStatic="True" DelayedCrossGroupLinksState="Fetched" Label="Normal" />
-    <Node Id="(@1 @2 @7 Member=NotFound)" Category="CodeSchema_Field" Bounds="96.1895678710937,109.155485842542,90.6100000000001,25.96" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsStatic="True" DelayedCrossGroupLinksState="Fetched" Label="NotFound" />
-    <Node Id="(@1 @2 @7 Member=Warning)" Category="CodeSchema_Field" Bounds="188.799561360677,25.2754809597299,82.0433333333333,25.96" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsStatic="True" DelayedCrossGroupLinksState="Fetched" Label="Warning" />
-    <Node Id="@10" Category="CodeSchema_Method" Bounds="135.901197393691,494.72,93.5366666666666,25.96" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsProtected="True" CodeSchemaProperty_IsSpecialName="True" DelayedCrossGroupLinksState="Fetched" Label="PluginBase">
-      <Category Ref="Category2" />
-    </Node>
-    <Node Id="@11" Category="CodeSchema_Field" Bounds="28.874530727024,438.76,67.5900000000001,25.96" CodeSchemaProperty_IsPrivate="True" DelayedCrossGroupLinksState="Fetched" Label="_state" />
-    <Node Id="@12" Category="CodeSchema_Property" Bounds="383.544722036646,323.035985842542,90.1457281207149,25" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsVirtual="True" DelayedChildNodesState="Fetched" DelayedCrossGroupLinksState="Fetched" FetchedChildrenCount="1" Group="Collapsed" Label="Name">
-      <Category Ref="Category2" />
-    </Node>
-    <Node Id="@13" Category="CodeSchema_Property" Bounds="268.205660582597,323.035985842543,85.3390614540485,25" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsVirtual="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="State">
-      <Category Ref="Category2" />
-    </Node>
-    <Node Id="@14" Category="CodeSchema_Property" Bounds="20,495.2,85.3390614540481,25" CodeSchemaProperty_IsFinal="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsVirtual="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="State">
-      <Category Ref="Category2" />
-    </Node>
-    <Node Id="@4" Category="CodeSchema_Interface" Bounds="248.20562886556,171.115685842542,323.686645304362,196.9204" CodeSchemaProperty_IsPublic="True" CommonLabel="IPlugin" DelayedChildNodesState="Fetched" DelayedCrossGroupLinksState="Fetched" FetchedChildrenCount="7" Group="Expanded" Icon="CodeSchema_Interface" Label="IPlugin" Language="{B5E9BD34-6D3E-4B5D-925E-8A43B79820B4}" SourceLocation="(Assembly=&quot;file:///C:/Users/Scopollif/Documents/Personnel/GIT/Pascal Repo/OpenHomeMation/Common.Public/Plugins/IPlugin.cs&quot; StartLineNumber=7 StartCharacterOffset=4 EndLineNumber=7 EndCharacterOffset=4)" UseManualLocation="True">
-      <Category Ref="Category2" />
-    </Node>
-    <Node Id="@6" Category="CodeSchema_Class" Bounds="0,398.76,367.032394787381,252.88" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsPublic="True" CommonLabel="PluginBase" DelayedChildNodesState="Fetched" DelayedCrossGroupLinksState="Fetched" FetchedChildrenCount="9" Group="Expanded" Icon="CodeSchema_Class" Label="PluginBase" Language="{B5E9BD34-6D3E-4B5D-925E-8A43B79820B4}" SourceLocation="(Assembly=&quot;file:///C:/Users/Scopollif/Documents/Personnel/GIT/Pascal Repo/OpenHomeMation/Common.Public/Plugins/PluginBase.cs&quot; StartLineNumber=7 StartCharacterOffset=4 EndLineNumber=7 EndCharacterOffset=4)">
-      <Category Ref="Category2" />
-    </Node>
-    <Node Id="@8" Category="CodeSchema_Enum" Bounds="90.1895593261719,-0.724619040270127,186.653335367839,141.840204882813" CodeSchemaProperty_IsFinal="True" CodeSchemaProperty_IsPublic="True" CommonLabel="PluginStates" DelayedChildNodesState="Fetched" DelayedCrossGroupLinksState="Fetched" FetchedChildrenCount="5" Group="Expanded" Icon="CodeSchema_Enum" Label="PluginStates" Language="{B5E9BD34-6D3E-4B5D-925E-8A43B79820B4}" SourceLocation="(Assembly=&quot;file:///C:/Users/Scopollif/Documents/Personnel/GIT/Pascal Repo/OpenHomeMation/Common.Public/Plugins/PluginStates.cs&quot; StartLineNumber=4 StartCharacterOffset=4 EndLineNumber=4 EndCharacterOffset=4)">
-      <Category Ref="Category2" />
-    </Node>
+    <Node Id="(@1 @2 @3 Member=(Name=CreateInterface OverloadingParameters=[(@9 Namespace=System Type=String)]))" Category="CodeSchema_Method" Bounds="380.147394787381,295.76,116.513333333333,25.96" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsVirtual="True" DelayedCrossGroupLinksState="Fetched" Label="CreateInterface" />
+    <Node Id="(@1 @2 @3 Member=(Name=CreateVrNode OverloadingParameters=[(@9 Namespace=System Type=String)]))" Category="CodeSchema_Method" Bounds="238.840728120715,295.76,111.306666666667,25.96" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsVirtual="True" DelayedCrossGroupLinksState="Fetched" Label="CreateVrNode" />
+    <Node Id="(@1 @2 @3 Member=(Name=Install OverloadingParameters=[(@1 Namespace=OHM.SYS Type=IOhmSystemInstallGateway)]))" Category="CodeSchema_Method" Bounds="238.840728120715,239.8,67.0633333333334,25.96" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsVirtual="True" DelayedCrossGroupLinksState="Fetched" Label="Install" />
+    <Node Id="(@1 @2 @3 Member=(Name=Uninstall OverloadingParameters=[(@1 Namespace=OHM.SYS Type=IOhmSystemUnInstallGateway)]))" Category="CodeSchema_Method" Bounds="440.717394787381,239.8,81.8099999999999,25.96" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsVirtual="True" DelayedCrossGroupLinksState="Fetched" Label="Uninstall" />
+    <Node Id="(@1 @2 @3 Member=Id)" Category="CodeSchema_Property" Bounds="238.840728120715,351.72,68.7090614540482,25" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsVirtual="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="Id" />
+    <Node Id="(@1 @2 @3 Member=Update)" Category="CodeSchema_Method" Bounds="335.904061454048,239.8,74.8133333333333,25.96" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsVirtual="True" DelayedCrossGroupLinksState="Fetched" Label="Update" />
+    <Node Id="(@1 @2 @5 Member=(Name=CreateInterface OverloadingParameters=[(@9 Namespace=System Type=String)]))" Category="CodeSchema_Method" Bounds="20,689.6,116.513333333333,25.96" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsVirtual="True" DelayedCrossGroupLinksState="Fetched" Label="CreateInterface" />
+    <Node Id="(@1 @2 @5 Member=(Name=CreateVrNode OverloadingParameters=[(@9 Namespace=System Type=String)]))" Category="CodeSchema_Method" Bounds="131.81,633.64,111.306666666667,25.96" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsVirtual="True" DelayedCrossGroupLinksState="Fetched" Label="CreateVrNode" />
+    <Node Id="(@1 @2 @5 Member=(Name=Install OverloadingParameters=[(@1 Namespace=OHM.SYS Type=IOhmSystemInstallGateway)]))" Category="CodeSchema_Method" Bounds="259.437864060357,521.72,67.0633333333333,25.96" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsVirtual="True" DelayedCrossGroupLinksState="Fetched" Label="Install" />
+    <Node Id="(@1 @2 @5 Member=(Name=Uninstall OverloadingParameters=[(@1 Namespace=OHM.SYS Type=IOhmSystemUnInstallGateway)]))" Category="CodeSchema_Method" Bounds="20,633.64,81.81,25.96" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsVirtual="True" DelayedCrossGroupLinksState="Fetched" Label="Uninstall" />
+    <Node Id="(@1 @2 @5 Member=Id)" Category="CodeSchema_Property" Bounds="166.513333333333,689.6,68.7090614540482,25" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsVirtual="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="Id" />
+    <Node Id="(@1 @2 @5 Member=Name)" Category="CodeSchema_Property" Bounds="265.222394787381,689.6,90.1457281207149,25" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsVirtual="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="Name" />
+    <Node Id="(@1 @2 @5 Member=Update)" Category="CodeSchema_Method" Bounds="259.437864060357,577.68,74.8133333333333,25.96" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsVirtual="True" DelayedCrossGroupLinksState="Fetched" Label="Update" />
+    <Node Id="(@1 @2 @7 Member=Error)" Category="CodeSchema_Field" Bounds="100.357394787381,26,62.62,25.96" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsStatic="True" DelayedCrossGroupLinksState="Fetched" Label="Error" />
+    <Node Id="(@1 @2 @7 Member=FatalError)" Category="CodeSchema_Field" Bounds="100.357394787381,53.96,87.6666666666667,25.96" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsStatic="True" DelayedCrossGroupLinksState="Fetched" Label="FatalError" />
+    <Node Id="(@1 @2 @7 Member=Normal)" Category="CodeSchema_Field" Bounds="100.357394787381,81.92,76.53,25.96" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsStatic="True" DelayedCrossGroupLinksState="Fetched" Label="Normal" />
+    <Node Id="(@1 @2 @7 Member=NotFound)" Category="CodeSchema_Field" Bounds="100.357394787381,109.88,90.61,25.96" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsStatic="True" DelayedCrossGroupLinksState="Fetched" Label="NotFound" />
+    <Node Id="(@1 @2 @7 Member=Ready)" Category="CodeSchema_Field" Bounds="100.357394787381,137.84,69.4333333333333,25.96" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsStatic="True" DelayedCrossGroupLinksState="Fetched" Label="Ready" />
+    <Node Id="(@1 @2 @7 Member=Warning)" Category="CodeSchema_Field" Bounds="192.967394787381,26,82.0433333333334,25.96" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsStatic="True" DelayedCrossGroupLinksState="Fetched" Label="Warning" />
+    <Node Id="@10" Category="CodeSchema_Method" Bounds="135.901197393691,577.68,93.5366666666666,25.96" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsProtected="True" CodeSchemaProperty_IsSpecialName="True" DelayedCrossGroupLinksState="Fetched" Label="PluginBase" />
+    <Node Id="@11" Category="CodeSchema_Field" Bounds="28.8745307270241,521.72,67.59,25.96" CodeSchemaProperty_IsPrivate="True" DelayedCrossGroupLinksState="Fetched" Label="_state" />
+    <Node Id="@12" Category="CodeSchema_Property" Bounds="238.840728120715,406.72,90.1457281207149,25" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsVirtual="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="Name" />
+    <Node Id="@13" Category="CodeSchema_Property" Bounds="337.549789574763,351.72,85.3390614540482,25" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsVirtual="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="State" />
+    <Node Id="@14" Category="CodeSchema_Property" Bounds="20,578.16,85.3390614540482,25" CodeSchemaProperty_IsFinal="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsVirtual="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="State" />
+    <Node Id="@4" Category="CodeSchema_Interface" Bounds="218.840728120715,199.8,323.686666666667,251.92" CodeSchemaProperty_IsPublic="True" CommonLabel="IPlugin" DelayedChildNodesState="Fetched" DelayedCrossGroupLinksState="Fetched" FetchedChildrenCount="8" Group="Expanded" Icon="CodeSchema_Interface" Label="IPlugin" Language="{B5E9BD34-6D3E-4B5D-925E-8A43B79820B4}" SourceLocation="(Assembly=&quot;file:///C:/Users/Scopollif/Documents/Personnel/GIT/Pascal Repo/OpenHomeMation/Common.Public/PluginsSystem/_Interfaces/IPlugin.cs&quot; StartLineNumber=7 StartCharacterOffset=4 EndLineNumber=7 EndCharacterOffset=4)" />
+    <Node Id="@6" Category="CodeSchema_Class" Bounds="-2.8421709430404E-14,481.72,375.368122908096,253.84" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsPublic="True" CommonLabel="PluginBase" DelayedChildNodesState="Fetched" DelayedCrossGroupLinksState="Fetched" FetchedChildrenCount="10" Group="Expanded" Icon="CodeSchema_Class" Label="PluginBase" Language="{B5E9BD34-6D3E-4B5D-925E-8A43B79820B4}" SourceLocation="(Assembly=&quot;file:///C:/Users/Scopollif/Documents/Personnel/GIT/Pascal Repo/OpenHomeMation/Common.Public/PluginsSystem/PluginBase.cs&quot; StartLineNumber=7 StartCharacterOffset=4 EndLineNumber=7 EndCharacterOffset=4)" />
+    <Node Id="@8" Category="CodeSchema_Enum" Bounds="94.3573947873814,0,186.653333333333,169.8" CodeSchemaProperty_IsFinal="True" CodeSchemaProperty_IsPublic="True" CommonLabel="PluginStates" DelayedChildNodesState="Fetched" DelayedCrossGroupLinksState="Fetched" FetchedChildrenCount="6" Group="Expanded" Icon="CodeSchema_Enum" Label="PluginStates" Language="{B5E9BD34-6D3E-4B5D-925E-8A43B79820B4}" SourceLocation="(Assembly=&quot;file:///C:/Users/Scopollif/Documents/Personnel/GIT/Pascal Repo/OpenHomeMation/Common.Public/PluginsSystem/PluginStates.cs&quot; StartLineNumber=4 StartCharacterOffset=4 EndLineNumber=4 EndCharacterOffset=4)" />
   </Nodes>
   <Links>
-    <Link Source="@10" Target="@11" Category="CodeSchema_FieldWrite" Bounds="98.6603851318359,468.523742675781,56.1749725341797,26.1962585449219" Weight="1" />
-    <Link Source="@11" Target="@8" Category="References" Bounds="-876.345248725974,-287.618791353351,117.763809856555,410.779237930353" Weight="1" />
-    <Link Source="@12" Target="(@1 @2 @3 Member=get_Name)" Category="Contains" FetchingParent="@12" />
-    <Link Source="@13" Target="@8" Category="CodeSchema_ReturnTypeLink" Bounds="221.451147951181,149.229346764777,83.4242542606727,173.806639077766" IsSourceVirtualized="True" Weight="1" />
-    <Link Source="@14" Target="@11" Category="CodeSchema_FieldRead" Bounds="62.6695289611816,473.720001220703,0,21.4800109863281" IsSourceVirtualized="True" Weight="2">
+    <Link Source="@10" Target="@11" Category="CodeSchema_FieldWrite" Bounds="98.6603851318359,551.483764648438,56.1749725341797,26.1962280273438" Weight="1" />
+    <Link Source="@11" Target="@8" Category="References" Weight="1" />
+    <Link Source="@13" Target="@8" Category="CodeSchema_ReturnTypeLink" IsSourceVirtualized="True" Weight="1" />
+    <Link Source="@14" Target="@11" Category="CodeSchema_FieldRead" Bounds="62.6695289611816,556.679992675781,0,21.47998046875" IsSourceVirtualized="True" Weight="2">
       <Category Ref="CodeSchema_FieldWrite" />
     </Link>
-    <Link Source="@14" Target="@8" Category="References" Bounds="-886.15484901354,-231.316963132524,122.867162442957,354.624864692369" IsSourceVirtualized="True" Weight="2">
+    <Link Source="@14" Target="@8" Category="References" IsSourceVirtualized="True" Weight="2">
       <Category Ref="CodeSchema_ReturnTypeLink" />
     </Link>
-    <Link Source="@4" Target="(@1 @2 @3 Member=(Name=CreateInterface OverloadingParameters=[(@9 Namespace=System Type=String),(@1 Namespace=OHM.Logger Type=ILogger)]))" Category="Contains" FetchingParent="@4" />
+    <Link Source="@4" Target="(@1 @2 @3 Member=(Name=CreateInterface OverloadingParameters=[(@9 Namespace=System Type=String)]))" Category="Contains" FetchingParent="@4" />
+    <Link Source="@4" Target="(@1 @2 @3 Member=(Name=CreateVrNode OverloadingParameters=[(@9 Namespace=System Type=String)]))" Category="Contains" FetchingParent="@4" />
     <Link Source="@4" Target="(@1 @2 @3 Member=(Name=Install OverloadingParameters=[(@1 Namespace=OHM.SYS Type=IOhmSystemInstallGateway)]))" Category="Contains" FetchingParent="@4" />
     <Link Source="@4" Target="(@1 @2 @3 Member=(Name=Uninstall OverloadingParameters=[(@1 Namespace=OHM.SYS Type=IOhmSystemUnInstallGateway)]))" Category="Contains" FetchingParent="@4" />
     <Link Source="@4" Target="(@1 @2 @3 Member=Id)" Category="Contains" FetchingParent="@4" />
     <Link Source="@4" Target="(@1 @2 @3 Member=Update)" Category="Contains" FetchingParent="@4" />
     <Link Source="@4" Target="@12" Category="Contains" FetchingParent="@4" />
     <Link Source="@4" Target="@13" Category="Contains" FetchingParent="@4" />
-    <Link Source="@6" Target="(@1 @2 @5 Member=(Name=CreateInterface OverloadingParameters=[(@9 Namespace=System Type=String),(@1 Namespace=OHM.Logger Type=ILogger)]))" Category="Contains" FetchingParent="@6" />
+    <Link Source="@6" Target="(@1 @2 @5 Member=(Name=CreateInterface OverloadingParameters=[(@9 Namespace=System Type=String)]))" Category="Contains" FetchingParent="@6" />
+    <Link Source="@6" Target="(@1 @2 @5 Member=(Name=CreateVrNode OverloadingParameters=[(@9 Namespace=System Type=String)]))" Category="Contains" FetchingParent="@6" />
     <Link Source="@6" Target="(@1 @2 @5 Member=(Name=Install OverloadingParameters=[(@1 Namespace=OHM.SYS Type=IOhmSystemInstallGateway)]))" Category="Contains" FetchingParent="@6" />
     <Link Source="@6" Target="(@1 @2 @5 Member=(Name=Uninstall OverloadingParameters=[(@1 Namespace=OHM.SYS Type=IOhmSystemUnInstallGateway)]))" Category="Contains" FetchingParent="@6" />
     <Link Source="@6" Target="(@1 @2 @5 Member=Id)" Category="Contains" FetchingParent="@6" />
@@ -90,15 +57,15 @@
     <Link Source="@6" Target="@10" Category="Contains" FetchingParent="@6" />
     <Link Source="@6" Target="@11" Category="Contains" FetchingParent="@6" />
     <Link Source="@6" Target="@14" Category="Contains" FetchingParent="@6" />
-    <Link Source="@6" Target="@4" Category="Implements" Bounds="295.566664642652,375.145977688139,20.9266231704482,23.6140223118615" Weight="1" />
+    <Link Source="@6" Target="@4" Category="Implements" Bounds="274.277526855469,459.567504882813,15.1139221191406,22.1524963378906" Weight="1" />
     <Link Source="@8" Target="(@1 @2 @7 Member=Error)" Category="Contains" FetchingParent="@8" />
     <Link Source="@8" Target="(@1 @2 @7 Member=FatalError)" Category="Contains" FetchingParent="@8" />
     <Link Source="@8" Target="(@1 @2 @7 Member=Normal)" Category="Contains" FetchingParent="@8" />
     <Link Source="@8" Target="(@1 @2 @7 Member=NotFound)" Category="Contains" FetchingParent="@8" />
+    <Link Source="@8" Target="(@1 @2 @7 Member=Ready)" Category="Contains" FetchingParent="@8" />
     <Link Source="@8" Target="(@1 @2 @7 Member=Warning)" Category="Contains" FetchingParent="@8" />
   </Links>
   <Categories>
-    <Category Id="Category2" Label="Category 2" Background="#FF339933" IsTag="True" />
     <Category Id="CodeSchema_Class" Label="Class" BasedOn="CodeSchema_Type" CanBeDataDriven="True" DefaultAction="Node:Both:CodeSchema_Member" Icon="CodeSchema_Class" NavigationActionLabel="Classes" />
     <Category Id="CodeSchema_Enum" Label="Enum" BasedOn="CodeSchema_Type" CanBeDataDriven="True" DefaultAction="Node:Both:CodeSchema_Member" Icon="CodeSchema_Enum" NavigationActionLabel="Enums" />
     <Category Id="CodeSchema_Field" Label="Field" BasedOn="CodeSchema_Member" CanBeDataDriven="True" DefaultAction="Microsoft.Contains" Icon="CodeSchema_Field" NavigationActionLabel="Fields" />
@@ -116,7 +83,6 @@
     <Category Id="References" Label="References" CanBeDataDriven="True" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Referenced By" OutgoingActionLabel="References" />
   </Categories>
   <Properties>
-    <Property Id="Background" Label="Background" Description="The background color" DataType="System.Windows.Media.Brush" />
     <Property Id="Bounds" DataType="System.Windows.Rect" />
     <Property Id="CanBeDataDriven" Label="CanBeDataDriven" Description="CanBeDataDriven" DataType="System.Boolean" />
     <Property Id="CanLinkedNodesBeDataDriven" Label="CanLinkedNodesBeDataDriven" Description="CanLinkedNodesBeDataDriven" DataType="System.Boolean" />
@@ -145,7 +111,6 @@
     <Property Id="IsContainment" DataType="System.Boolean" />
     <Property Id="IsEnabled" DataType="System.Boolean" />
     <Property Id="IsSourceVirtualized" Label="Link Source Virtualized" Description="If true, the link source end contains data for virtualized nodes/links (i.e. not actually created in the graph)." DataType="System.Boolean" />
-    <Property Id="IsTag" DataType="System.Boolean" />
     <Property Id="Label" Label="Label" Description="Displayable label of an Annotatable object" DataType="System.String" />
     <Property Id="Language" Label="Language" Description="Language" DataType="System.String" />
     <Property Id="Layout" DataType="System.String" />
@@ -153,7 +118,6 @@
     <Property Id="OutgoingActionLabel" Label="OutgoingActionLabel" Description="OutgoingActionLabel" DataType="System.String" />
     <Property Id="SourceLocation" Label="Start Line Number" DataType="Microsoft.VisualStudio.GraphModel.CodeSchema.SourceLocation" />
     <Property Id="TargetType" DataType="System.Type" />
-    <Property Id="UseManualLocation" DataType="System.Boolean" />
     <Property Id="Value" DataType="System.String" />
     <Property Id="ValueLabel" DataType="System.String" />
     <Property Id="Visibility" Label="Visibility" Description="Defines whether a node in the graph is visible or not" DataType="System.Windows.Visibility" />

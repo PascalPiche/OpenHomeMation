@@ -18,7 +18,7 @@ namespace ZWaveLib.Commands
 
         protected override bool RunImplementation(IDictionary<string, string> arguments)
         {
-            return false;
+            return ZWaveInterface.Manager.RefreshNodeInfo(uint.Parse(arguments["homeId"]),byte.Parse(arguments["nodeId"]));
             //return ZWaveInterface.Manager.RefreshValue(_node.HomeId, _node.NodeId);
         }
     }

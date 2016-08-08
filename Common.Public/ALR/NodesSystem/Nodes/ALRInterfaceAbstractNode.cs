@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace OHM.RAL
 {
-    public abstract class ALRInterfaceAbstractNode : ALRAbstractNode, IALRInterface
+    public abstract class ALRInterfaceAbstractNode : ALRAbstractTreeNode, IALRInterface
     {
         #region Private Members
 

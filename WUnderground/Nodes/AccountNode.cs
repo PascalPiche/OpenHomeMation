@@ -3,14 +3,14 @@ using System;
 using System.Collections.Generic;
 using WUnderground.Commands;
 
-namespace WUnderground.Data
+namespace WUnderground.Nodes
 {
-    public class Account : WUndergroundNodeAbstract
+    public class AccountNode : WUndergroundNodeAbstract
     {
 
         private INodeProperty _apiKeyProperty;
 
-        public Account(string keyId, string name, string apiKey)
+        public AccountNode(string keyId, string name, string apiKey)
             : base(keyId, name)
         {
             _apiKeyProperty = new NodeProperty("APIKey", "API Key", typeof(String), true, "", apiKey);

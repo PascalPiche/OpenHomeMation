@@ -22,7 +22,7 @@ namespace OHM.RAL
 
         bool CanExecuteCommand(string nodeKey, string commandKey);
 
-        bool ExecuteCommand(string nodeKey, string commandKey, Dictionary<string, string> arguments);
+        bool ExecuteCommand(string nodeKey, string commandKey, IDictionary<string, string> arguments);
 
     }
 }

@@ -13,7 +13,7 @@ namespace OHM.Data
         private ILoggerManager _loggerMng;
         private ILogger _logger;
         private string _filePath;
-        private Dictionary<String, IDataStore> _loadedDataStore = new Dictionary<string,IDataStore>();
+        private IDictionary<String, IDataStore> _loadedDataStore = new Dictionary<string,IDataStore>();
 
         #endregion
 

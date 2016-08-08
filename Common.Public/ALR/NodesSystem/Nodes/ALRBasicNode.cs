@@ -1,7 +1,7 @@
 ﻿
 namespace OHM.RAL
 {
-    public class ALRBasicNode : ALRAbstractNode
+    public class ALRBasicNode : ALRAbstractTreeNode
     {
         public ALRBasicNode(string key, string name) : base(key, name) {}
 

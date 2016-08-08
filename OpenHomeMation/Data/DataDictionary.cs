@@ -126,12 +126,12 @@ namespace OHM.Data
 
         #region Protected
 
-        protected void StoreValue(string key, IDataValue obj)
+        private void StoreValue(string key, IDataValue obj)
         {
             _dataValues[key] = obj;
         }
 
-        protected IDataValue GetValue(string key)
+        private IDataValue GetValue(string key)
         {
             IDataValue value;
             if (_dataValues.TryGetValue(key, out value))

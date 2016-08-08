@@ -7,7 +7,7 @@ using ZWaveLib.Commands;
 
 namespace ZWaveLib.Data
 {
-    public abstract class ZWaveHomeNode : ALRAbstractNode, IZWaveHomeNode
+    public abstract class ZWaveHomeNode : ALRAbstractTreeNode, IZWaveHomeNode
     {
         private uint _homeId;
 

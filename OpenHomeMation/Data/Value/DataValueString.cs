@@ -10,7 +10,7 @@ namespace OHM.Data
 
         public DataValueString() { }
 
-        public DataValueString(String value)
+        public DataValueString(string value)
         {
             _value = value;
         }

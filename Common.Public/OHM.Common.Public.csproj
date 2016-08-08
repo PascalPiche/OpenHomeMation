@@ -68,19 +68,19 @@
     <Compile Include="NodesSystem\Nodes\_Interfaces\ICommandsTreeNode.cs" />
     <Compile Include="NodesSystem\Nodes\_Interfaces\IPropertiesTreeNode.cs" />
     <Compile Include="NodesSystem\Nodes\AbstractTreeNode.cs" />
-    <Compile Include="ALR\Nodes\ALRBasicNode.cs" />
-    <Compile Include="ALR\Commands\_Interfaces\IInterfaceCommand.cs" />
-    <Compile Include="ALR\Commands\InterfaceCommandAbstract.cs" />
+    <Compile Include="ALR\NodesSystem\Nodes\ALRBasicNode.cs" />
+    <Compile Include="ALR\NodesSystem\NodesCommands\_Interfaces\IInterfaceCommand.cs" />
+    <Compile Include="ALR\NodesSystem\NodesCommands\InterfaceCommandAbstract.cs" />
     <Compile Include="DataSystem\_Interfaces\IDataDictionary.cs" />
     <Compile Include="DataSystem\_Interfaces\IDataStore.cs" />
-    <Compile Include="ALR\Nodes\ALRAbstractNode.cs" />
-    <Compile Include="ALR\Nodes\ALRInterfaceState.cs" />
+    <Compile Include="ALR\NodesSystem\Nodes\ALRAbstractNode.cs" />
+    <Compile Include="ALR\NodesSystem\Nodes\ALRInterfaceState.cs" />
     <Compile Include="NodesSystem\Nodes\_Interfaces\INode.cs" />
-    <Compile Include="ALR\Nodes\_Interfaces\IALRInterface.cs" />
+    <Compile Include="ALR\NodesSystem\_Interfaces\IALRInterface.cs" />
     <Compile Include="LoggingSystem\_Interfaces\ILogger.cs" />
     <Compile Include="NodesSystem\NodesProperties\_Interfaces\INodeProperty.cs" />
     <Compile Include="NodesSystem\Nodes\AbstractNode.cs" />
-    <Compile Include="ALR\Nodes\ALRInterfaceAbstractNode.cs" />
+    <Compile Include="ALR\NodesSystem\Nodes\ALRInterfaceAbstractNode.cs" />
     <Compile Include="NodesSystem\NodesProperties\NodeProperty.cs" />
     <Compile Include="NodesSystem\Nodes\NodeStates.cs" />
     <Compile Include="PluginsSystem\PluginStates.cs" />
@@ -110,9 +110,9 @@
     <None Include="NodesSystem\Nodes\_Diagrams\Graph-NodeAbstract-2016-07-25.dgml" />
     <None Include="NodesSystem\Nodes\_Diagrams\Relations-expanded.dgml" />
     <None Include="NodesSystem\Nodes\_Diagrams\Relations-simple.dgml" />
-    <None Include="PluginsSystem\_Diagrams\Graph1.dgml" />
-    <None Include="ALR\Commands\_Diagrams\ClassDiagram1.cd" />
-    <None Include="ALR\Commands\_Diagrams\Graph1.dgml" />
+    <None Include="PluginsSystem\_Diagrams\GraphExpanded-201-08-0.dgml" />
+    <None Include="ALR\NodesSystem\NodesCommands\_Diagrams\ClassDiagram1.cd" />
+    <None Include="ALR\NodesSystem\NodesCommands\_Diagrams\Graph1.dgml" />
     <None Include="ALR\_Diagrams\Graph1.dgml" />
     <None Include="_diagrams\ClassDiagram.cd" />
     <None Include="NodesSystem\NodesCommands\_Diagrams\CommandsClassDiagram.cd" />
@@ -128,11 +128,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ALAI\" />
-    <Folder Include="ALR\Commands\_Interfaces\_Diagrams\" />
-    <Folder Include="ALR\Nodes\_Diagrams\" />
-    <Folder Include="ALR\Nodes\_Interfaces\_Diagrams\" />
+    <Folder Include="ALR\NodesSystem\NodesCommands\_Interfaces\_Diagrams\" />
+    <Folder Include="ALR\NodesSystem\_Diagrams\" />
+    <Folder Include="ALR\NodesSystem\_Interfaces\_Diagrams\" />
     <Folder Include="NodesSystem\_Diagrams\" />
-    <Folder Include="PluginsSystem\_Interfaces\_Diagrams\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

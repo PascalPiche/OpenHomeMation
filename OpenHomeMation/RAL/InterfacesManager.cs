@@ -136,7 +136,7 @@ namespace OHM.RAL
             return result;
         }
 
-        public bool ExecuteCommand(string nodeKey, string commandKey, Dictionary<string, string> arguments)
+        public bool ExecuteCommand(string nodeKey, string commandKey, IDictionary<string, string> arguments)
         {
             _logger.Debug("Executing Command -> Node Key : " + nodeKey + " -> Command Key : " + commandKey);
 

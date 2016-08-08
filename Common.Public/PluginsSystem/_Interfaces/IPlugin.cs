@@ -7,10 +7,9 @@ namespace OHM.Plugins
 {
     public interface IPlugin
     {
-
         Guid Id { get; }
 
-        String Name { get; }
+        string Name { get; }
 
         PluginStates State { get; }
 
@@ -23,6 +22,5 @@ namespace OHM.Plugins
         ALRInterfaceAbstractNode CreateInterface(string key);
 
         IVrType CreateVrNode(string key);
-
     }
 }

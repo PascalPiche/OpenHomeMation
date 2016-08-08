@@ -3,7 +3,7 @@ using OHM.RAL;
 
 namespace OHM.Common.Public.Test.Nodes.Stubs
 {
-    public class RalNodeAbstractStub : ALRAbstractNode
+    public class RalNodeAbstractStub : ALRAbstractTreeNode
     {
 
         public RalNodeAbstractStub(string key, string name) 

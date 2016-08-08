@@ -145,7 +145,7 @@ namespace WpfApplication1.MV
         {
             get
             {
-                if (IsInterfaceViewVisible != Visibility.Visible && selectedNode is ALRAbstractNode)
+                if (IsInterfaceViewVisible != Visibility.Visible && selectedNode is ALRAbstractTreeNode)
                 {
                     return Visibility.Visible;
                 }

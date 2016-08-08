@@ -1,10 +1,5 @@
-﻿using OHM.Nodes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WUnderground.Data;
+﻿using System.Collections.Generic;
+using WUnderground.Nodes;
 
 namespace WUnderground.Commands
 {
@@ -19,7 +14,7 @@ namespace WUnderground.Commands
 
         protected override bool RunImplementation(IDictionary<string, string> arguments)
         {
-            return ((StationCondition)this.Node).refresh();
+            return ((StationConditionNode)this.Node).refresh();
         }
     }
 }

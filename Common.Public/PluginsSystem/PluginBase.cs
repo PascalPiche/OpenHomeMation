@@ -10,7 +10,7 @@ namespace OHM.Plugins
     {
         #region Private members
 
-        private PluginStates _state = PluginStates.Normal;
+        private PluginStates _state = PluginStates.Ready;
 
         #endregion
 
@@ -47,6 +47,5 @@ namespace OHM.Plugins
         public abstract IVrType CreateVrNode(string key);
 
         #endregion
-       
     }
 }

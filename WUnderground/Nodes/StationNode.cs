@@ -2,23 +2,21 @@
 using System.Collections.Generic;
 using WUnderground.Api;
 
-namespace WUnderground.Data
+namespace WUnderground.Nodes
 {
-    public class Station : WUndergroundNodeAbstract
+    public class StationNode : WUndergroundNodeAbstract
     {
 
         private int _zip;
         private int _magic;
         private string _wmo;
 
-        public Station(string keyId, string name, int zip, int magic, string wmo)
+        public StationNode(string keyId, string name, int zip, int magic, string wmo)
             : base(keyId, name)
         {
-
             _zip = zip;
             _magic = magic;
             _wmo = wmo;
-
         }
 
         protected override bool Initing()
@@ -33,9 +31,9 @@ namespace WUnderground.Data
             return result;
         }
 
-        internal bool GetCondition(StationCondition condition)
+        internal bool GetCondition(StationConditionNode condition)
         {
-            Account acc = (Account)this.Parent;
+            AccountNode acc = (AccountNode)this.Parent;
             return condition.update(WUndergroundApi.QueryConditions(acc.ApiKey, _zip, _magic, _wmo));
         }
 

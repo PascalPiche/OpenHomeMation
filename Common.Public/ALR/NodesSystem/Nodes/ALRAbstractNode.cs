@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace OHM.RAL
 {
-    public abstract class ALRAbstractNode : AbstractTreeNode
+    public abstract class ALRAbstractTreeNode : AbstractTreeNode
     {
         #region Private members
 
@@ -15,7 +15,7 @@ namespace OHM.RAL
 
         #region Protected Ctor
 
-        protected ALRAbstractNode(string key, string name) 
+        protected ALRAbstractTreeNode(string key, string name) 
             : base(key, name)
         {}
 
@@ -26,7 +26,7 @@ namespace OHM.RAL
         protected AbstractTreeNode CreateChildNode(string model, string key, string name, IDictionary<string, object> options = null)
         {
             AbstractTreeNode result = null;
-            ALRAbstractNode newNode = Interface.CreateNodeInstance(model, key, name, options) as ALRAbstractNode;
+            ALRAbstractTreeNode newNode = Interface.CreateNodeInstance(model, key, name, options) as ALRAbstractTreeNode;
             if (newNode != null)
             {
                 newNode.Init(DataStore, Logger, Interface);

@@ -7,7 +7,7 @@ namespace OHM.Nodes
     {
         #region Private Members
 
-        private AbstractTreeNode _parent;
+        private ITreeNode _parent;
         private ObservableCollection<AbstractTreeNode> _children;
         private IDictionary<string, AbstractTreeNode> _childrenDic;
 
@@ -52,7 +52,7 @@ namespace OHM.Nodes
 
         #region Protected Properties
 
-        protected AbstractTreeNode Parent { get { return _parent; } }
+        protected ITreeNode Parent { get { return _parent; } }
 
         #endregion
 
@@ -71,7 +71,7 @@ namespace OHM.Nodes
             {
                 return result;
             }
-            else
+            /*else
             {
                 //Check child
                 foreach (AbstractTreeNode item in Children)
@@ -82,7 +82,7 @@ namespace OHM.Nodes
                         return result;
                     }
                 }
-            }
+            }*/
             return null;
         }
 
@@ -174,7 +174,7 @@ namespace OHM.Nodes
 
         private bool RemoveChild(AbstractTreeNode node)
         {
-            if (node != null)
+            if (node != null && _childrenDic.ContainsKey(node.Key))
             {
                 _children.Remove(node);
                 _childrenDic.Remove(node.Key);

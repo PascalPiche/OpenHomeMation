@@ -9,6 +9,7 @@ namespace OHM.Plugins
         FatalError = -1,
         Error = 0,
         Warning = 1,
-        Normal = 2
+        Ready = 2,
+        Normal = 3
     }
 }

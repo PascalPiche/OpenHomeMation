@@ -1,17 +1,17 @@
 ﻿using OHM.Nodes.Commands;
 using System.Collections.Generic;
-using WUnderground.Data;
+using WUnderground.Nodes;
 
 namespace WUnderground.Commands
 {
     class AddStation : AbstractWUndergroundCommand
     {
 
-        private Account _account
+        private AccountNode _account
         {
             get
             {
-                return (Account)this.Node;
+                return (AccountNode)this.Node;
             }
         }
 
