@@ -17,7 +17,7 @@ namespace OHM.Plugins
 
         bool Uninstall(IOhmSystemUnInstallGateway system);
 
-        bool Update();
+        bool Update(IOhmSystemInstallGateway system);
 
         ALRInterfaceAbstractNode CreateInterface(string key);
 

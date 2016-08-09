@@ -6,31 +6,39 @@ namespace OHM.Plugins
 {
     public sealed class NotFoundPlugin : IPlugin
     {
+        #region Private Members
+
         private Guid _guid;
         private string _name;
 
-        public NotFoundPlugin(string guid, string name)
+        #endregion
+
+        #region Public CTOR
+
+        internal NotFoundPlugin(string guid, string name)
         {
             _guid = new Guid(guid);
             _name = name;
         }
 
-        public Guid Id
-        {
-            get { return _guid; }
-        }
+        #endregion
 
-        public string Name
-        {
-            get { return _name; }
-        }
+        #region Public Properties
+
+        public Guid Id      { get { return _guid; } }
+
+        public string Name  { get { return _name; } }
+
+        #endregion
+
+        #region Public Methods
 
         public bool Install(IOhmSystemInstallGateway system)
         {
             return false;
         }
-        
-        public bool Update()
+
+        public bool Update(IOhmSystemInstallGateway system)
         {
             return false;
         }
@@ -54,5 +62,7 @@ namespace OHM.Plugins
         {
             throw new NotImplementedException();
         }
+
+        #endregion
     }
 }

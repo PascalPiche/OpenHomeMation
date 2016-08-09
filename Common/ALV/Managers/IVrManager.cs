@@ -6,7 +6,6 @@ namespace OHM.VAL
 {
     public interface IVrManager
     {
-
         bool Init(IDataStore data, IOhmSystemInternal system);
 
         bool RegisterVrType(string key, IPlugin plugin);

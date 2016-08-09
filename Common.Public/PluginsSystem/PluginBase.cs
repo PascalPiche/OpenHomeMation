@@ -16,10 +16,6 @@ namespace OHM.Plugins
 
         #region Public Properties
 
-        public abstract Guid Id { get; }
-
-        public abstract string Name { get; }
-
         public PluginStates State { 
             get { return _state; }
             protected set
@@ -34,13 +30,21 @@ namespace OHM.Plugins
 
         #endregion
 
-        #region Public Methods
+        #region Public Abstract Properties
+
+        public abstract Guid Id { get; }
+
+        public abstract string Name { get; }
+
+        #endregion
+
+        #region Public Abstract Methods
 
         public abstract bool Install(IOhmSystemInstallGateway system);
 
         public abstract bool Uninstall(IOhmSystemUnInstallGateway system);
 
-        public abstract bool Update();
+        public abstract bool Update(IOhmSystemInstallGateway system);
 
         public abstract ALRInterfaceAbstractNode CreateInterface(string key);
 

@@ -3,7 +3,6 @@ namespace OHM.Data
 {
     public interface IDataManager
     {
-
         bool Init();
 
         void Shutdown();

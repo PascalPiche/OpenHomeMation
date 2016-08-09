@@ -7,6 +7,5 @@ namespace OHM.SYS
         bool CreateNode(AbstractTreeNode node);
 
         bool RemoveNode(AbstractTreeNode node);
-
     }
 }

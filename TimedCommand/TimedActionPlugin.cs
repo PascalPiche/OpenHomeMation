@@ -1,6 +1,7 @@
 ﻿using OHM.Plugins;
 using OHM.RAL;
 using OHM.SYS;
+using OHM.VAL;
 using System;
 
 namespace TimedCommand
@@ -25,9 +26,9 @@ namespace TimedCommand
             return false; // system.UnRegisterInter(_interfaceKey);
         }
 
-        public override bool Update()
+        public override bool Update(IOhmSystemInstallGateway system)
         {
-            return true;
+            return false;
         }
 
         public override ALRInterfaceAbstractNode CreateInterface(string key)
@@ -35,7 +36,7 @@ namespace TimedCommand
             throw new NotImplementedException();
         }
 
-        public override OHM.VAL.IVrType CreateVrNode(string key)
+        public override IVrType CreateVrNode(string key)
         {
             throw new NotImplementedException();
         }

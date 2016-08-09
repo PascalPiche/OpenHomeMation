@@ -13,7 +13,7 @@ namespace OHM.Nodes
 
         #endregion
 
-        #region Internal CTOR
+        #region Internal Ctor
 
         internal AbstractTreeNode(string key, string name, NodeStates initialState = NodeStates.initializing)
             : base(key, name, initialState)

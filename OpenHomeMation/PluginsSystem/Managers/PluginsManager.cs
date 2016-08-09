@@ -11,7 +11,6 @@ namespace OHM.Plugins
 {
     public sealed class PluginsManager : IPluginsManager
     {
-
         #region Private members
 
         private ILoggerManager _loggerMng;
@@ -260,6 +259,5 @@ namespace OHM.Plugins
         }
 
         #endregion
-
     }
 }

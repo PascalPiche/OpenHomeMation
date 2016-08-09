@@ -1,5 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OHM.Plugins;
+using OHM.RAL;
+using OHM.SYS;
+using OHM.VAL;
 using System;
 
 namespace OHM.Tests
@@ -52,22 +55,22 @@ namespace OHM.Tests
             get { throw new NotImplementedException(); }
         }
 
-        public override bool Install(SYS.IOhmSystemInstallGateway system)
+        public override bool Install(IOhmSystemInstallGateway system)
         {
             throw new NotImplementedException();
         }
 
-        public override bool Uninstall(SYS.IOhmSystemUnInstallGateway system)
+        public override bool Uninstall(IOhmSystemUnInstallGateway system)
         {
             throw new NotImplementedException();
         }
 
-        public override bool Update()
+        public override bool Update(IOhmSystemInstallGateway system)
         {
             throw new NotImplementedException();
         }
 
-        public override RAL.ALRInterfaceAbstractNode CreateInterface(string key)
+        public override ALRInterfaceAbstractNode CreateInterface(string key)
         {
             throw new NotImplementedException();
         }
@@ -77,7 +80,7 @@ namespace OHM.Tests
             this.State = state;
         }
 
-        public override VAL.IVrType CreateVrNode(string key)
+        public override IVrType CreateVrNode(string key)
         {
             throw new NotImplementedException();
         }

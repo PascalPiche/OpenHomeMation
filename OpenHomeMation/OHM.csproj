@@ -62,31 +62,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\DataDictionary.cs" />
-    <Compile Include="Data\DataStore.cs" />
-    <Compile Include="Data\Value\DataValueBool.cs" />
-    <Compile Include="Data\Value\DataValueDictionary.cs" />
-    <Compile Include="Data\Value\DataValueInt.cs" />
-    <Compile Include="Data\Value\DataValueString.cs">
+    <Compile Include="DataSystem\DataDictionary.cs" />
+    <Compile Include="DataSystem\DataStore.cs" />
+    <Compile Include="DataSystem\Value\DataValueBool.cs" />
+    <Compile Include="DataSystem\Value\DataValueDictionary.cs" />
+    <Compile Include="DataSystem\Value\DataValueInt.cs" />
+    <Compile Include="DataSystem\Value\DataValueString.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Data\FileDataManager.cs" />
-    <Compile Include="Data\Value\_Interfaces\IDataValue.cs" />
-    <Compile Include="RAL\IInterfacesManagerInternal.cs" />
-    <Compile Include="RAL\InterfacesManager.cs" />
-    <Compile Include="Logger\DefaultLogger.cs" />
-    <Compile Include="Logger\LoggerManager.cs" />
-    <Compile Include="Plugins.Core\NotFoundPlugin.cs" />
-    <Compile Include="Plugins.Core\PluginObservableAdapter.cs" />
+    <Compile Include="DataSystem\FileDataManager.cs" />
+    <Compile Include="DataSystem\Value\_Interfaces\IDataValue.cs" />
+    <Compile Include="ALR\Managers\IInterfacesManagerInternal.cs" />
+    <Compile Include="ALR\Managers\InterfacesManager.cs" />
+    <Compile Include="LoggingSystem\DefaultLogger.cs" />
+    <Compile Include="LoggingSystem\Managers\LoggerManager.cs" />
+    <Compile Include="PluginsSystem\NotFoundPlugin.cs" />
+    <Compile Include="PluginsSystem\PluginObservableAdapter.cs" />
     <Compile Include="System\OhmSystem.cs" />
     <Compile Include="System\OhmSystemInstallGateway.cs" />
     <Compile Include="System\OhmSystemInterfaceGateway.cs" />
     <Compile Include="System\OhmSystemUnInstallGateway.cs" />
     <Compile Include="System\OpenHomeMation.cs" />
-    <Compile Include="Plugins.Core\PluginsManager.cs" />
+    <Compile Include="PluginsSystem\Managers\PluginsManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="System\OpenHomeMationServer.cs" />
-    <Compile Include="VAL\VrManager.cs" />
+    <Compile Include="ALV\Managers\VrManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
@@ -116,25 +116,25 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Plugins.Core\_diagrams\PluginsManager_GetPlugin.sequencediagram" />
-    <None Include="Plugins.Core\_diagrams\PluginsManager_InstallPlugin.sequencediagram" />
-    <None Include="Plugins.Core\_diagrams\PluginsManager_Init.sequencediagram" />
+    <None Include="PluginsSystem\_diagrams\PluginsManager_GetPlugin.sequencediagram" />
+    <None Include="PluginsSystem\_diagrams\PluginsManager_InstallPlugin.sequencediagram" />
+    <None Include="PluginsSystem\_diagrams\PluginsManager_Init.sequencediagram" />
     <None Include="System\_diagrams\OpenHomeMation_start.sequencediagram" />
     <None Include="packages.config" />
     <None Include="System\_diagrams\ClassDiagram1.cd" />
-    <None Include="Data\_Diagrams\DataClassDiagram.cd" />
-    <None Include="Data\_Diagrams\DataClassDiagramFull.cd" />
-    <None Include="Logger\LoggerClassDiagram.cd" />
-    <None Include="Logger\LoggerClassDiagramFull.cd" />
+    <None Include="DataSystem\_Diagrams\DataClassDiagram.cd" />
+    <None Include="DataSystem\_Diagrams\DataClassDiagramFull.cd" />
+    <None Include="LoggingSystem\_Diagrams\LoggerClassDiagram.cd" />
+    <None Include="LoggingSystem\_Diagrams\LoggerClassDiagramFull.cd" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Plugins.Core\_diagrams\PluginsManager_GetPlugin.sequencediagram.layout">
+    <EmbeddedResource Include="PluginsSystem\_diagrams\PluginsManager_GetPlugin.sequencediagram.layout">
       <DependentUpon>PluginsManager_GetPlugin.sequencediagram</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Plugins.Core\_diagrams\PluginsManager_InstallPlugin.sequencediagram.layout">
+    <EmbeddedResource Include="PluginsSystem\_diagrams\PluginsManager_InstallPlugin.sequencediagram.layout">
       <DependentUpon>PluginsManager_InstallPlugin.sequencediagram</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Plugins.Core\_diagrams\PluginsManager_Init.sequencediagram.layout">
+    <EmbeddedResource Include="PluginsSystem\_diagrams\PluginsManager_Init.sequencediagram.layout">
       <DependentUpon>PluginsManager_Init.sequencediagram</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="System\_diagrams\OpenHomeMation_start.sequencediagram.layout">
@@ -142,7 +142,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="RAL\_diagrams\" />
+    <Folder Include="ALR\_diagrams\" />
     <Folder Include="_Diagrams\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

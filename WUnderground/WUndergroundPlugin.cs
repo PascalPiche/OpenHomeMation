@@ -36,7 +36,7 @@ namespace WUnderground
             return system.UnRegisterInterface(_interfaceKey);
         }
 
-        public override bool Update()
+        public override bool Update(IOhmSystemInstallGateway system)
         {
             return true;
         }

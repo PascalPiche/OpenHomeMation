@@ -7,6 +7,5 @@ namespace OHM.SYS
         ILogger Logger { get; }
 
         bool UnRegisterInterface(string key);
-
     }
 }

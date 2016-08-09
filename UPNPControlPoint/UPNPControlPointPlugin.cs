@@ -7,33 +7,29 @@ namespace UPNPControlPoint
 {
     public class UPNPControlPointPlugin : PluginBase
     {
+        #region Private Members
 
         private Guid _id = new Guid("ec3cb3af-23b9-4f45-8e80-66bb869cc0a3");
-
         private string _name = "UPNP Control Point";
-
         private ALRInterfaceAbstractNode _runningInterface;
 
-        public override Guid Id
-        {
-            get 
-            {
-                return _id;
-            }
-        }
+        #endregion
 
-        public override string Name
-        {
-            get { return _name; }
-        }
+        #region Public Properties
+
+        public override Guid Id     { get { return _id; } } 
+        public override string Name { get { return _name; } }
+
+        #endregion
+
+        #region Public Methods
 
         public override bool Install(IOhmSystemInstallGateway system)
         {
-
             return system.RegisterInterface("UPNPControlPointInterface");
         }
 
-        public override bool Update()
+        public override bool Update(IOhmSystemInstallGateway system)
         {
             return true;
         }
@@ -58,5 +54,7 @@ namespace UPNPControlPoint
         {
             throw new NotImplementedException();
         }
+
+        #endregion
     }
 }
