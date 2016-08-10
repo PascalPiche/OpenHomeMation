@@ -22,7 +22,7 @@ namespace WUnderground.Nodes
             this.RegisterCommand(new RefreshCondition("refreshCondition", "Refresh", ""));
         }
 
-        protected override void RegisterProperties()
+        protected override bool RegisterProperties()
         {
             this.RegisterProperty(new NodeProperty("DewPoint_C", "Dew Point Celsius", typeof(Double), true));
             this.RegisterProperty(new NodeProperty("DewPoint_F", "Dew Point F", typeof(Double), true));
@@ -50,6 +50,8 @@ namespace WUnderground.Nodes
             this.RegisterProperty(new NodeProperty("WindGust_Mph", "WindGust Mph", typeof(Double), true));
             this.RegisterProperty(new NodeProperty("WindSpeed_Kph", "WindSpeed Kph", typeof(Double), true));
             this.RegisterProperty(new NodeProperty("WindSpeed_Mph", "WindSpeed Mph", typeof(Double), true));
+
+            return true;
         }
 
         #endregion

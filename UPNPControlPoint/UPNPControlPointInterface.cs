@@ -22,7 +22,7 @@ namespace UPNPControlPoint
             
         }
 
-        protected override AbstractNode CreateNodeInstance(string model, string key, string name, IDictionary<string, object> options)
+        protected override AbstractPowerNode CreateNodeInstance(string model, string key, string name, IDictionary<string, object> options)
         {
             throw new NotImplementedException();
         }
@@ -33,9 +33,9 @@ namespace UPNPControlPoint
             //this.RegisterCommand(new CreateControllerCommand(this));
         }
 
-        protected override void RegisterProperties()
+        protected override bool RegisterProperties()
         {
-            
+            return true;
         }
     }
 }

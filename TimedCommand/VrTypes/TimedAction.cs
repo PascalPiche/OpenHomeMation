@@ -17,7 +17,7 @@ namespace TimedCommand.VrTypes
             throw new NotImplementedException();
         }
 
-        protected override void RegisterProperties()
+        protected override bool RegisterProperties()
         {
             throw new NotImplementedException();
         }

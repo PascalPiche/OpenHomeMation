@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 
 namespace OHM.Nodes
 {
-    public abstract class AbstractTreeNode : AbstractNode, ITreeNode
+    public abstract class AbstractTreeNode : AbstractPowerNode, ITreeNode
     {
         #region Private Members
 

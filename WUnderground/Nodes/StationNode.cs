@@ -45,11 +45,13 @@ namespace WUnderground.Nodes
             //No commands
         }
 
-        protected override void RegisterProperties()
+        protected override bool RegisterProperties()
         {
             this.RegisterProperty(new NodeProperty("zip", "zip", typeof(int), true, "", _zip));
             this.RegisterProperty(new NodeProperty("magic", "magic", typeof(int), true, "", _magic));
             this.RegisterProperty(new NodeProperty("wmo", "wmo", typeof(string), true, "", _wmo));
+
+            return true;
         }
 
         #endregion

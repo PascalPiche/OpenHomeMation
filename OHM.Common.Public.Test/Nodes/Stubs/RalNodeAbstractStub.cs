@@ -19,9 +19,9 @@ namespace OHM.Common.Public.Test.Nodes.Stubs
             //throw new System.NotImplementedException();
         }
 
-        protected override void RegisterProperties()
+        protected override bool RegisterProperties()
         {
-            //throw new System.NotImplementedException();
+            throw new System.NotImplementedException();
         }
     }
 }

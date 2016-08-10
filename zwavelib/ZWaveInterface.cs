@@ -682,9 +682,9 @@ namespace ZWaveLib
 
         #endregion
 
-        protected override AbstractNode CreateNodeInstance(string model, string key, string name, IDictionary<string, object> options)
+        protected override AbstractPowerNode CreateNodeInstance(string model, string key, string name, IDictionary<string, object> options)
         {
-            AbstractNode result = null ;
+            AbstractPowerNode result = null ;
 
             switch (model)
             {
@@ -714,9 +714,9 @@ namespace ZWaveLib
             this.RegisterCommand(new CreateControler());
         }
 
-        protected override void RegisterProperties()
+        protected override bool RegisterProperties()
         {
-            
+            return true;
         }
     }
 }

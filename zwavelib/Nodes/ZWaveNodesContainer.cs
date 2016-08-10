@@ -31,8 +31,8 @@ namespace ZWaveLib.Nodes
             this.RegisterCommand(new ControlerAddNodeCommand());
         }
 
-        protected override void RegisterProperties()
-        { }
+        protected override bool RegisterProperties()
+        { return true; }
 
         #endregion
 

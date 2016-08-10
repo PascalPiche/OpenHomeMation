@@ -42,9 +42,11 @@ namespace WUnderground.Nodes
             this.RegisterCommand(new RemoveAccount());
         }
 
-        protected override void RegisterProperties()
+        protected override bool RegisterProperties()
         {
             this.RegisterProperty(_apiKeyProperty);
+
+            return true;
         }
     }
 }

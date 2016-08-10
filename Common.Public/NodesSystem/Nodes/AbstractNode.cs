@@ -8,40 +8,27 @@ using System.ComponentModel;
 
 namespace OHM.Nodes
 {
-    public abstract class AbstractNode : INode, ICommandsNode, IPropertiesNode
+    public abstract class AbstractBasicNode : IBasicNode
     {
         #region Private Members
-
-        private INodeProperty _keyProperty;
-        private INodeProperty _nameProperty;
-        private INodeProperty _nodeStateProperty;
 
         private ILogger _logger;
         private IDataStore _data;
 
-        private ObservableCollection<ICommand> _commands;
-        private IDictionary<string, ICommand> _commandsDic;
-        private ReadOnlyObservableCollection<ICommand> _commandsReadOnly;
+        private INodeProperty _keyProperty;
+        private INodeProperty _nameProperty;
+
+        private INodeProperty _nodeStateProperty;
 
         private ObservableCollection<INodeProperty> _properties;
         private IDictionary<string, INodeProperty> _propertiesDic;
 
         #endregion
 
-        #region Public Events
+        #region Internal Ctor
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        #endregion
-
-        #region Internal ctor
-
-        internal AbstractNode(string key, string name, NodeStates initialState = NodeStates.initializing)
-        {
-            _commands = new ObservableCollection<ICommand>();
-            _commandsDic = new Dictionary<string, ICommand>();
-            _commandsReadOnly = new ReadOnlyObservableCollection<ICommand>(_commands); 
-            
+        internal AbstractBasicNode(string key, string name, NodeStates initialState = NodeStates.initializing)
+        {            
             _properties = new ObservableCollection<INodeProperty>();
             _propertiesDic = new Dictionary<string, INodeProperty>();
 
@@ -60,27 +47,31 @@ namespace OHM.Nodes
 
         #endregion
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
         #region Public Properties
 
         public string Key { get { return _keyProperty.Value as string; } }
 
-        public string Name { get { return _nameProperty.Value as string; }
-            protected set
+        public string Name
+        {
+            get { return _nameProperty.Value as string; }
+            /*internal set
             {
                 UpdateProperty("system-name", value);
                 NotifyPropertyChanged("Name");
-            }
+            }*/
         }
 
-        public NodeStates State { get { return (NodeStates)_nodeStateProperty.Value; }
+        public NodeStates State
+        {
+            get { return (NodeStates)_nodeStateProperty.Value; }
             protected set
             {
                 UpdateProperty("system-node-state", value);
                 NotifyPropertyChanged("State");
             }
         }
-
-        public IReadOnlyList<ICommand> Commands { get { return _commandsReadOnly; } }
 
         public IReadOnlyList<INodeProperty> Properties { get { return _properties; } }
 
@@ -94,7 +85,9 @@ namespace OHM.Nodes
 
         #endregion
 
-        #region Protected Functions
+        #region Protected Methods
+
+        protected abstract bool RegisterProperties();
 
         protected bool RegisterProperty(INodeProperty nodeProperty)
         {
@@ -132,32 +125,6 @@ namespace OHM.Nodes
             return result;
         }
 
-        protected bool RegisterCommand(CommandAbstract command)
-        {
-            bool result = false;
-            if (!_commandsDic.ContainsKey(command.Key))
-            {
-                if (command.Init(this))
-                {
-                    _commandsDic.Add(command.Key, command);
-                    _commands.Add(command);
-                    result = true;
-                }
-            }
-            return result;
-        }
-
-        protected bool UnRegisterCommand(ICommand command)
-        {
-            bool result = false;
-            if (_commandsDic.ContainsKey(command.Key)) {
-                _commandsDic.Remove(command.Key);
-                _commands.Remove(command);
-                result = true;
-            }
-            return result; ;
-        }
-       
         protected bool TryGetProperty(string key, out INodeProperty result)
         {
             return _propertiesDic.TryGetValue(key, out result);
@@ -186,17 +153,6 @@ namespace OHM.Nodes
             }
         }
 
-        protected virtual bool Initing()
-        {
-            RegisterCommands();
-            RegisterProperties();
-            return true;
-        }
-
-        protected abstract void RegisterCommands();
-
-        protected abstract void RegisterProperties();
-
         #endregion
 
         #region Internal Methods
@@ -205,8 +161,80 @@ namespace OHM.Nodes
         {
             _data = data;
             _logger = logger;
+            return RegisterProperties();
+        }
+
+        #endregion
+    }
+
+    public abstract class AbstractPowerNode : AbstractBasicNode, IPowerNode
+    {
+        #region Private Members
+
+        private ObservableCollection<ICommand> _commands;
+        private IDictionary<string, ICommand> _commandsDic;
+        private ReadOnlyObservableCollection<ICommand> _commandsReadOnly;
+
+        #endregion
+
+        #region Internal ctor
+
+        internal AbstractPowerNode(string key, string name, NodeStates initialState = NodeStates.initializing)
+            : base(key, name, initialState)
+        {
+            _commands = new ObservableCollection<ICommand>();
+            _commandsDic = new Dictionary<string, ICommand>();
+            _commandsReadOnly = new ReadOnlyObservableCollection<ICommand>(_commands); 
+        }
+
+        #endregion
+
+        #region Public Properties
+
+        public IReadOnlyList<ICommand> Commands { get { return _commandsReadOnly; } }
+
+        #endregion
+
+        #region Protected Functions
+        
+        protected virtual bool Initing()
+        {
+            RegisterCommands();
+            RegisterProperties();
             return true;
         }
+
+        protected bool RegisterCommand(CommandAbstract command)
+        {
+            bool result = false;
+            if (!_commandsDic.ContainsKey(command.Key))
+            {
+                if (command.Init(this))
+                {
+                    _commandsDic.Add(command.Key, command);
+                    _commands.Add(command);
+                    result = true;
+                }
+            }
+            return result;
+        }
+
+        protected bool UnRegisterCommand(ICommand command)
+        {
+            bool result = false;
+            if (_commandsDic.ContainsKey(command.Key)) {
+                _commandsDic.Remove(command.Key);
+                _commands.Remove(command);
+                result = true;
+            }
+            return result; ;
+        }
+       
+        protected abstract void RegisterCommands();
+
+        #endregion
+
+        #region Internal Methods
 
         internal bool CanExecuteCommand(string key)
         {

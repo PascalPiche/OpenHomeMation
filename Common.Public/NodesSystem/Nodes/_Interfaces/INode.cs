@@ -10,4 +10,9 @@ namespace OHM.Nodes
 
         NodeStates State { get; }
     }
+
+    public interface IBasicNode : INode, IPropertiesNode
+    {
+
+    }
 }

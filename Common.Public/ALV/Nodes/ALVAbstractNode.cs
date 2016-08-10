@@ -1,7 +1,7 @@
 ﻿
 namespace OHM.Nodes.ALV
 {
-    public abstract class ALVAbstractNode : AbstractNode
+    public abstract class ALVAbstractNode : AbstractPowerNode
     {
         #region Public Ctor
 

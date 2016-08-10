@@ -31,12 +31,14 @@ namespace ZWaveLib.Nodes
             this.RegisterCommand(new ControlerAddNodeCommand());
         }
 
-        protected override void RegisterProperties()
+        protected override bool RegisterProperties()
         {
             this.RegisterProperty(new NodeProperty("DriverControllerInterfaceType", "Driver Controller Interface Type", typeof(ZWControllerInterface)));
             this.RegisterProperty(new NodeProperty("IsBridgeController", "Is Bridge Controller", typeof(Boolean)));
             this.RegisterProperty(new NodeProperty("IsPrimaryController", "Is Primary Controller", typeof(Boolean)));
             this.RegisterProperty(new NodeProperty("IsStaticUpdateController", "Is Static Update Controller", typeof(Boolean)));
+
+            return true;
         }
 
         #endregion

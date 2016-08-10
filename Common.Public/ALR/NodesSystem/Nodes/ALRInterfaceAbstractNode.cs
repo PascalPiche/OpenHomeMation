@@ -101,7 +101,7 @@ namespace OHM.Nodes.ALR
 
         #region internal Protected Functions
 
-        internal protected abstract AbstractNode CreateNodeInstance(string model, string key, string name, IDictionary<string, object> options);
+        internal protected abstract AbstractPowerNode CreateNodeInstance(string model, string key, string name, IDictionary<string, object> options);
 
         #endregion
     }

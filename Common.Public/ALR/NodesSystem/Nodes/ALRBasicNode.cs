@@ -7,6 +7,9 @@ namespace OHM.Nodes.ALR
 
         protected override void RegisterCommands() {}
 
-        protected override void RegisterProperties() {}
+        protected override bool RegisterProperties()
+        {
+            return true;
+        }
     }
 }

@@ -329,7 +329,7 @@ namespace ZWaveLib.Nodes
             //this.RegisterCommand(new RefreshNodeValueCommand(this));
         }
 
-        protected override void RegisterProperties()
+        protected override bool RegisterProperties()
         {
             //Manager.GetAllScenes
             //Manager.GetAssociations
@@ -364,6 +364,8 @@ namespace ZWaveLib.Nodes
             this.RegisterProperty(new NodeProperty("NodeProductType", "Node Product Type", typeof(String), true));
             this.RegisterProperty(new NodeProperty("NodeType", "Node Type", typeof(String), true));
             this.RegisterProperty(new NodeProperty("NodeVersion", "Node Version", typeof(byte), true));
+
+            return true;
         }
     }
 }

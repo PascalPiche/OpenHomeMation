@@ -40,9 +40,9 @@ namespace WUnderground.Nodes
             //TODO: ? // (Scopollif:)Guest Nothing
         }
 
-        protected override AbstractNode CreateNodeInstance(string model, string key, string name, IDictionary<string, object> options)
+        protected override AbstractPowerNode CreateNodeInstance(string model, string key, string name, IDictionary<string, object> options)
         {
-            AbstractNode result = null;
+            AbstractPowerNode result = null;
             switch (model)
             {
                 case "Account":
@@ -66,9 +66,10 @@ namespace WUnderground.Nodes
             RegisterCommand(new AddAccount());
         }
 
-        protected override void RegisterProperties()
+        protected override bool RegisterProperties()
         {
             //No properties to register
+            return true;
         }
         
         #endregion 
@@ -95,7 +96,7 @@ namespace WUnderground.Nodes
             return result;
         }
 
-        internal bool RemoveAccountCommand(AbstractNode node)
+        internal bool RemoveAccountCommand(AbstractPowerNode node)
         {
             bool result = false;
             if (_registeredAccounts.ContainKey(node.Key))
