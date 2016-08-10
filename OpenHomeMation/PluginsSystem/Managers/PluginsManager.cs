@@ -1,5 +1,6 @@
 ﻿using OHM.Data;
 using OHM.Logger;
+using OHM.Plugins;
 using OHM.SYS;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Reflection;
 
-namespace OHM.Plugins
+namespace OHM.Managers.Plugins
 {
     public sealed class PluginsManager : IPluginsManager
     {

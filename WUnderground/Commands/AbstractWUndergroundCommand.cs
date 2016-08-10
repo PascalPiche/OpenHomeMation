@@ -1,4 +1,4 @@
-﻿using OHM.Nodes.ALR.Commands;
+﻿using OHM.Nodes.Commands.ALR;
 using WUnderground.Nodes;
 
 namespace WUnderground.Commands

@@ -2,7 +2,7 @@
 using OHM.Plugins;
 using OHM.SYS;
 
-namespace OHM.VAL
+namespace OHM.Managers.ALV
 {
     public interface IVrManager
     {

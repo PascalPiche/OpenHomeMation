@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OHM.Data;
 using OHM.Logger;
+using OHM.Managers.Plugins;
 using OHM.SYS;
 using Rhino.Mocks;
 using System;

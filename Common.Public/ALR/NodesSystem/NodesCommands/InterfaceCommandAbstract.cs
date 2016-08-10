@@ -1,8 +1,7 @@
 ﻿using OHM.Nodes.ALR;
-using OHM.Nodes.Commands;
 using System.Collections.Generic;
 
-namespace OHM.Nodes.ALR.Commands
+namespace OHM.Nodes.Commands.ALR
 {
     public abstract class InterfaceCommandAbstract : TreeCommandAbstract, IInterfaceCommand
     {

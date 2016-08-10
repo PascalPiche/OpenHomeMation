@@ -1,8 +1,8 @@
 ﻿using OHM.Data;
 using OHM.Logger;
 using OHM.Managers.ALR;
-using OHM.Plugins;
-using OHM.VAL;
+using OHM.Managers.ALV;
+using OHM.Managers.Plugins;
 
 namespace OHM.SYS
 {

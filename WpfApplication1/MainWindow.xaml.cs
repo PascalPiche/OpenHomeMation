@@ -1,5 +1,5 @@
-﻿using OHM.Nodes.ALR.Commands;
-using OHM.Nodes.Commands;
+﻿using OHM.Nodes.Commands;
+using OHM.Nodes.Commands.ALR;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

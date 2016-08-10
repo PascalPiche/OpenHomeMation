@@ -1,12 +1,13 @@
 ﻿using OHM.Data;
 using OHM.Logger;
+using OHM.Managers.Plugins;
 using OHM.Nodes.ALV;
 using OHM.Plugins;
 using OHM.SYS;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace OHM.VAL
+namespace OHM.Managers.ALV
 {
     public class VrManager : IVrManager
     {
@@ -17,11 +18,7 @@ namespace OHM.VAL
         private IDictionary<string, IPlugin> _registeredType = new Dictionary<string, IPlugin>();
         private ICollection<IVrType> _rootNodes = new ObservableCollection<IVrType>();
 
-        #region Public Property
-
-        #endregion
-
-        #region Ctor
+        #region Public Ctor
 
         public VrManager(ILoggerManager loggerMng, IPluginsManager pluginsMng)
         {
@@ -31,7 +28,7 @@ namespace OHM.VAL
 
         #endregion
 
-        #region Public API
+        #region Public Methods
 
         public bool Init(IDataStore data, IOhmSystemInternal system)
         {
