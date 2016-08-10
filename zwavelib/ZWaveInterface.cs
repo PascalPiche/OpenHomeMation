@@ -1,5 +1,5 @@
 ﻿using OHM.Nodes;
-using OHM.RAL;
+using OHM.Nodes.ALR;
 using OpenZWaveDotNet;
 using System;
 using System.Collections.Generic;

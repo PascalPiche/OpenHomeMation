@@ -1,10 +1,9 @@
 ﻿using OHM.Data;
 using OHM.Logger;
-using OHM.Nodes;
 using OHM.SYS;
 using System.Collections.Generic;
 
-namespace OHM.RAL
+namespace OHM.Nodes.ALR
 {
     public abstract class ALRInterfaceAbstractNode : ALRAbstractTreeNode, IALRInterface
     {

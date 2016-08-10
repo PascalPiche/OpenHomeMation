@@ -1,5 +1,5 @@
 ﻿using OHM.Nodes;
-using OHM.RAL;
+using OHM.Nodes.ALR;
 using System;
 using System.Collections.Generic;
 
@@ -9,9 +9,7 @@ namespace UPNPControlPoint
     {
         public UPNPControlPointInterface()
             : base("UPNPCtlPointInterface", "UPNP Control Point")
-        {
-            
-        }
+        { }
 
         protected override void Start()
         {

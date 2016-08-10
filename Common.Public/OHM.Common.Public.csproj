@@ -76,7 +76,7 @@
     <Compile Include="ALR\NodesSystem\Nodes\ALRAbstractNode.cs" />
     <Compile Include="ALR\NodesSystem\Nodes\ALRInterfaceState.cs" />
     <Compile Include="NodesSystem\Nodes\_Interfaces\INode.cs" />
-    <Compile Include="ALR\NodesSystem\_Interfaces\IALRInterface.cs" />
+    <Compile Include="ALR\NodesSystem\Nodes\_Interfaces\IALRInterface.cs" />
     <Compile Include="LoggingSystem\_Interfaces\ILogger.cs" />
     <Compile Include="NodesSystem\NodesProperties\_Interfaces\INodeProperty.cs" />
     <Compile Include="NodesSystem\Nodes\AbstractNode.cs" />
@@ -129,8 +129,8 @@
   <ItemGroup>
     <Folder Include="ALAI\" />
     <Folder Include="ALR\NodesSystem\NodesCommands\_Interfaces\_Diagrams\" />
+    <Folder Include="ALR\NodesSystem\Nodes\_Interfaces\_Diagrams\" />
     <Folder Include="ALR\NodesSystem\_Diagrams\" />
-    <Folder Include="ALR\NodesSystem\_Interfaces\_Diagrams\" />
     <Folder Include="NodesSystem\_Diagrams\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

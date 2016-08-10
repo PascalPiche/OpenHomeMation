@@ -1,5 +1,6 @@
-﻿using OHM.Plugins;
-using OHM.RAL;
+﻿using OHM.Nodes.ALR;
+using OHM.Nodes.ALV;
+using OHM.Plugins;
 using OHM.SYS;
 using System;
 
@@ -50,7 +51,7 @@ namespace ZWaveLib
             return null;
         }
 
-        public override OHM.VAL.IVrType CreateVrNode(string key)
+        public override IVrType CreateVrNode(string key)
         {
             throw new NotImplementedException();
         }

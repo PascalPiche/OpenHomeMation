@@ -1,6 +1,6 @@
 ﻿using OHM.Nodes;
+using OHM.Nodes.ALR;
 using OHM.Nodes.Properties;
-using OHM.RAL;
 using OpenZWaveDotNet;
 using System;
 using System.Collections.ObjectModel;

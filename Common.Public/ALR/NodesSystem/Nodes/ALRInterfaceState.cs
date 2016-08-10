@@ -1,5 +1,5 @@
 ﻿
-namespace OHM.RAL
+namespace OHM.Nodes.ALR
 {
     public enum ALRInterfaceStates
     {

@@ -1,9 +1,10 @@
 ﻿using OHM.Data;
+using OHM.Nodes.ALR;
 using OHM.Plugins;
 using OHM.SYS;
 using System.Collections.Generic;
 
-namespace OHM.RAL
+namespace OHM.Managers.ALR
 {
     public interface IInterfacesManager
     {

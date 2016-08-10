@@ -1,5 +1,4 @@
-﻿using OHM.Nodes;
-using OHM.RAL.Commands;
+﻿using OHM.Nodes.ALR.Commands;
 
 namespace ZWaveLib.Commands
 {

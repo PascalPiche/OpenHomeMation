@@ -1,6 +1,6 @@
 ﻿using OHM.Nodes.Commands;
 
-namespace OHM.RAL.Commands
+namespace OHM.Nodes.ALR.Commands
 {
     public interface IInterfaceCommand : ITreeCommand
     {

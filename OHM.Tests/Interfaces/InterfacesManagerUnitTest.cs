@@ -1,8 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OHM.Data;
 using OHM.Logger;
+using OHM.Managers.ALR;
 using OHM.Plugins;
-using OHM.RAL;
 using OHM.SYS;
 using Rhino.Mocks;
 using System;
@@ -16,7 +16,6 @@ namespace OHM.Tests.Interfaces
         [TestMethod]
         public void TestInterfacesManagerConstructor()
         {
-
             var loggerMng = MockRepository.GenerateStub<ILoggerManager>();
             var logger = MockRepository.GenerateStub<ILogger>();
             loggerMng.Stub(x => x.GetLogger("InterfacesManager")).Return(logger);
@@ -27,7 +26,6 @@ namespace OHM.Tests.Interfaces
 
             Assert.IsNotNull(target.RunnableInterfaces);
             Assert.AreEqual(0, target.RunnableInterfaces.Count);
-
         }
 
         [TestMethod]
@@ -46,7 +44,7 @@ namespace OHM.Tests.Interfaces
             Assert.IsTrue(target.Init(dataStore, system));
         }
 
-        [TestMethod]
+        /*[TestMethod]
         public void TestInterfacesManagerRegisterInterface()
         {
             var loggerMng = MockRepository.GenerateStub<ILoggerManager>();
@@ -86,7 +84,7 @@ namespace OHM.Tests.Interfaces
             plugin.AssertWasCalled(x => x.CreateInterface("testGood"));
             Assert.AreEqual(1, target.RunnableInterfaces.Count);
 
-        }
+        }*/
 
         [TestMethod]
         public void TestInterfacesManagerLoadRegistered()

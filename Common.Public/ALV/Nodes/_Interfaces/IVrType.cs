@@ -1,7 +1,6 @@
-﻿using OHM.Nodes;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace OHM.VAL
+namespace OHM.Nodes.ALV
 {
     public interface IVrType : INode, IPropertiesNode, ICommandsNode
     {

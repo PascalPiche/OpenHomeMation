@@ -1,8 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OHM.Data;
 using OHM.Logger;
+using OHM.Managers.ALR;
 using OHM.Plugins;
-using OHM.RAL;
 using OHM.SYS;
 using OHM.VAL;
 using Rhino.Mocks;
@@ -20,7 +20,9 @@ namespace OHM.Sys.Tests
             var dataMng = MockRepository.GenerateStub<IDataManager>();
             var vrMng = MockRepository.GenerateStub<IVrManager>();
             var pluginsMng = MockRepository.GenerateStub<IPluginsManager>();
+
             var target = new OhmSystem(intMng, vrMng, loggerMng, dataMng, pluginsMng);
+
             var plugin = MockRepository.GenerateStub<IPlugin>();
             var logger = MockRepository.GenerateStub<ILogger>();
             plugin.Stub(x => x.Name).Return("name");

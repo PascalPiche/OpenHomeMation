@@ -1,18 +1,13 @@
 ﻿using ConsoleApplication1.Logger;
 using OHM.Data;
-using OHM.Logger;
+using OHM.Managers.ALR;
 using OHM.Plugins;
-using OHM.RAL;
 using OHM.SYS;
 using OHM.VAL;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.ServiceModel;
-using System.ServiceModel.Description;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleApplication1
 {

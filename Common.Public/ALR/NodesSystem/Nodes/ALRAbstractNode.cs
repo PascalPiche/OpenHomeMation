@@ -1,9 +1,8 @@
 ﻿using OHM.Data;
 using OHM.Logger;
-using OHM.Nodes;
 using System.Collections.Generic;
 
-namespace OHM.RAL
+namespace OHM.Nodes.ALR
 {
     public abstract class ALRAbstractTreeNode : AbstractTreeNode
     {

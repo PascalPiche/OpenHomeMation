@@ -1,11 +1,10 @@
-﻿using OHM.Nodes.Commands;
-using OHM.RAL;
+﻿using OHM.Nodes.ALR;
+using OHM.Nodes.Commands;
 
 namespace OHM.Common.Public.Test.Nodes.Stubs
 {
     public class RalNodeAbstractStub : ALRAbstractTreeNode
     {
-
         public RalNodeAbstractStub(string key, string name) 
             : base(key, name)
         {}

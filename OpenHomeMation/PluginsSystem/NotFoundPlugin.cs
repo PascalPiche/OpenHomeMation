@@ -1,4 +1,5 @@
-﻿using OHM.RAL;
+﻿using OHM.Nodes.ALR;
+using OHM.Nodes.ALV;
 using OHM.SYS;
 using System;
 
@@ -58,7 +59,7 @@ namespace OHM.Plugins
             throw new NotImplementedException();
         }
 
-        public VAL.IVrType CreateVrNode(string key)
+        public IVrType CreateVrNode(string key)
         {
             throw new NotImplementedException();
         }

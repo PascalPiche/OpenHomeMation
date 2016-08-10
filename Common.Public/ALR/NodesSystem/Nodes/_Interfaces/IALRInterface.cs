@@ -1,7 +1,6 @@
-﻿using OHM.Nodes;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace OHM.RAL
+namespace OHM.Nodes.ALR
 {
     public interface IALRInterface : IPowerTreeNode
     {

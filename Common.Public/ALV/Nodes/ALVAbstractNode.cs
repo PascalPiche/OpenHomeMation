@@ -1,6 +1,5 @@
-﻿using OHM.Nodes;
-
-namespace OHM.RAL
+﻿
+namespace OHM.Nodes.ALV
 {
     public abstract class ALVAbstractNode : AbstractNode
     {

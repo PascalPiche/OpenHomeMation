@@ -1,12 +1,13 @@
 ﻿using OHM.Data;
 using OHM.Logger;
+using OHM.Nodes.ALR;
 using OHM.Plugins;
 using OHM.SYS;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace OHM.RAL
+namespace OHM.Managers.ALR
 {
 
     public class InterfacesManager : IInterfacesManager
