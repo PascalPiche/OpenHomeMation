@@ -102,6 +102,7 @@
     <None Include="NodesSystem\NodesCommands\_Diagrams\GraphFull-2016-08-04.dgml" />
     <None Include="NodesSystem\NodesProperties\_Diagrams\GraphExpanded-2016-08-04.dgml" />
     <None Include="NodesSystem\NodesProperties\_Interfaces\_Diagrams\ClassDiagram.cd" />
+    <None Include="NodesSystem\Nodes\_Interfaces\_Diagrams\ClassDiagramExpanded.cd" />
     <None Include="NodesSystem\Nodes\_Interfaces\_Diagrams\ClassDiagram.cd" />
     <None Include="NodesSystem\Nodes\_Interfaces\_Diagrams\Graph.dgml" />
     <None Include="NodesSystem\NodesProperties\_Diagrams\ClassDiagram.cd" />

@@ -1,6 +1,6 @@
 ﻿
 namespace OHM.Nodes
 {
-    public interface IPowerTreeNode : ITreeNode, IPropertiesTreeNode, ICommandsTreeNode
+    public interface IPowerTreeNode : IBasicTreeNode, ICommandsTreeNode
     { }
 }
