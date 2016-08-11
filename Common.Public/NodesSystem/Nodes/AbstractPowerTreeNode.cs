@@ -3,23 +3,23 @@ using System.Collections.ObjectModel;
 
 namespace OHM.Nodes
 {
-    public abstract class AbstractTreeNode : AbstractPowerNode, ITreeNode
+    public abstract class AbstractPowerTreeNode : AbstractPowerNode, ITreeNode
     {
         #region Private Members
 
         private ITreeNode _parent;
-        private ObservableCollection<AbstractTreeNode> _children;
-        private IDictionary<string, AbstractTreeNode> _childrenDic;
+        private ObservableCollection<AbstractPowerTreeNode> _children;
+        private IDictionary<string, AbstractPowerTreeNode> _childrenDic;
 
         #endregion
 
         #region Internal Ctor
 
-        internal AbstractTreeNode(string key, string name, NodeStates initialState = NodeStates.initializing)
+        internal AbstractPowerTreeNode(string key, string name, NodeStates initialState = NodeStates.initializing)
             : base(key, name, initialState)
         {
-            _children = new ObservableCollection<AbstractTreeNode>();
-            _childrenDic = new Dictionary<string, AbstractTreeNode>();
+            _children = new ObservableCollection<AbstractPowerTreeNode>();
+            _childrenDic = new Dictionary<string, AbstractPowerTreeNode>();
         }
 
         #endregion
@@ -63,9 +63,9 @@ namespace OHM.Nodes
             return RemoveChild(FindChild(key));
         }
 
-        protected AbstractTreeNode FindChild(string key)
+        protected AbstractPowerTreeNode FindChild(string key)
         {
-            AbstractTreeNode result;
+            AbstractPowerTreeNode result;
 
             if (_childrenDic.TryGetValue(key, out result))
             {
@@ -74,7 +74,7 @@ namespace OHM.Nodes
             /*else
             {
                 //Check child
-                foreach (AbstractTreeNode item in Children)
+                foreach (AbstractPowerTreeNode item in Children)
                 {
                     result = item.FindChild(key);
                     if (result != null)
@@ -90,13 +90,13 @@ namespace OHM.Nodes
 
         #region Internal methods
 
-        internal void SetParent(AbstractTreeNode node)
+        internal void SetParent(AbstractPowerTreeNode node)
         {
             _parent = node;
             this.State = NodeStates.normal;
         }
 
-        internal bool AddChild(AbstractTreeNode node)
+        internal bool AddChild(AbstractPowerTreeNode node)
         {
             if (!_childrenDic.ContainsKey(node.Key))
             {
@@ -128,7 +128,7 @@ namespace OHM.Nodes
                 }
 
                 //Lookup ALL LEVEL the node list
-                AbstractTreeNode node = this.FindChild(nextNode);
+                AbstractPowerTreeNode node = this.FindChild(nextNode);
                 if (node != null)
                 {
                     return node.CanExecuteCommand(nodeFullKey, commandKey);
@@ -159,7 +159,7 @@ namespace OHM.Nodes
                     nextNode = nextNode.Split('.')[0];
                 }
 
-                AbstractTreeNode node = this.FindChild(nextNode);
+                AbstractPowerTreeNode node = this.FindChild(nextNode);
                 if (node != null)
                 {
                     result = node.ExecuteCommand(nodeFullKey, commandKey, arguments);
@@ -172,7 +172,7 @@ namespace OHM.Nodes
 
         #region Private methods
 
-        private bool RemoveChild(AbstractTreeNode node)
+        private bool RemoveChild(AbstractPowerTreeNode node)
         {
             if (node != null && _childrenDic.ContainsKey(node.Key))
             {

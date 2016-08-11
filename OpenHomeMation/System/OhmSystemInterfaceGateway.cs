@@ -16,12 +16,12 @@ namespace OHM.SYS
             _interface = interf;
         }
 
-        public bool CreateNode(AbstractTreeNode node)
+        public bool CreateNode(AbstractPowerTreeNode node)
         {
             throw new NotImplementedException();
         }
 
-        public bool RemoveNode(AbstractTreeNode node)
+        public bool RemoveNode(AbstractPowerTreeNode node)
         {
             throw new NotImplementedException();
         }

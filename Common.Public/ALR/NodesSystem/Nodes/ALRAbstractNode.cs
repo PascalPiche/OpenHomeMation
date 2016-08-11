@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace OHM.Nodes.ALR
 {
-    public abstract class ALRAbstractTreeNode : AbstractTreeNode
+    public abstract class ALRAbstractTreeNode : AbstractPowerTreeNode
     {
         #region Private members
 
@@ -22,9 +22,9 @@ namespace OHM.Nodes.ALR
 
         #region Protected Methods
 
-        protected AbstractTreeNode CreateChildNode(string model, string key, string name, IDictionary<string, object> options = null)
+        protected AbstractPowerTreeNode CreateChildNode(string model, string key, string name, IDictionary<string, object> options = null)
         {
-            AbstractTreeNode result = null;
+            AbstractPowerTreeNode result = null;
             ALRAbstractTreeNode newNode = Interface.CreateNodeInstance(model, key, name, options) as ALRAbstractTreeNode;
             if (newNode != null)
             {
