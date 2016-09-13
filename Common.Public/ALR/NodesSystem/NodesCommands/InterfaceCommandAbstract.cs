@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace OHM.Nodes.Commands.ALR
 {
-    public abstract class InterfaceCommandAbstract : TreeCommandAbstract, IInterfaceCommand
+    public abstract class InterfaceCommandAbstract : AbstractTreeCommand, IInterfaceCommand
     {
 
         #region Protected Ctor

@@ -18,7 +18,7 @@ namespace OHM.SYS
 
         #region Public Ctor
 
-        public OpenHomeMation(IPluginsManager pluginsMng, IDataManager dataMng, ILoggerManager loggerMng, IInterfacesManager interfacesMng, IVrManager vrMng)
+        public OpenHomeMation(IPluginsManager pluginsMng, DataManagerAbstract dataMng, ILoggerManager loggerMng, IInterfacesManager interfacesMng, IVrManager vrMng)
         {
             _ohmSystem = new OhmSystem(interfacesMng, vrMng, loggerMng, dataMng, pluginsMng);
         }
@@ -32,7 +32,7 @@ namespace OHM.SYS
         public bool Start()
         {
             bool result = false;
-            _logger = _ohmSystem.LoggerMng.GetLogger("OHM");
+            _logger = _ohmSystem.LoggerMng.GetLogger("OHM","OHM");
 
             _logger.Debug("Starting");
 

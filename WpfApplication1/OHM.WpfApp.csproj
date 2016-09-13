@@ -61,6 +61,30 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Ctl\DatasManagerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Ctl\homeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Ctl\InterfacesManagerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Ctl\NavTreeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Ctl\PluginsManagerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Ctl\SystemView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -71,6 +95,24 @@
     </Compile>
     <Compile Include="CommandDialog.xaml.cs">
       <DependentUpon>CommandDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ctl\DatasManagerView.xaml.cs">
+      <DependentUpon>DatasManagerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ctl\homeView.xaml.cs">
+      <DependentUpon>homeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ctl\InterfacesManagerView.xaml.cs">
+      <DependentUpon>InterfacesManagerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ctl\NavTreeView.xaml.cs">
+      <DependentUpon>NavTreeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ctl\PluginsManagerView.xaml.cs">
+      <DependentUpon>PluginsManagerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ctl\SystemView.xaml.cs">
+      <DependentUpon>SystemView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Designer\ArgumentsDefinitionDesigner.cs" />
     <Compile Include="Logger\WpfLogger.cs" />

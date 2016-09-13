@@ -2,6 +2,9 @@
 
 namespace OHM.Nodes.Commands
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public sealed class CommandDefinition : ICommandDefinition
     {
         #region Private Members
@@ -13,14 +16,32 @@ namespace OHM.Nodes.Commands
 
         #endregion
 
-        #region Internal Ctor
+        #region Public Ctor
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="name"></param>
         public CommandDefinition(string key, string name)
             : this(key, name, string.Empty) { }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="name"></param>
+        /// <param name="description"></param>
         public CommandDefinition(string key, string name, string description)
             : this(key, name, description, null) { }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="name"></param>
+        /// <param name="description"></param>
+        /// <param name="argumentsDefinition"></param>
         public CommandDefinition(string key, string name, string description, IDictionary<string, IArgumentDefinition> argumentsDefinition)
         {
             _key = key;
@@ -38,16 +59,30 @@ namespace OHM.Nodes.Commands
 
         #region Public Properties
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string Key { get { return _key; } }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string Name { get { return _name; } }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string Description { get { return _description; } }
 
         #endregion
 
         #region Public Api
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="arguments"></param>
+        /// <returns></returns>
         public bool ValidateArguments(IDictionary<string, string> arguments)
         {
             bool result = true;
@@ -80,6 +115,9 @@ namespace OHM.Nodes.Commands
             return result;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public IDictionary<string, IArgumentDefinition> ArgumentsDefinition
         {
             get { return _argumentsDefinition; }

@@ -52,7 +52,7 @@ namespace OHM.Managers.Plugins
         public bool Init(IDataStore data)
         {
             //Spawn internal logger
-            this._logger = _loggerMng.GetLogger("PluginsManager");
+            this._logger = _loggerMng.GetLogger("PluginsManager", "PluginsManager");
             _logger.Debug("Initing");
             //Store internal reference for futur uses
             _data = data;

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace OHM.Common.Public.Test.Commands.Stubs
 {
-    public class TreeCommandAbstractStub : TreeCommandAbstract
+    public class TreeCommandAbstractStub : AbstractTreeCommand
     {
         /*public TreeCommandAbstractStub(string key, string name)
             : base(key, name) { }

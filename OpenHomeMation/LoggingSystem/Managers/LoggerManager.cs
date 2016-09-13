@@ -5,14 +5,18 @@ namespace OHM.Logger
 {
     public class LoggerManager : ILoggerManager
     {
-        public ILogger GetLogger(Type type)
+        public ILogger GetLogger(string repository, Type type)
         {
-            return new DefaultLogger(LogManager.GetLogger(type));
+            log4net.LogManager.CreateRepository(repository);
+
+            return new DefaultLogger(LogManager.GetLogger(repository, type));
         }
 
-        public ILogger GetLogger(string name)
+        public ILogger GetLogger(string repository, string name)
         {
-            return new DefaultLogger(log4net.LogManager.GetLogger(name));
+            log4net.LogManager.CreateRepository(repository);
+
+            return new DefaultLogger(log4net.LogManager.GetLogger(repository, name));
         }
     }
 }

@@ -1,22 +1,20 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OHM.Common.Public.Test.Commands.Stubs;
-using OHM.Common.Public.Test.Nodes.Stubs;
 using OHM.Nodes;
-using System;
-using System.Collections.ObjectModel;
+using OHM.Nodes.ALR;
+using OHM.Nodes.Commands;
 
 namespace OHM.Tests
 {
     [TestClass]
-    public class NodeAbstractUnitTest
+    public class ALRAbstractTreeNodeUnitTest
     {
 
         [TestMethod]
-        public void TestNodeAbstractConstructorDefault()
+        public void TestALRAbstractTreeNodeConstructorDefault()
         {
             string key = "key";
             string name = "name";
-            RalNodeAbstractStub target = new RalNodeAbstractStub(key, name);
+            ALRAbstractTreeNodeStub target = new ALRAbstractTreeNodeStub(key, name);
 
             Assert.IsNotNull(target.Children);
             Assert.AreEqual(0, target.Children.Count);
@@ -46,7 +44,7 @@ namespace OHM.Tests
             string key = "key";
             string name = "name";
 
-            RalNodeAbstractStub target = new RalNodeAbstractStub(key, name);
+            ALRAbstractTreeNodeStub target = new ALRAbstractTreeNodeStub(key, name);
 
             Assert.IsFalse(target.CanExecuteCommand("test"));
         }
@@ -58,7 +56,7 @@ namespace OHM.Tests
             string key = "key";
             string name = "name";
 
-            RalNodeAbstractStub target = new RalNodeAbstractStub(key, name);
+            ALRAbstractTreeNodeStub target = new ALRAbstractTreeNodeStub(key, name);
             target.TestRegisterCommand(new CommandAbstractStub("key2", "name2"));
 
             Assert.IsTrue(target.CanExecuteCommand("key2"));
@@ -71,7 +69,7 @@ namespace OHM.Tests
             string key = "key";
             string name = "name";
 
-            RalNodeAbstractStub target = new RalNodeAbstractStub(key, name);
+            ALRAbstractTreeNodeStub target = new ALRAbstractTreeNodeStub(key, name);
 
             Assert.IsFalse(target.ExecuteCommand(key, "test", null));
         }
@@ -82,10 +80,32 @@ namespace OHM.Tests
             string key = "key";
             string name = "name";
 
-            RalNodeAbstractStub target = new RalNodeAbstractStub(key, name);
+            ALRAbstractTreeNodeStub target = new ALRAbstractTreeNodeStub(key, name);
             target.TestRegisterCommand(new CommandAbstractStub("key2", "name2"));
 
             Assert.IsTrue(target.ExecuteCommand(key, "key2", null));
         }*/
+
+        private class ALRAbstractTreeNodeStub : ALRAbstractTreeNode
+        {
+        public ALRAbstractTreeNodeStub(string key, string name) 
+            : base(key, name)
+        {}
+
+        public bool TestRegisterCommand(AbstractCommand command)
+        {
+            return this.RegisterCommand(command);
+        }
+
+        protected override void RegisterCommands()
+        {
+            //throw new System.NotImplementedException();
+        }
+
+        protected override bool RegisterProperties()
+        {
+            throw new System.NotImplementedException();
+        }
+    }
     }
 }

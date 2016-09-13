@@ -84,7 +84,7 @@ namespace OHM.Common.Public.Test.Commands
             string name = "name5";
             string desc = "Description";
             Dictionary<string, IArgumentDefinition> args = new Dictionary<string, IArgumentDefinition>();
-            args.Add("arg1", new ArgumentDefinition("arg1", "arg1Name", typeof(Int32)));
+            args.Add("arg1", new CommandArgumentDefinition("arg1", "arg1Name", typeof(Int32)));
 
             var target = new CommandDefinition(key, name, desc, args);
 
@@ -100,7 +100,7 @@ namespace OHM.Common.Public.Test.Commands
             string name = "name5";
             string desc = "Description";
             Dictionary<string, IArgumentDefinition> args = new Dictionary<string, IArgumentDefinition>();
-            args.Add("arg1", new ArgumentDefinition("arg1", "arg1Name", typeof(Int32), true));
+            args.Add("arg1", new CommandArgumentDefinition("arg1", "arg1Name", typeof(Int32), true));
 
             var target = new CommandDefinition(key, name, desc, args);
 
@@ -116,7 +116,7 @@ namespace OHM.Common.Public.Test.Commands
             string name = "name5";
             string desc = "Description";
             Dictionary<string, IArgumentDefinition> args = new Dictionary<string, IArgumentDefinition>();
-            args.Add("arg1", new ArgumentDefinition("arg1", "arg1Name", typeof(Int32), true));
+            args.Add("arg1", new CommandArgumentDefinition("arg1", "arg1Name", typeof(Int32), true));
 
             var target = new CommandDefinition(key, name, desc, args);
 
@@ -132,7 +132,7 @@ namespace OHM.Common.Public.Test.Commands
             string name = "name5";
             string desc = "Description";
             Dictionary<string, IArgumentDefinition> args = new Dictionary<string, IArgumentDefinition>();
-            args.Add("arg1", new ArgumentDefinition("arg1", "arg1Name", typeof(Int32), true));
+            args.Add("arg1", new CommandArgumentDefinition("arg1", "arg1Name", typeof(Int32), true));
             var values = new Dictionary<string, string>();
             values.Add("arg1", null);
 
@@ -150,7 +150,7 @@ namespace OHM.Common.Public.Test.Commands
             string name = "name5";
             string desc = "Description";
             Dictionary<string, IArgumentDefinition> args = new Dictionary<string, IArgumentDefinition>();
-            args.Add("arg1", new ArgumentDefinition("arg1", "arg1Name", typeof(Int32), true));
+            args.Add("arg1", new CommandArgumentDefinition("arg1", "arg1Name", typeof(Int32), true));
             var values = new Dictionary<string, string>();
             values.Add("arg1", "toto");
 

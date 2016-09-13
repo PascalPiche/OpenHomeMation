@@ -6,32 +6,31 @@ using System.Runtime.Serialization;
 
 namespace OHM.Data
 {
-    public class FileDataManager : IDataManager
+    public class FileDataManager : DataManagerAbstract
     {
         #region Private Member
         
         private ILoggerManager _loggerMng;
         private ILogger _logger;
         private string _filePath;
-        private IDictionary<String, IDataStore> _loadedDataStore = new Dictionary<string,IDataStore>();
 
         #endregion
 
         #region Public Ctor
 
-        public FileDataManager(ILoggerManager loggerMng, string filePath) {
+        public FileDataManager(string filePath) {
             _filePath = filePath;
-            _loggerMng = loggerMng;
         }
 
         #endregion
 
         #region Public Api
 
-        public bool Init()
+        public override bool Init(ILoggerManager loggerMng)
         {
             bool result = true;
-            _logger = _loggerMng.GetLogger("FileDataManager");
+            _loggerMng = loggerMng;
+            _logger = _loggerMng.GetLogger("FileDataManager", "FileDataManager");
             _logger.Debug("Initing");
 
             if (!Directory.Exists(_filePath))
@@ -55,40 +54,15 @@ namespace OHM.Data
             return result;
         }
 
-        public void Shutdown()
+        public override void Shutdown()
         {
             //Save All Data store
             _logger.Debug("Shutdowning");
-            var enumerator = _loadedDataStore.GetEnumerator();
-            while (enumerator.MoveNext())
-            {
-                SaveDataStore(enumerator.Current.Value);
-            }
+            SaveDataStoreInMemory();
             _logger.Debug("Shutdowned");
         }
 
-        public IDataStore GetDataStore(string key)
-        {
-            IDataStore result = null;
-
-            if (_loadedDataStore.ContainsKey(key)) {
-                result = _loadedDataStore[key];
-            }
-            else 
-            {
-                string path = BuildDataStorePath(key);
-                if (File.Exists(path))
-                {
-                    IDataStore newDataStore = DataStoreFromFile(path);
-                    _loadedDataStore.Add(key, newDataStore);
-                    result = newDataStore;
-                }
-            }
-
-            return result;
-        }
-
-        public IDataStore GetOrCreateDataStore(string key)
+        public override IDataStore GetOrCreateDataStore(string key)
         {
             //Check if DataStore exist
             IDataStore result = GetDataStore(key);
@@ -100,7 +74,6 @@ namespace OHM.Data
                 //Create object
                 DataStore newDataStore = new DataStore(key);
 
-
                 //Init object
                 newDataStore.Init(this);
 
@@ -111,8 +84,8 @@ namespace OHM.Data
                     _logger.Error("New Datastore " + key + " only created in memory");
                 }
 
-                //Add data store to the loaded dataStore
-                _loadedDataStore.Add(key, newDataStore);
+                //Add data store in the memory map
+                StoreDataStoreInMemory(key, newDataStore);
 
                 //Set result to the new value
                 result = newDataStore;
@@ -123,11 +96,36 @@ namespace OHM.Data
             return result;
         }
 
-        public bool SaveDataStore(IDataStore dataStore)
+        public override bool SaveDataStore(IDataStore dataStore)
         {
             _logger.Debug("Saving DataStore: " + dataStore.Key);
             DataStoreToFile(dataStore);
             return true;
+        }
+
+        #endregion
+
+        #region Internal
+
+        internal override IDataStore GetDataStore(string key)
+        {
+            //Check in memory first
+            IDataStore result = GetDataStoreFromMemory(key);
+
+            //Try directly with file on the drive
+            if (result == null)
+            {
+                string path = BuildDataStorePath(key);
+                if (File.Exists(path))
+                {
+                    result = DataStoreFromFile(path);
+
+                    //Store result in memory
+                    StoreDataStoreInMemory(key, result);
+                }
+            }
+
+            return result;
         }
 
         #endregion
@@ -189,6 +187,5 @@ namespace OHM.Data
         }
 
         #endregion
-
     }
 }

@@ -50,7 +50,7 @@ namespace OHM.Managers.ALR
         public bool Init(IDataStore data, IOhmSystemInternal system)
         {
             _data = data;
-            _logger = _loggerMng.GetLogger("InterfacesManager");
+            _logger = _loggerMng.GetLogger("InterfacesManager","InterfacesManager");
             _logger.Debug("Initing");
             _dataRegisteredInterfaces = _data.GetOrCreateDataDictionary("RegisteredInterfaces");
             //_data.Save();
@@ -232,7 +232,7 @@ namespace OHM.Managers.ALR
 
             if (plugin != null)
             {
-                var interfaceLogger = _loggerMng.GetLogger(GetInterfaceLoggerKey(key, plugin));
+                var interfaceLogger = _loggerMng.GetLogger("InterfacesManager", GetInterfaceLoggerKey(key, plugin));
                 var tempResult = plugin.CreateInterface(key);
 
                 if (tempResult != null)

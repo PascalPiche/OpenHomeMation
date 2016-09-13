@@ -46,7 +46,11 @@ namespace OHM.Nodes
 
         #endregion
 
+        #region Public Events
+
         public event PropertyChangedEventHandler PropertyChanged;
+
+        #endregion
 
         #region Public Properties
 

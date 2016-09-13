@@ -72,6 +72,7 @@ namespace WpfApplication1.MV
             set
             {
                 selectedNode = value;
+                NotifyPropertyChanged("IsHomeViewVisible");
                 NotifyPropertyChanged("IsSystemViewVisible");
                 NotifyPropertyChanged("IsDatasManagerViewVisible");
                 NotifyPropertyChanged("IsPluginsManagerViewVisible");
@@ -82,15 +83,30 @@ namespace WpfApplication1.MV
             }
         }
 
+        private Visibility IsVisibleWhenSelectedNodeTagMatch(string value)
+        {
+            if (selectedNode is TreeViewItem && 
+                ((TreeViewItem)selectedNode).Tag != null &&
+                ((TreeViewItem)selectedNode).Tag.ToString() == value)
+            {
+                return Visibility.Visible;
+            }
+            return Visibility.Collapsed;
+        }
+
+        public Visibility IsHomeViewVisible
+        {
+            get
+            {
+                return IsVisibleWhenSelectedNodeTagMatch("home");
+            }
+        }
+
         public Visibility IsSystemViewVisible
         {
             get
             {
-                if (selectedNode is TreeViewItem && ((TreeViewItem)selectedNode).Tag.ToString() == "system")
-                {
-                    return Visibility.Visible;
-                }
-                return Visibility.Collapsed;
+                return IsVisibleWhenSelectedNodeTagMatch("system");
             }
         }
 
@@ -98,11 +114,7 @@ namespace WpfApplication1.MV
         {
             get
             {
-                if (selectedNode is TreeViewItem && ((TreeViewItem)selectedNode).Tag.ToString() == "datasManager")
-                {
-                    return Visibility.Visible;
-                }
-                return Visibility.Collapsed;
+                return IsVisibleWhenSelectedNodeTagMatch("datasManager");
             }
         }
 
@@ -110,11 +122,7 @@ namespace WpfApplication1.MV
         {
             get
             {
-                if (selectedNode is TreeViewItem && ((TreeViewItem)selectedNode).Tag.ToString() == "pluginsManager")
-                {
-                    return Visibility.Visible;
-                }
-                return Visibility.Collapsed;
+                return IsVisibleWhenSelectedNodeTagMatch("pluginsManager");
             }
         }
 
@@ -122,11 +130,7 @@ namespace WpfApplication1.MV
         {
             get
             {
-                if (selectedNode is TreeViewItem && ((TreeViewItem)selectedNode).Tag.ToString() == "interfacesManager")
-                {
-                    return Visibility.Visible;
-                }
-                return Visibility.Collapsed;
+                return IsVisibleWhenSelectedNodeTagMatch("interfacesManager");
             }
         }
 
@@ -146,7 +150,7 @@ namespace WpfApplication1.MV
         {
             get
             {
-                if (IsInterfaceViewVisible != Visibility.Visible && selectedNode is ALRAbstractTreeNode)
+                if (!(selectedNode is IALRInterface) && selectedNode is ALRAbstractTreeNode)
                 {
                     return Visibility.Visible;
                 }
@@ -231,7 +235,7 @@ namespace WpfApplication1.MV
         internal void start(TextBox txt)
         {
             ILoggerManager loggerMng = new WpfLoggerManager(txt);
-            IDataManager dataMng = new FileDataManager(loggerMng, AppDomain.CurrentDomain.BaseDirectory + "\\data\\");
+            DataManagerAbstract dataMng = new FileDataManager(AppDomain.CurrentDomain.BaseDirectory + "\\data\\");
             IPluginsManager pluginMng = new PluginsManager(loggerMng, AppDomain.CurrentDomain.BaseDirectory + "\\plugins\\");
             IInterfacesManager interfacesMng = new InterfacesManager(loggerMng, pluginMng);
             IVrManager vrMng = new VrManager(loggerMng, pluginMng);

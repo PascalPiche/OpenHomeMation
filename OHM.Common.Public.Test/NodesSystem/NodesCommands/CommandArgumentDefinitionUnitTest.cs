@@ -6,14 +6,14 @@ using System.Collections.Generic;
 namespace OHM.Tests
 {
     [TestClass]
-    public class ArgurmentDefinitionUnitTest
+    public class CommandArgurmentDefinitionUnitTest
     {
         
         [TestMethod]
         public void TestArgumentDefinitionConstructorDefault()
         {
             string key = "key";
-            var target = new ArgumentDefinition(key, "name", typeof(string));
+            var target = new CommandArgumentDefinition(key, "name", typeof(string));
 
             Assert.AreEqual(key, target.Key);
             Assert.AreEqual("name", target.Name);
@@ -26,7 +26,7 @@ namespace OHM.Tests
         public void TestArgumentDefinitionConstructorRequired()
         {
             string key = "tata";
-            var target = new ArgumentDefinition(key, "toto", typeof(Int32), true);
+            var target = new CommandArgumentDefinition(key, "toto", typeof(Int32), true);
 
             Assert.AreEqual(key, target.Key);
             Assert.AreEqual("toto", target.Name);
@@ -34,13 +34,11 @@ namespace OHM.Tests
             Assert.AreEqual(typeof(Int32), target.Type);
         }
 
-
-
         [TestMethod]
         public void TestArgumentDefinitionTryGetBoolWithBool()
         {
             string key = "tata";
-            var target = new ArgumentDefinition(key, "toto", typeof(bool), true);
+            var target = new CommandArgumentDefinition(key, "toto", typeof(bool), true);
             bool targetValue = true;
             Boolean result = false;
             bool outValue = true;
@@ -57,7 +55,7 @@ namespace OHM.Tests
         public void TestArgumentDefinitionTryGetBoolWithString()
         {
             string key = "tata";
-            var target = new ArgumentDefinition(key, "toto", typeof(bool), true);
+            var target = new CommandArgumentDefinition(key, "toto", typeof(bool), true);
             string inputValue = "true";
             bool targetValue = true;
 
@@ -76,7 +74,7 @@ namespace OHM.Tests
         public void TestArgumentDefinitionTryGetBoolWithInvalidString()
         {
             string key = "tata";
-            var target = new ArgumentDefinition(key, "toto", typeof(bool), true);
+            var target = new CommandArgumentDefinition(key, "toto", typeof(bool), true);
             string inputValue = "abc";
             bool targetValue = false;
 
@@ -91,14 +89,11 @@ namespace OHM.Tests
             Assert.AreEqual(targetValue, outValue);
         }
 
-
-
-
         [TestMethod]
         public void TestArgumentDefinitionTryGetDoubleWithDouble()
         {
             string key = "tata";
-            var target = new ArgumentDefinition(key, "toto", typeof(double), true);
+            var target = new CommandArgumentDefinition(key, "toto", typeof(double), true);
 
             double targetValue = 25.756;
 
@@ -117,7 +112,7 @@ namespace OHM.Tests
         public void TestArgumentDefinitionTryGetDoubleWithString()
         {
             string key = "tata";
-            var target = new ArgumentDefinition(key, "toto", typeof(double), true);
+            var target = new CommandArgumentDefinition(key, "toto", typeof(double), true);
             string inputValue = "24.75";
             double targetValue = 24.75;
 
@@ -136,7 +131,7 @@ namespace OHM.Tests
         public void TestArgumentDefinitionTryGetDoubleWithInvalidString()
         {
             string key = "tata";
-            var target = new ArgumentDefinition(key, "toto", typeof(double), true);
+            var target = new CommandArgumentDefinition(key, "toto", typeof(double), true);
             string inputValue = "abc";
             double targetValue = 0;
 
@@ -151,15 +146,11 @@ namespace OHM.Tests
             Assert.AreEqual(targetValue, outValue);
         }
 
-
-
-
-
         [TestMethod]
         public void TestArgumentDefinitionTryGetUInt16WithUInt16()
         {
             string key = "tata";
-            var target = new ArgumentDefinition(key, "toto", typeof(UInt16), true);
+            var target = new CommandArgumentDefinition(key, "toto", typeof(UInt16), true);
             UInt16 targetValue = 30;
             Boolean result = false;
 
@@ -177,7 +168,7 @@ namespace OHM.Tests
         public void TestArgumentDefinitionTryGetUInt16WithString()
         {
             string key = "tata2";
-            var target = new ArgumentDefinition(key, "toto", typeof(UInt16), true);
+            var target = new CommandArgumentDefinition(key, "toto", typeof(UInt16), true);
 
             String inputValue = "22";
             UInt16 targetValue = 22;
@@ -197,7 +188,7 @@ namespace OHM.Tests
         public void TestArgumentDefinitionTryGetUInt16Invalid()
         {
             string key = "tata3";
-            var target = new ArgumentDefinition(key, "toto", typeof(UInt16), true);
+            var target = new CommandArgumentDefinition(key, "toto", typeof(UInt16), true);
 
             String inputValue = "robert";
             UInt16 targetValue = 0;
@@ -213,15 +204,11 @@ namespace OHM.Tests
             Assert.AreEqual(targetValue, outValue);
         }
 
-
-
-
-
         [TestMethod]
         public void TestArgumentDefinitionTryGetInt16WithInt16()
         {
             string key = "tata";
-            var target = new ArgumentDefinition(key, "toto", typeof(Int16), true);
+            var target = new CommandArgumentDefinition(key, "toto", typeof(Int16), true);
             Int16 targetValue = 65;
             Boolean result = false;
             Int16 outValue = -1;
@@ -238,7 +225,7 @@ namespace OHM.Tests
         public void TestArgumentDefinitionTryGetInt16WithString()
         {
             string key = "tata2";
-            var target = new ArgumentDefinition(key, "toto", typeof(Int16), true);
+            var target = new CommandArgumentDefinition(key, "toto", typeof(Int16), true);
 
             String inputValue = "40";
             Int16 targetValue = 40;
@@ -257,7 +244,7 @@ namespace OHM.Tests
         public void TestArgumentDefinitionTryGetInt16WithDictionnaryObject()
         {
             string key = "tata2";
-            var target = new ArgumentDefinition(key, "toto", typeof(Int16), true);
+            var target = new CommandArgumentDefinition(key, "toto", typeof(Int16), true);
 
             object inputValue = "30";
             Int32 targetValue = 30;
@@ -281,7 +268,7 @@ namespace OHM.Tests
         public void TestArgumentDefinitionTryGetInt16WithDictionnaryString()
         {
             string key = "tata2";
-            var target = new ArgumentDefinition(key, "toto", typeof(Int16), true);
+            var target = new CommandArgumentDefinition(key, "toto", typeof(Int16), true);
 
             String inputValue = "20";
             Int16 targetValue = 20;
@@ -305,7 +292,7 @@ namespace OHM.Tests
         public void TestArgumentDefinitionTryGetInt16Invalid()
         {
             string key = "tata3";
-            var target = new ArgumentDefinition(key, "toto", typeof(Int16), true);
+            var target = new CommandArgumentDefinition(key, "toto", typeof(Int16), true);
 
             Object inputValue = "rob";
             Int16 targetValue = 0;
@@ -323,14 +310,11 @@ namespace OHM.Tests
             Assert.AreEqual(targetValue, outValue);
         }
 
-
-
-
         [TestMethod]
         public void TestArgumentDefinitionTryGetUInt32WithUInt32()
         {
             string key = "tata";
-            var target = new ArgumentDefinition(key, "toto", typeof(UInt32), true);
+            var target = new CommandArgumentDefinition(key, "toto", typeof(UInt32), true);
             UInt32 targetValue = 30;
             Boolean result = false;
 
@@ -348,7 +332,7 @@ namespace OHM.Tests
         public void TestArgumentDefinitionTryGetUInt32WithString()
         {
             string key = "tata2";
-            var target = new ArgumentDefinition(key, "toto", typeof(UInt32), true);
+            var target = new CommandArgumentDefinition(key, "toto", typeof(UInt32), true);
 
             String inputValue = "222344";
             UInt32 targetValue = 222344;
@@ -368,7 +352,7 @@ namespace OHM.Tests
         public void TestArgumentDefinitionTryGetUInt32Invalid()
         {
             string key = "tata3";
-            var target = new ArgumentDefinition(key, "toto", typeof(UInt32), true);
+            var target = new CommandArgumentDefinition(key, "toto", typeof(UInt32), true);
 
             String inputValue = "robert";
             UInt32 targetValue = 0;
@@ -384,14 +368,11 @@ namespace OHM.Tests
             Assert.AreEqual(targetValue, outValue);
         }
 
-
-
-
         [TestMethod]
         public void TestArgumentDefinitionTryGetInt32WithInt32()
         {
             string key = "tata";
-            var target = new ArgumentDefinition(key, "toto", typeof(Int32), true);
+            var target = new CommandArgumentDefinition(key, "toto", typeof(Int32), true);
             Int32 targetValue = 65;            
             Boolean result = false;
             Int32 outValue = -1;
@@ -408,7 +389,7 @@ namespace OHM.Tests
         public void TestArgumentDefinitionTryGetInt32WithString()
         {
             string key = "tata2";
-            var target = new ArgumentDefinition(key, "toto", typeof(Int32), true);
+            var target = new CommandArgumentDefinition(key, "toto", typeof(Int32), true);
 
             String inputValue = "65";
             Int32 targetValue = 65;
@@ -427,7 +408,7 @@ namespace OHM.Tests
         public void TestArgumentDefinitionTryGetInt32WithDictionnaryObject()
         {
             string key = "tata2";
-            var target = new ArgumentDefinition(key, "toto", typeof(Int32), true);
+            var target = new CommandArgumentDefinition(key, "toto", typeof(Int32), true);
 
             String inputValue = "65";
             Int32 targetValue = 65;
@@ -451,7 +432,7 @@ namespace OHM.Tests
         public void TestArgumentDefinitionTryGetInt32WithDictionnaryString()
         {
             string key = "tata2";
-            var target = new ArgumentDefinition(key, "toto", typeof(Int32), true);
+            var target = new CommandArgumentDefinition(key, "toto", typeof(Int32), true);
 
             String inputValue = "65";
             Int32 targetValue = 65;
@@ -475,7 +456,7 @@ namespace OHM.Tests
         public void TestArgumentDefinitionTryGetInt32Invalid()
         {
             string key = "tata3";
-            var target = new ArgumentDefinition(key, "toto", typeof(Int32), true);
+            var target = new CommandArgumentDefinition(key, "toto", typeof(Int32), true);
 
             Int64 inputValue = 65;
             Int32 targetValue = 0;
@@ -495,14 +476,11 @@ namespace OHM.Tests
             Assert.AreEqual(targetValue, outValue);
         }
 
-
-
-
         [TestMethod]
         public void TestArgumentDefinitionTryGetUInt64WithUInt64()
         {
             string key = "tata";
-            var target = new ArgumentDefinition(key, "toto", typeof(UInt64), true);
+            var target = new CommandArgumentDefinition(key, "toto", typeof(UInt64), true);
             UInt64 targetValue = 6234232345;
             Boolean result = false;
 
@@ -520,7 +498,7 @@ namespace OHM.Tests
         public void TestArgumentDefinitionTryGetUInt64WithString()
         {
             string key = "tata2";
-            var target = new ArgumentDefinition(key, "toto", typeof(UInt64), true);
+            var target = new CommandArgumentDefinition(key, "toto", typeof(UInt64), true);
 
             String inputValue = "652342343";
             UInt64 targetValue = 652342343;
@@ -540,7 +518,7 @@ namespace OHM.Tests
         public void TestArgumentDefinitionTryGetUInt64Invalid()
         {
             string key = "tata3";
-            var target = new ArgumentDefinition(key, "toto", typeof(UInt64), true);
+            var target = new CommandArgumentDefinition(key, "toto", typeof(UInt64), true);
 
             String inputValue = "robert";
             UInt64 targetValue = 0;
@@ -555,15 +533,12 @@ namespace OHM.Tests
             Assert.AreEqual(false, result);
             Assert.AreEqual(targetValue, outValue);
         }
-
-
-
         
         [TestMethod]
         public void TestArgumentDefinitionTryGetInt64WithInt64()
         {
             string key = "tata";
-            var target = new ArgumentDefinition(key, "toto", typeof(Int64), true);
+            var target = new CommandArgumentDefinition(key, "toto", typeof(Int64), true);
             Int64 targetValue = 6234232345;
             Boolean result = false;
          
@@ -581,7 +556,7 @@ namespace OHM.Tests
         public void TestArgumentDefinitionTryGetInt64WithString()
         {
             string key = "tata2";
-            var target = new ArgumentDefinition(key, "toto", typeof(Int64), true);
+            var target = new CommandArgumentDefinition(key, "toto", typeof(Int64), true);
 
             String inputValue = "652342343";
             Int64 targetValue = 652342343;
@@ -601,7 +576,7 @@ namespace OHM.Tests
         public void TestArgumentDefinitionTryGetInt64Invalid()
         {
             string key = "tata3";
-            var target = new ArgumentDefinition(key, "toto", typeof(Int64), true);
+            var target = new CommandArgumentDefinition(key, "toto", typeof(Int64), true);
 
             String inputValue = "robert";
             Int64 targetValue = 0;
@@ -617,15 +592,11 @@ namespace OHM.Tests
             Assert.AreEqual(targetValue, outValue);
         }
 
-
-
-
-
         [TestMethod]
         public void TestArgumentDefinitionTryGetString()
         {
             string key = "tata4";
-            var target = new ArgumentDefinition(key, "toto", typeof(String), true);
+            var target = new CommandArgumentDefinition(key, "toto", typeof(String), true);
 
             String inputValue = "allo";
             String targetValue = "allo";
@@ -646,7 +617,7 @@ namespace OHM.Tests
         public void TestArgumentDefinitionTryGetStringInvalid()
         {
             string key = "tata5";
-            var target = new ArgumentDefinition(key, "toto", typeof(String), true);
+            var target = new CommandArgumentDefinition(key, "toto", typeof(String), true);
 
             Int64 inputValue = 65;
             String targetValue = "65";
@@ -665,16 +636,11 @@ namespace OHM.Tests
             Assert.IsNull(outValue);
         }
 
-
-
-
-
-
         [TestMethod]
         public void TestArgumentDefinitionValidateValueGoodWithInt32()
         {
             string key = "tata6";
-            var target = new ArgumentDefinition(key, "toto", typeof(Int32), true);
+            var target = new CommandArgumentDefinition(key, "toto", typeof(Int32), true);
 
             Int32 targetValue = 65;
             Dictionary<string, object> tempObject = new Dictionary<string, object>();
@@ -692,7 +658,7 @@ namespace OHM.Tests
         public void TestArgumentDefinitionValidateValueGoodWithString()
         {
             string key = "tata7";
-            var target = new ArgumentDefinition(key, "toto", typeof(String), true);
+            var target = new CommandArgumentDefinition(key, "toto", typeof(String), true);
 
             String targetValue = "test";
             Dictionary<string, object> tempObject = new Dictionary<String, object>();

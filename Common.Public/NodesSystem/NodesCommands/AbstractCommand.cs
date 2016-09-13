@@ -2,7 +2,7 @@
 
 namespace OHM.Nodes.Commands
 {
-    public abstract class CommandAbstract : ICommand
+    public abstract class AbstractCommand : ICommand
     {
         #region Private Members
 
@@ -13,16 +13,38 @@ namespace OHM.Nodes.Commands
 
         #region Protected Ctor
 
-        protected CommandAbstract(string key, string name)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="name"></param>
+        protected AbstractCommand(string key, string name)
             : this(key, name, string.Empty) { }
 
-        protected CommandAbstract(string key, string name, string description)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="name"></param>
+        /// <param name="description"></param>
+        protected AbstractCommand(string key, string name, string description)
             : this(key, name, description, null) { }
 
-        protected CommandAbstract(string key, string name, string description, IDictionary<string, IArgumentDefinition> argumentsDefinition)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="name"></param>
+        /// <param name="description"></param>
+        /// <param name="argumentsDefinition"></param>
+        protected AbstractCommand(string key, string name, string description, IDictionary<string, IArgumentDefinition> argumentsDefinition)
             : this(new CommandDefinition(key, name, description, argumentsDefinition)) { }
 
-        protected CommandAbstract(ICommandDefinition definition)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="definition"></param>
+        protected AbstractCommand(ICommandDefinition definition)
         {
             _definition = definition;
         }
@@ -31,12 +53,25 @@ namespace OHM.Nodes.Commands
 
         #region Public
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string Key { get { return _definition.Key; } }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string Name { get { return _definition.Name; } }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public ICommandDefinition Definition { get { return _definition; } }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public virtual bool CanExecute()
         {
             bool result = false;
@@ -48,6 +83,11 @@ namespace OHM.Nodes.Commands
             return result;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="arguments"></param>
+        /// <returns></returns>
         public bool Execute(IDictionary<string, string> arguments)
         {
             bool result = false;
@@ -62,8 +102,16 @@ namespace OHM.Nodes.Commands
 
         #region Protected
 
+        /// <summary>
+        /// 
+        /// </summary>
         protected ICommandsNode Node { get { return _node; } }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="arguments"></param>
+        /// <returns></returns>
         protected abstract bool RunImplementation(IDictionary<string, string> arguments);
 
         #endregion

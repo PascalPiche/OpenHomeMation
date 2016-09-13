@@ -41,7 +41,7 @@ namespace OHM.Nodes
             return true;
         }
 
-        protected bool RegisterCommand(CommandAbstract command)
+        protected bool RegisterCommand(AbstractCommand command)
         {
             bool result = false;
             if (!_commandsDic.ContainsKey(command.Key))

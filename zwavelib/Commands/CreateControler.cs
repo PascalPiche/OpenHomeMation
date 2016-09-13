@@ -12,7 +12,7 @@ namespace ZWaveLib.Commands
             this.Definition.ArgumentsDefinition.Add
             (
                 "port",
-                new ArgumentDefinition(
+                new CommandArgumentDefinition(
                     "port",
                     "Port",
                     typeof(int),

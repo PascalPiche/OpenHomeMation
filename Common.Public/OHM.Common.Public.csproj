@@ -44,8 +44,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NodesSystem\NodesCommands\ArgumentDefinition.cs" />
-    <Compile Include="NodesSystem\NodesCommands\CommandAbstract.cs">
+    <Compile Include="NodesSystem\NodesCommands\CommandArgumentDefinition.cs" />
+    <Compile Include="NodesSystem\NodesCommands\AbstractCommand.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="NodesSystem\NodesCommands\CommandDefinition.cs" />
@@ -55,7 +55,15 @@
     </Compile>
     <Compile Include="NodesSystem\NodesCommands\_Interfaces\ICommandDefinition.cs" />
     <Compile Include="NodesSystem\NodesCommands\_Interfaces\ITreeCommand.cs" />
-    <Compile Include="NodesSystem\NodesCommands\TreeCommandAbstract.cs" />
+    <Compile Include="NodesSystem\NodesCommands\AbstractTreeCommand.cs" />
+    <Compile Include="NodesSystem\Nodes\AbstractBasicNode.cs" />
+    <Compile Include="NodesSystem\Nodes\AbstractPowerNode.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NodesSystem\Nodes\_Interfaces\IBasicNode.cs" />
+    <Compile Include="NodesSystem\Nodes\_Interfaces\INode.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="NodesSystem\Nodes\_Interfaces\IPowerNode.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -67,7 +75,7 @@
     <Compile Include="NodesSystem\Nodes\_Interfaces\IPropertiesNode.cs" />
     <Compile Include="NodesSystem\Nodes\_Interfaces\ICommandsTreeNode.cs" />
     <Compile Include="NodesSystem\Nodes\_Interfaces\IPropertiesTreeNode.cs" />
-    <Compile Include="NodesSystem\Nodes\AbstractTreeNode.cs" />
+    <Compile Include="NodesSystem\Nodes\AbstractPowerTreeNode.cs" />
     <Compile Include="ALR\NodesSystem\Nodes\ALRBasicNode.cs" />
     <Compile Include="ALR\NodesSystem\NodesCommands\_Interfaces\IInterfaceCommand.cs" />
     <Compile Include="ALR\NodesSystem\NodesCommands\InterfaceCommandAbstract.cs" />
@@ -75,16 +83,14 @@
     <Compile Include="DataSystem\_Interfaces\IDataStore.cs" />
     <Compile Include="ALR\NodesSystem\Nodes\ALRAbstractNode.cs" />
     <Compile Include="ALR\NodesSystem\Nodes\ALRInterfaceState.cs" />
-    <Compile Include="NodesSystem\Nodes\_Interfaces\INode.cs" />
     <Compile Include="ALR\NodesSystem\Nodes\_Interfaces\IALRInterface.cs" />
     <Compile Include="LoggingSystem\_Interfaces\ILogger.cs" />
     <Compile Include="NodesSystem\NodesProperties\_Interfaces\INodeProperty.cs" />
-    <Compile Include="NodesSystem\Nodes\AbstractNode.cs" />
     <Compile Include="ALR\NodesSystem\Nodes\ALRInterfaceAbstractNode.cs" />
     <Compile Include="NodesSystem\NodesProperties\NodeProperty.cs" />
     <Compile Include="NodesSystem\Nodes\NodeStates.cs" />
     <Compile Include="PluginsSystem\PluginStates.cs" />
-    <Compile Include="System\_Interfaces\IOhmSystem.cs" />
+    <Compile Include="System\_Interfaces\IOhmSystemPlugins.cs" />
     <Compile Include="PluginsSystem\_Interfaces\IPlugin.cs" />
     <Compile Include="PluginsSystem\PluginBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -110,7 +116,6 @@
     <None Include="NodesSystem\NodesProperties\_Diagrams\Graph-201-08-04.dgml" />
     <None Include="NodesSystem\Nodes\_Diagrams\Graph-NodeAbstract-2016-07-21.dgml" />
     <None Include="NodesSystem\Nodes\_Diagrams\Graph-NodeAbstract-2016-07-25.dgml" />
-    <None Include="NodesSystem\Nodes\_Diagrams\Relations-expanded.dgml" />
     <None Include="NodesSystem\Nodes\_Diagrams\Relations-simple.dgml" />
     <None Include="PluginsSystem\_Diagrams\GraphExpanded-201-08-0.dgml" />
     <None Include="ALR\NodesSystem\NodesCommands\_Diagrams\ClassDiagram1.cd" />

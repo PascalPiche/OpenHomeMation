@@ -76,6 +76,7 @@ namespace WpfApplication1
             InitializeComponent();
             vm.start(txt);
             this.DataContext = vm;
+            navTreeView.DataContext = vm;
         }
 
         #endregion
@@ -175,12 +176,12 @@ namespace WpfApplication1
         private void ExecuteVrAddNodeCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             //Create fake commandDefinition for commandDialog
-            Dictionary<string, IArgumentDefinition> argumentsDefinitions = new Dictionary<string,IArgumentDefinition>();
-            argumentsDefinitions.Add("nodeType", new ArgumentDefinition("nodeType", "Node Type", typeof(string), true));
-            argumentsDefinitions.Add("key", new ArgumentDefinition("key", "Key", typeof(string), true));
-            argumentsDefinitions.Add("name", new ArgumentDefinition("name", "Name", typeof(string), true));
+            Dictionary<string, IArgumentDefinition> comArgDef = new Dictionary<string,IArgumentDefinition>();
+            comArgDef.Add("nodeType", new CommandArgumentDefinition("nodeType", "Node Type", typeof(string), true));
+            comArgDef.Add("key", new CommandArgumentDefinition("key", "Key", typeof(string), true));
+            comArgDef.Add("name", new CommandArgumentDefinition("name", "Name", typeof(string), true));
 
-            ICommandDefinition commandDefinition = new CommandDefinition("addVrNode", "Add Vr Node", "", argumentsDefinitions);
+            ICommandDefinition commandDefinition = new CommandDefinition("addVrNode", "Add Vr Node", "", comArgDef);
 
             Dictionary<string, string> arguments;
 
@@ -193,17 +194,16 @@ namespace WpfApplication1
                     MessageBox.Show("The command was not successfully executed", "Command error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
                 }
             }
-
         }
 
         #endregion
 
         #region Private Handler 
 
-        private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        /*private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             vm.SelectedNode = e.NewValue;
-        }
+        }*/
 
         #endregion
 

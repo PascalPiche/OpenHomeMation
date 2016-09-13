@@ -33,7 +33,7 @@ namespace OHM.Managers.ALV
         public bool Init(IDataStore data, IOhmSystemInternal system)
         {
             _data = data;
-            _logger = _loggerMng.GetLogger("InterfacesManager");
+            _logger = _loggerMng.GetLogger("VrManager","VrManager");
             //Launch Main Vr Node
             
 

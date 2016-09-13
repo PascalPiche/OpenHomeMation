@@ -22,10 +22,10 @@ namespace WUnderground.Commands
         {
             _apiKey = apiKey;
 
-            this.Definition.ArgumentsDefinition.Add("name",     new ArgumentDefinition("name",  "Name",     typeof(string), true));
-            this.Definition.ArgumentsDefinition.Add("zip",      new ArgumentDefinition("zip",   "Zip",      typeof(int),    true));
-            this.Definition.ArgumentsDefinition.Add("magic",    new ArgumentDefinition("magic", "Magic",    typeof(int),    true));
-            this.Definition.ArgumentsDefinition.Add("wmo",      new ArgumentDefinition("wmo",   "Wmo",      typeof(string), true));
+            this.Definition.ArgumentsDefinition.Add("name", new CommandArgumentDefinition("name", "Name", typeof(string), true));
+            this.Definition.ArgumentsDefinition.Add("zip", new CommandArgumentDefinition("zip", "Zip", typeof(int), true));
+            this.Definition.ArgumentsDefinition.Add("magic", new CommandArgumentDefinition("magic", "Magic", typeof(int), true));
+            this.Definition.ArgumentsDefinition.Add("wmo", new CommandArgumentDefinition("wmo", "Wmo", typeof(string), true));
         }
 
         protected override bool RunImplementation(IDictionary<string, string> arguments)

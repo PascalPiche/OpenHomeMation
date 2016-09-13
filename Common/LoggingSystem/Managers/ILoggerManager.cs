@@ -5,8 +5,8 @@ namespace OHM.Logger
     public interface ILoggerManager
     {
 
-        ILogger GetLogger(Type type);
+        ILogger GetLogger(string repository, Type type);
 
-        ILogger GetLogger(String name);
+        ILogger GetLogger(string repository, string name);
     }
 }

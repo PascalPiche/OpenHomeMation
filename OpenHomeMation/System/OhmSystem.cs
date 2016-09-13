@@ -19,7 +19,7 @@ namespace OHM.SYS
         private ILogger _logger;
         private ILoggerManager _loggerMng;
         private IInterfacesManager _interfacesMng;
-        private IDataManager _dataMng;
+        private DataManagerAbstract _dataMng;
         private IVrManager _vrMng;
         private IPluginsManager _pluginsMng;
         private IAPI _api;
@@ -28,7 +28,7 @@ namespace OHM.SYS
 
         #region Internal Ctor
 
-        internal OhmSystem(IInterfacesManager interfacesMng, IVrManager vrMng, ILoggerManager loggerMng, IDataManager dataMng, IPluginsManager pluginsMng)
+        internal OhmSystem(IInterfacesManager interfacesMng, IVrManager vrMng, ILoggerManager loggerMng, DataManagerAbstract dataMng, IPluginsManager pluginsMng)
         {
             _loggerMng = loggerMng;
             _interfacesMng = interfacesMng;
@@ -56,7 +56,7 @@ namespace OHM.SYS
 
         public IOhmSystemInstallGateway GetInstallGateway(Plugins.IPlugin plugin)
         {
-            return new OhmSystemInstallGateway(plugin, _loggerMng.GetLogger(plugin.Name), _interfacesMng, _vrMng);
+            return new OhmSystemInstallGateway(plugin, _loggerMng.GetLogger("PluginsManager", plugin.Name), _interfacesMng, _vrMng);
         }
 
         public IOhmSystemInterfaceGateway GetInterfaceGateway(IALRInterface interf)
@@ -66,7 +66,7 @@ namespace OHM.SYS
 
         public IOhmSystemUnInstallGateway GetUnInstallGateway(Plugins.IPlugin plugin)
         {
-            return new OhmSystemUnInstallGateway(plugin, _loggerMng.GetLogger(plugin.Name), _interfacesMng);
+            return new OhmSystemUnInstallGateway(plugin, _loggerMng.GetLogger("PluginsManager", plugin.Name), _interfacesMng);
         }
 
         public IDataStore GetOrCreateDataStore(string key)
@@ -108,6 +108,9 @@ namespace OHM.SYS
                 {
                     switch (splitedKey[0])
                     {
+                        case "datas":
+                            commandResult = ExecuteDatasTree(splitedKey, arguments);
+                            break;
                         case "plugins":
                             commandResult = ExecutePluginsTree(splitedKey, arguments);
                             break;
@@ -135,6 +138,25 @@ namespace OHM.SYS
             #endregion
 
             #region Private Methods
+
+            private IAPIResult ExecuteDatasTree(string[] splitedKey, Dictionary<string, string> arguments)
+            {
+                IAPIResult result = new APIResultFalse();
+
+                if (splitedKey[1] == "list")
+                {
+                    if (splitedKey.Length > 3)
+                    {
+                        if (splitedKey[2] == "store")
+                        {
+                            //_system._dataMng.
+                        }
+                    }
+                }
+                    
+
+                return result;
+            }
 
             private IAPIResult ExecutePluginsTree(string[] splitedKey, Dictionary<string, string> arguments)
             {
@@ -400,11 +422,11 @@ namespace OHM.SYS
         internal bool Start()
         {
             bool result = false;
-            _logger = _loggerMng.GetLogger("OhmSystem");
+            _logger = _loggerMng.GetLogger("OHM", "OhmSystem");
             result = true;
 
             //Init DataManager
-            if (!DataMng.Init())
+            if (!DataMng.Init(_loggerMng))
             {
                 _logger.Fatal("DataManager failed Init. Abording start");
                 return false;

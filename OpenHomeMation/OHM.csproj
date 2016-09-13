@@ -63,14 +63,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataSystem\DataDictionary.cs" />
+    <Compile Include="DataSystem\DataManagerAbstract.cs" />
     <Compile Include="DataSystem\DataStore.cs" />
+    <Compile Include="DataSystem\FileDataManager.cs" />
     <Compile Include="DataSystem\Value\DataValueBool.cs" />
     <Compile Include="DataSystem\Value\DataValueDictionary.cs" />
     <Compile Include="DataSystem\Value\DataValueInt.cs" />
     <Compile Include="DataSystem\Value\DataValueString.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DataSystem\FileDataManager.cs" />
     <Compile Include="DataSystem\Value\_Interfaces\IDataValue.cs" />
     <Compile Include="ALR\Managers\IInterfacesManagerInternal.cs" />
     <Compile Include="ALR\Managers\InterfacesManager.cs" />

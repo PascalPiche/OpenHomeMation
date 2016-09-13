@@ -1,9 +1,10 @@
-﻿
+﻿using OHM.Logger;
+
 namespace OHM.Data
 {
     public interface IDataManager
     {
-        bool Init();
+        bool Init(ILoggerManager loggerMng);
 
         void Shutdown();
 

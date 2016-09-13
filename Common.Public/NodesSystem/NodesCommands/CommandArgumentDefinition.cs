@@ -3,7 +3,10 @@ using System.Collections.Generic;
 
 namespace OHM.Nodes.Commands
 {
-    public sealed class ArgumentDefinition : IArgumentDefinition
+    /// <summary>
+    /// 
+    /// </summary>
+    public sealed class CommandArgumentDefinition : IArgumentDefinition
     {
         #region Private Members
 
@@ -16,9 +19,22 @@ namespace OHM.Nodes.Commands
 
         #region Public Ctor
 
-        public ArgumentDefinition(string key, string name, Type t) : this(key, name, t, false) { }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="name"></param>
+        /// <param name="t"></param>
+        public CommandArgumentDefinition(string key, string name, Type t) : this(key, name, t, false) { }
 
-        public ArgumentDefinition(string key, string name, Type t, bool required)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="name"></param>
+        /// <param name="t"></param>
+        /// <param name="required"></param>
+        public CommandArgumentDefinition(string key, string name, Type t, bool required)
         {
             _key = key;
             _name = name;
@@ -30,18 +46,35 @@ namespace OHM.Nodes.Commands
 
         #region Public Properties
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string Key { get { return _key; } }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string Name { get { return _name; } }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public Type Type { get { return _type; } }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public bool Required { get { return _required; } }
 
         #endregion
 
         #region Public API
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public bool ValidateValue(object value)
         {
             //TODO: NEED TO CHECK
@@ -61,6 +94,12 @@ namespace OHM.Nodes.Commands
             return result;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="result"></param>
+        /// <returns></returns>
         public bool TryGetBool(object value, out bool result)
         {
             bool fctResult = false;
@@ -80,6 +119,12 @@ namespace OHM.Nodes.Commands
             return fctResult;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="result"></param>
+        /// <returns></returns>
         public bool TryGetUInt16(object value, out ushort result)
         {
             bool fctResult = false;
@@ -99,6 +144,12 @@ namespace OHM.Nodes.Commands
             return fctResult;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="result"></param>
+        /// <returns></returns>
         public bool TryGetInt16(object value, out short result)
         {
             bool fctResult = false;
@@ -118,6 +169,12 @@ namespace OHM.Nodes.Commands
             return fctResult;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="result"></param>
+        /// <returns></returns>
         public bool TryGetUInt32(object value, out uint result)
         {
             bool fctResult = false;
@@ -137,6 +194,12 @@ namespace OHM.Nodes.Commands
             return fctResult;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="result"></param>
+        /// <returns></returns>
         public bool TryGetInt32(object value, out int result)
         {
             bool fctResult = false;

@@ -12,18 +12,23 @@ namespace WpfApplication1.Logger
     {
 
         private TextBox _txt;
+
         public WpfLoggerManager(TextBox txt)
         {
             _txt = txt;
         }
 
-        public ILogger GetLogger(Type type)
+        public ILogger GetLogger(string repository, Type type)
         {
+            //log4net.LogManager.CreateRepository(repository);
+
             return new WpfLogger(log4net.LogManager.GetLogger(type), _txt);
         }
 
-        public ILogger GetLogger(string name)
+        public ILogger GetLogger(string repository, string name)
         {
+            //log4net.LogManager.CreateRepository(repository);
+
             return new WpfLogger(log4net.LogManager.GetLogger(name), _txt);
         }
     }

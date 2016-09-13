@@ -2,6 +2,9 @@
 
 namespace OHM.Plugins
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [Serializable]
     public enum PluginStates
     {

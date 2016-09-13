@@ -1,11 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OHM.Common.Public.Test.Commands.Stubs;
-using OHM.Common.Public.Test.Nodes.Stubs;
 
 namespace OHM.Common.Public.Test.Commands
 {
     [TestClass]
-    public class CommandAbstractIntegrationTest
+    public class AbstractCommandIntegrationTest
     {
         /*[TestMethod]
         public void TestInitIntegration()
@@ -13,7 +11,7 @@ namespace OHM.Common.Public.Test.Commands
             string key = "key";
             string name = "name";
 
-            RalNodeAbstractStub holder = new RalNodeAbstractStub(key, name);
+            ALRAbstractTreeNodeStub holder = new ALRAbstractTreeNodeStub(key, name);
             TreeCommandAbstractStub target = new TreeCommandAbstractStub("key", "name", "", null);
 
             //Assert.IsNull(target.GetAssignedNodeForTest());
@@ -34,7 +32,7 @@ namespace OHM.Common.Public.Test.Commands
             string key = "key";
             string name = "name";
 
-            RalNodeAbstractStub holder = new RalNodeAbstractStub(key, name);
+            ALRAbstractTreeNodeStub holder = new ALRAbstractTreeNodeStub(key, name);
             TreeCommandAbstractStub target = new TreeCommandAbstractStub("key", "name", "", null);
 
             //Assert.IsNull(target.GetAssignedNodeForTest());
@@ -54,7 +52,7 @@ namespace OHM.Common.Public.Test.Commands
             string key = "key";
             string name = "name";
 
-            RalNodeAbstractStub holder = new RalNodeAbstractStub(key, name);
+            ALRAbstractTreeNodeStub holder = new ALRAbstractTreeNodeStub(key, name);
             TreeCommandAbstractStub target = new TreeCommandAbstractStub("key", "name", "", null);
 
             //Assert.IsNull(target.GetAssignedNodeForTest());

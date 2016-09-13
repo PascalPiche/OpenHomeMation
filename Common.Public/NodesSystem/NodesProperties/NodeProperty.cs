@@ -5,6 +5,9 @@ using System.ComponentModel;
 
 namespace OHM.Nodes.Properties
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class NodeProperty : INodeProperty, INotifyPropertyChanged
     {
         #region Private Members
@@ -22,6 +25,12 @@ namespace OHM.Nodes.Properties
 
         #region Public Ctor
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="name"></param>
+        /// <param name="type"></param>
         public NodeProperty(string key, string name, Type type) 
             : this(key, name, type, true) {}
 
@@ -34,6 +43,16 @@ namespace OHM.Nodes.Properties
         public NodeProperty(string key, string name, Type type, bool readOnly, string description, object value) 
             : this(key, name, type, readOnly, description, value, new ObservableCollection<INodeProperty>()) {}
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="name"></param>
+        /// <param name="type"></param>
+        /// <param name="readOnly"></param>
+        /// <param name="description"></param>
+        /// <param name="value"></param>
+        /// <param name="extraInfo"></param>
         public NodeProperty(string key, string name, Type type, bool readOnly, string description, object value, ObservableCollection<INodeProperty> extraInfo)
         {
             _key = key;
@@ -49,22 +68,45 @@ namespace OHM.Nodes.Properties
 
         #region Public Properties
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string Key { get { return _key; } }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string Name { get { return _name; } }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public Type Type { get { return _type; } }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string Description { get { return _description; } }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public bool ReadOnly { get { return _readOnly; } }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public object Value { get { return _value; } }
 
         #endregion
 
-        #region Public API
+        #region Public Methods
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="val"></param>
+        /// <returns></returns>
         public bool SetValue(object val)
         {
             
@@ -77,12 +119,23 @@ namespace OHM.Nodes.Properties
             return false;
         }
 
+        #endregion
+
+        #region Public Events
+
+        /// <summary>
+        /// 
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
         #endregion
 
         #region Protected Functions
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
         protected void NotifyPropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)

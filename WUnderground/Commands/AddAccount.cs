@@ -8,8 +8,8 @@ namespace WUnderground.Commands
         public AddAccount()
             : base("addAccount", "Add an account", "")
         {
-            this.Definition.ArgumentsDefinition.Add("username", new ArgumentDefinition("username", "User Name", typeof(string), true));
-            this.Definition.ArgumentsDefinition.Add("keyid", new ArgumentDefinition("keyid", "Key Id", typeof(string), true));
+            this.Definition.ArgumentsDefinition.Add("username", new CommandArgumentDefinition("username", "User Name", typeof(string), true));
+            this.Definition.ArgumentsDefinition.Add("keyid", new CommandArgumentDefinition("keyid", "Key Id", typeof(string), true));
         }
 
         protected override bool RunImplementation(IDictionary<string, string> arguments)
