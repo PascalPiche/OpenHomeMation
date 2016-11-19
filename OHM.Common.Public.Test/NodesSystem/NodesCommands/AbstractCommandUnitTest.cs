@@ -10,18 +10,29 @@ namespace OHM.Common.Public.Test.Commands
     public class AbstractCommandUnitTest
     {
         [TestMethod]
-        public void TestCommandAbstractNotInited_ConstructorDefault()
+        public void TestCommandAbstract_ConstructorDefault()
         {
             string key = "key";
             string name = "name";
+            string description = string.Empty;
 
-            var target = MockRepository.GeneratePartialMock<AbstractCommand>(key, name);
+            CommandDefinition definition = new CommandDefinition(key, name);
 
+            var target = MockRepository.GeneratePartialMock<AbstractCommand>(definition);
+
+            // Check definition presence
             Assert.IsNotNull(target.Definition);
+
+            // Check key
             Assert.AreEqual(key, target.Definition.Key);
-            Assert.AreEqual(name, target.Definition.Name);
             Assert.AreEqual(key, target.Key);
+
+            // Check name
+            Assert.AreEqual(name, target.Definition.Name);
             Assert.AreEqual(name, target.Name);
+
+            // Check description
+            Assert.AreEqual(description, target.Definition.Description);
         }
 
         [TestMethod]
@@ -31,7 +42,9 @@ namespace OHM.Common.Public.Test.Commands
             string key = "key";
             string name = "name";
 
-            var target = MockRepository.GeneratePartialMock<AbstractCommand>(key, name);
+            CommandDefinition definition = new CommandDefinition(key, name);
+
+            var target = MockRepository.GeneratePartialMock<AbstractCommand>(definition);
 
             //Node not inited
             Assert.IsFalse(target.CanExecute());
@@ -44,7 +57,9 @@ namespace OHM.Common.Public.Test.Commands
             string key = "key";
             string name = "name";
 
-            var target = MockRepository.GeneratePartialMock<AbstractCommand>(key, name);
+            CommandDefinition definition = new CommandDefinition(key, name);
+
+            var target = MockRepository.GeneratePartialMock<AbstractCommand>(definition);
 
             Assert.IsFalse(target.Execute(null));
         }
@@ -56,7 +71,9 @@ namespace OHM.Common.Public.Test.Commands
             string key = "key";
             string name = "name";
 
-            var target = new CommandAbstractMock(key, name);
+            CommandDefinition definition = new CommandDefinition(key, name);
+
+            var target = new CommandAbstractMock(definition);
 
             Assert.IsNull(target.ProtectedGetNode());
         }
@@ -67,8 +84,9 @@ namespace OHM.Common.Public.Test.Commands
             //Should not be valid with a null Node
             string key = "key";
             string name = "name";
+            CommandDefinition definition = new CommandDefinition(key, name);
 
-            var target = new CommandAbstractMock(key, name); ;
+            var target = new CommandAbstractMock(definition);
 
             Assert.IsFalse(target.Execute(new Dictionary<string, string>()));
         }
@@ -77,8 +95,8 @@ namespace OHM.Common.Public.Test.Commands
 
         private class CommandAbstractMock : AbstractCommand
         {
-            public CommandAbstractMock(string key, string name)
-                : base(key, name)
+            public CommandAbstractMock(ICommandDefinition definition)
+                : base(definition)
             { }
 
             public ICommandsNode ProtectedGetNode()

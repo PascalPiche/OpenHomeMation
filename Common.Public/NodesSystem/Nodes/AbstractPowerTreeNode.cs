@@ -71,18 +71,6 @@ namespace OHM.Nodes
             {
                 return result;
             }
-            /*else
-            {
-                //Check child
-                foreach (AbstractPowerTreeNode item in Children)
-                {
-                    result = item.FindChild(key);
-                    if (result != null)
-                    {
-                        return result;
-                    }
-                }
-            }*/
             return null;
         }
 

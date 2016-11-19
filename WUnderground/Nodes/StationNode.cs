@@ -28,10 +28,9 @@ namespace WUnderground.Nodes
 
         #region Protected Methods
 
-        protected override bool Initing()
+        protected override bool InitSubChild()
         {
-            bool result = false;
-            result = base.Initing();
+            bool result = true;
 
             IDictionary<string, object> options = new Dictionary<string, object>();
             options.Add("station", this);

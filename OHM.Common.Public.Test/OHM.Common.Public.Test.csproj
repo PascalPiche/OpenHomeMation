@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Rhino.Mocks">
       <HintPath>..\packages\RhinoMocks.3.6.1\lib\net\Rhino.Mocks.dll</HintPath>
     </Reference>
@@ -53,17 +56,16 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ALR\Nodes\ALRAbstractTreeNodeUnitTest.cs" />
+    <Compile Include="NodesSystem\NodesCommands\AbstractCommandUnitTest.cs" />
+    <Compile Include="NodesSystem\NodesCommands\AbstractTreeCommandUnitTest.cs" />
     <Compile Include="NodesSystem\NodesCommands\CommandArgumentDefinitionUnitTest.cs" />
     <Compile Include="NodesSystem\NodesCommands\CommandDefinitionUnitTest.cs" />
-    <Compile Include="NodesSystem\NodesCommands\AbstractCommandUnitTest.cs" />
     <Compile Include="NodesSystem\NodesCommands\AbstractCommandIntegrationTest.cs" />
-    <Compile Include="NodesSystem\NodesCommands\Stubs\CommandAbstractStub.cs" />
-    <Compile Include="ALR\ALRAbstractTreeNodeUnitTest.cs" />
     <Compile Include="NodesSystem\NodesProperty\NodePropertyUnitTest.cs" />
-    <Compile Include="NodesSystem\Nodes\AbstractBasicNodeUnitTest.cs" />
     <Compile Include="PluginsSystem\PluginBaseUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ALR\InterfaceCommandAbstractUnitTest.cs" />
+    <Compile Include="ALR\Commands\InterfaceCommandAbstractUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common.Public\OHM.Common.Public.csproj">

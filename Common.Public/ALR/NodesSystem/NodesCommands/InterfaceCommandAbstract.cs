@@ -8,11 +8,17 @@ namespace OHM.Nodes.Commands.ALR
 
         #region Protected Ctor
 
+        protected InterfaceCommandAbstract(string key, string name)
+            : this(key, name, string.Empty) { }
+
         protected InterfaceCommandAbstract(string key, string name, string description) 
-            : this (key, name, description, null) { }
+            : this(key, name, description, null) { }
 
         protected InterfaceCommandAbstract(string key, string name, string description, IDictionary<string, IArgumentDefinition> argumentsDefinition)
-            : base(new CommandDefinition(key, name, description, argumentsDefinition)) { }
+            : this(new CommandDefinition(key, name, description, argumentsDefinition)) { }
+        
+        protected InterfaceCommandAbstract(ICommandDefinition definition)
+            : base(definition) { }
 
         #endregion
 

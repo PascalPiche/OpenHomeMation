@@ -11,6 +11,8 @@ namespace OHM.Nodes
     {
         #region Private Members
 
+        private const string PREFIX_SYSTEM = "system-";
+
         private ILogger _logger;
         private IDataStore _data;
 
@@ -32,15 +34,15 @@ namespace OHM.Nodes
             _propertiesDic = new Dictionary<string, INodeProperty>();
 
             //Register Key Property
-            _keyProperty = new NodeProperty("system-key", "System node key", typeof(string), true, "System node key", key);
+            _keyProperty = new NodeProperty(PREFIX_SYSTEM + "key", "System node key", typeof(string), true, "System node key", key);
             this.RegisterProperty(_keyProperty);
 
             //Register Name Property
-            _nameProperty = new NodeProperty("system-name", "System node name", typeof(string), false, "System node name", name);
+            _nameProperty = new NodeProperty(PREFIX_SYSTEM + "name", "System node name", typeof(string), false, "System node name", name);
             this.RegisterProperty(_nameProperty);
 
             //Register Node State Property
-            _nodeStateProperty = new NodeProperty("system-node-state", "System node state", typeof(NodeStates), false, "System node state", initialState);
+            _nodeStateProperty = new NodeProperty(PREFIX_SYSTEM + "node-state", "System node state", typeof(NodeStates), false, "System node state", initialState);
             this.RegisterProperty(_nodeStateProperty);
         }
 
@@ -56,27 +58,19 @@ namespace OHM.Nodes
 
         public string Key { get { return _keyProperty.Value as string; } }
 
-        public string Name
-        {
-            get { return _nameProperty.Value as string; }
-            /*internal set
-            {
-                UpdateProperty("system-name", value);
-                NotifyPropertyChanged("Name");
-            }*/
-        }
+        public string Name { get { return _nameProperty.Value as string; } }
+
+        public IReadOnlyList<INodeProperty> Properties { get { return _properties; } }
 
         public NodeStates State
         {
             get { return (NodeStates)_nodeStateProperty.Value; }
             protected set
             {
-                UpdateProperty("system-node-state", value);
+                UpdateProperty(PREFIX_SYSTEM + "node-state", value);
                 NotifyPropertyChanged("State");
             }
         }
-
-        public IReadOnlyList<INodeProperty> Properties { get { return _properties; } }
 
         #endregion
 
@@ -107,7 +101,8 @@ namespace OHM.Nodes
         protected bool UnRegisterProperty(string key)
         {
             bool result = false;
-            if (_propertiesDic.ContainsKey(key))
+
+            if (key != null && !key.StartsWith(PREFIX_SYSTEM) && _propertiesDic.ContainsKey(key))
             {
                 var property = _propertiesDic[key];
                 if (_properties.Remove(property))
@@ -118,13 +113,12 @@ namespace OHM.Nodes
                     }
                     else
                     {
+                        Logger.Error("Cannot remove property " + key + " -> reverting state");
                         //Undo first remove to maintain coherence in the system
                         _properties.Add(property);
                     }
                 }
-                return result;
             }
-
             return result;
         }
 

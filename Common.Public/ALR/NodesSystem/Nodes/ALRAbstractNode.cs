@@ -14,7 +14,7 @@ namespace OHM.Nodes.ALR
 
         #region Protected Ctor
 
-        protected ALRAbstractTreeNode(string key, string name) 
+        protected ALRAbstractTreeNode(string key, string name)
             : base(key, name)
         {}
 
@@ -25,16 +25,21 @@ namespace OHM.Nodes.ALR
         protected AbstractPowerTreeNode CreateChildNode(string model, string key, string name, IDictionary<string, object> options = null)
         {
             AbstractPowerTreeNode result = null;
-            ALRAbstractTreeNode newNode = Interface.CreateNodeInstance(model, key, name, options) as ALRAbstractTreeNode;
-            if (newNode != null)
+
+            if (Interface != null)
             {
-                newNode.Init(DataStore, Logger, Interface);
-                if (this.AddChild(newNode))
+                ALRAbstractTreeNode newNode = Interface.CreateNodeInstance(model, key, name, options) as ALRAbstractTreeNode;
+                if (newNode != null)
                 {
-                    newNode.Initing();
-                    result = newNode;
+                    newNode.Init(DataStore, Logger, Interface);
+                    if (this.AddChild(newNode))
+                    {
+                        newNode.Initing();
+                        result = newNode;
+                    }
                 }
             }
+           
             return result;
         }
 

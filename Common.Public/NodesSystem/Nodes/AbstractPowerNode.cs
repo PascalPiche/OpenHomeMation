@@ -34,23 +34,25 @@ namespace OHM.Nodes
 
         #region Protected Functions
         
-        protected virtual bool Initing()
+        protected virtual bool InitSubChild()
         {
-            RegisterCommands();
-            RegisterProperties();
             return true;
         }
 
         protected bool RegisterCommand(AbstractCommand command)
         {
             bool result = false;
-            if (!_commandsDic.ContainsKey(command.Key))
+            
+            if (command != null && !_commandsDic.ContainsKey(command.Key))
             {
-                if (command.Init(this))
+                if (!(this.State == NodeStates.fatal || this.State == NodeStates.initializing))
                 {
-                    _commandsDic.Add(command.Key, command);
-                    _commands.Add(command);
-                    result = true;
+                    if (command.Init(this))
+                    {
+                        _commandsDic.Add(command.Key, command);
+                        _commands.Add(command);
+                        result = true;
+                    }
                 }
             }
             return result;
@@ -66,12 +68,19 @@ namespace OHM.Nodes
             }
             return result; ;
         }
-       
+
         protected abstract void RegisterCommands();
 
         #endregion
 
         #region Internal Methods
+
+        internal bool Initing()
+        {
+            RegisterCommands();
+            InitSubChild();
+            return RegisterProperties();
+        }
 
         internal bool CanExecuteCommand(string key)
         {

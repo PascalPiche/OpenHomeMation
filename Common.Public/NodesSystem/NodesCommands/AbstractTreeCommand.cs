@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 namespace OHM.Nodes.Commands
 {
     /// <summary>
@@ -8,12 +9,21 @@ namespace OHM.Nodes.Commands
     {
         #region Protected Ctor
 
+        protected AbstractTreeCommand(string key, string name)
+            : this(key, name, string.Empty) {}
+
+        protected AbstractTreeCommand(string key, string name, string description)
+            : this(key, name, description, null) {}
+
+        protected AbstractTreeCommand(string key, string name, string description, IDictionary<string, IArgumentDefinition> argumentsDefinition)
+            : this(new CommandDefinition(key, name, description, argumentsDefinition)) {}
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="definition"></param>
         protected AbstractTreeCommand(ICommandDefinition definition)
-            :base(definition) { }
+            :base(definition) {}
 
         #endregion
 
@@ -22,7 +32,16 @@ namespace OHM.Nodes.Commands
         /// <summary>
         /// 
         /// </summary>
-        public string NodeTreeKey { get { return ((ICommandsTreeNode)Node).TreeKey; } }
+        public string NodeTreeKey { 
+            get {
+                string result = string.Empty;
+                if (Node != null)
+                {
+                    result = ((ICommandsTreeNode)Node).TreeKey; 
+                }
+                return result;
+            }
+        }
 
         #endregion
 

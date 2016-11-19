@@ -12,7 +12,7 @@ namespace OHM.Nodes.Commands
         #endregion
 
         #region Protected Ctor
-
+        /*
         /// <summary>
         /// 
         /// </summary>
@@ -39,7 +39,7 @@ namespace OHM.Nodes.Commands
         /// <param name="argumentsDefinition"></param>
         protected AbstractCommand(string key, string name, string description, IDictionary<string, IArgumentDefinition> argumentsDefinition)
             : this(new CommandDefinition(key, name, description, argumentsDefinition)) { }
-
+        */
         /// <summary>
         /// 
         /// </summary>
