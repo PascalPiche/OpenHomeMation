@@ -19,7 +19,7 @@ namespace OHM.Tests.Interfaces
         {
             var loggerMng = MockRepository.GenerateStub<ILoggerManager>();
             var logger = MockRepository.GenerateStub<ILogger>();
-            loggerMng.Stub(x => x.GetLogger("InterfacesManager")).Return(logger);
+            loggerMng.Stub(x => x.GetLogger("", "InterfacesManager")).Return(logger);
 
             var pluginsMng = MockRepository.GenerateStub<IPluginsManager>();
 
@@ -34,7 +34,7 @@ namespace OHM.Tests.Interfaces
         {
             var loggerMng = MockRepository.GenerateStub<ILoggerManager>();
             var logger = MockRepository.GenerateStub<ILogger>();
-            loggerMng.Stub(x => x.GetLogger("InterfacesManager")).Return(logger);
+            loggerMng.Stub(x => x.GetLogger("", "InterfacesManager")).Return(logger);
 
             var pluginsMng = MockRepository.GenerateStub<IPluginsManager>();
             var dataStore = MockRepository.GenerateStub<IDataStore>();
@@ -92,7 +92,7 @@ namespace OHM.Tests.Interfaces
         {
             var loggerMng = MockRepository.GenerateStub<ILoggerManager>();
             var logger = MockRepository.GenerateStub<ILogger>();
-            loggerMng.Stub(x => x.GetLogger("InterfacesManager")).Return(logger);
+            loggerMng.Stub(x => x.GetLogger("", "InterfacesManager")).Return(logger);
 
             var pluginsMng = MockRepository.GenerateStub<IPluginsManager>();
             var dataStore = MockRepository.GenerateStub<IDataStore>();

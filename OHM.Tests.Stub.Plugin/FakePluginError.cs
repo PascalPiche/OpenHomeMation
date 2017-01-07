@@ -1,6 +1,4 @@
-﻿using OHM.Logger;
-using OHM.Plugins;
-using OHM.RAL;
+﻿using OHM.Plugins;
 using OHM.SYS;
 using System;
 
@@ -35,12 +33,17 @@ namespace OHM.Tests.Stub.Plugin
             throw new NotImplementedException();
         }
 
-        public override bool Update()
+        public override bool Update(IOhmSystemInstallGateway system)
         {
             throw new NotImplementedException();
         }
 
-        public override RalInterfaceNodeAbstract CreateInterface(string key)
+        public override Nodes.ALR.ALRInterfaceAbstractNode CreateInterface(string key)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Nodes.ALV.IVrType CreateVrNode(string key)
         {
             throw new NotImplementedException();
         }

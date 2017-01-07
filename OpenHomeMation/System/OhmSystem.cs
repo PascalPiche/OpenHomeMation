@@ -19,7 +19,7 @@ namespace OHM.SYS
         private ILogger _logger;
         private ILoggerManager _loggerMng;
         private IInterfacesManager _interfacesMng;
-        private DataManagerAbstract _dataMng;
+        private IDataManager _dataMng;
         private IVrManager _vrMng;
         private IPluginsManager _pluginsMng;
         private IAPI _api;
@@ -28,7 +28,7 @@ namespace OHM.SYS
 
         #region Internal Ctor
 
-        internal OhmSystem(IInterfacesManager interfacesMng, IVrManager vrMng, ILoggerManager loggerMng, DataManagerAbstract dataMng, IPluginsManager pluginsMng)
+        internal OhmSystem(IInterfacesManager interfacesMng, IVrManager vrMng, ILoggerManager loggerMng, IDataManager dataMng, IPluginsManager pluginsMng)
         {
             _loggerMng = loggerMng;
             _interfacesMng = interfacesMng;

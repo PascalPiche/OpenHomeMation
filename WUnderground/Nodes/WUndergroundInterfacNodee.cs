@@ -35,9 +35,9 @@ namespace WUnderground.Nodes
             LoadRegisteredAccounts();
         }
 
-        protected override void Shutdown()
+        protected override bool Shutdown()
         {
-            //TODO: ? // (Scopollif:)Guest Nothing
+            return true;
         }
 
         protected override AbstractPowerNode CreateNodeInstance(string model, string key, string name, IDictionary<string, object> options)
@@ -189,7 +189,7 @@ namespace WUnderground.Nodes
 
         private AccountNode GetAccountNodeFromUsername(string username)
         {
-            return (AccountNode)FindChild(username);
+            return (AccountNode)FindDirectChild(username);
         }
 
         #endregion

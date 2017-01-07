@@ -49,7 +49,7 @@ namespace ZWaveLib.Nodes
         
         internal void CreateOrUpdateNode(ZWNotification n)
         {
-            ZWaveNode node = this.FindChild(n.GetNodeId().ToString()) as ZWaveNode;
+            ZWaveNode node = this.FindDirectChild(n.GetNodeId().ToString()) as ZWaveNode;
             if (node != null)
             {
                 //Update Node
@@ -65,7 +65,7 @@ namespace ZWaveLib.Nodes
 
         internal void CreateOrUpdateValue(ZWNotification n)
         {
-            ZWaveNode node = this.FindChild(n.GetNodeId().ToString()) as ZWaveNode;
+            ZWaveNode node = this.FindDirectChild(n.GetNodeId().ToString()) as ZWaveNode;
             if (node != null)
             {
                 node.CreateOrUpdateValue(n);

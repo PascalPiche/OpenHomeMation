@@ -27,7 +27,7 @@ namespace OHM.Sys.Tests
             var plugin = MockRepository.GenerateStub<IPlugin>();
             var logger = MockRepository.GenerateStub<ILogger>();
             plugin.Stub(x => x.Name).Return("name");
-            loggerMng.Stub(x => x.GetLogger(plugin.Name)).Return(logger);
+            loggerMng.Stub(x => x.GetLogger("", plugin.Name)).Return(logger);
             //var system = MockRepository.GenerateStub<OhmSystem>();
 
             var result = target.GetInstallGateway(plugin);

@@ -54,6 +54,11 @@ namespace OHM.Nodes
                         result = true;
                     }
                 }
+                else
+                {
+                    //TODO STORE COMMAND TO INIT
+
+                }
             }
             return result;
         }
@@ -61,11 +66,15 @@ namespace OHM.Nodes
         protected bool UnRegisterCommand(ICommand command)
         {
             bool result = false;
-            if (_commandsDic.ContainsKey(command.Key)) {
+
+            //Critical zone
+            if (command != null && _commandsDic.ContainsKey(command.Key) && _commands.Remove(command))
+            {
                 _commandsDic.Remove(command.Key);
-                _commands.Remove(command);
                 result = true;
             }
+            //end critical zone
+
             return result; ;
         }
 
@@ -84,17 +93,19 @@ namespace OHM.Nodes
 
         internal bool CanExecuteCommand(string key)
         {
-            if (_commandsDic.ContainsKey(key))
+            bool result = false;
+
+            if (!string.IsNullOrWhiteSpace(key) && _commandsDic.ContainsKey(key))
             {
-                return _commandsDic[key].CanExecute();
+                result = _commandsDic[key].CanExecute();
             }
-            return false;
+            return result;
         }
 
         internal bool ExecuteCommand(string commandKey, IDictionary<string, string> arguments)
         {
             bool result = false;
-            if (_commandsDic.ContainsKey(commandKey))
+            if (CanExecuteCommand(commandKey))
             {
                 result = _commandsDic[commandKey].Execute(arguments);
             }

@@ -1,10 +1,6 @@
 ﻿using log4net;
 using OHM.Logger;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleApplication1.Logger
 {
@@ -24,6 +20,16 @@ namespace ConsoleApplication1.Logger
         public ILogger GetLogger(string name)
         {
             return new ConsoleLogger(LogManager.GetLogger(name));
+        }
+
+        public ILogger GetLogger(string repository, Type type)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ILogger GetLogger(string repository, string name)
+        {
+            throw new NotImplementedException();
         }
     }
 }

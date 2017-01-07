@@ -19,8 +19,8 @@ namespace OHM.Data.Tests
         {
             var loggerMng = MockRepository.GenerateStub<ILoggerManager>();
             var logger = MockRepository.GenerateStub<ILogger>();
-            loggerMng.Stub(x => x.GetLogger("FileDataManager")).Return(logger);
-            var d = new FileDataManager(loggerMng, _filePath);
+            loggerMng.Stub(x => x.GetLogger("", "FileDataManager")).Return(logger);
+            var d = new FileDataManager(_filePath);
 
             //Make Sure Data is empty
             if (Directory.Exists(_filePath))
@@ -31,12 +31,12 @@ namespace OHM.Data.Tests
             Assert.IsFalse(Directory.Exists(_filePath));
 
             //Must create the directory
-            d.Init();
+            d.Init(loggerMng);
 
             Assert.IsTrue(Directory.Exists(_filePath));
 
             //Should do nothing
-            Assert.IsTrue(d.Init());
+            Assert.IsTrue(d.Init(loggerMng));
 
         }
 
@@ -45,10 +45,10 @@ namespace OHM.Data.Tests
         {
             var loggerMng = MockRepository.GenerateStub<ILoggerManager>();
             var logger = MockRepository.GenerateStub<ILogger>();
-            loggerMng.Stub(x => x.GetLogger("FileDataManager")).Return(logger);
+            loggerMng.Stub(x => x.GetLogger("", "FileDataManager")).Return(logger);
 
             //With Invalid file Path
-            var d = new FileDataManager(loggerMng, "AB:");
+            var d = new FileDataManager("AB:");
 
             //Make Sure Data is empty
             /*if (Directory.Exists(_filePath4))
@@ -60,12 +60,12 @@ namespace OHM.Data.Tests
             */
             //Should throw error
 
-            d.Init();
+            bool result = d.Init(loggerMng);
 
             //Assert.IsTrue(Directory.Exists(_filePath4));
 
             //Should do nothing
-            Assert.IsFalse(d.Init());
+            Assert.IsFalse(result);
 
         }
 
@@ -74,8 +74,8 @@ namespace OHM.Data.Tests
         {
             var loggerMng = MockRepository.GenerateStub<ILoggerManager>();
             var logger = MockRepository.GenerateStub<ILogger>();
-            loggerMng.Stub(x => x.GetLogger("FileDataManager")).Return(logger);
-            var d = new FileDataManager(loggerMng, _filePath2);
+            loggerMng.Stub(x => x.GetLogger("", "FileDataManager")).Return(logger);
+            var d = new FileDataManager(_filePath2);
 
             //Make Sure Data is empty
             if (Directory.Exists(_filePath2))
@@ -86,7 +86,7 @@ namespace OHM.Data.Tests
             Assert.IsFalse(Directory.Exists(_filePath2));
 
             //Create Data folder
-            d.Init();
+            d.Init(loggerMng);
 
             Assert.IsNull(d.GetDataStore("key"));
 
@@ -103,8 +103,8 @@ namespace OHM.Data.Tests
         {
             var loggerMng = MockRepository.GenerateStub<ILoggerManager>();
             var logger = MockRepository.GenerateStub<ILogger>();
-            loggerMng.Stub(x => x.GetLogger("FileDataManager")).Return(logger);
-            var d = new FileDataManager(loggerMng, _filePath3);
+            loggerMng.Stub(x => x.GetLogger("", "FileDataManager")).Return(logger);
+            var d = new FileDataManager(_filePath3);
 
             //Make Sure Data is empty
             if (Directory.Exists(_filePath3))
@@ -115,7 +115,7 @@ namespace OHM.Data.Tests
             Assert.IsFalse(Directory.Exists(_filePath3));
 
             //Create Data folder
-            d.Init();
+            d.Init(loggerMng);
 
             Assert.IsNull(d.GetDataStore("key"));
 
@@ -134,8 +134,8 @@ namespace OHM.Data.Tests
             Assert.AreEqual("Hi", data2.GetString("key"));
 
             //Create new FileDataManager (clear cache)
-            d = new FileDataManager(loggerMng, _filePath3);
-            d.Init();
+            d = new FileDataManager(_filePath3);
+            d.Init(loggerMng);
             
             //Get Again DataStore
             var data3 = d.GetDataStore("key");

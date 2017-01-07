@@ -21,7 +21,7 @@ namespace ConsoleApplication1
             bool exit = false;
 
             var loggerMng = new ConsoleLoggerManager();
-            var dataMng = new FileDataManager(loggerMng, AppDomain.CurrentDomain.BaseDirectory + "\\data\\");
+            var dataMng = new FileDataManager(AppDomain.CurrentDomain.BaseDirectory + "\\data\\");
             var pluginMng = new PluginsManager(loggerMng, AppDomain.CurrentDomain.BaseDirectory + "\\plugins\\");
             var interfacesMng = new InterfacesManager(loggerMng, pluginMng);
             var vrMng = new VrManager(loggerMng, pluginMng);

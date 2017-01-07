@@ -58,10 +58,11 @@ namespace ZWaveLib
             LoadRegisteredControllers();
         }
 
-        protected override void Shutdown()
+        protected override bool Shutdown()
         {
             _mng.Destroy();
             _mng = null;
+            return true;
         }
 
         #endregion
@@ -530,7 +531,7 @@ namespace ZWaveLib
             Logger.Debug("Creating Driver Controler on port: " + port);
 
             //Valid if a Controller already exist on this port
-            if (this.FindChild(port.ToString()) != null)
+            if (this.FindDirectChild(port.ToString()) != null)
             {
                 Logger.Error("Creating Driver Controler on port: " + port + " Failed. A Controler already exist on port : " + port);
                 return false;
@@ -657,7 +658,7 @@ namespace ZWaveLib
             }
             else
             {
-                var node = this.FindChild(NotificationTool.MakeNodeKey(n));
+                var node = this.FindDirectChild(NotificationTool.MakeNodeKey(n));
                 if (node != null)
                 {
                     ((ZWaveNode)node).RemoveValue(n);

@@ -81,7 +81,7 @@
     <Compile Include="ALR\NodesSystem\NodesCommands\InterfaceCommandAbstract.cs" />
     <Compile Include="DataSystem\_Interfaces\IDataDictionary.cs" />
     <Compile Include="DataSystem\_Interfaces\IDataStore.cs" />
-    <Compile Include="ALR\NodesSystem\Nodes\ALRAbstractNode.cs" />
+    <Compile Include="ALR\NodesSystem\Nodes\ALRAbstracTreetNode.cs" />
     <Compile Include="ALR\NodesSystem\Nodes\ALRInterfaceState.cs" />
     <Compile Include="ALR\NodesSystem\Nodes\_Interfaces\IALRInterface.cs" />
     <Compile Include="LoggingSystem\_Interfaces\ILogger.cs" />

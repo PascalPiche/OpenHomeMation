@@ -60,25 +60,21 @@ namespace OHM.Nodes
 
         protected bool RemoveChild(string key)
         {
-            return RemoveChild(FindChild(key));
+            return RemoveChild(FindDirectChild(key));
         }
 
-        protected AbstractPowerTreeNode FindChild(string key)
+        protected AbstractPowerTreeNode FindDirectChild(string key)
         {
             AbstractPowerTreeNode result;
-
-            if (_childrenDic.TryGetValue(key, out result))
-            {
-                return result;
-            }
-            return null;
+            _childrenDic.TryGetValue(key, out result);
+            return result;
         }
 
         #endregion
 
         #region Internal methods
 
-        internal void SetParent(AbstractPowerTreeNode node)
+        internal void SetParent(ITreeNode node)
         {
             _parent = node;
             this.State = NodeStates.normal;
@@ -98,59 +94,49 @@ namespace OHM.Nodes
 
         internal bool CanExecuteCommand(string nodeFullKey, string commandKey)
         {
-            if (this.Key == nodeFullKey)
+            bool result = false;
+
+            if (!string.IsNullOrWhiteSpace(nodeFullKey) && !string.IsNullOrWhiteSpace(commandKey))
             {
-                return base.CanExecuteCommand(commandKey);
-            }
-            else
-            {
-                //Remove Extra checked key
-                if (nodeFullKey.Contains("."))
+                if (this.Key == nodeFullKey)
                 {
+                    result = base.CanExecuteCommand(commandKey);
+                }
+                else if (nodeFullKey.Contains(".") && this._children.Count != 0)
+                {
+                    //Lookup ALL LEVEL the node list
                     nodeFullKey = nodeFullKey.Substring(nodeFullKey.IndexOf('.') + 1);
-                }
-                string nextNode = nodeFullKey;
-                if (nextNode.Contains("."))
-                {
-                    nextNode = nextNode.Split('.')[0];
-                }
 
-                //Lookup ALL LEVEL the node list
-                AbstractPowerTreeNode node = this.FindChild(nextNode);
-                if (node != null)
-                {
-                    return node.CanExecuteCommand(nodeFullKey, commandKey);
+                    AbstractPowerTreeNode node = GetDirectChildNode(nodeFullKey);
+                    if (node != null)
+                    {
+                        result = node.CanExecuteCommand(nodeFullKey, commandKey);
+                    }
                 }
             }
 
-            return false;
+            return result;
         }
 
         internal bool ExecuteCommand(string nodeFullKey, string commandKey, IDictionary<string, string> arguments)
         {
             bool result = false;
-            if (this.Key == nodeFullKey)
+            if (!string.IsNullOrWhiteSpace(nodeFullKey) && !string.IsNullOrWhiteSpace(commandKey))
             {
-                result = base.ExecuteCommand(commandKey, arguments);
-            }
-            else
-            {
-                //Remove Extra checked key
-                if (nodeFullKey.Contains("."))
+                if (this.Key == nodeFullKey)
                 {
+                    result = base.ExecuteCommand(commandKey, arguments);
+                }
+                else if (nodeFullKey.Contains(".") && this._children.Count != 0)
+                {
+                    //Remove Extra checked key
                     nodeFullKey = nodeFullKey.Substring(nodeFullKey.IndexOf('.') + 1);
-                }
 
-                string nextNode = nodeFullKey;
-                if (nextNode.Contains("."))
-                {
-                    nextNode = nextNode.Split('.')[0];
-                }
-
-                AbstractPowerTreeNode node = this.FindChild(nextNode);
-                if (node != null)
-                {
-                    result = node.ExecuteCommand(nodeFullKey, commandKey, arguments);
+                    AbstractPowerTreeNode node = GetDirectChildNode(nodeFullKey);
+                    if (node != null)
+                    {
+                        result = node.ExecuteCommand(nodeFullKey, commandKey, arguments);
+                    }
                 }
             }
             return result;
@@ -159,6 +145,18 @@ namespace OHM.Nodes
         #endregion
 
         #region Private methods
+
+        private AbstractPowerTreeNode GetDirectChildNode(string nodeFullKey)
+        {
+            string nextNode = nodeFullKey;
+
+            if (nextNode.Contains("."))
+            {
+                nextNode = nextNode.Split('.')[0];
+            }
+
+            return this.FindDirectChild(nextNode);
+        }
 
         private bool RemoveChild(AbstractPowerTreeNode node)
         {

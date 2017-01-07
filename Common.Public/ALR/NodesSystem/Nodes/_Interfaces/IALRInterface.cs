@@ -20,9 +20,9 @@ namespace OHM.Nodes.ALR
 
         bool CanExecuteCommand(string nodeKey, string key);
 
-        void Starting();
+        bool Starting();
 
-        void Shutdowning();
+        bool Shutdowning();
 
         #endregion
     }

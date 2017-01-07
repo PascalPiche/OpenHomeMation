@@ -26,9 +26,9 @@ namespace OHM.Nodes.ALR
         {
             AbstractPowerTreeNode result = null;
 
-            if (Interface != null)
+            if (_interface != null)
             {
-                ALRAbstractTreeNode newNode = Interface.CreateNodeInstance(model, key, name, options) as ALRAbstractTreeNode;
+                ALRAbstractTreeNode newNode = _interface.CreateNodeInstance(model, key, name, options) as ALRAbstractTreeNode;
                 if (newNode != null)
                 {
                     newNode.Init(DataStore, Logger, Interface);

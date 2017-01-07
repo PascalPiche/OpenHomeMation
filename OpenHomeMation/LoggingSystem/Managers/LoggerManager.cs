@@ -7,6 +7,7 @@ namespace OHM.Logger
     {
         public ILogger GetLogger(string repository, Type type)
         {
+
             log4net.LogManager.CreateRepository(repository);
 
             return new DefaultLogger(LogManager.GetLogger(repository, type));

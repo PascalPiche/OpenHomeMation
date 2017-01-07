@@ -10,7 +10,7 @@ namespace OHM.Logger.Tests
         {
 
             var logMng = new LoggerManager();
-            var result = logMng.GetLogger(typeof(object));
+            var result = logMng.GetLogger("", typeof(object));
 
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(DefaultLogger));
@@ -21,7 +21,7 @@ namespace OHM.Logger.Tests
         {
 
             var logMng = new LoggerManager();
-            var result = logMng.GetLogger("a.a");
+            var result = logMng.GetLogger("", "a.a");
 
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(DefaultLogger));

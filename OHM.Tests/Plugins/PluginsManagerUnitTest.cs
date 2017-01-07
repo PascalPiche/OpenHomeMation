@@ -27,7 +27,7 @@ namespace OHM.Plugins.Tests
             var loggerMng = MockRepository.GenerateStub<ILoggerManager>();
 
             var logger = MockRepository.GenerateStub<ILogger>();
-            loggerMng.Stub(x => x.GetLogger("PluginsManager")).Return(logger);
+            loggerMng.Stub(x => x.GetLogger("", "PluginsManager")).Return(logger);
 
             var dataStore = MockRepository.GenerateStub<IDataStore>();
             dataStore.Stub(x => x.GetOrCreateDataDictionary("InstalledPlugins")).Return(new DataDictionary());
@@ -53,7 +53,7 @@ namespace OHM.Plugins.Tests
             var loggerMng = MockRepository.GenerateStub<ILoggerManager>();
 
             var logger = MockRepository.GenerateStub<ILogger>();
-            loggerMng.Stub(x => x.GetLogger("PluginsManager")).Return(logger);
+            loggerMng.Stub(x => x.GetLogger("", "PluginsManager")).Return(logger);
             var dataStore = MockRepository.GenerateStub<IDataStore>();
             dataStore.Stub(x => x.GetOrCreateDataDictionary("InstalledPlugins")).Return(new DataDictionary());
 
@@ -78,7 +78,7 @@ namespace OHM.Plugins.Tests
             var loggerMng = MockRepository.GenerateStub<ILoggerManager>();
             var logger = MockRepository.GenerateStub<ILogger>();
 
-            loggerMng.Stub(x => x.GetLogger("PluginsManager")).Return(logger);
+            loggerMng.Stub(x => x.GetLogger("", "PluginsManager")).Return(logger);
 
             var dataStore = MockRepository.GenerateStub<IDataStore>();
             dataStore.Stub(x => x.GetOrCreateDataDictionary("InstalledPlugins")).Return(new DataDictionary());
@@ -119,7 +119,7 @@ namespace OHM.Plugins.Tests
         {
             var loggerMng = MockRepository.GenerateStub<ILoggerManager>();
             var logger = MockRepository.GenerateStub<ILogger>();
-            loggerMng.Stub(x => x.GetLogger("PluginsManager")).Return(logger);
+            loggerMng.Stub(x => x.GetLogger("", "PluginsManager")).Return(logger);
 
             var dataDic = MockRepository.GenerateStub<IDataDictionary>();
             var listKeys = new List<string>();

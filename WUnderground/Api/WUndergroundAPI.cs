@@ -57,10 +57,6 @@ namespace WUnderground.Api
                 }
                 throw;
             }
-            catch (IOException ex)
-            {
-                throw;
-            }
         }
     }
 }

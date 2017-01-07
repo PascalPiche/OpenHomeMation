@@ -35,6 +35,7 @@ namespace OHM.Tests
             Assert.AreEqual(NodeStates.initializing, target.State);
 
             Assert.IsNull(target.TreeKey);
+            Assert.IsNull(target.Parent);
         }
 
         [TestMethod]
@@ -207,7 +208,6 @@ namespace OHM.Tests
             Assert.IsTrue(result);
         }
 
-
         [TestMethod]
         public void TestRegisteCommandWithNull()
         {
@@ -222,7 +222,34 @@ namespace OHM.Tests
         }
 
         [TestMethod]
-        public void TestRegisteCommandWithValid()
+        public void TestUnRegisteCommandWithNull()
+        {
+            string key = "key";
+            string name = "name";
+
+            ALRAbstractTreeNodeStub target = new ALRAbstractTreeNodeStub(key, name);
+
+            bool result = target.UnRegiserCommand(null);
+
+            Assert.IsFalse(result);
+        }
+
+        [TestMethod]
+        public void TestUnRegisteCommandWithUnknowCommand()
+        {
+            string key = "key";
+            string name = "name";
+
+            ALRAbstractTreeNodeStub target = new ALRAbstractTreeNodeStub(key, name);
+            ICommand cmd = new AbstractCommandStub(new CommandDefinition("not-found", "Command should not exist"));
+
+            bool result = target.UnRegiserCommand(cmd);
+
+            Assert.IsFalse(result);
+        }
+
+        [TestMethod]
+        public void TestRegisteCommandWithValidCommandNotInitialized()
         {
             string key = "key";
             string name = "name";
@@ -231,21 +258,36 @@ namespace OHM.Tests
             AbstractCommandStub cmd = new AbstractCommandStub(new CommandDefinition("keyCmd", "nameCmd"));
             bool result = target.RegisterCommand(cmd);
 
-            Assert.IsTrue(result);
+            Assert.IsFalse(result);
         }
 
         [TestMethod]
-        public void TestInitSubChild()
+        public void TestFindDirectChildWithNoChild()
         {
             string key = "key";
             string name = "name";
 
             ALRAbstractTreeNodeStub target = new ALRAbstractTreeNodeStub(key, name);
 
-            bool result = target.InitSubChild();
+            AbstractPowerTreeNode result = target.TestFindDirectChild("test");
 
-            Assert.IsTrue(result);
+            Assert.IsNull(result);
         }
+
+        [TestMethod]
+        public void TestRemoveChild()
+        {
+            string key = "key";
+            string name = "name";
+
+            ALRAbstractTreeNodeStub target = new ALRAbstractTreeNodeStub(key, name);
+
+            bool result = target.TestRemoveChild("test");
+
+            Assert.IsFalse(result);
+        }
+
+        #region Stubs
 
         private class AbstractCommandStub : AbstractCommand
         {
@@ -320,11 +362,22 @@ namespace OHM.Tests
                 return base.RegisterCommand(cmd);
             }
 
-            public bool InitSubChild()
+            public bool UnRegiserCommand(ICommand command)
             {
-                return base.InitSubChild();
+                return base.UnRegisterCommand(command);
+            }
+            
+            public ITreeNode Parent { get { return base.Parent; } }
+
+            public AbstractPowerTreeNode TestFindDirectChild(string key) {
+                return base.FindDirectChild(key);
             }
 
+            public bool TestRemoveChild(string key)
+            {
+                return base.RemoveChild(key);
+            }
+            
             protected override void RegisterCommands()
             {
                 throw new System.NotImplementedException();
@@ -335,5 +388,6 @@ namespace OHM.Tests
                 throw new System.NotImplementedException();
             }
         }
+        #endregion
     }
 }

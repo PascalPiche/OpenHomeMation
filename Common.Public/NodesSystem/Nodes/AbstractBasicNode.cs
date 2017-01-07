@@ -102,22 +102,16 @@ namespace OHM.Nodes
         {
             bool result = false;
 
-            if (key != null && !key.StartsWith(PREFIX_SYSTEM) && _propertiesDic.ContainsKey(key))
+            
+            if (key != null && !key.StartsWith(PREFIX_SYSTEM)) 
             {
-                var property = _propertiesDic[key];
-                if (_properties.Remove(property))
+                //CRITICAL ZONE
+                if (_propertiesDic.ContainsKey(key) && _properties.Remove(_propertiesDic[key]))
                 {
-                    if (_propertiesDic.Remove(key))
-                    {
-                        result = true;
-                    }
-                    else
-                    {
-                        Logger.Error("Cannot remove property " + key + " -> reverting state");
-                        //Undo first remove to maintain coherence in the system
-                        _properties.Add(property);
-                    }
+                    _propertiesDic.Remove(key);
+                    result = true;
                 }
+                //END CRITICAL ZONE
             }
             return result;
         }

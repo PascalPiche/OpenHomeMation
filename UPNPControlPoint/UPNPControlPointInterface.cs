@@ -17,9 +17,9 @@ namespace UPNPControlPoint
             t.StartAsyncFind(t.CreateAsyncFind(".", 0, null));
         }
 
-        protected override void Shutdown()
+        protected override bool Shutdown()
         {
-            
+            return true;
         }
 
         protected override AbstractPowerNode CreateNodeInstance(string model, string key, string name, IDictionary<string, object> options)

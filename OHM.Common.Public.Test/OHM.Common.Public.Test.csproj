@@ -56,7 +56,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="ALR\Nodes\ALRAbstractTreeNodeUnitTest.cs" />
+    <Compile Include="ALR\NodesSystem\Nodes\ALRInterfaceAbstractNodeUnitTest.cs" />
+    <Compile Include="ALR\NodesSystem\Nodes\ALRBasicNodeUnitTest.cs" />
+    <Compile Include="ALR\NodesSystem\Nodes\ALRAbstractTreeNodeUnitTest.cs" />
     <Compile Include="NodesSystem\NodesCommands\AbstractCommandUnitTest.cs" />
     <Compile Include="NodesSystem\NodesCommands\AbstractTreeCommandUnitTest.cs" />
     <Compile Include="NodesSystem\NodesCommands\CommandArgumentDefinitionUnitTest.cs" />

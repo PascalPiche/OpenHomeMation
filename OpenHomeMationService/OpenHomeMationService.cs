@@ -34,7 +34,7 @@ namespace OpenHomeMationService
             IVrManager vrMng;
 
             loggerMng = new LoggerManager();
-            var dataMng = new FileDataManager(loggerMng, AppDomain.CurrentDomain.BaseDirectory + "\\data\\");
+            var dataMng = new FileDataManager(AppDomain.CurrentDomain.BaseDirectory + "\\data\\");
             pluginMng = new PluginsManager(loggerMng, AppDomain.CurrentDomain.BaseDirectory + "\\plugins\\");
             interfacesMng = new InterfacesManager(loggerMng, pluginMng);
             vrMng = new VrManager(loggerMng, pluginMng);
