@@ -1,6 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OHM.Data;
+using OHM.Logger;
 using OHM.Nodes;
 using OHM.Nodes.ALR;
+using OHM.SYS;
 
 namespace OHM.Tests
 {
@@ -173,11 +176,13 @@ namespace OHM.Tests
         {
             string key = "key";
             string name = "name";
+
             ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name);
+            IDataStore data = null;
+            ILogger logger = null;
+            IOhmSystemInterfaceGateway sys = null;
 
-            //target.Init();
-
-            Assert.Fail("todo");
+            target.Init(data, logger, sys);
         }
 
 
@@ -197,6 +202,24 @@ namespace OHM.Tests
             Assert.AreEqual(NodeStates.initializing, target.State);
         }
 
+        [TestMethod]
+        public void TestSetInterfaceStateNotInited()
+        {
+            string key = "key";
+            string name = "name";
+            ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name);
+
+            Assert.AreEqual(NodeStates.initializing, target.State);
+            Assert.AreEqual(ALRInterfaceStates.Disabled, target.InterfaceState);
+
+            target.TestSetInterfaceState(ALRInterfaceStates.Enabled);
+
+            Assert.AreEqual(ALRInterfaceStates.Disabled, target.InterfaceState);
+            Assert.AreEqual(NodeStates.initializing, target.State);
+        }
+
+        
+
         #region Stubs
 
         private class ALRInterfaceAbstractNodeStub : ALRInterfaceAbstractNode
@@ -204,6 +227,11 @@ namespace OHM.Tests
             public ALRInterfaceAbstractNodeStub(string key, string name)
             : base(key, name)
             { }
+
+            public void TestSetInterfaceState(ALRInterfaceStates newState)
+            {
+                base.InterfaceState = newState;
+            }
 
             protected override void Start()
             {
@@ -222,12 +250,12 @@ namespace OHM.Tests
 
             protected override void RegisterCommands()
             {
-                throw new System.NotImplementedException();
+                
             }
 
             protected override bool RegisterProperties()
             {
-                throw new System.NotImplementedException();
+                return true;
             }
         }
 

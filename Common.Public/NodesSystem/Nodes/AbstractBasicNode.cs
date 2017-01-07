@@ -150,9 +150,14 @@ namespace OHM.Nodes
 
         internal bool Init(IDataStore data, ILogger logger)
         {
-            _data = data;
-            _logger = logger;
-            return RegisterProperties();
+            bool result = false;
+            if (data != null && logger != null)
+            {
+                _data = data;
+                _logger = logger;
+                result = RegisterProperties();
+            }
+            return result;
         }
 
         #endregion

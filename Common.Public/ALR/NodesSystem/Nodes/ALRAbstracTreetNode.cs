@@ -51,8 +51,13 @@ namespace OHM.Nodes.ALR
 
         internal bool Init(IDataStore data, ILogger logger, ALRInterfaceAbstractNode inter)
         {
-            _interface = inter;
-            return this.Init(data, logger);
+            bool result = false;
+            if (inter != null)
+            {
+                _interface = inter;
+                result = base.Init(data, logger);
+            }
+            return result;
         }
 
         #endregion

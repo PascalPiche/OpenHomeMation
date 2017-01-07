@@ -92,14 +92,16 @@ namespace OHM.Nodes.ALR
         
         public void Init(IDataStore data, ILogger logger, IOhmSystemInterfaceGateway system)
         {
-            base.Init(data, logger, this);
-            _startOnLaunch = data.GetBool("StartOnLaunch");
-            _system = system;
+            if (base.Init(data, logger, this))
+            {
+                _startOnLaunch = data.GetBool("StartOnLaunch");
+                _system = system;
 
-            State = NodeStates.normal;
-            NotifyPropertyChanged("StartOnLaunch");
-            
-            this.Initing();
+                State = NodeStates.normal;
+                NotifyPropertyChanged("StartOnLaunch");
+
+                this.Initing();
+            }
         }
 
         public new bool ExecuteCommand(string nodeKey, string commandKey, IDictionary<string, string> arguments)

@@ -16,7 +16,6 @@ namespace OHM.Plugins.Tests
         [TestMethod]
         public void TestPluginsManagerConstructor()
         {
-            
             var loggerMng = MockRepository.GenerateStub<ILoggerManager>();
             var d = new PluginsManager(loggerMng, AppDomain.CurrentDomain.BaseDirectory + "\\plugins\\");
         }
