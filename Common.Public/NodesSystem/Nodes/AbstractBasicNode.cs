@@ -7,11 +7,13 @@ using System.ComponentModel;
 
 namespace OHM.Nodes
 {
+
+    
     public abstract class AbstractBasicNode : IBasicNode
     {
         #region Private Members
 
-        private const string PREFIX_SYSTEM = "system-";
+        internal const string PREFIX_SYSTEM = "system-";
 
         private ILogger _logger;
         private IDataStore _data;

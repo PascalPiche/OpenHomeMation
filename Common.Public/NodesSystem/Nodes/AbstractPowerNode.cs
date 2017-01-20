@@ -87,8 +87,7 @@ namespace OHM.Nodes
         internal bool Initing()
         {
             RegisterCommands();
-            InitSubChild();
-            return RegisterProperties();
+            return InitSubChild();
         }
 
         internal bool CanExecuteCommand(string key)

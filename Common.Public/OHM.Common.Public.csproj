@@ -101,6 +101,7 @@
     <Compile Include="ALV\Nodes\ALVAbstractNode.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ALRInterfaceAbstractNode_Init.sequencediagram" />
     <None Include="DataSystem\_Interfaces\_Diagrams\GraphRelationsExpanded-2016-08-04.dgml" />
     <None Include="NodesSystem\NodesCommands\_Interfaces\_Diagrams\ClassDiagram.cd" />
     <None Include="NodesSystem\NodesCommands\_Interfaces\_Diagrams\Graph.dgml" />
@@ -120,11 +121,9 @@
     <None Include="PluginsSystem\_Diagrams\GraphExpanded-201-08-0.dgml" />
     <None Include="ALR\NodesSystem\NodesCommands\_Diagrams\ClassDiagram1.cd" />
     <None Include="ALR\NodesSystem\NodesCommands\_Diagrams\Graph1.dgml" />
-    <None Include="ALR\_Diagrams\Graph1.dgml" />
     <None Include="_diagrams\ClassDiagram.cd" />
     <None Include="NodesSystem\NodesCommands\_Diagrams\CommandsClassDiagram.cd" />
     <None Include="DataSystem\_Interfaces\_Diagrams\DataClassDiagram-2016-08-04.cd" />
-    <None Include="ALR\_Diagrams\ALRClassDiagram.cd" />
     <None Include="LoggingSystem\_Interfaces\_Diagrams\LoggerClassDiagram-2014-08-24.cd" />
     <None Include="NodesSystem\Nodes\_Diagrams\NodesClassDiagram.cd" />
     <None Include="packages.config" />
@@ -138,7 +137,13 @@
     <Folder Include="ALR\NodesSystem\NodesCommands\_Interfaces\_Diagrams\" />
     <Folder Include="ALR\NodesSystem\Nodes\_Interfaces\_Diagrams\" />
     <Folder Include="ALR\NodesSystem\_Diagrams\" />
+    <Folder Include="ALR\_Diagrams\" />
     <Folder Include="NodesSystem\_Diagrams\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ALRInterfaceAbstractNode_Init.sequencediagram.layout">
+      <DependentUpon>ALRInterfaceAbstractNode_Init.sequencediagram</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -4,6 +4,7 @@ using OHM.Logger;
 using OHM.Nodes;
 using OHM.Nodes.ALR;
 using OHM.SYS;
+using Rhino.Mocks;
 
 namespace OHM.Tests
 {
@@ -15,7 +16,7 @@ namespace OHM.Tests
         {
             string key = "key";
             string name = "name";
-            ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name);
+            ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name, false);
             
             Assert.IsNotNull(target.Children);
             Assert.AreEqual(0, target.Children.Count);
@@ -28,7 +29,7 @@ namespace OHM.Tests
             Assert.AreEqual(name, target.Name);
 
             Assert.IsNotNull(target.Properties);
-            Assert.AreEqual(3, target.Properties.Count);
+            Assert.AreEqual(4, target.Properties.Count);
 
             Assert.AreEqual(NodeStates.initializing, target.State);
 
@@ -44,7 +45,7 @@ namespace OHM.Tests
         {
             string key = "key";
             string name = "name";
-            ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name);
+            ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name, false);
 
             bool result = target.CanExecuteCommand(null, null);
 
@@ -56,7 +57,7 @@ namespace OHM.Tests
         {
             string key = "key";
             string name = "name";
-            ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name);
+            ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name, false);
 
             bool result = target.CanExecuteCommand("garbage not found", null);
 
@@ -68,7 +69,7 @@ namespace OHM.Tests
         {
             string key = "key";
             string name = "name";
-            ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name);
+            ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name, false);
 
             bool result = target.CanExecuteCommand(key, null);
 
@@ -80,7 +81,7 @@ namespace OHM.Tests
         {
             string key = "key";
             string name = "name";
-            ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name);
+            ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name, false);
 
             bool result = target.CanExecuteCommand(key, "garbage command key not found");
 
@@ -92,7 +93,7 @@ namespace OHM.Tests
         {
             string key = "key";
             string name = "name";
-            ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name);
+            ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name, false);
 
             bool result = target.CanExecuteCommand(key + ".test", "garbage command key not found");
 
@@ -104,7 +105,7 @@ namespace OHM.Tests
         {
             string key = "key";
             string name = "name";
-            ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name);
+            ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name, false);
 
             bool result = target.ExecuteCommand(null, null, null);
 
@@ -116,7 +117,7 @@ namespace OHM.Tests
         {
             string key = "key";
             string name = "name";
-            ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name);
+            ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name, false);
 
             bool result = target.ExecuteCommand(key, null, null);
 
@@ -128,7 +129,7 @@ namespace OHM.Tests
         {
             string key = "key";
             string name = "name";
-            ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name);
+            ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name, false);
 
             bool result = target.ExecuteCommand(key + ".test", null, null);
 
@@ -140,7 +141,7 @@ namespace OHM.Tests
         {
             string key = "key";
             string name = "name";
-            ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name);
+            ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name, false);
 
             bool result = target.ExecuteCommand(key, "garbage command key", null);
 
@@ -152,7 +153,7 @@ namespace OHM.Tests
         {
             string key = "key";
             string name = "name";
-            ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name);
+            ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name, false);
 
             bool result = target.ExecuteCommand(key + ".test", "garbage command key", null);
 
@@ -164,7 +165,7 @@ namespace OHM.Tests
         {
             string key = "key";
             string name = "name";
-            ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name);
+            ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name, false);
 
             bool result = target.Shutdowning();
 
@@ -172,12 +173,12 @@ namespace OHM.Tests
         }
 
         [TestMethod]
-        public void TestInit()
+        public void TestInitWithNullNullNull()
         {
             string key = "key";
             string name = "name";
 
-            ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name);
+            ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name, false);
             IDataStore data = null;
             ILogger logger = null;
             IOhmSystemInterfaceGateway sys = null;
@@ -185,13 +186,212 @@ namespace OHM.Tests
             target.Init(data, logger, sys);
         }
 
+        [TestMethod]
+        public void TestInitWithInterfaceGatewayAndDataNullLoggerNull()
+        {
+            string key = "key";
+            string name = "name";
+
+            ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name, false);
+            IDataStore data = null;
+            ILogger logger = null;
+            IOhmSystemInterfaceGateway sys = new OhmSystemInterfaceGatewayStub();
+
+            Assert.AreEqual(NodeStates.initializing, target.State);
+
+            target.Init(data, logger, sys);
+
+            Assert.AreNotEqual(NodeStates.normal, target.State);
+        }
+
+        [TestMethod]
+        public void TestInitWithInterfaceGatewayDataAndLoggerNull()
+        {
+            string key = "key";
+            string name = "name";
+
+            ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name, false);
+            IDataStore data = MockRepository.GenerateStub<IDataStore>();
+            ILogger logger = null;
+
+            IOhmSystemInterfaceGateway sys = new OhmSystemInterfaceGatewayStub();
+
+            Assert.AreEqual(NodeStates.initializing, target.State);
+
+            target.Init(data, logger, sys);
+
+            Assert.AreNotEqual(NodeStates.normal, target.State);
+            Assert.AreEqual(NodeStates.initializing, target.State);
+        }
+
+        [TestMethod]
+        public void TestInitWithInterfaceGatewayLoggerAndDataNull()
+        {
+            string key = "key";
+            string name = "name";
+
+            ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name, false);
+            IDataStore data = null;
+            ILogger logger = MockRepository.GenerateStub<ILogger>();
+
+            IOhmSystemInterfaceGateway sys = new OhmSystemInterfaceGatewayStub();
+
+            Assert.AreEqual(NodeStates.initializing, target.State);
+
+            target.Init(data, logger, sys);
+
+            Assert.AreNotEqual(NodeStates.normal, target.State);
+            Assert.AreEqual(NodeStates.initializing, target.State);
+
+        }
+
+        [TestMethod]
+        public void TestInitFalsePropertiesInit()
+        {
+            string key = "key";
+            string name = "name";
+
+            ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name, false);
+            IDataStore data = MockRepository.GenerateStub<IDataStore>();
+            ILogger logger = MockRepository.GenerateStub<ILogger>();
+
+            IOhmSystemInterfaceGateway sys = new OhmSystemInterfaceGatewayStub();
+
+            Assert.AreEqual(NodeStates.initializing, target.State);
+
+            target.Init(data, logger, sys);
+
+            Assert.AreNotEqual(NodeStates.normal, target.State);
+            Assert.AreEqual(NodeStates.initializing, target.State);
+        }
+
+        [TestMethod]
+        public void TestInitTruePropertiesInit()
+        {
+            string key = "key";
+            string name = "name";
+
+            ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name, true);
+            IDataStore data = MockRepository.GenerateStub<IDataStore>();
+            ILogger logger = MockRepository.GenerateStub<ILogger>();
+
+            IOhmSystemInterfaceGateway sys = new OhmSystemInterfaceGatewayStub();
+
+            Assert.AreEqual(NodeStates.initializing, target.State);
+
+            target.Init(data, logger, sys);
+
+            Assert.AreEqual(NodeStates.normal, target.State);
+        }
+
+        [TestMethod]
+        public void TestInitWitStartOnLaunchValue()
+        {
+            string key = "key";
+            string name = "name";
+
+            ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name, true);
+            
+               // mng.Stub(x => x.SaveDataStore(d)).Return(true);
+            IDataStore data = MockRepository.GenerateStub<IDataStore>();
+            data.Stub(x => x.ContainKey("StartOnLaunch")).Return(true);
+
+            ILogger logger = MockRepository.GenerateStub<ILogger>();
+
+            IOhmSystemInterfaceGateway sys = new OhmSystemInterfaceGatewayStub();
+
+            Assert.AreEqual(NodeStates.initializing, target.State);
+
+            target.Init(data, logger, sys);
+
+            Assert.AreEqual(NodeStates.normal, target.State);
+        }
+
+        [TestMethod]
+        public void TestSetInterfaceStateWhenInited()
+        {
+            string key = "key";
+            string name = "name";
+
+            ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name, true);
+            IDataStore data = MockRepository.GenerateStub<IDataStore>();
+            ILogger logger = MockRepository.GenerateStub<ILogger>();
+            IOhmSystemInterfaceGateway sys = new OhmSystemInterfaceGatewayStub();
+
+            Assert.AreEqual(NodeStates.initializing, target.State);
+
+            target.Init(data, logger, sys);
+
+            Assert.AreEqual(NodeStates.normal, target.State);
+
+            target.TestSetInterfaceState(ALRInterfaceStates.Enabled);
+
+            Assert.AreEqual(ALRInterfaceStates.Enabled, target.InterfaceState);
+        }
+
+        [TestMethod]
+        public void TestStartingWhenInited()
+        {
+            string key = "key";
+            string name = "name";
+
+            ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name, true);
+            IDataStore data = MockRepository.GenerateStub<IDataStore>();
+            ILogger logger = MockRepository.GenerateStub<ILogger>();
+            IOhmSystemInterfaceGateway sys = new OhmSystemInterfaceGatewayStub();
+
+            Assert.AreEqual(NodeStates.initializing, target.State);
+
+            target.Init(data, logger, sys);
+
+            Assert.AreEqual(NodeStates.normal, target.State);
+
+            Assert.AreEqual(ALRInterfaceStates.Disabled, target.InterfaceState);
+
+            bool result = target.Starting();
+
+            Assert.IsTrue(result);
+            Assert.AreEqual(ALRInterfaceStates.Enabled, target.InterfaceState);
+        }
+
+        [TestMethod]
+        public void TestShutdowningWhenInterfaceEnabled()
+        {
+            string key = "key";
+            string name = "name";
+
+            ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name, true);
+            IDataStore data = MockRepository.GenerateStub<IDataStore>();
+            ILogger logger = MockRepository.GenerateStub<ILogger>();
+            IOhmSystemInterfaceGateway sys = new OhmSystemInterfaceGatewayStub();
+
+            Assert.AreEqual(NodeStates.initializing, target.State);
+
+            target.Init(data, logger, sys);
+
+            Assert.AreEqual(NodeStates.normal, target.State);
+
+            Assert.AreEqual(ALRInterfaceStates.Disabled, target.InterfaceState);
+
+            bool result = target.Starting();
+
+            Assert.IsTrue(result);
+            Assert.AreEqual(ALRInterfaceStates.Enabled, target.InterfaceState);
+
+            bool result2 = target.Shutdowning();
+
+            Assert.IsTrue(result2);
+            Assert.AreEqual(ALRInterfaceStates.Disabled, target.InterfaceState);
+        }
+
+        
 
         [TestMethod]
         public void TestStartingNotInited()
         {
             string key = "key";
             string name = "name";
-            ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name);
+            ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name, false);
 
             Assert.AreEqual(NodeStates.initializing, target.State);
             Assert.AreEqual(ALRInterfaceStates.Disabled, target.InterfaceState);
@@ -207,7 +407,7 @@ namespace OHM.Tests
         {
             string key = "key";
             string name = "name";
-            ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name);
+            ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name, false);
 
             Assert.AreEqual(NodeStates.initializing, target.State);
             Assert.AreEqual(ALRInterfaceStates.Disabled, target.InterfaceState);
@@ -218,15 +418,17 @@ namespace OHM.Tests
             Assert.AreEqual(NodeStates.initializing, target.State);
         }
 
-        
-
         #region Stubs
 
         private class ALRInterfaceAbstractNodeStub : ALRInterfaceAbstractNode
         {
-            public ALRInterfaceAbstractNodeStub(string key, string name)
+            private bool _internalTestRegisterProperties = true;
+
+            public ALRInterfaceAbstractNodeStub(string key, string name, bool internalTestRegisterPropertiersResult)
             : base(key, name)
-            { }
+            {
+                _internalTestRegisterProperties = internalTestRegisterPropertiersResult;
+            }
 
             public void TestSetInterfaceState(ALRInterfaceStates newState)
             {
@@ -235,12 +437,17 @@ namespace OHM.Tests
 
             protected override void Start()
             {
-                throw new System.NotImplementedException();
+                //throw new System.NotImplementedException();
+            }
+
+            protected override bool InitSubChild()
+            {
+                return base.InitSubChild();
             }
 
             protected override bool Shutdown()
             {
-                throw new System.NotImplementedException();
+                return true;
             }
 
             protected override AbstractPowerNode CreateNodeInstance(string model, string key, string name, System.Collections.Generic.IDictionary<string, object> options)
@@ -255,7 +462,68 @@ namespace OHM.Tests
 
             protected override bool RegisterProperties()
             {
+                return _internalTestRegisterProperties;
+            }
+        }
+
+        private class ALRInterfaceAbstractNodeStub2 : ALRInterfaceAbstractNode
+        {
+            private bool _internalTestRegisterProperties = true;
+
+            public ALRInterfaceAbstractNodeStub2(string key, string name)
+                : base(key, name)
+            {
+                
+            }
+
+            public void TestSetInterfaceState(ALRInterfaceStates newState)
+            {
+                base.InterfaceState = newState;
+            }
+
+            protected override void Start()
+            {
+                throw new System.NotImplementedException();
+            }
+
+            protected override bool InitSubChild()
+            {
+                //Create Custom child
+                //this.CreateChildNode()
+                return base.InitSubChild();
+            }
+
+            protected override bool Shutdown()
+            {
+                throw new System.NotImplementedException();
+            }
+
+            protected override AbstractPowerNode CreateNodeInstance(string model, string key, string name, System.Collections.Generic.IDictionary<string, object> options)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            protected override void RegisterCommands()
+            {
+                throw new System.NotImplementedException();
+            }
+
+            protected override bool RegisterProperties()
+            {
                 return true;
+            }
+        }
+
+        private class OhmSystemInterfaceGatewayStub : IOhmSystemInterfaceGateway
+        {
+            public bool CreateNode(AbstractPowerTreeNode node)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public bool RemoveNode(AbstractPowerTreeNode node)
+            {
+                throw new System.NotImplementedException();
             }
         }
 

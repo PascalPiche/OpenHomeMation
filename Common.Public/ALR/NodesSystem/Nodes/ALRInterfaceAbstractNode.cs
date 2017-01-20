@@ -1,5 +1,6 @@
 ﻿using OHM.Data;
 using OHM.Logger;
+using OHM.Nodes.Properties;
 using OHM.SYS;
 using System.Collections.Generic;
 
@@ -9,8 +10,8 @@ namespace OHM.Nodes.ALR
     {
         #region Private Members
 
+        private INodeProperty _startOnLaunchProperty;
         private ALRInterfaceStates _interfaceState = ALRInterfaceStates.Disabled;
-        private bool _startOnLaunch = false;
         private IOhmSystemInterfaceGateway _system;
 
         #endregion
@@ -19,7 +20,10 @@ namespace OHM.Nodes.ALR
 
         protected ALRInterfaceAbstractNode(string key, string name)
             : base(key, name)
-        { }
+        {
+            _startOnLaunchProperty = new NodeProperty(PREFIX_SYSTEM + "startOnLaunch", "StartOnLaunch", typeof(bool), false, "System start on launch interface", false);
+            this.RegisterProperty(_startOnLaunchProperty);
+        }
 
         #endregion
 
@@ -39,20 +43,22 @@ namespace OHM.Nodes.ALR
 
         public bool IsRunning { get { return InterfaceState == ALRInterfaceStates.Enabled; } }
 
-        public bool StartOnLaunch { get { return _startOnLaunch; }
+        public bool StartOnLaunch { 
+            get { 
+                return (bool)this._startOnLaunchProperty.Value;
+            }
             internal set
             {
-                if ((this.State == NodeStates.fatal && value == true) || this.State == NodeStates.initializing)
+                if ((this.State == NodeStates.fatal && value == true))
                 {
                     return;
                 }
-
-                _startOnLaunch = value;
-
-                //TODO : MOVE IT INSIDE A SUB META DICTIONARY FOR INTERFACE
-                DataStore.StoreBool("StartOnLaunch", value);
-                DataStore.Save();
-                NotifyPropertyChanged("StartOnLaunch");
+                if (this._startOnLaunchProperty.SetValue(value))
+                {
+                    DataStore.StoreBool("StartOnLaunch", value);
+                    DataStore.Save();
+                    NotifyPropertyChanged("StartOnLaunch");
+                }
             }
         }
 
@@ -84,7 +90,7 @@ namespace OHM.Nodes.ALR
                 Shutdown();
                 InterfaceState = ALRInterfaceStates.Disabled;
                 result = true;
-                Logger.Info("Interface Shutdowning was successfully");
+                Logger.Info("Interface Shutdowning was successfully executed");
                 
             }
             return result;
@@ -92,15 +98,19 @@ namespace OHM.Nodes.ALR
         
         public void Init(IDataStore data, ILogger logger, IOhmSystemInterfaceGateway system)
         {
-            if (base.Init(data, logger, this))
+            if (system != null && base.Init(data, logger, this))
             {
-                _startOnLaunch = data.GetBool("StartOnLaunch");
                 _system = system;
+                
+                if (this.Initing())
+                {
+                    State = NodeStates.normal;
+                }
 
-                State = NodeStates.normal;
-                NotifyPropertyChanged("StartOnLaunch");
-
-                this.Initing();
+                if (data.ContainKey("StartOnLaunch"))
+                {
+                    this.StartOnLaunch = data.GetBool("StartOnLaunch");
+                }
             }
         }
 
@@ -117,7 +127,7 @@ namespace OHM.Nodes.ALR
         #endregion
         
         #region Protected abstract functions
-        
+
         protected abstract void Start();
 
         protected abstract bool Shutdown();
