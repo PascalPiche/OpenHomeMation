@@ -36,9 +36,9 @@ namespace OHM.Data
             get { return _key; }
         }
 
-        public bool HasUnsavedData
+        /*public bool HasUnsavedData
         {
             get { throw new NotImplementedException(); }
-        }
+        }*/
     }
 }

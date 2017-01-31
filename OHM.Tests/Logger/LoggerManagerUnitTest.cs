@@ -8,23 +8,31 @@ namespace OHM.Logger.Tests
         [TestMethod]
         public void TestGetLoggerType()
         {
-
             var logMng = new LoggerManager();
-            var result = logMng.GetLogger("", typeof(object));
+            var result = logMng.GetLogger("a", typeof(object));
 
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(DefaultLogger));
+
+            //Generate exception code coverage
+            var result2 = logMng.GetLogger("a", typeof(LoggerManagerUnitTest));
+            Assert.IsNotNull(result2);
+            Assert.IsInstanceOfType(result2, typeof(DefaultLogger));
         }
 
         [TestMethod]
         public void TestGetLoggerName()
         {
-
             var logMng = new LoggerManager();
-            var result = logMng.GetLogger("", "a.a");
+            var result = logMng.GetLogger("b", "a.a");
 
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(DefaultLogger));
+
+            //Generate exception code coverage
+            var result2 = logMng.GetLogger("b", "b.b");
+            Assert.IsNotNull(result2);
+            Assert.IsInstanceOfType(result2, typeof(DefaultLogger));
         }
     }
 }

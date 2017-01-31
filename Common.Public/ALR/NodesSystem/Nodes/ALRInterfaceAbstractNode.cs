@@ -49,11 +49,7 @@ namespace OHM.Nodes.ALR
             }
             internal set
             {
-                if ((this.State == NodeStates.fatal && value == true))
-                {
-                    return;
-                }
-                if (this._startOnLaunchProperty.SetValue(value))
+                if ((this.State != NodeStates.fatal || value == false) && this._startOnLaunchProperty.SetValue(value))
                 {
                     DataStore.StoreBool("StartOnLaunch", value);
                     DataStore.Save();
@@ -102,9 +98,13 @@ namespace OHM.Nodes.ALR
             {
                 _system = system;
                 
-                if (this.Initing())
+                if (this.Initing() && State == NodeStates.initializing)
                 {
                     State = NodeStates.normal;
+                }
+                else if (State != NodeStates.fatal)
+                {
+                    State = NodeStates.error;
                 }
 
                 if (data.ContainKey("StartOnLaunch"))

@@ -418,6 +418,104 @@ namespace OHM.Tests
             Assert.AreEqual(NodeStates.initializing, target.State);
         }
 
+        [TestMethod]
+        public void TestNodeStateErrorInitSubChild()
+        {
+            string key = "key";
+            string name = "name";
+            ALRInterfaceAbstractNodeStub2 target = new ALRInterfaceAbstractNodeStub2(key, name, false);
+
+            Assert.AreEqual(NodeStates.initializing, target.State);
+            Assert.AreEqual(ALRInterfaceStates.Disabled, target.InterfaceState);
+
+            IDataStore data = MockRepository.GenerateStub<IDataStore>();
+            ILogger logger = MockRepository.GenerateStub<ILogger>();
+            IOhmSystemInterfaceGateway sys = new OhmSystemInterfaceGatewayStub();
+
+            target.Init(data, logger, sys);
+    
+            Assert.AreEqual(NodeStates.error, target.State);
+        }
+
+        [TestMethod]
+        public void TestSetStartOnLaunchTrueWithInitFatalState()
+        {
+            string key = "key";
+            string name = "name";
+            ALRInterfaceAbstractNodeStub2 target = new ALRInterfaceAbstractNodeStub2(key, name, true);
+
+            Assert.AreEqual(NodeStates.initializing, target.State);
+            Assert.AreEqual(ALRInterfaceStates.Disabled, target.InterfaceState);
+
+            target.TestSetNodeState(NodeStates.fatal);
+            Assert.AreEqual(NodeStates.fatal, target.State);
+            Assert.AreEqual(false, target.StartOnLaunch);
+            
+            IDataStore data = MockRepository.GenerateStub<IDataStore>();
+            data.Stub(x => x.ContainKey("StartOnLaunch")).Return(true);
+            data.Stub(x => x.GetBool("StartOnLaunch")).Return(true);
+            ILogger logger = MockRepository.GenerateStub<ILogger>();
+            IOhmSystemInterfaceGateway sys = new OhmSystemInterfaceGatewayStub();
+
+            target.Init(data, logger, sys);
+            
+            Assert.AreEqual(NodeStates.fatal, target.State);
+            Assert.IsFalse(target.StartOnLaunch);
+        }
+
+        [TestMethod]
+        public void TestSetStartOnLaunchFalseWithInitFatalState()
+        {
+            string key = "key";
+            string name = "name";
+            ALRInterfaceAbstractNodeStub2 target = new ALRInterfaceAbstractNodeStub2(key, name, true);
+
+            Assert.AreEqual(NodeStates.initializing, target.State);
+            Assert.AreEqual(ALRInterfaceStates.Disabled, target.InterfaceState);
+
+            target.TestSetNodeState(NodeStates.fatal);
+            Assert.AreEqual(NodeStates.fatal, target.State);
+            Assert.AreEqual(false, target.StartOnLaunch);
+
+            IDataStore data = MockRepository.GenerateStub<IDataStore>();
+            data.Stub(x => x.ContainKey("StartOnLaunch")).Return(true);
+            data.Stub(x => x.GetBool("StartOnLaunch")).Return(false);
+            
+            ILogger logger = MockRepository.GenerateStub<ILogger>();
+            IOhmSystemInterfaceGateway sys = new OhmSystemInterfaceGatewayStub();
+
+            target.Init(data, logger, sys);
+
+            Assert.AreEqual(NodeStates.fatal, target.State);
+            Assert.IsFalse(target.StartOnLaunch);
+        }
+
+        //INTEGRATION TEST ALRAbstractTreeNode CreateChildNode Test
+        [TestMethod]
+        public void TestCreateChildNode()
+        {
+            string key = "key";
+            string name = "name";
+
+            ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name, true);
+
+            Assert.AreEqual(NodeStates.initializing, target.State);
+            Assert.AreEqual(ALRInterfaceStates.Disabled, target.InterfaceState);
+
+            IDataStore data = MockRepository.GenerateStub<IDataStore>();
+            data.Stub(x => x.ContainKey("StartOnLaunch")).Return(true);
+            data.Stub(x => x.GetBool("StartOnLaunch")).Return(false);
+
+            ILogger logger = MockRepository.GenerateStub<ILogger>();
+            IOhmSystemInterfaceGateway sys = new OhmSystemInterfaceGatewayStub();
+
+            target.Init(data, logger, sys);
+
+            Assert.AreEqual(NodeStates.normal, target.State);
+            Assert.IsFalse(target.StartOnLaunch);
+
+        }
+
         #region Stubs
 
         private class ALRInterfaceAbstractNodeStub : ALRInterfaceAbstractNode
@@ -440,9 +538,17 @@ namespace OHM.Tests
                 //throw new System.NotImplementedException();
             }
 
+            public bool CustomTest1InitSubChild()
+            {
+                var result = this.CreateChildNode(null, null, null);
+                Assert.IsNull(result);
+
+                return true;
+            }
+
             protected override bool InitSubChild()
             {
-                return base.InitSubChild();
+                return base.InitSubChild() && CustomTest1InitSubChild();
             }
 
             protected override bool Shutdown()
@@ -452,7 +558,9 @@ namespace OHM.Tests
 
             protected override AbstractPowerNode CreateNodeInstance(string model, string key, string name, System.Collections.Generic.IDictionary<string, object> options)
             {
-                throw new System.NotImplementedException();
+                //TEMP;
+                return null;
+                //throw new System.NotImplementedException();
             }
 
             protected override void RegisterCommands()
@@ -468,12 +576,18 @@ namespace OHM.Tests
 
         private class ALRInterfaceAbstractNodeStub2 : ALRInterfaceAbstractNode
         {
-            private bool _internalTestRegisterProperties = true;
+            //private bool _internalTestRegisterProperties = true;
+            private bool _initSubChildResult = true;
 
-            public ALRInterfaceAbstractNodeStub2(string key, string name)
+            public ALRInterfaceAbstractNodeStub2(string key, string name, bool initSubChildResult)
                 : base(key, name)
             {
-                
+                _initSubChildResult = initSubChildResult;
+            }
+            
+            public void TestSetNodeState(NodeStates value)
+            {
+                base.State = value;
             }
 
             public void TestSetInterfaceState(ALRInterfaceStates newState)
@@ -489,8 +603,7 @@ namespace OHM.Tests
             protected override bool InitSubChild()
             {
                 //Create Custom child
-                //this.CreateChildNode()
-                return base.InitSubChild();
+                return _initSubChildResult && base.InitSubChild();
             }
 
             protected override bool Shutdown()
@@ -505,7 +618,7 @@ namespace OHM.Tests
 
             protected override void RegisterCommands()
             {
-                throw new System.NotImplementedException();
+                //throw new System.NotImplementedException();
             }
 
             protected override bool RegisterProperties()

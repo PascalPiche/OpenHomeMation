@@ -5,7 +5,7 @@ namespace OHM.Data
     {
         string Key { get; }
 
-        bool HasUnsavedData { get; }
+        //bool HasUnsavedData { get; }
 
         bool Save();
     }

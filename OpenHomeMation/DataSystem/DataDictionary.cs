@@ -124,7 +124,7 @@ namespace OHM.Data
         
         #endregion
 
-        #region Protected
+        #region Private
 
         private void StoreValue(string key, IDataValue obj)
         {

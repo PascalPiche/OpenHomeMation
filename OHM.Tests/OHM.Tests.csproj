@@ -58,6 +58,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Data\DataDictionaryUnitTest.cs" />
+    <Compile Include="Data\DataValueInt32Test.cs" />
+    <Compile Include="Data\DataValueBoolUnitTest.cs" />
     <Compile Include="Data\FileDataManagerUnitTest.cs" />
     <Compile Include="Interfaces\InterfacesManagerUnitTest.cs" />
     <Compile Include="Plugins\PluginsManagerUnitTest.cs" />

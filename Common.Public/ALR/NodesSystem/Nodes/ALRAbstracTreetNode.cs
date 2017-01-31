@@ -37,7 +37,16 @@ namespace OHM.Nodes.ALR
                         newNode.Initing();
                         result = newNode;
                     }
+                    else
+                    {
+                        //TODO LOG: CANT ADD NEW NODE TO THE TREE
+                    }
                 }
+            }
+            else
+            {
+                //LOG
+                this.Logger.Error("Trying to create a child node with no interface bound to the creator node: " + this.ToString() + " with model: " + model);
             }
            
             return result;
