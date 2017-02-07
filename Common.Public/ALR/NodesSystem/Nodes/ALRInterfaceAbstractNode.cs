@@ -32,7 +32,7 @@ namespace OHM.Nodes.ALR
         public ALRInterfaceStates InterfaceState { get { return _interfaceState; }
             protected set
             {
-                if (this.State != NodeStates.initializing)
+                if (this.State != NodeStates.created)
                 {
                     _interfaceState = value;
                     NotifyPropertyChanged("InterfaceState");
@@ -65,7 +65,7 @@ namespace OHM.Nodes.ALR
         public bool Starting()
         {
             bool result = false;
-            if (this.State != NodeStates.initializing && this.State != NodeStates.fatal && !this.IsRunning)
+            if (this.State != NodeStates.created && this.State != NodeStates.fatal && !this.IsRunning)
             {
                 Logger.Debug("Starting interface");
                 Start();
@@ -98,7 +98,7 @@ namespace OHM.Nodes.ALR
             {
                 _system = system;
                 
-                if (this.Initing() && State == NodeStates.initializing)
+                if (State == NodeStates.created && this.Initing())
                 {
                     State = NodeStates.normal;
                 }

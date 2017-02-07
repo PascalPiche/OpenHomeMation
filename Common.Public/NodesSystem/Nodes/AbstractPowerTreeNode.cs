@@ -15,7 +15,7 @@ namespace OHM.Nodes
 
         #region Internal Ctor
 
-        internal AbstractPowerTreeNode(string key, string name, NodeStates initialState = NodeStates.initializing)
+        internal AbstractPowerTreeNode(string key, string name, NodeStates initialState = NodeStates.created)
             : base(key, name, initialState)
         {
             _children = new ObservableCollection<AbstractPowerTreeNode>();
@@ -31,7 +31,7 @@ namespace OHM.Nodes
             get
             {
                 string result = null;
-                if (State != NodeStates.initializing)
+                if (State != NodeStates.created)
                 {
                     if (Parent != null)
                     {

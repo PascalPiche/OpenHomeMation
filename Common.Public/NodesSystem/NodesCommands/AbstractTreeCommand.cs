@@ -37,7 +37,7 @@ namespace OHM.Nodes.Commands
                 string result = string.Empty;
                 if (Node != null)
                 {
-                    result = ((ICommandsTreeNode)Node).TreeKey; 
+                    result = ((ITreeNode)Node).TreeKey; 
                 }
                 return result;
             }
@@ -49,7 +49,7 @@ namespace OHM.Nodes.Commands
 
         internal override bool Init(ICommandsNode node)
         {
-            if (node is ICommandsTreeNode)
+            if (node is ITreeNode)
             {
                 return base.Init(node);
             }

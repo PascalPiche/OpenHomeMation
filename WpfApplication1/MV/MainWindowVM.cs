@@ -180,7 +180,7 @@ namespace WpfApplication1.MV
 
         #endregion
 
-        #region Hal
+        #region ALR
 
         public bool StartInterface(string key)
         {

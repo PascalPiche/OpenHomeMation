@@ -4,14 +4,55 @@ using OHM.Logger;
 using OHM.Nodes;
 using OHM.Nodes.ALR;
 using OHM.Nodes.Commands;
+using OHM.Nodes.Commands.ALR;
 using OHM.Nodes.Properties;
 
 namespace OHM.Tests
 {
     [TestClass]
-    public class ALRBasicNodeUnitTest
+    public class InterfaceCommandAbstractUnitTest
     {
         [TestMethod]
+        public void TestInterfaceCommandStubConstructorDefault()
+        {
+            string key = "key";
+            string name = "name";
+
+            InterfaceCommandStub target = new InterfaceCommandStub(key, name);
+
+            Assert.AreEqual(key, target.Key);
+            Assert.AreEqual(name, target.Name);
+            Assert.IsNull(target.testGetNode());
+            Assert.IsNull(target.testGetInterface());
+            Assert.IsFalse(target.testIsInterfaceRunning());
+            Assert.IsFalse(target.CanExecute());
+        }
+
+        private class InterfaceCommandStub : InterfaceCommandAbstract
+        {
+            public InterfaceCommandStub(string key, string name) : base(key, name) { }
+
+            protected override bool RunImplementation(System.Collections.Generic.IDictionary<string, string> arguments)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public ALRAbstractTreeNode testGetNode()
+            {
+                return this.Node;
+            }
+
+            public bool testIsInterfaceRunning()
+            {
+                return this.IsInterfaceRunning();
+            }
+
+            public ALRInterfaceAbstractNode testGetInterface() {
+                return this.Interface;
+            }
+        }
+
+        /*[TestMethod]
         public void TestALRBasicNodeConstructorDefault()
         {
             string key = "key";
@@ -73,6 +114,6 @@ namespace OHM.Tests
             {
                 return base.RegisterProperties();
             }
-        }
+        }*/
     }
 }

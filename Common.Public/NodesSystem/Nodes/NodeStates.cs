@@ -6,7 +6,9 @@ namespace OHM.Nodes
         fatal,
         error,
         warn,
-        initializing,
+        creating,
+        created,
+        initialized,
         normal
     }
 }

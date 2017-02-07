@@ -30,7 +30,7 @@ namespace OHM.Nodes
 
         #region Internal Ctor
 
-        internal AbstractBasicNode(string key, string name, NodeStates initialState = NodeStates.initializing)
+        internal AbstractBasicNode(string key, string name, NodeStates initialState = NodeStates.created)
         {            
             _properties = new ObservableCollection<INodeProperty>();
             _propertiesDic = new Dictionary<string, INodeProperty>();

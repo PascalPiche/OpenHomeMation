@@ -85,7 +85,7 @@ namespace WUnderground.Nodes
             } else if (CreateAccountNode(username, keyId))
             {
                 //Store new account
-                IDataDictionary accountsMetaInfo = _registeredAccounts.GetOrCreateDataDictionary(username);
+                IDataDictionary accountsMetaInfo = _registeredAccounts.GetOrCreateDataDictionary(keyId);
                 accountsMetaInfo.StoreString("username", username);
                 accountsMetaInfo.StoreString("key", keyId);
 

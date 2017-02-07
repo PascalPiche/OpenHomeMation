@@ -31,7 +31,7 @@ namespace OHM.Tests
             Assert.IsNotNull(target.Properties);
             Assert.AreEqual(4, target.Properties.Count);
 
-            Assert.AreEqual(NodeStates.initializing, target.State);
+            Assert.AreEqual(NodeStates.created, target.State);
 
             Assert.AreEqual(ALRInterfaceStates.Disabled, target.InterfaceState);
             Assert.IsFalse(target.IsRunning);
@@ -167,6 +167,8 @@ namespace OHM.Tests
             string name = "name";
             ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name, false);
 
+            Assert.IsFalse(target.IsRunning);
+
             bool result = target.Shutdowning();
 
             Assert.IsTrue(result);
@@ -197,7 +199,7 @@ namespace OHM.Tests
             ILogger logger = null;
             IOhmSystemInterfaceGateway sys = new OhmSystemInterfaceGatewayStub();
 
-            Assert.AreEqual(NodeStates.initializing, target.State);
+            Assert.AreEqual(NodeStates.created, target.State);
 
             target.Init(data, logger, sys);
 
@@ -216,12 +218,12 @@ namespace OHM.Tests
 
             IOhmSystemInterfaceGateway sys = new OhmSystemInterfaceGatewayStub();
 
-            Assert.AreEqual(NodeStates.initializing, target.State);
+            Assert.AreEqual(NodeStates.created, target.State);
 
             target.Init(data, logger, sys);
 
             Assert.AreNotEqual(NodeStates.normal, target.State);
-            Assert.AreEqual(NodeStates.initializing, target.State);
+            Assert.AreEqual(NodeStates.created, target.State);
         }
 
         [TestMethod]
@@ -236,12 +238,12 @@ namespace OHM.Tests
 
             IOhmSystemInterfaceGateway sys = new OhmSystemInterfaceGatewayStub();
 
-            Assert.AreEqual(NodeStates.initializing, target.State);
+            Assert.AreEqual(NodeStates.created, target.State);
 
             target.Init(data, logger, sys);
 
             Assert.AreNotEqual(NodeStates.normal, target.State);
-            Assert.AreEqual(NodeStates.initializing, target.State);
+            Assert.AreEqual(NodeStates.created, target.State);
 
         }
 
@@ -257,12 +259,12 @@ namespace OHM.Tests
 
             IOhmSystemInterfaceGateway sys = new OhmSystemInterfaceGatewayStub();
 
-            Assert.AreEqual(NodeStates.initializing, target.State);
+            Assert.AreEqual(NodeStates.created, target.State);
 
             target.Init(data, logger, sys);
 
             Assert.AreNotEqual(NodeStates.normal, target.State);
-            Assert.AreEqual(NodeStates.initializing, target.State);
+            Assert.AreEqual(NodeStates.created, target.State);
         }
 
         [TestMethod]
@@ -277,7 +279,7 @@ namespace OHM.Tests
 
             IOhmSystemInterfaceGateway sys = new OhmSystemInterfaceGatewayStub();
 
-            Assert.AreEqual(NodeStates.initializing, target.State);
+            Assert.AreEqual(NodeStates.created, target.State);
 
             target.Init(data, logger, sys);
 
@@ -300,7 +302,7 @@ namespace OHM.Tests
 
             IOhmSystemInterfaceGateway sys = new OhmSystemInterfaceGatewayStub();
 
-            Assert.AreEqual(NodeStates.initializing, target.State);
+            Assert.AreEqual(NodeStates.created, target.State);
 
             target.Init(data, logger, sys);
 
@@ -318,7 +320,7 @@ namespace OHM.Tests
             ILogger logger = MockRepository.GenerateStub<ILogger>();
             IOhmSystemInterfaceGateway sys = new OhmSystemInterfaceGatewayStub();
 
-            Assert.AreEqual(NodeStates.initializing, target.State);
+            Assert.AreEqual(NodeStates.created, target.State);
 
             target.Init(data, logger, sys);
 
@@ -340,7 +342,7 @@ namespace OHM.Tests
             ILogger logger = MockRepository.GenerateStub<ILogger>();
             IOhmSystemInterfaceGateway sys = new OhmSystemInterfaceGatewayStub();
 
-            Assert.AreEqual(NodeStates.initializing, target.State);
+            Assert.AreEqual(NodeStates.created, target.State);
 
             target.Init(data, logger, sys);
 
@@ -365,7 +367,7 @@ namespace OHM.Tests
             ILogger logger = MockRepository.GenerateStub<ILogger>();
             IOhmSystemInterfaceGateway sys = new OhmSystemInterfaceGatewayStub();
 
-            Assert.AreEqual(NodeStates.initializing, target.State);
+            Assert.AreEqual(NodeStates.created, target.State);
 
             target.Init(data, logger, sys);
 
@@ -384,8 +386,6 @@ namespace OHM.Tests
             Assert.AreEqual(ALRInterfaceStates.Disabled, target.InterfaceState);
         }
 
-        
-
         [TestMethod]
         public void TestStartingNotInited()
         {
@@ -393,13 +393,13 @@ namespace OHM.Tests
             string name = "name";
             ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name, false);
 
-            Assert.AreEqual(NodeStates.initializing, target.State);
+            Assert.AreEqual(NodeStates.created, target.State);
             Assert.AreEqual(ALRInterfaceStates.Disabled, target.InterfaceState);
 
             target.Starting();
 
             Assert.AreEqual(ALRInterfaceStates.Disabled, target.InterfaceState);
-            Assert.AreEqual(NodeStates.initializing, target.State);
+            Assert.AreEqual(NodeStates.created, target.State);
         }
 
         [TestMethod]
@@ -409,13 +409,13 @@ namespace OHM.Tests
             string name = "name";
             ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name, false);
 
-            Assert.AreEqual(NodeStates.initializing, target.State);
+            Assert.AreEqual(NodeStates.created, target.State);
             Assert.AreEqual(ALRInterfaceStates.Disabled, target.InterfaceState);
 
             target.TestSetInterfaceState(ALRInterfaceStates.Enabled);
 
             Assert.AreEqual(ALRInterfaceStates.Disabled, target.InterfaceState);
-            Assert.AreEqual(NodeStates.initializing, target.State);
+            Assert.AreEqual(NodeStates.created, target.State);
         }
 
         [TestMethod]
@@ -425,7 +425,7 @@ namespace OHM.Tests
             string name = "name";
             ALRInterfaceAbstractNodeStub2 target = new ALRInterfaceAbstractNodeStub2(key, name, false);
 
-            Assert.AreEqual(NodeStates.initializing, target.State);
+            Assert.AreEqual(NodeStates.created, target.State);
             Assert.AreEqual(ALRInterfaceStates.Disabled, target.InterfaceState);
 
             IDataStore data = MockRepository.GenerateStub<IDataStore>();
@@ -444,7 +444,7 @@ namespace OHM.Tests
             string name = "name";
             ALRInterfaceAbstractNodeStub2 target = new ALRInterfaceAbstractNodeStub2(key, name, true);
 
-            Assert.AreEqual(NodeStates.initializing, target.State);
+            Assert.AreEqual(NodeStates.created, target.State);
             Assert.AreEqual(ALRInterfaceStates.Disabled, target.InterfaceState);
 
             target.TestSetNodeState(NodeStates.fatal);
@@ -470,7 +470,7 @@ namespace OHM.Tests
             string name = "name";
             ALRInterfaceAbstractNodeStub2 target = new ALRInterfaceAbstractNodeStub2(key, name, true);
 
-            Assert.AreEqual(NodeStates.initializing, target.State);
+            Assert.AreEqual(NodeStates.created, target.State);
             Assert.AreEqual(ALRInterfaceStates.Disabled, target.InterfaceState);
 
             target.TestSetNodeState(NodeStates.fatal);
@@ -499,7 +499,7 @@ namespace OHM.Tests
 
             ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name, true);
 
-            Assert.AreEqual(NodeStates.initializing, target.State);
+            Assert.AreEqual(NodeStates.created, target.State);
             Assert.AreEqual(ALRInterfaceStates.Disabled, target.InterfaceState);
 
             IDataStore data = MockRepository.GenerateStub<IDataStore>();

@@ -35,13 +35,30 @@ namespace OHM.Nodes.Commands.ALR
 
         protected new ALRAbstractTreeNode Node { get { return base.Node as ALRAbstractTreeNode; } }
 
-        protected ALRInterfaceAbstractNode Interface { get { return ((ALRAbstractTreeNode)base.Node).Interface; } }
+        protected ALRInterfaceAbstractNode Interface 
+        { 
+            get 
+            {
+                ALRInterfaceAbstractNode result = null;
+                if (Node != null)
+                {
+                    result = Node.Interface; 
+                }
+                return result;
+            }
+        }
 
         protected abstract override bool RunImplementation(IDictionary<string, string> arguments);
 
         protected bool IsInterfaceRunning()
         {
-            return this.Node.Interface.IsRunning;
+            bool result = false;
+            if (Node != null && Node.Interface != null)
+            {
+                result = Node.Interface.IsRunning;
+            }
+
+            return result;
         }
 
         #endregion

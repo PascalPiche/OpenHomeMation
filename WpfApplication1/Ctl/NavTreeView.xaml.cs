@@ -36,11 +36,11 @@ namespace WpfApplication1.Ctl
         private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             MainWindowVM dataContext = this.GetValue(DataContextProperty) as MainWindowVM;
-            TreeViewItem newItem = e.NewValue as TreeViewItem;
+            //TreeViewItem newItem = e.NewValue as TreeViewItem;
 
             if (dataContext != null)
             {
-                dataContext.SelectedNode = newItem;
+                dataContext.SelectedNode = e.NewValue;
             }
         }
     }

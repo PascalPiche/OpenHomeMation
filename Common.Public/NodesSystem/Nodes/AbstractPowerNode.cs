@@ -16,7 +16,7 @@ namespace OHM.Nodes
 
         #region Internal ctor
 
-        internal AbstractPowerNode(string key, string name, NodeStates initialState = NodeStates.initializing)
+        internal AbstractPowerNode(string key, string name, NodeStates initialState = NodeStates.creating)
             : base(key, name, initialState)
         {
             _commands = new ObservableCollection<ICommand>();
@@ -28,7 +28,13 @@ namespace OHM.Nodes
 
         #region Public Properties
 
-        public IReadOnlyList<ICommand> Commands { get { return _commandsReadOnly; } }
+        public IReadOnlyList<ICommand> Commands 
+        { 
+            get 
+            { 
+                return _commandsReadOnly; 
+            } 
+        }
 
         #endregion
 
@@ -39,25 +45,34 @@ namespace OHM.Nodes
             return true;
         }
 
+        private List<AbstractCommand> commandsToInit = new List<AbstractCommand>();
+
+        private bool InitCommandAndAdd(AbstractCommand command)
+        {
+            bool result = false;
+            if (command.Init(this))
+            {
+                _commandsDic.Add(command.Key, command);
+                _commands.Add(command);
+                this.NotifyPropertyChanged("Commands");
+                result = true;
+            }
+            return result;
+        }
+
         protected bool RegisterCommand(AbstractCommand command)
         {
             bool result = false;
             
-            if (command != null && !_commandsDic.ContainsKey(command.Key))
+            if (this.State != NodeStates.creating && command != null && !_commandsDic.ContainsKey(command.Key))
             {
-                if (!(this.State == NodeStates.fatal || this.State == NodeStates.initializing))
+                if (!(this.State == NodeStates.fatal))
                 {
-                    if (command.Init(this))
-                    {
-                        _commandsDic.Add(command.Key, command);
-                        _commands.Add(command);
-                        result = true;
-                    }
+                    result = InitCommandAndAdd(command);
                 }
                 else
                 {
-                    //TODO STORE COMMAND TO INIT
-
+                    //TODO Log node is in fatal state...
                 }
             }
             return result;

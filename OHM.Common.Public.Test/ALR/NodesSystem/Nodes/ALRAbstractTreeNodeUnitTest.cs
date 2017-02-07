@@ -32,7 +32,7 @@ namespace OHM.Tests
             Assert.IsNotNull(target.Properties);
             Assert.AreEqual(3, target.Properties.Count);
 
-            Assert.AreEqual(NodeStates.initializing, target.State);
+            Assert.AreEqual(NodeStates.created, target.State);
 
             Assert.IsNull(target.TreeKey);
             Assert.IsNull(target.Parent);
@@ -148,7 +148,7 @@ namespace OHM.Tests
              TestSetStateTriggerProperty = false;
              bool result = target.UpdateProperty("unknow", null);
 
-             Assert.AreEqual(NodeStates.initializing, target.State);
+             Assert.AreEqual(NodeStates.created, target.State);
 
              Assert.IsFalse(result);
         }

@@ -39,14 +39,18 @@ namespace OHM.Nodes.ALR
                     }
                     else
                     {
-                        //TODO LOG: CANT ADD NEW NODE TO THE TREE
+                        //LOG: CANT ADD NEW NODE TO THE TREE
+                        this.Logger.Error("Can't add new node to the tree");
                     }
                 }
             }
             else
             {
                 //LOG
-                this.Logger.Error("Trying to create a child node with no interface bound to the creator node: " + this.ToString() + " with model: " + model);
+                if (this.Logger != null)
+                {
+                    this.Logger.Error("Trying to create a child node with no interface bound to the creator node: " + this.ToString() + " with model: " + model);
+                }
             }
            
             return result;
