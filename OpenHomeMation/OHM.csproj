@@ -117,6 +117,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="FileDataManager_FileDataManager.sequencediagram" />
+    <None Include="LoggerManager_LoggerManager.sequencediagram" />
     <None Include="PluginsSystem\_diagrams\PluginsManager_GetPlugin.sequencediagram" />
     <None Include="PluginsSystem\_diagrams\PluginsManager_InstallPlugin.sequencediagram" />
     <None Include="PluginsSystem\_diagrams\PluginsManager_Init.sequencediagram" />
@@ -129,6 +131,12 @@
     <None Include="LoggingSystem\_Diagrams\LoggerClassDiagramFull.cd" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="FileDataManager_FileDataManager.sequencediagram.layout">
+      <DependentUpon>FileDataManager_FileDataManager.sequencediagram</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoggerManager_LoggerManager.sequencediagram.layout">
+      <DependentUpon>LoggerManager_LoggerManager.sequencediagram</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PluginsSystem\_diagrams\PluginsManager_GetPlugin.sequencediagram.layout">
       <DependentUpon>PluginsManager_GetPlugin.sequencediagram</DependentUpon>
     </EmbeddedResource>

@@ -16,7 +16,7 @@ namespace OHM.Nodes
 
         #region Internal ctor
 
-        internal AbstractPowerNode(string key, string name, NodeStates initialState = NodeStates.creating)
+        protected AbstractPowerNode(string key, string name, NodeStates initialState = NodeStates.creating)
             : base(key, name, initialState)
         {
             _commands = new ObservableCollection<ICommand>();
@@ -39,11 +39,6 @@ namespace OHM.Nodes
         #endregion
 
         #region Protected Functions
-        
-        protected virtual bool InitSubChild()
-        {
-            return true;
-        }
 
         private List<AbstractCommand> commandsToInit = new List<AbstractCommand>();
 
@@ -99,10 +94,10 @@ namespace OHM.Nodes
 
         #region Internal Methods
 
-        internal bool Initing()
+        internal protected virtual bool Initing()
         {
             RegisterCommands();
-            return InitSubChild();
+            return true;
         }
 
         internal bool CanExecuteCommand(string key)

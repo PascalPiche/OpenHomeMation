@@ -35,7 +35,7 @@ namespace OHM.Tests
                 Assert.Fail("Should Throw error");
             }
             catch (Exception ex) {
-
+                Assert.IsNotNull(ex);
             }
             Assert.AreEqual(PluginStates.Ready, target.State);
         }

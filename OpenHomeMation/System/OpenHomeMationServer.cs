@@ -6,19 +6,28 @@ using System.ServiceModel.Description;
 namespace OHM.Sys
 {
 
-    [ServiceContract(Namespace = "http://Microsoft.ServiceModel.Samples")]
+    [ServiceContract(Namespace = "http://Microsoft.ServiceModel.Samples", CallbackContract=typeof(IOpenHomeMationCallback))]
     public interface IOpenHomeMationServer
     {
-        [OperationContract]
-        String Query(String query);
+        [OperationContract(IsOneWay=true)]
+        void Login(String user);
     }
 
+    public interface IOpenHomeMationCallback
+    {
+        [OperationContract(IsOneWay = true)]
+        void CallBackFunction(string str);
+    }
 
+    [ServiceBehavior(InstanceContextMode=InstanceContextMode.PerCall)]
     public sealed class OpenHomeMationServer : IOpenHomeMationServer
     {
-        public string Query(string query)
+        public void Login(string user)
         {
-            return "test";
+            IOpenHomeMationCallback callback = OperationContext.Current.GetCallbackChannel<IOpenHomeMationCallback>();
+
+            callback.CallBackFunction("Calling from Call Back");
+            //return "test";
         }
     }
 
@@ -36,7 +45,7 @@ namespace OHM.Sys
                 ohmService = new ServiceHost(typeof(OpenHomeMationServer), httpBaseAddress);
 
                 //Add Endpoint to Host
-                ohmService.AddServiceEndpoint(typeof(IOpenHomeMationServer), new WSHttpBinding(), "");
+                ohmService.AddServiceEndpoint(typeof(IOpenHomeMationServer), new WSDualHttpBinding(), "");
 
                 //Metadata Exchange
                 ServiceMetadataBehavior serviceBehavior = new ServiceMetadataBehavior();

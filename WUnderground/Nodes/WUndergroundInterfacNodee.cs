@@ -166,7 +166,7 @@ namespace WUnderground.Nodes
                         int magic = locationData.GetInt32("magic");
                         string wmo = locationData.GetString("wmo");
 
-                        GetAccountNodeFromUsername(username).AddLocation(locationKey, zip, magic, wmo);
+                        ((AccountNode)FindDirectChild(key)).AddLocation(locationKey, zip, magic, wmo);
                     }
 
                 } else {
@@ -187,10 +187,10 @@ namespace WUnderground.Nodes
             return false;
         }
 
-        private AccountNode GetAccountNodeFromUsername(string username)
+        /*private AccountNode GetAccountNodeFromUsername(string username)
         {
             return (AccountNode)FindDirectChild(username);
-        }
+        }*/
 
         #endregion
     }

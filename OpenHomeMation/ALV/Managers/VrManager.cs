@@ -9,13 +9,13 @@ using System.Collections.ObjectModel;
 
 namespace OHM.Managers.ALV
 {
-    public class VrManager : IVrManager
+    public class VrManager : IVrManager, IVrNodeCreator
     {
         private ILoggerManager _loggerMng;
         private ILogger _logger;
         private IDataStore _data;
         private IPluginsManager _pluginsMng;
-        private IDictionary<string, IPlugin> _registeredType = new Dictionary<string, IPlugin>();
+        private IDictionary<string, IVrNodeCreator> _registeredType = new Dictionary<string, IVrNodeCreator>();
         private ICollection<IVrType> _rootNodes = new ObservableCollection<IVrType>();
 
         #region Public Ctor
@@ -45,10 +45,15 @@ namespace OHM.Managers.ALV
                 _data.Save();
             }
             loadRegisteredInterfaces(system);*/
+
+
+            //Register basic type
+
+
             return true;
         }
 
-        public bool RegisterVrType(string key, IPlugin plugin)
+        public bool RegisterVrType(string key, IVrNodeCreator plugin)
         {
             bool result = false;
             if (!_registeredType.ContainsKey(key))
@@ -82,6 +87,7 @@ namespace OHM.Managers.ALV
                 IVrType newNode = _registeredType[vrType].CreateVrNode(vrType);
 
                 //Init type
+                //newNode.in
 
                 //_rootNodes 
 
@@ -93,5 +99,16 @@ namespace OHM.Managers.ALV
         }
 
         #endregion
+
+        public IVrType CreateVrNode(string key)
+        {
+            throw new System.NotImplementedException();
+        }
+
+
+        /*public bool RegisterVrType(string key, IPlugin plugin)
+        {
+            throw new System.NotImplementedException();
+        }*/
     }
 }

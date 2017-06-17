@@ -8,7 +8,7 @@ namespace OHM.Managers.ALV
     {
         bool Init(IDataStore data, IOhmSystemInternal system);
 
-        bool RegisterVrType(string key, IPlugin plugin);
+        bool RegisterVrType(string key, IVrNodeCreator creator);
 
         bool CreateRootNode(string model, string key, string name);
     }

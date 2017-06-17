@@ -3,6 +3,7 @@ using OHM.Logger;
 using OHM.Managers.ALR;
 using OHM.Managers.ALV;
 using OHM.Managers.Plugins;
+using OHM.Sys;
 
 namespace OHM.SYS
 {
@@ -41,7 +42,7 @@ namespace OHM.SYS
                 _logger.Info("System Started");
 
                 //TODO: STARTING INTERNAL SERVER IF NEEDED
-                //OpenHomeMationServerImplementation.Run();
+                OpenHomeMationServerImplementation.Run();
 
                 this._isRunning = true;
             } 

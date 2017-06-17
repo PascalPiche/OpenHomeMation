@@ -21,7 +21,19 @@ namespace WUnderground.Api
 
         public static WUndergroundConditionsResponse QueryConditions(string key, int zip, int magic, string wmo)
         {
-            return WUndergroudResponseFactory.CreateWUndergroundConditionsResponse(Query(key, "conditions", CreateZMW(zip, magic, wmo)));
+            WUndergroundConditionsResponse result = null;
+
+            try
+            {
+                string queryResult = Query(key, "conditions", CreateZMW(zip, magic, wmo));
+                result = WUndergroudResponseFactory.CreateWUndergroundConditionsResponse(queryResult);
+            }
+            catch (Exception)
+            {
+                //TODO PASS EXCEPTION HAS A RESULT
+                //throw;
+            }
+            return result; 
         }
 
         private static string CreateZMW(int zip, int magic, string wmo)
@@ -46,10 +58,13 @@ namespace WUnderground.Api
             catch (WebException ex)
             {
                 WebResponse errorResponse = ex.Response;
-                using (Stream responseStream = errorResponse.GetResponseStream())
+                if (errorResponse != null)
                 {
-                    StreamReader reader = new StreamReader(responseStream, Encoding.GetEncoding("utf-8"));
-                    String errorText = reader.ReadToEnd();
+                    using (Stream responseStream = errorResponse.GetResponseStream())
+                    {
+                        StreamReader reader = new StreamReader(responseStream, Encoding.GetEncoding("utf-8"));
+                        String errorText = reader.ReadToEnd();
+                    }
                 }
                 throw;
             }

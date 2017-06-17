@@ -1,8 +1,79 @@
 ﻿<Window x:Class="OhmClient.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+        xmlns:local="clr-namespace:OhmClient"
+        Title="OVWRAI Service Manager" 
+        Height="350" 
+        Width="525" 
+        ResizeMode="CanMinimize" 
+        WindowStartupLocation="CenterScreen">
+    <Window.CommandBindings>
+        <CommandBinding Command="local:MainWindow.ExitCommand" Executed="ExitCommand_Executed" />
+        <CommandBinding Command="local:MainWindow.StartServiceCommand" Executed="StartServiceCommand_Executed" CanExecute="StartServiceCommand_CanExecute"/>
+        <CommandBinding Command="local:MainWindow.StopServiceCommand" Executed="StopServiceCommand_Executed" CanExecute="StopServiceCommand_CanExecute"/>
+    </Window.CommandBindings>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <Menu.Items>
+                <MenuItem Header="_FILE">
+                    <MenuItem.Items>
+                        <MenuItem Header="Exit" Command="local:MainWindow.ExitCommand"/>
+                    </MenuItem.Items>
+                </MenuItem>
+                <MenuItem Header="_SERVICE">
+                    <MenuItem.Items>
+                        <MenuItem Header="Start" Command="local:MainWindow.StartServiceCommand"/>
+                        <MenuItem Header="Stop" Command="local:MainWindow.StopServiceCommand" />
+                    </MenuItem.Items>
+                </MenuItem>
+                <MenuItem Header="_HELP">
+                    <MenuItem Header="About" />
+                </MenuItem>
+            </Menu.Items>
+        </Menu>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <StackPanel>
+                <TextBlock Margin="10 15 10 5" Text="Service" />
+                <StackPanel Margin="15 0" Orientation="Horizontal">
+                    <TextBlock Text="Name : " />
+                    <TextBlock Name="txtDisplayName" />
+                </StackPanel>
+                <StackPanel Margin="15 0" Orientation="Horizontal">
+                    <TextBlock Text="Machine name : " />
+                    <TextBlock Name="txtMachineName" />
+                </StackPanel>
+                <StackPanel Margin="15 0" Orientation="Horizontal">
+                    <TextBlock Text="Status : " />
+                    <TextBlock Name="txtStatus" />
+                </StackPanel>
+                <StackPanel Margin="15 0" Orientation="Horizontal">
+                    <TextBlock Text="Service name : " />
+                    <TextBlock Name="txtServiceName" />
+                </StackPanel>
+                <StackPanel Margin="15 0" Orientation="Horizontal">
+                    <TextBlock Text="Service type : " />
+                    <TextBlock Name="txtServiceType" />
+                </StackPanel>
+                <StackPanel Margin="15 0" Orientation="Horizontal">
+                    <TextBlock Text="Can Stop : " />
+                    <TextBlock Name="txtCanStop" />
+                </StackPanel>
+                <StackPanel Margin="15 0" Orientation="Horizontal">
+                    <TextBlock Text="Can shutdown : " />
+                    <TextBlock Name="txtCanShutdown" />
+                </StackPanel>
+                <StackPanel Margin="15 0" Orientation="Horizontal">
+                    <TextBlock Text="Can pause and continue : " />
+                    <TextBlock Name="txtCanPauseAndContinue" />
+                </StackPanel>
+            </StackPanel>
+            
+            
+        </Grid>
+    </DockPanel>
+   
 </Window>

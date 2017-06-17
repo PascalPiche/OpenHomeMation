@@ -24,12 +24,12 @@ namespace ConsoleApplication1.Logger
 
         public ILogger GetLogger(string repository, Type type)
         {
-            throw new NotImplementedException();
+            return new ConsoleLogger(LogManager.GetLogger(type));
         }
 
         public ILogger GetLogger(string repository, string name)
         {
-            throw new NotImplementedException();
+            return new ConsoleLogger(LogManager.GetLogger(name));
         }
     }
 }

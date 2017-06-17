@@ -5,10 +5,21 @@ using System;
 
 namespace OHM.Plugins
 {
+
+    public interface IVrNodeCreator
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        IVrType CreateVrNode(string key);
+    }
+
     /// <summary>
     /// 
     /// </summary>
-    public interface IPlugin
+    public interface IPlugin : IVrNodeCreator
     {
         /// <summary>
         /// 
@@ -53,11 +64,6 @@ namespace OHM.Plugins
         /// <returns></returns>
         ALRInterfaceAbstractNode CreateInterface(string key);
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="key"></param>
-        /// <returns></returns>
-        IVrType CreateVrNode(string key);
+       
     }
 }

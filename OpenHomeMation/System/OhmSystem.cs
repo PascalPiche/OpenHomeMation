@@ -92,6 +92,16 @@ namespace OHM.SYS
 
             #endregion
 
+            #region Internal Ctor Methods
+
+            internal APIInstance(OhmSystem system)
+            {
+                _system = system;
+                ((ObservableCollection<IPlugin>)_system._pluginsMng.InstalledPlugins).CollectionChanged += InstalledPlugins_CollectionChanged;
+            }
+
+            #endregion
+
             #region Public Methods
 
             public IAPIResult ExecuteCommand(String key)
@@ -123,16 +133,6 @@ namespace OHM.SYS
                     }
                 }
                 return commandResult;
-            }
-
-            #endregion
-
-            #region Internal Methods
-
-            internal APIInstance(OhmSystem system)
-            {
-                _system = system;
-                ((ObservableCollection<IPlugin>)_system._pluginsMng.InstalledPlugins).CollectionChanged += InstalledPlugins_CollectionChanged;
             }
 
             #endregion

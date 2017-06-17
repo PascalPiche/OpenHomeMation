@@ -58,6 +58,11 @@ namespace OHM.Nodes
 
         #region Protected Methods
 
+        protected virtual bool InitSubChild()
+        {
+            return true;
+        }
+
         protected bool RemoveChild(string key)
         {
             return RemoveChild(FindDirectChild(key));
@@ -73,6 +78,11 @@ namespace OHM.Nodes
         #endregion
 
         #region Internal methods
+
+        internal protected override bool Initing()
+        {   
+            return base.Initing() && InitSubChild();
+        }
 
         internal void SetParent(ITreeNode node)
         {

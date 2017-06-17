@@ -59,8 +59,14 @@ namespace WUnderground.Nodes
 
         internal bool GetCondition(StationConditionNode condition)
         {
+            bool result = false;
             AccountNode acc = (AccountNode)this.Parent;
-            return condition.update(WUndergroundApi.QueryConditions(acc.ApiKey, _zip, _magic, _wmo));
+            var resultData = WUndergroundApi.QueryConditions(acc.ApiKey, _zip, _magic, _wmo);
+            if (resultData != null)
+            {
+                result = condition.update(resultData);
+            }
+            return result;
         }
 
         #endregion

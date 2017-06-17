@@ -367,7 +367,7 @@ namespace OHM.Tests
                 return base.UnRegisterCommand(command);
             }
             
-            public ITreeNode Parent { get { return base.Parent; } }
+            public new ITreeNode Parent { get { return base.Parent; } }
 
             public AbstractPowerTreeNode TestFindDirectChild(string key) {
                 return base.FindDirectChild(key);

@@ -5,6 +5,9 @@ namespace OHM.Logger
 {
     public class LoggerManager : ILoggerManager
     {
+
+        public LoggerManager() : base() {}
+
         public ILogger GetLogger(string repository, Type type)
         {
             try

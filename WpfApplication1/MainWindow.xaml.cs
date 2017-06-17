@@ -18,6 +18,13 @@ namespace WpfApplication1
 
         #region Public CommandDefinition
 
+        public static readonly RoutedUICommand ExitCommand = new RoutedUICommand
+        (
+                "Exit",
+                "Exit",
+                typeof(MainWindow)
+        );
+
         public static readonly RoutedUICommand InstallPluginCommand = new RoutedUICommand
         (
                 "Install Plugin",
@@ -66,6 +73,11 @@ namespace WpfApplication1
                 "Execute VR add node basic command",
                 typeof(MainWindow)
         );
+
+        private void ExitCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            Application.Current.Shutdown(0);
+        }
 
         #endregion 
 
@@ -222,5 +234,7 @@ namespace WpfApplication1
         }
 
         #endregion
+
+        
     }
 }
