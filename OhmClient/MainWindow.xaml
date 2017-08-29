@@ -8,22 +8,29 @@
         ResizeMode="CanMinimize" 
         WindowStartupLocation="CenterScreen">
     <Window.CommandBindings>
-        <CommandBinding Command="local:MainWindow.ExitCommand" Executed="ExitCommand_Executed" />
+        <CommandBinding Command="local:MainWindow.CloseWindowCommand"  Executed="CloseWindowCommand_Executed" />
+        <CommandBinding Command="local:MainWindow.ExitCommand"  Executed="ExitCommand_Executed" />
         <CommandBinding Command="local:MainWindow.StartServiceCommand" Executed="StartServiceCommand_Executed" CanExecute="StartServiceCommand_CanExecute"/>
         <CommandBinding Command="local:MainWindow.StopServiceCommand" Executed="StopServiceCommand_Executed" CanExecute="StopServiceCommand_CanExecute"/>
+        <CommandBinding Command="local:MainWindow.PauseServiceCommand" Executed="PauseServiceCommand_Executed" CanExecute="PauseServiceCommand_CanExecute"/>
+        <CommandBinding Command="local:MainWindow.ContinueServiceCommand" Executed="ContinueServiceCommand_Executed" CanExecute="ContinueServiceCommand_CanExecute"/>
     </Window.CommandBindings>
+    
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <Menu.Items>
                 <MenuItem Header="_FILE">
                     <MenuItem.Items>
-                        <MenuItem Header="Exit" Command="local:MainWindow.ExitCommand"/>
+                        <MenuItem Header="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}" Command="local:MainWindow.ExitCommand"/>
+                        <MenuItem Header="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}" Command="local:MainWindow.CloseWindowCommand"/>
                     </MenuItem.Items>
                 </MenuItem>
                 <MenuItem Header="_SERVICE">
                     <MenuItem.Items>
-                        <MenuItem Header="Start" Command="local:MainWindow.StartServiceCommand"/>
-                        <MenuItem Header="Stop" Command="local:MainWindow.StopServiceCommand" />
+                        <MenuItem Header="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}" Command="local:MainWindow.StartServiceCommand"/>
+                        <MenuItem Header="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}" Command="local:MainWindow.StopServiceCommand" />
+                        <MenuItem Header="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}" Command="local:MainWindow.PauseServiceCommand" />
+                        <MenuItem Header="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}" Command="local:MainWindow.ContinueServiceCommand" />
                     </MenuItem.Items>
                 </MenuItem>
                 <MenuItem Header="_HELP">

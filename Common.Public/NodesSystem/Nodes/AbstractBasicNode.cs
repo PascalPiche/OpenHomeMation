@@ -9,7 +9,7 @@ namespace OHM.Nodes
 {
 
     
-    public abstract class AbstractBasicNode : IBasicNode
+    public abstract class AbstractBasicNode : INode
     {
         #region Private Members
 

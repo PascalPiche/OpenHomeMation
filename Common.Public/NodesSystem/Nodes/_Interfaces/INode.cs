@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿using OHM.Nodes.Properties;
+using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace OHM.Nodes
 {
@@ -9,5 +11,7 @@ namespace OHM.Nodes
         string Name { get; }
 
         NodeStates State { get; }
+
+        IReadOnlyList<INodeProperty> Properties { get; }
     }
 }

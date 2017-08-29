@@ -60,7 +60,6 @@
     <Compile Include="NodesSystem\Nodes\AbstractPowerNode.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="NodesSystem\Nodes\_Interfaces\IBasicNode.cs" />
     <Compile Include="NodesSystem\Nodes\_Interfaces\INode.cs">
       <SubType>Code</SubType>
     </Compile>

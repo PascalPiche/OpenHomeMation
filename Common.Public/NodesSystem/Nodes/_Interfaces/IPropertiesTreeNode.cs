@@ -1,6 +1,6 @@
 ﻿
 namespace OHM.Nodes
 {
-    public interface IBasicTreeNode : ITreeNode, IBasicNode
+    public interface IBasicTreeNode : ITreeNode
     { }
 }
