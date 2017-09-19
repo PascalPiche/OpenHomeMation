@@ -28,33 +28,38 @@ namespace OHM.Nodes.Properties
         #region Public Ctor
 
         /// <summary>
-        /// 
+        /// Minimal Constructor
         /// </summary>
-        /// <param name="key"></param>
-        /// <param name="name"></param>
-        /// <param name="type"></param>
-        /*public NodeProperty(string key, string name, Type type) 
-            : this(key, name, type, true) {}*/
-
-        public NodeProperty(string key, string name, Type type, bool readOnly) 
-            : this(key,name,type, readOnly, "") {}
-
+        /// <param name="key">Local Unique key for the property</param>
+        /// <param name="name">Name of the property</param>
+        /// <param name="type">Type of the property</param>
+        /// <param name="readOnly">True if the property is read-only</param>
+        /// <param name="description">Short description of the property</param>
         public NodeProperty(string key, string name, Type type, bool readOnly, string description)
             : this(key, name, type, readOnly, description, null) {}
 
+        /// <summary>
+        /// Constructor with initial value
+        /// </summary>
+        /// <param name="key">Local Unique key for the property</param>
+        /// <param name="name">Name of the property</param>
+        /// <param name="type">Type of the property</param>
+        /// <param name="readOnly">True if the property is read-only</param>
+        /// <param name="description">Short description of the property</param>
+        /// <param name="value">Initial value set in the property</param>
         public NodeProperty(string key, string name, Type type, bool readOnly, string description, object value) 
             : this(key, name, type, readOnly, description, value, new ObservableCollection<INodeProperty>()) {}
 
         /// <summary>
         /// Complete constructor
         /// </summary>
-        /// <param name="key"></param>
-        /// <param name="name"></param>
-        /// <param name="type"></param>
-        /// <param name="readOnly"></param>
-        /// <param name="description"></param>
-        /// <param name="value"></param>
-        /// <param name="extraInfo"></param>
+        /// <param name="key">Local Unique key for the property</param>
+        /// <param name="name">Name of the property</param>
+        /// <param name="type">Type of the property</param>
+        /// <param name="readOnly">True if the property is read-only</param>
+        /// <param name="description">Short description of the property</param>
+        /// <param name="value">Initial value set in the property</param>
+        /// <param name="extraInfo">Observable collection of other INodeProperty</param>
         public NodeProperty(string key, string name, Type type, bool readOnly, string description, object value, ObservableCollection<INodeProperty> extraInfo)
         {
             _key = key;
@@ -114,20 +119,20 @@ namespace OHM.Nodes.Properties
         #region Public Methods
 
         /// <summary>
-        /// 
+        /// Set the property value with the argument passed
         /// </summary>
-        /// <param name="val"></param>
-        /// <returns></returns>
+        /// <param name="val">Value to set in the property value</param>
+        /// <returns>True if succeed otherwise false</returns>
         public bool SetValue(object val)
         {
-            
+            bool result = false;
             if (val == null || val.GetType() == _type)
             {
                 _value = val;
                 NotifyPropertyChanged("Value");
-                return true;
+                result = true;
             }
-            return false;
+            return result;
         }
 
         #endregion
@@ -135,7 +140,7 @@ namespace OHM.Nodes.Properties
         #region Public Events
 
         /// <summary>
-        /// 
+        /// Property changed event handler declaration
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 

@@ -33,10 +33,10 @@ namespace ZWaveLib.Nodes
 
         protected override bool RegisterProperties()
         {
-            this.RegisterProperty(new NodeProperty("DriverControllerInterfaceType", "Driver Controller Interface Type", typeof(ZWControllerInterface), true));
-            this.RegisterProperty(new NodeProperty("IsBridgeController", "Is Bridge Controller", typeof(Boolean), true));
-            this.RegisterProperty(new NodeProperty("IsPrimaryController", "Is Primary Controller", typeof(Boolean), true));
-            this.RegisterProperty(new NodeProperty("IsStaticUpdateController", "Is Static Update Controller", typeof(Boolean), true));
+            this.RegisterProperty(new NodeProperty("DriverControllerInterfaceType", "Driver Controller Interface Type", typeof(ZWControllerInterface), true, ""));
+            this.RegisterProperty(new NodeProperty("IsBridgeController", "Is Bridge Controller", typeof(Boolean), true, ""));
+            this.RegisterProperty(new NodeProperty("IsPrimaryController", "Is Primary Controller", typeof(Boolean), true, ""));
+            this.RegisterProperty(new NodeProperty("IsStaticUpdateController", "Is Static Update Controller", typeof(Boolean), true, ""));
 
             return true;
         }
