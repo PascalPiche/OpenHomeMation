@@ -6,7 +6,9 @@ using System.ComponentModel;
 namespace OHM.Nodes.Properties
 {
     /// <summary>
-    /// 
+    /// Core node property class
+    /// Implements: INotifyPropertyChanged
+    /// Implements: INodeProperty
     /// </summary>
     public class NodeProperty : INodeProperty, INotifyPropertyChanged
     {
@@ -31,8 +33,8 @@ namespace OHM.Nodes.Properties
         /// <param name="key"></param>
         /// <param name="name"></param>
         /// <param name="type"></param>
-        public NodeProperty(string key, string name, Type type) 
-            : this(key, name, type, true) {}
+        /*public NodeProperty(string key, string name, Type type) 
+            : this(key, name, type, true) {}*/
 
         public NodeProperty(string key, string name, Type type, bool readOnly) 
             : this(key,name,type, readOnly, "") {}
@@ -44,7 +46,7 @@ namespace OHM.Nodes.Properties
             : this(key, name, type, readOnly, description, value, new ObservableCollection<INodeProperty>()) {}
 
         /// <summary>
-        /// 
+        /// Complete constructor
         /// </summary>
         /// <param name="key"></param>
         /// <param name="name"></param>
@@ -68,35 +70,44 @@ namespace OHM.Nodes.Properties
 
         #region Public Properties
 
+        #region INodeProperty Implementation
+
         /// <summary>
-        /// 
+        /// Unique Key of the property
+        /// Implements: INodeProperty.Key
         /// </summary>
         public string Key { get { return _key; } }
 
         /// <summary>
-        /// 
+        /// Name of the property
+        /// Implements: INodeProperty.Name
         /// </summary>
         public string Name { get { return _name; } }
 
         /// <summary>
-        /// 
+        /// Type of the property value
+        /// Implements: INodeProperty.Type
         /// </summary>
         public Type Type { get { return _type; } }
 
         /// <summary>
-        /// 
+        /// Short Description of the property
         /// </summary>
+        /// <returns>String or String.empty if not available</returns>
         public string Description { get { return _description; } }
 
         /// <summary>
-        /// 
+        /// Readonly flag of the property
         /// </summary>
+        /// <return>True if the property is read-only otherwise false</return>
         public bool ReadOnly { get { return _readOnly; } }
 
         /// <summary>
-        /// 
+        /// Value object actual in the property
         /// </summary>
         public object Value { get { return _value; } }
+
+        #endregion
 
         #endregion
 

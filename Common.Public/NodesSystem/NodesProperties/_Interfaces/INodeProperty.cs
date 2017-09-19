@@ -3,39 +3,40 @@
 namespace OHM.Nodes.Properties
 {
     /// <summary>
-    /// 
+    /// Node property interface with minimal property and methods.
+    /// It's the core interface for all property in the system.
     /// </summary>
     public interface INodeProperty
     {
         #region Properties
 
         /// <summary>
-        /// 
+        /// Unique Key for the property
         /// </summary>
         string Key { get; }
 
         /// <summary>
-        /// 
+        /// Name of the property
         /// </summary>
         string Name { get; }
 
         /// <summary>
-        /// 
+        /// Short description of the property
         /// </summary>
         string Description { get; }
 
         /// <summary>
-        /// 
+        /// Flag defining read only property
         /// </summary>
         bool ReadOnly { get; }
 
         /// <summary>
-        /// 
+        /// Type used for the property value
         /// </summary>
         Type Type { get; }
 
         /// <summary>
-        /// 
+        /// Actual Value of the property
         /// </summary>
         object Value { get; }
 
@@ -44,13 +45,12 @@ namespace OHM.Nodes.Properties
         #region API
 
         /// <summary>
-        /// 
+        /// Function to set the value
         /// </summary>
-        /// <param name="val"></param>
-        /// <returns></returns>
+        /// <param name="val">New value to set</param>
+        /// <returns>If set succed: return true elsewhere reture false</returns>
         bool SetValue(object val);
 
         #endregion
-
     }
 }

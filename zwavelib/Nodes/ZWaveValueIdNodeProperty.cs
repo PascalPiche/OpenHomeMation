@@ -5,7 +5,7 @@ namespace ZWaveLib.Data
     public class ZWaveValueIdNodeProperty : NodeProperty
     {
         public ZWaveValueIdNodeProperty(string key, string name) 
-            : base(key, name, typeof(OpenZWaveDotNet.ZWValueID))
+            : base(key, name, typeof(OpenZWaveDotNet.ZWValueID), true)
         { }
 
         internal bool InternalSetValue()

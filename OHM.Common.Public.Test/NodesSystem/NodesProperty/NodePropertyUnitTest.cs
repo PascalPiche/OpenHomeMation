@@ -15,7 +15,7 @@ namespace OHM.Tests
             string key = "key1";
             string name = "name1";
             Type type = typeof(Int32);
-            NodeProperty target = new NodeProperty(key, name, type);
+            NodeProperty target = new NodeProperty(key, name, type, true);
 
             Assert.AreEqual(key, target.Key);
             Assert.AreEqual(name, target.Name);
@@ -88,7 +88,7 @@ namespace OHM.Tests
             Type type = typeof(Int32);
             Int32 value = 1;
             ObservableCollection<INodeProperty> extraInfo = new ObservableCollection<INodeProperty>();
-            extraInfo.Add(new NodeProperty("extra1", "extra1Name", typeof(string)));
+            extraInfo.Add(new NodeProperty("extra1", "extra1Name", typeof(string), true));
 
             NodeProperty target = new NodeProperty(key, name, type, false, description, value, extraInfo);
 
@@ -99,7 +99,6 @@ namespace OHM.Tests
             Assert.AreEqual(description, target.Description);
             Assert.AreEqual(type, target.Type);
             Assert.AreEqual(value, target.Value);
-
         }
 
         // Boolean state for the event trigger
@@ -111,7 +110,7 @@ namespace OHM.Tests
             string key = "key1";
             string name = "name1";
             Type type = typeof(Int32);
-            NodeProperty target = new NodeProperty(key, name, type);
+            NodeProperty target = new NodeProperty(key, name, type, true);
             target.PropertyChanged += target_PropertyChanged;
 
             _CheckPropertyChangedForTestNodePropertySetValueWithNull = false;

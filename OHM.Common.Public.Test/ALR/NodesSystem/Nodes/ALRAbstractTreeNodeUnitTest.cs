@@ -353,7 +353,7 @@ namespace OHM.Tests
 
             public bool RegisterProperty(string key, string name)
             {
-                INodeProperty p = new NodeProperty(key, name, typeof(object));
+                INodeProperty p = new NodeProperty(key, name, typeof(object), true);
                 return base.RegisterProperty(p);
             }
 

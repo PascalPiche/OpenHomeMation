@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Common.Public.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -100,8 +101,8 @@
     <None Include="NodesSystem\NodesCommands\_Diagrams\GraphFull-2016-08-04.dgml" />
     <None Include="NodesSystem\NodesProperties\_Diagrams\GraphExpanded-2016-08-04.dgml" />
     <None Include="NodesSystem\NodesProperties\_Interfaces\_Diagrams\ClassDiagram.cd" />
-    <None Include="NodesSystem\Nodes\Diagrams\Graph-2017-09-19.dgml" />
-    <None Include="NodesSystem\Nodes\Diagrams\Graph1.dgml" />
+    <None Include="NodesSystem\Nodes\Diagrams\Graph-light-2017-09-19.dgml" />
+    <None Include="NodesSystem\Nodes\Diagrams\Graph-expand-2017-09-19.dgml" />
     <None Include="NodesSystem\Nodes\_Class\_Diagrams\Graph-2017-09-19.dgml" />
     <None Include="NodesSystem\Nodes\_Class\_Diagrams\Graph-AbstractBasicNode-2017-09-19.dgml" />
     <None Include="NodesSystem\Nodes\_Class\_Diagrams\Graph-AbstractPowerNode-2017-09-19.dgml" />
@@ -111,7 +112,7 @@
     <None Include="NodesSystem\Nodes\_Interfaces\_Diagrams\Graph-2017-09-18.dgml" />
     <None Include="NodesSystem\Nodes\_Interfaces\_Diagrams\Archive\Graph.dgml" />
     <None Include="NodesSystem\NodesProperties\_Diagrams\ClassDiagram.cd" />
-    <None Include="NodesSystem\NodesProperties\_Diagrams\Graph-201-08-04.dgml" />
+    <None Include="NodesSystem\NodesProperties\_Diagrams\Graph-2016-08-04.dgml" />
     <None Include="NodesSystem\Nodes\_Class\_Diagrams\Archives\Graph-NodeAbstract-2016-07-21.dgml" />
     <None Include="NodesSystem\Nodes\_Class\_Diagrams\Archives\Graph-NodeAbstract-2016-07-25.dgml" />
     <None Include="NodesSystem\Nodes\_Class\_Diagrams\Archives\Relations-simple.dgml" />
