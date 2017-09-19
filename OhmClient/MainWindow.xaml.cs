@@ -14,6 +14,13 @@ namespace OhmClient
 
         #region Command definition
 
+        public static readonly RoutedUICommand CloseWindowCommand = new RoutedUICommand
+        (
+                "Close window",
+                "Close window",
+                typeof(MainWindow)
+        );
+
         public static readonly RoutedUICommand ExitCommand = new RoutedUICommand
         (
                 "Exit",
@@ -85,10 +92,18 @@ namespace OhmClient
                 txtCanPauseAndContinue.Text = myController.CanPauseAndContinue.ToString();
                 txtCanShutdown.Text = myController.CanShutdown.ToString();
                 txtCanStop.Text = myController.CanStop.ToString();
+
+                //Show panel
+                header_menu_service.Visibility = Visibility.Visible;
+                service_info_pnl.Visibility = Visibility.Visible;
+                service_not_found_pnl.Visibility = Visibility.Collapsed;
             }
             else
             {
-
+                //Show Not found panel
+                service_not_found_pnl.Visibility = Visibility.Visible;
+                header_menu_service.Visibility = Visibility.Collapsed;
+                service_info_pnl.Visibility = Visibility.Collapsed;
             }
 
             //myController.ExecuteCommand(int)

@@ -25,7 +25,7 @@
                         <MenuItem Header="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}" Command="local:MainWindow.CloseWindowCommand"/>
                     </MenuItem.Items>
                 </MenuItem>
-                <MenuItem Header="_SERVICE">
+                <MenuItem Header="_SERVICE" x:Name="header_menu_service" Visibility="Collapsed">
                     <MenuItem.Items>
                         <MenuItem Header="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}" Command="local:MainWindow.StartServiceCommand"/>
                         <MenuItem Header="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}" Command="local:MainWindow.StopServiceCommand" />
@@ -33,17 +33,17 @@
                         <MenuItem Header="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}" Command="local:MainWindow.ContinueServiceCommand" />
                     </MenuItem.Items>
                 </MenuItem>
-                <MenuItem Header="_HELP">
+                <!--MenuItem Header="_HELP">
                     <MenuItem Header="About" />
-                </MenuItem>
+                </-->
             </Menu.Items>
         </Menu>
         <Grid>
             <Grid.RowDefinitions>
+                <RowDefinition  />
                 <RowDefinition Height="auto" />
-                <RowDefinition />
             </Grid.RowDefinitions>
-            <StackPanel>
+            <StackPanel x:Name="service_info_pnl" Visibility="Collapsed" Grid.Row="0">
                 <TextBlock Margin="10 15 10 5" Text="Service" />
                 <StackPanel Margin="15 0" Orientation="Horizontal">
                     <TextBlock Text="Name : " />
@@ -79,6 +79,9 @@
                 </StackPanel>
             </StackPanel>
             
+            <DockPanel x:Name="service_not_found_pnl" Visibility="Collapsed" Grid.Row="0">
+                <TextBlock Text="Service not found" VerticalAlignment="Center" HorizontalAlignment="Center" />
+            </DockPanel>
             
         </Grid>
     </DockPanel>
