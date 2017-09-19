@@ -1,6 +1,7 @@
 ﻿using OHM.Data;
 using OHM.Logger;
 using OHM.Nodes.Properties;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -8,11 +9,17 @@ using System.ComponentModel;
 namespace OHM.Nodes
 {
 
-    
+    /// <summary>
+    /// Minimal implementation of the INode interface.
+    /// Must be used for all node present in the system.
+    /// </summary>
     public abstract class AbstractBasicNode : INode
     {
         #region Private Members
 
+        /// <summary>
+        /// For storing prefix system const
+        /// </summary>
         internal const string PREFIX_SYSTEM = "system-";
 
         private ILogger _logger;
@@ -30,6 +37,12 @@ namespace OHM.Nodes
 
         #region Internal Ctor
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key">Key to identify the node in the system</param>
+        /// <param name="name">Text show for basic report and debug information</param>
+        /// <param name="initialState">State of the node after the constructor execution</param>
         internal AbstractBasicNode(string key, string name, NodeStates initialState = NodeStates.created)
         {            
             _properties = new ObservableCollection<INodeProperty>();
@@ -52,6 +65,9 @@ namespace OHM.Nodes
 
         #region Public Events
 
+        /// <summary>
+        /// 
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
         #endregion
@@ -91,11 +107,20 @@ namespace OHM.Nodes
         protected bool RegisterProperty(INodeProperty nodeProperty)
         {
             bool result = false;
+
+
+            //CRITICAL ZONE
             if (!_propertiesDic.ContainsKey(nodeProperty.Key))
             {
                 _propertiesDic.Add(nodeProperty.Key, nodeProperty);
                 _properties.Add(nodeProperty);
                 result = true;
+            }
+            //END CRITICAL ZONE
+
+            if (result)
+            {
+                //TODO Notify property list changed
             }
             return result;
         }
@@ -104,7 +129,6 @@ namespace OHM.Nodes
         {
             bool result = false;
 
-            
             if (key != null && !key.StartsWith(PREFIX_SYSTEM)) 
             {
                 //CRITICAL ZONE
@@ -115,7 +139,17 @@ namespace OHM.Nodes
                 }
                 //END CRITICAL ZONE
             }
+
+            if (result)
+            {
+                //TODO Notify property list changed
+            }
             return result;
+        }
+        
+        protected bool ContainProperty(string key)
+        {
+            return _propertiesDic.ContainsKey(key);
         }
 
         protected bool TryGetProperty(string key, out INodeProperty result)
@@ -126,21 +160,22 @@ namespace OHM.Nodes
         protected bool UpdateProperty(string key, object value)
         {
             INodeProperty property;
+            bool result = false;
             if (TryGetProperty(key, out property))
             {
-                return property.SetValue(value);
+                result = property.SetValue(value);
             }
-            return false;
-        }
 
-        protected bool ContainProperty(string key)
-        {
-            return _propertiesDic.ContainsKey(key);
+            if (result)
+            {
+                //Notify node property changed
+            }
+            return result;
         }
 
         protected void NotifyPropertyChanged(string propertyName)
         {
-            if (PropertyChanged != null)
+            if (PropertyChanged != null && !String.IsNullOrWhiteSpace(propertyName))
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }

@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 
 namespace OHM.Nodes
 {
-    public abstract class AbstractPowerNode : AbstractBasicNode, IPowerNode
+    public abstract class AbstractPowerNode : AbstractBasicNode, ICommandsNode
     {
         #region Private Members
 

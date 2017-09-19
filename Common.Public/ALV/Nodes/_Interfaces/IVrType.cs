@@ -2,7 +2,7 @@
 
 namespace OHM.Nodes.ALV
 {
-    public interface IVrType : INode, IPropertiesNode, ICommandsNode
+    public interface IVrType : INode, ICommandsNode
     {
         IList<string> GetAllowedSubVrType();
     }

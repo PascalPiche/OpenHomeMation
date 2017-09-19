@@ -63,17 +63,9 @@
     <Compile Include="NodesSystem\Nodes\_Interfaces\INode.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="NodesSystem\Nodes\_Interfaces\IPowerNode.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="NodesSystem\Nodes\_Interfaces\IPowerTreeNode.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="NodesSystem\Nodes\_Interfaces\ITreeNode.cs" />
     <Compile Include="NodesSystem\Nodes\_Interfaces\ICommandsNode.cs" />
-    <Compile Include="NodesSystem\Nodes\_Interfaces\IPropertiesNode.cs" />
     <Compile Include="NodesSystem\Nodes\_Interfaces\ICommandsTreeNode.cs" />
-    <Compile Include="NodesSystem\Nodes\_Interfaces\IPropertiesTreeNode.cs" />
     <Compile Include="NodesSystem\Nodes\AbstractPowerTreeNode.cs" />
     <Compile Include="ALR\NodesSystem\Nodes\ALRBasicNode.cs" />
     <Compile Include="ALR\NodesSystem\NodesCommands\_Interfaces\IInterfaceCommand.cs" />
@@ -111,6 +103,7 @@
     <None Include="NodesSystem\Nodes\_Interfaces\_Diagrams\ClassDiagramExpanded.cd" />
     <None Include="NodesSystem\Nodes\_Interfaces\_Diagrams\ClassDiagram.cd" />
     <None Include="NodesSystem\Nodes\_Interfaces\_Diagrams\Graph-2016-08-10.dgml" />
+    <None Include="NodesSystem\Nodes\_Interfaces\_Diagrams\Graph-2017-09-18.dgml" />
     <None Include="NodesSystem\Nodes\_Interfaces\_Diagrams\Graph.dgml" />
     <None Include="NodesSystem\NodesProperties\_Diagrams\ClassDiagram.cd" />
     <None Include="NodesSystem\NodesProperties\_Diagrams\Graph-201-08-04.dgml" />
