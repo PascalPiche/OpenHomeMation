@@ -3,33 +3,26 @@
   <Class Name="OHM.Nodes.AbstractPowerNode" Collapsed="true">
     <Position X="0.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AIAgAgAAAAAAAAEAAACCCAAAAAAAAACAAAAAABAAAAA=</HashCode>
-      <FileName>NodesSystem\Nodes\AbstractBasicNode.cs</FileName>
+      <HashCode>AIAgAgAAAAAAAAEAAACCCAAAAAAAAACAAABAABQAAAA=</HashCode>
+      <FileName>NodesSystem\Nodes\_Class\AbstractPowerNode.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="OHM.Nodes.AbstractBasicNode" Collapsed="true">
     <Position X="0.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AEAAAAABBAIAEIQAAAAAAQYAoACgAAEAEQADRAACAAA=</HashCode>
-      <FileName>NodesSystem\Nodes\AbstractBasicNode.cs</FileName>
+      <HashCode>AMAAAAABBAIAEIAAAAAAAQIAoACgAAEAEwADQAACICA=</HashCode>
+      <FileName>NodesSystem\Nodes\_Class\AbstractBasicNode.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="OHM.Nodes.AbstractPowerTreeNode" Collapsed="true">
     <Position X="0.5" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AIAwIAAAAAAAEAAAAAAEQAAQAAIAAAAgAEAAAAAAAAI=</HashCode>
-      <FileName>NodesSystem\Nodes\AbstractTreeNode.cs</FileName>
+      <HashCode>AIAwAAAAAAAAEAAAAACEQAAQBAIAAAAkAEAIAAAAAAI=</HashCode>
+      <FileName>NodesSystem\Nodes\_Class\AbstractPowerTreeNode.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Enum Name="OHM.Nodes.NodeStates" Collapsed="true">
-    <Position X="3" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAQAAAAAAAAAAEAAAAEAAAgAAAAAAAAAAAABAAAAAAA=</HashCode>
-      <FileName>NodesSystem\Nodes\NodeStates.cs</FileName>
-    </TypeIdentifier>
-  </Enum>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

@@ -16,7 +16,7 @@ namespace OHM.Nodes
 
         #region Internal ctor
 
-        protected AbstractPowerNode(string key, string name, NodeStates initialState = NodeStates.creating)
+        protected AbstractPowerNode(string key, string name, SystemNodeStates initialState = SystemNodeStates.creating)
             : base(key, name, initialState)
         {
             _commands = new ObservableCollection<ICommand>();
@@ -59,9 +59,9 @@ namespace OHM.Nodes
         {
             bool result = false;
             
-            if (this.State != NodeStates.creating && command != null && !_commandsDic.ContainsKey(command.Key))
+            if (this.SystemState != SystemNodeStates.creating && command != null && !_commandsDic.ContainsKey(command.Key))
             {
-                if (!(this.State == NodeStates.fatal))
+                if (!(this.SystemState == SystemNodeStates.fatal))
                 {
                     result = InitCommandAndAdd(command);
                 }

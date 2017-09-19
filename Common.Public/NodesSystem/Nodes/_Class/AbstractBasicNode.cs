@@ -40,24 +40,24 @@ namespace OHM.Nodes
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="key">Key to identify the node in the system</param>
+        /// <param name="key">SystemKey to identify the node in the system</param>
         /// <param name="name">Text show for basic report and debug information</param>
-        /// <param name="initialState">State of the node after the constructor execution</param>
-        internal AbstractBasicNode(string key, string name, NodeStates initialState = NodeStates.created)
+        /// <param name="initialState">SystemState of the node after the constructor execution</param>
+        internal AbstractBasicNode(string key, string name, SystemNodeStates initialState = SystemNodeStates.created)
         {            
             _properties = new ObservableCollection<INodeProperty>();
             _propertiesDic = new Dictionary<string, INodeProperty>();
 
-            //Register Key Property
+            //Register SystemKey Property
             _keyProperty = new NodeProperty(PREFIX_SYSTEM + "key", "System node key", typeof(string), true, "System node key", key);
             this.RegisterProperty(_keyProperty);
 
-            //Register Name Property
+            //Register SystemName Property
             _nameProperty = new NodeProperty(PREFIX_SYSTEM + "name", "System node name", typeof(string), false, "System node name", name);
             this.RegisterProperty(_nameProperty);
 
-            //Register Node State Property
-            _nodeStateProperty = new NodeProperty(PREFIX_SYSTEM + "node-state", "System node state", typeof(NodeStates), false, "System node state", initialState);
+            //Register Node SystemState Property
+            _nodeStateProperty = new NodeProperty(PREFIX_SYSTEM + "node-state", "System node state", typeof(SystemNodeStates), false, "System node state", initialState);
             this.RegisterProperty(_nodeStateProperty);
         }
 
@@ -74,15 +74,15 @@ namespace OHM.Nodes
 
         #region Public Properties
 
-        public string Key { get { return _keyProperty.Value as string; } }
+        public string SystemKey { get { return _keyProperty.Value as string; } }
 
-        public string Name { get { return _nameProperty.Value as string; } }
+        public string SystemName { get { return _nameProperty.Value as string; } }
 
         public IReadOnlyList<INodeProperty> Properties { get { return _properties; } }
 
-        public NodeStates State
+        public SystemNodeStates SystemState
         {
-            get { return (NodeStates)_nodeStateProperty.Value; }
+            get { return (SystemNodeStates)_nodeStateProperty.Value; }
             protected set
             {
                 UpdateProperty(PREFIX_SYSTEM + "node-state", value);
@@ -107,7 +107,6 @@ namespace OHM.Nodes
         protected bool RegisterProperty(INodeProperty nodeProperty)
         {
             bool result = false;
-
 
             //CRITICAL ZONE
             if (!_propertiesDic.ContainsKey(nodeProperty.Key))

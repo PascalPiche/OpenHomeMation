@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 
 namespace OHM.Nodes
 {
-    public abstract class AbstractPowerTreeNode : AbstractPowerNode, ITreeNode
+    public abstract class AbstractPowerTreeNode : AbstractPowerNode, ICommandsTreeNode
     {
         #region Private Members
 
@@ -15,7 +15,7 @@ namespace OHM.Nodes
 
         #region Internal Ctor
 
-        internal AbstractPowerTreeNode(string key, string name, NodeStates initialState = NodeStates.created)
+        internal AbstractPowerTreeNode(string key, string name, SystemNodeStates initialState = SystemNodeStates.created)
             : base(key, name, initialState)
         {
             _children = new ObservableCollection<AbstractPowerTreeNode>();
@@ -31,15 +31,15 @@ namespace OHM.Nodes
             get
             {
                 string result = null;
-                if (State != NodeStates.created)
+                if (SystemState != SystemNodeStates.created)
                 {
                     if (Parent != null)
                     {
-                        result = Parent.TreeKey + "." + Key;
+                        result = Parent.TreeKey + "." + SystemKey;
                     }
                     else
                     {
-                        result = Key;
+                        result = SystemKey;
                     }
                 }
                 return result;
@@ -87,14 +87,14 @@ namespace OHM.Nodes
         internal void SetParent(ITreeNode node)
         {
             _parent = node;
-            this.State = NodeStates.normal;
+            this.SystemState = SystemNodeStates.operational;
         }
 
         internal bool AddChild(AbstractPowerTreeNode node)
         {
-            if (!_childrenDic.ContainsKey(node.Key))
+            if (!_childrenDic.ContainsKey(node.SystemKey))
             {
-                _childrenDic.Add(node.Key, node);
+                _childrenDic.Add(node.SystemKey, node);
                 _children.Add(node);
                 node.SetParent(this);
                 return true;
@@ -108,7 +108,7 @@ namespace OHM.Nodes
 
             if (!string.IsNullOrWhiteSpace(nodeFullKey) && !string.IsNullOrWhiteSpace(commandKey))
             {
-                if (this.Key == nodeFullKey)
+                if (this.SystemKey == nodeFullKey)
                 {
                     result = base.CanExecuteCommand(commandKey);
                 }
@@ -133,7 +133,7 @@ namespace OHM.Nodes
             bool result = false;
             if (!string.IsNullOrWhiteSpace(nodeFullKey) && !string.IsNullOrWhiteSpace(commandKey))
             {
-                if (this.Key == nodeFullKey)
+                if (this.SystemKey == nodeFullKey)
                 {
                     result = base.ExecuteCommand(commandKey, arguments);
                 }
@@ -170,10 +170,10 @@ namespace OHM.Nodes
 
         private bool RemoveChild(AbstractPowerTreeNode node)
         {
-            if (node != null && _childrenDic.ContainsKey(node.Key))
+            if (node != null && _childrenDic.ContainsKey(node.SystemKey))
             {
                 _children.Remove(node);
-                _childrenDic.Remove(node.Key);
+                _childrenDic.Remove(node.SystemKey);
                 return true;
             }
             return false;

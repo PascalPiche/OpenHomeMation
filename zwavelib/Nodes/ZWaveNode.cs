@@ -62,7 +62,7 @@ namespace ZWaveLib.Nodes
             {
                 _nodeId = nodeId;
                 UpdateZWaveNodeProperties();
-                State = NodeStates.normal;
+                SystemState = SystemNodeStates.operational;
                 result = true;
             }
             return result;

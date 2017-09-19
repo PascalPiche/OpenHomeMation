@@ -14,7 +14,7 @@ namespace OHM.Data
         #endregion
 
         protected DataManagerAbstract()
-            : base("data-manager", "Data manager", NodeStates.creating)
+            : base("data-manager", "Data manager", SystemNodeStates.creating)
         {
 
         }

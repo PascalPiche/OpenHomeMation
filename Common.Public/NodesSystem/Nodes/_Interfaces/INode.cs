@@ -5,32 +5,33 @@ using System.ComponentModel;
 namespace OHM.Nodes
 {
     /// <summary>
-    /// System node interface with minimal public properties
+    /// Node interface with minimal properties
     /// </summary>
     public interface INode : INotifyPropertyChanged
     {
         /// <summary>
-        /// System Key property of the node.
+        /// System Key property getter.
         /// </summary>
         /// <remarks>
         /// Must be unique in the possible list where it can be.
         /// </remarks>
-        string Key { get; }
+        string SystemKey { get; }
 
         /// <summary>
-        /// System name property of the node.
+        /// System name property getter.
         /// </summary>
-        string Name { get; }
+        string SystemName { get; }
 
         /// <summary>
-        /// System state of the node.
+        /// System state property gettyer.
         /// </summary>
-        /// <see cref="NodeStates"/>
-        NodeStates State { get; }
+        /// <see cref="SystemNodeStates"/>
+        SystemNodeStates SystemState { get; }
 
         /// <summary>
-        /// List all properties of the node
+        /// List all properties of the system node
         /// </summary>
+        /// <see cref="INodeProperty"/>
         IReadOnlyList<INodeProperty> Properties { get; }
     }
 }

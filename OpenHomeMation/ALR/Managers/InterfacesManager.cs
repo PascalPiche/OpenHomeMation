@@ -94,7 +94,7 @@ namespace OHM.Managers.ALR
         {
             bool result = false;
 
-            //Interface may running
+            //Interface may operational
             if (_runningDic.ContainsKey(key))
             {
                 _runningDic[key].Shutdowning();
@@ -237,7 +237,7 @@ namespace OHM.Managers.ALR
 
                 if (tempResult != null)
                 {
-                    var _interfData = system.GetOrCreateDataStore(plugin.Id.ToString() + "." + tempResult.Key);
+                    var _interfData = system.GetOrCreateDataStore(plugin.Id.ToString() + "." + tempResult.SystemKey);
 
                     tempResult.Init(_interfData, interfaceLogger, system.GetInterfaceGateway(tempResult));
                     _runningInterfaces.Add(tempResult);

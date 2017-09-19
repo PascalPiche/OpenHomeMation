@@ -32,7 +32,7 @@ namespace OHM.Nodes.ALR
         public ALRInterfaceStates InterfaceState { get { return _interfaceState; }
             protected set
             {
-                if (this.State != NodeStates.created)
+                if (this.SystemState != SystemNodeStates.created)
                 {
                     _interfaceState = value;
                     NotifyPropertyChanged("InterfaceState");
@@ -49,7 +49,7 @@ namespace OHM.Nodes.ALR
             }
             internal set
             {
-                if ((this.State != NodeStates.fatal || value == false) && this._startOnLaunchProperty.SetValue(value))
+                if ((this.SystemState != SystemNodeStates.fatal || value == false) && this._startOnLaunchProperty.SetValue(value))
                 {
                     DataStore.StoreBool("StartOnLaunch", value);
                     DataStore.Save();
@@ -65,7 +65,7 @@ namespace OHM.Nodes.ALR
         public bool Starting()
         {
             bool result = false;
-            if (this.State != NodeStates.created && this.State != NodeStates.fatal && !this.IsRunning)
+            if (this.SystemState != SystemNodeStates.created && this.SystemState != SystemNodeStates.fatal && !this.IsRunning)
             {
                 Logger.Debug("Starting interface");
                 Start();
@@ -98,13 +98,13 @@ namespace OHM.Nodes.ALR
             {
                 _system = system;
                 
-                if (State == NodeStates.created && this.Initing())
+                if (SystemState == SystemNodeStates.created && this.Initing())
                 {
-                    State = NodeStates.normal;
+                    SystemState = SystemNodeStates.operational;
                 }
-                else if (State != NodeStates.fatal)
+                else if (SystemState != SystemNodeStates.fatal)
                 {
-                    State = NodeStates.error;
+                    SystemState = SystemNodeStates.error;
                 }
 
                 if (data.ContainKey("StartOnLaunch"))

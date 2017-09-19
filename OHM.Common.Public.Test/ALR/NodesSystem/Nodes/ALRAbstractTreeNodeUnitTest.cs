@@ -25,14 +25,14 @@ namespace OHM.Tests
             Assert.IsNotNull(target.Commands);
             Assert.AreEqual(0, target.Commands.Count);
 
-            Assert.AreEqual(key, target.Key);
+            Assert.AreEqual(key, target.SystemKey);
 
-            Assert.AreEqual(name, target.Name);
+            Assert.AreEqual(name, target.SystemName);
 
             Assert.IsNotNull(target.Properties);
             Assert.AreEqual(3, target.Properties.Count);
 
-            Assert.AreEqual(NodeStates.created, target.State);
+            Assert.AreEqual(SystemNodeStates.created, target.SystemState);
 
             Assert.IsNull(target.TreeKey);
             Assert.IsNull(target.Parent);
@@ -122,9 +122,9 @@ namespace OHM.Tests
 
              target.PropertyChanged += target_PropertyChanged;
              TestSetStateTriggerProperty = false;
-             target.SetState(NodeStates.error);
+             target.SetState(SystemNodeStates.error);
 
-             Assert.AreEqual(NodeStates.error, target.State);
+             Assert.AreEqual(SystemNodeStates.error, target.SystemState);
              Assert.IsTrue(TestSetStateTriggerProperty);
         }
 
@@ -148,7 +148,7 @@ namespace OHM.Tests
              TestSetStateTriggerProperty = false;
              bool result = target.UpdateProperty("unknow", null);
 
-             Assert.AreEqual(NodeStates.created, target.State);
+             Assert.AreEqual(SystemNodeStates.created, target.SystemState);
 
              Assert.IsFalse(result);
         }
@@ -336,9 +336,9 @@ namespace OHM.Tests
                 return base.ContainProperty(key);
             }
 
-            public void SetState(NodeStates newState)
+            public void SetState(SystemNodeStates newState)
             {
-                base.State = newState;
+                base.SystemState = newState;
             }
 
             public new bool UpdateProperty(string key, object value)

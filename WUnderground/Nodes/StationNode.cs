@@ -34,7 +34,7 @@ namespace WUnderground.Nodes
 
             IDictionary<string, object> options = new Dictionary<string, object>();
             options.Add("station", this);
-            this.CreateChildNode("station-condition", base.Key + "-condition", "Condition", options);
+            this.CreateChildNode("station-condition", base.SystemKey + "-condition", "Condition", options);
 
             return result;
         }

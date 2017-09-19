@@ -370,7 +370,7 @@ namespace ZWaveLib
             Logger.Debug("Notification Driver removing: ControllerPath=" + controlerPath);
             if (this._runningDriverControlers.TryGetValue(controlerPath, out controler))
             {
-                this.RemoveChild(controler.Key);
+                this.RemoveChild(controler.SystemKey);
                 this._runningDriverControlers.Remove(controlerPath);
                 _driverControlerPathMapping.Remove(homeId);
 
@@ -411,7 +411,7 @@ namespace ZWaveLib
 
         private void NotificationNodeAdded(ZWNotification n)
         {
-            //Update State
+            //Update SystemState
             Logger.Debug("Notification Node Added: NodeId=" + GetNodeIdForLog(n));
             CreateOrUpdateNode(n);
         }
@@ -448,7 +448,7 @@ namespace ZWaveLib
 
         private void NotificationNodeNaming(ZWNotification n)
         {
-            //Update State
+            //Update SystemState
             Logger.Debug("Notification Node Naming: NodeId=" + GetNodeIdForLog(n));
             CreateOrUpdateNode(n);
         }
@@ -574,7 +574,7 @@ namespace ZWaveLib
                 Logger.Error("Trying to start a Driver Controler on port " + port + " failed");
 
                 //Create new node
-                options.Add("initialState", NodeStates.fatal);
+                options.Add("initialState", SystemNodeStates.fatal);
                 ZWaveDriverControlerRalNode ctl = this.CreateChildNode("zwavecontroller", "COM" + port, "COM" + port, options) as ZWaveDriverControlerRalNode;
 
                 if (ctl != null)

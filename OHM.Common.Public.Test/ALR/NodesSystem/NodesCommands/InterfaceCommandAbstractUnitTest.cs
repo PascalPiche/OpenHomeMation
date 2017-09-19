@@ -65,14 +65,14 @@ namespace OHM.Tests
             Assert.IsNotNull(target.Commands);
             Assert.AreEqual(0, target.Commands.Count);
 
-            Assert.AreEqual(key, target.Key);
+            Assert.AreEqual(key, target.SystemKey);
 
-            Assert.AreEqual(name, target.Name);
+            Assert.AreEqual(name, target.SystemName);
 
             Assert.IsNotNull(target.Properties);
             Assert.AreEqual(3, target.Properties.Count);
 
-            Assert.AreEqual(NodeStates.created, target.State);
+            Assert.AreEqual(SystemNodeStates.created, target.SystemState);
 
             Assert.IsNull(target.TreeKey);
         }

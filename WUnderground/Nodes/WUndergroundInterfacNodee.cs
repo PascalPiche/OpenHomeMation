@@ -99,11 +99,11 @@ namespace WUnderground.Nodes
         internal bool RemoveAccountCommand(AbstractPowerNode node)
         {
             bool result = false;
-            if (_registeredAccounts.ContainKey(node.Key))
+            if (_registeredAccounts.ContainKey(node.SystemKey))
             {
-                if (RemoveChild(node.Key))
+                if (RemoveChild(node.SystemKey))
                 {
-                    _registeredAccounts.RemoveKey(node.Key);
+                    _registeredAccounts.RemoveKey(node.SystemKey);
                     result = DataStore.Save();
                 }
             }
@@ -113,7 +113,7 @@ namespace WUnderground.Nodes
         internal bool AddStationCommandExecution(AccountNode node, string locationName, int zip, int magic, string wmo)
         {
             bool result = false;
-            IDataDictionary dataAccount = _registeredAccounts.GetOrCreateDataDictionary(node.Key);
+            IDataDictionary dataAccount = _registeredAccounts.GetOrCreateDataDictionary(node.SystemKey);
             IDataDictionary accountLocations = dataAccount.GetOrCreateDataDictionary("locations");
 
             if (!accountLocations.ContainKey(locationName))

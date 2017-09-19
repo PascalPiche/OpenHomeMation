@@ -56,8 +56,8 @@
     <Compile Include="NodesSystem\NodesCommands\_Interfaces\ICommandDefinition.cs" />
     <Compile Include="NodesSystem\NodesCommands\_Interfaces\ITreeCommand.cs" />
     <Compile Include="NodesSystem\NodesCommands\AbstractTreeCommand.cs" />
-    <Compile Include="NodesSystem\Nodes\AbstractBasicNode.cs" />
-    <Compile Include="NodesSystem\Nodes\AbstractPowerNode.cs">
+    <Compile Include="NodesSystem\Nodes\_Class\AbstractBasicNode.cs" />
+    <Compile Include="NodesSystem\Nodes\_Class\AbstractPowerNode.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="NodesSystem\Nodes\_Interfaces\INode.cs">
@@ -66,7 +66,7 @@
     <Compile Include="NodesSystem\Nodes\_Interfaces\ITreeNode.cs" />
     <Compile Include="NodesSystem\Nodes\_Interfaces\ICommandsNode.cs" />
     <Compile Include="NodesSystem\Nodes\_Interfaces\ICommandsTreeNode.cs" />
-    <Compile Include="NodesSystem\Nodes\AbstractPowerTreeNode.cs" />
+    <Compile Include="NodesSystem\Nodes\_Class\AbstractPowerTreeNode.cs" />
     <Compile Include="ALR\NodesSystem\Nodes\ALRBasicNode.cs" />
     <Compile Include="ALR\NodesSystem\NodesCommands\_Interfaces\IInterfaceCommand.cs" />
     <Compile Include="ALR\NodesSystem\NodesCommands\InterfaceCommandAbstract.cs" />
@@ -79,7 +79,7 @@
     <Compile Include="NodesSystem\NodesProperties\_Interfaces\INodeProperty.cs" />
     <Compile Include="ALR\NodesSystem\Nodes\ALRInterfaceAbstractNode.cs" />
     <Compile Include="NodesSystem\NodesProperties\NodeProperty.cs" />
-    <Compile Include="NodesSystem\Nodes\NodeStates.cs" />
+    <Compile Include="NodesSystem\Nodes\SystemNodeStates.cs" />
     <Compile Include="PluginsSystem\PluginStates.cs" />
     <Compile Include="System\_Interfaces\IOhmSystemPlugins.cs" />
     <Compile Include="PluginsSystem\_Interfaces\IPlugin.cs" />
@@ -100,16 +100,21 @@
     <None Include="NodesSystem\NodesCommands\_Diagrams\GraphFull-2016-08-04.dgml" />
     <None Include="NodesSystem\NodesProperties\_Diagrams\GraphExpanded-2016-08-04.dgml" />
     <None Include="NodesSystem\NodesProperties\_Interfaces\_Diagrams\ClassDiagram.cd" />
+    <None Include="NodesSystem\Nodes\Diagrams\Graph-2017-09-19.dgml" />
+    <None Include="NodesSystem\Nodes\Diagrams\Graph1.dgml" />
+    <None Include="NodesSystem\Nodes\_Class\_Diagrams\Graph-2017-09-19.dgml" />
+    <None Include="NodesSystem\Nodes\_Class\_Diagrams\Graph-AbstractBasicNode-2017-09-19.dgml" />
+    <None Include="NodesSystem\Nodes\_Class\_Diagrams\Graph-AbstractPowerNode-2017-09-19.dgml" />
     <None Include="NodesSystem\Nodes\_Interfaces\_Diagrams\ClassDiagramExpanded.cd" />
     <None Include="NodesSystem\Nodes\_Interfaces\_Diagrams\ClassDiagram.cd" />
-    <None Include="NodesSystem\Nodes\_Interfaces\_Diagrams\Graph-2016-08-10.dgml" />
+    <None Include="NodesSystem\Nodes\_Interfaces\_Diagrams\Archive\Graph-2016-08-10.dgml" />
     <None Include="NodesSystem\Nodes\_Interfaces\_Diagrams\Graph-2017-09-18.dgml" />
-    <None Include="NodesSystem\Nodes\_Interfaces\_Diagrams\Graph.dgml" />
+    <None Include="NodesSystem\Nodes\_Interfaces\_Diagrams\Archive\Graph.dgml" />
     <None Include="NodesSystem\NodesProperties\_Diagrams\ClassDiagram.cd" />
     <None Include="NodesSystem\NodesProperties\_Diagrams\Graph-201-08-04.dgml" />
-    <None Include="NodesSystem\Nodes\_Diagrams\Graph-NodeAbstract-2016-07-21.dgml" />
-    <None Include="NodesSystem\Nodes\_Diagrams\Graph-NodeAbstract-2016-07-25.dgml" />
-    <None Include="NodesSystem\Nodes\_Diagrams\Relations-simple.dgml" />
+    <None Include="NodesSystem\Nodes\_Class\_Diagrams\Archives\Graph-NodeAbstract-2016-07-21.dgml" />
+    <None Include="NodesSystem\Nodes\_Class\_Diagrams\Archives\Graph-NodeAbstract-2016-07-25.dgml" />
+    <None Include="NodesSystem\Nodes\_Class\_Diagrams\Archives\Relations-simple.dgml" />
     <None Include="PluginsSystem\_Diagrams\GraphExpanded-201-08-0.dgml" />
     <None Include="ALR\NodesSystem\NodesCommands\_Diagrams\ClassDiagram1.cd" />
     <None Include="ALR\NodesSystem\NodesCommands\_Diagrams\Graph1.dgml" />
@@ -117,11 +122,11 @@
     <None Include="NodesSystem\NodesCommands\_Diagrams\CommandsClassDiagram.cd" />
     <None Include="DataSystem\_Interfaces\_Diagrams\DataClassDiagram-2016-08-04.cd" />
     <None Include="LoggingSystem\_Interfaces\_Diagrams\LoggerClassDiagram-2014-08-24.cd" />
-    <None Include="NodesSystem\Nodes\_Diagrams\NodesClassDiagram.cd" />
+    <None Include="NodesSystem\Nodes\_Class\_Diagrams\ClassDiagram.cd" />
     <None Include="packages.config" />
     <None Include="PluginsSystem\_Diagrams\PluginsClassDiagram.cd" />
     <None Include="System\_Interfaces\_diagrams\SystemClassDiagram.cd" />
-    <None Include="NodesSystem\Nodes\_Diagrams\ClassDiagramExpanded.cd" />
+    <None Include="NodesSystem\Nodes\_Class\_Diagrams\ClassDiagramExpanded.cd" />
     <None Include="_diagrams\GraphNamespaces-2016-07-20.dgml" />
   </ItemGroup>
   <ItemGroup>

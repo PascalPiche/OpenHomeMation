@@ -62,7 +62,7 @@ namespace ZWaveLib.Nodes
 
         internal void SetFatalState()
         {
-            this.State = NodeStates.fatal;
+            this.SystemState = SystemNodeStates.fatal;
         }
 
         internal void CreateOrUpdateNode(ZWNotification n)
