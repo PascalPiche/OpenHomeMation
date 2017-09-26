@@ -15,7 +15,7 @@ namespace OHM.Tests
             string key = "key1";
             string name = "name1";
             Type type = typeof(Int32);
-            NodeProperty target = new NodeProperty(key, name, type, true, "");
+            NodeProperty target = new NodeProperty(key, name, type, true, "", null);
 
             Assert.AreEqual(key, target.Key);
             Assert.AreEqual(name, target.Name);
