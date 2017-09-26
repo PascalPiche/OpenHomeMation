@@ -66,7 +66,7 @@
     </Compile>
     <Compile Include="NodesSystem\Nodes\_Interfaces\ITreeNode.cs" />
     <Compile Include="NodesSystem\Nodes\_Interfaces\ICommandsNode.cs" />
-    <Compile Include="NodesSystem\Nodes\_Interfaces\ICommandsTreeNode.cs" />
+    <Compile Include="NodesSystem\Nodes\_Interfaces\IPowerTreeNode.cs" />
     <Compile Include="NodesSystem\Nodes\_Class\AbstractPowerTreeNode.cs" />
     <Compile Include="ALR\NodesSystem\Nodes\ALRBasicNode.cs" />
     <Compile Include="ALR\NodesSystem\NodesCommands\_Interfaces\IInterfaceCommand.cs" />
@@ -103,6 +103,7 @@
     <None Include="NodesSystem\NodesProperties\_Interfaces\_Diagrams\ClassDiagram.cd" />
     <None Include="NodesSystem\Nodes\Diagrams\Graph-light-2017-09-19.dgml" />
     <None Include="NodesSystem\Nodes\Diagrams\Graph-expand-2017-09-19.dgml" />
+    <None Include="NodesSystem\Nodes\_Class\_Diagrams\ClassDiagramExpanded.cd" />
     <None Include="NodesSystem\Nodes\_Class\_Diagrams\Graph-2017-09-19.dgml" />
     <None Include="NodesSystem\Nodes\_Class\_Diagrams\Graph-AbstractBasicNode-2017-09-19.dgml" />
     <None Include="NodesSystem\Nodes\_Class\_Diagrams\Graph-AbstractPowerNode-2017-09-19.dgml" />
@@ -127,7 +128,7 @@
     <None Include="packages.config" />
     <None Include="PluginsSystem\_Diagrams\PluginsClassDiagram.cd" />
     <None Include="System\_Interfaces\_diagrams\SystemClassDiagram.cd" />
-    <None Include="NodesSystem\Nodes\_Class\_Diagrams\ClassDiagramExpanded.cd" />
+    <None Include="NodesSystem\Nodes\_Class\_Diagrams\ClassDiagramFull.cd" />
     <None Include="_diagrams\GraphNamespaces-2016-07-20.dgml" />
   </ItemGroup>
   <ItemGroup>

@@ -2,7 +2,7 @@
 
 namespace OHM.Nodes.ALR
 {
-    public interface IALRInterface : ICommandsTreeNode
+    public interface IALRInterface : IPowerTreeNode
     {
         #region Properties
 

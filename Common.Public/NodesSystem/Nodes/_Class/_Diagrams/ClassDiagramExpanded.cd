@@ -1,55 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="OHM.Nodes.AbstractBasicNode" Collapsed="true">
-    <Position X="2.75" Y="0.5" Width="2.5" />
+  <Class Name="OHM.Nodes.AbstractBasicNode">
+    <Position X="0.75" Y="1" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AMAAAAABBAIAEIAAAAAAAQIAoACgAAEAEwADQAACICA=</HashCode>
+      <HashCode>AMAAAAABBAIAMIAAAAAAAQIAoACgAAEAEwADQAACIAA=</HashCode>
       <FileName>NodesSystem\Nodes\_Class\AbstractBasicNode.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="OHM.Nodes.AbstractPowerNode" Collapsed="true">
-    <Position X="3.25" Y="1.75" Width="1.5" />
+  <Class Name="OHM.Nodes.AbstractPowerNode">
+    <Position X="3.5" Y="1" Width="2" />
     <TypeIdentifier>
-      <HashCode>AIAgAgAAAAAAAAEAAACCCAAAAAAAAACAAABAABQAAAA=</HashCode>
+      <HashCode>AIAgAgAAAAAAAAEAAACCCAAAAAAAAACAAABAABAAAAA=</HashCode>
       <FileName>NodesSystem\Nodes\_Class\AbstractPowerNode.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="OHM.Nodes.AbstractPowerTreeNode" Collapsed="true">
-    <Position X="1.75" Y="3.25" Width="2" />
+  <Class Name="OHM.Nodes.AbstractPowerTreeNode">
+    <Position X="6.25" Y="1" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AIAwAAAAAAAAEAAAAACEQAAQBAIAAAAkAEAIAAAAAAI=</HashCode>
       <FileName>NodesSystem\Nodes\_Class\AbstractPowerTreeNode.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
-  <Class Name="OHM.Nodes.ALV.ALVAbstractNode" Collapsed="true">
-    <Position X="4.25" Y="3.25" Width="2" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>ALV\Nodes\ALVAbstractNode.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="OHM.Nodes.ALR.ALRAbstractTreeNode" Collapsed="true">
-    <Position X="1.75" Y="4.5" Width="2" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAIAAAAAAAAAABAQAAAAAAAAAAAAAACAAAAAAA=</HashCode>
-      <FileName>ALR\NodesSystem\Nodes\ALRAbstracTreetNode.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="OHM.Nodes.ALR.ALRBasicNode" Collapsed="true">
-    <Position X="0.5" Y="6" Width="1.75" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAQAAAAAA=</HashCode>
-      <FileName>ALR\NodesSystem\Nodes\ALRBasicNode.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="OHM.Nodes.ALR.ALRInterfaceAbstractNode" Collapsed="true">
-    <Position X="3" Y="6" Width="2" />
-    <TypeIdentifier>
-      <HashCode>AIAgAAACECBAAAAAAABAQQAAAAAAAAAIAAAmAEAAAAA=</HashCode>
-      <FileName>ALR\NodesSystem\Nodes\ALRInterfaceAbstractNode.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>

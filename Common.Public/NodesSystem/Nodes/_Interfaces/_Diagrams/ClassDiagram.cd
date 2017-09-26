@@ -7,17 +7,10 @@
       <FileName>NodesSystem\Nodes\_Interfaces\ICommandsNode.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="OHM.Nodes.ICommandsTreeNode" Collapsed="true">
-    <Position X="4.5" Y="4.75" Width="1.75" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>NodesSystem\Nodes\_Interfaces\ICommandsTreeNode.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
   <Interface Name="OHM.Nodes.INode" Collapsed="true">
     <Position X="4.5" Y="1.75" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAQAAAAAAAQAAAAAAAAAAAAABAACAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAgAAAAACIAA=</HashCode>
       <FileName>NodesSystem\Nodes\_Interfaces\INode.cs</FileName>
     </TypeIdentifier>
   </Interface>
@@ -31,6 +24,13 @@
   <Interface Name="System.ComponentModel.INotifyPropertyChanged" Collapsed="true">
     <Position X="4.5" Y="0.5" Width="1.75" />
     <TypeIdentifier />
+  </Interface>
+  <Interface Name="OHM.Nodes.IPowerTreeNode" Collapsed="true">
+    <Position X="4.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>NodesSystem\Nodes\_Interfaces\IPowerTreeNode.cs</FileName>
+    </TypeIdentifier>
   </Interface>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

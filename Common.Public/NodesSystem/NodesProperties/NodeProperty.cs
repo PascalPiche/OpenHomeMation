@@ -7,8 +7,8 @@ namespace OHM.Nodes.Properties
 {
     /// <summary>
     /// Core node property class
-    /// Implements: INotifyPropertyChanged
     /// Implements: INodeProperty
+    /// Implements: INotifyPropertyChanged
     /// </summary>
     public class NodeProperty : INodeProperty, INotifyPropertyChanged
     {
@@ -67,8 +67,12 @@ namespace OHM.Nodes.Properties
             _type = type;
             _readOnly = readOnly;
             _description = description;
-            SetValue(value);
             InitializeExtraInfo(extraInfo);
+
+            if (!SetValue(value))
+            {
+                //TODO THROW EXCEPTION
+            }
         }
 
         #endregion
@@ -97,18 +101,21 @@ namespace OHM.Nodes.Properties
 
         /// <summary>
         /// Short Description of the property
+        /// Implements: INodeProperty.Description
         /// </summary>
         /// <returns>String or String.empty if not available</returns>
         public string Description { get { return _description; } }
 
         /// <summary>
         /// Readonly flag of the property
+        /// Implements: INodeProperty.ReadOnly
         /// </summary>
         /// <return>True if the property is read-only otherwise false</return>
         public bool ReadOnly { get { return _readOnly; } }
 
         /// <summary>
         /// Value object actual in the property
+        /// Implements: INodeProperty.Value
         /// </summary>
         public object Value { get { return _value; } }
 
@@ -120,6 +127,7 @@ namespace OHM.Nodes.Properties
 
         /// <summary>
         /// Set the property value with the argument passed
+        /// Implements: INodeProperty.SetValue
         /// </summary>
         /// <param name="val">Value to set in the property value</param>
         /// <returns>True if succeed otherwise false</returns>
@@ -149,9 +157,9 @@ namespace OHM.Nodes.Properties
         #region Protected Functions
 
         /// <summary>
-        /// 
+        /// Raise a property changed event
         /// </summary>
-        /// <param name="propertyName"></param>
+        /// <param name="propertyName">The property name passed to the property changed event</param>
         protected void NotifyPropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)

@@ -9,15 +9,6 @@ namespace OHM.Nodes.Commands
     {
         #region Protected Ctor
 
-        protected AbstractTreeCommand(string key, string name)
-            : this(key, name, string.Empty) {}
-
-        protected AbstractTreeCommand(string key, string name, string description)
-            : this(key, name, description, null) {}
-
-        protected AbstractTreeCommand(string key, string name, string description, IDictionary<string, IArgumentDefinition> argumentsDefinition)
-            : this(new CommandDefinition(key, name, description, argumentsDefinition)) {}
-
         /// <summary>
         /// 
         /// </summary>

@@ -2,6 +2,9 @@
 
 namespace OHM.Nodes.Commands
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public abstract class AbstractCommand : ICommand
     {
         #region Private Members
@@ -12,34 +15,7 @@ namespace OHM.Nodes.Commands
         #endregion
 
         #region Protected Ctor
-        /*
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="key"></param>
-        /// <param name="name"></param>
-        protected AbstractCommand(string key, string name)
-            : this(key, name, string.Empty) { }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="key"></param>
-        /// <param name="name"></param>
-        /// <param name="description"></param>
-        protected AbstractCommand(string key, string name, string description)
-            : this(key, name, description, null) { }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="key"></param>
-        /// <param name="name"></param>
-        /// <param name="description"></param>
-        /// <param name="argumentsDefinition"></param>
-        protected AbstractCommand(string key, string name, string description, IDictionary<string, IArgumentDefinition> argumentsDefinition)
-            : this(new CommandDefinition(key, name, description, argumentsDefinition)) { }
-        */
         /// <summary>
         /// 
         /// </summary>

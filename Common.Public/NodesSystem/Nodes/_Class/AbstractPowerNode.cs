@@ -4,6 +4,9 @@ using System.Collections.ObjectModel;
 
 namespace OHM.Nodes
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public abstract class AbstractPowerNode : AbstractBasicNode, ICommandsNode
     {
         #region Private Members
@@ -14,10 +17,15 @@ namespace OHM.Nodes
 
         #endregion
 
-        #region Internal ctor
+        #region Protected ctor
 
-        protected AbstractPowerNode(string key, string name, SystemNodeStates initialState = SystemNodeStates.creating)
-            : base(key, name, initialState)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="name"></param>
+        protected AbstractPowerNode(string key, string name)
+            : base(key, name)
         {
             _commands = new ObservableCollection<ICommand>();
             _commandsDic = new Dictionary<string, ICommand>();
@@ -27,6 +35,8 @@ namespace OHM.Nodes
         #endregion
 
         #region Public Properties
+
+        #region ICommandsNode implementation
 
         public IReadOnlyList<ICommand> Commands 
         { 
@@ -38,22 +48,9 @@ namespace OHM.Nodes
 
         #endregion
 
+        #endregion
+
         #region Protected Functions
-
-        private List<AbstractCommand> commandsToInit = new List<AbstractCommand>();
-
-        private bool InitCommandAndAdd(AbstractCommand command)
-        {
-            bool result = false;
-            if (command.Init(this))
-            {
-                _commandsDic.Add(command.Key, command);
-                _commands.Add(command);
-                this.NotifyPropertyChanged("Commands");
-                result = true;
-            }
-            return result;
-        }
 
         protected bool RegisterCommand(AbstractCommand command)
         {
@@ -117,6 +114,23 @@ namespace OHM.Nodes
             if (CanExecuteCommand(commandKey))
             {
                 result = _commandsDic[commandKey].Execute(arguments);
+            }
+            return result;
+        }
+
+        #endregion
+
+        #region Private method
+
+        private bool InitCommandAndAdd(AbstractCommand command)
+        {
+            bool result = false;
+            if (command.Init(this))
+            {
+                _commandsDic.Add(command.Key, command);
+                _commands.Add(command);
+                this.NotifyPropertyChanged("Commands");
+                result = true;
             }
             return result;
         }

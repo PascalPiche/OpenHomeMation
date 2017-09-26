@@ -18,7 +18,7 @@ namespace OHM.Nodes
         #region Private Members
 
         /// <summary>
-        /// For storing prefix system const
+        /// For storing prefix system constant
         /// </summary>
         internal const string PREFIX_SYSTEM = "system-";
 
@@ -27,7 +27,6 @@ namespace OHM.Nodes
 
         private INodeProperty _keyProperty;
         private INodeProperty _nameProperty;
-
         private INodeProperty _nodeStateProperty;
 
         private ObservableCollection<INodeProperty> _properties;
@@ -38,12 +37,11 @@ namespace OHM.Nodes
         #region Internal Ctor
 
         /// <summary>
-        /// 
+        /// Main constructor
         /// </summary>
         /// <param name="key">SystemKey to identify the node in the system</param>
         /// <param name="name">Text show for basic report and debug information</param>
-        /// <param name="initialState">SystemState of the node after the constructor execution</param>
-        internal AbstractBasicNode(string key, string name, SystemNodeStates initialState = SystemNodeStates.created)
+        internal AbstractBasicNode(string key, string name)
         {            
             _properties = new ObservableCollection<INodeProperty>();
             _propertiesDic = new Dictionary<string, INodeProperty>();
@@ -57,8 +55,11 @@ namespace OHM.Nodes
             this.RegisterProperty(_nameProperty);
 
             //Register Node SystemState Property
-            _nodeStateProperty = new NodeProperty(PREFIX_SYSTEM + "node-state", "System node state", typeof(SystemNodeStates), false, "System node state", initialState);
+            _nodeStateProperty = new NodeProperty(PREFIX_SYSTEM + "node-state", "System node state", typeof(SystemNodeStates), false, "System node state", SystemNodeStates.creating);
             this.RegisterProperty(_nodeStateProperty);
+
+            //Set the node as created
+            this.UpdateProperty(_nodeStateProperty.Key, SystemNodeStates.created);
         }
 
         #endregion
@@ -74,19 +75,38 @@ namespace OHM.Nodes
 
         #region Public Properties
 
+        /// <summary>
+        /// System key of the node
+        /// </summary>
         public string SystemKey { get { return _keyProperty.Value as string; } }
 
+        /// <summary>
+        /// System name of the node
+        /// </summary>
         public string SystemName { get { return _nameProperty.Value as string; } }
 
+        /// <summary>
+        /// Properties list of the node
+        /// </summary>
         public IReadOnlyList<INodeProperty> Properties { get { return _properties; } }
 
+        /// <summary>
+        /// Get the actual state of the node
+        /// </summary>
         public SystemNodeStates SystemState
         {
             get { return (SystemNodeStates)_nodeStateProperty.Value; }
             protected set
             {
-                UpdateProperty(PREFIX_SYSTEM + "node-state", value);
-                NotifyPropertyChanged("State");
+                if (UpdateProperty(PREFIX_SYSTEM + "node-state", value))
+                {
+                    NotifyPropertyChanged("State");
+                }
+                else
+                {
+                    //TODO: MANAGE THE CASE
+                    //Throw exception?
+                }
             }
         }
 
@@ -94,16 +114,31 @@ namespace OHM.Nodes
 
         #region Protected Properties
 
+        /// <summary>
+        /// Get the logger
+        /// </summary>
         protected ILogger Logger { get { return _logger; } }
 
+        /// <summary>
+        /// Get the data store
+        /// </summary>
         protected IDataStore DataStore { get { return _data; } }
 
         #endregion
 
         #region Protected Methods
 
+        /// <summary>
+        /// Properties to register when the node is created
+        /// </summary>
+        /// <returns></returns>
         protected abstract bool RegisterProperties();
 
+        /// <summary>
+        /// Register a property
+        /// </summary>
+        /// <param name="nodeProperty"></param>
+        /// <returns></returns>
         protected bool RegisterProperty(INodeProperty nodeProperty)
         {
             bool result = false;
@@ -119,11 +154,16 @@ namespace OHM.Nodes
 
             if (result)
             {
-                //TODO Notify property list changed
+                NotifyPropertyChanged("Properties");
             }
             return result;
         }
 
+        /// <summary>
+        /// Remove a property from the node
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns>True when the property was succesfuly removed from the node</returns>
         protected bool UnRegisterProperty(string key)
         {
             bool result = false;
@@ -141,37 +181,59 @@ namespace OHM.Nodes
 
             if (result)
             {
-                //TODO Notify property list changed
+                NotifyPropertyChanged("Properties");
             }
             return result;
         }
         
+        /// <summary>
+        /// Allow to check if a property exist on the node with a property key string
+        /// </summary>
+        /// <param name="key">The property key to lookup</param>
+        /// <returns>True if the key exist in the property list of the node</returns>
         protected bool ContainProperty(string key)
         {
             return _propertiesDic.ContainsKey(key);
         }
 
+        /// <summary>
+        /// Try get property without error if not found
+        /// </summary>
+        /// <param name="key">The property key to get</param>
+        /// <param name="result">The property if found</param>
+        /// <returns>True if the property was found</returns>
         protected bool TryGetProperty(string key, out INodeProperty result)
         {
             return _propertiesDic.TryGetValue(key, out result);
         }
 
+        /// <summary>
+        /// Update the value of a property
+        /// </summary>
+        /// <param name="key">The property key to update</param>
+        /// <param name="value">The new value to set</param>
+        /// <returns>True if the change is accepted</returns>
         protected bool UpdateProperty(string key, object value)
         {
             INodeProperty property;
             bool result = false;
             if (TryGetProperty(key, out property))
             {
+                //TODO: Custom check for system-key and system-state PROPERTY NEEDED
+                //TODO IMPORTANT FOR SECURITY AND INTEGRITY
                 result = property.SetValue(value);
             }
-
             if (result)
             {
-                //Notify node property changed
+                NotifyPropertyChanged("Properties");
             }
             return result;
         }
 
+        /// <summary>
+        /// Raise a property changed event for the property name passed
+        /// </summary>
+        /// <param name="propertyName">The property name with the changed value</param>
         protected void NotifyPropertyChanged(string propertyName)
         {
             if (PropertyChanged != null && !String.IsNullOrWhiteSpace(propertyName))

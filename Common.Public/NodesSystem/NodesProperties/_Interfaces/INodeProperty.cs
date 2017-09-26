@@ -48,7 +48,7 @@ namespace OHM.Nodes.Properties
         /// Function to set the value
         /// </summary>
         /// <param name="val">New value to set</param>
-        /// <returns>If set succed: return true elsewhere reture false</returns>
+        /// <returns>Return true if succeed elsewhere return false</returns>
         bool SetValue(object val);
 
         #endregion

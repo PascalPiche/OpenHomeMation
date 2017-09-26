@@ -3,7 +3,10 @@ using System.Collections.ObjectModel;
 
 namespace OHM.Nodes
 {
-    public abstract class AbstractPowerTreeNode : AbstractPowerNode, ICommandsTreeNode
+    /// <summary>
+    /// 
+    /// </summary>
+    public abstract class AbstractPowerTreeNode : AbstractPowerNode, IPowerTreeNode
     {
         #region Private Members
 
@@ -15,8 +18,8 @@ namespace OHM.Nodes
 
         #region Internal Ctor
 
-        internal AbstractPowerTreeNode(string key, string name, SystemNodeStates initialState = SystemNodeStates.created)
-            : base(key, name, initialState)
+        internal AbstractPowerTreeNode(string key, string name)
+            : base(key, name)
         {
             _children = new ObservableCollection<AbstractPowerTreeNode>();
             _childrenDic = new Dictionary<string, AbstractPowerTreeNode>();

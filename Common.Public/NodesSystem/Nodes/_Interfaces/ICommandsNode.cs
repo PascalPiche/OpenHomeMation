@@ -10,7 +10,7 @@ namespace OHM.Nodes
     public interface ICommandsNode : INode
     {
         /// <summary>
-        /// List all commands of the system node
+        /// List all commands of the node
         /// </summary>
         IReadOnlyList<ICommand> Commands { get; }
     }
