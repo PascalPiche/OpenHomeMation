@@ -11,8 +11,8 @@ namespace OHM.Nodes
         #region Private Members
 
         private ITreeNode _parent;
-        private ObservableCollection<AbstractPowerTreeNode> _children;
-        private IDictionary<string, AbstractPowerTreeNode> _childrenDic;
+        private ObservableCollection<INode> _children;
+        private IDictionary<string, INode> _childrenDic;
 
         #endregion
 
@@ -21,8 +21,8 @@ namespace OHM.Nodes
         internal AbstractPowerTreeNode(string key, string name)
             : base(key, name)
         {
-            _children = new ObservableCollection<AbstractPowerTreeNode>();
-            _childrenDic = new Dictionary<string, AbstractPowerTreeNode>();
+            _children = new ObservableCollection<INode>();
+            _childrenDic = new Dictionary<string, INode>();
         }
 
         #endregion
@@ -49,7 +49,7 @@ namespace OHM.Nodes
             }
         }
 
-        public IReadOnlyList<ITreeNode> Children { get { return _children; } }
+        public IReadOnlyList<INode> Children { get { return _children; } }
 
         #endregion
 
@@ -71,9 +71,9 @@ namespace OHM.Nodes
             return RemoveChild(FindDirectChild(key));
         }
 
-        protected AbstractPowerTreeNode FindDirectChild(string key)
+        protected INode FindDirectChild(string key)
         {
-            AbstractPowerTreeNode result;
+            INode result;
             _childrenDic.TryGetValue(key, out result);
             return result;
         }
@@ -120,7 +120,7 @@ namespace OHM.Nodes
                     //Lookup ALL LEVEL the node list
                     nodeFullKey = nodeFullKey.Substring(nodeFullKey.IndexOf('.') + 1);
 
-                    AbstractPowerTreeNode node = GetDirectChildNode(nodeFullKey);
+                    AbstractPowerTreeNode node = GetDirectChildNode(nodeFullKey) as AbstractPowerTreeNode;
                     if (node != null)
                     {
                         result = node.CanExecuteCommand(nodeFullKey, commandKey);
@@ -145,10 +145,10 @@ namespace OHM.Nodes
                     //Remove Extra checked key
                     nodeFullKey = nodeFullKey.Substring(nodeFullKey.IndexOf('.') + 1);
 
-                    AbstractPowerTreeNode node = GetDirectChildNode(nodeFullKey);
-                    if (node != null)
+                    INode node = GetDirectChildNode(nodeFullKey);
+                    if (node != null && node is AbstractPowerTreeNode)
                     {
-                        result = node.ExecuteCommand(nodeFullKey, commandKey, arguments);
+                        result = ((AbstractPowerTreeNode)node).ExecuteCommand(nodeFullKey, commandKey, arguments);
                     }
                 }
             }
@@ -159,7 +159,7 @@ namespace OHM.Nodes
 
         #region Private methods
 
-        private AbstractPowerTreeNode GetDirectChildNode(string nodeFullKey)
+        private INode GetDirectChildNode(string nodeFullKey)
         {
             string nextNode = nodeFullKey;
 
@@ -171,7 +171,7 @@ namespace OHM.Nodes
             return this.FindDirectChild(nextNode);
         }
 
-        private bool RemoveChild(AbstractPowerTreeNode node)
+        private bool RemoveChild(INode node)
         {
             if (node != null && _childrenDic.ContainsKey(node.SystemKey))
             {

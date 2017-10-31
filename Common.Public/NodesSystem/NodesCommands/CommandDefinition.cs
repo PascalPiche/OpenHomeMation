@@ -23,14 +23,6 @@ namespace OHM.Nodes.Commands
         /// </summary>
         /// <param name="key"></param>
         /// <param name="name"></param>
-        public CommandDefinition(string key, string name)
-            : this(key, name, string.Empty) { }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="key"></param>
-        /// <param name="name"></param>
         /// <param name="description"></param>
         public CommandDefinition(string key, string name, string description)
             : this(key, name, description, null) { }
@@ -38,9 +30,9 @@ namespace OHM.Nodes.Commands
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="key"></param>
-        /// <param name="name"></param>
-        /// <param name="description"></param>
+        /// <param name="key">Unique key of the command</param>
+        /// <param name="name">Name of the command</param>
+        /// <param name="description">Short description</param>
         /// <param name="argumentsDefinition"></param>
         public CommandDefinition(string key, string name, string description, IDictionary<string, IArgumentDefinition> argumentsDefinition)
         {
@@ -73,47 +65,6 @@ namespace OHM.Nodes.Commands
         /// 
         /// </summary>
         public string Description { get { return _description; } }
-
-        #endregion
-
-        #region Public Api
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="arguments"></param>
-        /// <returns></returns>
-        public bool ValidateArguments(IDictionary<string, string> arguments)
-        {
-            bool result = true;
-
-            //Validate required
-            foreach (var item in _argumentsDefinition.Values)
-            {
-                if (item.Required)
-                {
-                    if (arguments == null || !arguments.ContainsKey(item.Key) || arguments[item.Key] == null)
-                    {
-                        result = false;
-                    }
-                }
-            }
-
-            //Validate type value
-            if (result != false && arguments != null)
-            {
-                foreach (var item in arguments)
-                {
-                    var argDef = _argumentsDefinition[item.Key];
-                    if (!argDef.ValidateValue(item.Value))
-                    {
-                        result = false;
-                    }
-                }
-            }
-            
-            return result;
-        }
 
         /// <summary>
         /// 

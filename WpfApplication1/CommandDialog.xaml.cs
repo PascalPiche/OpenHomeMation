@@ -21,8 +21,7 @@ namespace WpfApplication1
         void okBtn_Click(object sender, RoutedEventArgs e)
         {
             //Validate arguments
-            var args = ArgumentsResult;
-            if (_mv.CommandDefinition.ValidateArguments(args))
+            if (_mv.Validate())
             {
                 this.DialogResult = true;
                 this.Close();
@@ -31,7 +30,7 @@ namespace WpfApplication1
 
         public Dictionary<string, string> ArgumentsResult { get { return _mv.ArgumentsResult; } }
 
-        public void init(ICommandDefinition commandDefinition)
+        public void init(ICommand commandDefinition)
         {
             _mv = new CommandDialogMV(commandDefinition);
             

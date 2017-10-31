@@ -92,8 +92,11 @@ namespace OHM.Nodes.ALR
             return result;
         }
         
-        public void Init(IDataStore data, ILogger logger, IOhmSystemInterfaceGateway system)
+        public bool Init(IDataStore data, ILogger logger, IOhmSystemInterfaceGateway system)
         {
+            bool result = false;
+
+            //Make sure we can cet a system gateway
             if (system != null && base.Init(data, logger, this))
             {
                 _system = system;
@@ -101,17 +104,21 @@ namespace OHM.Nodes.ALR
                 if (SystemState == SystemNodeStates.created && this.Initing())
                 {
                     SystemState = SystemNodeStates.operational;
+                    result = true;
                 }
+                //Dont set lower value if already in a fatal state
                 else if (SystemState != SystemNodeStates.fatal)
                 {
                     SystemState = SystemNodeStates.error;
                 }
 
+                //Update start on launch from data store
                 if (data.ContainKey("StartOnLaunch"))
                 {
                     this.StartOnLaunch = data.GetBool("StartOnLaunch");
                 }
             }
+            return result;
         }
 
         public new bool ExecuteCommand(string nodeKey, string commandKey, IDictionary<string, string> arguments)
@@ -128,7 +135,7 @@ namespace OHM.Nodes.ALR
         
         #region Protected abstract functions
 
-        protected abstract void Start();
+        protected abstract bool Start();
 
         protected abstract bool Shutdown();
         

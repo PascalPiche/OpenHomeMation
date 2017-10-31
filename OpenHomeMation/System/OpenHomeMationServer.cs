@@ -38,7 +38,7 @@ namespace OHM.Sys
             try
             {
 
-                //Base Address for StudentService
+                //Base Address
                 Uri httpBaseAddress = new Uri("http://localhost/ohm/api/");
 
                 //Instantiate ServiceHost

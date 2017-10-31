@@ -11,10 +11,11 @@ namespace UPNPControlPoint
             : base("UPNPCtlPointInterface", "UPNP Control Point")
         { }
 
-        protected override void Start()
+        protected override bool Start()
         {
             var t = new UPNPLib.UPnPDeviceFinder();
             t.StartAsyncFind(t.CreateAsyncFind(".", 0, null));
+            return true;
         }
 
         protected override bool Shutdown()

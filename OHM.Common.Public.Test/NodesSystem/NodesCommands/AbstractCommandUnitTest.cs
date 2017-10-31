@@ -16,7 +16,7 @@ namespace OHM.Common.Public.Test.Commands
             string name = "name";
             string description = string.Empty;
 
-            CommandDefinition definition = new CommandDefinition(key, name);
+            CommandDefinition definition = new CommandDefinition(key, name, description);
 
             var target = MockRepository.GeneratePartialMock<AbstractCommand>(definition);
 
@@ -41,8 +41,8 @@ namespace OHM.Common.Public.Test.Commands
             //Should not be valid with a null Node
             string key = "key";
             string name = "name";
-
-            CommandDefinition definition = new CommandDefinition(key, name);
+            string description = "description";
+            CommandDefinition definition = new CommandDefinition(key, name, description);
 
             var target = MockRepository.GeneratePartialMock<AbstractCommand>(definition);
 
@@ -56,8 +56,8 @@ namespace OHM.Common.Public.Test.Commands
             //Should not be valid with a null Node
             string key = "key";
             string name = "name";
-
-            CommandDefinition definition = new CommandDefinition(key, name);
+            string description = "description";
+            CommandDefinition definition = new CommandDefinition(key, name, description);
 
             var target = MockRepository.GeneratePartialMock<AbstractCommand>(definition);
 
@@ -70,8 +70,8 @@ namespace OHM.Common.Public.Test.Commands
             //Should not be valid with a null Node
             string key = "key";
             string name = "name";
-
-            CommandDefinition definition = new CommandDefinition(key, name);
+            string description = "description";
+            CommandDefinition definition = new CommandDefinition(key, name, description);
 
             var target = new CommandAbstractMock(definition);
 
@@ -84,7 +84,8 @@ namespace OHM.Common.Public.Test.Commands
             //Should not be valid with a null Node
             string key = "key";
             string name = "name";
-            CommandDefinition definition = new CommandDefinition(key, name);
+            string description = "description";
+            CommandDefinition definition = new CommandDefinition(key, name, description);
 
             var target = new CommandAbstractMock(definition);
 

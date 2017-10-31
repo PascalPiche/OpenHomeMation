@@ -34,17 +34,15 @@ namespace OHM.SYS
         {
             bool result = false;
             _logger = _ohmSystem.LoggerMng.GetLogger("OHM","OHM");
-
             _logger.Debug("Starting");
 
             if (_ohmSystem.Start())
             {
+                this._isRunning = true;
                 _logger.Info("System Started");
 
                 //TODO: STARTING INTERNAL SERVER IF NEEDED
-                OpenHomeMationServerImplementation.Run();
-
-                this._isRunning = true;
+                //OpenHomeMationServerImplementation.Run();
             } 
             else
             {

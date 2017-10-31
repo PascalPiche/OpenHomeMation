@@ -153,11 +153,12 @@ namespace WpfApplication1
                 if (command.Definition.ArgumentsDefinition.Count > 0)
                 {
                     Dictionary<string, string> arguments;
-                    bool? result = ShowCommandDialog(command.Definition, out arguments);
+                    bool? result = ShowCommandDialog(command, out arguments);
 
                     if (result.HasValue && result.Value)
                     {
-                        if (!vm.ExecuteHalCommand(command.NodeTreeKey, command.Definition.Key, arguments))
+                        //TODO MISSING KEY NODE
+                        if (!vm.ExecuteHalCommand(/*KEY NODE */command.Key, command.Definition.Key, arguments))
                         {
                             MessageBox.Show("The command was not successfully executed", "Command error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
                         }
@@ -166,7 +167,7 @@ namespace WpfApplication1
                 }
                 else
                 {
-                    if (!vm.ExecuteHalCommand(command.NodeTreeKey, command.Key))
+                    if (!vm.ExecuteHalCommand(/*KEY NODE */command.Key, command.Key))
                     {
                         //Show alert
                         MessageBox.Show("The command was not successfully executed", "Command error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
@@ -181,14 +182,15 @@ namespace WpfApplication1
             e.CanExecute = false;
             if (command != null)
             {
-                e.CanExecute = vm.CanExecuteHalCommand(command.NodeTreeKey, command.Key);
+                //MISSING NODE TREE KEY
+                e.CanExecute = vm.CanExecuteHalCommand(command.Key, command.Key);
             }
         }
 
         private void ExecuteVrAddNodeCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             //Create fake commandDefinition for commandDialog
-            Dictionary<string, IArgumentDefinition> comArgDef = new Dictionary<string,IArgumentDefinition>();
+            /*Dictionary<string, IArgumentDefinition> comArgDef = new Dictionary<string,IArgumentDefinition>();
             comArgDef.Add("nodeType", new CommandArgumentDefinition("nodeType", "Node Type", typeof(string), true));
             comArgDef.Add("key", new CommandArgumentDefinition("key", "Key", typeof(string), true));
             comArgDef.Add("name", new CommandArgumentDefinition("name", "Name", typeof(string), true));
@@ -205,7 +207,7 @@ namespace WpfApplication1
                 {
                     MessageBox.Show("The command was not successfully executed", "Command error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
                 }
-            }
+            }*/
         }
 
         #endregion
@@ -221,10 +223,10 @@ namespace WpfApplication1
 
         #region Private Helper functions
 
-        private bool? ShowCommandDialog(ICommandDefinition commandDefinition, out Dictionary<string,string> arguments)
+        private bool? ShowCommandDialog(OHM.Nodes.Commands.ICommand command, out Dictionary<string,string> arguments)
         {
             var w = new CommandDialog();
-            w.init(commandDefinition);
+            w.init(command);
 
             bool? result = w.ShowDialog();
 

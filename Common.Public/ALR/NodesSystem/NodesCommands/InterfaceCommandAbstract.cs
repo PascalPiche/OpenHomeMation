@@ -3,13 +3,10 @@ using System.Collections.Generic;
 
 namespace OHM.Nodes.Commands.ALR
 {
-    public abstract class InterfaceCommandAbstract : AbstractTreeCommand, IInterfaceCommand
+    public abstract class InterfaceCommandAbstract : AbstractCommand, IInterfaceCommand
     {
 
         #region Protected Ctor
-
-        protected InterfaceCommandAbstract(string key, string name)
-            : this(key, name, string.Empty) { }
 
         protected InterfaceCommandAbstract(string key, string name, string description) 
             : this(key, name, description, null) { }

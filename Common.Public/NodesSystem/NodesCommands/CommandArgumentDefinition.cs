@@ -20,25 +20,17 @@ namespace OHM.Nodes.Commands
         #region Public Ctor
 
         /// <summary>
-        /// 
+        /// Create a Command argument Definition
         /// </summary>
-        /// <param name="key"></param>
-        /// <param name="name"></param>
-        /// <param name="t"></param>
-        public CommandArgumentDefinition(string key, string name, Type t) : this(key, name, t, false) { }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="key"></param>
-        /// <param name="name"></param>
-        /// <param name="t"></param>
-        /// <param name="required"></param>
-        public CommandArgumentDefinition(string key, string name, Type t, bool required)
+        /// <param name="key">Unique key of the command argument for the command</param>
+        /// <param name="name">Name of the argument</param>
+        /// <param name="type">Type of the argument value expected</param>
+        /// <param name="required">Boolean defining the required state of the argument for executing the command</param>
+        public CommandArgumentDefinition(string key, string name, Type type, bool required = false)
         {
             _key = key;
             _name = name;
-            _type = t;
+            _type = type;
             _required = required;
         }
 
@@ -47,52 +39,44 @@ namespace OHM.Nodes.Commands
         #region Public Properties
 
         /// <summary>
-        /// 
+        /// Unique key of the argument command
         /// </summary>
+        /// <remarks>
+        /// Implement :
+        ///     IArgumentDefinition.Key
+        /// </remarks>
         public string Key { get { return _key; } }
 
         /// <summary>
-        /// 
+        /// Name of the argument command
         /// </summary>
+        /// <remarks>
+        /// Implement :
+        ///     IArgumentDefinition.Name
+        /// </remarks>
         public string Name { get { return _name; } }
 
         /// <summary>
-        /// 
+        /// Type of the argument command
         /// </summary>
+        /// <remarks>
+        /// Implement :
+        ///     IArgumentDefinition.Type
+        /// </remarks>
         public Type Type { get { return _type; } }
 
         /// <summary>
         /// 
         /// </summary>
+        /// <remarks>
+        /// Implement :
+        ///     IArgumentDefinition.Required
+        /// </remarks>
         public bool Required { get { return _required; } }
 
         #endregion
 
         #region Public API
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public bool ValidateValue(object value)
-        {
-            //TODO: NEED TO CHECK
-            bool result = false;
-
-            if (Type == typeof(int))
-            {
-                int resultTemp;
-                result = this.TryGetInt32(value, out resultTemp);
-            }
-            else if (Type == typeof(string))
-            {
-                string resultTemp;
-                result = this.TryGetString(value, out resultTemp);
-            }
-
-            return result;
-        }
 
         /// <summary>
         /// 

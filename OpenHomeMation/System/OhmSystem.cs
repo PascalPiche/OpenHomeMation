@@ -432,13 +432,6 @@ namespace OHM.SYS
                 return false;
             }
 
-            //Init PluginsManager
-            if (!InitPluginsMng())
-            {
-                _logger.Fatal("PluginsManager failed Init. Abording start");
-                return false;
-            }
-
             //Init InterfacesManager
             if (!InitInterfacesMng())
             {
@@ -450,6 +443,13 @@ namespace OHM.SYS
             if (!InitVrMng())
             {
                 _logger.Fatal("VirtualRealityManager failed Init. Abording start");
+                return false;
+            }
+
+            //Init PluginsManager
+            if (!InitPluginsMng())
+            {
+                _logger.Fatal("PluginsManager failed Init. Abording start");
                 return false;
             }
 

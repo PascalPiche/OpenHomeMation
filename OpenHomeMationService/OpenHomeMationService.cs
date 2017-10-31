@@ -27,6 +27,7 @@ namespace OpenHomeMationService
 
         protected override void OnStart(string[] args)
         {
+
             ILoggerManager loggerMng;
             IPluginsManager pluginMng;
             IInterfacesManager interfacesMng;
@@ -38,7 +39,17 @@ namespace OpenHomeMationService
             interfacesMng = new InterfacesManager(loggerMng, pluginMng);
             vrMng = new VrManager(loggerMng, pluginMng);
             ohm = new OpenHomeMation(pluginMng, dataMng, loggerMng, interfacesMng, vrMng);
-            var result = ohm.Start();
+
+            this.EventLog.WriteEntry("OHM: Starting");
+            bool result = ohm.Start();
+            if (result)
+            {
+                this.EventLog.WriteEntry("OHM: Started");
+            }
+            else
+            {
+                this.EventLog.WriteEntry("OHM: Not started");
+            }
         }
 
         protected override bool OnPowerEvent(PowerBroadcastStatus powerStatus)
@@ -46,22 +57,31 @@ namespace OpenHomeMationService
             switch (powerStatus)
             {
                 case PowerBroadcastStatus.BatteryLow:
+
                     break;
                 case PowerBroadcastStatus.OemEvent:
+
                     break;
                 case PowerBroadcastStatus.PowerStatusChange:
+
                     break;
                 case PowerBroadcastStatus.QuerySuspend:
+
                     break;
                 case PowerBroadcastStatus.QuerySuspendFailed:
+
                     break;
                 case PowerBroadcastStatus.ResumeAutomatic:
+
                     break;
                 case PowerBroadcastStatus.ResumeCritical:
+
                     break;
                 case PowerBroadcastStatus.ResumeSuspend:
+
                     break;
                 case PowerBroadcastStatus.Suspend:
+
                     break;
             }
             return base.OnPowerEvent(powerStatus);
@@ -83,6 +103,29 @@ namespace OpenHomeMationService
                 case 129:
                     break;
             }
-        } 
+        }
+
+        protected override void OnContinue()
+        {
+            base.OnContinue();
+        }
+
+        protected override void OnPause()
+        {
+            base.OnPause();
+        }
+
+        protected override void OnShutdown()
+        {
+            base.OnShutdown();
+        }
+
+        protected override bool CanRaiseEvents
+        {
+            get
+            {
+                return base.CanRaiseEvents;
+            }
+        }
     }
 }

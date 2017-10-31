@@ -17,8 +17,9 @@ namespace OHM.Tests
         {
             string key = "key";
             string name = "name";
+            string description = "description";
 
-            InterfaceCommandStub target = new InterfaceCommandStub(key, name);
+            InterfaceCommandStub target = new InterfaceCommandStub(key, name, description);
 
             Assert.AreEqual(key, target.Key);
             Assert.AreEqual(name, target.Name);
@@ -30,7 +31,7 @@ namespace OHM.Tests
 
         private class InterfaceCommandStub : InterfaceCommandAbstract
         {
-            public InterfaceCommandStub(string key, string name) : base(key, name) { }
+            public InterfaceCommandStub(string key, string name, string description) : base(key, name, description) { }
 
             protected override bool RunImplementation(System.Collections.Generic.IDictionary<string, string> arguments)
             {

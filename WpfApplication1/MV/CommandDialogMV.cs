@@ -7,6 +7,7 @@ namespace WpfApplication1.MV
 {
     public sealed class CommandDialogMV
     {
+        private ICommand _command;
         private ICommandDefinition _commandDefinition;
         private ObservableCollection<ArgumentsDefinitionDesigner> _arguments = new ObservableCollection<ArgumentsDefinitionDesigner>();
         private ObservableCollection<string> _optionalArguments = new ObservableCollection<string>();
@@ -15,9 +16,10 @@ namespace WpfApplication1.MV
 
         public ObservableCollection<ArgumentsDefinitionDesigner> Arguments { get { return _arguments; } }
 
-        internal CommandDialogMV(ICommandDefinition commandDefinition)
+        internal CommandDialogMV(ICommand command)
         {
-            _commandDefinition = commandDefinition;
+            _command = command;
+            _commandDefinition = command.Definition;
             Init();
         }
 
@@ -49,6 +51,11 @@ namespace WpfApplication1.MV
             }
 
             return result;
+        }
+
+        public bool Validate()
+        {
+            return _command.ValidateArguments(ArgumentsResult);
         }
     }
 }

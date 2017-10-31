@@ -55,8 +55,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="NodesSystem\NodesCommands\_Interfaces\ICommandDefinition.cs" />
-    <Compile Include="NodesSystem\NodesCommands\_Interfaces\ITreeCommand.cs" />
-    <Compile Include="NodesSystem\NodesCommands\AbstractTreeCommand.cs" />
     <Compile Include="NodesSystem\Nodes\_Class\AbstractBasicNode.cs" />
     <Compile Include="NodesSystem\Nodes\_Class\AbstractPowerNode.cs">
       <SubType>Code</SubType>
@@ -95,28 +93,36 @@
   <ItemGroup>
     <None Include="ALRInterfaceAbstractNode_Init.sequencediagram" />
     <None Include="DataSystem\_Interfaces\_Diagrams\GraphRelationsExpanded-2016-08-04.dgml" />
+    <None Include="NodesSystem\NodesCommands\_Diagrams\GraphClass-2017-09-27.dgml" />
+    <None Include="NodesSystem\NodesCommands\_Diagrams\GraphFullExpanded-2017-10-01.dgml" />
+    <None Include="NodesSystem\NodesCommands\_Diagrams\GraphFull-2017-09-27.dgml" />
     <None Include="NodesSystem\NodesCommands\_Interfaces\_Diagrams\ClassDiagram.cd" />
     <None Include="NodesSystem\NodesCommands\_Interfaces\_Diagrams\Graph.dgml" />
-    <None Include="NodesSystem\NodesCommands\_Diagrams\GraphClass-2016-08-04.dgml" />
-    <None Include="NodesSystem\NodesCommands\_Diagrams\GraphFull-2016-08-04.dgml" />
-    <None Include="NodesSystem\NodesProperties\_Diagrams\GraphExpanded-2016-08-04.dgml" />
+    <None Include="NodesSystem\NodesCommands\_Diagrams\Archives\GraphClass-2016-08-04.dgml" />
+    <None Include="NodesSystem\NodesCommands\_Diagrams\Archives\GraphFull-2016-08-04.dgml" />
+    <None Include="NodesSystem\NodesProperties\_Diagrams\_Archives\Graph-2017-09-27.dgml" />
+    <None Include="NodesSystem\NodesProperties\_Diagrams\_Archives\GraphFullExpanded-2016-08-04.dgml" />
+    <None Include="NodesSystem\NodesProperties\_Diagrams\GraphFullExpanded-2017-09-27.dgml" />
     <None Include="NodesSystem\NodesProperties\_Interfaces\_Diagrams\ClassDiagram.cd" />
     <None Include="NodesSystem\Nodes\Diagrams\Graph-light-2017-09-19.dgml" />
-    <None Include="NodesSystem\Nodes\Diagrams\Graph-expand-2017-09-19.dgml" />
+    <None Include="NodesSystem\Nodes\Diagrams\Graph-extend-2017-09-19.dgml" />
     <None Include="NodesSystem\Nodes\_Class\_Diagrams\ClassDiagramExpanded.cd" />
     <None Include="NodesSystem\Nodes\_Class\_Diagrams\Graph-2017-09-19.dgml" />
     <None Include="NodesSystem\Nodes\_Class\_Diagrams\Graph-AbstractBasicNode-2017-09-19.dgml" />
     <None Include="NodesSystem\Nodes\_Class\_Diagrams\Graph-AbstractPowerNode-2017-09-19.dgml" />
+    <None Include="NodesSystem\Nodes\_Class\_Diagrams\Graph-AbstractPowerTreeNode-2017-09-27.dgml" />
     <None Include="NodesSystem\Nodes\_Interfaces\_Diagrams\ClassDiagramExpanded.cd" />
     <None Include="NodesSystem\Nodes\_Interfaces\_Diagrams\ClassDiagram.cd" />
     <None Include="NodesSystem\Nodes\_Interfaces\_Diagrams\Archive\Graph-2016-08-10.dgml" />
-    <None Include="NodesSystem\Nodes\_Interfaces\_Diagrams\Graph-2017-09-18.dgml" />
+    <None Include="NodesSystem\Nodes\_Interfaces\_Diagrams\Archive\Graph-2017-09-18.dgml" />
     <None Include="NodesSystem\Nodes\_Interfaces\_Diagrams\Archive\Graph.dgml" />
     <None Include="NodesSystem\NodesProperties\_Diagrams\ClassDiagram.cd" />
-    <None Include="NodesSystem\NodesProperties\_Diagrams\Graph-2016-08-04.dgml" />
+    <None Include="NodesSystem\NodesProperties\_Diagrams\_Archives\Graph-2016-08-04.dgml" />
     <None Include="NodesSystem\Nodes\_Class\_Diagrams\Archives\Graph-NodeAbstract-2016-07-21.dgml" />
     <None Include="NodesSystem\Nodes\_Class\_Diagrams\Archives\Graph-NodeAbstract-2016-07-25.dgml" />
     <None Include="NodesSystem\Nodes\_Class\_Diagrams\Archives\Relations-simple.dgml" />
+    <None Include="NodesSystem\Nodes\_Interfaces\_Diagrams\Graph-2017-09-27.dgml" />
+    <None Include="NodesSystem\_Diagrams\Graph.dgml" />
     <None Include="PluginsSystem\_Diagrams\GraphExpanded-201-08-0.dgml" />
     <None Include="ALR\NodesSystem\NodesCommands\_Diagrams\ClassDiagram1.cd" />
     <None Include="ALR\NodesSystem\NodesCommands\_Diagrams\Graph1.dgml" />
@@ -137,7 +143,6 @@
     <Folder Include="ALR\NodesSystem\Nodes\_Interfaces\_Diagrams\" />
     <Folder Include="ALR\NodesSystem\_Diagrams\" />
     <Folder Include="ALR\_Diagrams\" />
-    <Folder Include="NodesSystem\_Diagrams\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ALRInterfaceAbstractNode_Init.sequencediagram.layout">

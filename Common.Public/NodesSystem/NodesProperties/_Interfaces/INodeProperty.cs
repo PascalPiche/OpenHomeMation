@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace OHM.Nodes.Properties
 {
@@ -6,29 +8,21 @@ namespace OHM.Nodes.Properties
     /// Node property interface with minimal property and methods.
     /// It's the core interface for all property in the system.
     /// </summary>
-    public interface INodeProperty
+    public interface INodeProperty : INotifyPropertyChanged
     {
         #region Properties
 
         /// <summary>
-        /// Unique Key for the property
+        /// Unique Key of the node property.
+        /// Can not be null.
         /// </summary>
         string Key { get; }
 
         /// <summary>
-        /// Name of the property
+        /// Name of the node property.
+        /// Can not be null.
         /// </summary>
         string Name { get; }
-
-        /// <summary>
-        /// Short description of the property
-        /// </summary>
-        string Description { get; }
-
-        /// <summary>
-        /// Flag defining read only property
-        /// </summary>
-        bool ReadOnly { get; }
 
         /// <summary>
         /// Type used for the property value
@@ -36,9 +30,30 @@ namespace OHM.Nodes.Properties
         Type Type { get; }
 
         /// <summary>
+        /// Flag defining read only node property
+        /// </summary>
+        /// <value>True when value is read only</value>
+        bool ReadOnly { get; }
+
+        /// <summary>
+        /// Short description of the node property
+        /// </summary>
+        /// <value>Return string or String.empty</value>
+        string Description { get; }
+
+        /// <summary>
         /// Actual Value of the property
         /// </summary>
         object Value { get; }
+
+        //todo
+        /// <summary>
+        /// Get the sub properties collection
+        /// </summary>
+        ReadOnlyCollection<INodeProperty> Properties
+        {
+            get;
+        }
 
         #endregion
 

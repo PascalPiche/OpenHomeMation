@@ -239,9 +239,12 @@ namespace OHM.Tests
         {
             string key = "key";
             string name = "name";
+            //string description = "description";
+
+            string descriptionCommand = "descriptionCommand";
 
             ALRAbstractTreeNodeStub target = new ALRAbstractTreeNodeStub(key, name);
-            ICommand cmd = new AbstractCommandStub(new CommandDefinition("not-found", "Command should not exist"));
+            ICommand cmd = new AbstractCommandStub(new CommandDefinition("not-found", "Command should not exist", descriptionCommand));
 
             bool result = target.UnRegiserCommand(cmd);
 
@@ -253,9 +256,9 @@ namespace OHM.Tests
         {
             string key = "key";
             string name = "name";
-
+            string descriptionCommand = "descriptionCommand";
             ALRAbstractTreeNodeStub target = new ALRAbstractTreeNodeStub(key, name);
-            AbstractCommandStub cmd = new AbstractCommandStub(new CommandDefinition("keyCmd", "nameCmd"));
+            AbstractCommandStub cmd = new AbstractCommandStub(new CommandDefinition("keyCmd", "nameCmd", descriptionCommand));
             bool result = target.RegisterCommand(cmd);
 
             Assert.IsFalse(result);
@@ -269,7 +272,7 @@ namespace OHM.Tests
 
             ALRAbstractTreeNodeStub target = new ALRAbstractTreeNodeStub(key, name);
 
-            AbstractPowerTreeNode result = target.TestFindDirectChild("test");
+            INode result = target.TestFindDirectChild("test");
 
             Assert.IsNull(result);
         }
@@ -369,7 +372,7 @@ namespace OHM.Tests
             
             public new ITreeNode Parent { get { return base.Parent; } }
 
-            public AbstractPowerTreeNode TestFindDirectChild(string key) {
+            public INode TestFindDirectChild(string key) {
                 return base.FindDirectChild(key);
             }
 

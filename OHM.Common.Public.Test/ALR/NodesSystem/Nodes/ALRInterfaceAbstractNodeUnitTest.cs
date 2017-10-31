@@ -533,9 +533,9 @@ namespace OHM.Tests
                 base.InterfaceState = newState;
             }
 
-            protected override void Start()
+            protected override bool Start()
             {
-                //throw new System.NotImplementedException();
+                throw new System.NotImplementedException();
             }
 
             public bool CustomTest1InitSubChild()
@@ -595,7 +595,7 @@ namespace OHM.Tests
                 base.InterfaceState = newState;
             }
 
-            protected override void Start()
+            protected override bool Start()
             {
                 throw new System.NotImplementedException();
             }

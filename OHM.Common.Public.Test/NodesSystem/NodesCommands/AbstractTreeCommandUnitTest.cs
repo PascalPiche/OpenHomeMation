@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 namespace OHM.Common.Public.Test.Commands
 {
+    /*
     [TestClass]
     public class AbstractTreeCommandUnitTest
     {
@@ -64,4 +65,5 @@ namespace OHM.Common.Public.Test.Commands
             Assert.AreEqual(string.Empty, target.NodeTreeKey);
         }
     }
+     */
 }

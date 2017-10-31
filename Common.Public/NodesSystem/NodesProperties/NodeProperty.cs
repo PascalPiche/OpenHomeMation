@@ -7,10 +7,14 @@ namespace OHM.Nodes.Properties
 {
     /// <summary>
     /// Core node property class
-    /// Implements: INodeProperty
-    /// Implements: INotifyPropertyChanged
     /// </summary>
-    public class NodeProperty : INodeProperty, INotifyPropertyChanged
+    /// <seealso cref="OHM.Nodes.Properties.INodeProperty"/>
+    /// <remarks>
+    /// Implements: INodeProperty
+    /// Tested by :
+    ///     - NodePropertyUnitTest
+    /// </remarks>
+    public class NodeProperty : INodeProperty
     {
         #region Private Members
 
@@ -20,26 +24,15 @@ namespace OHM.Nodes.Properties
         private object _value;
         private bool _readOnly;
         private Type _type;
-        private ObservableCollection<INodeProperty> _extraInfo = new ObservableCollection<INodeProperty>();
-        private Dictionary<String, INodeProperty> _extraInfoDict;
+        private ObservableCollection<INodeProperty> _properties;
+        private Dictionary<String, INodeProperty> propertiesDict;
 
         #endregion
 
         #region Public Ctor
 
         /// <summary>
-        /// Minimal Constructor
-        /// </summary>
-        /// <param name="key">Local Unique key for the property</param>
-        /// <param name="name">Name of the property</param>
-        /// <param name="type">Type of the property</param>
-        /// <param name="readOnly">True if the property is read-only</param>
-        /// <param name="description">Short description of the property</param>
-        public NodeProperty(string key, string name, Type type, bool readOnly, string description)
-            : this(key, name, type, readOnly, description, null) {}
-
-        /// <summary>
-        /// Constructor with initial value
+        ///  Minimal Constructor for a node property
         /// </summary>
         /// <param name="key">Local Unique key for the property</param>
         /// <param name="name">Name of the property</param>
@@ -47,6 +40,13 @@ namespace OHM.Nodes.Properties
         /// <param name="readOnly">True if the property is read-only</param>
         /// <param name="description">Short description of the property</param>
         /// <param name="value">Initial value set in the property</param>
+        /// <remarks>
+        /// Tested  by :
+        ///    - TestNodeProperty_Ctor_Minimal_UT001 (Normal case)
+        ///    - TestNodeProperty_Ctor_Minimal_UT002 (Key validation error)
+        ///    - TestNodeProperty_Ctor_Minimal_UT003 (Name validation error)
+        ///    - TestNodeProperty_Ctor_Minimal_UT004 (Value validation error);
+        /// </remarks>
         public NodeProperty(string key, string name, Type type, bool readOnly, string description, object value) 
             : this(key, name, type, readOnly, description, value, new ObservableCollection<INodeProperty>()) {}
 
@@ -59,22 +59,42 @@ namespace OHM.Nodes.Properties
         /// <param name="readOnly">True if the property is read-only</param>
         /// <param name="description">Short description of the property</param>
         /// <param name="value">Initial value set in the property</param>
-        /// <param name="extraInfo">Observable collection of other INodeProperty</param>
-        public NodeProperty(string key, string name, Type type, bool readOnly, string description, object value, ObservableCollection<INodeProperty> extraInfo)
+        /// <param name="properties">Observable collection of other INodeProperty</param>
+        /// <remarks>
+        /// Tested  by :
+        ///     - TestNodeProperty_Ctor_Minimal_UT005
+        /// </remarks>
+        /// <exception cref="ArgumentNullException" />
+        public NodeProperty(string key, string name, Type type, bool readOnly, string description, object value, IList<INodeProperty> properties)
         {
+            //Validate key
+            //Tested by NodePropertyUnitTest.TestNodeProperty_Ctor_Minimal_UT002
+            if (string.IsNullOrWhiteSpace(key))
+            {
+                throw new ArgumentNullException("key", "Key cannot be Null, empty string or white space only");
+            }
+
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                throw new ArgumentNullException("name", "Name cannot be Null, empty string or white space only");
+            }
+
+            //Assign value
             _key = key;
             _name = name;
             _type = type;
             _readOnly = readOnly;
             _description = description;
-            InitializeExtraInfo(extraInfo);
+
+            //Initialize sub list
+            InitializeSubProperties(properties);
 
             if (!SetValue(value))
             {
-                //TODO THROW EXCEPTION
+                //Throw exception
+                throw new ArgumentOutOfRangeException("value", value, "Can't set the new value in the property value");
             }
         }
-
         #endregion
 
         #region Public Properties
@@ -82,42 +102,69 @@ namespace OHM.Nodes.Properties
         #region INodeProperty Implementation
 
         /// <summary>
-        /// Unique Key of the property
-        /// Implements: INodeProperty.Key
+        /// Unique Key of the node property.
+        /// Can not be null.
         /// </summary>
+        /// <remarks>
+        /// Implements: INodeProperty.Key
+        /// </remarks>
         public string Key { get { return _key; } }
 
         /// <summary>
-        /// Name of the property
-        /// Implements: INodeProperty.Name
+        /// Name of the node property.
+        /// Can not be null.
         /// </summary>
+        /// <remarks>
+        /// Implements: INodeProperty.Name
+        /// </remarks>
         public string Name { get { return _name; } }
 
         /// <summary>
         /// Type of the property value
-        /// Implements: INodeProperty.Type
         /// </summary>
+        /// <remarks>
+        /// Implements: INodeProperty.Type
+        /// </remarks>
         public Type Type { get { return _type; } }
 
         /// <summary>
-        /// Short Description of the property
-        /// Implements: INodeProperty.Description
-        /// </summary>
-        /// <returns>String or String.empty if not available</returns>
-        public string Description { get { return _description; } }
-
-        /// <summary>
         /// Readonly flag of the property
-        /// Implements: INodeProperty.ReadOnly
         /// </summary>
         /// <return>True if the property is read-only otherwise false</return>
+        /// <remarks>
+        /// Implements: INodeProperty.ReadOnly
+        /// </remarks>
         public bool ReadOnly { get { return _readOnly; } }
 
         /// <summary>
-        /// Value object actual in the property
-        /// Implements: INodeProperty.Value
+        /// Short Description of the property
         /// </summary>
+        /// <returns>String or String.empty if not available</returns>
+        /// <remarks>
+        /// Implements: INodeProperty.Description
+        /// </remarks>
+        public string Description { get { return _description; } }
+
+        /// <summary>
+        /// Value object actual in the property
+        /// </summary>
+        /// <remarks>
+        /// Implements: INodeProperty.Value
+        /// </remarks>
         public object Value { get { return _value; } }
+
+        /// <summary>
+        /// Get the read only properties collection
+        /// </summary>
+        /// <remarks>
+        /// Implements: INodeProperty.Value
+        /// </remarks>
+        public ReadOnlyCollection<INodeProperty> Properties
+        {
+            get {
+                return new ReadOnlyCollection<INodeProperty>(_properties);
+            }
+        }
 
         #endregion
 
@@ -134,7 +181,9 @@ namespace OHM.Nodes.Properties
         public bool SetValue(object val)
         {
             bool result = false;
-            if (val == null || val.GetType() == _type)
+            //TODO MUST CHECK IF NULLABLE IS ALLOWED : 
+            //Dont know how to do it at the moment.
+            if (val == null || isValidType(val))
             {
                 _value = val;
                 NotifyPropertyChanged("Value");
@@ -148,7 +197,7 @@ namespace OHM.Nodes.Properties
         #region Public Events
 
         /// <summary>
-        /// Property changed event handler declaration
+        /// Property changed event handler
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -172,13 +221,27 @@ namespace OHM.Nodes.Properties
 
         #region Private functions
 
-        private void InitializeExtraInfo(ObservableCollection<INodeProperty> extraInfo)
+        /// <summary>
+        /// Check if the object is the same type as the property
+        /// </summary>
+        /// <param name="val">Object to validate the type</param>
+        /// <returns>True when the type are the same</returns>
+        private bool isValidType(object val)
         {
-            _extraInfo = extraInfo;
-            _extraInfoDict = new Dictionary<string, INodeProperty>();
-            foreach (INodeProperty nodeProp in _extraInfo)
+            return val.GetType() == _type;
+        }
+
+        /// <summary>
+        /// Initialize the Extra dictionnary of sub property
+        /// </summary>
+        /// <param name="properties">List of sub properties to initialize</param>
+        private void InitializeSubProperties(IList<INodeProperty> properties)
+        {
+            _properties = new ObservableCollection<INodeProperty>(properties);
+            propertiesDict = new Dictionary<string, INodeProperty>();
+            foreach (INodeProperty nodeProp in _properties)
             {
-                _extraInfoDict.Add(nodeProp.Key, nodeProp);
+                propertiesDict.Add(nodeProp.Key, nodeProp);
             }
         }
 

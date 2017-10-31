@@ -17,6 +17,6 @@ namespace OHM.Nodes
         /// Get all children of the node
         /// </summary>
         /// <value>Readonly list of children TreeNode</value>
-        IReadOnlyList<ITreeNode> Children { get; }
+        IReadOnlyList<INode> Children { get; }
     }
 }

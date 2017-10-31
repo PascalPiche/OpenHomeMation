@@ -26,13 +26,14 @@ namespace WUnderground.Nodes
 
         #region Protected Methods
 
-        protected override void Start()
+        protected override bool Start()
         {
             //Get DataDictionary For installed Controllers
             _registeredAccounts = DataStore.GetOrCreateDataDictionary("registeredAccounts");
 
             //Load registered controllers
             LoadRegisteredAccounts();
+            return true;
         }
 
         protected override bool Shutdown()

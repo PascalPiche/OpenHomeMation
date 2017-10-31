@@ -33,7 +33,7 @@ namespace ZWaveLib
 
         #region public API
 
-        protected override void Start()
+        protected override bool Start()
         {
             var apiPath = @"C:\Users\Scopollif\Documents\Visual Studio 2013\Projects\OpenHomeMation\external\open-zwave\openzwave-1.0.791";
             ZWOptions opt = new ZWOptions();
@@ -56,6 +56,7 @@ namespace ZWaveLib
             
             //Load registered controllers
             LoadRegisteredControllers();
+            return true;
         }
 
         protected override bool Shutdown()
