@@ -45,9 +45,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration.Install" />
@@ -119,11 +119,11 @@
   <ItemGroup>
     <None Include="FileDataManager_FileDataManager.sequencediagram" />
     <None Include="LoggerManager_LoggerManager.sequencediagram" />
+    <None Include="packages.config" />
     <None Include="PluginsSystem\_diagrams\PluginsManager_GetPlugin.sequencediagram" />
     <None Include="PluginsSystem\_diagrams\PluginsManager_InstallPlugin.sequencediagram" />
     <None Include="PluginsSystem\_diagrams\PluginsManager_Init.sequencediagram" />
     <None Include="System\_diagrams\OpenHomeMation_start.sequencediagram" />
-    <None Include="packages.config" />
     <None Include="System\_diagrams\ClassDiagram1.cd" />
     <None Include="DataSystem\_Diagrams\DataClassDiagram.cd" />
     <None Include="DataSystem\_Diagrams\DataClassDiagramFull.cd" />

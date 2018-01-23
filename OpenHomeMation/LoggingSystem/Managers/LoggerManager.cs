@@ -1,4 +1,5 @@
 ﻿using log4net;
+using log4net.Repository;
 using System;
 
 namespace OHM.Logger
@@ -6,24 +7,20 @@ namespace OHM.Logger
     public class LoggerManager : ILoggerManager
     {
 
-        public LoggerManager() : base() {}
 
-        public ILogger GetLogger(string repository, Type type)
+
+        /// <summary>
+        /// Core CTor 
+        /// </summary>
+        public LoggerManager() : base()
         {
-            try
-            {
-                log4net.LogManager.CreateRepository(repository);
-            }
-            catch (Exception)
-            {
-
-            }
-
-            return new DefaultLogger(LogManager.GetLogger(repository, type));
+        
         }
 
         public ILogger GetLogger(string repository, string name)
         {
+            ILoggerRepository rep = log4net.LogManager.GetRepository(repository);
+            
             try
             {
                 log4net.LogManager.CreateRepository(repository);

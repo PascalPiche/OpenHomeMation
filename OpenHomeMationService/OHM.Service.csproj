@@ -64,6 +64,9 @@
     <StartupObject>OpenHomeMationService.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
@@ -93,6 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
     <None Include="_diagrams\OpenHomeMationService_OnStart.sequencediagram" />
     <None Include="OpenHomeMationService_TemporaryKey.pfx" />
   </ItemGroup>

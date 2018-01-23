@@ -5,20 +5,6 @@ namespace OHM.Logger.Tests
     [TestClass]
     public class LoggerManagerUnitTest
     {
-        [TestMethod]
-        public void TestGetLoggerType()
-        {
-            var logMng = new LoggerManager();
-            var result = logMng.GetLogger("a", typeof(object));
-
-            Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(DefaultLogger));
-
-            //Generate exception code coverage
-            var result2 = logMng.GetLogger("a", typeof(LoggerManagerUnitTest));
-            Assert.IsNotNull(result2);
-            Assert.IsInstanceOfType(result2, typeof(DefaultLogger));
-        }
 
         [TestMethod]
         public void TestGetLoggerName()
