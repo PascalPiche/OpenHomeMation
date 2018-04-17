@@ -46,7 +46,6 @@ namespace OHM.Logger
                 hierarchy.Root.AddAppender(item);
             }
 
-
             /*ManagedColoredConsoleAppender console = new ManagedColoredConsoleAppender();
             //console.Target = "Console.Out";
             console.Threshold = Level.All;
@@ -54,16 +53,16 @@ namespace OHM.Logger
             hierarchy.Root.AddAppender(console);*/
 
             /*RollingFileAppender roller = new RollingFileAppender();
-           roller.AppendToFile = false;
-           roller.File = @"Logs\EventLog.txt";
-           roller.Layout = DefaultPatternLayout;
-           roller.MaxSizeRollBackups = 5;
-           roller.MaximumFileSize = "1GB";
-           roller.Threshold = Level.Warn;
-           roller.RollingStyle = RollingFileAppender.RollingMode.Size;
-           roller.StaticLogFileName = true;
+            roller.AppendToFile = false;
+            roller.File = @"Logs\EventLog.txt";
+            roller.Layout = DefaultPatternLayout;
+            roller.MaxSizeRollBackups = 5;
+            roller.MaximumFileSize = "1GB";
+            roller.Threshold = Level.Warn;
+            roller.RollingStyle = RollingFileAppender.RollingMode.Size;
+            roller.StaticLogFileName = true;
 
-           roller.ActivateOptions();*/
+            roller.ActivateOptions();*/
 
             hierarchy.Root.Level = Level.All;
             hierarchy.Configured = true;
