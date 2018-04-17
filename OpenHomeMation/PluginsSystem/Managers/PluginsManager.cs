@@ -149,11 +149,11 @@ namespace OHM.Managers.Plugins
         }
 
         /// <summary>
-        /// 
+        /// Uninstall the plugin by Guid provided
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Guid of the plugin to uninstall</param>
         /// <param name="system"></param>
-        /// <returns></returns>
+        /// <returns>True if the Uninstall was succeed; False otherwise</returns>
         public bool UnInstallPlugin(Guid id, IOhmSystemPlugins system)
         {
             IPlugin plugin = FindPluginIn(id, _installedPluginsInstance);
@@ -171,10 +171,10 @@ namespace OHM.Managers.Plugins
         }
 
         /// <summary>
-        /// 
+        /// Return the plugin instance by Guid if found
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">Guid of the plugin requested</param>
+        /// <returns>nstance of the IPlugin find by the Guid requested or Null</returns>
         public IPlugin GetPlugin(Guid id)
         {
             return FindPluginIn(id, _installedPluginsInstance);
@@ -332,17 +332,17 @@ namespace OHM.Managers.Plugins
         }
 
         /// <summary>
-        /// 
+        /// Check if base type is a PluginBaseType
         /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
+        /// <param name="type">The type to valid</param>
+        /// <returns>True if the type is a PluginBaseType; False otherwise</returns>
         private bool IsPlugin(Type type)
         {
             return _pluginBaseType.IsAssignableFrom(type);
         }
 
         /// <summary>
-        /// 
+        /// Load all registered plugins
         /// </summary>
         private void LoadRegisteredPlugins() {
             foreach (string item in _dataInstalledPlugins.Keys)
