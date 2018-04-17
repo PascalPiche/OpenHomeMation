@@ -1,4 +1,5 @@
-﻿using OHM.Data;
+﻿using log4net;
+using OHM.Data;
 using OHM.Logger;
 using OHM.Managers.ALR;
 using OHM.Managers.ALV;
@@ -16,7 +17,7 @@ namespace OHM.SYS
     {
         #region Private Members
 
-        private ILogger _logger;
+        private ILog _logger;
         private ILoggerManager _loggerMng;
         private IInterfacesManager _interfacesMng;
         private IDataManager _dataMng;
@@ -56,7 +57,7 @@ namespace OHM.SYS
 
         public IOhmSystemInstallGateway GetInstallGateway(Plugins.IPlugin plugin)
         {
-            return new OhmSystemInstallGateway(plugin, _loggerMng.GetLogger("PluginsManager", plugin.Name), _interfacesMng, _vrMng);
+            return new OhmSystemInstallGateway(plugin, _loggerMng.GetLogger(plugin.Name), _interfacesMng, _vrMng);
         }
 
         public IOhmSystemInterfaceGateway GetInterfaceGateway(IALRInterface interf)
@@ -66,7 +67,7 @@ namespace OHM.SYS
 
         public IOhmSystemUnInstallGateway GetUnInstallGateway(Plugins.IPlugin plugin)
         {
-            return new OhmSystemUnInstallGateway(plugin, _loggerMng.GetLogger("PluginsManager", plugin.Name), _interfacesMng);
+            return new OhmSystemUnInstallGateway(plugin, _loggerMng.GetLogger(plugin.Name), _interfacesMng);
         }
 
         public IDataStore GetOrCreateDataStore(string key)
@@ -422,7 +423,7 @@ namespace OHM.SYS
         internal bool Start()
         {
             bool result = false;
-            _logger = _loggerMng.GetLogger("OHM", "OhmSystem");
+            _logger = _loggerMng.GetLogger("OhmSystem");
             result = true;
 
             //Init DataManager

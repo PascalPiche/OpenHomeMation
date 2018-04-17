@@ -8,7 +8,7 @@ using System.Windows.Controls;
 
 namespace WpfApplication1.Logger
 {
-    public class WpfLoggerManager : ILoggerManager
+    /*public class WpfLoggerManager : ILoggerManager
     {
 
         private TextBox _txt;
@@ -18,18 +18,14 @@ namespace WpfApplication1.Logger
             _txt = txt;
         }
 
-        public ILogger GetLogger(string repository, Type type)
+        public ILogger GetLogger(Type type)
         {
-            //log4net.LogManager.CreateRepository(repository);
-
             return new WpfLogger(log4net.LogManager.GetLogger(type), _txt);
         }
 
-        public ILogger GetLogger(string repository, string name)
+        public ILogger GetLogger(string name)
         {
-            //log4net.LogManager.CreateRepository(repository);
-
             return new WpfLogger(log4net.LogManager.GetLogger(name), _txt);
         }
-    }
+    }*/
 }

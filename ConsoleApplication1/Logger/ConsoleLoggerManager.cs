@@ -4,7 +4,7 @@ using System;
 
 namespace ConsoleApplication1.Logger
 {
-    public class ConsoleLoggerManager : ILoggerManager
+    /*public class ConsoleLoggerManager : ILoggerManager
     {
 
         public ConsoleLoggerManager()
@@ -12,7 +12,7 @@ namespace ConsoleApplication1.Logger
             
         }
 
-        public ILogger GetLogger(Type type)
+        public ILog GetLogger(Type type)
         {
             return new ConsoleLogger(LogManager.GetLogger(type));
         }
@@ -31,5 +31,5 @@ namespace ConsoleApplication1.Logger
         {
             return new ConsoleLogger(LogManager.GetLogger(name));
         }
-    }
+    }*/
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using log4net;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OHM.Logger;
 using Rhino.Mocks;
 using System;
@@ -18,8 +19,8 @@ namespace OHM.Data.Tests
         public void TestFileDataManagerInit()
         {
             var loggerMng = MockRepository.GenerateStub<ILoggerManager>();
-            var logger = MockRepository.GenerateStub<ILogger>();
-            loggerMng.Stub(x => x.GetLogger("", "FileDataManager")).Return(logger);
+            var logger = MockRepository.GenerateStub<ILog>();
+            loggerMng.Stub(x => x.GetLogger("FileDataManager")).Return(logger);
             var d = new FileDataManager(_filePath);
 
             //Make Sure Data is empty
@@ -44,8 +45,8 @@ namespace OHM.Data.Tests
         public void TestFileDataManagerInitWithError()
         {
             var loggerMng = MockRepository.GenerateStub<ILoggerManager>();
-            var logger = MockRepository.GenerateStub<ILogger>();
-            loggerMng.Stub(x => x.GetLogger("", "FileDataManager")).Return(logger);
+            var logger = MockRepository.GenerateStub<ILog>();
+            loggerMng.Stub(x => x.GetLogger("FileDataManager")).Return(logger);
 
             //With Invalid file Path
             var d = new FileDataManager("AB:");
@@ -73,8 +74,8 @@ namespace OHM.Data.Tests
         public void TestFileDataManagerGetOrCreate()
         {
             var loggerMng = MockRepository.GenerateStub<ILoggerManager>();
-            var logger = MockRepository.GenerateStub<ILogger>();
-            loggerMng.Stub(x => x.GetLogger("", "FileDataManager")).Return(logger);
+            var logger = MockRepository.GenerateStub<ILog>();
+            loggerMng.Stub(x => x.GetLogger("FileDataManager")).Return(logger);
             var d = new FileDataManager(_filePath2);
 
             //Make Sure Data is empty
@@ -102,8 +103,8 @@ namespace OHM.Data.Tests
         public void TestFileDataManagerSaveAndGet()
         {
             var loggerMng = MockRepository.GenerateStub<ILoggerManager>();
-            var logger = MockRepository.GenerateStub<ILogger>();
-            loggerMng.Stub(x => x.GetLogger("", "FileDataManager")).Return(logger);
+            var logger = MockRepository.GenerateStub<ILog>();
+            loggerMng.Stub(x => x.GetLogger("FileDataManager")).Return(logger);
             var d = new FileDataManager(_filePath3);
 
             //Make Sure Data is empty

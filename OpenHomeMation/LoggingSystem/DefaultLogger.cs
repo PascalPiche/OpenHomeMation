@@ -3,7 +3,7 @@ using System;
 
 namespace OHM.Logger
 {
-    public class DefaultLogger : ILogger
+    /*public class DefaultLogger : ILog
     {
         #region Private Members
 
@@ -236,5 +236,5 @@ namespace OHM.Logger
         }
 
         #endregion
-    }
+    }*/
 }

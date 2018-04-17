@@ -1,4 +1,5 @@
-﻿using OHM.Logger;
+﻿using log4net;
+using OHM.Logger;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,7 +12,7 @@ namespace OHM.Data
         #region Private Member
         
         private ILoggerManager _loggerMng;
-        private ILogger _logger;
+        private ILog _logger;
         private string _filePath;
 
         #endregion
@@ -30,7 +31,7 @@ namespace OHM.Data
         {
             bool result = true;
             _loggerMng = loggerMng;
-            _logger = _loggerMng.GetLogger("FileDataManager", "FileDataManager");
+            _logger = _loggerMng.GetLogger("FileDataManager");
             _logger.Debug("Initing");
 
             if (!Directory.Exists(_filePath))

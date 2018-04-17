@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using log4net;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OHM.Data;
 using OHM.Logger;
 using OHM.Managers.ALR;
@@ -18,8 +19,8 @@ namespace OHM.Tests.Interfaces
         public void TestInterfacesManagerConstructor()
         {
             var loggerMng = MockRepository.GenerateStub<ILoggerManager>();
-            var logger = MockRepository.GenerateStub<ILogger>();
-            loggerMng.Stub(x => x.GetLogger("", "InterfacesManager")).Return(logger);
+            var logger = MockRepository.GenerateStub<ILog>();
+            loggerMng.Stub(x => x.GetLogger("InterfacesManager")).Return(logger);
 
             var pluginsMng = MockRepository.GenerateStub<IPluginsManager>();
 
@@ -33,8 +34,8 @@ namespace OHM.Tests.Interfaces
         public void TestInterfacesManagerInit()
         {
             var loggerMng = MockRepository.GenerateStub<ILoggerManager>();
-            var logger = MockRepository.GenerateStub<ILogger>();
-            loggerMng.Stub(x => x.GetLogger("", "InterfacesManager")).Return(logger);
+            var logger = MockRepository.GenerateStub<ILog>();
+            loggerMng.Stub(x => x.GetLogger("InterfacesManager")).Return(logger);
 
             var pluginsMng = MockRepository.GenerateStub<IPluginsManager>();
             var dataStore = MockRepository.GenerateStub<IDataStore>();
@@ -91,8 +92,8 @@ namespace OHM.Tests.Interfaces
         public void TestInterfacesManagerLoadRegistered()
         {
             var loggerMng = MockRepository.GenerateStub<ILoggerManager>();
-            var logger = MockRepository.GenerateStub<ILogger>();
-            loggerMng.Stub(x => x.GetLogger("", "InterfacesManager")).Return(logger);
+            var logger = MockRepository.GenerateStub<ILog>();
+            loggerMng.Stub(x => x.GetLogger("InterfacesManager")).Return(logger);
 
             var pluginsMng = MockRepository.GenerateStub<IPluginsManager>();
             var dataStore = MockRepository.GenerateStub<IDataStore>();
@@ -119,10 +120,7 @@ namespace OHM.Tests.Interfaces
 
             Assert.IsTrue(target.Init(dataStore, system));
 
-
             Assert.AreEqual(1, target.RunnableInterfaces.Count);
-            
-
         }
     }
 }

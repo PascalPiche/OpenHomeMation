@@ -1,7 +1,7 @@
 ﻿using log4net;
 
-namespace OHM.Logger
+/*namespace OHM.Logger
 {
     public interface ILogger : ILog
     {}
-}
+}*/

@@ -1,4 +1,5 @@
-﻿using OHM.Data;
+﻿using log4net;
+using OHM.Data;
 using OHM.Logger;
 using OHM.Plugins;
 using OHM.SYS;
@@ -10,30 +11,72 @@ using System.Reflection;
 
 namespace OHM.Managers.Plugins
 {
+
+    /// <summary>
+    /// Core Plugins Manager
+    /// </summary>
     public sealed class PluginsManager : IPluginsManager
     {
         #region Private members
 
+        /// <summary>
+        /// Member instance of the Logger manager
+        /// </summary>
         private ILoggerManager _loggerMng;
-        private ILogger _logger;
 
+        /// <summary>
+        /// Member instance of the logger
+        /// </summary>
+        private ILog _logger;
+
+        /// <summary>
+        /// Member instance of inner the data store for the manager
+        /// </summary>
         private IDataStore _data;
+
+        /// <summary>
+        /// Dictionnary of installed and active plugins by key
+        /// </summary>
         private IDataDictionary _dataInstalledPlugins;
+
+        /// <summary>
+        /// Local filepath
+        /// </summary>
         private string _filePath;
 
+        /// <summary>
+        /// List of availables plugins not installed
+        /// </summary>
         private IList<IPlugin> _availablesPlugins = new ObservableCollection<IPlugin>();
+
+        /// <summary>
+        /// List of installed plugins
+        /// </summary>
         private IList<IPlugin> _installedPluginsInstance = new ObservableCollection<IPlugin>();
 
+        /// <summary>
+        /// 
+        /// </summary>
         private readonly Type _pluginBaseType = typeof(PluginBase);
 
         #endregion
 
         #region Public Ctor
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="loggerMng"></param>
+        /// <param name="filePath"></param>
         public PluginsManager(ILoggerManager loggerMng, string filePath)
         {
+            //Store logger
             _loggerMng = loggerMng;
+
+            //Store file path
             _filePath = filePath;
+
+            //Attach assembly resolve event
             AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
         }
 
@@ -41,18 +84,29 @@ namespace OHM.Managers.Plugins
 
         #region Public Properties
 
+        /// <summary>
+        /// 
+        /// </summary>
         public IList<IPlugin> AvailablesPlugins { get { return _availablesPlugins; } }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public IList<IPlugin> InstalledPlugins { get { return _installedPluginsInstance; } }
 
         #endregion
 
         #region Public Api
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public bool Init(IDataStore data)
         {
             //Spawn internal logger
-            this._logger = _loggerMng.GetLogger("PluginsManager", "PluginsManager");
+            this._logger = _loggerMng.GetLogger("PluginsManager");
             _logger.Debug("Initing");
             //Store internal reference for futur uses
             _data = data;
@@ -71,6 +125,12 @@ namespace OHM.Managers.Plugins
             return true;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="system"></param>
+        /// <returns></returns>
         public bool InstallPlugin(Guid id, IOhmSystemPlugins system)
         {
             IPlugin plugin = FindPluginIn(id, _availablesPlugins);
@@ -88,6 +148,12 @@ namespace OHM.Managers.Plugins
             return result;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="system"></param>
+        /// <returns></returns>
         public bool UnInstallPlugin(Guid id, IOhmSystemPlugins system)
         {
             IPlugin plugin = FindPluginIn(id, _installedPluginsInstance);
@@ -104,6 +170,11 @@ namespace OHM.Managers.Plugins
             return result;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public IPlugin GetPlugin(Guid id)
         {
             return FindPluginIn(id, _installedPluginsInstance);
@@ -113,6 +184,12 @@ namespace OHM.Managers.Plugins
 
         #region Private
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="plugin"></param>
+        /// <param name="system"></param>
+        /// <returns></returns>
         private bool InstallPlugin(IPlugin plugin, IOhmSystemInstallGateway system)
         {
             bool result = false;
@@ -139,6 +216,12 @@ namespace OHM.Managers.Plugins
             return result;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="plugin"></param>
+        /// <param name="system"></param>
+        /// <returns></returns>
         private bool UnInstallPlugin(IPlugin plugin, IOhmSystemUnInstallGateway system)
         {
             bool result = false;
@@ -161,6 +244,12 @@ namespace OHM.Managers.Plugins
             return result;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="source"></param>
+        /// <returns></returns>
         private IPlugin FindPluginIn(Guid id, IList<IPlugin> source) {
 
             IPlugin result = null;
@@ -176,6 +265,9 @@ namespace OHM.Managers.Plugins
             return result;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void InitPluginsList()
         {
             if (!Directory.Exists(_filePath))
@@ -217,6 +309,12 @@ namespace OHM.Managers.Plugins
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        /// <returns></returns>
         private Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
         {
             Assembly result = null;
@@ -233,11 +331,19 @@ namespace OHM.Managers.Plugins
             return result;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         private bool IsPlugin(Type type)
         {
             return _pluginBaseType.IsAssignableFrom(type);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void LoadRegisteredPlugins() {
             foreach (string item in _dataInstalledPlugins.Keys)
             {

@@ -1,10 +1,11 @@
-﻿using System;
+﻿using log4net;
+using System;
 
 namespace OHM.Logger
 {
     public interface ILoggerManager
     {
 
-        ILogger GetLogger(string repository, string name);
+        ILog GetLogger(string name);
     }
 }

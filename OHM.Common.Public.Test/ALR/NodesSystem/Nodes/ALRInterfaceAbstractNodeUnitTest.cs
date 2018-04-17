@@ -1,6 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using log4net;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OHM.Data;
-using OHM.Logger;
 using OHM.Nodes;
 using OHM.Nodes.ALR;
 using OHM.SYS;
@@ -182,7 +182,7 @@ namespace OHM.Tests
 
             ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name, false);
             IDataStore data = null;
-            ILogger logger = null;
+            ILog logger = null;
             IOhmSystemInterfaceGateway sys = null;
 
             target.Init(data, logger, sys);
@@ -196,7 +196,7 @@ namespace OHM.Tests
 
             ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name, false);
             IDataStore data = null;
-            ILogger logger = null;
+            ILog logger = null;
             IOhmSystemInterfaceGateway sys = new OhmSystemInterfaceGatewayStub();
 
             Assert.AreEqual(SystemNodeStates.created, target.SystemState);
@@ -214,7 +214,7 @@ namespace OHM.Tests
 
             ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name, false);
             IDataStore data = MockRepository.GenerateStub<IDataStore>();
-            ILogger logger = null;
+            ILog logger = null;
 
             IOhmSystemInterfaceGateway sys = new OhmSystemInterfaceGatewayStub();
 
@@ -234,7 +234,7 @@ namespace OHM.Tests
 
             ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name, false);
             IDataStore data = null;
-            ILogger logger = MockRepository.GenerateStub<ILogger>();
+            ILog logger = MockRepository.GenerateStub<ILog>();
 
             IOhmSystemInterfaceGateway sys = new OhmSystemInterfaceGatewayStub();
 
@@ -255,7 +255,7 @@ namespace OHM.Tests
 
             ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name, false);
             IDataStore data = MockRepository.GenerateStub<IDataStore>();
-            ILogger logger = MockRepository.GenerateStub<ILogger>();
+            ILog logger = MockRepository.GenerateStub<ILog>();
 
             IOhmSystemInterfaceGateway sys = new OhmSystemInterfaceGatewayStub();
 
@@ -275,7 +275,7 @@ namespace OHM.Tests
 
             ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name, true);
             IDataStore data = MockRepository.GenerateStub<IDataStore>();
-            ILogger logger = MockRepository.GenerateStub<ILogger>();
+            ILog logger = MockRepository.GenerateStub<ILog>();
 
             IOhmSystemInterfaceGateway sys = new OhmSystemInterfaceGatewayStub();
 
@@ -298,7 +298,7 @@ namespace OHM.Tests
             IDataStore data = MockRepository.GenerateStub<IDataStore>();
             data.Stub(x => x.ContainKey("StartOnLaunch")).Return(true);
 
-            ILogger logger = MockRepository.GenerateStub<ILogger>();
+            ILog logger = MockRepository.GenerateStub<ILog>();
 
             IOhmSystemInterfaceGateway sys = new OhmSystemInterfaceGatewayStub();
 
@@ -317,7 +317,7 @@ namespace OHM.Tests
 
             ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name, true);
             IDataStore data = MockRepository.GenerateStub<IDataStore>();
-            ILogger logger = MockRepository.GenerateStub<ILogger>();
+            ILog logger = MockRepository.GenerateStub<ILog>();
             IOhmSystemInterfaceGateway sys = new OhmSystemInterfaceGatewayStub();
 
             Assert.AreEqual(SystemNodeStates.created, target.SystemState);
@@ -339,7 +339,7 @@ namespace OHM.Tests
 
             ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name, true);
             IDataStore data = MockRepository.GenerateStub<IDataStore>();
-            ILogger logger = MockRepository.GenerateStub<ILogger>();
+            ILog logger = MockRepository.GenerateStub<ILog>();
             IOhmSystemInterfaceGateway sys = new OhmSystemInterfaceGatewayStub();
 
             Assert.AreEqual(SystemNodeStates.created, target.SystemState);
@@ -364,7 +364,7 @@ namespace OHM.Tests
 
             ALRInterfaceAbstractNodeStub target = new ALRInterfaceAbstractNodeStub(key, name, true);
             IDataStore data = MockRepository.GenerateStub<IDataStore>();
-            ILogger logger = MockRepository.GenerateStub<ILogger>();
+            ILog logger = MockRepository.GenerateStub<ILog>();
             IOhmSystemInterfaceGateway sys = new OhmSystemInterfaceGatewayStub();
 
             Assert.AreEqual(SystemNodeStates.created, target.SystemState);
@@ -429,7 +429,7 @@ namespace OHM.Tests
             Assert.AreEqual(ALRInterfaceStates.Disabled, target.InterfaceState);
 
             IDataStore data = MockRepository.GenerateStub<IDataStore>();
-            ILogger logger = MockRepository.GenerateStub<ILogger>();
+            ILog logger = MockRepository.GenerateStub<ILog>();
             IOhmSystemInterfaceGateway sys = new OhmSystemInterfaceGatewayStub();
 
             target.Init(data, logger, sys);
@@ -454,7 +454,7 @@ namespace OHM.Tests
             IDataStore data = MockRepository.GenerateStub<IDataStore>();
             data.Stub(x => x.ContainKey("StartOnLaunch")).Return(true);
             data.Stub(x => x.GetBool("StartOnLaunch")).Return(true);
-            ILogger logger = MockRepository.GenerateStub<ILogger>();
+            ILog logger = MockRepository.GenerateStub<ILog>();
             IOhmSystemInterfaceGateway sys = new OhmSystemInterfaceGatewayStub();
 
             target.Init(data, logger, sys);
@@ -481,7 +481,7 @@ namespace OHM.Tests
             data.Stub(x => x.ContainKey("StartOnLaunch")).Return(true);
             data.Stub(x => x.GetBool("StartOnLaunch")).Return(false);
             
-            ILogger logger = MockRepository.GenerateStub<ILogger>();
+            ILog logger = MockRepository.GenerateStub<ILog>();
             IOhmSystemInterfaceGateway sys = new OhmSystemInterfaceGatewayStub();
 
             target.Init(data, logger, sys);
@@ -506,7 +506,7 @@ namespace OHM.Tests
             data.Stub(x => x.ContainKey("StartOnLaunch")).Return(true);
             data.Stub(x => x.GetBool("StartOnLaunch")).Return(false);
 
-            ILogger logger = MockRepository.GenerateStub<ILogger>();
+            ILog logger = MockRepository.GenerateStub<ILog>();
             IOhmSystemInterfaceGateway sys = new OhmSystemInterfaceGatewayStub();
 
             target.Init(data, logger, sys);

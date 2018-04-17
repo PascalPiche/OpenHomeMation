@@ -1,4 +1,5 @@
-﻿using OHM.Data;
+﻿using log4net;
+using OHM.Data;
 using OHM.Logger;
 using OHM.Managers.ALR;
 using OHM.Managers.ALV;
@@ -6,6 +7,8 @@ using OHM.Managers.Plugins;
 using OHM.SYS;
 using System;
 using System.ServiceProcess;
+
+//https://docs.microsoft.com/en-us/dotnet/framework/windows-services/walkthrough-creating-a-windows-service-application-in-the-component-designer#BK_AddInstallers
 
 namespace OpenHomeMationService
 {
@@ -24,13 +27,8 @@ namespace OpenHomeMationService
         /// <summary>
         /// Main log instance
         /// </summary>
-        private static ILogger log;
-
-        /// <summary>
-        /// Configured log level from data configuration or args passed
-        /// </summary>
-        private static int logLevel = 0;
-
+        private static ILog log;
+        
         #endregion
 
         #region Public Ctor
@@ -61,6 +59,17 @@ namespace OpenHomeMationService
 
             //Initialise component
             InitializeComponent();
+
+            //Initialise EventLog
+            string eventSourceName = "OpenHomeMation";
+            string logName = "Service";
+            
+            if (!System.Diagnostics.EventLog.SourceExists(eventSourceName))
+            {
+                System.Diagnostics.EventLog.CreateEventSource(eventSourceName, logName);
+            }
+            this.EventLog.Source = eventSourceName;
+            this.EventLog.Log = logName; 
         }
 
         #endregion
@@ -73,13 +82,18 @@ namespace OpenHomeMationService
         /// <param name="args">Arguments configuring the system</param>
         protected override void OnStart(string[] args)
         {
+            base.OnStart(args);
+            this.EventLog.WriteEntry("OHM.Service: OnStart: BEGIN", System.Diagnostics.EventLogEntryType.Information);
+
             ParseArgs(args);
+
+            this.EventLog.WriteEntry("OHM.Service: OnStart: Args Parsed", System.Diagnostics.EventLogEntryType.Information);
 
             //TODO: We need to setup LoggerManager based on the args
             ILoggerManager loggerMng = new LoggerManager();
 
             //Get Internal logger
-            ILogger log = loggerMng.GetLogger("OHM", "Service");
+            ILog log = loggerMng.GetLogger("Service");
 
             //FROM HERE WE SHOULD USE INTERNAL LOG
 
@@ -89,28 +103,29 @@ namespace OpenHomeMationService
             //TODO: Extract Plugin directory from data And/Or args
             IPluginsManager pluginMng = new PluginsManager(loggerMng, AppDomain.CurrentDomain.BaseDirectory + "\\plugins\\");
 
-            //
+            //Instanciate Interfaces Manager
             IInterfacesManager interfacesMng = new InterfacesManager(loggerMng, pluginMng);
+
+            //Instanciate VrManager
             IVrManager vrMng = new VrManager(loggerMng, pluginMng);
 
             //Create main instance
             ohm = new OpenHomeMation(pluginMng, dataMng, loggerMng, interfacesMng, vrMng);
 
             //Write event starting
-            this.EventLog.WriteEntry("OHM.Service: OnStart: OHM Starting", System.Diagnostics.EventLogEntryType.Information);
+            log.Debug("OHM.Service: OnStart: OHM Starting");
+            //this.EventLog.WriteEntry("OHM.Service: OnStart: OHM Starting", System.Diagnostics.EventLogEntryType.Information);
 
-            bool result = ohm.Start();
-
-            if (result)
+            if (ohm.Start())
             {
-                this.EventLog.WriteEntry("OHM.Service: OnStart: OHM Started", System.Diagnostics.EventLogEntryType.SuccessAudit);
+                log.Info("OHM.Service: OnStart: OHM Started");
+                //this.EventLog.WriteEntry("OHM.Service: OnStart: OHM Started", System.Diagnostics.EventLogEntryType.SuccessAudit);
             }
             else
             {
-                this.EventLog.WriteEntry("OHM.Service: OnStart: OHM Not started", System.Diagnostics.EventLogEntryType.Error, 1);
+                log.Info("OHM.Service: OnStart: OHM Not started");
+                //this.EventLog.WriteEntry("OHM.Service: OnStart: OHM Not started", System.Diagnostics.EventLogEntryType.Error, 1);
             }
-
-            base.OnStart(args);
         }
 
         /// <summary>
@@ -137,13 +152,17 @@ namespace OpenHomeMationService
         /// Handle custom command
         /// </summary>
         /// <param name="command">Integer of the requested command</param>
+        /// <remarks>Command parameter must be between 128 and 256 inclusive</remarks>
         protected override void OnCustomCommand(int command)
         {
             base.OnCustomCommand(command);
             //between 128 - 256 inclusive
+            this.EventLog.WriteEntry("OHM.Service: OnCustomCommand: command received", System.Diagnostics.EventLogEntryType.Information);
+
             switch (command)
             {
                 case 128:
+
                     break;
                 case 129:
                     break;
@@ -158,6 +177,8 @@ namespace OpenHomeMationService
         /// </remarks>
         protected override bool OnPowerEvent(PowerBroadcastStatus powerStatus)
         {
+            this.EventLog.WriteEntry("OHM.Service: OnPowerEvent: powerStatus received", System.Diagnostics.EventLogEntryType.Information);
+
             switch (powerStatus)
             {
                 case PowerBroadcastStatus.BatteryLow:
@@ -219,10 +240,10 @@ namespace OpenHomeMationService
         /// <summary>
         /// Extract data from args if available
         /// </summary>
-        /// <param name="args"></param>
+        /// <param name="args">List of arguments</param>
         private void ParseArgs(string[] args)
         {
-
+            //TODO Parse and set flags
         }
 
         #endregion

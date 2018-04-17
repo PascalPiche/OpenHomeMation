@@ -1,5 +1,5 @@
-﻿using OHM.Data;
-using OHM.Logger;
+﻿using log4net;
+using OHM.Data;
 using System.Collections.Generic;
 
 namespace OHM.Nodes.ALR
@@ -62,7 +62,7 @@ namespace OHM.Nodes.ALR
 
         internal protected ALRInterfaceAbstractNode Interface { get { return _interface; } }
 
-        internal bool Init(IDataStore data, ILogger logger, ALRInterfaceAbstractNode inter)
+        internal bool Init(IDataStore data, ILog logger, ALRInterfaceAbstractNode inter)
         {
             bool result = false;
             if (inter != null)

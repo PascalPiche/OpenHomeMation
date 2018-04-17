@@ -1,5 +1,7 @@
-﻿using ConsoleApplication1.Logger;
+﻿using log4net.Appender;
+using log4net.Core;
 using OHM.Data;
+using OHM.Logger;
 using OHM.Managers.ALR;
 using OHM.Managers.ALV;
 using OHM.Managers.Plugins;
@@ -20,7 +22,14 @@ namespace ConsoleApplication1
         {
             bool exit = false;
 
-            var loggerMng = new ConsoleLoggerManager();
+            ManagedColoredConsoleAppender console = new ManagedColoredConsoleAppender();
+            
+            console.Threshold = Level.All;
+            console.ActivateOptions();
+            IList<IAppender> col = new System.Collections.Generic.List<IAppender>();
+            col.Add(console);
+            
+            var loggerMng = new OHM.Logger.LoggerManager(col);
             var dataMng = new FileDataManager(AppDomain.CurrentDomain.BaseDirectory + "\\data\\");
             var pluginMng = new PluginsManager(loggerMng, AppDomain.CurrentDomain.BaseDirectory + "\\plugins\\");
             var interfacesMng = new InterfacesManager(loggerMng, pluginMng);

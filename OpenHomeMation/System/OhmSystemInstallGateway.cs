@@ -1,4 +1,5 @@
-﻿using OHM.Logger;
+﻿using log4net;
+using OHM.Logger;
 using OHM.Managers.ALR;
 using OHM.Managers.ALV;
 using OHM.Plugins;
@@ -9,11 +10,11 @@ namespace OHM.SYS
     public sealed class OhmSystemInstallGateway : IOhmSystemInstallGateway
     {
         private IPlugin _plugin;
-        private ILogger _logger;
+        private ILog _logger;
         private IInterfacesManager _interfacesMng;
         private IVrManager _vrMng;
 
-        internal OhmSystemInstallGateway(IPlugin plugin, ILogger logger, IInterfacesManager interfacesMng, IVrManager vrMng)
+        internal OhmSystemInstallGateway(IPlugin plugin, ILog logger, IInterfacesManager interfacesMng, IVrManager vrMng)
         {
             _logger = logger;
             _interfacesMng = interfacesMng;
@@ -21,7 +22,7 @@ namespace OHM.SYS
             _vrMng = vrMng;
         }
 
-        public Logger.ILogger Logger
+        public ILog Logger
         {
             get { return _logger;}
         }

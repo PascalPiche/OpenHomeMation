@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using log4net;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace OHM.Logger.Tests
 {
@@ -10,15 +11,15 @@ namespace OHM.Logger.Tests
         public void TestGetLoggerName()
         {
             var logMng = new LoggerManager();
-            var result = logMng.GetLogger("b", "a.a");
+            var result = logMng.GetLogger("a.a");
 
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(DefaultLogger));
+            Assert.IsInstanceOfType(result, typeof(ILog));
 
             //Generate exception code coverage
-            var result2 = logMng.GetLogger("b", "b.b");
+            var result2 = logMng.GetLogger("b.b");
             Assert.IsNotNull(result2);
-            Assert.IsInstanceOfType(result2, typeof(DefaultLogger));
+            Assert.IsInstanceOfType(result2, typeof(ILog));
         }
     }
 }

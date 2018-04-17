@@ -1,10 +1,10 @@
-﻿using OHM.Logger;
+﻿using log4net;
 
 namespace OHM.SYS
 {
     public interface IOhmSystemInstallGateway
     {
-        ILogger Logger { get; }
+        ILog Logger { get; }
 
         bool RegisterInterface(string key);
 

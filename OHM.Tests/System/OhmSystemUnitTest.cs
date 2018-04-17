@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using log4net;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OHM.Data;
 using OHM.Logger;
 using OHM.Managers.ALR;
@@ -25,9 +26,9 @@ namespace OHM.Sys.Tests
             var target = new OhmSystem(intMng, vrMng, loggerMng, dataMng, pluginsMng);
 
             var plugin = MockRepository.GenerateStub<IPlugin>();
-            var logger = MockRepository.GenerateStub<ILogger>();
+            var logger = MockRepository.GenerateStub<ILog>();
             plugin.Stub(x => x.Name).Return("name");
-            loggerMng.Stub(x => x.GetLogger("", plugin.Name)).Return(logger);
+            loggerMng.Stub(x => x.GetLogger(plugin.Name)).Return(logger);
             //var system = MockRepository.GenerateStub<OhmSystem>();
 
             var result = target.GetInstallGateway(plugin);

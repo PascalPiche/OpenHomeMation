@@ -1,6 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using log4net;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OHM.Data;
-using OHM.Logger;
 using OHM.Nodes;
 using OHM.Nodes.ALR;
 using OHM.Nodes.Commands;
@@ -105,7 +105,7 @@ namespace OHM.Tests
 
              ALRAbstractTreeNodeStub target = new ALRAbstractTreeNodeStub(key, name);
 
-             ILogger result = target.TestLoggerProperty();
+             ILog result = target.TestLoggerProperty();
 
              Assert.IsNull(result);
         }
@@ -314,7 +314,7 @@ namespace OHM.Tests
                 
             }
 
-            public ILogger TestLoggerProperty()
+            public ILog TestLoggerProperty()
             {
                 return base.Logger;
             }

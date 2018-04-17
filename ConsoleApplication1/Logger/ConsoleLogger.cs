@@ -4,7 +4,7 @@ using System;
 
 namespace ConsoleApplication1.Logger
 {
-    public class ConsoleLogger : DefaultLogger
+    /*public class ConsoleLogger : DefaultLogger
     {
        
         public ConsoleLogger(ILog log)
@@ -102,5 +102,5 @@ namespace ConsoleApplication1.Logger
         {
             System.Console.WriteLine(message);
         }
-    }
+    }*/
 }

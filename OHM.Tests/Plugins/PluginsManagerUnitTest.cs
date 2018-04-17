@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using log4net;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OHM.Data;
 using OHM.Logger;
 using OHM.Managers.Plugins;
@@ -25,8 +26,8 @@ namespace OHM.Plugins.Tests
         {
             var loggerMng = MockRepository.GenerateStub<ILoggerManager>();
 
-            var logger = MockRepository.GenerateStub<ILogger>();
-            loggerMng.Stub(x => x.GetLogger("", "PluginsManager")).Return(logger);
+            var logger = MockRepository.GenerateStub<ILog>();
+            loggerMng.Stub(x => x.GetLogger("PluginsManager")).Return(logger);
 
             var dataStore = MockRepository.GenerateStub<IDataStore>();
             dataStore.Stub(x => x.GetOrCreateDataDictionary("InstalledPlugins")).Return(new DataDictionary());
@@ -51,8 +52,8 @@ namespace OHM.Plugins.Tests
         {
             var loggerMng = MockRepository.GenerateStub<ILoggerManager>();
 
-            var logger = MockRepository.GenerateStub<ILogger>();
-            loggerMng.Stub(x => x.GetLogger("", "PluginsManager")).Return(logger);
+            var logger = MockRepository.GenerateStub<ILog>();
+            loggerMng.Stub(x => x.GetLogger("PluginsManager")).Return(logger);
             var dataStore = MockRepository.GenerateStub<IDataStore>();
             dataStore.Stub(x => x.GetOrCreateDataDictionary("InstalledPlugins")).Return(new DataDictionary());
 
@@ -75,9 +76,9 @@ namespace OHM.Plugins.Tests
         public void TestPluginsManagerInstall()
         {
             var loggerMng = MockRepository.GenerateStub<ILoggerManager>();
-            var logger = MockRepository.GenerateStub<ILogger>();
+            var logger = MockRepository.GenerateStub<ILog>();
 
-            loggerMng.Stub(x => x.GetLogger("", "PluginsManager")).Return(logger);
+            loggerMng.Stub(x => x.GetLogger("PluginsManager")).Return(logger);
 
             var dataStore = MockRepository.GenerateStub<IDataStore>();
             dataStore.Stub(x => x.GetOrCreateDataDictionary("InstalledPlugins")).Return(new DataDictionary());
@@ -117,8 +118,8 @@ namespace OHM.Plugins.Tests
         public void TestPluginsManagerLoadRegistered()
         {
             var loggerMng = MockRepository.GenerateStub<ILoggerManager>();
-            var logger = MockRepository.GenerateStub<ILogger>();
-            loggerMng.Stub(x => x.GetLogger("", "PluginsManager")).Return(logger);
+            var logger = MockRepository.GenerateStub<ILog>();
+            loggerMng.Stub(x => x.GetLogger("PluginsManager")).Return(logger);
 
             var dataDic = MockRepository.GenerateStub<IDataDictionary>();
             var listKeys = new List<string>();

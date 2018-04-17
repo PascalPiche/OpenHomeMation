@@ -1,4 +1,5 @@
-﻿using OHM.Data;
+﻿using log4net;
+using OHM.Data;
 using OHM.Logger;
 using OHM.Managers.ALR;
 using OHM.Managers.ALV;
@@ -11,7 +12,7 @@ namespace OHM.SYS
     {
         #region Private Members
 
-        private ILogger _logger;
+        private ILog _logger;
         private bool _isRunning = false;
         private OhmSystem _ohmSystem;
 
@@ -33,7 +34,7 @@ namespace OHM.SYS
         public bool Start()
         {
             bool result = false;
-            _logger = _ohmSystem.LoggerMng.GetLogger("OHM","OHM");
+            _logger = _ohmSystem.LoggerMng.GetLogger("OHM");
             _logger.Debug("Starting");
 
             if (_ohmSystem.Start())

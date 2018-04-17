@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OHM.Data;
-using OHM.Logger;
 using OHM.Nodes;
 using OHM.Nodes.ALR;
 using OHM.Nodes.Commands;

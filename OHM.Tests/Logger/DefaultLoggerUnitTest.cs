@@ -5,6 +5,7 @@ using System;
 
 namespace OHM.Logger.Tests
 {
+    /*
     [TestClass]
     public class DefaultLoggerUnitTest
     {
@@ -206,6 +207,6 @@ namespace OHM.Logger.Tests
         }
 
         
-    }
+    }*/
 
 }

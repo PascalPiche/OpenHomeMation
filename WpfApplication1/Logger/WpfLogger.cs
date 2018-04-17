@@ -5,7 +5,7 @@ using System.Windows.Controls;
 
 namespace WpfApplication1.Logger
 {
-    public class WpfLogger : DefaultLogger, ILogger
+    /*public class WpfLogger : DefaultLogger, ILogger
     {
         private TextBox output;
         public WpfLogger(ILog log, TextBox output)
@@ -89,5 +89,5 @@ namespace WpfApplication1.Logger
                 
             }));
         }
-    }
+    }*/
 }

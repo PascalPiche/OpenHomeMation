@@ -1,5 +1,5 @@
-﻿using OHM.Data;
-using OHM.Logger;
+﻿using log4net;
+using OHM.Data;
 using OHM.Nodes.Properties;
 using System;
 using System.Collections.Generic;
@@ -22,7 +22,7 @@ namespace OHM.Nodes
         /// </summary>
         internal const string PREFIX_SYSTEM = "system-";
 
-        private ILogger _logger;
+        private ILog _logger;
         private IDataStore _data;
 
         private INodeProperty _keyProperty;
@@ -117,7 +117,7 @@ namespace OHM.Nodes
         /// <summary>
         /// Get the logger
         /// </summary>
-        protected ILogger Logger { get { return _logger; } }
+        protected ILog Logger { get { return _logger; } }
 
         /// <summary>
         /// Get the data store
@@ -246,7 +246,7 @@ namespace OHM.Nodes
 
         #region Internal Methods
 
-        internal bool Init(IDataStore data, ILogger logger)
+        internal bool Init(IDataStore data, ILog logger)
         {
             bool result = false;
             if (data != null && logger != null)

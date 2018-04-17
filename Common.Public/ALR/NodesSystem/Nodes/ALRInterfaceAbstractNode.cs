@@ -1,5 +1,5 @@
-﻿using OHM.Data;
-using OHM.Logger;
+﻿using log4net;
+using OHM.Data;
 using OHM.Nodes.Properties;
 using OHM.SYS;
 using System.Collections.Generic;
@@ -92,7 +92,7 @@ namespace OHM.Nodes.ALR
             return result;
         }
         
-        public bool Init(IDataStore data, ILogger logger, IOhmSystemInterfaceGateway system)
+        public bool Init(IDataStore data, ILog logger, IOhmSystemInterfaceGateway system)
         {
             bool result = false;
 

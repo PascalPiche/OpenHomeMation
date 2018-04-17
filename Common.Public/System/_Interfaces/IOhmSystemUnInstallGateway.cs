@@ -1,4 +1,4 @@
-﻿using OHM.Logger;
+﻿using log4net;
 
 namespace OHM.SYS
 {
@@ -10,7 +10,7 @@ namespace OHM.SYS
         /// <summary>
         /// 
         /// </summary>
-        ILogger Logger { get; }
+        ILog Logger { get; }
 
         /// <summary>
         /// 

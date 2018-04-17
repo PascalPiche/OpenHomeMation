@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using WpfApplication1.Logger;
 
 namespace WpfApplication1.MV
 {
@@ -234,7 +233,7 @@ namespace WpfApplication1.MV
 
         internal void start(TextBox txt)
         {
-            ILoggerManager loggerMng = new WpfLoggerManager(txt);
+            ILoggerManager loggerMng = new LoggerManager();
             DataManagerAbstract dataMng = new FileDataManager(AppDomain.CurrentDomain.BaseDirectory + "\\data\\");
             IPluginsManager pluginMng = new PluginsManager(loggerMng, AppDomain.CurrentDomain.BaseDirectory + "\\plugins\\");
             IInterfacesManager interfacesMng = new InterfacesManager(loggerMng, pluginMng);
