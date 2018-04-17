@@ -67,7 +67,6 @@ namespace OHM.Logger
 
             hierarchy.Root.Level = Level.All;
             hierarchy.Configured = true;
-            hierarchy.
             hierarchy.EmittedNoAppenderWarning = true;
             hierarchy.Threshold = Level.All;
         }
