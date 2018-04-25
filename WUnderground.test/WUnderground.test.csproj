@@ -56,7 +56,7 @@
   <ItemGroup>
     <ProjectReference Include="..\WUnderground\OHM.Plugins.WUndergroundPlugin.csproj">
       <Project>{645a5ca5-0505-4312-9c73-364bc66c1f7c}</Project>
-      <Name>WUnderground</Name>
+      <Name>OHM.Plugins.WUndergroundPlugin</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

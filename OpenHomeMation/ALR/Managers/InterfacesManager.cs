@@ -57,7 +57,7 @@ namespace OHM.Managers.ALR
             //_data.Save();
             _system = system;
             loadRegisteredInterfaces(system);
-            _logger.Debug("Inited");
+            _logger.Info("Inited");
             return true;
         }
 

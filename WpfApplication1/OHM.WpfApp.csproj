@@ -115,8 +115,6 @@
       <DependentUpon>SystemView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Designer\ArgumentsDefinitionDesigner.cs" />
-    <Compile Include="Logger\WpfLogger.cs" />
-    <Compile Include="Logger\WpfLoggerManager.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -165,6 +163,9 @@
       <Project>{c5df6e96-8157-4901-9ced-f75285ab8e49}</Project>
       <Name>OHM</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Logger\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

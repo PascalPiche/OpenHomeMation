@@ -1,5 +1,5 @@
-﻿using log4net.Appender;
-using log4net.Core;
+﻿using ConsoleApplication1.Logger;
+using log4net.Appender;
 using OHM.Data;
 using OHM.Logger;
 using OHM.Managers.ALR;
@@ -16,47 +16,82 @@ namespace ConsoleApplication1
 {
     class Program
     {
-        private static OpenHomeMation ohm;
+        private static OpenHomeMation app;
 
         static void Main(string[] args)
         {
-            bool exit = false;
+            CreateApp();
 
-            ManagedColoredConsoleAppender console = new ManagedColoredConsoleAppender();
-            
-            console.Threshold = Level.All;
-            console.ActivateOptions();
-            IList<IAppender> col = new System.Collections.Generic.List<IAppender>();
-            col.Add(console);
-            
-            var loggerMng = new OHM.Logger.LoggerManager(col);
-            var dataMng = new FileDataManager(AppDomain.CurrentDomain.BaseDirectory + "\\data\\");
-            var pluginMng = new PluginsManager(loggerMng, AppDomain.CurrentDomain.BaseDirectory + "\\plugins\\");
-            var interfacesMng = new InterfacesManager(loggerMng, pluginMng);
-            var vrMng = new VrManager(loggerMng, pluginMng);
-            ohm = new OpenHomeMation(pluginMng, dataMng, loggerMng, interfacesMng, vrMng);
-            ohm.Start();
+            // Start App
+            app.Start();
+
+            // Local variable to detect exit loop
+            bool exit = false;
 
             while (!exit)
             {
-                string line = Console.ReadLine(); 
-
-                if (line == "exit") {
-                    exit = true;
-                }
-                else if (line == "help")
-                {
-                    outputBasicHelp();
-                }
-                else
-                {
-                    executeCommand(line);
-                }
+                exit = loop();
             }
 
-            ohm.Shutdown();
+            app.Shutdown();
             Console.WriteLine("Press enter to close");
             Console.ReadLine(); 
+        }
+
+        static ILoggerManager CreateLoggerManager()
+        {
+            // Create Log Console Output Appender
+            AppConsoleOutput appender = new AppConsoleOutput();
+
+            // Config Console Layout
+            appender.Layout = OHM.Logger.LoggerManager.DefaultPatternLayout;
+
+            // Create Logger Manager arguments
+            IList<IAppender> col = new System.Collections.Generic.List<IAppender>();
+            col.Add(appender);
+
+            // Create Final Logger Manager
+            return new OHM.Logger.LoggerManager(col);
+        }
+
+        static void CreateApp()
+        {
+            // Create logger Manager
+            ILoggerManager loggerMng = CreateLoggerManager();
+
+            // Create Data manager
+            var dataMng = new FileDataManager(AppDomain.CurrentDomain.BaseDirectory + "\\data\\");
+
+            // Create Plugin manager
+            var pluginMng = new PluginsManager(loggerMng, AppDomain.CurrentDomain.BaseDirectory + "\\plugins\\");
+
+            // Create Interface manager
+            var interfacesMng = new InterfacesManager(loggerMng, pluginMng);
+
+            // Create VrManager
+            var vrMng = new VrManager(loggerMng, pluginMng);
+
+            // Create OHM
+            app = new OpenHomeMation(pluginMng, dataMng, loggerMng, interfacesMng, vrMng);
+        }
+
+        static bool loop()
+        {
+            string line = Console.ReadLine();
+
+            if (line == "exit")
+            {
+                return true;
+            }
+            else if (line == "help")
+            {
+                outputBasicHelp();
+            }
+            else
+            {
+                executeCommand(line);
+            }
+            return false;
         }
 
         static void executeCommand(string command)
@@ -83,7 +118,7 @@ namespace ConsoleApplication1
                 }
             }
 
-            IAPIResult result = ohm.API.ExecuteCommand(command, args);
+            IAPIResult result = app.API.ExecuteCommand(command, args);
             if (result.IsSuccess)
             {
                 Console.WriteLine("Command " + command + " successfully executed");

@@ -46,8 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Logger\ConsoleLogger.cs" />
-    <Compile Include="Logger\ConsoleLoggerManager.cs" />
+    <Compile Include="Logger\ConsoleAppender.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -69,6 +68,7 @@
       <Name>OHM</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy "$(SolutionDir)OpenHomeMation\plugins\*" "$(SolutionDir)ConsoleApplication1\bin\Debug\plugins\" /Y /s</PostBuildEvent>
