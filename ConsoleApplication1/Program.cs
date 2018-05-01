@@ -82,7 +82,11 @@ namespace ConsoleApplication1
                 {
                     // No Local command found
                     // Potentially a command to a instance of OHM
-                    executeCommand(line);
+                    if (!executeCommand(line))
+                    {
+                        // Command Not found
+                        Console.WriteLine("Command not found : " + line);
+                    }
                 }
             }
             
@@ -96,12 +100,10 @@ namespace ConsoleApplication1
         /// </summary>
         private static void Main_End()
         {
-
             //Shutdown local host if available
-            if (app != null)
+            if (embedInstance != null)
             {
-                //Shutdown
-                app.Shutdown();
+                embedInstance.Shutdown();
             }
 
             //Wait before final close for last logging
@@ -136,29 +138,38 @@ namespace ConsoleApplication1
         }
 
         /// <summary>
-        /// 
+        /// Detect and process internal Console command
+        /// Will return true if the command is handled
         /// </summary>
-        /// <param name="line"></param>
-        /// <returns></returns>
+        /// <param name="line">The command line to interpret</param>
+        /// <returns>Return true if the command was detected as an internal command</returns>
         private static bool ProcessConsoleCommand(string line)
         {
+            // Local variable for result
+            bool result = false;
+
             // Interpret help command
             if (line.ToUpper() == "HELP")
             {
                 outputBasicHelp();
-                return true;
+                result = true;
             }
-            return false;
+            else if (line.ToUpper() == "LAUNCH-LOCAL")
+            {
+                LaunchLocal();
+                result = true;
+            }
+            return result;
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="command"></param>
-        private static void executeCommand(string command)
+        private static bool executeCommand(string command)
         {
-
-            Console.WriteLine("Sending Command " + command + "");
+            return false;
+            /*Console.WriteLine("Sending Command " + command + "");
             string commandKey = command;
             Dictionary<String, String> args = new Dictionary<string, string>();
 
@@ -189,7 +200,7 @@ namespace ConsoleApplication1
             else
             {
                 Console.WriteLine("Command " + command + " was not executed");
-            }
+            }*/
         }
 
         /// <summary>
@@ -241,87 +252,53 @@ namespace ConsoleApplication1
             }
         }
 
-        #region LocalEmbed OpenHomeMation part
+        #region Embed Instance OpenHomeMation part
 
         /// <summary>
-        /// 
+        /// Private local member of the Embeded Local Instance Controller
         /// </summary>
-        private static OpenHomeMation app;
+        private static EmbedInstanceControler embedInstance;
 
         /// <summary>
-        /// Create and lanch the local instance
+        /// Create and lanch the local Embeded instance
         /// </summary>
         private static bool LaunchLocal()
         {
-            if (app != null)
+            bool result = false;
+
+            if (embedInstance != null)
             {
-                CreateApp();
-
-                // Start App
-                return app.Start();
+                embedInstance = new EmbedInstanceControler();
+                embedInstance.Create();
+                result = embedInstance.Start();
             }
-            return false;
-        }
-
-        /// <summary>
-        /// Create the custom logger for the console 
-        /// and configure base logger with passed args if available.
-        /// </summary>
-        /// <returns>The created ILoggerManager</returns>
-        private static ILoggerManager CreateLoggerManager()
-        {
-            // Create Log Console Output Appender
-            AppConsoleOutput appender = new AppConsoleOutput();
-
-            // Config Console Layout
-            appender.Layout = OHM.Logger.LoggerManager.DefaultPatternLayout;
-
-            // Create Logger Manager arguments
-            IList<IAppender> col = new System.Collections.Generic.List<IAppender>();
-            col.Add(appender);
-
-            // Create Final Logger Manager
-            return new OHM.Logger.LoggerManager(col);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private static void CreateApp()
-        {
-            // Create logger Manager
-            ILoggerManager loggerMng = CreateLoggerManager();
-
-            // Create Data manager
-            var dataMng = new FileDataManager(AppDomain.CurrentDomain.BaseDirectory + "\\data\\");
-
-            // Create Plugin manager
-            var pluginMng = new PluginsManager(loggerMng, AppDomain.CurrentDomain.BaseDirectory + "\\plugins\\");
-
-            // Create Interface manager
-            var interfacesMng = new InterfacesManager(loggerMng, pluginMng);
-
-            // Create VrManager
-            var vrMng = new VrManager(loggerMng, pluginMng);
-
-            // Create OHM
-            app = new OpenHomeMation(pluginMng, dataMng, loggerMng, interfacesMng, vrMng);
+            return result;
         }
 
         #endregion
 
         #region Help Output
 
+        /// <summary>
+        /// Output basic help command
+        /// </summary>
         private static void outputBasicHelp()
         {
-            Console.WriteLine("-----HELP--------");
-            Console.WriteLine("Root nodes : ");
-            Console.WriteLine("- plugins");
-            Console.WriteLine("- hal");
+            Console.WriteLine("------- HELP GENERAL ---------");
+            Console.WriteLine("----- CONSOLE COMMANDS --------");
+            Console.WriteLine("exit            : Exit console application. Will shutdown local instance and disconnect from remote instance");
+            Console.WriteLine("launch-local   : Create and launch a local Embed instance in the console");
+            //Console.WriteLine("discover-local : Search for instance on the localhost");
+            //Console.WriteLine("connect        : ");
 
-            Console.WriteLine("Base commands : ");
-            Console.WriteLine("- list");
-            Console.WriteLine("- execute");
+            //Console.WriteLine("----------System nodes --------");
+            //Console.WriteLine("Root nodes : ");
+            //Console.WriteLine("- plugins");
+            //Console.WriteLine("- hal");
+
+            //Console.WriteLine("Base commands : ");
+            //Console.WriteLine("- list");
+            //Console.WriteLine("- execute");
         }
 
         #endregion
