@@ -164,9 +164,7 @@
       <Name>OHM</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Logger\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy "$(SolutionDir)OpenHomeMation\plugins\*" "$(SolutionDir)WpfApplication1\bin\Debug\plugins\" /Y /s</PostBuildEvent>
