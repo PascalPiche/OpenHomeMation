@@ -27,6 +27,7 @@ namespace OHM.Sys
             IOpenHomeMationCallback callback = OperationContext.Current.GetCallbackChannel<IOpenHomeMationCallback>();
 
             callback.CallBackFunction("Calling from Call Back");
+
             //return "test";
         }
     }
@@ -37,7 +38,6 @@ namespace OHM.Sys
             ServiceHost ohmService = null;
             try
             {
-
                 //Base Address
                 Uri httpBaseAddress = new Uri("http://localhost/ohm/api/");
 

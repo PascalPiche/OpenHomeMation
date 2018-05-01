@@ -41,7 +41,11 @@ namespace OHM.Logger
         {
             // Core Repository
             hierarchy = (Hierarchy)LogManager.GetRepository();
-            
+            hierarchy.Root.Level = Level.All;
+            hierarchy.Configured = true;
+            hierarchy.EmittedNoAppenderWarning = true;
+            hierarchy.Threshold = Level.All;
+
             // Memory Logging
             memoryLog = new MemoryAppender();
             memoryLog.Threshold = Level.All;
@@ -60,22 +64,19 @@ namespace OHM.Logger
             roller.StaticLogFileName = true;
             roller.ActivateOptions();
             hierarchy.Root.AddAppender(roller);
-
-            foreach (IAppender item in appender)
+            
+            if (appender != null)
             {
-                hierarchy.Root.AddAppender(item);
+                foreach (IAppender item in appender)
+                {
+                    hierarchy.Root.AddAppender(item);
+                }
             }
-
-
-            hierarchy.Root.Level = Level.All;
-            hierarchy.Configured = true;
-            hierarchy.EmittedNoAppenderWarning = true;
-            hierarchy.Threshold = Level.All;
         }
 
         public ILog GetLogger(string name)
         {
-            return log4net.LogManager.GetLogger(name);
+            return (ILog)hierarchy.GetLogger(name);
         }
     }
 }

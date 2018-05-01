@@ -43,7 +43,7 @@ namespace OHM.SYS
                 _logger.Info("System Started");
 
                 //TODO: STARTING INTERNAL SERVER IF NEEDED
-                //OpenHomeMationServerImplementation.Run();
+                OpenHomeMationServerImplementation.Run();
             } 
             else
             {
