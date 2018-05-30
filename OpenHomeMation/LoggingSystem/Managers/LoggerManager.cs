@@ -76,7 +76,7 @@ namespace OHM.Logger
 
         public ILog GetLogger(string name)
         {
-            return (ILog)hierarchy.GetLogger(name);
+            return new log4net.Core.LogImpl(hierarchy.GetLogger(name));
         }
     }
 }

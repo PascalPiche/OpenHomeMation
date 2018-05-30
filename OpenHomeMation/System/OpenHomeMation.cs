@@ -1,4 +1,5 @@
 ﻿using log4net;
+using log4net.Core;
 using OHM.Data;
 using OHM.Logger;
 using OHM.Managers.ALR;

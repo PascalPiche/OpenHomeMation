@@ -266,7 +266,7 @@ namespace ConsoleApplication1
         {
             bool result = false;
 
-            if (embedInstance != null)
+            if (embedInstance == null)
             {
                 embedInstance = new EmbedInstanceControler();
                 embedInstance.Create();
@@ -287,14 +287,14 @@ namespace ConsoleApplication1
             Console.WriteLine("------- HELP GENERAL ---------");
             Console.WriteLine("----- CONSOLE COMMANDS --------");
             Console.WriteLine("exit            : Exit console application. Will shutdown local instance and disconnect from remote instance");
-            Console.WriteLine("launch-local   : Create and launch a local Embed instance in the console");
+            Console.WriteLine("launch-local    : Create and launch a local Embed instance in the console");
             //Console.WriteLine("discover-local : Search for instance on the localhost");
             //Console.WriteLine("connect        : ");
 
-            //Console.WriteLine("----------System nodes --------");
-            //Console.WriteLine("Root nodes : ");
-            //Console.WriteLine("- plugins");
-            //Console.WriteLine("- hal");
+            Console.WriteLine("----------System nodes --------");
+            Console.WriteLine("Root nodes : ");
+            Console.WriteLine("- plugins");
+            Console.WriteLine("- hal");
 
             //Console.WriteLine("Base commands : ");
             //Console.WriteLine("- list");
