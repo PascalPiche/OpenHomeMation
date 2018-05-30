@@ -72,7 +72,7 @@ namespace ConsoleApplication1
             string line = Main_LoopExecute_Read();
 
             // Detect Exit command
-            exitRequested = DetectExitCommand(line);
+            exitRequested = IsExitCommand(line);
 
             // Process if exit not requested
             if (!exitRequested)
@@ -131,7 +131,7 @@ namespace ConsoleApplication1
         /// </summary>
         /// <param name="line">The string line to check</param>
         /// <returns>true if the line is the Exit command</returns>
-        private static bool DetectExitCommand(string line)
+        private static bool IsExitCommand(string line)
         {
             // Detection
             return (line.ToUpper() == "EXIT");
@@ -158,6 +158,10 @@ namespace ConsoleApplication1
             {
                 LaunchLocal();
                 result = true;
+            }
+            else if (line.ToUpper() == "")
+            {
+
             }
             return result;
         }

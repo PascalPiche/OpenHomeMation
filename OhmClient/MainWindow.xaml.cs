@@ -60,6 +60,22 @@ namespace OhmClient
 
         private NotifyIcon notifier = new NotifyIcon();
 
+        private ServiceController GetServiceByName(string name)
+        {
+            ServiceController result = null;
+
+            ServiceController[] services = ServiceController.GetServices();
+            foreach (ServiceController item in services)
+            {
+                if (item.ServiceName == "OpenHomeMation")
+                {
+                    result = item;
+                    break;
+                }
+            }
+            return result;
+        }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -70,18 +86,9 @@ namespace OhmClient
 
             ServiceController[] services = ServiceController.GetServices();
 
-            bool serviceFound = false;
-            foreach (ServiceController item in services)
-            {
-                if (item.ServiceName == "OpenHomeMation")
-                {
-                    serviceFound = true;
-                    myController = item;
-                    break;
-                }
-            }
+            myController = GetServiceByName("OpenHomeMation");
 
-            if (serviceFound)
+            if (myController != null)
             {
                 txtStatus.Text = myController.Status.ToString();
                 txtDisplayName.Text = myController.DisplayName;
