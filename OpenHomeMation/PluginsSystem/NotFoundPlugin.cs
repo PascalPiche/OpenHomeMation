@@ -14,7 +14,7 @@ namespace OHM.Plugins
 
         #endregion
 
-        #region Public CTOR
+        #region Internal Ctor
 
         internal NotFoundPlugin(string guid, string name)
         {

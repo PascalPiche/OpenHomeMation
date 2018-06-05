@@ -14,7 +14,11 @@ namespace OHM.Plugins
 
         #endregion
 
+        #region Public Event
+
         public event PropertyChangedEventHandler PropertyChanged;
+
+        #endregion 
 
         #region Public Ctor
 

@@ -27,6 +27,16 @@ namespace OHM.Data
 
         #region Public API
 
+        public bool RemoveKey(String key)
+        {
+            return _dataValues.Remove(key);
+        }
+
+        public bool ContainKey(string key)
+        {
+            return _dataValues.ContainsKey(key);
+        }
+        
         #region String
 
         public void StoreString(string key, string value)
@@ -116,16 +126,6 @@ namespace OHM.Data
 
         #endregion
 
-        public bool RemoveKey(String key)
-        {
-            return _dataValues.Remove(key);
-        }
-
-        public bool ContainKey(string key)
-        {
-            return _dataValues.ContainsKey(key);
-        }
-        
         #endregion
 
         #region Private

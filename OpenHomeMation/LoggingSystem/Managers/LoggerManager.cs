@@ -49,7 +49,7 @@ namespace OHM.Logger
 
         #endregion
 
-        #region Ctor
+        #region Public Ctor
 
         /// <summary>
         /// Core CTor 

@@ -184,12 +184,6 @@ namespace OHM.Managers.Plugins
 
         #region Private
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="plugin"></param>
-        /// <param name="system"></param>
-        /// <returns></returns>
         private bool InstallPlugin(IPlugin plugin, IOhmSystemInstallGateway system)
         {
             bool result = false;
@@ -216,12 +210,6 @@ namespace OHM.Managers.Plugins
             return result;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="plugin"></param>
-        /// <param name="system"></param>
-        /// <returns></returns>
         private bool UnInstallPlugin(IPlugin plugin, IOhmSystemUnInstallGateway system)
         {
             bool result = false;
@@ -244,12 +232,6 @@ namespace OHM.Managers.Plugins
             return result;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="source"></param>
-        /// <returns></returns>
         private IPlugin FindPluginIn(Guid id, IList<IPlugin> source) {
 
             IPlugin result = null;
@@ -265,9 +247,6 @@ namespace OHM.Managers.Plugins
             return result;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
         private void InitPluginsList()
         {
             if (!Directory.Exists(_filePath))
@@ -309,12 +288,6 @@ namespace OHM.Managers.Plugins
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="args"></param>
-        /// <returns></returns>
         private Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
         {
             Assembly result = null;

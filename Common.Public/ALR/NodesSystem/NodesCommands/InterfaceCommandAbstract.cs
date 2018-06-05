@@ -5,7 +5,6 @@ namespace OHM.Nodes.Commands.ALR
 {
     public abstract class InterfaceCommandAbstract : AbstractCommand, IInterfaceCommand
     {
-
         #region Protected Ctor
 
         protected InterfaceCommandAbstract(string key, string name, string description) 

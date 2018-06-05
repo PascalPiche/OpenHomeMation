@@ -1,19 +1,22 @@
 ﻿using log4net;
-using log4net.Core;
-using OHM.Logger;
 using OHM.Managers.ALR;
 using OHM.Managers.ALV;
 using OHM.Plugins;
 
 namespace OHM.SYS
 {
-    
     public sealed class OhmSystemInstallGateway : IOhmSystemInstallGateway
     {
+        #region Private Members
+
         private IPlugin _plugin;
         private ILog _logger;
         private IInterfacesManager _interfacesMng;
         private IVrManager _vrMng;
+
+        #endregion
+
+        #region Internal Ctor
 
         internal OhmSystemInstallGateway(IPlugin plugin, ILog logger, IInterfacesManager interfacesMng, IVrManager vrMng)
         {
@@ -23,10 +26,18 @@ namespace OHM.SYS
             _vrMng = vrMng;
         }
 
+        #endregion
+
+        #region Public Properties
+
         public ILog Logger
         {
             get { return _logger;}
         }
+
+        #endregion
+
+        #region Public Methods
 
         public bool RegisterInterface(string key)
         {
@@ -37,5 +48,7 @@ namespace OHM.SYS
         {
             return _vrMng.RegisterVrType(key, _plugin);
         }
+
+        #endregion
     }
 }
