@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="OHM.Logger.LoggerManager">
-    <Position X="3" Y="0.75" Width="2" />
+    <Position X="3" Y="0.75" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAACAAAAAAAgBACAQAAAAAAAAAAA=</HashCode>
       <FileName>LoggingSystem\Managers\LoggerManager.cs</FileName>

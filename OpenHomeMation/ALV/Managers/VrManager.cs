@@ -12,12 +12,17 @@ namespace OHM.Managers.ALV
 {
     public class VrManager : IVrManager, IVrNodeCreator
     {
+
+        #region Private members
+
         private ILoggerManager _loggerMng;
         private ILog _logger;
         private IDataStore _data;
         private IPluginsManager _pluginsMng;
         private IDictionary<string, IVrNodeCreator> _registeredType = new Dictionary<string, IVrNodeCreator>();
         private ICollection<IVrType> _rootNodes = new ObservableCollection<IVrType>();
+
+        #endregion
 
         #region Public Ctor
 
@@ -35,8 +40,8 @@ namespace OHM.Managers.ALV
         {
             _data = data;
             _logger = _loggerMng.GetLogger("VrManager");
+
             //Launch Main Vr Node
-            
 
            /* _dataRegisteredInterfaces = _data.GetDataDictionary("RegisteredInterfaces");
             if (_dataRegisteredInterfaces == null)
@@ -47,11 +52,14 @@ namespace OHM.Managers.ALV
             }
             loadRegisteredInterfaces(system);*/
 
-
             //Register basic type
 
-
             return true;
+        }
+
+        public IVrType CreateVrNode(string key)
+        {
+            throw new System.NotImplementedException();
         }
 
         public bool RegisterVrType(string key, IVrNodeCreator plugin)
@@ -87,6 +95,9 @@ namespace OHM.Managers.ALV
                 //Create Node
                 IVrType newNode = _registeredType[vrType].CreateVrNode(vrType);
 
+                //TODO INCOMPLETE
+                throw new System.NotImplementedException();
+
                 //Init type
                 //newNode.in
 
@@ -100,16 +111,5 @@ namespace OHM.Managers.ALV
         }
 
         #endregion
-
-        public IVrType CreateVrNode(string key)
-        {
-            throw new System.NotImplementedException();
-        }
-
-
-        /*public bool RegisterVrType(string key, IPlugin plugin)
-        {
-            throw new System.NotImplementedException();
-        }*/
     }
 }

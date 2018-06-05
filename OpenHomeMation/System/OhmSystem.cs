@@ -1,5 +1,4 @@
 ﻿using log4net;
-using log4net.Core;
 using OHM.Data;
 using OHM.Logger;
 using OHM.Managers.ALR;
@@ -20,10 +19,11 @@ namespace OHM.SYS
 
         private ILog _logger;
         private ILoggerManager _loggerMng;
-        private IInterfacesManager _interfacesMng;
         private IDataManager _dataMng;
-        private IVrManager _vrMng;
         private IPluginsManager _pluginsMng;
+        private IInterfacesManager _interfacesMng;
+        private IVrManager _vrMng;
+
         private IAPI _api;
 
         #endregion
@@ -416,6 +416,12 @@ namespace OHM.SYS
         internal ILoggerManager LoggerMng { get { return _loggerMng; } }
 
         internal IDataManager DataMng { get { return _dataMng; } }
+
+        internal IPluginsManager PluginsMng { get { return _pluginsMng; } }
+
+        internal IInterfacesManager InterfacesMng { get { return _interfacesMng; } }
+
+        internal IVrManager VrMng { get { return _vrMng; } }
 
         #endregion
 

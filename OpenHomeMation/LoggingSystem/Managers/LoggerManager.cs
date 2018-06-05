@@ -2,21 +2,33 @@
 using log4net.Appender;
 using log4net.Core;
 using log4net.Layout;
-using log4net.Repository;
 using log4net.Repository.Hierarchy;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace OHM.Logger
 {
     public class LoggerManager : ILoggerManager
     {
+        #region Static section
 
-        private Hierarchy hierarchy;
-        private MemoryAppender memoryLog;
+        #region Private Static Members
 
         private static PatternLayout m_patternLayout;
+
+        #endregion
+
+        #region Static Ctor
+
+        static LoggerManager()
+        {
+            m_patternLayout = new PatternLayout();
+            m_patternLayout.ConversionPattern = "%date [%thread] %-5level %logger - %message%newline";
+            m_patternLayout.ActivateOptions();
+        }
+
+        #endregion
+
+        #region Static Property
 
         public static PatternLayout DefaultPatternLayout
         {
@@ -26,12 +38,18 @@ namespace OHM.Logger
             }
         }
 
-        static LoggerManager()
-        {
-            m_patternLayout = new PatternLayout();
-            m_patternLayout.ConversionPattern = "%date [%thread] %-5level %logger - %message%newline";
-            m_patternLayout.ActivateOptions();
-        }
+        #endregion
+
+        #endregion 
+
+        #region Private Members
+
+        private Hierarchy hierarchy;
+        private MemoryAppender memoryLog;
+
+        #endregion
+
+        #region Ctor
 
         /// <summary>
         /// Core CTor 
@@ -74,9 +92,15 @@ namespace OHM.Logger
             }
         }
 
+        #endregion
+
+        #region Public properties
+
         public ILog GetLogger(string name)
         {
             return new log4net.Core.LogImpl(hierarchy.GetLogger(name));
         }
+
+        #endregion
     }
 }

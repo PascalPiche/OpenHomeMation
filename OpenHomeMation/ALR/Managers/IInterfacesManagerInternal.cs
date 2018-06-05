@@ -1,5 +1,5 @@
 ﻿
-namespace OHM.RAL
+namespace OHM.ALR
 {
     public interface IInterfacesManagerInternal
     {

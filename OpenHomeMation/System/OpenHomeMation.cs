@@ -1,11 +1,9 @@
 ﻿using log4net;
-using log4net.Core;
 using OHM.Data;
 using OHM.Logger;
 using OHM.Managers.ALR;
 using OHM.Managers.ALV;
 using OHM.Managers.Plugins;
-using OHM.Sys;
 
 namespace OHM.SYS
 {
@@ -28,27 +26,38 @@ namespace OHM.SYS
 
         #endregion
 
-        #region Public
+        #region Public Properties
 
         public IAPI API { get { return _ohmSystem.API; } }
+
+        public bool IsRunning { get { return this._isRunning; } }
+
+        #endregion
+
+        #region Public Method
 
         public bool Start()
         {
             bool result = false;
-            _logger = _ohmSystem.LoggerMng.GetLogger("OHM");
-            _logger.Debug("Starting");
-
-            if (_ohmSystem.Start())
+            //Check if we are already running
+            if (!IsRunning)
             {
-                this._isRunning = true;
-                _logger.Info("System Started");
+                _logger = _ohmSystem.LoggerMng.GetLogger("OHM");
+                _logger.Debug("Starting");
 
-                //TODO: STARTING INTERNAL SERVER IF NEEDED
-                OpenHomeMationServerImplementation.Run();
-            } 
-            else
-            {
-                _logger.Fatal("Can not start the system.");
+                if (_ohmSystem.Start())
+                {
+                    this._isRunning = true;
+                    _logger.Info("System Started");
+
+                    //TODO: STARTING INTERNAL SERVER IF NEEDED
+                    //OpenHomeMationServerImplementation.Run();
+                }
+                else
+                {
+                    //Log fatal erro
+                    _logger.Fatal("Can not start the system.");
+                }
             }
 
             return result;
@@ -57,10 +66,30 @@ namespace OHM.SYS
         public void Shutdown()
         {
             //Log data
-            _logger.Debug("Stoping");
+            _logger.Debug("Stoping system");
+
+            //TODO Shutdown AI Layer
+
+            //TODO Shutdown AI Manager
+
+            //TODO Shutdown VR Layer
+
+            //TODO Shutdown VR Manager
+
+            //TODO Shutdown Real Layer
+
+            //TODO Shutdown Interface Manager
+
+            //TODO Shutdown Plugins Manager
+            
+
+            //TODO Shutdown System Status
 
             //Shutdown DataManager
             _ohmSystem.DataMng.Shutdown();
+
+            //TODO shutdown Logger
+            //_ohmSystem.LoggerMng.Shutdown();
 
             //Switch inner flag
             this._isRunning = false;
@@ -69,12 +98,6 @@ namespace OHM.SYS
             _logger.Info("Stoped");
         }
 
-        public bool IsRunning()
-        {
-            return this._isRunning;
-        }
-
         #endregion
-
     }
 }
