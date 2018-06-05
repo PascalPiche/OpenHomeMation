@@ -4,8 +4,13 @@ namespace OHM.Data
 {
     public class DataValueDictionary : IDataValue
     {
+        #region Private Members
 
         private IDataDictionary _data;
+
+        #endregion
+
+        #region Public Ctor
 
         public DataValueDictionary() { }
 
@@ -13,6 +18,10 @@ namespace OHM.Data
         {
             _data = data;
         }
+
+        #endregion
+
+        #region Public Properties
 
         public IDataDictionary Value
         {
@@ -24,5 +33,7 @@ namespace OHM.Data
         {
             get { return this.GetType(); }
         }
+
+        #endregion
     }
 }

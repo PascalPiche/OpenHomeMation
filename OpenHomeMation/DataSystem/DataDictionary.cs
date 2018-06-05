@@ -7,7 +7,11 @@ namespace OHM.Data
     [Serializable]
     public class DataDictionary : IDataDictionary
     {
+        #region Private Members
+
         private Dictionary<string, IDataValue> _dataValues = new Dictionary<string, IDataValue>();
+
+        #endregion
 
         #region Public Properties
 

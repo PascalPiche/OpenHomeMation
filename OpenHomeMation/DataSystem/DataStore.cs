@@ -7,20 +7,43 @@ namespace OHM.Data
     public sealed class DataStore : DataDictionary, IDataStore
     {
 
+        #region Private Members
+
         private string _key;
 
         [NonSerialized]
         private IDataManager _mng;
+
+        #endregion
+
+        #region Internal Ctor
 
         internal DataStore(string key)
         {
             _key = key;
         }
 
+        #endregion
+
+        #region Internal Methods
+
         internal void Init(IDataManager mng)
         {
             _mng = mng;
         }
+
+        #endregion
+
+        #region Public Properties
+
+        public string Key
+        {
+            get { return _key; }
+        }
+
+        #endregion
+
+        #region Public Methods
 
         public bool Save()
         {
@@ -31,10 +54,7 @@ namespace OHM.Data
             return false;
         }
 
-        public string Key
-        {
-            get { return _key; }
-        }
+        #endregion
 
         /*public bool HasUnsavedData
         {

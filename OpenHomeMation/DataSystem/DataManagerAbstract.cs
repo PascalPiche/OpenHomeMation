@@ -13,11 +13,15 @@ namespace OHM.Data
 
         #endregion
 
+        #region Protected Ctor
+
         protected DataManagerAbstract()
             : base("data-manager", "Data manager")
         {
 
         }
+
+        #endregion
 
         #region Public Methods
 
@@ -56,24 +60,24 @@ namespace OHM.Data
                 SaveDataStore(enumerator.Current.Value);
             }
         }
-        
+
+        protected override void RegisterCommands()
+        {
+            //Nothing to do?
+        }
+
+        protected override bool RegisterProperties()
+        {
+            //Nothing to do?
+            return true;
+        }
+
         #endregion
 
         #region Internal Method
 
         internal abstract IDataStore GetDataStore(string key);
 
-        #endregion 
-    
-        protected override void RegisterCommands()
-        {
-            //throw new NotImplementedException();
-        }
-
-        protected override bool RegisterProperties()
-        {
-            return true;
-            //throw new NotImplementedException();
-        }
+        #endregion         
     }
 }

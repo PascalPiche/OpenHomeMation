@@ -5,8 +5,13 @@ namespace OHM.Data
     [Serializable]
     public class DataValueBool : IDataValue
     {
+        #region Private Members
 
         private bool _value;
+
+        #endregion
+
+        #region Public Ctor
 
         public DataValueBool() { }
 
@@ -14,6 +19,10 @@ namespace OHM.Data
         {
             _value = value;
         }
+
+        #endregion
+
+        #region Public Properties
 
         public bool Value
         {
@@ -25,5 +34,7 @@ namespace OHM.Data
         {
             get { return this.GetType(); }
         }
+
+        #endregion
     }
 }
