@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<layerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="c6fa5b7b-da44-42ca-a546-26c524906494" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/LayerDesigner">
+  <layers>
+    <layer Id="b2a055bd-8cc4-4729-b5a2-b9efaa8ee4a0" name="ILogger.cs">
+      <references>
+        <reference Id="ac14284a-1373-43ce-b080-02589dd8b787" name="ILogger.cs">
+          <ArtifactNode Label="ILogger.cs" Category="CodeSchema_ProjectItem" Id="(Assembly=&quot;$(PersonalUri)/Personnel/GIT/Pascal Repo/OpenHomeMation/Common.Public/OHM.Common.Public.csproj&quot; File=&quot;$(PersonalUri)/Personnel/GIT/Pascal Repo/OpenHomeMation/Common.Public/LoggingSystem/_Interfaces/ILogger.cs&quot;)">
+            <Category Ref="File" />
+          </ArtifactNode>
+        </reference>
+      </references>
+    </layer>
+  </layers>
+</layerModel>

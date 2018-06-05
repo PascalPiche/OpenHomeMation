@@ -22,13 +22,6 @@
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\ArchitectureTools\Microsoft.VisualStudio.TeamArchitect.ModelingProject.targets" Condition="'$(VSToolsPath)' != ''" />
   <ItemGroup>
-    <Content Include="UMLClassDiagram1.classdiagram">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="UMLClassDiagram1.classdiagram.layout">
-      <SubType>Content</SubType>
-      <DependentUpon>UMLClassDiagram1.classdiagram</DependentUpon>
-    </Content>
     <Folder Include="ModelDefinition\" />
     <Content Include="ModelDefinition\ModelingProject1.uml">
       <SubType>Content</SubType>
@@ -36,9 +29,9 @@
     <Folder Include="OHM" />
     <Folder Include="OHM\OHM.Common.dll" />
     <Folder Include="OHM\OHM.Common.dll\Data" />
-    <Folder Include="OHM\OHM.Common.Public.dll\Data" />
-    <Folder Include="OHM\OHM.Common.Public.dll\Logger" />
-    <Folder Include="OHM\OHM.Common.Public.dll\Nodes" />
+    <Folder Include="OHM\OHM.Common.Public.dll\DataSystem" />
+    <Folder Include="OHM\OHM.Common.Public.dll\LoggingSystem" />
+    <Folder Include="OHM\OHM.Common.Public.dll\NodesSystem" />
     <Folder Include="OHM\OHM.dll" />
     <Folder Include="OHM\OHM.Common.Public.dll" />
     <Folder Include="OHM\OHM.dll\Data" />
@@ -55,27 +48,38 @@
       <SubType>Content</SubType>
       <DependentUpon>OHM\Dll-Dependency.layerdiagram</DependentUpon>
     </Validate>
-    <Validate Include="OHM\OHM.Common.Public.dll\Data\Dependencies.layerdiagram">
+    <Validate Include="OHM\OHM.Common.Public.dll\DataSystem\Dependencies.layerdiagram">
       <SubType>Content</SubType>
     </Validate>
-    <Validate Include="OHM\OHM.Common.Public.dll\Data\Dependencies.layerdiagram.layout">
+    <Validate Include="OHM\OHM.Common.Public.dll\DataSystem\Dependencies.layerdiagram.layout">
       <SubType>Content</SubType>
-      <DependentUpon>OHM\OHM.Common.Public.dll\Data\Dependencies.layerdiagram</DependentUpon>
+      <DependentUpon>OHM\OHM.Common.Public.dll\DataSystem\Dependencies.layerdiagram</DependentUpon>
     </Validate>
-    <Validate Include="OHM\OHM.Common.Public.dll\Data\Dependencies.layerdiagram.suppressions">
+    <Validate Include="OHM\OHM.Common.Public.dll\DataSystem\Dependencies.layerdiagram.suppressions">
       <SubType>Content</SubType>
-      <DependentUpon>OHM\OHM.Common.Public.dll\Data\Dependencies.layerdiagram</DependentUpon>
+      <DependentUpon>OHM\OHM.Common.Public.dll\DataSystem\Dependencies.layerdiagram</DependentUpon>
     </Validate>
-    <Validate Include="OHM\OHM.Common.Public.dll\Nodes\Dependencies.layerdiagram">
+    <Validate Include="OHM\OHM.Common.Public.dll\LoggingSystem\Dependencies.layerdiagram">
       <SubType>Content</SubType>
     </Validate>
-    <Validate Include="OHM\OHM.Common.Public.dll\Nodes\Dependencies.layerdiagram.layout">
+    <Validate Include="OHM\OHM.Common.Public.dll\LoggingSystem\Dependencies.layerdiagram.layout">
       <SubType>Content</SubType>
-      <DependentUpon>OHM\OHM.Common.Public.dll\Nodes\Dependencies.layerdiagram</DependentUpon>
+      <DependentUpon>OHM\OHM.Common.Public.dll\LoggingSystem\Dependencies.layerdiagram</DependentUpon>
     </Validate>
-    <Validate Include="OHM\OHM.Common.Public.dll\Nodes\Dependencies.layerdiagram.suppressions">
+    <Validate Include="OHM\OHM.Common.Public.dll\LoggingSystem\Dependencies.layerdiagram.suppressions">
       <SubType>Content</SubType>
-      <DependentUpon>OHM\OHM.Common.Public.dll\Nodes\Dependencies.layerdiagram</DependentUpon>
+      <DependentUpon>OHM\OHM.Common.Public.dll\LoggingSystem\Dependencies.layerdiagram</DependentUpon>
+    </Validate>
+    <Validate Include="OHM\OHM.Common.Public.dll\NodesSystem\Dependencies.layerdiagram">
+      <SubType>Content</SubType>
+    </Validate>
+    <Validate Include="OHM\OHM.Common.Public.dll\NodesSystem\Dependencies.layerdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>OHM\OHM.Common.Public.dll\NodesSystem\Dependencies.layerdiagram</DependentUpon>
+    </Validate>
+    <Validate Include="OHM\OHM.Common.Public.dll\NodesSystem\Dependencies.layerdiagram.suppressions">
+      <SubType>Content</SubType>
+      <DependentUpon>OHM\OHM.Common.Public.dll\NodesSystem\Dependencies.layerdiagram</DependentUpon>
     </Validate>
     <Validate Include="OHM\OHM.dll\Data\Dependency.layerdiagram">
       <SubType>Content</SubType>
