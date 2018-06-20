@@ -1,5 +1,5 @@
-﻿using ConsoleApplication1.Logger;
-using log4net.Appender;
+﻿using log4net.Appender;
+using OHM.Apps.Console.Tools.Logger;
 using OHM.Data;
 using OHM.Logger;
 using OHM.Managers.ALR;

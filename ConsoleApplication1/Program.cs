@@ -102,8 +102,6 @@ namespace ConsoleApplication1
             Console.ReadLine();
         }
 
-        #endregion
-
         /// <summary>
         /// Read command from user console
         /// </summary>
@@ -116,6 +114,8 @@ namespace ConsoleApplication1
             // Wait Carret caracter to return the line typed
             return Console.ReadLine();
         }
+
+        #endregion
 
         /// <summary>
         /// Detect if the string is the exit command
@@ -255,7 +255,7 @@ namespace ConsoleApplication1
         private static EmbedInstanceControler embedInstance;
 
         /// <summary>
-        /// Create and lanch the local Embeded instance
+        /// Create and launch the local Embeded instance
         /// </summary>
         private static bool LaunchLocal()
         {
@@ -269,8 +269,6 @@ namespace ConsoleApplication1
             }
             return result;
         }
-
-        #endregion
 
         #region Help Output
 
@@ -295,6 +293,8 @@ namespace ConsoleApplication1
             //Console.WriteLine("- list");
             //Console.WriteLine("- execute");
         }
+
+        #endregion
 
         #endregion
     }
