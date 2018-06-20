@@ -17,6 +17,9 @@ namespace OHMConsoleServer
 
         static void Main(string[] args)
         {
+            Console.WriteLine("Console: Starting Console Server");
+
+
             String baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
 
             Main_Start_Header();
@@ -38,6 +41,14 @@ namespace OHMConsoleServer
 
             // Create OHM
             app = new OpenHomeMation(pluginMng, dataMng, loggerMng, interfacesMng, vrMng);
+
+            app.Start();
+
+            Console.WriteLine("Console: Press any key to end server instance");
+            Console.ReadKey();
+            app.Shutdown();
+            Console.WriteLine("Console: Press any key to close console");
+            Console.ReadKey();
         }
 
         private static ILoggerManager CreateLoggerManager()
