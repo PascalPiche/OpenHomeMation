@@ -43,7 +43,7 @@ namespace OHM.SYS
             if (!IsRunning)
             {
                 _logger = _ohmSystem.LoggerMng.GetLogger("OHM");
-                _logger.Debug("Starting");
+                _logger.Debug("Starting.");
 
                 if (_ohmSystem.Start())
                 {
@@ -58,6 +58,10 @@ namespace OHM.SYS
                     //Log fatal erro
                     _logger.Fatal("Can not start the system.");
                 }
+            }
+            else
+            {
+                _logger.Warn("Already running.");
             }
 
             return result;

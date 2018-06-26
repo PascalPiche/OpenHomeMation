@@ -5,6 +5,10 @@ using System.Collections.Generic;
 
 namespace OHM.Data
 {
+    /// <summary>
+    /// Abstract class for all Data manager in the system.
+    /// Implements AbstractPowerNode and IDataManager partialy
+    /// </summary>
     public abstract class DataManagerAbstract : AbstractPowerNode, IDataManager
     {
         #region Private members
@@ -52,7 +56,7 @@ namespace OHM.Data
             return result;
         }
 
-        protected void SaveDataStoreInMemory()
+        protected void SaveDataStoreFromMemory()
         {
             var enumerator = _inMemoryDataStore.GetEnumerator();
             while (enumerator.MoveNext())

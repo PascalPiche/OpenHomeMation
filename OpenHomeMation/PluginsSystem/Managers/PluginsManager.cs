@@ -55,7 +55,7 @@ namespace OHM.Managers.Plugins
         private IList<IPlugin> _installedPluginsInstance = new ObservableCollection<IPlugin>();
 
         /// <summary>
-        /// 
+        /// Local member of the type to lookup as a plugin (for performance purpose?)
         /// </summary>
         private readonly Type _pluginBaseType = typeof(PluginBase);
 
@@ -64,16 +64,16 @@ namespace OHM.Managers.Plugins
         #region Public Ctor
 
         /// <summary>
-        /// 
+        /// Instanciate a new PluginsManager
         /// </summary>
-        /// <param name="loggerMng"></param>
-        /// <param name="filePath"></param>
+        /// <param name="loggerMng">The loggerMng to use</param>
+        /// <param name="filePath">The root folder for plugins</param>
         public PluginsManager(ILoggerManager loggerMng, string filePath)
         {
-            //Store logger
+            //Save localy loggerMng
             _loggerMng = loggerMng;
 
-            //Store file path
+            //Save localy file path
             _filePath = filePath;
 
             //Attach assembly resolve event
@@ -85,12 +85,12 @@ namespace OHM.Managers.Plugins
         #region Public Properties
 
         /// <summary>
-        /// 
+        /// List of all availables plugins not already installed
         /// </summary>
         public IList<IPlugin> AvailablesPlugins { get { return _availablesPlugins; } }
 
         /// <summary>
-        /// 
+        /// List of all installed plugins
         /// </summary>
         public IList<IPlugin> InstalledPlugins { get { return _installedPluginsInstance; } }
 
@@ -108,17 +108,22 @@ namespace OHM.Managers.Plugins
             //Spawn internal logger
             this._logger = _loggerMng.GetLogger("PluginsManager");
             _logger.Debug("Initing");
-            //Store internal reference for futur uses
+
+            //Save localy internal reference for futur uses
             _data = data;
 
             //Create or get Dictionnary for installed plugins
             _dataInstalledPlugins = _data.GetOrCreateDataDictionary("InstalledPlugins");
-            //_data.StoreDataDictionary("InstalledPlugins", _dataInstalledPlugins);
+
+            //Save all data to drive
             _data.Save();
 
+            //Init all plugins list
             InitPluginsList();
 
+            //PreLoad registeredPlugins
             LoadRegisteredPlugins();
+
 
             _logger.Info("Inited");
 

@@ -15,10 +15,13 @@ namespace OHMConsoleServer
     {
         private static OpenHomeMation app;
 
+        /// <summary>
+        /// Core Static Subroutine for Main app
+        /// </summary>
+        /// <param name="args">List of arguments used to configure the server </param>
         static void Main(string[] args)
         {
             Console.WriteLine("Console: Starting Console Server");
-
 
             String baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
 

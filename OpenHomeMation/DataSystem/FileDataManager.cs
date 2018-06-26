@@ -7,18 +7,31 @@ using System.Runtime.Serialization;
 
 namespace OHM.Data
 {
+    /// <summary>
+    /// Implementation of the DataManager with xml file on the drive
+    /// </summary>
     public class FileDataManager : DataManagerAbstract
     {
         #region Private Member
-        
-        private ILoggerManager _loggerMng;
+
+        /// <summary>
+        /// Local Logger
+        /// </summary>
         private ILog _logger;
+
+        /// <summary>
+        /// Root file path
+        /// </summary>
         private string _filePath;
 
         #endregion
 
         #region Public Ctor
 
+        /// <summary>
+        /// Instanciate a new FileDataManager with the filePath provided
+        /// </summary>
+        /// <param name="filePath">Root file path for all created files</param>
         public FileDataManager(string filePath) {
             _filePath = filePath;
         }
@@ -27,11 +40,15 @@ namespace OHM.Data
 
         #region Public Api
 
+        /// <summary>
+        /// Initialize the FileDataManager for use. 
+        /// </summary>
+        /// <param name="loggerMng">The loggerMng for future use</param>
+        /// <returns>True if all test are succeeded elsewhere false.</returns>
         public override bool Init(ILoggerManager loggerMng)
         {
             bool result = true;
-            _loggerMng = loggerMng;
-            _logger = _loggerMng.GetLogger("FileDataManager");
+            _logger = loggerMng.GetLogger("FileDataManager");
             _logger.Debug("Initing");
 
             if (!Directory.Exists(_filePath))
@@ -55,14 +72,23 @@ namespace OHM.Data
             return result;
         }
 
+        /// <summary>
+        /// Shutdown cleanly the FileDataManager instance
+        /// </summary>
         public override void Shutdown()
         {
             //Save All Data store
             _logger.Debug("Shutdowning");
-            SaveDataStoreInMemory();
+            SaveDataStoreFromMemory();
             _logger.Debug("Shutdowned");
         }
 
+        /// <summary>
+        /// Get or Create the requested Datastore by key
+        /// </summary>
+        /// <param name="key">The data store key requested</param>
+        /// <returns>A new Datastore associated with key requested 
+        /// or the in memory or loaded file associated to this key</returns>
         public override IDataStore GetOrCreateDataStore(string key)
         {
             //Check if DataStore exist
@@ -97,6 +123,11 @@ namespace OHM.Data
             return result;
         }
 
+        /// <summary>
+        /// Save the dataStore to file
+        /// </summary>
+        /// <param name="dataStore">The data store to save</param>
+        /// <returns>True if the data store was successfully saved to file</returns>
         public override bool SaveDataStore(IDataStore dataStore)
         {
             _logger.Debug("Saving DataStore: " + dataStore.Key);
