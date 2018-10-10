@@ -92,7 +92,7 @@ namespace OHM.Managers.ALV
             //Find type
             if (_registeredType.ContainsKey(vrType))
             {
-                //Create Node
+                //Launch Node
                 IVrType newNode = _registeredType[vrType].CreateVrNode(vrType);
 
                 //TODO INCOMPLETE

@@ -112,7 +112,7 @@ namespace OHM.Managers.Plugins
             //Save localy internal reference for futur uses
             _data = data;
 
-            //Create or get Dictionnary for installed plugins
+            //Launch or get Dictionnary for installed plugins
             _dataInstalledPlugins = _data.GetOrCreateDataDictionary("InstalledPlugins");
 
             //Save all data to drive
@@ -205,7 +205,7 @@ namespace OHM.Managers.Plugins
             _installedPluginsInstance.Add(plugin);
 
             //Save to persistent storage
-            //Create object to store Version and name
+            //Launch object to store Version and name
             IDataDictionary newInstalledPluginRegisteringDict = _dataInstalledPlugins.GetOrCreateDataDictionary(plugin.Id.ToString());
             newInstalledPluginRegisteringDict.StoreString("name", plugin.Name);
             newInstalledPluginRegisteringDict.StoreString("version", plugin.GetType().Assembly.GetName().Version.ToString());

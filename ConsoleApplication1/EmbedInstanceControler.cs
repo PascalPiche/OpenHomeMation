@@ -22,22 +22,22 @@ namespace ConsoleApplication1
         /// </summary>
         public void Create()
         {
-            // Create logger Manager
+            // Launch logger Manager
             ILoggerManager loggerMng = CreateLoggerManager();
 
-            // Create Data manager
+            // Launch Data manager
             var dataMng = new FileDataManager(AppDomain.CurrentDomain.BaseDirectory + "\\data\\");
 
-            // Create Plugin manager
+            // Launch Plugin manager
             var pluginMng = new PluginsManager(loggerMng, AppDomain.CurrentDomain.BaseDirectory + "\\plugins\\");
 
-            // Create Interface manager
+            // Launch Interface manager
             var interfacesMng = new InterfacesManager(loggerMng, pluginMng);
 
-            // Create VrManager
+            // Launch VrManager
             var vrMng = new VrManager(loggerMng, pluginMng);
 
-            // Create OHM
+            // Launch OHM
             app = new OpenHomeMation(pluginMng, dataMng, loggerMng, interfacesMng, vrMng);
         }
 
@@ -69,23 +69,23 @@ namespace ConsoleApplication1
         private OpenHomeMation app;
 
         /// <summary>
-        /// Create the custom logger for the console 
+        /// Launch the custom logger for the console 
         /// and configure base logger with passed args if available.
         /// </summary>
         /// <returns>The created ILoggerManager</returns>
         private ILoggerManager CreateLoggerManager()
         {
-            // Create Log Console Output Appender
+            // Launch Log Console Output Appender
             AppConsoleOutput appender = new AppConsoleOutput();
 
             // Config Console Layout
             appender.Layout = OHM.Logger.LoggerManager.DefaultPatternLayout;
 
-            // Create Logger Manager arguments
+            // Launch Logger Manager arguments
             IList<IAppender> col = new System.Collections.Generic.List<IAppender>();
             col.Add(appender);
 
-            // Create Final Logger Manager
+            // Launch Final Logger Manager
             return new OHM.Logger.LoggerManager(col);
         }
 

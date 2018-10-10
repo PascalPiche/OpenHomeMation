@@ -2,6 +2,7 @@
 using OHM.SYS;
 using System;
 using System.Collections;
+using System.ServiceModel;
 
 //TODO: CHANGE NAMESPACE
 namespace ConsoleApplication1
@@ -40,9 +41,6 @@ namespace ConsoleApplication1
 
         #region Main Functions
 
-        /// <summary>
-        /// 
-        /// </summary>
         private static void Main_Start()
         {
             //Write Header
@@ -53,7 +51,7 @@ namespace ConsoleApplication1
         /// Main function to process infinite loop
         /// Execute Read, Interpretation And output result
         /// </summary>
-        /// <returns></returns>
+        /// <returns>true when exit is requested</returns>
         private static bool Main_LoopExecute()
         {
             //Local member for exit request
@@ -71,6 +69,8 @@ namespace ConsoleApplication1
                 //Process Local command
                 if (!ProcessConsoleCommand(line))
                 {
+                    //Refactor? Do we have a local instance or a connection to a remote instance?
+                    //One or multiple connection?
                     // No Local command found
                     // Potentially a command to a instance of OHM
                     if (!executeCommand(line))
@@ -130,7 +130,7 @@ namespace ConsoleApplication1
 
         /// <summary>
         /// Detect and process internal Console command
-        /// Will return true if the command is handled
+        /// Will return true if the command is handled as an internal command
         /// </summary>
         /// <param name="line">The command line to interpret</param>
         /// <returns>Return true if the command was detected as an internal command</returns>
@@ -150,17 +150,47 @@ namespace ConsoleApplication1
                 LaunchLocal();
                 result = true;
             }
-            else if (line.ToUpper() == "")
+            else if (line.ToUpper() == "CONNECT")
             {
-
+                launchConnectWizzard();
+                result = true;
             }
             return result;
         }
 
+        private static void launchConnectWizzard()
+        {
+            //Write indicateur
+            Console.Write("Enter Ip: ");
+
+            // Wait Carret caracter to return the line typed
+            string enteredIp = Console.ReadLine();
+
+            //Todo valid ip
+
+            //Launch client
+            // This code is written by an application developer.
+            // Launch a channel factory.
+            WSDualHttpBinding myBinding = new WSDualHttpBinding();
+
+            EndpointAddress myEndpoint = new EndpointAddress("http://localhost:8080/ohm/api/");
+
+            var temp = new ServerCallback();
+            DuplexChannelFactory<IOpenHomeMationServer> myChannelFactory = new DuplexChannelFactory<IOpenHomeMationServer>(temp, myBinding, myEndpoint);
+
+            
+            // Launch a channel.
+            
+            IOpenHomeMationServer server = myChannelFactory.CreateChannel();
+            
+            server.LoginAsync("test");
+        }
+
         /// <summary>
-        /// 
+        /// Execute the command
         /// </summary>
-        /// <param name="command"></param>
+        /// <param name="command">the command to execute</param>
+        /// 
         private static bool executeCommand(string command)
         {
             return false;
@@ -255,7 +285,7 @@ namespace ConsoleApplication1
         private static EmbedInstanceControler embedInstance;
 
         /// <summary>
-        /// Create and launch the local Embeded instance
+        /// Launch and launch the local Embeded instance
         /// </summary>
         private static bool LaunchLocal()
         {
@@ -299,4 +329,14 @@ namespace ConsoleApplication1
         #endregion
     }
         #endregion
+}
+
+public class ServerCallback : IOpenHomeMationServerCallback
+{
+
+    public void CallBackFunction(string str)
+    {
+
+        throw new NotImplementedException();
+    }
 }

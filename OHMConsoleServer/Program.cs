@@ -16,7 +16,7 @@ namespace OHMConsoleServer
         private static OpenHomeMation app;
 
         /// <summary>
-        /// Core Static Subroutine for Main app
+        /// Main static subroutine for the Console Server Application
         /// </summary>
         /// <param name="args">List of arguments used to configure the server </param>
         static void Main(string[] args)
@@ -27,28 +27,54 @@ namespace OHMConsoleServer
 
             Main_Start_Header();
 
-            // Create logger Manager
+            // TODO? Trim args
+            List<string> appArgs = new List<string>(args);
+
+            //TODO REMOVES
+            //TEMP DEV CODE
+            //FORCE SERVER ENABLED = TRUE;
+            appArgs.Add("-server-api.enabled");
+            appArgs.Add("true");
+            appArgs.Add("-server-api.port");
+            appArgs.Add("8080");
+            appArgs.Add("-system.require-server-api");
+            appArgs.Add("true");
+            
+            appArgs.Add("-system.launch-on-start");
+            appArgs.Add("false");
+
+            /*appArgs.Add("-system.config-file");
+            appArgs.Add("config.cfg");*/
+            //END TEMP DEV CODE
+
+            // Launch logger Manager
             ILoggerManager loggerMng = CreateLoggerManager();
 
-            // Create Data manager
+            // Launch Data manager
             var dataMng = new FileDataManager(baseDirectory + "\\data\\");
 
-            // Create Plugin manager
+            // Launch Plugin manager
             var pluginMng = new PluginsManager(loggerMng, baseDirectory + "\\plugins\\");
 
-            // Create Interface manager
+            // Launch Interface manager
             var interfacesMng = new InterfacesManager(loggerMng, pluginMng);
 
-            // Create VrManager
+            // Launch VrManager
             var vrMng = new VrManager(loggerMng, pluginMng);
 
-            // Create OHM
+            // Launch OHM
             app = new OpenHomeMation(pluginMng, dataMng, loggerMng, interfacesMng, vrMng);
 
-            app.Start();
-
-            Console.WriteLine("Console: Press any key to end server instance");
-            Console.ReadKey();
+            if (app.Start(appArgs))
+            {
+                Console.WriteLine("Console: Press any key to end server instance");
+                Console.ReadKey();
+            }
+            else
+            {
+                Console.WriteLine("Console: Application can not start. shutdowning.");
+            }
+            //Shutdown app
             app.Shutdown();
             Console.WriteLine("Console: Press any key to close console");
             Console.ReadKey();
@@ -56,17 +82,17 @@ namespace OHMConsoleServer
 
         private static ILoggerManager CreateLoggerManager()
         {
-            // Create Log Console Output Appender
+            // Launch Log Console Output Appender
             AppConsoleOutput appender = new AppConsoleOutput();
 
             // Config Console Layout
             appender.Layout = OHM.Logger.LoggerManager.DefaultPatternLayout;
             
-            // Create Logger Manager arguments
+            // Launch Logger Manager arguments
             IList<IAppender> col = new List<IAppender>();
             col.Add(appender);
 
-            // Create Final Logger Manager
+            // Launch Final Logger Manager
             return new LoggerManager(col);
         }
 

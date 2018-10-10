@@ -84,7 +84,7 @@ namespace OHM.Data
         }
 
         /// <summary>
-        /// Get or Create the requested Datastore by key
+        /// Get or Launch the requested Datastore by key
         /// </summary>
         /// <param name="key">The data store key requested</param>
         /// <returns>A new Datastore associated with key requested 
@@ -98,7 +98,7 @@ namespace OHM.Data
             {
                 _logger.Debug("Creating new DataStore: " + key);
 
-                //Create object
+                //Launch object
                 DataStore newDataStore = new DataStore(key);
 
                 //Init object
