@@ -239,7 +239,7 @@ namespace WpfApplication1.MV
             IInterfacesManager interfacesMng = new InterfacesManager(pluginMng);
             IVrManager vrMng = new VrManager();
 
-            ohm = new OpenHomeMation(pluginMng, dataMng, loggerMng, interfacesMng, vrMng);
+            ohm = OpenHomeMation.Create(pluginMng, dataMng, loggerMng, interfacesMng, vrMng);
             ohm.API.PropertyChanged += API_PropertyChanged;
             ohm.Start();
         }
