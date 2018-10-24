@@ -7,8 +7,8 @@
     <ProjectGuid>{28E9ABE9-8EDF-4DD7-B975-0F9A7901B9BF}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OHMConsoleServer</RootNamespace>
-    <AssemblyName>OHMConsoleServer</AssemblyName>
+    <RootNamespace>OHM.Apps.ConsoleServer</RootNamespace>
+    <AssemblyName>ConsoleServer</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -44,7 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="ConsoleServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -60,9 +60,9 @@
       <Project>{f8c3c250-222d-49f4-9582-f7ba0dd6393e}</Project>
       <Name>OHM.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OHM.Apps.Console.tools\OHM.Apps.Console.tools.csproj">
+    <ProjectReference Include="..\OHM.Apps.Console.tools\ConsoleTools.csproj">
       <Project>{a1430c5e-80b4-47e9-aad3-df40fda925d4}</Project>
-      <Name>OHM.Apps.Console.tools</Name>
+      <Name>ConsoleTools</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenHomeMation\OHM.csproj">
       <Project>{c5df6e96-8157-4901-9ced-f75285ab8e49}</Project>

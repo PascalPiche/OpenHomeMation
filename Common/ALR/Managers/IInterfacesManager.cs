@@ -1,4 +1,5 @@
 ﻿using OHM.Data;
+using OHM.Logger;
 using OHM.Nodes.ALR;
 using OHM.Plugins;
 using OHM.SYS;
@@ -9,7 +10,7 @@ namespace OHM.Managers.ALR
     public interface IInterfacesManager
     {
 
-        bool Init(IDataStore data, IOhmSystemInternal system);
+        bool Init(ILoggerManager loggerMng, IDataStore data, IOhmSystemInternal system);
 
         bool RegisterInterface(string key, IPlugin plugin);
 

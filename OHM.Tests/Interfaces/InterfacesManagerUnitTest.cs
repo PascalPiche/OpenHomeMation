@@ -15,18 +15,25 @@ namespace OHM.Tests.Interfaces
     [TestClass]
     public class InterfacesManagerUnitTest
     {
+        /// <summary>
+        /// 
+        /// </summary>
         [TestMethod]
         public void TestInterfacesManagerConstructor()
         {
-            var loggerMng = MockRepository.GenerateStub<ILoggerManager>();
-            var logger = MockRepository.GenerateStub<ILog>();
-            loggerMng.Stub(x => x.GetLogger("InterfacesManager")).Return(logger);
-
+            //Prepare Test
+            //var loggerMng = MockRepository.GenerateStub<ILoggerManager>();
+            //var logger = MockRepository.GenerateStub<ILog>();
+            //loggerMng.Stub(x => x.GetLogger("InterfacesManager")).Return(logger);
             var pluginsMng = MockRepository.GenerateStub<IPluginsManager>();
 
-            var target = new InterfacesManager(loggerMng, pluginsMng);
+            //Instantiate target
+            var target = new InterfacesManager(pluginsMng);
 
+            //Validate
+            //Runnables Interfaces instantiated
             Assert.IsNotNull(target.RunnableInterfaces);
+            //Count is empty
             Assert.AreEqual(0, target.RunnableInterfaces.Count);
         }
 
@@ -41,9 +48,9 @@ namespace OHM.Tests.Interfaces
             var dataStore = MockRepository.GenerateStub<IDataStore>();
             var system = MockRepository.GenerateStub<IOhmSystemInternal>();
 
-            var target = new InterfacesManager(loggerMng, pluginsMng);
+            var target = new InterfacesManager(pluginsMng);
 
-            Assert.IsTrue(target.Init(dataStore, system));
+            Assert.IsTrue(target.Init(loggerMng, dataStore, system));
         }
 
         /*[TestMethod]
@@ -115,10 +122,10 @@ namespace OHM.Tests.Interfaces
             pluginsMng.Stub(x => x.GetPlugin(guid)).Return(plugin);
             var system = MockRepository.GenerateStub<IOhmSystemInternal>();
 
-            var target = new InterfacesManager(loggerMng, pluginsMng);
+            var target = new InterfacesManager(pluginsMng);
             Assert.AreEqual(0, target.RunnableInterfaces.Count);
 
-            Assert.IsTrue(target.Init(dataStore, system));
+            Assert.IsTrue(target.Init(loggerMng, dataStore, system));
 
             Assert.AreEqual(1, target.RunnableInterfaces.Count);
         }

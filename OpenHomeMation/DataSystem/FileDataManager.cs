@@ -73,7 +73,7 @@ namespace OHM.Data
         }
 
         /// <summary>
-        /// Shutdown cleanly the FileDataManager instance
+        /// Shutdown cleanly the FileDataManager _instance
         /// </summary>
         public override void Shutdown()
         {

@@ -1,7 +1,6 @@
 ﻿using log4net;
 using OHM.Data;
 using OHM.Logger;
-using OHM.Managers.Plugins;
 using OHM.Nodes.ALV;
 using OHM.Plugins;
 using OHM.SYS;
@@ -12,13 +11,11 @@ namespace OHM.Managers.ALV
 {
     public class VrManager : IVrManager, IVrNodeCreator
     {
-
         #region Private members
 
         private ILoggerManager _loggerMng;
         private ILog _logger;
         private IDataStore _data;
-        private IPluginsManager _pluginsMng;
         private IDictionary<string, IVrNodeCreator> _registeredType = new Dictionary<string, IVrNodeCreator>();
         private ICollection<IVrType> _rootNodes = new ObservableCollection<IVrType>();
 
@@ -26,18 +23,18 @@ namespace OHM.Managers.ALV
 
         #region Public Ctor
 
-        public VrManager(ILoggerManager loggerMng, IPluginsManager pluginsMng)
+        public VrManager()
         {
-            _loggerMng = loggerMng;
-            _pluginsMng = pluginsMng;
+            
         }
 
         #endregion
 
         #region Public Methods
 
-        public bool Init(IDataStore data, IOhmSystemInternal system)
+        public bool Init(ILoggerManager loggerMng, IDataStore data, IOhmSystemInternal system)
         {
+            _loggerMng = loggerMng;
             _data = data;
             _logger = _loggerMng.GetLogger("VrManager");
 

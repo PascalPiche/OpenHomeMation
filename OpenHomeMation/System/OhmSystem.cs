@@ -470,17 +470,17 @@ namespace OHM.SYS
 
         private bool InitPluginsMng()
         {
-            return _pluginsMng.Init(DataMng.GetOrCreateDataStore("PluginsManager"));
+            return _pluginsMng.Init(_loggerMng, DataMng.GetOrCreateDataStore("PluginsManager"));
         }
 
         private bool InitInterfacesMng()
         {
-            return _interfacesMng.Init(DataMng.GetOrCreateDataStore("InterfacesManager"), this);
+            return _interfacesMng.Init(_loggerMng, DataMng.GetOrCreateDataStore("InterfacesManager"), this);
         }
 
         private bool InitVrMng()
         {
-            return _vrMng.Init(DataMng.GetOrCreateDataStore("VrManager"), this);
+            return _vrMng.Init(_loggerMng, DataMng.GetOrCreateDataStore("VrManager"), this);
         }
 
         #endregion

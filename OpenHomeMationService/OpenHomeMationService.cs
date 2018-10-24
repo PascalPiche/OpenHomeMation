@@ -20,12 +20,12 @@ namespace OpenHomeMationService
         #region Private member
 
         /// <summary>
-        /// Main instance 
+        /// Main _instance 
         /// </summary>
         private static OpenHomeMation ohm;
 
         /// <summary>
-        /// Main log instance
+        /// Main log _instance
         /// </summary>
         private static ILog log;
         
@@ -97,20 +97,15 @@ namespace OpenHomeMationService
 
             //FROM HERE WE SHOULD USE INTERNAL LOG
 
-            //TODO: Extract Data directory from args
+
+            //TODO: Extract Parameters directory from args
             DataManagerAbstract dataMng = new FileDataManager(AppDomain.CurrentDomain.BaseDirectory + "\\data\\");
+            IPluginsManager pluginMng = new PluginsManager(AppDomain.CurrentDomain.BaseDirectory + "\\plugins\\");
+            IInterfacesManager interfacesMng = new InterfacesManager(pluginMng);
+            IVrManager vrMng = new VrManager();
 
-            //TODO: Extract Plugin directory from data And/Or args
-            IPluginsManager pluginMng = new PluginsManager(loggerMng, AppDomain.CurrentDomain.BaseDirectory + "\\plugins\\");
-
-            //Instanciate Interfaces Manager
-            IInterfacesManager interfacesMng = new InterfacesManager(loggerMng, pluginMng);
-
-            //Instanciate VrManager
-            IVrManager vrMng = new VrManager(loggerMng, pluginMng);
-
-            //Create main instance
-            ohm = new OpenHomeMation(pluginMng, dataMng, loggerMng, interfacesMng, vrMng);
+            //Create main _instance
+            ohm = OpenHomeMation.Create(pluginMng, dataMng, loggerMng, interfacesMng, vrMng);
 
             //Write event starting
             log.Debug("OHM.Service: OnStart: OHM Starting");

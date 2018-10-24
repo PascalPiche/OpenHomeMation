@@ -1,4 +1,5 @@
 ﻿using OHM.Data;
+using OHM.Logger;
 using OHM.Plugins;
 using OHM.SYS;
 
@@ -6,7 +7,7 @@ namespace OHM.Managers.ALV
 {
     public interface IVrManager
     {
-        bool Init(IDataStore data, IOhmSystemInternal system);
+        bool Init(ILoggerManager loggerMng, IDataStore data, IOhmSystemInternal system);
 
         bool RegisterVrType(string key, IVrNodeCreator creator);
 

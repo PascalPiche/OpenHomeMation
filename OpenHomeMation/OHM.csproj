@@ -7,7 +7,7 @@
     <ProjectGuid>{C5DF6E96-8157-4901-9CED-F75285AB8E49}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OHM.Logger</RootNamespace>
+    <RootNamespace>OHM.Sys</RootNamespace>
     <AssemblyName>OpenHomeMation</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -82,14 +82,18 @@
     <Compile Include="PluginsSystem\NotFoundPlugin.cs" />
     <Compile Include="PluginsSystem\PluginObservableAdapter.cs" />
     <Compile Include="System\OhmSystem.cs" />
-    <Compile Include="System\OhmSystemInstallGateway.cs" />
-    <Compile Include="System\OhmSystemInterfaceGateway.cs" />
-    <Compile Include="System\OhmSystemUnInstallGateway.cs" />
+    <Compile Include="System\Gateway\OhmSystemInstallGateway.cs" />
+    <Compile Include="System\Gateway\OhmSystemInterfaceGateway.cs" />
+    <Compile Include="System\Gateway\OhmSystemUnInstallGateway.cs" />
     <Compile Include="System\OpenHomeMation.cs" />
     <Compile Include="PluginsSystem\Managers\PluginsManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="System\OpenHomeMationServer.cs" />
+    <Compile Include="System\Server\IOpenHomeMationCallback.cs" />
+    <Compile Include="System\Server\IOpenHomeMationServer.cs" />
     <Compile Include="ALV\Managers\VrManager.cs" />
+    <Compile Include="System\Server\OpenHomeMationServer.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">

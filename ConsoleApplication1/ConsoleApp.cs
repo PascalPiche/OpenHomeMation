@@ -4,13 +4,12 @@ using System;
 using System.Collections;
 using System.ServiceModel;
 
-//TODO: CHANGE NAMESPACE
-namespace ConsoleApplication1
+namespace OHM.Apps.ConsoleApp
 {
     /// <summary>
-    /// Main console Program
+    /// Main console Application program
     /// </summary>
-    public class Program
+    public class ConsoleApp
     {
         #region Public function
 
@@ -18,20 +17,12 @@ namespace ConsoleApplication1
         /// <param name="args">Arguments passed to the console</param>
         public static void Main(string[] args)
         {
-            // Local variable to detect exit Main_LoopExecute
-            bool exitRequested = false;
-
-            // Main start routine
+            bool exitRequested;
             Main_Start();
+            do {
+                exitRequested = Main_LoopExecute(); //Return true if exit command
+            } while (!exitRequested);
 
-            // Core Main INFINITE Loop
-            while (!exitRequested)
-            {
-                // Main loop code : Return true if exit command
-                exitRequested = Main_LoopExecute();
-            }
-
-            //Main end routine
             Main_End();
         }
         
@@ -44,7 +35,7 @@ namespace ConsoleApplication1
         private static void Main_Start()
         {
             //Write Header
-            Console.WriteLine("OHM Console");
+            System.Console.WriteLine("OHM Console");
         }
 
         /// <summary>
@@ -69,14 +60,14 @@ namespace ConsoleApplication1
                 //Process Local command
                 if (!ProcessConsoleCommand(line))
                 {
-                    //Refactor? Do we have a local instance or a connection to a remote instance?
+                    //Refactor? Do we have a local _instance or a connection to a remote _instance?
                     //One or multiple connection?
                     // No Local command found
-                    // Potentially a command to a instance of OHM
+                    // Potentially a command to a _instance of OHM
                     if (!executeCommand(line))
                     {
                         // Command Not found
-                        Console.WriteLine("Command not found : " + line);
+                        System.Console.WriteLine("Command not found : " + line);
                     }
                 }
             }
@@ -86,20 +77,20 @@ namespace ConsoleApplication1
         }
 
         /// <summary>
-        /// Shutdown and destroy local instance or close connection to remote
+        /// Shutdown and destroy local _instance or close connection to remote
         /// Show last message to the console
         /// </summary>
         private static void Main_End()
         {
             //Shutdown local host if available
-            if (embedInstance != null)
+            /*if (embedInstance != null)
             {
                 embedInstance.Shutdown();
-            }
+            }*/
 
             //Wait before final close for last logging
-            Console.WriteLine("Press enter to close");
-            Console.ReadLine();
+            System.Console.WriteLine("Press enter to close");
+            System.Console.ReadLine();
         }
 
         /// <summary>
@@ -109,10 +100,10 @@ namespace ConsoleApplication1
         private static string Main_LoopExecute_Read()
         {
             //Write indicateur
-            Console.Write(">");
+            System.Console.Write(">");
 
             // Wait Carret caracter to return the line typed
-            return Console.ReadLine();
+            return System.Console.ReadLine();
         }
 
         #endregion
@@ -145,11 +136,11 @@ namespace ConsoleApplication1
                 outputBasicHelp();
                 result = true;
             }
-            else if (line.ToUpper() == "LAUNCH-LOCAL")
+            /*else if (line.ToUpper() == "LAUNCH-LOCAL")
             {
                 LaunchLocal();
                 result = true;
-            }
+            }*/
             else if (line.ToUpper() == "CONNECT")
             {
                 launchConnectWizzard();
@@ -158,39 +149,31 @@ namespace ConsoleApplication1
             return result;
         }
 
-        private static void launchConnectWizzard()
+        private static IOpenHomeMationServer launchConnectWizzard()
         {
-            //Write indicateur
-            Console.Write("Enter Ip: ");
-
-            // Wait Carret caracter to return the line typed
-            string enteredIp = Console.ReadLine();
+            System.Console.Write("Enter Ip: ");
+            string enteredIp = System.Console.ReadLine();
 
             //Todo valid ip
 
-            //Launch client
-            // This code is written by an application developer.
-            // Launch a channel factory.
+            //Try Connect
             WSDualHttpBinding myBinding = new WSDualHttpBinding();
-
             EndpointAddress myEndpoint = new EndpointAddress("http://localhost:8080/ohm/api/");
-
             var temp = new ServerCallback();
             DuplexChannelFactory<IOpenHomeMationServer> myChannelFactory = new DuplexChannelFactory<IOpenHomeMationServer>(temp, myBinding, myEndpoint);
-
-            
-            // Launch a channel.
-            
             IOpenHomeMationServer server = myChannelFactory.CreateChannel();
-            
+
+            //Try Login
             server.LoginAsync("test");
+
+            //Channel created... return server?
+            return server;
         }
 
         /// <summary>
-        /// Execute the command
+        /// TODO Execute the command
         /// </summary>
-        /// <param name="command">the command to execute</param>
-        /// 
+        /// <param name="command">the command string to execute</param>
         private static bool executeCommand(string command)
         {
             return false;
@@ -249,7 +232,7 @@ namespace ConsoleApplication1
             }
             else if (result.Result is Boolean)
             {
-                Console.WriteLine(result.Result);
+                System.Console.WriteLine(result.Result);
             }
         }
 
@@ -262,22 +245,22 @@ namespace ConsoleApplication1
             if (item is IPlugin)
             {
                 IPlugin plugin = item as IPlugin;
-                Console.WriteLine("PLUGIN : ");
-                Console.WriteLine("Name : " + plugin.Name);
-                Console.WriteLine("Id : " + plugin.Id);
-                Console.WriteLine("State : " + plugin.State);
+                System.Console.WriteLine("PLUGIN : ");
+                System.Console.WriteLine("Name : " + plugin.Name);
+                System.Console.WriteLine("Id : " + plugin.Id);
+                System.Console.WriteLine("State : " + plugin.State);
             }
             else if (item is string)
             {
-                Console.WriteLine("STRING : " + item.ToString());
+                System.Console.WriteLine("STRING : " + item.ToString());
             }
             else
             {
-                Console.WriteLine("No conversion to console output found for type : " + item.ToString());
+                System.Console.WriteLine("No conversion to console output found for type : " + item.ToString());
             }
         }
 
-        #region Embed Instance OpenHomeMation part
+        /*#region Embed Instance OpenHomeMation part
 
         /// <summary>
         /// Private local member of the Embeded Local Instance Controller
@@ -285,7 +268,7 @@ namespace ConsoleApplication1
         private static EmbedInstanceControler embedInstance;
 
         /// <summary>
-        /// Launch and launch the local Embeded instance
+        /// Launch and launch the local Embeded _instance
         /// </summary>
         private static bool LaunchLocal()
         {
@@ -298,7 +281,7 @@ namespace ConsoleApplication1
                 result = embedInstance.Start();
             }
             return result;
-        }
+        }*/
 
         #region Help Output
 
@@ -307,28 +290,27 @@ namespace ConsoleApplication1
         /// </summary>
         private static void outputBasicHelp()
         {
-            Console.WriteLine("------- HELP GENERAL ---------");
-            Console.WriteLine("----- CONSOLE COMMANDS --------");
-            Console.WriteLine("exit            : Exit console application. Will shutdown local instance and disconnect from remote instance");
-            Console.WriteLine("launch-local    : Create and launch a local Embed instance in the console");
-            //Console.WriteLine("discover-local : Search for instance on the localhost");
-            //Console.WriteLine("connect        : ");
+            System.Console.WriteLine("------- HELP GENERAL ---------");
+            System.Console.WriteLine("----- CONSOLE COMMANDS --------");
+            System.Console.WriteLine("exit            : Exit console application. Will shutdown local instance and disconnect from remote instance");
+            //System.Console.WriteLine("launch-local    : Create and launch a local Embed instance in the console");
+            //System.Console.WriteLine("discover-local : Search for _instance on the localhost");
+            //System.Console.WriteLine("connect        : ");
 
-            Console.WriteLine("----------System nodes --------");
-            Console.WriteLine("Root nodes : ");
-            Console.WriteLine("- plugins");
-            Console.WriteLine("- hal");
+            System.Console.WriteLine("----------System nodes --------");
+            System.Console.WriteLine("Root nodes : ");
+            System.Console.WriteLine("- plugins");
+            System.Console.WriteLine("- hal");
 
-            //Console.WriteLine("Base commands : ");
-            //Console.WriteLine("- list");
-            //Console.WriteLine("- execute");
+            //System.Console.WriteLine("Base commands : ");
+            //System.Console.WriteLine("- list");
+            //System.Console.WriteLine("- execute");
         }
 
         #endregion
 
         #endregion
     }
-        #endregion
 }
 
 public class ServerCallback : IOpenHomeMationServerCallback
@@ -336,7 +318,6 @@ public class ServerCallback : IOpenHomeMationServerCallback
 
     public void CallBackFunction(string str)
     {
-
         throw new NotImplementedException();
     }
 }

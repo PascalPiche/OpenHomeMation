@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("OHM.Apps.Console.tools")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Shareable Console tools")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Scopollif")]
 [assembly: AssemblyProduct("OHM.Apps.Console.tools")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]

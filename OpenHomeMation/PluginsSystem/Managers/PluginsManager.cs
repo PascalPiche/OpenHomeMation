@@ -20,17 +20,12 @@ namespace OHM.Managers.Plugins
         #region Private members
 
         /// <summary>
-        /// Member instance of the Logger manager
-        /// </summary>
-        private ILoggerManager _loggerMng;
-
-        /// <summary>
-        /// Member instance of the logger
+        /// Member _instance of the logger
         /// </summary>
         private ILog _logger;
 
         /// <summary>
-        /// Member instance of inner the data store for the manager
+        /// Member _instance of inner the data store for the manager
         /// </summary>
         private IDataStore _data;
 
@@ -66,13 +61,9 @@ namespace OHM.Managers.Plugins
         /// <summary>
         /// Instanciate a new PluginsManager
         /// </summary>
-        /// <param name="loggerMng">The loggerMng to use</param>
         /// <param name="filePath">The root folder for plugins</param>
-        public PluginsManager(ILoggerManager loggerMng, string filePath)
+        public PluginsManager(string filePath)
         {
-            //Save localy loggerMng
-            _loggerMng = loggerMng;
-
             //Save localy file path
             _filePath = filePath;
 
@@ -103,10 +94,10 @@ namespace OHM.Managers.Plugins
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        public bool Init(IDataStore data)
+        public bool Init(ILoggerManager loggerMng, IDataStore data)
         {
             //Spawn internal logger
-            this._logger = _loggerMng.GetLogger("PluginsManager");
+            this._logger = loggerMng.GetLogger("PluginsManager");
             _logger.Debug("Initing");
 
             //Save localy internal reference for futur uses
@@ -176,7 +167,7 @@ namespace OHM.Managers.Plugins
         }
 
         /// <summary>
-        /// Return the plugin instance by Guid if found
+        /// Return the plugin _instance by Guid if found
         /// </summary>
         /// <param name="id">Guid of the plugin requested</param>
         /// <returns>nstance of the IPlugin find by the Guid requested or Null</returns>

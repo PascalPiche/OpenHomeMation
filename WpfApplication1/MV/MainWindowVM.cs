@@ -235,9 +235,9 @@ namespace WpfApplication1.MV
         {
             ILoggerManager loggerMng = new LoggerManager();
             DataManagerAbstract dataMng = new FileDataManager(AppDomain.CurrentDomain.BaseDirectory + "\\data\\");
-            IPluginsManager pluginMng = new PluginsManager(loggerMng, AppDomain.CurrentDomain.BaseDirectory + "\\plugins\\");
-            IInterfacesManager interfacesMng = new InterfacesManager(loggerMng, pluginMng);
-            IVrManager vrMng = new VrManager(loggerMng, pluginMng);
+            IPluginsManager pluginMng = new PluginsManager(AppDomain.CurrentDomain.BaseDirectory + "\\plugins\\");
+            IInterfacesManager interfacesMng = new InterfacesManager(pluginMng);
+            IVrManager vrMng = new VrManager();
 
             ohm = new OpenHomeMation(pluginMng, dataMng, loggerMng, interfacesMng, vrMng);
             ohm.API.PropertyChanged += API_PropertyChanged;

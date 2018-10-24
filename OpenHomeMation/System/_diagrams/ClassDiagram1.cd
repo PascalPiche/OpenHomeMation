@@ -11,7 +11,7 @@
       </Class>
     </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAAAQAABACAAEAAAABECAAggIACiAEAAAAIABAAICAA=</HashCode>
+      <HashCode>AAAAQgABACAAMAAAABECAAggIACiAEAAAAIABAAICgA=</HashCode>
       <FileName>System\OhmSystem.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -19,8 +19,8 @@
   <Class Name="OHM.SYS.OhmSystemInstallGateway">
     <Position X="8" Y="2" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAEAAAAAAIAAAAAAAACAAAAIAAgAgAAAAAAAAAAAAA=</HashCode>
-      <FileName>System\OhmSystemInstallGateway.cs</FileName>
+      <HashCode>AAAEAAABAAIAAAAAAAACAAAAIAAgAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>System\Gateway\OhmSystemInstallGateway.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
@@ -28,7 +28,7 @@
     <Position X="10.5" Y="2" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAIAAAAAAEAAAEAAAAAAAAAAAAAAAAEAAAAAAA=</HashCode>
-      <FileName>System\OhmSystemInterfaceGateway.cs</FileName>
+      <FileName>System\Gateway\OhmSystemInterfaceGateway.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
@@ -36,37 +36,30 @@
     <Position X="13" Y="2" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAIAAAAAAAASAAAAIAAgAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>System\OhmSystemUnInstallGateway.cs</FileName>
+      <FileName>System\Gateway\OhmSystemUnInstallGateway.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="OHM.SYS.OpenHomeMation">
     <Position X="3.75" Y="2" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAACAAAAAAAIAAQQAgIAAAAAAAAAQAAAAAAAA=</HashCode>
+      <HashCode>AAIMAAgAACAAAACAAIAAQQAgIAAAAEAAAAQEAAAAAAA=</HashCode>
       <FileName>System\OpenHomeMation.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="OHM.Sys.OpenHomeMationServer" BaseTypeListCollapsed="true">
     <Position X="0.5" Y="2" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAA=</HashCode>
-      <FileName>System\OpenHomeMationServer.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>System\Server\OpenHomeMationServer.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
-  </Class>
-  <Class Name="OHM.Sys.OpenHomeMationServerImplementation">
-    <Position X="0.5" Y="3.5" Width="3" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
-      <FileName>System\OpenHomeMationServer.cs</FileName>
-    </TypeIdentifier>
   </Class>
   <Interface Name="OHM.Sys.IOpenHomeMationServer">
     <Position X="0.5" Y="0.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAA=</HashCode>
-      <FileName>System\OpenHomeMationServer.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>System\Server\IOpenHomeMationServer.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Font Name="Segoe UI" Size="9" />

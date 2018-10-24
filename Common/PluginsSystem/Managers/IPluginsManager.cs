@@ -1,4 +1,5 @@
 ﻿using OHM.Data;
+using OHM.Logger;
 using OHM.Plugins;
 using OHM.SYS;
 using System;
@@ -15,9 +16,10 @@ namespace OHM.Managers.Plugins
         /// <summary>
         /// Init the plugins manager
         /// </summary>
+        /// <param name="loggerMng">Logger Manager</param>
         /// <param name="data">DataStore to save info</param>
         /// <returns>True when the initialization was a success</returns>
-        bool Init(IDataStore data);
+        bool Init(ILoggerManager loggerMng, IDataStore data);
 
         /// <summary>
         /// List of installed plugins

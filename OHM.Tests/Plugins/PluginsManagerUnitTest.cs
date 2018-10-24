@@ -18,7 +18,9 @@ namespace OHM.Plugins.Tests
         public void TestPluginsManagerConstructor()
         {
             var loggerMng = MockRepository.GenerateStub<ILoggerManager>();
-            var d = new PluginsManager(loggerMng, AppDomain.CurrentDomain.BaseDirectory + "\\plugins\\");
+            var d = new PluginsManager(AppDomain.CurrentDomain.BaseDirectory + "\\plugins\\");
+
+            Assert.Inconclusive();
         }
 
         [TestMethod]
@@ -34,13 +36,13 @@ namespace OHM.Plugins.Tests
 
             string filePath = AppDomain.CurrentDomain.BaseDirectory + "\\pluginsTest\\";
 
-            var d = new PluginsManager(loggerMng, filePath);
+            var d = new PluginsManager(filePath);
 
             //Check directory not exists
             Assert.IsFalse(Directory.Exists(filePath));
 
             //Should not throw exception and will fail silently
-            Assert.IsTrue(d.Init(dataStore));
+            Assert.IsTrue(d.Init(loggerMng, dataStore));
 
             Assert.AreEqual(0, d.AvailablesPlugins.Count);
             Assert.AreEqual(0, d.InstalledPlugins.Count);
@@ -59,12 +61,12 @@ namespace OHM.Plugins.Tests
 
             string filePath = AppDomain.CurrentDomain.BaseDirectory + "\\pluginsStub\\";
 
-            var d = new PluginsManager(loggerMng, filePath);
+            var d = new PluginsManager(filePath);
 
             //Make Sure directory exists
             Assert.IsTrue(Directory.Exists(filePath));
 
-            Assert.IsTrue(d.Init(dataStore));
+            Assert.IsTrue(d.Init(loggerMng, dataStore));
 
             dataStore.AssertWasCalled(x => x.Save());
             Assert.AreEqual(3, d.AvailablesPlugins.Count);
@@ -86,12 +88,12 @@ namespace OHM.Plugins.Tests
             string filePath = AppDomain.CurrentDomain.BaseDirectory + "\\pluginsStub1\\";
 
             var ohmSystem = MockRepository.GenerateStub<IOhmSystemPlugins>();
-            var d = new PluginsManager(loggerMng, filePath);
+            var d = new PluginsManager(filePath);
 
             var guid = new Guid("dd985d5b-2d5e-49b5-9b07-64aad480e312");
             var guid2 = new Guid("dd985d5b-2d5e-49b5-9b07-64aad480e314");
 
-            Assert.IsTrue(d.Init(dataStore));
+            Assert.IsTrue(d.Init(loggerMng, dataStore));
 
             Assert.AreEqual(2, d.AvailablesPlugins.Count);
             Assert.AreEqual(0, d.InstalledPlugins.Count);
@@ -137,9 +139,9 @@ namespace OHM.Plugins.Tests
 
             string filePath = AppDomain.CurrentDomain.BaseDirectory + "\\pluginsStub2\\";
 
-            var target = new PluginsManager(loggerMng, filePath);
+            var target = new PluginsManager(filePath);
 
-            Assert.IsTrue(target.Init(dataStore));
+            Assert.IsTrue(target.Init(loggerMng, dataStore));
 
             Assert.AreEqual(1, target.AvailablesPlugins.Count);
             Assert.AreEqual(1, target.InstalledPlugins.Count);

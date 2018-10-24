@@ -9,7 +9,7 @@ using OHM.SYS;
 using System;
 using System.Collections.Generic;
 
-namespace ConsoleApplication1
+namespace OHM.Apps.ConsoleApp
 {
     /// <summary>
     /// 
@@ -29,20 +29,20 @@ namespace ConsoleApplication1
             var dataMng = new FileDataManager(AppDomain.CurrentDomain.BaseDirectory + "\\data\\");
 
             // Launch Plugin manager
-            var pluginMng = new PluginsManager(loggerMng, AppDomain.CurrentDomain.BaseDirectory + "\\plugins\\");
+            var pluginMng = new PluginsManager(AppDomain.CurrentDomain.BaseDirectory + "\\plugins\\");
 
             // Launch Interface manager
-            var interfacesMng = new InterfacesManager(loggerMng, pluginMng);
+            var interfacesMng = new InterfacesManager(pluginMng);
 
             // Launch VrManager
-            var vrMng = new VrManager(loggerMng, pluginMng);
+            var vrMng = new VrManager();
 
             // Launch OHM
-            app = new OpenHomeMation(pluginMng, dataMng, loggerMng, interfacesMng, vrMng);
+            app = OpenHomeMation.Create(pluginMng, dataMng, loggerMng, interfacesMng, vrMng);
         }
 
         /// <summary>
-        /// Start Local embeded instance
+        /// Start Local embeded _instance
         /// </summary>
         /// <returns>True if the start was successfull</returns>
         public bool Start()
@@ -51,7 +51,7 @@ namespace ConsoleApplication1
         }
 
         /// <summary>
-        /// Shutdown local embeded instance
+        /// Shutdown local embeded _instance
         /// </summary>
         public void Shutdown()
         {

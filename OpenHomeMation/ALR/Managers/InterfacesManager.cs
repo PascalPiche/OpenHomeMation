@@ -38,9 +38,8 @@ namespace OHM.Managers.ALR
 
         #region Public Ctor
 
-        public InterfacesManager(ILoggerManager loggerMng, IPluginsManager pluginsMng)
+        public InterfacesManager(IPluginsManager pluginsMng)
         {
-            _loggerMng = loggerMng;
             _pluginsMng = pluginsMng;
         }
 
@@ -48,8 +47,9 @@ namespace OHM.Managers.ALR
 
         #region Public API
 
-        public bool Init(IDataStore data, IOhmSystemInternal system)
+        public bool Init(ILoggerManager loggerMng, IDataStore data, IOhmSystemInternal system)
         {
+            _loggerMng = loggerMng;
             _data = data;
             _logger = _loggerMng.GetLogger("InterfacesManager");
             _logger.Debug("Initing");
