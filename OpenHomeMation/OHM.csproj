@@ -129,7 +129,7 @@
     <None Include="PluginsSystem\_diagrams\PluginsManager_InstallPlugin.sequencediagram" />
     <None Include="PluginsSystem\_diagrams\PluginsManager_Init.sequencediagram" />
     <None Include="System\_diagrams\OpenHomeMation_start.sequencediagram" />
-    <None Include="System\_diagrams\ClassDiagram1.cd" />
+    <None Include="System\_diagrams\ClassDiagram.cd" />
     <None Include="DataSystem\_Diagrams\DataClassDiagram.cd" />
     <None Include="DataSystem\_Diagrams\DataClassDiagramFull.cd" />
     <None Include="LoggingSystem\_Diagrams\LoggerClassDiagram.cd" />
