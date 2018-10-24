@@ -82,12 +82,6 @@ namespace OHM.Apps.ConsoleApp
         /// </summary>
         private static void Main_End()
         {
-            //Shutdown local host if available
-            /*if (embedInstance != null)
-            {
-                embedInstance.Shutdown();
-            }*/
-
             //Wait before final close for last logging
             System.Console.WriteLine("Press enter to close");
             System.Console.ReadLine();
@@ -136,11 +130,6 @@ namespace OHM.Apps.ConsoleApp
                 outputBasicHelp();
                 result = true;
             }
-            /*else if (line.ToUpper() == "LAUNCH-LOCAL")
-            {
-                LaunchLocal();
-                result = true;
-            }*/
             else if (line.ToUpper() == "CONNECT")
             {
                 launchConnectWizzard();
@@ -260,29 +249,6 @@ namespace OHM.Apps.ConsoleApp
             }
         }
 
-        /*#region Embed Instance OpenHomeMation part
-
-        /// <summary>
-        /// Private local member of the Embeded Local Instance Controller
-        /// </summary>
-        private static EmbedInstanceControler embedInstance;
-
-        /// <summary>
-        /// Launch and launch the local Embeded _instance
-        /// </summary>
-        private static bool LaunchLocal()
-        {
-            bool result = false;
-
-            if (embedInstance == null)
-            {
-                embedInstance = new EmbedInstanceControler();
-                embedInstance.Create();
-                result = embedInstance.Start();
-            }
-            return result;
-        }*/
-
         #region Help Output
 
         /// <summary>
@@ -292,10 +258,9 @@ namespace OHM.Apps.ConsoleApp
         {
             System.Console.WriteLine("------- HELP GENERAL ---------");
             System.Console.WriteLine("----- CONSOLE COMMANDS --------");
-            System.Console.WriteLine("exit            : Exit console application. Will shutdown local instance and disconnect from remote instance");
-            //System.Console.WriteLine("launch-local    : Create and launch a local Embed instance in the console");
+            System.Console.WriteLine("exit            : Exit console application. Will disconnect from remote instance.");
             //System.Console.WriteLine("discover-local : Search for _instance on the localhost");
-            //System.Console.WriteLine("connect        : ");
+            System.Console.WriteLine("connect         : Connect to an instance.");
 
             System.Console.WriteLine("----------System nodes --------");
             System.Console.WriteLine("Root nodes : ");
